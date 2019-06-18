@@ -1,0 +1,147 @@
+<div class="lay-out">
+  <div class="topLink">
+    <h3>Generate Bill</h3>
+    <span (click)="onClickClose(true)">Close</span>
+  </div>
+  <div class="prd-name" (click)="onClickPrd()">
+    <!-- Compound benzoin tincture (USP) 45 MG/ML Gas for Inhalation
+    - 3 mL, Every six hours for 4 Hours, (0) -->
+    {{drug.genericName}}
+    <span *ngFor="let reg of drug?.regimen">
+      {{reg?.dosage }} - {{reg?.frequency }} for {{ reg?.duration }} {{ reg?.durationUnit }}
+    </span>
+  </div>
+
+  <div *ngIf="productAvailable">
+    <div class="store-avail-bckgrnd">
+      <span>Drugs/brands available in store</span>
+    </div>
+    <!-- <div class="drg-InStores">
+      <h4>Drugs/brands also available in:</h4>
+      <div class="store-in">
+        <div class="store-in-avail">
+          <span>All Soul's Central Store</span>
+        </div>
+        <div class="store-in-avail">
+          <span>All Soul's Central Store</span>
+        </div>
+        <div class="store-in-avail">
+          <span>All Soul's Central Store</span>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="tbl-head">All Soul's Central Store</h4>
+    <div class="tbl-resp-wrap">
+      <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+        <thead>
+          <tr class="th-r1 th-xxx">
+            <th style="width: 60%;" colspan="2">Drugs/Brands</th>
+            <th style="width: 40%;">Qty Available</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="th-xxx" *ngFor="let product of drugs">
+            <td style="width: 5%;">
+              <input type="radio">
+            </td>
+            <td>
+              <div class="prd">
+                <span>{{product.productObject.name}},</span>
+                <a class="blue">Unit Cost: {{product?.price?.price|number}}</a>
+              </div>
+            </td>
+            <td>
+              <div class="qty">
+                <span>{{product.availableQuantity|number}}</span>
+                <div class="frm">
+                  <div class="frm-1">
+                    <div class="sel" style=" width: 100% !important;">
+                      <select>
+                        <option *ngFor="let config of product?.productObject?.productConfigObject" value="0">{{config.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prd-details">
+      <span>Emzo compound benzoin 45 MG/ML Gas for Inhalation </span>
+      <div class="disp-qty">
+        <div class="qty-detail">
+          <span>Quantity to dispense</span>
+          <div class="qty" style="margin-top:-15px">
+            <span>200</span>
+            <div class="frm">
+              <div class="frm-1">
+                <div class="sel" style=" width: 100% !important;">
+                  <select>
+                    <option value="0">Tablets</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="qty-detail">
+          <span>Modifier</span>
+          <div class="qty" style="margin-top:-15px">
+            <div class="frm">
+              <div class="frm-1">
+                <div class="sel" style=" width: 100% !important; margin-left: 0;">
+                  <select>
+                    <option value="0">HMO</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="qty-detail" style="width: 20%;">
+          <span>Drug Price</span>
+          <div class="InputGroup">
+            <input class="customInput" type="number" required>
+            <span class="highlight"></span>
+          </div>
+        </div>
+        <div class="qty-detail">
+          <div class="new-btn-solid-blue">
+            <span>Bill</span>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <app-gen-bill-search (closeModalEvent)="onClickClose($event)" (searchResultEvent)="receive_search_result_event($event)"
+      [selectedDrug]="drug" [stores]=stores [drugs]=drugs></app-gen-bill-search>
+  </div>
+
+  <div *ngIf="searchProduct">
+    <div *ngIf="searchList" class="store-avail-bckgrnd2">
+      <span>Drugs / Brands not found in your store, Search similar replacement</span>
+    </div>
+    <div *ngIf="searchShow" class="store-avail-bckgrnd">
+      <span>Some substitute found drugs/brands found</span>
+    </div>
+    <div class="searchproduct">
+      <div class="InputGroup">
+        <input class="customInput" [formControl]="productSearchFormControl" type="text" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="customLabel"><i class="fa fa-search" aria-hidden="true"></i>Search Drugs / Brands with substitute</label>
+        <ul class="search-sugestions bar" *ngIf="searchList">
+          <li *ngFor="let product of searchResults" (click)="onShowSearchResult(product)" class="search-sugestion">{{product.productObject.name}}</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="searchShow">
+      <app-gen-bill-search (closeModalEvent)="onClickClose($event)" (searchResultEvent)="receive_search_result_event($event)"
+        [selectedDrug]="drug" [stores]=stores [drugs]=drugs></app-gen-bill-search>
+    </div>
+  </div>
+</div>

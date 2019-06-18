@@ -1,0 +1,267 @@
+<div class="">
+    <div class="facility-title">Patient Bills</div>
+    <i (click)="hmoList_click()" class="fa fa-long-arrow-left bck" aria-hidden="true"></i>
+    <div class="inner-page-wrap">
+        <div class="megaPgWrap">
+
+            <div class="contentCol" *ngIf="selectedPatient._id != undefined">
+                <div class="billTopSect">
+                    <div class="topsecInnerWrap">
+                        <div>
+                            <div class="clientName">{{selectedPatient?.personDetails?.lastName}} {{selectedPatient?.personDetails?.firstName}}</div>
+                            <div class="clientAddress">
+                                <div>{{selectedPatient?.street}}, {{selectedPatient?.city}}, {{selectedPatient?.lga}}. {{selectedPatient?.state}}, {{selectedPatient?.country}}
+                                </div>
+                                <div>{{selectedPatient?.personDetails?.email}}</div>
+                                <div>{{selectedPatient?.personDetails?.phoneNumber}}</div>
+                            </div>
+                        </div>
+                        <div class="patientImgWrap">
+                            <img *ngIf="selectedPatient?.personDetails?.profileImageObject == undefined" src="assets/images/users/default.png">
+                            <img *ngIf="selectedPatient?.personDetails?.profileImageObject != undefined" [src]="facilityService.transform(selectedPatient?.personDetails?.profileImageObject?.detailthumbnail)">
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="selectedPatient._id != undefined" class="billBody">
+                    <div class="billContentSect">
+                        <div (click)="addItem_show()" class="cta-1 btn-addItem">
+                            Add Item
+                        </div>
+                        <table class="tblBg">
+                            <thead>
+                                <tr>
+                                    <th class="selectTD">
+                                        <input (change)="selectAll_change($event)" type="checkbox" [attr.checked]="selectAll" [formControl]="txtSelectAll">
+                                    </th>
+                                    <th>Date</th>
+                                    <th>Item</th>
+                                    <th>Unit Price</th>
+                                    <th>Qty</th>
+                                    <th>Total Price</th>
+                                    <th>Options</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody *ngFor="let group of billGroups">
+                                <tr class="tdMasterCategories">
+                                    <td colspan="1"><input type="checkbox" (change)="checkGroup($event,group)" [checked]="group.isChecked" [formControl]="select1"></td>
+                                    <td (click)="toggleCurrentCategory(group)" colspan="6">{{group.category}}</td>
+                                    <td (click)="toggleCurrentCategory(group)" colspan="1" class="data">{{group.total | currency:'NGN':true:'4.2-2'}}</td>
+                                </tr>
+                                <ng-container *ngIf="isCurrentCategory(group)">
+                                    <tr *ngFor="let bill of group.bills; let i = index;">
+                                        <td>
+                                            <input type="checkbox" (change)="checkBill($event,bill, group)" [checked]="bill.isChecked" [formControl]="select1">
+                                        </td>
+                                        <td>11th October, 2017. 10:00am</td>
+                                        <td (click)="itemDetail(bill)">
+                                            <div class="itemName">{{bill.itemName}}</div>
+                                        </td>
+                                        <td>
+                                            <div class="topTotal"><span>&#8358;</span> {{bill.unitPrice | number:'1.2-2'}}</div>
+                                        </td>
+                                        <td>
+                                            <span [hidden]="isCurrentBill(bill, group)"> {{bill.qty}}</span>
+                                            <input *ngIf="isCurrentBill(bill, group)" min="0" class="edit-control" type="number" [value]="bill.qty" [formControl]="itemQtyEdit">
+                                        </td>
+                                        <td class="td-modefier">
+                                            <div class="topTotal"><span>&#8358;</span> {{bill.amount | number:'1.2-2'}}</div>
+                                            <div class="modefier-link"><i class="fa fa-external-link" aria-hidden="true"></i></div>
+                                            <div class="modefier-wrap shadow-RB">
+                                                <div class="modefier-title">Price Modefiers</div>
+                                                <div class="actual-price">
+                                                    <div class="ac-label">Actual Price</div>
+                                                    <div class="ac-val"><span>&#8358;</span> 300,000</div>
+                                                </div>
+                                                <!-- <div class="actual-price">
+                          <div class="ac-label">Modefied Price</div>
+                          <div class="ac-val"><span>&#8358;</span> 230,000</div>
+                        </div> -->
+                                                <table class="tblBg2">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="modefier-item">HIV AIDs</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="modefier-val">50%</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="modefied-val"><span>&#8358;</span> 280,000</div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>
+                                                                <div class="modefier-item">HIV AIDs</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="modefier-val">50%</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="modefied-val"><span>&#8358;</span> 280,000</div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>
+                                                                <div class="modefier-item">HIV AIDs</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="modefier-val">50%</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="modefied-val"><span>&#8358;</span> 280,000</div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="actual-price">
+                                                    <div class="ac-label">Modefied Price</div>
+                                                    <div class="ac-val mod-price"><span>&#8358;</span> 230,000</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="type-wrap">
+                                                <!-- <mat-select placeholder="Select Type"  [formControl]="coverTypeFormControl">
+                          <mat-option class="captn" [value]="Capitation">Capitation</mat-option>
+                          <mat-option [value]="Authorization">Authorization Required</mat-option>
+                          <mat-option [value]="CoPay">Fee For Service</mat-option>
+                        </mat-select> -->
+                                                <mat-form-field>
+                                                    <mat-select (change)="setSeletedBill(bill)" [formControl]="coverTypeFormControl">
+                                                        <mat-option *ngFor="let cover of coverTypes" value="{{cover.value}}">{{ cover.text }}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <div *ngIf="selectedCoverType==='Authorization' && isSelectedBill(bill)" class="floating-action authorizn shadow-RB">
+                                                    <form>
+                                                        <mat-input-container class="full-width">
+                                                            <input matInput placeholder="Authorization Code" [formControl]="authFormControl">
+                                                            <mat-error *ngIf="authFormControl.hasError('required')">
+                                                                Authorization code Required
+                                                            </mat-error>
+                                                        </mat-input-container>
+
+                                                        <mat-input-container class="full-width">
+                                                            <input matInput #message maxlength="256" placeholder="Comment" [formControl]="authCommentFormControl">
+                                                            <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                                                        </mat-input-container>
+
+                                                        <div class="btn-wrap">
+                                                            <button mat-button>Done</button>
+                                                            <button (click)="cancelSelectedCover()" mat-button>Cancel</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                                <div *ngIf="selectedCoverType==='CoPay' && isSelectedBill(bill)" class="floating-action copay shadow-RB">
+                                                    <form>
+                                                        <div class="input-x2">
+                                                            <mat-input-container class="half-width" style="padding-top:5px;">
+                                                                <input type="number" matInput placeholder="Value" [formControl]="authFormControl">
+                                                                <mat-error *ngIf="authFormControl.hasError('required')">
+                                                                    Value Required
+                                                                </mat-error>
+                                                            </mat-input-container>
+                                                            <mat-form-field>
+                                                                <mat-select placeholder="Unit" class="half-width" [formControl]="coverTypeFormControl">
+                                                                    <mat-option class="captn" [value]="Capitation">%</mat-option>
+                                                                    <mat-option [value]="Authorization">Naira</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <mat-input-container class="full-width">
+                                                            <input matInput placeholder="Authorization Code" [formControl]="authFormControl2">
+                                                            <mat-error *ngIf="authFormControl.hasError('required')">
+                                                                Authorization code Required
+                                                            </mat-error>
+                                                        </mat-input-container>
+
+                                                        <mat-input-container class="full-width">
+                                                            <input matInput #message maxlength="256" placeholder="Comment" [formControl]="authCommentFormControl">
+                                                            <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                                                        </mat-input-container>
+
+                                                        <div class="btn-wrap">
+                                                            <button mat-button>Done</button>
+                                                            <button (click)="cancelSelectedCover()" mat-button>Cancel</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <i [hidden]="itemEditShow && (selectedBillItem._id ===bill._id)" (click)="itemEditToggle(bill)" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            <i *ngIf="itemEditShow && (selectedBillItem._id ===bill._id)" (click)="itemEditToggle(bill)" class="fa fa-check" aria-hidden="true"></i>
+                                            <i (click)="onRemoveBill(bill,group)" class="fa fa-times" style="color:#ff2500;" aria-hidden="true"></i>
+                                            <div (click)="lineModifier_show(bill)" class="cta-1 btn-addItem">
+                                                Add Modifier
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="billSummarySect">
+                        <!-- <div class="lhs">
+              <div *ngIf="total > 0" (click)="addModefier()" class="cta-1">
+                Add Discount
+              </div>
+            </div> -->
+                        <table class="rhs">
+                            <div class="summaryItems">
+                                <tr class="summaryItem">
+                                    <td class="label">Sub Total</td>
+                                    <td class="data"> {{subTotal | currency:'NGN':true:'1.2-2' }}</td>
+                                    <td></td>
+                                </tr>
+                                <!-- <tr class="summaryItem">
+                  <td class="label">Discount</td>
+                  <td class="data"> {{discount | currency:'NGN':true:'1.2-2'}}</td>
+                  <td class="remove-link"><i (click)="onRemoveDiscount()" class="fa fa-trash" aria-hidden="true"></i> Remove</td>
+                </tr> -->
+                            </div>
+                            <tr class="grandTotalWrap">
+                                <td class="label">GRAND TOTAL</td>
+                                <td class="data"> {{total | currency:'NGN':true:'1.2-2'}}</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="btn-x2">
+                        <div class="generateInvoiceWrap">
+                            <div (click)="makePayment_onclick()" class="btn-1 btn-blue">
+                                Approve
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contentCol emptySet" *ngIf="selectedPatient._id === undefined">
+                <span>Kindly select a patient from the lookup below</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-global-patient-lookup></app-global-patient-lookup>
+
+<div *ngIf="addItem" class="modal-overlay">
+    <app-bill-add-item (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-bill-add-item>
+</div>
+
+<div *ngIf="addModefierPopup" class="modal-overlay">
+    <app-bill-add-modefier (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-bill-add-modefier>
+</div>
+
+<div *ngIf="addLineModefierPopup" class="modal-overlay">
+    <app-bill-add-line-modefier (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-bill-add-line-modefier>
+</div>

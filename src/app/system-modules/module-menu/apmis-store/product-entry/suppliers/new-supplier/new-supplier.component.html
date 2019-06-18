@@ -1,0 +1,48 @@
+<div class="new-supp-base">
+  <h2 class="blue-lbl">Add Supplier</h2>
+  <form [formGroup]="supplierFormGroup" class="new-supp-base" novalidate>
+    <div class="input-group-x2">
+      <div class="InputGroup">
+        <input formControlName="name" class="customInput" type="text" required>
+        <span class="highlight"></span>
+        <label class="customLabel">Supplier Name</label>
+      </div>
+      <div class="InputGroup">
+        <input formControlName="contactPerson" class="customInput" type="text" required>
+        <span class="highlight"></span>
+        <label class="customLabel">Contact Person</label>
+      </div>
+    </div>
+
+    <div class="input-group-x2">
+      <div class="InputGroup">
+        <input formControlName="phone" type="tel" class="customInput" required>
+        <span class="highlight"></span>
+        <label class="customLabel">Phone </label>
+      </div>
+      <div class="InputGroup">
+        <input formControlName="email" class="customInput" type="email" required>
+        <span class="highlight"></span>
+        <label class="customLabel">Email</label>
+      </div>
+    </div>
+    <div class="input-group-x2">
+      <div class="InputGroup-textarea">
+        <textarea formControlName="contactAddress" placeholder="Contact Address" class="customTextarea" type="text"
+          required></textarea>
+        <span class="highlight"></span>
+      </div>
+    </div>
+
+    <div class="btn-con">
+      <div [class.disabled]="supplierFormGroup.valid === false" class="new-btn-solid-blue" (click)="submit()">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <span>Add New Supplier</span>
+      </div>
+      <div class="new-btn-blue">
+        <span> Cancel</span>
+      </div>
+    </div>
+  </form>
+
+</div>

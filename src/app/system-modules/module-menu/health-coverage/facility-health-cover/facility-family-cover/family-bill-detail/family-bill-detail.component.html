@@ -1,0 +1,52 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">{{selectedBill?.principalObject?.personDetails?.firstName}}
+            {{selectedBill?.principalObject?.personDetails?.lastName}}</legend>
+        <div class="modal_mini_title">Family Cover Bills Generated</div>
+        <div class="modal_mini_title">{{selectedBill?.updatedAt|date:'medium'}}</div>
+    </div>
+    <div class="modal-baseWrap">
+        <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+                <tr>
+                    <th>
+                        <span style="padding-left: 3px;">Patient</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Service</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Amount</span>
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bill of selectedBill.billItems">
+                    <td>
+                        <div class="empWrap">
+                            <div class="list-img">
+                                <img src="assets/images/users/default.png">
+                            </div>
+                            <div>{{bill.patientObject.personDetails.firstName}} {{bill.patientObject.personDetails.lastName}}</div>
+                        </div>
+                    </td>
+                    <td>{{bill.serviceObject?.name}}</td>
+                    <td class="td-worspace">&#8358; {{bill.totalPrice|number:'1.2-2'}}</td>
+                    <td>
+                        <div class="td-ctaWrap" *ngIf="bill.covered.isVerify===undefined">
+                            <i (click)="confirmBill_onClick(bill)" class="fa fa-check-circle" aria-hidden="true"></i>
+                            <i (click)="declineBill_onClick(bill)" class="fa fa-times-circle" aria-hidden="true"></i>
+                          </div>
+                          <div class="td-ctaWrap" *ngIf="bill.covered.isVerify!==undefined">
+                            <span style="color:green" *ngIf="bill.covered.billAccepted">Approved</span>
+                            <span style="color:red" *ngIf="!bill.covered.billAccepted">Denied</span>
+                          </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

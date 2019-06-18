@@ -1,0 +1,20 @@
+<div class="baseWrap">
+  <div class="details">
+    <div style="padding: 30px;">
+        <h2>Today’s Sales Summary</h2>
+      <span class="totalPayment"><naira-currency></naira-currency>{{summaryData.totalSales | number}}</span>
+      <span *ngIf="loading"><i class="fa fa-spin fa-refresh"></i></span>
+    </div> 
+    <i (click)="call_invoiceList()" style="font-size: 13px;" >View List of Invoices</i>
+  </div>
+  <div style="text-align: center;">
+    <canvas class="pieChart" baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+    </canvas>
+    <div style="display: flex; margin-left: 60px;">
+      <h3>Total Payment: <naira-currency></naira-currency>{{summaryData.totalSales | number}}</h3>
+  
+    </div>
+  </div>
+
+</div>

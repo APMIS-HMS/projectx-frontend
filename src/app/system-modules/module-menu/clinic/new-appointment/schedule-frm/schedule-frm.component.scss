@@ -1,0 +1,96 @@
+.schedule-wrap {
+    padding: 10px 0;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.btn-box {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.btn {
+    color: #fff;
+}
+
+.pill {
+    background-color: #003cff;
+    color: #ffffff;
+    height: 25px;
+    width: 100px;
+    border-radius: 25px;
+    line-height: 1.2rem;
+    font-size: 1.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    margin: 2px;
+    .pill-img {
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        float: left;
+    }
+    span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 25px;
+    }
+}
+
+.frm-appointment {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sect-wrap {
+    position: relative;
+    width: 33%;
+}
+
+.sect-wrap .tr-act-btn {
+    width: 180px;
+    font-size: 1.2rem;
+}
+
+.sect-wrap .tr-act-btn1 {
+    position: absolute;
+    top: 92px;
+}
+
+.sect-wrap .tr-act-btn2 {
+    position: absolute;
+    top: 160px;
+}
+
+.sect-wrap .tr-act-btn3 {
+    position: absolute;
+    top: 226px;
+}
+
+.cta-1 {
+    height: 35px;
+    font-size: 1.4rem;
+}
+
+.sect-wrap .frm-item-wrap {
+    width: 100%;
+}
+
+.mat-input-infix {
+    border-top: 0em solid transparent !important;
+}
+.frm-min-x2{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    .min-x2-child{
+        width: 45% !important;
+    }
+}

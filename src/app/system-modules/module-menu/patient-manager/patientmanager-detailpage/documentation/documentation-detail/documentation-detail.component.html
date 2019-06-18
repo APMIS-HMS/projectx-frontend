@@ -1,0 +1,168 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">{{document?.document?.documentType?.title}}</legend>
+        <div class="modal_mini_title">{{document?.facilityId?.name}}</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="docCard-header">
+            <div class="empWrap">
+                <div class="list-img">
+                    <!-- <img *ngIf="document?.createdBy?.employeeDetails?.profileImageObject === undefined" src="assets/images/users/default.png">
+          <div *ngIf="document?.createdBy?.employeeDetails?.profileImageObject !== undefined"> <img class="shadow" [src]="facilityService.transform(document?.createdBy?.employeeDetails?.profileImageObject?.thumbnail)"></div>  -->
+                </div>
+                <div>
+                    <div class="val-tag">Practitioner</div>
+                    <div class="list-label">{{document?.createdBy}}</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="val-tag">Status</div>
+                <div class="list-label">Draft</div>
+            </div>
+
+            <div>
+                <div class="val-tag">Date/Time</div>
+                <div class="list-label">{{document.createdAt | date:'shortDate'}}. <span class="time">{{document.createdAt | date:'shortTime'}}</span></div>
+            </div>
+
+        </div>
+
+        <div class="cont-wrap">
+            <div class="docCard-body">
+                <div class="docCard-ctaWrap">
+                    <i class="edit-ico-color fa fa-pencil-square" aria-hidden="true"></i>
+                    <i class="del-ico-color fa fa-trash" aria-hidden="true"></i>
+                </div>
+
+                <div class="cardSect-wrap">
+                    <div class="card-sect">
+                        <!-- <div class="docCard-sectTitle">{{document?.document?.documentType?.title}}</div> -->
+                        <div class="docCard-sectContent">
+                            <div *ngIf="document?.document?.documentType?.isSide === false || document?.document?.documentType?.isSide === undefined">
+                                <div *ngFor="let key of document?.document?.body | keys">
+                                    <div *ngIf="document?.document?.body !==undefined " class="sect-key ">{{key}}:</div>
+                                    <div *ngIf="document?.document?.body !==undefined " class="sect-value ">
+                                        <span *ngIf="checkType(document?.document?.body[key])">{{document?.document?.body[key]}}</span>
+                                        <span *ngIf="!checkType(document?.document?.body[key])">
+                                                <div *ngFor="let key2 of document?.document?.body[key] | keys ">
+                                                        <div class="sect-key ">{{key2}}:</div>
+                                                        <div class="sect-value ">
+                                                                {{document?.document?.body[key][key2] | json}}
+                                                        </div>
+                                                </div>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div *ngIf="document?.document?.addendum !== undefined">
+                                    <span class="sect-key">Addendum:</span> <span>{{document?.document?.addendum.text}}</span>
+                                </div>
+                            </div>
+                            <div *ngIf="document?.document?.documentType?.isSide === true">
+                                <div *ngFor="let key of document?.document?.body | keys">
+                                    <div *ngIf="document?.document?.body !== undefined" class="sect-key">{{key}}:</div>
+                                    <div *ngFor="let key2 of document?.document?.body.problems | keys let k = index">
+                                        <div *ngIf="document?.document?.body !== undefined" class="sect-value">
+                                            {{k+1}}:
+                                            <span class="sect-key">{{document?.document?.body.problems[key2].problem}}</span> ({{document?.document?.body.problems[key2]?.status?.name}}) {{document?.document?.body.problems[key2].note}}
+                                        </div>
+                                    </div>
+                                    <div *ngFor="let key2 of document?.document?.body.allergies | keys let k = index">
+                                        <div *ngIf="document?.document?.body !== undefined">
+                                            {{k+1}}:
+                                            <span class="sect-key">{{document?.document?.body.allergies[key2].allergy}}</span> ({{document?.document?.body.allergies[key2].severity.name}}) {{document?.document?.body.allergies[key2].reaction}} || {{document?.document?.body.allergies[key2].note}}
+                                        </div>
+                                    </div>
+                                    <div *ngIf="document?.document?.body.vitals !== undefined && document?.document?.body.vitals.length > 0">
+                                        <div *ngIf="document?.document?.body !== undefined" class="sect-value">
+                                            <!-- {{k+1}}: -->
+                                            <!-- <span class="sect-key">{{document?.document?.body.allergies[key2].allergy}}</span> ({{document?.document?.body.allergies[key2].severity.name}}) {{document?.document?.body.allergies[key2].reaction}} || {{document?.document?.body.allergies[key2].note}} -->
+                                            <table cellpadding="0" cellspacing="0" border="0.5">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>T</th>
+                                                        <th>PR</th>
+                                                        <th>RR</th>
+                                                        <th>BP</th>
+                                                        <th>Wt</th>
+                                                        <th>Ht</th>
+                                                        <th>BMI</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr *ngFor="let item of document?.document?.body.vitals">
+                                                        <td>{{item.updatedAt|date:'medium'}}</td>
+                                                        <td>{{item.temperature}}</td>
+                                                        <td>{{item.pulseRate.pulseRateValue}}</td>
+                                                        <td>{{item.respiratoryRate}}</td>
+                                                        <td>S: {{item.bloodPressure.systolic}} D: {{item.bloodPressure.diastolic}}</td>
+                                                        <td>{{item.bodyMass.weight}}</td>
+                                                        <td>{{item.bodyMass.height}}</td>
+                                                        <td>{{item.bodyMass.bmi}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="document?.document?.addendum !== undefined" class="sect-value">
+                                        <span class="sect-key">Addendum:</span> <span>{{document?.document?.addendum.text}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- <div class="card-sect">
+          <div class="docCard-sectContent">
+              <div *ngIf="document?.document?.documentType?.isSide === false || document?.document?.documentType?.isSide === undefined">
+                  <div *ngFor="let key of document?.document?.body | keys">
+                      <div *ngIf="document?.document?.body !== undefined" class="sect-key">{{key}}:</div>
+                      <div *ngIf="document?.document?.body !== undefined" class="sect-value">{{document?.document?.body[key]}}</div>
+                  </div>
+              </div>
+              <div *ngIf="document?.document?.documentType?.isSide === true">
+                  <div *ngFor="let key of document?.document?.body | keys">
+                      <div *ngIf="document?.document?.body !== undefined" class="sect-key">{{key}}:</div>
+                      <div *ngFor="let key2 of document?.document?.body.problems | keys let k = index">
+                          <div *ngIf="document?.document?.body !== undefined" class="sect-value">
+                              {{k+1}}: <span class="sect-key">{{document?.document?.body.problems[key2].problem}}</span> ({{document?.document?.body.problems[key2].status.name}}) {{document?.document?.body.problems[key2].note}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div> -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!--Edit/ Add Addendum Modal-->
+    <!--<div *ngIf="editClick" class="animated pulse">-->
+    <div class="animated pulse" *ngIf="isDocumentEdit">
+        <div class="modal-header-wrap">
+            <!--<div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+            <legend class="modal_title">Document Type</legend>-->
+            <div class="modal_mini_title">ADD ADDENDUM</div>
+        </div>
+        <div class="modal-baseWrap">
+            <form>
+                <div class="form-group">
+                    <!--<label>ADDENDUM:</label>-->
+                    <textarea class="form-cont" [formControl]="addendumCtrl" rows="5" id="addendum" placeholder="Write a Note"></textarea>
+                </div>
+                <div class="but-style">
+                    <button (click)="save()" class="btn btn-primary">Save </button>
+                </div>
+            </form>
+        </div>
+    </div>

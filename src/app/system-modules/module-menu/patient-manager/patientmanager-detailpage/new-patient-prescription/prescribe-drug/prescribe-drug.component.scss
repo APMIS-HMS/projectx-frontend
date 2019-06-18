@@ -1,0 +1,163 @@
+@import "./../prescription-history/prescription-history.component.scss";
+
+.frm {
+  display: -webkit-box;
+  margin-top: 10px;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+
+  h2 {
+    font-size: 40px;
+    margin: 20px;
+  }
+
+  .frm-1 {
+    display: flex;
+    justify-content: space-between;
+
+    .sel {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+      width: 110px;
+      margin: 10px;
+
+      select {
+        outline: none;
+        border: none;
+        width: stretch;
+      }
+    }
+
+    .InputGroup,
+    .sel {
+      width: 40% !important;
+      margin-right: 20px;
+    }
+  }
+
+  .frm-2 {
+    display: flex;
+
+    .custom-chk {
+      display: flex;
+      align-items: center;
+      margin-right: 30px;
+
+      input {
+        zoom: 1.7;
+        margin-right: 5px;
+      }
+
+      label {
+        font-size: 12px;
+      }
+    }
+
+    .InputGroup {
+      width: 40%;
+      margin-right: 20px;
+
+      input[type=date]:required:invalid::-webkit-datetime-edit {
+        color: transparent;
+      }
+
+      input[type=date]:focus::-webkit-datetime-edit {
+        color: black !important;
+      }
+    }
+  }
+}
+
+.btnWrap {
+  justify-items: right;
+  display: flex;
+
+  .new-btn-solid-blue {
+    margin-right: 30px;
+    width: 120px;
+    justify-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 20px;
+  }
+
+  .disabled {
+    cursor: not-allowed;
+    // background: rgba(168, 220, 255, 0.52);
+  }
+}
+
+.action-tbl {
+  display: flex;
+
+  .btn-tbl {
+    border-radius: 3px;
+    width: fit-content;
+    padding: 5px;
+    cursor: pointer;
+    background: #0288D1;
+    align-content: center;
+    align-items: center;
+    margin-right: 15px;
+
+    span {
+      text-align: center;
+      color: white;
+    }
+  }
+
+  .custom-chk {
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    padding: 1px;
+
+    input {
+      margin-right: 8px;
+    }
+  }
+}
+
+.fa-act {
+  margin: 5px;
+  font-size: 10px;
+  cursor: pointer;
+
+  a {
+    margin-right: 5px;
+  }
+}
+
+.td-wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .caution-note {
+    background: rgba(254, 70, 70, 0.13);
+    border-radius: 3px;
+    width: fit-content;
+    padding: 5px;
+    display: flex;
+    margin: 5px;
+
+    i {
+      font-size: 8px;
+      margin-right: 5px;
+      color: #FE4646;
+      cursor: pointer;
+    }
+  }
+}
+
+.btm-action {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}

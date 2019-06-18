@@ -1,0 +1,347 @@
+<div class="container cotainer-width">
+    <div *ngIf="toggleTransferOpen">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="frm-item-wrap">
+                    <mat-form-field>
+                        <mat-select (change)="onStoreChanged()" class="example-full-width" placeholder="Choose Destination Store" [formControl]="frmDestinationStore"
+                            [compareWith]="compareItems">
+                            <mat-option *ngFor="let store of stores" [value]="store._id">{{store.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div *ngIf="flyout">
+                    <mat-input-container class="example-full-width">
+                        <input matInput mat-error placeholder="search product to transfer..." [formControl]="searchControl">
+                    </mat-input-container>
+                    <div *ngFor="let group of superGroups">
+                        <label *ngFor="let item of group;let j=index" class="control control--checkbox">{{item.name}}
+                            <div class="control__indicator">
+                                <mat-checkbox (change)="onProductCheckChange($event,item,j)" [checked]="item.checked"></mat-checkbox>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <form *ngIf="productTableForm?.controls['productTableArray'].value.length > 0" [formGroup]="productTableForm">
+                    <div formArrayName="productTableArray" class="frmArrayWrap">
+                        <div class="frmArray" *ngFor="let schedule of productTableForm.controls['productTableArray'].controls; let i = index;">
+                            <h2 style="color:aaa;" class="col-md-12">{{schedule.value.product}} ({{schedule.value.avQty}} <span *ngIf="schedule.value.avQty ===1||schedule.value.avQty < 1">qty</span><span *ngIf="schedule.value.avQty >1">qties</span>) |
+                                <span style="color:#5088d1">₦ {{schedule.value.totalCostPrice}}</span>
+                            </h2>
+
+                            <div formGroupName="{{i}}">
+                                <div class="prod-wrap">
+                                    <div class="inputWrap-productDetail">
+                                        <div (click)="removeProduct(i, productTableForm.controls['productTableArray'].controls)" class="modal-close-ico" aria-hidden="true">
+                                            <i class="fa fa-close"></i>
+                                        </div>
+                                        <div class="row">
+                                            <mat-input-container style="display:none">
+                                                <input matInput mat-error placeholder="Product" readOnly formControlName="product">
+                                            </mat-input-container>
+                                            <mat-input-container style="display:none" class="col-md-4">
+                                                <input matInput mat-error placeholder="Batch No" [readOnly]="true" formControlName="batchNo">
+                                            </mat-input-container>
+
+                                            <mat-form-field class="col-md-4">
+                                                <mat-select (change)="getProductQuantity($event,schedule.controls.batchNumbers.value, i)" style="width: 100%;" class="example-full-width"
+                                                    placeholder="Batch Numbers">
+                                                    <mat-option *ngFor="let batch of schedule.controls.batchNumbers.value" [value]="batch._id">{{batch.batchNumber}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <div class="col-md-4">
+                                                <div class="frm-item-wrap">
+                                                    <mat-input-container class="example-full-width">
+                                                        <input [step]="0.01" type="number" matInput mat-error placeholder="Unit Cost Price" (change)="onPackageSize(i,productTableForm.controls['productTableArray'].controls)"
+                                                            formControlName="costPrice">
+                                                    </mat-input-container>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="frm-item-wrap">
+                                                    <mat-input-container style="display:none" class="example-full-width">
+                                                        <input (change)="checkProductQuantity($event,schedule.controls.batchNumbers.value, i, schedule.controls.id.value)" min="1"
+                                                            max="{{maxQty}}" type="number" matInput mat-error placeholder="Quantity"
+                                                            formControlName="qty" readonly>
+                                                    </mat-input-container>
+                                                    <h2>{{schedule.value.qty}} {{getBaseProductConfig(schedule)}}
+                                                        <span *ngIf="schedule.value.qty > 1">(s)</span>
+                                                    </h2>
+                                                </div>
+                                            </div>
+
+                                            <div class="row example-full-width" formArrayName="config">
+                                                <div class="row col-md-3" [formGroupName]="k" *ngFor="let itm of schedule.controls.config.controls;let k = index">
+                                                    <mat-input-container class="col-md-4">
+                                                        <input type="number" min="1" [readonly]="itm.value.packItem === null" matInput mat-error formControlName="size" (change)="onPackageSize(i,productTableForm.controls['productTableArray'].controls)">
+                                                    </mat-input-container>
+                                                    <mat-form-field class="col-md-6">
+                                                        <mat-select placeholder="Select Packsize" formControlName="packItem" [compareWith]="compareItems" (change)="onPackageSize(i,productTableForm.controls['productTableArray'].controls)">
+                                                            <mat-option disabled="">None</mat-option>
+                                                            <mat-option [value]="item._id" *ngFor="let item of itm.value.packsizes">
+                                                                <span>{{item.name}}</span>
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <div class="ico-wrap">
+                                                        <i *ngIf="itm?.value?.packsizes?.length !== k+1 && schedule.controls.config.controls.length===k+1" class="col-md-2 fa fa-fw fa-plus"
+                                                            (click)="onAddPackSize(itm.value.packsizes,schedule)"></i>
+                                                        <i class="fa fa-close fa-fw" *ngIf="schedule.controls.config.controls.length > 1" (click)="onRemovePack(schedule,productTableForm.controls['productTableArray'].controls,k,i)"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div style="display:none" class="col-md-3">
+                                                <div class="frm-item-wrap">
+                                                    <mat-input-container class="example-full-width">
+                                                        <input [step]="0.01" readonly min="0" type="number" [readOnly]="true" matInput mat-error placeholder="Total Cost Price" formControlName="totalCostPrice">
+                                                    </mat-input-container>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="plus-row" (click)="splitProduct($event,schedule.controls.batchNumbers.value, i, schedule.controls.id.value)"
+                                            *ngIf="(showSplitProduct(i, schedule.controls.batchNumbers.value) || showPlusSign)">
+                                            <span>
+                                                <i class="fa fa-plus plus-color"></i> Add Another One
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+
+        <div class="CTAs-wrap" *ngIf="productTableForm.controls['productTableArray'].valid && frmDestinationStore.value != null">
+            <button (click)="previewShow()" class="cta-1 cta-no-bg"> Preview </button>
+            <button class="cta-1" (click)="saveTransfer()" [disabled]="isProcessing"> Send </button>
+        </div>
+    </div>
+
+
+    <button class="btn blue-gradient" *ngIf="!toggleTransferOpen" (click)="toggleTransfer()">
+        Create Transfer
+    </button>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-xs-4 table-head">Requistion Id</div>
+                <div class="col-xs-4 table-head">From</div>
+                <div class="table-head col-xs-3">Date</div>
+                <div class="table-head col-xs-1">
+                    <i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i>
+                </div>
+            </div>
+            <div class="row" *ngIf="searchOpen">
+                <div class="col-md-4">
+                    <input [formControl]="frmFilterRequisition" class="table-header-input" type="text" placeholder="Search Requisition">
+                </div>
+                <div class="col-md-4">
+                    <mat-select placeholder="Select Store" [formControl]="frmFilterStore" [compareWith]="compareItems">
+                        <mat-option [value]="item._id" *ngFor="let item of stores">
+                            <span>{{item.name}}</span>
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="col-md-3">
+                    <input [formControl]="frmFilterDate" class="table-header-input" type="Date" placeholder="Date">
+                </div>
+                <div class="col-md-1 table-head">
+                    <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="card-list-item" *ngIf="requisitions.length === 0">
+                <div class="col-xs-12" style="text-align:center">
+                    No data available in table
+                    <br/>
+                </div>
+            </div>
+            <div class="card-list-item" *ngFor="let requistion of requisitions; let i=index;">
+                <div class="row">
+                    <div class="table-list col-md-4">
+                        {{requistion?.storeRequisitionNumber}}
+                    </div>
+                    <div class="table-list col-md-4">
+                        {{requistion?.storeObject?.name}}
+                    </div>
+                    <div class="table-list col-md-3">
+                        {{requistion?.createdAt|date:'medium'}}
+                    </div>
+                    <div class="table-list col-md-1">
+                        <a class="action-btn">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a *ngIf="!requistion.isSupplied">
+                            <span>
+                                <i class="fa fa-level-up" (click)="onClickRequi(requistion)"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div *ngIf="preview" class="overlay">
+    <div class="survery paper">
+        <div class="">
+            <div (click)="previewShow()" class="modal-close-ico" aria-hidden="true">X</div>
+            <div class="row">
+                <div class="col-mat-12 col-sm-12 col-xs-12">
+                    <div class="box">
+                        <div class="row">
+                            <div class="col-sm-12 col-mat-12 col-xs-12 text-center">
+                                <h4 class="apmis-brown">Stock Transfer</h4>
+                                <!--<p class="apmis-blue">112250AA</p>-->
+                            </div>
+                        </div>
+                        <div class="justwrap">
+                            <div class="row">
+                                <div class="col-sm-6 col-mat-6 col-xs-12">
+                                    <div class="date-box">
+                                        <div class="col-sm-4 col-mat-4">
+                                            <p>From</p>
+                                        </div>
+                                        <div class="col-sm-1 col-mat-1">
+                                            <span>-</span>
+                                        </div>
+                                        <div class="col-sm-6 col-mat-6">
+                                            {{checkingStore?.storeObject?.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-mat-6 col-xs-12">
+                                    <div class="date-box">
+                                        <div class="col-sm-4 col-mat-4">
+                                            <p>To</p>
+                                        </div>
+                                        <div class="col-sm-1 col-mat-1">
+                                            <span>-</span>
+                                        </div>
+                                        <div class="col-sm-6 col-mat-6">
+                                            <p>{{previewObject?.destinationStore}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-7 col-mat-7 col-xs-12">
+                                <div class="date-value">
+                                    <div class="col-sm-5 col-mat-5">
+                                        <p>Date Transfered</p>
+                                    </div>
+                                    <div class="col-sm-1 col-mat-1">
+                                        <span>-</span>
+                                    </div>
+                                    <div class="col-sm-5 col-mat-5">
+                                        <p>{{previewObject?.dateTransfer|date:'short'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-7 col-mat-7 col-xs-12">
+                                <div class="date-value">
+                                    <div class="col-sm-5 col-mat-5">
+                                        <p>Date Accepted</p>
+                                    </div>
+                                    <div class="col-sm-1 col-mat-1">
+                                        <span>-</span>
+                                    </div>
+                                    <div class="col-sm-5 col-mat-5">
+                                        <p>{{previewObject?.dateAccepted}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-7 col-mat-7 col-xs-12">
+                                <div class="date-value red">
+                                    <div class="col-sm-5 col-mat-5">
+                                        <p>Stock Value</p>
+                                    </div>
+                                    <div class="col-sm-1 col-mat-1">
+                                        <span>-</span>
+                                    </div>
+                                    <div class="col-sm-5 col-mat-5">
+                                        <p>{{previewObject?.stockValue|number:'1.2-2'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-mat-12">
+                                <div class="print pull-right">
+                                    <a>
+                                        <span class="fa fa-paperclip"></span>
+                                    </a>
+                                    <a>
+                                        <span class="fa fa-file-pdf-o"></span>
+                                    </a>
+                                    <a>
+                                        <span class="fa fa-print"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" box-border">
+                            <div class="row">
+                                <div class="col-sm-4 col-mat-4">
+                                    <h4> Products </h4>
+                                </div>
+                                <div class="col-sm-4 col-mat-4">
+                                    <h4> Value (N) </h4>
+                                </div>
+                                <div class="col-sm-4 col-mat-4">
+                                    <h4>Qty Transfered</h4>
+                                </div>
+                            </div>
+                            <div class="row" *ngFor="let previewProduct of previewObject.products">
+                                <div class="col-sm-4 col-mat-4">
+                                    <p> {{previewProduct.product}} </p>
+                                </div>
+                                <div class="col-sm-4 col-mat-4">
+                                    <p> {{previewProduct?.cost|number:'1.2-2'}} </p>
+                                </div>
+                                <div class="col-sm-4 col-mat-4">
+                                    <p> {{previewProduct?.quantity}} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end preview -->
+
+
+
+
+
+
+
+
+
+
+</div>

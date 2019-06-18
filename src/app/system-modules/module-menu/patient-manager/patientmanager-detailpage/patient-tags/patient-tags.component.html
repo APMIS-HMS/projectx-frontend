@@ -1,0 +1,69 @@
+<div class="pg-subtitle">PATIENT PAGE - TAGS</div>
+
+<div class="doc-mainWrap">
+  <div class="doc-contentArea">
+    <div claas="tbl-wrap">
+      <i (click)="addTag_popup()" class="fa fa-plus-square tbl-add-ico"></i>
+      <table style="background:#fff;" cellpadding="0" cellspacing="0" border="0.5">
+        <thead>
+          <tr>
+            <th style="border-bottom:1px solid #333;">Tag</th>
+            <th  style="border-bottom:1px solid #333;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>VIP</td>
+                <td>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </td>
+            </tr>
+            <tr>
+              <td>VIP</td>
+              <td>
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+              </td>
+          </tr>
+          <tr>
+            <td>VIP</td>
+            <td>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="doc-rArea">
+    <app-right-tab [patient]="patient"
+        (addProblem)="addProblem_show($event)"
+        (addAllergy)="addAllergy_show($event)"
+        (addHistory)="addHistory_show($event)"
+        (addVitals)="addVitals_show($event)"
+        ></app-right-tab>
+  </div>
+
+  <div *ngIf="docDetail_view" class="modal-overlay">
+    <app-documentation-detail [document] ="selectedDocument" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-documentation-detail>
+  </div>
+  
+  <div *ngIf="addProblem_view" class="modal-overlay">
+    <app-add-patient-problem [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-patient-problem>
+  </div>
+
+  <div *ngIf="addAllergy_view" class="modal-overlay">
+    <app-add-allergy [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-allergy>
+  </div>
+
+  <div *ngIf="addHistory_view" class="modal-overlay">
+    <app-add-history (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-history>
+  </div>
+
+  <div *ngIf="addVitals_view" class="modal-overlay">
+    <app-add-vitals [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-vitals>
+  </div>
+
+  <div *ngIf="addTag_pop" class="modal-overlay">
+      <app-patient-add-tag (closeModal)="close_onClick($event)" class="form-modal center-center"></app-patient-add-tag>
+  </div>
+</div>

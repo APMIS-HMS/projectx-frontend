@@ -1,0 +1,205 @@
+.page-title {
+    text-align: center;
+    position: relative;
+    top: -20px;
+    font-size: 1.2rem;
+    width: 100%;
+    color: #A6ACAF;
+}
+
+.rhsInnerCArea {
+    position: relative;
+    margin-left: 3px;
+    border: 1px solid #eee;
+    padding: 3px;
+    min-height: 340px;
+    width: 62%;
+}
+
+li.listHeader {
+    font-weight: bold;
+    background: #eee;
+    padding: 6px;
+    font-size: 1.2rem;
+}
+
+.li-itemWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #E0E0E0;
+    font-size: 1.2rem;
+    padding: 5px 0;
+}
+
+li.li-itemWrap:hover {
+    background: #eee;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+}
+
+li.listHeader,
+li.li-itemWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.li-Item {
+    width: 100px;
+    text-align: center;
+}
+
+.li-Item-group {
+    width: 300px;
+    text-align: center;
+}
+
+.group-wrap {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    color: #7B7D7D;
+    background: rgba(208, 211, 212, 0.3);
+    box-sizing: border-box;
+}
+
+.li-cta {
+    width: 50px;
+    text-align: center;
+}
+
+.li-cta i {
+    font-size: 2rem;
+    margin: 5px;
+    cursor: pointer
+}
+
+.li-cta i:hover {
+    color: #0288D1;
+}
+
+.imgNameWrap img {
+    margin: 5px;
+    width: 70px;
+    border-radius: 100%;
+}
+
+.lhsInnerFrm {
+    width: 34%;
+    background: #eee;
+    padding: 10px;
+}
+
+.schedule-wrap {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid #eee;
+    padding: 2px;
+}
+
+.sect-title {
+    font-size: 1.4rem;
+    color: #7B7D7D;
+    background: rgba(208, 211, 212, 0.3);
+    width: 100%;
+    text-align: center;
+    padding: 2px;
+    margin-bottom: -20px;
+}
+
+.dx-theme-generic .dx-fieldset {
+    width: 40%;
+    float: left;
+}
+
+.frm-label {
+    color: #7B7D7D;
+    font-size: 1.2rem;
+    padding: 10px 0;
+}
+
+#age {
+    display: inline-block;
+}
+
+.cta-1 {
+    width: 165px;
+    height: 38px;
+    font-size: 1.2rem;
+}
+
+.dx-field-value:not(.dx-switch):not(.dx-checkbox):not(.dx-button),
+.dx-field-value-static {
+    width: 100%;
+}
+
+.frmArray {
+    position: relative;
+    border: 1px solid #fff;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.addFrmLink {
+    color: #0288D1;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.addFrmLink:hover {
+    text-decoration: underline;
+}
+
+.room-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.addFrmLink i {
+    padding-right: 10px;
+}
+
+.frmArrayWrap {
+    max-height: 400px;
+    overflow-y: scroll;
+    background: rgba(208, 211, 212, 0.3);
+    padding: 5px;
+    margin: 3px 0;
+}
+
+.closeIcon {
+    color: #ff2500;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.group-Item {
+    padding: 0 5px;
+    width: 100px;
+}
+
+.li-cta {
+    width: auto;
+}
+
+.li-Item {
+    min-width: 200px;
+}
+
+.apmis-blue {
+    color: #fff;
+    background: #0288D1;
+    margin: 5px 2px;
+}
+
+.table-content {
+    width: 100%;
+    padding: 10px;
+    text-align: center !important;
+}

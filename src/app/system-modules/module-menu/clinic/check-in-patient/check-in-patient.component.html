@@ -1,0 +1,151 @@
+<div class="checkedinPatients">
+
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="table-head col-xs-2">
+                    Name
+                </div>
+                <div class="table-head col-xs-2">
+                    Currently In
+                </div>
+                <div class="table-head col-xs-2">
+                    Care Giver
+                </div>
+                <div class="table-head col-xs-2">
+                    Checked In
+                </div>
+                <div class="table-head col-xs-1">
+                    Time Spent
+                </div>
+                <div class="table-head col-xs-3">
+                    <i class="fa fa-search fa-fw"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <div *ngIf="checkedInAppointments.length === 0 && !loading" class="row">
+                <div class="card-list-item col-xs-12 table-list">
+                    No data available in table
+                </div>
+            </div>
+
+            <div *ngIf="checkedInAppointments.length === 0 && loading" class="row">
+                <div class="card-list-item col-xs-12 table-list">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue"></i>
+                </div>
+            </div>
+            <div class="card-list-item" *ngFor="let appointment of checkedInAppointments; let i = index">
+                <div class="row">
+                    <div class="table-list col-xs-2">
+                        <div title="{{appointment?.patientDetails?.personDetails?.primaryContactPhoneNo}} {{appointment?.patientDetails?.personDetails?.email}} Reason for Vist: {{appointment.appointmentReason == NULL ? 'None' : appointment.appointmentReason }}" class="empWrap"
+                            (click)="goToPatientPage(appointment,false)">
+                            <div class="list-img" *ngIf="appointment?.patientDetails?.personDetails?.profileImageObject == undefined">
+                                <img src="assets/images/users/default.png">
+                            </div>
+                            <div class="list-img" *ngIf="appointment?.patientDetails?.personDetails?.profileImageObject !== undefined">
+                                <img [src]="facilityService.transform(appointment.patientDetails.personDetails?.profileImageObject?.thumbnail)">
+                            </div>
+                            <div>
+                                {{appointment?.patientDetails?.personDetails?.lastName}} {{appointment?.patientDetails?.personDetails?.firstName}}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-list col-xs-2">
+                        {{appointment.clinicId}}
+                    </div>
+                    <div class="table-list col-xs-2">
+                        <div>{{appointment.providerDetails?.personDetails?.lastName}} {{appointment.providerDetails?.personDetails?.firstName}}</div>
+                        <div class="caregiver-room">{{getConsultingRoom(appointment)}}</div>
+                    </div>
+                    <div class="table-list col-xs-2">
+                        {{appointment?.attendance?.dateCheckIn | date:'shortTime'}}
+                    </div>
+                    <div class="table-list col-xs-1">{{appointment?.attendance?.dateCheckIn | amTimeAgo}}</div>
+
+                    <div class="table-list col-xs-3">
+                        <div class="td-ctaWrap">
+                            <div class="actionWrap" [class.vital-taken]="appointment.hasDoneVital" (click)="showVital(appointment)">
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                <span>Vitals</span>
+                            </div>
+                            <div class="actionWrap" [class.patient-is-engaged]="appointment.isEngaged" (click)="goToPatientPage(appointment,true)">
+                                <i class="fa fa-medkit" aria-hidden="true"></i>
+                                <span>Attend to Patient</span>
+                            </div>
+                            <div (click)="slideTimeline_toggle(appointment, $event)" class="actionWrap">
+                                <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                                <span>Timeline</span>
+                            </div>
+                            <div *ngIf="appointment.zoom !== undefined" (click)="onNavigate(appointment, $event)" class="actionWrap">
+                                <i class="fa fa-stethoscope" aria-hidden="true"></i>
+                                <span>TeleMedicine</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="addVital" class="modal-overlay">
+        <app-add-vitals (closeModal)="close_onClick($event)" [patient]="patient" id="form-modal" class="form-modal center-center"></app-add-vitals>
+    </div>
+
+</div>
+
+<div *ngIf="slideTimeline" class="inPatient-activityTimeline shadow-RB animated slideInRight">
+    <div (click)="slideTimeline_toggle(appointment, $event)" class="hide-actionWrap">
+        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+    </div>
+
+    <div class="timeline-headwrap">
+        <div class="timelinehead-contentWrap">
+            <div class="timelinePatient-imgWrap" *ngIf="selectedCheckedInAppointment?.personDetails?.profileImageObject == undefined">
+                <img src="assets/images/users/default.png">
+            </div>
+            <div class="timelinePatient-imgWrap" *ngIf="selectedCheckedInAppointment?.patientDetails?.personDetails?.profileImageObject !== undefined">
+                <img [src]="facilityService.transform(selectedCheckedInAppointment?.personDetails?.profileImageObject?.detailthumbnail)">
+            </div>
+            <div class="patientLabelGroup">
+                <div class="patientName">{{selectedCheckedInAppointment?.patientDetails?.personDetails?.lastName}} {{selectedCheckedInAppointment?.patientDetails?.personDetails?.firstName}}</div>
+                <div class="label">
+                    <span>{{selectedCheckedInAppointment?.patientDetails?.personDetails?.primaryContactPhoneNo}}</span> |
+                    <span>{{selectedCheckedInAppointment?.patientDetails?.personDetails?.email}}</span> |
+                    <span>{{selectedCheckedInAppointment?.appointmentTypeId}}</span>
+                </div>
+                <div class="label">
+                    <span>{{selectedCheckedInAppointment?.appointmentReason}}</span>
+                </div>
+                <div class="label">(Clinical Activity Timeline)</div>
+            </div>
+        </div>
+    </div>
+
+    <div (click)="dontGo()" class="activity-listings">
+        <div *ngFor="let timeline of timelines" class="activity-listing">
+            <i class="fa fa-circle-thin" aria-hidden="true"></i>
+            <div class="activity-content">
+                <div class="activity-time">
+                    <div class="date">{{timeline.startTime | date:'mediumDate'}}</div>
+                    <div class="time">{{timeline.startTime | date:'mediumTime'}}</div>
+                </div>
+                <div class="activity">
+                    <div class="activity-label">{{timeline.label}}</div>
+                    <div class="activity-actor" *ngIf="timeline.person !== undefined">
+                        <span>{{timeline.person}}</span>
+                    </div>
+                    <div class="activity-actor" *ngIf="timeline.person === undefined">
+                        <span>{{timeline.person}}</span>
+                    </div>
+                    <div class="activity-detail"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="addVital" class="modal-overlay">
+    <app-add-vitals [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-vitals>
+</div>

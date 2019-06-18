@@ -1,0 +1,230 @@
+<div>
+
+    <div class="dataMix-wrap color1">
+        <div class="lhs">Facility Name</div>
+        <div class="rhs">
+            <div [hidden]="facilityNameEditShow" class="lhs"> {{facilityObj.name}} </div>
+            <!--<input *ngIf="facilityNameEditShow" class="edit-control lhs" type="text" value="{{facilityObj.name}}" [formControl]="facilityNameEdit">-->
+            <mat-input-container *ngIf="facilityNameEditShow"  class="example-full-width">
+                <input matInput value="{{facilityObj.name}}" [formControl]="facilityNameEdit">
+            </mat-input-container>
+                        <i *ngIf="facilityNameEditShow" (click)="facilityNameEditToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <i [hidden]="facilityNameEditShow" (click)="facilityNameEditToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="dataMix-wrap color2">
+        <div class="lhs">Short Name (Alias)</div>
+        <div class="rhs">
+            <div [hidden]="shortNameEditShow" class="lhs"> {{facilityObj.shortName}} </div>
+            <!--<input *ngIf="shortNameEditShow" class="edit-control lhs" type="text" value="{{facilityObj.shortName}}" [formControl]="shortNameEdit">-->
+            <mat-input-container  *ngIf="shortNameEditShow" class="example-full-width">
+            <input matInput value="{{facilityObj.shortName}}" [formControl]="shortNameEdit">
+            </mat-input-container>
+            <i [hidden]="shortNameEditShow" (click)="shortNameEditToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i *ngIf="shortNameEditShow" (click)="shortNameEditToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="dataMix-wrap color1">
+        <div class="lhs">Email Address</div>
+        <div class="rhs">
+            <div [hidden]="facilityEmailEditShow" class="lhs"> {{facilityObj.email}} </div>
+            <!--<input *ngIf="facilityEmailEditShow" class="edit-control lhs" type="text" value="{{facilityObj.email}}" [formControl]="facilityEmailEdit">-->
+            <mat-input-container *ngIf="facilityEmailEditShow" class="example-full-width">
+            <input matInput value="{{facilityObj.email}}" [formControl]="facilityEmailEdit">
+            </mat-input-container>
+            <i [hidden]="facilityEmailEditShow" (click)="facilityEmailEditToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i *ngIf="facilityEmailEditShow" (click)="facilityEmailEditToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="dataMix-wrap color2">
+        <div class="lhs">Official Website</div>
+        <div class="rhs">
+            <div [hidden]="facilityWebsiteEditShow" class="lhs"> {{facilityObj.website}} </div>
+            <!--<input *ngIf="facilityWebsiteEditShow" class="edit-control lhs" type="text" value="{{facilityObj.website}}" [formControl]="facilityWebsiteEdit">-->
+            <mat-input-container *ngIf="facilityWebsiteEditShow"  class="example-full-width">
+             <input matInput value="{{facilityObj.website}}" [formControl]="facilityWebsiteEdit">
+            </mat-input-container>
+            <i [hidden]="facilityWebsiteEditShow" (click)="facilityNameWebsiteToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i *ngIf="facilityWebsiteEditShow" (click)="facilityNameWebsiteToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="dataMix-wrap color1">
+        <div class="lhs">Contact Person</div>
+        <div class="rhs">
+            <div [hidden]="fullNameEditShow" class="lhs"> {{facilityObj.contactFullName}} </div>
+            <!--<input *ngIf="fullNameEditShow" class="edit-control lhs" type="text" value="{{facilityObj.contactFullName}}" [formControl]="ContactFullNameEdit">-->
+            <mat-input-container *ngIf="fullNameEditShow" class="example-full-width">
+            <input matInput value="{{facilityObj.contactFullName}}" [formControl]="ContactFullNameEdit">
+            </mat-input-container>
+            <i [hidden]="fullNameEditShow" (click)="fullNameEditToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i *ngIf="fullNameEditShow" (click)="fullNameEditToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="dataMix-wrap color2">
+        <div class="lhs">Phone Number</div>
+        <div class="rhs">
+            <div [hidden]="phoneNoEditShow" class="lhs"> {{facilityObj.contactPhoneNo}} </div>
+            <!--<input *ngIf="phoneNoEditShow" class="edit-control lhs" type="text" value="{{facilityObj.contactPhoneNo}}" [formControl]="phoneNoEdit">-->
+            <mat-input-container *ngIf="phoneNoEditShow" class="example-full-width">
+             <input matInput value="{{facilityObj.contactPhoneNo}}" [formControl]="phoneNoEdit">
+            </mat-input-container>
+            <i [hidden]="phoneNoEditShow" (click)="phoneNoEditToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i *ngIf="phoneNoEditShow" (click)="phoneNoEditToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="dataMix-wrap color1">
+        <div class="lhs">Type of Facility</div>
+        <div class="rhs">
+            <div [hidden]="facilityTypeEditShow" class="lhs"> {{facilityObj.facilityItem?.name}} </div>
+           <!--<select *ngIf="facilityTypeEditShow" [formControl]="facilityTypeEdit">
+            <option  value="" disabled selected>Type of Facility/Organisation</option>
+            <option *ngFor="let item of facilityTypes"  value={{item._id}}>{{item.name}}</option>
+          </select>-->
+           <mat-select *ngIf="facilityTypeEditShow" [formControl]="facilityTypeEdit">
+                <mat-option  value="" disabled selected>Type of Facility/Organisation</mat-option>
+                <mat-option *ngFor="let item of facilityTypes"  value={{item._id}}>
+                {{item.name}}
+                </mat-option>
+            </mat-select>
+            <i [hidden]="facilityTypeEditShow" (click)="facilityTypeEditToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i *ngIf="facilityTypeEditShow" (click)="facilityTypeEditToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="dataMix-wrap color2">
+        <div class="lhs">Class</div>
+        <div class="rhs">
+            <div [hidden]="facilityClassEditShow" class="lhs"> {{facilityObj.facilityClassItem?.name}} </div>
+            <!--<input *ngIf="facilityClassEditShow" class="edit-control lhs" type="text" value="{{facilityObj.facilityClass}}" [formControl]="facilityClassEdit">-->
+            <!--<select *ngIf="facilityClassEditShow" [formControl]="facilityClassEdit">
+            <option  value="" disabled selected>Class of Facility</option>
+            <option *ngFor="let item of facilityClassess"  value={{item._id}}>{{item.name}}</option>
+           </select>-->
+           <mat-select *ngIf="facilityClassEditShow" [formControl]="facilityClassEdit">
+                <mat-option  value="" disabled selected>Class of Facility</mat-option>
+                <mat-option *ngFor="let item of facilityClassess"  value={{item._id}}>
+                {{item.name}}
+                </mat-option>
+            </mat-select>
+            <i [hidden]="facilityClassEditShow" (click)="facilityClassEditToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i *ngIf="facilityClassEditShow" (click)="facilityClassEditToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="dataMix-wrap color1">
+        <div class="lhs">Address</div>
+        <div class="rhs">
+            <div [hidden]="facilityStreetEditShow" class="lhs"> {{facilityObj?.address?.street}} </div>
+            <!--<input *ngIf="facilityStreetEditShow" class="edit-control lhs" type="text" value="{{facilityObj.address.street}}" [formControl]="facilityStreetEdit">-->
+            <mat-input-container *ngIf="facilityStreetEditShow" class="example-full-width">
+                <input matInput value="{{facilityObj.address.street}}" [formControl]="facilityStreetEdit">
+            </mat-input-container>
+            <i [hidden]="facilityStreetEditShow" (click)="facilityStreetEditToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i *ngIf="facilityStreetEditShow" (click)="facilityStreetEditToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="dataMix-wrap color2">
+        <div class="lhs">Country</div>
+        <div class="rhs">
+            <div [hidden]="facilityCountryEditShow" class="lhs"> {{facilityObj.addressObj?.country}} </div>
+            <!--<input *ngIf="facilityCountryEditShow" class="edit-control lhs" type="text" value="{{facilityObj.address.country}}" [formControl]="facilityCountryEdit">-->
+            <!--<select *ngIf="facilityCountryEditShow" [formControl]="facilityCountryEdit">
+            <option  value="" disabled selected>Country</option>
+            <option *ngFor="let item of countries"  value={{item._id}}>{{item.name}}</option>
+          </select>-->
+          <mat-select *ngIf="facilityCountryEditShow" [formControl]="facilityCountryEdit">
+                <mat-option  value="" disabled selected>Type of Facility/Organisation</mat-option>
+                <mat-option *ngFor="let item of countries"  value={{item._id}}>
+                {{item.name}}
+                </mat-option>
+            </mat-select>
+            <i [hidden]="facilityCountryEditShow" (click)="facilityCountryEditToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i *ngIf="facilityCountryEditShow" (click)="facilityCountryEditToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="dataMix-wrap color1">
+        <div class="lhs">State</div>
+        <div class="rhs">
+            <div [hidden]="facilityStateEditShow" class="lhs"> {{facilityObj.addressObj?.state}} </div>
+            <!--<input *ngIf="facilityStateEditShow" class="edit-control lhs" type="text" value="{{facilityObj.address.state}}" [formControl]="facilityStateEdit">-->
+            <!--<select *ngIf="facilityStateEditShow" [formControl]="facilityStateEdit">
+            <option  value="" disabled selected>State</option>
+            <option *ngFor="let item of states"  value={{item._id}}>{{item.name}}</option>
+          </select>-->
+           <mat-select *ngIf="facilityStateEditShow" [formControl]="facilityStateEdit">
+                <mat-option  value="" disabled selected>State</mat-option>
+                <mat-option *ngFor="let item of states"  value={{item._id}}>
+                {{item.name}}
+                </mat-option>
+            </mat-select>
+            <i [hidden]="facilityStateEditShow" (click)="facilityStateEditToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i *ngIf="facilityStateEditShow" (click)="facilityStateEditToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="dataMix-wrap color2">
+        <div class="lhs">City</div>
+        <div class="rhs">
+            <div [hidden]="facilityCityEditShow" class="lhs"> {{facilityObj.addressObj?.city}} </div>
+            <!--<input *ngIf="facilityCityEditShow" class="edit-control lhs" type="text" value="{{facilityObj.address.city}}" [formControl]="facilityCityEdit">-->
+            <!--<select *ngIf="facilityCityEditShow" [formControl]="facilityCityEdit">
+            <option  value="" disabled selected>City</option>
+            <option *ngFor="let item of cities"  value={{item._id}}>{{item.name}}</option>
+          </select>-->
+          <mat-select *ngIf="facilityCityEditShow" [formControl]="facilityCityEdit">
+                <mat-option  value="" disabled selected>City</mat-option>
+                <mat-option *ngFor="let item of cities"  value={{item._id}}>
+                {{item.name}}
+                </mat-option>
+            </mat-select>
+            <i [hidden]="facilityCityEditShow" (click)="facilityCityEditToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i *ngIf="facilityCityEditShow" (click)="facilityCityEditToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="dataMix-wrap color1">
+        <div class="lhs">Major Landmark</div>
+        <div class="rhs">
+            <div [hidden]="facilityLandmarkEditShow" class="lhs"> {{facilityObj.address?.landmark}} </div>
+            <!--<input *ngIf="facilityLandmarkEditShow" class="edit-control lhs" type="text" value="{{facilityObj.address.landmark}}" [formControl]="facilityLandmarkEdit">-->
+            <mat-input-container *ngIf="facilityLandmarkEditShow" class="example-full-width">
+                <input matInput value="{{facilityObj.address.landmark}}" [formControl]="facilityLandmarkEdit">
+            </mat-input-container>
+            <i [hidden]="facilityLandmarkEditShow" (click)="facilityLandmarkEditToggle()" class="edit-ico fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i *ngIf="facilityLandmarkEditShow" (click)="facilityLandmarkEditToggle()" class="done-ico fa fa-check" aria-hidden="true"></i>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>   
+</div>

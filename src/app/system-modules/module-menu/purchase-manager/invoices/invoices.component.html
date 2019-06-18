@@ -1,0 +1,132 @@
+<div class="survery">
+    <div class="">
+
+        <!-- <div class="row margin-bottom">
+            <div class="col-sm-4 col-md-4 col-xs-12">
+                <mat-form-field>
+                    <mat-select placeholder="Filter By" [formControl]="frmSupplier">
+                        <mat-option *ngFor="let item of suppliers" [value]="item._id">{{item.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-4 col-md-4 col-xs-12 pull-right">
+                <mat-input-container class="example-full-width">
+                    <input type="text" matInput mat-error placeholder="Search">
+                </mat-input-container>
+            </div>
+        </div> -->
+
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-xs-4 table-head">Invoice No</div>
+                    <div class="col-xs-4 table-head">Supplier</div>
+                    <div class="table-head col-xs-3">Cost</div>
+                    <div class="table-head col-xs-1">
+                        <i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i>
+                    </div>
+                </div>
+                <div class="row" *ngIf="searchOpen">
+                    <div class="col-md-4">
+                        <input [formControl]="frmSearch" class="table-header-input" type="text" placeholder="Search...">
+                    </div>
+                    <div class="col-md-4">
+                        <mat-select placeholder="Search Supplier" [formControl]="frmSupplier">
+                            <mat-option disabled="">Supplier</mat-option>
+                            <mat-option [value]="item._id" *ngFor="let item of suppliers">
+                                <span>{{item.supplier.name}}</span>
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-1 table-head">
+                        <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-list-item" *ngIf="invoices.length === 0">
+                    <div class="col-xs-12" style="text-align:center">
+                        No data available in table<br/>
+                    </div>
+                </div>
+                <div class="card-list-item" *ngFor="let invoice of invoices; let i=index;">
+                    <div class="row">
+                        <div class="table-list col-md-4">
+                            {{invoice.invoiceNumber}}
+                        </div>
+                        <div class="table-list col-md-4">
+                            {{invoice.supplierObject?.supplier?.name}}
+                        </div>
+                        <div class="table-list col-md-3">
+                            &#8358; {{invoice.invoiceAmount}}
+                        </div>
+                        <div class="table-list col-md-1">
+                            <a class="action-btn" (click)="slideInvoiceDetailsToggle(invoice, $event)"><i class="fa fa-eye"></i></a>
+                            <a (click)="onNavigateToPayment(invoice)"><span><i class="fa fa-money"></i></span> </a>
+                            <!-- <a class="action-btn"><i class="fa fa-trash"></i></a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-12">
+            <a routerLink="/dashboard/purchase-manager/purchase-entry" id="floating-button">
+                <p class="plus">+</p>
+            </a>
+        </div>
+    </div>
+
+    <div *ngIf="slideInvoiceDetails" class="inPatient-activityTimeline shadow-RB animated slideInRight">
+        <div (click)="slideInvoiceDetailsToggle(invoice, $event)" class="hide-actionWrap">
+            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+        </div>
+
+        <h4 class="title">{{selectedProduct?.name}}</h4>
+
+        <div class="product-details">
+            <div class="row">
+                <div class="left"></div>
+                <div class="right"></div>
+            </div>
+            <div class="row">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Product</td>
+                            <td>Qty</td>
+                            <td>Batch No</td>
+                            <td>Exp Date</td>
+                            <td>Cost</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of selectedProduct.products">
+                            <td>{{product?.productObject?.name}}</td>
+                            <td>{{product.quantity}}</td>
+                            <td>{{product.batchNo}}</td>
+                            <td>{{product.expiryDate | date}}</td>
+                            <td>{{product.costPrice}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"></td>
+                            <td colspan="2">_______________________</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="remark">
+                <h3>Remark</h3>
+                <span>All goods received in good condition and have since been distributed
+                  to the various stores in need of supplies.
+                  From this point onwards, its business as usual at all our various store.
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Add Allergy</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <div>
+            <div>
+                <mat-input-container>
+                    <input matInput placeholder="Allergy" [formControl]="allergyFormCtrl">
+                </mat-input-container>
+            </div>
+            <div>
+                <mat-input-container>
+                    <input matInput placeholder="Reaction" [formControl]="reactionFormCtrl">
+                </mat-input-container>
+            </div>
+            <div>
+                <mat-input-container>
+                    <input matInput placeholder="Severity" [matAutocomplete]="auto" [formControl]="severityFormCtrl">
+                </mat-input-container>
+
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="severityDisplayFn">
+                    <mat-option *ngFor="let severity of severities" [value]="severity">
+                        {{ severity.name }}
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+            <div>
+                <mat-input-container>
+                    <textarea matInput placeholder="Note" [formControl]="noteFormCtrl"></textarea>
+                </mat-input-container>
+            </div>
+            <!-- <button [disabled]="(problemFormCtrl.value === null || !noteFormCtrl.value === null || problemFormCtrl.value.length === 0)" (click)="save()" [ngClass]="{'cta-1':(problemFormCtrl.value !== null && statusFormCtrl.value !== null && problemFormCtrl.value.length !== 0), 'cta-1-disable':(problemFormCtrl.value === null || noteFormCtrl.value === null || problemFormCtrl.value.length === 0)}"> -->
+            <button [disabled]="allergyFormCtrl.value === null || reactionFormCtrl.value === null || severityFormCtrl.value === null || allergyFormCtrl.value.length === 0 || reactionFormCtrl.value.length === 0" (click)="save()" [ngClass]="{'cta-1':allergyFormCtrl.value !== null && reactionFormCtrl.value !== null && severityFormCtrl.value !== null && allergyFormCtrl.value.length !== 0 && reactionFormCtrl.value.length !== 0, 'cta-1-disable':allergyFormCtrl.value === null || reactionFormCtrl.value === null || severityFormCtrl.value === null|| allergyFormCtrl.value.length === 0 || reactionFormCtrl.value.length === 0}">
+            SAVE
+            <span *ngIf="isSaving" class="fa fa-spinner fa-spin"></span>
+        </button>
+        </div>
+    </div>

@@ -1,0 +1,211 @@
+<app-system-module>
+</app-system-module>
+<!-- <app-messaging class="messaging-shell" channel="channel"></app-messaging> -->
+<div (click)="innerMenuHide($event)" class="secondary-tab">
+    <div class="inner-wrap inner-wrap-sec">
+
+        <!-- <span class="dashboard-link" [routerLink]="['/dashboard']">Dashboard</span>  -->
+        <div *ngIf="facilityManagerActive" class="menubar-wrap">
+            <i (click)="innerMenuToggle()" class="fa fa-bars" aria-hidden="true"></i>
+        </div>
+
+        <div class="menuBar-facilityName">
+            <div class="menubar_facilityLogo orgLogo-wrap">
+                <!-- <app-image-viewer></app-image-viewer> -->
+                <app-image-viewer [imageSrc]="facilityObj?.logoObject?.thumbnail"></app-image-viewer>
+
+                <!-- <img *ngIf="facilityObj.logoObject != undefined" [src]="facilityService.transform(facilityObj.logoObject.thumbnail)">
+                <img *ngIf="facilityObj.logoObject == undefined" src="assets/images/logos/default.png"> -->
+                <!-- <div (click)="show_changeFacilityLogo()" class="pp-overlay">Change Logo</div> -->
+            </div>
+            <span>{{facilityName}}</span>
+
+        </div>
+        <div class="rhs">
+        </div>
+    </div>
+</div>
+
+<div class="menu-content-wrap">
+
+    <div class="mc-wrap">
+        <div *ngIf="innerMenuShow" class="nice-scroll mainmenu-content animated slideInLeft">
+            <ul *ngIf="!loadedMenu">
+                <li class="overlay_mock_text"></li>
+                <li class="overlay_mock_text"></li>
+                <li class="overlay_mock_text"></li>
+                <li class="overlay_mock_text"></li>
+                <li class="overlay_mock_text"></li>
+                <li class="overlay_mock_text"></li>
+            </ul>
+            <ul *ngIf="loadedMenu" id="innerMenu-ul" class="innerMenu-ul">
+                <li *ngIf="accessHas('Facility','Facility')" (click)="facilitySubmenuShow()" [routerLink]="getSubscribedModule('Facility') ? ['facility'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-building" aria-hidden="true"></i>
+                    <span>Facility</span>
+                </li>
+                <li *ngIf="accessHas('Patient-Manager','Patient Manager')" (click)="patientSubmenuShow()" [routerLink]="getSubscribedModule('Patient Manager') ? ['patient-manager'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span>Patient Manager</span>
+                </li>
+                <li *ngIf="accessHas('Ward-manager','Ward Manager')" (click)="patientSubmenuShow()" [routerLink]="getSubscribedModule('Ward Manager') ? ['ward-manager'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-bed" aria-hidden="true"></i>
+                    <span>Ward Manager</span>
+                </li>
+                <li *ngIf="accessHas('Payment','Payment')" (click)="patientSubmenuShow()" [routerLink]="getSubscribedModule(' Manager') ? ['payment'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-money" aria-hidden="true"></i>
+                    <span>Payment</span>
+                </li>
+                <li *ngIf="accessHas('Wallet','Wallet')" (click)="patientSubmenuShow()" [routerLink]="getSubscribedModule('Wallet') ? ['wallet'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                    <span>Wallet</span>
+                </li>
+                <li *ngIf="accessHas('Order','Order Management')" (click)="userSubmenuShow()" [routerLink]="getSubscribedModule('Order Management') ? ['access-manager'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-first-order" aria-hidden="true"></i>
+                    <span>Order Management {{accessHas('Order','Order Management')}}</span>
+                </li>
+                <li *ngIf="accessHas('Clinic','Clinic Management')" (click)="facilitySubmenuShow()" [routerLink]="getSubscribedModule('Clinic Management') ? ['clinic'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                    <span>Clinic Management</span>
+                </li>
+                <li *ngIf="accessHas('Clinical-Documentation','Clinical Documentation')" (click)="formsSubmenuShow()" [routerLink]="['clinical-documentation']" routerLinkActive="menu-active">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    <span>Clinical Documentation</span>
+                </li>
+                <li *ngIf="accessHas('Store','Store')" (click)="patientSubmenuShow()" [routerLink]="getSubscribedModule('Store') ? ['store'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    <span>Store</span>
+                </li>
+                <li *ngIf="accessHas('Pharmacy','Pharmacy')" (click)="patientSubmenuShow()" [routerLink]="getSubscribedModule('Pharmacy') ? ['pharmacy'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    <span>Pharmacy</span>
+                </li>
+                <li *ngIf="accessHas('Laboratory','Laboratory')" (click)="laboratorySubmenuShow()" [routerLink]="getSubscribedModule('Laboratory') ? ['laboratory'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-flask" aria-hidden="true"></i>
+                    <span>Laboratory</span>
+                </li>
+                <li *ngIf="accessHas('Radiology','Radiology')" (click)="employeeSubmenuShow()" [routerLink]="getSubscribedModule('Radiology') ? ['radiology'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    <span>Radiology</span>
+                </li>
+                <li *ngIf="accessHas('Blood','Blood Bank')" (click)="patientSubmenuShow()" [routerLink]="getSubscribedModule('Blood Bank') ? ['patient-manager'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-tint" aria-hidden="true"></i>
+                    <span>Blood Bank</span>
+                </li>
+                <li *ngIf="accessHas('Theatre','Theatre')" (click)="patientSubmenuShow()" [routerLink]="getSubscribedModule('Theatre') ? ['patient-manager'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-bed" aria-hidden="true"></i>
+                    <span>Theatre</span>
+                </li>
+                <li *ngIf="accessHas('Immunization','Immunization')" (click)="patientSubmenuShow()" [routerLink]="getSubscribedModule('Immunization') ? ['immunization'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-bed" aria-hidden="true"></i>
+                    <span>Immunization</span>
+                </li>
+                <li *ngIf="accessHas('Health-Coverage','Health Care Coverage')" (click)="onHealthCoverage()">
+                    <i class="fa fa-heartbeat" [routerLink]="getSubscribedModule('Health Care Coverage') ? ['health-coverage'] : []" routerLinkActive="menu-active" aria-hidden="true"></i>
+                    <span> Health Care Coverage</span>
+                </li>
+                <!-- <li (click)="onSwitchAccount()"><i class="fa fa-users" aria-hidden="true"></i> <span>Switch Account</span></li> -->
+                <!-- <li (click)="logoutConfirm_show()"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log Out</span></li> -->
+                <li *ngIf="accessHas('billing/tags','Tags')" (click)="onTags()" [routerLink]="getSubscribedModule('Tags') ? ['billing/tags'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                    <span>Tags</span>
+                </li>
+                <li *ngIf="accessHas('Setting','Facility Settings')" (click)="facilitySubmenuShow()" [routerLink]="getSubscribedModule('Facility Settings') ? ['facility-page'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                    <span>Facility Settings</span>
+                </li>
+                <!-- <li (click)="employeeSubmenuShow()" [routerLink]="['employee-manager']"><i class="fa fa-user" aria-hidden="true"></i> <span>Profile Settings</span></li> -->
+                <!-- <li (click)="userSubmenuShow()" [routerLink]="['access-manager/access-role-details']"><i class="fa fa-sign-in" aria-hidden="true"></i> <span>Access Control</span></li> -->
+                <!-- <li (click)="changePass()"><i class="fa fa-lock" aria-hidden="true"></i> <span>Change Password</span></li> -->
+                <li *ngIf="accessHas('Billing','Billing Manager')" (click)="billingSubmenuShow()" [routerLink]="getSubscribedModule('Billing Manager') ? ['billing'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                    <span>Billing Manager</span>
+                    <!-- {{ getSubscribedModule(module?.name) ? ' wp-name': ' wp-name li-disabled'}} -->
+                </li>
+                <li *ngIf="accessHas('Corporate','Corporate')" (click)="billingSubmenuShow()" [routerLink]="getSubscribedModule('Corporate') ? ['corporate'] : []" routerLinkActive="menu-active">
+                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                    <span>Corporate</span>
+                </li>
+                <li [routerLink]="['./reports']" routerLinkActive="menu-active">
+                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                    <span>Reports</span>
+                </li>
+                <!-- <li [routerLink]="['./reports/register']" routerLinkActive="menu-active">
+                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                    <span>Registers</span>
+                </li> -->
+            </ul>
+        </div>
+
+        <div class="mainContentArea">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="facility-global-icons">
+    <div (click)="notificationToggle()" class="notification-wrap">
+        <div class="notification-count">5</div>
+        <i class="fa fa-bell-o" aria-hidden="true"></i>
+    </div>
+</div>
+
+<div *ngIf="notificationSlideIn" class="slideContentWrapper animated slideInRight">
+    <div class="notification-sect">
+
+        <i (click)="notificationToggle()" class="backIco fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+
+        <section>
+            <div class="sect-title">Today</div>
+            <div class="notification-list">
+                <div class="notification-item">
+                    <div class="notification-contentWrap">
+                        <span class="notification-actor"> <span class="person-link">Jonathan Nelson</span> scheduled you for an appointment with <span class="person-link">Dr. Jonathan Nelson</span> on 20th April, 2017.</span>
+                        <div class="person-pop">
+                            <div class="person-imgWrap">
+                                <img src="../../../assets/images/users/pic4.jpg">
+                                <div class="person-content">
+                                    <div class="person-name">Dr. Nelson Dariye</div>
+                                    <div class="person-empDetail">
+                                        <span>Dental Doctor</span>
+                                        <span>EMT Clinic</span>
+                                    </div>
+                                    <div class="person-generalDetail">
+                                        <span>08099009987</span>
+                                        <span>d.nelson@gmail.com</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notification-item">
+                    <div class="notification-contentWrap">
+                        <span class="notification-actor"> Jonathan Nelson scheduled you for an appointment with Dr. Jonathan Nelson on 20th April, 2017.</span>
+                    </div>
+                </div>
+
+                <div class="notification-item">
+                    <div class="notification-contentWrap">
+                        <span class="notification-actor"> Jonathan Nelson scheduled you for an appointment with Dr. Jonathan Nelson on 20th April, 2017.</span>
+                    </div>
+                </div>
+
+                <div class="notification-item">
+                    <div class="notification-contentWrap">
+                        <span class="notification-actor"> Jonathan Nelson scheduled you for an appointment with Dr. Jonathan Nelson on 20th April, 2017.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div> -->
+
+<div *ngIf="logoutConfirm_on" class="modal-overlay">
+    <app-logout-confirm (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-logout-confirm>
+</div>
+
+<div *ngIf="changeFacilityLogo" class="modal-overlay">
+    <app-logo-update [selectedFacility]="facilityObj" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-logo-update>
+</div>
+<div class="footer">&copy; 2017 APMIS. All Right Reserved.</div>

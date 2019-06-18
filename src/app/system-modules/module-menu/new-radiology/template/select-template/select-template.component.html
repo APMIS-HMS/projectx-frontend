@@ -1,0 +1,22 @@
+<div class="modal-baseWrap animated pulse">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+
+    <div class="postStrap-title">Select Template</div>
+    <div class="cont-wrap">
+        <div class="cont-item">
+            <form [formGroup]="templateFormGroup" novalidate>
+                <div class="frm-item-wrap">
+                    <mat-form-field>
+                        <mat-select class="example-full-width" placeholder="Investigation" formControlName="investigation">
+                            <mat-option *ngFor="let investigation of investigations" [value]="investigation">{{investigation.investigation.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="btn-group">
+                    <button mat-raised-button [disabled]="!templateFormGroup.valid" (click)="selectTemplate(templateFormGroup.valid, templateFormGroup.value);" style="color: #fff; margin-right: 5px;"> Save </button>
+                    <button mat-raised-button (click)="close_onClick();" style="color: #fff; background-color: #B71C1C;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

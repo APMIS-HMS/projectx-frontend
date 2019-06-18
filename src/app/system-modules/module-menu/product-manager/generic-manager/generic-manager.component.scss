@@ -1,0 +1,12 @@
+@import '../../clinic/check-in-patient/check-in-patient.component.scss';
+@import '../category-manager/category-manager.component.scss';
+.form-group {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+}
+
+//.card-header {
+//height: 15%;
+//}

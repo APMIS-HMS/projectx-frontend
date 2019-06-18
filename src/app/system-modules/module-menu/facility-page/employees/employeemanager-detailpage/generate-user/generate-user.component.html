@@ -1,0 +1,26 @@
+<div class="inner-wrap-b body-wrap">
+    <!-- <div class="side-sec lhs">
+        <app-employee-lookup (selectedEmployee)="navEpDetail($event)"></app-employee-lookup>
+    </div> -->
+
+    <div class="content-sec rhs">
+
+        <div class="modal-head-wrap">
+            <div *ngIf="selectedPerson?.profileImageObject === undefined"><img src="assets/images/users/default.png"></div>
+            <img *ngIf="selectedPerson?.profileImageObject !== undefined" style="cursor:pointer;" (click)="person_onClick()" [src]="facilityService.transform(selectedPerson?.profileImageObject?.thumbnail)">
+
+            <div>
+                <legend class="modal_title">Generate User</legend>
+                <div class="modal_mini_title">Make <span class="clickableText" (click)="person_onClick()"> {{selectedPerson?.lastName}} {{selectedPerson?.firstName}} </span>a user on the platform
+                </div>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+
+        <legend *ngIf="accessControlList.length > 0" class="title-label">Select user access roles</legend>
+
+        <div class="check-component">
+            <app-apmis-checkbox class="checkComponent" *ngFor="let item of accessControlList" [selectedAccessControl]="item"></app-apmis-checkbox>
+        </div>
+        <div (click)="generate()" class="btn-1 btn-blue"><i class="fa fa-sign-out" aria-hidden="true"></i> Generate User</div>

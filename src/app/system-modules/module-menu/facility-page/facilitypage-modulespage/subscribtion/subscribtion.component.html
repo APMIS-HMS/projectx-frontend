@@ -1,0 +1,37 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+      <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+      <legend class="modal_title">Subscription</legend>
+      <div class="modal_mini_title">Continental Hospital</div>
+  </div>
+  <div class="modal-baseWrap">
+    <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+    <div class="search-wrap">
+      <label class="plan-label" for="plan">Select Plan</label>
+      <select class="plan-input" [formControl]="plan">
+        <option>One Off Payment</option>
+        <option>Subscription</option>
+      </select>
+
+      <div class="mod-grp">
+        <div class="pretty p-default">
+          <input type="checkbox" />
+          <div class="state">
+              <label>Check</label>
+          </div>
+        </div>
+        <div class="pretty p-default">
+          <input type="checkbox" />
+          <div class="state">
+              <label>Check</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="cta-1"> 
+        Subscribe
+      </button>
+  </div>
+</div>

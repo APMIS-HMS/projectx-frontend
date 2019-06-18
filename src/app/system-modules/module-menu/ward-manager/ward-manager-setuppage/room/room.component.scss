@@ -1,0 +1,288 @@
+                    @import "../../../../../../globals/variables.scss";
+                    // @import "../../../patient-manager/patientmanager-homepage/patientmanager-homepage.component.scss";
+                    .card-list-item:hover {
+                        //border-left: solid 3px #337ab7;
+                        cursor: pointer;
+                        background: #eee !important;
+                    }
+                    
+                    .topmenuwrap {
+                        right: 130px;
+                    }
+                    
+                    .small-header {
+                        text-align: center;
+                        font-size: 1.2rem;
+                        color: #A6ACAF;
+                    }
+                    
+                    .body-wrap {
+                        margin-top: 0;
+                    }
+                    
+                    ul.topmenuwrap {
+                        top: -44px;
+                    }
+                    
+                    .c-page-wrapper {
+                        border: none;
+                        padding-left: 5px !important;
+                    }
+                    
+                    .inner-page-contentArea {
+                        padding: 0;
+                    }
+                    
+                    .menuContent {
+                        width: 73%;
+                    }
+                    
+                    .inner-menu1-wrap {
+                        top: 10px;
+                        right: auto;
+                        left: 0px;
+                    }
+                    
+                    .content-sec-ico {
+                        font-size: 2rem;
+                        color: #757575;
+                        padding: 4px;
+                        width: 21px;
+                        height: 21px;
+                        border-radius: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    
+                    .content-sec-ico:hover,
+                    .content-sec-icoActive {
+                        background: #F5F5F5;
+                        color: #4bb8ef;
+                    }
+                    
+                    .inner-menu1-wrap {
+                        top: 10px;
+                        right: 10px;
+                        left: auto;
+                    }
+                    
+                    .inner-menu1-wrap .innerMenu-ul {
+                        margin-top: 33px;
+                    }
+                    
+                    .content-sec-ico {
+                        position: absolute;
+                        right: 0;
+                    }
+                    
+                    .inner-page-wrap {
+                        margin-top: 40px !important;
+                    }
+                    
+                    .inner-page-menuTab {
+                        width: 20% !important;
+                    }
+                    
+                    .inner-page-contentArea {
+                        width: 80% !important;
+                    }
+                    
+                    .container {
+                        padding-top: 10px;
+                        padding-left: 10%;
+                        padding-right: 10%;
+                        padding-bottom: 10px;
+                        width: 100%;
+                        box-sizing: border-box;
+                    }
+                    
+                    .mat-form-field {
+                        width: 100% !important;
+                    }
+                    
+                    .card {
+                        position: relative;
+                        background: #fff;
+                        width: 100%;
+                        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+                        margin-top: 20px;
+                        .card-header {
+                            background: #337ab7;
+                            color: #fff;
+                            font-size: 1.2rem;
+                            padding: 10px;
+                            vertical-align: middle;
+                            line-height: 30px;
+                            border-bottom: solid 1px #fff;
+                            font-weight: 600;
+                            .table-head {
+                                border-right: solid 1px #fff;
+                                text-align: center;
+                                .search-box {
+                                    margin-top: 10px;
+                                }
+                            }
+                            .table-header-input {
+                                background: rgba(255, 255, 255, 0.233);
+                                color: #fff;
+                                border: none;
+                                border-radius: 5px;
+                                width: 100%;
+                                text-align: center;
+                                font-size: 1.2rem !important;
+                                height: 30px;
+                            }
+                            .table-header-select {
+                                background: rgba(255, 255, 255, 0.233);
+                                color: #dddddd;
+                                border: none;
+                                border-radius: 5px;
+                                width: 100%;
+                                text-align: center;
+                                height: 30px;
+                                font-size: 1.2rem !important;
+                            }
+                            .table-head:last-of-type {
+                                border: none;
+                            }
+                        }
+                        .card-content {
+                            font-size: 1.2px;
+                            .table-list {
+                                // border-right: solid 1px #aaa;
+                                text-align: center;
+                            }
+                        }
+                        .card-header-box {
+                            background: rgba(255, 255, 255, 0.16);
+                            color: #fff;
+                            border: none;
+                            font-size: 1.2rem !important;
+                            padding: 10px !important;
+                            width: 100%;
+                            height: 30px !important;
+                            box-sizing: border-box;
+                        }
+                        .card-list-item {
+                            padding: 10px;
+                            border-bottom: solid rgb(204, 204, 204) 1px;
+                            padding-top: 20px;
+                            padding-bottom: 20px;
+                            font-size: 1.2rem;
+                            transition: 0.2s;
+                        }
+                        .options {
+                            font-size: 1.2rem;
+                            opacity: 0;
+                            cursor: pointer;
+                        }
+                    }
+                    
+                    .padding {
+                        padding: 20px;
+                    }
+                    
+                    .title {
+                        margin-top: 30px;
+                        font-weight: bold;
+                        margin-bottom: 20px;
+                    }
+                    
+                    .star {
+                        color: rgb(255, 235, 51);
+                    }
+                    
+                    .pie-number {
+                        position: absolute;
+                        top: 45%;
+                        left: 17%;
+                        text-align: center;
+                    }
+                    
+                    .tabs {
+                        font-size: 1.2rem;
+                        line-height: 1.2rem;
+                        margin-bottom: 10px;
+                        .tab {
+                            border-bottom: solid 1px #999;
+                            padding: 9px;
+                            text-align: center;
+                            font-weight: 900;
+                            cursor: pointer;
+                            transition: 0.4s;
+                        }
+                        .tab:hover {
+                            padding: 8px;
+                            border-bottom: solid 2px #525252;
+                        }
+                        .active {
+                            color: #337ab7;
+                            padding: 8px;
+                            border-bottom: solid 2px #337ab7;
+                        }
+                    }
+                    
+                    .inner-page-contentArea {
+                        padding: 10px;
+                    }
+                    
+                    .c-page-header {
+                        height: 40px;
+                        z-index: 2;
+                        .c-page-title {
+                            text-align: left;
+                            float: left;
+                            width: 60%;
+                        }
+                        .btn-box {
+                            width: 40%;
+                            .back-btn {
+                                padding: 10px;
+                                font-size: 1.6rem;
+                                font-family: "Josefin Sans", sans-serif;
+                                color: #BDBDBD;
+                                margin: 0;
+                                z-index: 3;
+                                float: right;
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                            }
+                            .add-action-box {
+                                float: right;
+                                height: 40px;
+                                .btn {
+                                    color: #fff;
+                                }
+                            }
+                        }
+                    }
+                    
+                
+                    .modal-overlay {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        .inPatients {
+                            border: none;
+                            .filter-box {
+                                padding: 10px 0;
+                                .filter {
+                                    width: 130px;
+                                }
+                            }
+                            .table-content {
+                                padding: 10px;
+                            }
+                            .table-content-action {
+                                padding: 5px;
+                                .fa {
+                                    font-size: 1.6rem;
+                                    padding: 5px;
+                                    margin: 2px;
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                    }

@@ -1,0 +1,25 @@
+<div class="search-container ">
+    <div class="searchproduct">
+      <div class="InputGroup">
+        <input class="customInput" style="width: 100% !important;" [formControl]="drugSearch" [value]="selectedDrugName"
+          type="text" required>
+        <span class="highlight"></span>
+        <label class="customLabel"><i class="fa fa-search" aria-hidden="true"></i>Search Product</label>
+        <ul class="search-sugestions" *ngIf="showProduct">
+          <li class="search-sugestion" *ngFor="let drug of drugProducts; let i = index" (click)="setSelectedProduct(drug)">{{drug.name}}</li>
+        </ul>
+      </div>
+      <div class="search-noResult" *ngIf="drugExist">
+        <span>This product configuration
+          already exisst</span>
+      </div>
+    </div>
+    <div class="new-btn-solid-blue" [class.disabled]="!canConfigure" (click)="onClickConfigure()">
+      <span>Configure</span>
+    </div>
+  </div>
+
+  <div class="config-container ">
+      <app-base-unit></app-base-unit>
+  </div>
+  <app-config-container [btnName]="configProductBtn" [selectedProduct]="selectedDrug"></app-config-container>

@@ -1,0 +1,138 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Daily GMP Data Entry</legend>
+    <div class="modal_mini_title">Continental Hospital</div>
+  </div>
+
+  <div class="modal-content-overlay">
+    <form class="frm-down" [formGroup]="frm_Update" novalidate>
+      <div class="row">
+        <div class="col-xs-6" style="width:100%;">
+          <div>
+            <mat-form-field>
+              <input matInput placeholder="Date" type="date">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field>
+              <input matInput placeholder="Name">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-select placeholder="Sex">
+                <mat-option>Male</mat-option>
+                <mat-option>Female</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <input matInput type="tel" placeholder="Phone Number">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Date of Birth">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <h3 class="h3">Type of Visit</h3>
+            <mat-radio-group>
+              <mat-radio-button value="1">N</mat-radio-button>
+              <mat-radio-button value="2">R</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="col-md-4">
+            <h3 class="h3">Breast Feeding</h3>
+            <mat-radio-group>
+              <mat-radio-button value="1"><i class="iHeader">BF (tick for children under 6 months)</i>
+              </mat-radio-button>
+              <mat-radio-button value="2">Breast Feeding + Water</mat-radio-button>
+              <mat-radio-button value="3">Partial Breast Feeding</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="col-md-3">
+            <h3 class="h3">Stopped Breast Feedding </h3>
+            <mat-radio-group>
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="2">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <br>
+          <div class="col-md-3">
+            <mat-form-field>
+              <input matInput placeholder="Weight (kg)">
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field>
+              <input matInput placeholder="Height (cm)">
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <h3 class="h3">Nutritional Status</h3>
+            <mat-radio-group>
+              <mat-radio-button value="1">(Above the Line )</mat-radio-button>
+              <mat-radio-button value="2">(Below the Line)</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="col-md-3">
+            <h3 class="h3">Vitamin A supplement </h3>
+            <mat-radio-group>
+              <mat-radio-button value="1">6 - 11 Months</mat-radio-button>
+              <mat-radio-button value="2">12 - 59 Months</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="col-md-3">
+            <h3 class="h3">Children Receive Deworming Tablet (12 - 59) months </h3>
+            <mat-radio-group>
+              <mat-radio-button value="1">Yes = Given</mat-radio-button>
+              <mat-radio-button value="2">No= Not Given</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="col-md-3">
+            <h3 class="h3">Child Referred / Admitted into CMAM Programme? </h3>
+            <mat-radio-group>
+              <mat-radio-button value="1">Yes - Admitted</mat-radio-button>
+              <mat-radio-button value="2">No - Not Admitted</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <h2>Severe Acute Malnutrition(SAM)</h2>
+          <div class="col-md-3">
+            <h3 class="h3">Eligible for SAM Treatment</h3>
+            <mat-radio-group>
+              <mat-checkbox>Admitted in HF (OTP)</mat-checkbox>
+              <mat-checkbox>Refered to other HF (SC)</mat-checkbox>
+              <mat-checkbox>Not Eligible</mat-checkbox>
+            </mat-radio-group>
+          </div>
+          <div class="col-md-3">
+            <h3 class="h3">Outcome of Treatment</h3>
+            <mat-radio-group>
+              <mat-checkbox>Re</mat-checkbox>
+              <mat-checkbox>Df</mat-checkbox>
+              <mat-checkbox>Dth</mat-checkbox>
+              <mat-checkbox>Nr</mat-checkbox>
+            </mat-radio-group>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 text-center">
+        <div style="padding: 20px 10px;">
+          <button mat-raised-button type="submit" (click)="next_onClick()" class="mat-lg-btn">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

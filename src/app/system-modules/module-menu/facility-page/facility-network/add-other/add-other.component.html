@@ -1,0 +1,48 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick($event)" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Join A Network</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+
+    <div class="modal-baseWrap">
+
+        <!-- <div class="infoAlert"><i class="fa fa-info-circle" aria-hidden="true"></i>Note that a verification token will be sent to the number supplied
+        below</div> -->
+
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+        <div class="menuBar-facilityName">
+            <form [formGroup]="facilityForm1" novalidate>
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <input matInput mat-error placeholder="Search for facility" formControlName="facilitySearch">
+                    </mat-input-container>
+                </div>
+            </form>
+            <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5" *ngIf="searchedLength > 0">
+                <tbody>
+                    <tr *ngFor="let facility of searchedFacilities">
+                        <td>
+                            <div class="empWrap">
+                                <div class="list-img">
+                                    <img src="../../../../../assets/images/logos/default.png">
+                                </div>
+                                <div>{{facility.name}}</div>
+                            </div>
+                        </td>
+                        <td>
+                            <label class="control control--checkbox">
+                                <input type="checkbox" [checked]="facility.isMember" (change)="pickFacilitiesMemberOf($event,facility._id)"
+                                />
+                                <div class="control__indicator"></div>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button [ngClass]="{'cta-1':removeFacilities.length > 0 || selectedFacilityIds.length > 0 && !loading, 'cta-1-disable':removeFacilities.length === 0|| selectedFacilityIds.length === 0 || loading}" [disabled]="fac.memberFacilities?.length == 0 && facRemove?.memberFacilities?.length == 0" *ngIf="uncheck" (click)="confirmUpdate('update')">
+                <span *ngIf="!loading">Update</span>
+                <span *ngIf="loading">Loading...</span>
+            </button>
+        </div>
+    </div>

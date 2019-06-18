@@ -1,0 +1,67 @@
+<div class="c-page-header">
+    <div class="top-button-box">
+        <ul class="topmenuwrap pull-right" (click)="goToFacility();">
+            <li tabindex="0">
+                <i class="fa fa-arrow-circle-o-right"></i>
+                <span>Create Ward</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="c-page-body">
+    <div class="inPatients">
+        <div class="topFilters">
+            <!-- <div class="filter-title">FILTER BY</div> -->
+            <div class="filter-wrap dx-field">
+                <select class="filter-select" name="" id="">
+                    <option value="">Select Ward</option>
+                    <option value="">SouthWest</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <div class="table-responsive">
+                <table id="admission-list-table" class="table table-striped no-margin" cellspacing="0" width="100%">
+                    <thead>
+                        <tr class="table-bordered">
+                            <th style="width: 5%">No</th>
+                            <th style="width: 55%">Room</th>
+                            <th style="width: 20%">Bed</th>
+                            <th style="width: 20%">Available Bed</th>
+                        </tr>
+                    </thead>
+                    <tbody class="custom-tbody" *ngIf="wards.length === 0 && !loading">
+                        <tr>
+                            <td class="table-content " colspan="4" style="text-align: center">
+                                No data available in table
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody class="custom-tbody" *ngIf="wards.length === 0 && loading">
+                        <tr>
+                            <td class="table-content " colspan="4" style="text-align: center">
+                                <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody class="custom-tbody" *ngFor="let ward of wards;let i=index">
+                        <tr class="tr-header-group" (click)="showDetails(i);">
+                            <td class="table-content" colspan="4">{{ward?.name}}</td>
+                        </tr>
+                        <tr *ngIf="(ward?.wardSetup === undefined) && (ward?.wardSetup?.rooms?.length === 0) && (selectedIndex === i)">
+                            <td class="table-content " colspan="4 " style="text-align: center ">
+                                No added room and bed
+                            </td>
+                        </tr>
+                        <tr *ngFor="let room of ward?.wardSetup?.rooms; let j=index;">
+                            <td *ngIf="selectedIndex === i" class="table-content">{{j+1}}</td>
+                            <td *ngIf="selectedIndex === i" class="table-content">{{room.name}}</td>
+                            <td *ngIf="selectedIndex === i" class="table-content">{{room.beds.length}}</td>
+                            <td *ngIf="selectedIndex === i" class="table-content">{{room.availableBeds}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

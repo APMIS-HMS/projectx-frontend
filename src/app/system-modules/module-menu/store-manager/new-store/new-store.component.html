@@ -1,0 +1,75 @@
+<div class="animated pulse" class="container">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">New Store</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <form [formGroup]="frm_newStore" novalidate>
+            <div class="mainfrmwrap">
+                <div class="sec-1">
+                    <div class="frm-item-wrap">
+                        <mat-input-container class="example-full-width">
+                            <input matInput mat-error placeholder="Name" formControlName="name">
+                        </mat-input-container>
+                    </div>
+
+                    <div class="frm-item-wrap">
+                        <mat-form-field>
+                            <mat-select class="example-full-width" placeholder="Location" formControlName="minorLocationId">
+                                <mat-option *ngFor="let minorLocation of minorLocations" [value]="minorLocation._id">{{minorLocation.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="frm-item-wrap">
+                        <mat-input-container class="example-full-width">
+                            <textarea formControlName="description" matInput placeholder="Description"></textarea>
+                        </mat-input-container>
+                    </div>
+                </div>
+
+                <div class="sec-2">
+                    <div class="frm-item-wrap">
+                        <span class="frm-label">Product Type</span>
+                        <div class="chk-group-wrap">
+                            <div class="checkbox-wrap">
+                                <div *ngFor="let productType of productTypes" class="check-item">
+                                    <mat-checkbox (change)="onValueChanged($event,productType)" [checked]="productType.isChecked">
+                                        <span class="chk-label">{{productType.name}}</span>
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-wrap chkwrap">
+                        <div class="check-item">
+                            <mat-checkbox formControlName="canDespense">
+                                <span class="chk-label">Dispense</span>
+                            </mat-checkbox>
+                        </div>
+                        <div class="check-item">
+                            <mat-checkbox formControlName="canReceivePurchaseOrder">
+                                <span class="chk-label">Receive Purchase</span>
+                            </mat-checkbox>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button class="cta-1" [disabled]="!frm_newStore.valid || disableBtn" (click)="create(frm_newStore.valid, frm_newStore.value)">
+                <span *ngIf="addBtnText"> <i class="fa fa-check-circle "></i> Create Store</span>
+                <span *ngIf="addingBtnText">Creating Store... <i class="fa fa-spin fa-spinner "></i></span>
+                <span *ngIf="updateBtnText"> <i class="fa fa-check-circle "></i> Update Store</span>
+                <span *ngIf="updatingBtnText">Updating Store... <i class="fa fa-spin fa-spinner "></i></span>
+            </button>
+        </form>
+
+    </div>
+</div>
+<!-- <div *ngIf="loadIndicatorVisible" class="div_loading">
+    <mat-spinner id="large-indicator" height="60" width="60"></mat-spinner>
+</div> -->

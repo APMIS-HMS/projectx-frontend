@@ -1,0 +1,82 @@
+@import '../appointment/appointment.component.scss';
+.facility-title {
+    text-align: left;
+    margin-top: 40px;
+}
+
+.appointment-category {
+    margin-bottom: 20px;
+    .cat-radio-btn {
+        font-size: 14px;
+    }
+}
+
+.empWrap {
+    cursor: pointer;
+}
+
+.empWrap:hover {
+    .emp-label {
+        color: #03A9F4;
+        text-decoration: underline;
+    }
+}
+
+ul.topmenuwrap {
+    position: absolute;
+    top: -20px;
+    right: 1px;
+}
+
+.clinic-running-days-wrap {
+    background: #4bb8ef;
+    padding: 30px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.clinic-running-days-wrap i {
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.sect-title {
+    position: absolute;
+    top: -19px;
+    left: 0;
+    color: #4bb8ef;
+}
+
+.sect-title2 {
+    color: #4bb8ef;
+    font-size: 1.6rem;
+    margin-top: 30px;
+}
+
+.runningDays {
+    display: flex;
+    justify-content: space-between;
+}
+
+.runningDay-wrap {
+    border: 1px solid #fff;
+    padding: 10px;
+}
+
+.running-day {
+    font-size: 1.2rem;
+    color: #000;
+}
+
+.running-time {
+    color: #fff;
+    font-size: 1.4rem;
+}
+
+.page-title {
+    top: -10px;
+}

@@ -1,0 +1,216 @@
+<legend class="pg-subtitle">BREAST CANCER RISK ASSESSMENT </legend>
+<div class="doc-mainWrap">
+  <div class="doc-contentArea">
+    <div class="container con-cr">
+      <div class="row c-body" [formGroup]="bcrFormGroup">
+        <div class="col-sm-4">
+          <div>
+            <h3>Asymptomatic</h3>
+            <mat-radio-group formControlName="asymptomatic">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>HIV Counselling, Testing at L&D</h3>
+            <mat-radio-group formControlName="hivCounsellingTesting">
+              <mat-radio-button value="0">50 - 74</mat-radio-button>
+              <mat-radio-button value="1">35 - 69</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>Personal History of breast cancer</h3>
+            <mat-radio-group formControlName="personalHistoryOfBreatCancer">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>Mammogram within last 11 month</h3>
+            <mat-radio-group formControlName="mammogram">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>History of Breast Implants</h3>
+            <mat-radio-group formControlName="historyOfBreastImplant">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>First Degree Relative has a Gene Mutuation</h3>
+            <mat-radio-group formControlName="firstDegreeeHasGeneMutation">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>First degree relative has not had genetic counseling and testing</h3>
+            <mat-radio-group formControlName="firstDegreeeHasGeneticCounsellingAndTesting">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>          
+        </div>
+
+        <div class="col-sm-4">
+          <div>
+            <h3>2 or more cases of Breast Cancer and /or Ovarian Cancer</h3>
+            <mat-radio-group formControlName="twoOrMoreCasesOfBreastCancerOrOvarianCancer">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>Bilateral Breast Cancer</h3>
+            <mat-radio-group formControlName="bilateralBreastCancer">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>Both Breast and Ovarian in the same woman </h3>
+            <mat-radio-group formControlName="bothBreastAndOvarianInTheSameWoman">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>Serious Invasive Serious Ovarian Cancer </h3>
+            <mat-radio-group formControlName="seriousInvasiveSeriousOvarian">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>Breast/Ovarian Cancer in Ashkenazi Jewish Family</h3>
+            <mat-radio-group formControlName="breastOrOvarianCancerInAshkenaziJewishFamily">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <div>
+            <h3>Identified Gene Mutuation in any Blood Relative</h3>
+            <mat-radio-group formControlName="indentifiedGeneMutationInAnyBloodRelative">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div>
+            <h3>Male Breast Cancer</h3>
+            <mat-radio-group formControlName="maleBreastCancer">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>Known Carrier of a Gene
+              Mutuation (e.g BRCA1, BRCA2) </h3>
+            <mat-radio-group formControlName="knownCarrierOfAGeneMutation">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>First Degree Relative has
+              had genetic counseling and has
+              declined testing</h3>
+            <mat-radio-group formControlName="firstDegreeHasHadGeneticCounsellingAndHasDeclinedTesting">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>Preeviously Assessed as having a ≥
+              25% lifetime risk of breast cancer on
+              basis of family history</h3>
+            <mat-radio-group formControlName="previouslyAssessedAsHavingAGreaterLifetimeRiskOfBreastCancer">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+            <h3>Recieved chest radiation(not X-ray)
+              before age 30 and at least 8 yrs previously
+              (treatment for hodgkin'slymphoma)</h3>
+            <mat-radio-group formControlName="receiveChestXRayBeforeAge30AndAtLeast8YrsPreviously">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+      </div>
+      <mat-form-field>
+          <textarea class="txtarea" matInput placeholder="Family History "></textarea>
+        </mat-form-field>
+      <br>
+      <h4>Classification of Risk</h4>
+      <div class="tbl-resp-wrap">
+        <table class="table">
+          <thead class="thead-light">
+            <tr class="th-r1">
+              <th>Average Risk</th>
+              <th>Potential High Risk</th>
+              <th>Known High Risk</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <i *ngIf="!averageRisk" class="fa fa-times text-red"></i>
+                <i *ngIf="averageRisk" class="fa fa-check text-green"></i>
+              </td>
+              <td>
+                <i *ngIf="!potentialHighRisk" class="fa fa-times text-red"></i>
+                <i *ngIf="potentialHighRisk" class="fa fa-check text-green"></i>
+              </td>
+              <td>
+                <i *ngIf="!knownHighRisk" class="fa fa-times text-red"></i>
+                <i *ngIf="knownHighRisk" class="fa fa-check text-green"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-xs-12 text-center">
+        <div style="padding: 20px 10px;">
+          <button mat-raised-button type="submit" class="mat-lg-btn" (click)="onClickSubmitForm(bcrFormGroup.valid, bcrFormGroup.value);">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="doc-rArea">
+    <app-right-tab [patient]="patient" (addProblem)="addProblem_show($event)" (addAllergy)="addAllergy_show($event)"
+      (addHistory)="addHistory_show($event)" (addVitals)="addVitals_show($event)"></app-right-tab>
+  </div>
+
+  <div *ngIf="docDetail_view" class="modal-overlay">
+    <app-documentation-detail [document]="selectedDocument" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-documentation-detail>
+  </div>
+
+  <div *ngIf="addProblem_view" class="modal-overlay">
+    <app-add-patient-problem [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-patient-problem>
+  </div>
+
+  <div *ngIf="addAllergy_view" class="modal-overlay">
+    <app-add-allergy [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-allergy>
+  </div>
+
+  <div *ngIf="addHistory_view" class="modal-overlay">
+    <app-add-history (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-history>
+  </div>
+
+  <div *ngIf="addVitals_view" class="modal-overlay">
+    <app-add-vitals [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-vitals>
+  </div>
+</div>

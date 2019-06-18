@@ -1,0 +1,16 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Log Out</legend>
+    <div class="modal_mini_title">Are you sure you want to log out?</div>
+  </div>
+  <div class="modal-baseWrap">
+    <div class="logoutOptions-wrap">
+      <div (click)="logout()" class="btn-1 btn-blue">
+        <i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</div>
+      <div (click)="close_onClick()" class="btn-1 btn-red">
+        <i class="fa fa-ban" aria-hidden="true"></i> Cancel</div>
+    </div>
+
+  </div>
+</div>

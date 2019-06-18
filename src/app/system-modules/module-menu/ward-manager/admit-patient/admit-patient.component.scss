@@ -1,0 +1,53 @@
+.modal-baseWrap {
+    position: relative;
+    height: auto;
+    min-height: 200px;
+    // max-height: 400px;
+    width: 400px;
+    padding: 20px;
+}
+
+.frm-item-wrap {
+    position: relative;
+}
+
+.lhs {
+    float: none;
+}
+
+.edit-control {
+    background-color: transparent;
+    margin-right: 0;
+    width: 93% !important;
+    border: 0.5px solid #37474F;
+}
+
+.btn-box {
+    text-align: center;
+    .btn {
+        color: #fff;
+    }
+}
+
+.mat-select,
+.mat-input-container {
+    width: 100%;
+}
+
+.spinner-box {
+    padding: 50px 0;
+    width: 100%;
+    text-align: center;
+}
+
+input,
+select {
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    input,
+    select {
+        width: auto !important;
+    }
+}

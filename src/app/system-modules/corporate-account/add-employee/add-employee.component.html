@@ -1,0 +1,45 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Add employee to health cover</legend>
+    <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+  <div class="modal-baseWrap">
+    <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+    <div class="f_sg1">
+
+      <form [formGroup]="frmNewEmp" novalidate>
+
+        <div class="frm-item-wrap">
+          <small class="alert-label" [hidden]="frmNewEmp.controls.empName.valid || frmNewEmp.controls.empName.pristine">
+            this is a required field (minimum 3 and max of 50 characters).
+          </small>
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <input type="text" formControlName="empName" placeholder="Employee Name or APMIS ID" autocomplete="off">
+        </div>
+
+        <div class="frm-item-wrap">
+          <small class="alert-label" [hidden]="frmNewEmp.controls.empDept.valid || frmNewEmp.controls.empDept.pristine">
+            this field is required.
+          </small>
+          <i class="fa fa-building-o" aria-hidden="true"></i>
+          <select formControlName="empDept">
+              <option  value="" disabled selected>Department</option>
+            </select>
+        </div>
+
+        <div class="frm-item-wrap">
+          <i class="fa fa-object-group" aria-hidden="true"></i>
+          <input type="text" formControlName="empId" placeholder="Employee ID" autocomplete="off">
+        </div>
+
+        <div (click)="newUnit(frmNewEmp.valid, frmNewEmp.value)" class="cta-1">
+          ADD EMPLOYEE
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>

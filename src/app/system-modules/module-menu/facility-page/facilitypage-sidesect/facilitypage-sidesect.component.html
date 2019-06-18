@@ -1,0 +1,110 @@
+<div class="pp-card shadow-grey">
+
+    <i (click)="editBasicInfo_onClick()" class="fa fa-fw fa-2x fa-pencil-square-o card-edit orange " data-tooltip="Modify" aria-hidden="true"></i>
+
+    <div class="card-seperator">
+        <div class="patient-img-wrap">
+            <app-image-viewer></app-image-viewer>
+        </div>
+
+        <div class="basic-info-wrap">
+            <div class="basic-info-name">{{selectedFacility.name}}</div>
+            <div class="name-class">
+                <div class="basic-info-others">{{selectedFacility.facilityClassId}}</div>
+                <div class="basic-info-others">{{selectedFacility.facilityTypeId}}</div>
+                <div class="basic-info-others">{{selectedFacility.street}}.</div>
+            </div>
+            <div class="bulb basic-info-group">
+                <div class="basic-info-others">{{selectedFacility.shortName}}</div>
+                <div class="account-status">Active</div>
+            </div>
+            <div class="basic-info-group">
+                <div class="basic-info-others">
+                    <i class="fa fa-fw fa-2x fa-registered orange tooltip" data-tooltip="Company's Reg-No" aria-hidden="true"></i>{{selectedFacility.cacNo}}</div>
+                <div class="basic-info-others">
+                    <i class="fa fa-fw fa-2x fa-envelope-o orange tooltip" data-tooltip="email" aria-hidden="true"></i>{{selectedFacility.email}}</div>
+                <div *ngIf="selectedFacility.website" class="basic-info-others">
+                    <i class="fa fa-fw fa-2x fa-globe orange tooltip" data-tooltip="website" aria-hidden="true"></i>{{selectedFacility.website}}</div>
+                <div class="basic-info-others">
+                    <i class="fa fa-fw fa-2x fa-phone orange tooltip" data-tooltip="Phone-Number" aria-hidden="true"></i>{{selectedFacility.primaryContactPhoneNo}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pp-card shadow-grey">
+
+    <!-- <i (click)="changeRoute('network')" class="fa fa-pencil-square-o card-edit" aria-hidden="true"></i> -->
+
+    <!-- <div *ngIf="selectedFacility.isNetworkFacility" class="facility-count-sect card-seperator clickable-sect"> -->
+    <div class="facility-count-sect card-seperator">
+        <div class="cad-head">
+            <div class="isnetwork-wrap">
+                <div *ngIf="selectedFacility.isNetworkFacility" class="isnetwork">NETWORK</div>
+                <div *ngIf="selectedFacility.isNetworkFacility" class="network-membership">HOST</div>
+            </div>
+            <div class="facility-count">{{(selectedFacility.memberFacilities) ? selectedFacility.memberFacilities.length : '0'}}</div>
+            <div class="count-label">Facilities In Network</div>
+            <div class="head-tag">HOST</div>
+            <div class="oda-nets-link">
+                Other Networks
+                <i class="fa fa-fw fa-2x fa-long-arrow-up orange tooltip" data-tooltip="Up" aria-hidden="true"></i>
+                <i class="fa fa-fw fa-2x fa-long-arrow-down orange tooltip" data-tooltip="Down" aria-hidden="true"></i>
+            </div>
+
+            <ul class="oda-ul">
+                <li *ngFor="let mem of membersOf">{{mem.name}}</li>
+            </ul>
+        </div>
+        <ul class="work-places-list">
+            <!-- <li class="work-places-item">
+                <div class="wp-img-wrap">
+                    <img src="../../../../../assets/images/logos/lagoon.png">
+                </div>
+                <div class="network-list">
+                    <div class="wp-name">{{selectedFacility.name}}</div>
+                    <div class="basic-info-others tag">HOST</div>
+                    <div class="basic-info-others">
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>{{selectedFacility.email}}</div>
+                    <div class="basic-info-others">
+                        <i class="fa fa-phone" aria-hidden="true"></i>{{selectedFacility.primaryContactPhoneNo}}</div>
+                </div>
+            </li> -->
+            <li class="work-places-item" *ngFor="let member of memberFacilities">
+                <div class="wp-img-wrap">
+                    <img src="../../../../../assets/images/logos/lagoon.png">
+                </div>
+                <div class="network-list">
+                    <div class="wp-name">{{member.name}}</div>
+                    <div class="basic-info-others tag">MEMBER</div>
+                    <div class="basic-info-others">
+                        <i class="fa fa-fw fa-2x fa-envelope-o orange tooltip" data-tooltip="email" aria-hidden="true"></i>{{member.email}}</div>
+                    <div class="basic-info-others">
+                        <i class="fa fa-fw fa-2x fa-phone orange tooltip" data-tooltip="Phone-Number" aria-hidden="true"></i>{{member.primaryContactPhoneNo}}</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="pp-card shadow-grey">
+    <div class="card-title">Activities Feed</div>
+    <!-- <ul class="feed-ul">
+        <li class="feed-li">
+            New minor location 'Lab1' was created on the 16th April 2018, 9:00am in Laboratory Major Location by Pelumi
+            <div class="feed-time">16th April, 2018. 08:00am</div>
+        </li> 
+       <li class="feed-li"> -->
+            <!-- &#8358;--><!--New minor location 'Lab1' was created on the 16th April 2018, 9:00am in Laboratory Major Location by Pelumi
+            <div class="feed-time">16th April, 2018. 08:00am</div>
+        </li>
+        <li class="feed-li">
+            New minor location 'Lab1' was created on the 16th April 2018, 9:00am in Laboratory Major Location by Pelumi
+            <div class="feed-time">16th April, 2018. 08:00am</div>
+        </li>
+    </ul> -->
+</div>
+
+<div *ngIf="editBasicInfo" class="modal-overlay">
+    <app-facility-basicinfo-edit [selectedFacility]="selectedFacility" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-facility-basicinfo-edit>
+</div>

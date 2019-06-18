@@ -1,0 +1,160 @@
+<i [hidden]="chatActive" (click)="chatActiveToggle()" class="fa fa-comments msg-ico"><span class="notify-count">3</span></i>
+
+<div class="chat-container shadow-tb" *ngIf="chatActive">
+  <div class="container-header">
+    <div class="user-wrap">
+      <!-- <div class="user-img">
+        <img src="../../assets/images/users/default.png">
+      </div> -->
+      <i class="fa fa-users group-ico"></i> 
+      <div class="user-label">Team Bella</div>
+    </div>
+
+    <ul class="grp-members" *ngFor="let channel of userChannels">
+      <li>{{channel.name}}</li>
+      <!-- <li>Jude Jeremy</li>
+      <li>Rita Wales</li>
+      <li>Juanita Davis</li>
+      <li>Pamela Jonathan</li>
+      <li>Solomon Wise</li>
+      <li>Kings Philips</li> -->
+    </ul>
+
+    <div class="header-icos">
+      <div (click)="chatClose()" class="x">X</div>
+    </div>
+  </div>
+
+  <div class="chat-content-wrap">
+    <div class="groups-sect">
+      <div class="search-wrap">
+        <i class="fa fa-search"></i> 
+        <input type="text" [formControl]="searchAccount" placeholder="search chat">
+      </div>
+
+      <div class="tabs">
+        <div (click)="clinical_click()" class="tab" [class.tab-active]="clinicalTab">Clinical</div>
+        <div (click)="nonClinical_click()" class="tab" [class.tab-active]="nonClinicalTab">Non Clinical</div>
+      </div>
+
+      <div *ngIf="nonClinicalTab">
+        <ul class="chats-accs">
+          <li class="chat-acc">
+            <div class="chat-img-wrap">
+              <img src="../../assets/images/users/default.png">
+            </div>
+            <div class="chat-labels-wrap">
+              <div class="chat-label-name">Solomon Dung</div>
+              <div class="chat-label-other">Eye Clinic</div>
+            </div>
+            <div class="chat-time">8:00am</div>
+          </li>
+          <li class="chat-acc">
+            <i class="fa fa-users group-ico"></i> 
+            <div class="chat-labels-wrap">
+              <div class="chat-label-name">Team Bella</div>
+              <div class="chat-label-other">Eye Clinic</div>
+            </div>
+            <div class="chat-time">Yesterday</div>
+          </li>
+          <li class="chat-acc">
+            <div class="chat-img-wrap">
+              <img src="../../assets/images/users/default.png">
+            </div>
+            <div class="chat-labels-wrap">
+              <div class="chat-label-name">Janet James</div>
+              <div class="chat-label-other">EMT</div>
+            </div>
+            <div class="chat-time">10th March</div>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="clinicalTab">
+        <ul class="chats-accs">
+          <li class="chat-acc">
+            <div class="chat-img-wrap">
+              <img src="../../assets/images/users/default.png">
+            </div>
+            <div class="chat-labels-wrap">
+              <div class="chat-label-name">Solomon Dung</div>
+              <div class="chat-label-other">Gil Care Team</div>
+            </div>
+            <div class="chat-time">8:00am</div>
+          </li>
+          <li class="chat-acc">
+            <div class="chat-img-wrap">
+              <img src="../../assets/images/users/default.png">
+            </div>
+            <div class="chat-labels-wrap">
+              <div class="chat-label-name">Janet James</div>
+              <div class="chat-label-other">Gil Care Team</div>
+            </div>
+            <div class="chat-time">10th March</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="chat-sect">
+      <ul class="chats">
+        <div class="in-msg">
+          <li class="chat chat-first">
+            <div class="chat-in-user">Sam Alaba</div>
+            <div class="chat-payload">Hi Team</div>
+            <div class="chat-in-time">10:02am</div>
+          </li>
+          <li class="chat chat-center">
+            <div class="chat-in-user">Sam Alaba</div>
+            <div class="chat-payload">What do you say we go sky diving for a change</div>
+            <div class="chat-in-time">10:02am</div>
+          </li>
+          <li class="chat chat-center">
+            <div class="chat-in-user">Sam Alaba</div>
+            <div class="chat-payload">I think after all the hard work, taking a break might do us all alot of good.</div>
+            <div class="chat-in-time">10:02am</div>
+          </li>
+          <li class="chat chat-last"> 
+            <div class="chat-in-user">Sam Alaba</div>
+            <div class="chat-payload">just a thought...</div>
+            <div class="chat-in-time">10:02am</div>
+          </li>
+        </div>
+        <div class="out-msg">
+          <li class="chat chat-first"> 
+            <div class="chat-in-user">You</div>
+            <div class="chat-payload">yay!!!</div>
+            <div class="chat-in-time">10:09am</div>
+          </li>
+          <li class="chat chat-last"> 
+            <div class="chat-in-user">You</div>
+            <div class="chat-payload">i'm totally into that</div>
+            <div class="chat-in-time">10:10am</div>
+          </li>
+        </div>
+        <div class="in-msg">
+          <li class="chat chat-first">
+            <div class="chat-in-user">Sam Alaba</div>
+            <div class="chat-payload">Hi Team</div>
+            <div class="chat-in-time">10:02am</div>
+          </li>
+          <li class="chat chat-center">
+            <div class="chat-in-user">Sam Alaba</div>
+            <div class="chat-payload">What do you say we go sky diving for a change</div>
+            <div class="chat-in-time">10:02am</div>
+          </li>
+          <li class="chat chat-center">
+            <div class="chat-in-user">Sam Alaba</div>
+            <div class="chat-payload">I think after all the hard work, taking a break might do us all alot of good.</div>
+            <div class="chat-in-time">10:02am</div>
+          </li>
+          <li class="chat chat-last"> 
+            <div class="chat-in-user">Sam Alaba</div>
+            <div class="chat-payload">just a thought...</div>
+            <div class="chat-in-time">10:02am</div>
+          </li>
+        </div>
+      </ul>
+      <textarea [formControl]="chatBox" class="chat-box"></textarea>
+    </div>
+  </div>
+</div>

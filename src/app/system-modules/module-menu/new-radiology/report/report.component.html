@@ -1,0 +1,167 @@
+<div class="pg-subtitle">INVESTIGATION LIST</div>
+
+<div class="tbl-resp-wrap">
+    <table cellpadding="0" cellspacing="0" border="0.5">
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Investigation</th>
+                <th>Uploaded</th>
+                <th>Report Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>
+                    <div class="p-name">Johnson Wade</div>
+                    <div>
+                        <span>(M) </span>
+                        <span>DOB: 11th-10-1990</span>
+                    </div>
+                    <div>ID: AA2100CX</div>
+                </td>
+                <td>
+                    <div class="p-main">CT HEAD BRAIN W/O CONTRAST</div>
+                    <div>
+                        <span>CT </span>
+                        <span>53 Images</span>
+                    </div>
+                    <div>By: Wade Daniels</div>
+                </td>
+                <td>
+                    <div class="p-main">11-10-2018</div>
+                    <div>12:00 PM</div>
+                    <div>1d 5h 6m</div>
+                </td>
+                <td>
+                    <div class="tag n-report">No Report</div>
+                </td>
+                <td>
+                    <div (click)="report_new_click()" class="td-cta">
+                        <i class="fa fa-plus"></i> Write Report
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="p-name">Johnson Wade</div>
+                    <div>
+                        <span>(M) </span>
+                        <span>DOB: 11th-10-1990</span>
+                    </div>
+                    <div>ID: AA2100CX</div>
+                </td>
+                <td>
+                    <div class="p-main">CT HEAD BRAIN W/O CONTRAST</div>
+                    <div>
+                        <span>CT </span>
+                        <span>53 Images</span>
+                    </div>
+                    <div>By: Wade Daniels</div>
+                </td>
+                <td>
+                    <div class="p-main">11-10-2018</div>
+                    <div>12:00 PM</div>
+                    <div>1d 5h 6m</div>
+                </td>
+                <td>
+                    <div class="tag d-report">Drafted</div>
+                </td>
+                <td>
+                    <div class="td-cta">
+                        <i class="fa fa-share"></i> Publish Report
+                    </div>
+                    <div class="td-cta">
+                        <i class="fa fa-trash"></i> Delete Report
+                    </div>
+                    <div (click)="report_new_click()" class="td-cta">
+                        <i class="fa fa-pencil"></i> Edit Report
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="p-name">Johnson Wade</div>
+                    <div>
+                        <span>(M) </span>
+                        <span>DOB: 11th-10-1990</span>
+                    </div>
+                    <div>ID: AA2100CX</div>
+                </td>
+                <td>
+                    <div class="p-main">CT HEAD BRAIN W/O CONTRAST</div>
+                    <div>
+                        <span>CT </span>
+                        <span>53 Images</span>
+                    </div>
+                    <div>By: Wade Daniels</div>
+                </td>
+                <td>
+                    <div class="p-main">11-10-2018</div>
+                    <div>12:00 PM</div>
+                    <div>1d 5h 6m</div>
+                </td>
+                <td>
+                    <div class="tag p-report">Published</div>
+                </td>
+                <td>
+                    <div (click)="report_show()" class="td-cta">
+                        <i class="fa fa-ellipsis-h"></i> View Report
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="p-name">Johnson Wade</div>
+                    <div>
+                        <span>(M) </span>
+                        <span>DOB: 11th-10-1990</span>
+                    </div>
+                    <div>ID: AA2100CX</div>
+                </td>
+                <td>
+                    <div class="p-main">CT HEAD BRAIN W/O CONTRAST</div>
+                    <div>
+                        <span>CT </span>
+                        <span>53 Images</span>
+                    </div>
+                    <div>By: Wade Daniels</div>
+                </td>
+                <td>
+                    <div class="p-main">11-10-2018</div>
+                    <div>12:00 PM</div>
+                    <div>1d 5h 6m</div>
+                </td>
+                <td>
+                    <div class="tag d-report">Drafted</div>
+                </td>
+                <td>
+                    <div class="td-cta">
+                        <i class="fa fa-share"></i> Publish Report
+                    </div>
+                    <div class="td-cta">
+                        <i class="fa fa-trash"></i> Delete Report
+                    </div>
+                    <div (click)="report_new_click()" class="td-cta">
+                        <i class="fa fa-pencil"></i> Edit Report
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="report_view" class="view-report-wrap animated slideInRight"> 
+    <app-view-radiology-report (viewImgs)="imgs_show()" (closeModal)="close_onClick($event)" id="form-modal"></app-view-radiology-report>
+</div>
+<div *ngIf="imgs_view" class="view-imgs-wrap animated slideInRight"> 
+    <app-view-radiology-images (closeModal)="close_onClick($event)" id="form-modal"></app-view-radiology-images>
+</div>
+<div *ngIf="report_new" class="view-report-wrap animated slideInRight"> 
+    <app-new-radiology-report (viewImgs)="imgs_show()" (closeModal)="close_onClick($event)" id="form-modal"></app-new-radiology-report>
+</div>
+<div *ngIf="importTemplate" class="modal-overlay">
+    <app-select-template (closeModal)="close_onClick($event)" (template)="onClickTemplate($event);" id="form-modal" class="form-modal center-center"></app-select-template>
+</div>

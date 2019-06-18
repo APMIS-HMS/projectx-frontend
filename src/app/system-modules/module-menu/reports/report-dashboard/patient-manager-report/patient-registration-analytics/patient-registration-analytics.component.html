@@ -1,0 +1,108 @@
+<div class="inner-wrap-b body-wrap">
+    <!-- <div class="facility-title">{{pageInView}}</div>-->
+    <mat-tab-group (selectedIndexChange)="onTabClick($event)">
+        <mat-tab label="• Registration Analytics">
+            <div class="pg-wrap">
+
+                <div class="chart-item" style="width: 40%;">
+                    <div class="chart-label">Patient registration by registration type chart</div>
+                    <div>
+                        <div style="display: block">
+                            <canvas class='pieSize' baseChart [datasets]="pieChartData" [labels]="pieChartLabels"
+                                    [options]="pieChartOptions" [legend]="pieChartLegend" [chartType]="pieChartType"
+                                    (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="chart-item">
+                    <div class="chart-label">Patient registration demography Chart</div>
+                    <div>
+                        <div style="display: block">
+                            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                    [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"
+                                    (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </mat-tab>
+
+
+        <mat-tab label="• Payment Plan Analytics">
+            <div class="pg-wrap">
+                <div class="chart-item">
+                    <div class="chart-label">Patient registration by registration type chart</div>
+                    <div>
+                        <div style="display: block">
+                            <canvas class='chartSize' baseChart [datasets]="barChart1Data" [labels]="barChart1Labels"
+                                    [options]="barChart1Options" [legend]="barChart1Legend" [chartType]="barChart1Type"
+                                    (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="tbl-resp-wrap">
+                            <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5">
+                                <thead>
+                                <tr class="th-r1 th-xxx" style="background-color:black;">
+                                    <th>HMO Name</th>
+                                    <th>Number Of Patient</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr class="th-xxx" *ngFor="let h of hmoList">
+                                    <td>{{h.tag}}</td>
+                                    <td> {{h.totalPatient}} Patients</td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                            <mat-paginator [length]="100" [pageSize]="30" [pageSizeOptions]="[5, 10, 25, 100]">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="chart-item">
+                    <div class="chart-label">Patient registration demography Chart</div>
+                    <div>
+                        <div style="display: block">
+                            <canvas baseChart [datasets]="barChart2Data" [labels]="barChart2Labels"
+                                    [options]="barChart2Options" [legend]="barChart2Legend" [chartType]="barChart2Type"
+                                    (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="tbl-resp-wrap">
+                            <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5">
+                                <thead class="tableHead">
+                                <tr class="th-r1 th-xxx">
+                                    <th>Company Name</th>
+                                    <th>Number Of Patients</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr class="th-xxx" *ngFor="let h of companyList">
+                                    <td>{{h.tag}}</td>
+                                    <td> {{h.totalPatient}} Patients</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <mat-paginator [length]="100" [pageSize]="30" [pageSizeOptions]="[5, 10, 25, 100]">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

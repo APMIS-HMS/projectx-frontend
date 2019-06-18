@@ -1,0 +1,238 @@
+<div class="animated pulse"  style="width: 800px; height: auto;">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClickModal()" class="modal-close-ico">X</div>
+        <legend class="modal_title">PATIENT PAGE - ORDER SET</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+
+    <div class="doc-mainWrap modal-baseWrap">
+        <!-- <div class="pg-subtitle">PATIENT PAGE - ORDER SET</div> -->
+        <div class="doc-contentArea">
+            <div class="clinicalNoteWrap">
+                <div class="frm-x2">
+                    <div class="frm-item-wrap">
+                        <apmis-lookup [formControl]="template" [url]="apmisLookupUrl" [query]="apmisLookupQuery"
+                            [isSocket]="true" [displayImage]="false" [multipleKeys]="false" [displayKey]="apmisLookupDisplayKey"
+                            placeholder="Select Template" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                    </div>
+
+                    <div class="frm-item-wrap">
+                        <apmis-lookup [formControl]="diagnosis" [url]="apmisLookupUrl" [query]="apmisDLookupQuery"
+                            [isSocket]="true" [displayImage]="false" [multipleKeys]="false" [displayKey]="apmisDLookupDisplayKey"
+                            placeholder="Select Diagnosis" (selectedItem)="apmisDLookupHandleSelectedItem($event)"></apmis-lookup>
+                    </div>
+                </div>
+
+
+                <!-- <div class="med-sect">
+                    <div class="itemSect-title">Problem</div>
+                    <div>
+                        <mat-form-field *ngIf="selectedProblem.problem===undefined" style="margin-top: 0px;">
+                            <mat-select [formControl]="problemFormControl">
+                                <mat-option *ngFor="let item of problems" [value]="item">
+                                    {{ item?.problem }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div *ngIf="selectedProblem.problem !== undefined">
+                            <div>{{selectedProblem?.problem}}</div>
+                        </div>
+
+                        <div *ngIf="selectedProblem.problem===undefined" (click)="addProblem_show()" class="add-link">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Add Problem
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="med-sect">
+                    <div class="itemSect-title">Medication</div>
+                    <table class="item-ul">
+                        <tbody>
+                            <tr *ngIf="orderSet?.medications === undefined">
+                                <td class="text-center" colspan="3"> No data available in table</td>
+                            </tr>
+                            <tr *ngFor="let orderSetMed of orderSet?.medications; let i=index;">
+                                <td style="width:30px;text-align:center">{{ i+1 }}</td>
+                                <td>{{ orderSetMed.genericName }}<br>
+                                    <span *ngFor="let reg of orderSetMed?.regimen">
+                                      {{reg?.dosage }} - {{reg?.frequency }} for {{ reg?.duration }} {{ reg?.durationUnit }},
+                                    </span>
+                                    {{ orderSetMed?.patientInstruction }}
+                                    </td>
+                                     <!--- {{ orderSetMed.dosage }}{{ orderSetMed.dosageUnit
+                                    }}, {{ orderSetMed.frequency }} for {{ orderSetMed.duration }} {{
+                                    orderSetMed.durationUnit }} -->
+                                <td *ngIf="orderSetMed.isBilled!==true" class="action-placeholder" style="text-align:center;width:100px">
+                                    <button *ngIf="orderSetMed.isBilled ===undefined || !orderSetMed.isBilled" (click)="onClickBillPrescription(i, orderSetMed);"
+                                        mat-raised-button class="text-white mat-xs-btn bg-primary ">
+                                        <span *ngIf="orderSetMed.isBilled === undefined || !orderSetMed.isBilled">Bill</span>
+                                        <span *ngIf="orderSetMed.isBilled">Billed</span>
+                                    </button>
+                                    <button *ngIf="orderSetMed.isBilled" (click)="onClickBillPrescription(i, orderSetMed);"
+                                        mat-raised-button class="text-white mat-xs-btn bg-green ">
+                                        <span *ngIf="orderSetMed.isBilled === undefined || !orderSetMed.isBilled">Bill</span>
+                                        <span *ngIf="orderSetMed.isBilled">Billed</span>
+                                    </button>&nbsp;&nbsp;
+                                    <button mat-raised-button (click)="deleteOrderSetItem(i, orderSetMed, 'medication')"
+                                        class="text-white bg-danger mat-xs-btn">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                                <!-- <td *ngIf="showBill && i" style="background:#bebebe; position:relative;">
+                                    <div class="billItemWrap shadow-tb">
+                                        <app-order-bill-item (closeModal)="close_onClick($event)"></app-order-bill-item>
+                                    </div>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div (click)="showOrderSetType('medication');" class="add-link"><i class="fa fa-plus" aria-hidden="true"></i>
+                        Add Medication</div>
+                </div>
+                <div class="med-sect">
+                    <div class="itemSect-title">Investigation</div>
+                    <table class="item-ul">
+                        <tbody>
+                            <tr *ngIf="orderSet?.investigations === undefined">
+                                <td class="text-center" colspan="2"> No data available in table</td>
+                            </tr>
+                            <tr *ngFor="let orderSetInves of orderSet?.investigations; let i=index">
+                                <td style="width:30px;text-align:center">{{ i+1 }}</td>
+                                <td>{{ orderSetInves.name }}</td>
+                                <td *ngIf="orderSetInves.isBilled!==true" class="action-placeholder" style="text-align:center;width:100px">
+                                    <button *ngIf="orderSetInves.isBilled ===undefined || !orderSetInves.isBilled"
+                                        (click)="onClickBillInvestigation(i, orderSetInves);" mat-raised-button class="text-white mat-xs-btn bg-primary ">
+                                        <span *ngIf="orderSetInves.isBilled === undefined || !orderSetInves.isBilled">Bill</span>
+                                        <span *ngIf="orderSetInves.isBilled">Billed</span>
+                                    </button>
+                                    <button *ngIf="orderSetInves.isBilled" (click)="onClickBillInvestigation(i, orderSetInves);"
+                                        mat-raised-button class="text-white mat-xs-btn bg-green ">
+                                        <span *ngIf="orderSetInves.isBilled === undefined || !orderSetInves.isBilled">Bill</span>
+                                        <span *ngIf="orderSetInves.isBilled">Billed</span>
+                                    </button>&nbsp;&nbsp;
+                                    <button mat-raised-button (click)="deleteOrderSetItem(i, orderSetInves, 'investigation')"
+                                        class="text-white bg-danger mat-xs-btn">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div (click)="showOrderSetType('investigation');" class="add-link"><i class="fa fa-plus"
+                            aria-hidden="true"></i> Add Investigation</div>
+                </div>
+
+                <div class="med-sect">
+                    <div class="itemSect-title">Procedure</div>
+                    <table class="item-ul">
+                        <tbody>
+                            <tr *ngIf="orderSet?.procedures === undefined">
+                                <td class="text-center" colspan="2"> No data available in table</td>
+                            </tr>
+                            <tr *ngFor="let orderSetPro of orderSet?.procedures; let i=index;">
+                                <td style="width:30px;text-align:center"> {{ i+1 }} </td>
+                                <td> {{ orderSetPro.name }} </td>
+                                <td *ngIf="orderSetPro.isExisting!==true" class="action-placeholder" style="text-align:center;width:30px;">
+                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                    <div class="action-container shadow-RB">
+                                        <div class="action-item" (click)="popProcedure_show(orderSetPro)">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            <span>Edit Item</span>
+                                        </div>
+
+                                        <div class="action-item" (click)="removeProcedure_show(i)">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                            <span>Remove Item</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div (click)="showOrderSetType('procedure');" class="add-link"><i class="fa fa-plus" aria-hidden="true"></i>
+                        Add Procedure</div>
+                </div>
+
+                <div class="med-sect">
+                    <div class="itemSect-title">Nursing Care</div>
+                    <table class="item-ul">
+                        <tbody>
+                            <tr *ngIf="orderSet?.nursingCares === undefined">
+                                <td class="text-center" colspan="2"> No data available in table</td>
+                            </tr>
+                            <tr *ngFor="let orderSetNur of orderSet?.nursingCares; let i=index">
+                                <td style="width:30px;text-align:center">{{ i+1 }}</td>
+                                <td>{{ orderSetNur.name }}</td>
+                                <td *ngIf="orderSetNur.isExisting!==true" class="action-placeholder" (click)="deleteOrderSetItem(i, orderSetNur, 'nursingCare')"
+                                    style="text-align:center;width:30px;">
+                                    <div>
+                                        <i class="fa fa-close" aria-hidden="true"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div (click)="showOrderSetType('nursing care');" class="add-link"><i class="fa fa-plus" aria-hidden="true"></i>
+                        Add Nursing Care</div>
+                </div>
+
+                <div class="med-sect">
+                    <div class="itemSect-title">Physician Order</div>
+                    <table class="item-ul">
+                        <tbody>
+                            <tr *ngIf="orderSet?.physicianOrders === undefined">
+                                <td class="text-center" colspan="2"> No data available in table</td>
+                            </tr>
+                            <tr *ngFor="let orderSetPhy of orderSet?.physicianOrders; let i=index">
+                                <td style="width:30px;text-align:center">{{ i+1 }}</td>
+                                <td>{{ orderSetPhy.name }}</td>
+                                <td *ngIf="orderSetPhy.isExisting!==true" class="action-placeholder" (click)="deleteOrderSetItem(i, orderSetPhy, 'physicianOrder')"
+                                    style="text-align:center;width:30px;">
+                                    <div>
+                                        <i class="fa fa-close" aria-hidden="true"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div (click)="showOrderSetType('physician order');" class="add-link"><i class="fa fa-plus"
+                            aria-hidden="true"></i> Add Physician Order</div>
+                </div>
+            </div>
+            <div *ngIf="isButtonEnabled && orderSet.medications!==undefined || orderSet.investigations!==undefined || orderSet.procedures!==undefined || orderSet.physicianOrders!==undefined || orderSet.nursingCares!==undefined"
+                class="text-center btn-box">
+                <button [disabled]="disableAuthorizerxButton" (click)="authorizerx()" mat-raised-button class="mat-lg-btn">Authorize</button>
+                <button [disabled]="disableAuthorizerxButton" (click)="saverx()" mat-raised-button class="mat-lg-btn">Save Plan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="showInvestigationBill">
+    <app-bill-investigation [investigationData]="investigationData" (closeModal)="close_onClick($event)"></app-bill-investigation>
+</div>
+<div *ngIf="showMedicationBill">
+    <app-order-bill-item [prescriptionData]="prescriptionData" (closeModal)="close_onClick($event)"></app-order-bill-item>
+</div>
+<div *ngIf="popMed" class="modal-overlay">
+    <app-edit-medication (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-edit-medication>
+   
+</div>
+<div *ngIf="popInvestigation" class="modal-overlay">
+    <app-edit-investigation (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-edit-investigation>
+</div>
+<div *ngIf="popNursingCare" class="modal-overlay">
+    <app-edit-nursing-care (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-edit-nursing-care>
+</div>
+<div *ngIf="popPhysicianOrder" class="modal-overlay">
+    <app-edit-physician-order (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-edit-physician-order>
+</div>
+<div *ngIf="popProcedure" class="modal-overlay">
+    <app-edit-procedure (closeModal)="close_onClick($event)" [editedValue]="editedValue" id="form-modal" class="form-modal center-center"></app-edit-procedure>
+</div>
+
+<!-- <div *ngIf="addProblem" class="modal-overlay">
+    <app-add-patient-problem [patient]="selectedPatient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-patient-problem>
+</div> -->

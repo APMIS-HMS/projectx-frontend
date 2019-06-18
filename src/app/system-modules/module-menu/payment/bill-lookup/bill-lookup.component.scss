@@ -1,0 +1,417 @@
+@import "../payment.component.scss";
+.text-center {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+.invoice-table-list {
+    border-bottom: solid 1px #bbb;
+}
+
+.invoice-sub-header{
+    border-bottom: solid 1px #01579B;
+    color: #01579B;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+.accord{
+    overflow-y: auto;
+    max-height: 500px; 
+}
+
+
+table,
+td {
+    border: 0px solid transparent;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.8rem;
+    color: #5f5f5f;
+}
+
+th {
+    height: 50px;
+    background: #f8f8f8;
+    border: 0px solid transparent;
+    color: #000;
+    font-size: 1.6rem;
+}
+
+.billSummarySect tr:hover {
+    background-color: #f1f1f1
+}
+
+.billSummarySect tr:nth-child(even) {
+    background-color: #f8f8f8
+}
+
+.billContentSect {
+    position: relative;
+    min-height: 300px;
+    background: transparent;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0 5px;
+}
+
+// table{
+//     color: #9E9E9E;
+// }
+// th{
+//     color: #795548;
+// }
+td {
+    text-align: center;
+    font-weight: normal;
+    font-size: 1.4rem;
+}
+
+td input {
+    width: 80%;
+    margin: 0;
+    padding: 0 5px;
+}
+
+td i {
+    cursor: pointer;
+    padding: 3px;
+    margin: 3px;
+    text-align: center;
+}
+
+td i:hover {
+    color: #0288D1;
+}
+
+.remove-link {
+    cursor: pointer;
+    padding: 3px;
+    margin: 3px;
+    text-align: center;
+}
+
+.remove-link:hover {
+    color: #fff;
+}
+
+.remove-link i:hover {
+    color: #fff;
+}
+
+td .cta-1 {
+    margin: 0;
+    background: transparent;
+    border: 1px solid #0288D1;
+    color: #0288D1;
+    width: auto;
+    height: auto;
+    padding: 3px 5px;
+    font-size: 1rem;
+}
+
+td .cta-1:hover {
+    color: #fff;
+    background: #0288D1;
+}
+
+.patientImgWrap {
+    padding: 3px;
+    border-radius: 100%;
+    border: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.patientImgWrap img {
+    width: 150px;
+    border-radius: 100%;
+}
+
+.topsecInnerWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #eee;
+    margin: 10px;
+    padding: 5px;
+}
+
+.generateInvoiceWrap {
+    text-align: center;
+    padding: 30px 0;
+    // .btn-1 {
+    //     width: 100px;
+    //     margin: 20px auto;
+    //     padding: 20px 15px;
+    //     text-align: center;
+    // }
+}
+
+.contentCol {
+    margin-bottom: 40px;
+}
+
+.topTotal {
+    font-weight: normal;
+}
+
+.selectTD {
+    width: auto;
+}
+
+.selectTD input {
+    width: 40px;
+    display: block;
+    margin: 0 auto;
+}
+
+.tdCategories {
+    cursor: pointer;
+}
+
+.tdCategories:hover {
+    background: #eee;
+}
+
+.tdMasterCategories td {
+    cursor: pointer;
+    font-size: 1.8rem;
+    font-family: "Josefin Sans", sans-serif;
+    color: #0288D1;
+    background: #fff;
+    line-height: 2;
+    border-bottom: 1px solid #777;
+    -webkit-box-shadow: 0 8px 6px -6px #bebebe;
+    -moz-box-shadow: 0 8px 6px -6px #bebebe;
+    box-shadow: 0 8px 6px -6px #bebebe;
+}
+
+.billContentSect tbody tr {
+    border-left: 5px solid #fff;
+    border-right: 5px solid #fff;
+}
+
+.emptySet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #757575;
+    font-size: 1.4rem;
+}
+
+.pending-title table,
+.pending-title table {
+    border-collapse: collapse;
+}
+
+.pending-title table,
+.pending-title td,
+.pending-title table,
+.pending-title td {
+    border: 0px solid transparent;
+}
+
+.pending-title td,
+.pending-title td {
+    vertical-align: center;
+    text-align: left;
+    padding: 2px;
+}
+
+.pending-title th,
+.pending-title th {
+    height: 50px;
+    background: transparent;
+    border: 0px solid transparent;
+    text-align: left;
+}
+
+.pending-title td,
+.pending-title td {
+    padding: 5px;
+}
+
+.pending-header {
+    background: #f8f8f8;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.pending-title {
+    width: 100%;
+    text-align: center;
+    font-size: 1.4rem;
+    color: #474747;
+}
+
+.pending-header input {
+    width: 100%;
+}
+
+.mat-input-container {
+    width: 100%;
+    margin-bottom: -20px;
+}
+
+.pending-bills {
+    padding: 10px;
+    box-sizing: border-box;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.pending-bills li:hover {
+    background-color: #eee
+}
+
+.pending-bills li:nth-child(even) {
+    background-color: #f8f8f8
+}
+
+.empWrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.list-img {
+    margin-right: 10px;
+}
+
+.pending-name {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.8rem;
+}
+
+.pending-bills .list-labels {
+    width: 70%;
+}
+
+.oda {
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    color: #777;
+}
+
+.pending-amount {
+    color: #ff2500;
+}
+
+.contentCol {
+    border: 0px solid transparent;
+}
+
+.inner-wrap-b {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.billContentSect .tblBg td,
+.billContentSect .tblBg th {
+    min-width: auto;
+    width: auto;
+}
+
+.billContentSect .tblBg2 td,
+.billContentSect .tblBg2 th {
+    min-width: 90px;
+}
+
+.td-modefier {
+    position: relative;
+}
+
+.modefier-link {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #03A9F4;
+}
+
+.td-modefier:hover {
+    .modefier-wrap {
+        display: block;
+    }
+    .modefier-link i {
+        color: #ff2500;
+    }
+}
+
+.modefier-wrap {
+    position: absolute;
+    background: #fff;
+    padding: 5px;
+    padding-bottom: 10px;
+    line-height: 1.5;
+    z-index: 1;
+    display: none;
+    border: 1px solid #777;
+    max-height: 200px;
+    overflow-y: auto;
+    right: 0;
+    top: 50%;
+}
+
+.actual-price {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.ac-label {
+    font-size: 1.4rem;
+    color: #777;
+}
+
+.ac-val {
+    font-size: 1.6rem;
+    color: #333;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.modefier-title {
+    color: #01579B;
+    margin: 5px auto;
+    font-size: 1.6rem;
+}
+
+.btn-wrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.accBal-val {
+    color: #ff2500;
+}
+.modal-overlay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.topmenuwrap{
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    top: unset;
+    right: unset;
+}
+.frm-item-wrap{
+    width: 100%;
+}

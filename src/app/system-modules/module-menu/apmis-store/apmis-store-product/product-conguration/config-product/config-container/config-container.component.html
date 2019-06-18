@@ -1,0 +1,29 @@
+<div class="config-container " *ngIf="showConfigContainer">
+    <div class="config-layout" *ngFor="let config of packConfigurations; let i = index">
+      <div class="config-wrap">
+        <h3>Add Configuration (Based on Unit)</h3>
+        <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+      </div>
+      <div class="config-tags-wrap-x2">
+        <div class="tag-btn">
+          <span>{{config.label}}</span>
+        </div>
+        <span class="fnt">=</span>
+        <div class="InputGroup">
+          <input class="customInput" type="text" [(ngModel)]="config.size" required>
+          <span class="highlight"></span>
+        </div>
+        <h4>{{baseName}}s</h4>
+      </div>
+    </div>
+  </div>
+  <div class="sv-btn-container " *ngIf="showConfigContainer">
+    <div class="new-btn-solid-blue" [class.disabled]="isSaving" (click)="onClickBtn()">
+      <span>{{btnName}}</span>
+    </div>
+    <div class="la"></div>
+    <div class="new-btn-solid-blue"  (click)="cancel()">
+      <span>Cancel</span>
+    </div>
+  </div>
+  

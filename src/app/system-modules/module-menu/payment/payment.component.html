@@ -1,0 +1,242 @@
+<!-- <div class="inner-wrap-b body-wrap">
+    <div class="facility-title">Payment</div>
+    <div class="inner-page-wrap">
+        <div class="megaPgWrap pay-pg">
+            <div class="feedsWrap leftCol">
+                <div class="feedbox">
+                    <div class="pending-wrap">
+                        <div class="pending-header">
+                            <div class="pending-title">Patient's Pending Bills</div>
+                            <div class="search-wrap">
+                                <mat-input-container>
+                                    <input matInput placeholder="search for bill" [formControl]="searchPendingBill">
+                                </mat-input-container>
+                            </div>
+                        </div>
+                        <ul class="pending-bills">
+                            <li class="empWrap" *ngFor="let pendingBill of pendingBills; let i = index;" routerLink="/dashboard/payment/bill/{{pendingBill?.principalObject?._id }}">
+                                <div class="list-img">
+                                    <img *ngIf="pendingBill?.principalObject?.personDetails?.profileImageObject == undefined" src="assets/images/users/default.png">
+                                    <img class="shadow" *ngIf="pendingBill?.principalObject?.personDetails?.profileImageObject != undefined" [src]="facilityService.transform(pendingBill?.principalObject?.personDetails?.profileImageObject.thumbnail)">
+                                </div>
+                                <div class="list-labels">
+                                    <div class="pending-name">{{pendingBill?.principalObject?.personDetails?.firstName}} {{pendingBill?.principalObject?.personDetails?.lastName}}</div>
+                                    <div class="oda">
+                                        <div class="pending-date">{{ pendingBill?.updatedAt |date:'medium'}}</div>
+                                        <div class="pending-amount" *ngIf="pendingBill.grandTotalExcludeInvoice!=0">
+                                            <span>&#x20a6;</span>{{ pendingBill?.grandTotalExcludeInvoice|numberThr }}</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li *ngIf="loadingPendingBills">
+                                <div class="text-center">
+                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                </div>
+                            </li>
+
+                            <li *ngIf="pendingBills.length === 0 && !loadingPendingBills" class="empWrap">
+                                <div>No data available in table</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feedbox">
+                    <div class="pending-wrap">
+                        <div class="pending-header">
+                            <div class="pending-title">Invoices</div>
+                            <div class="search-wrap">
+                                <mat-input-container>
+                                    <input matInput placeholder="search for invoice" [formControl]="searchPendingInvoices">
+                                </mat-input-container>
+                            </div>
+                        </div>
+                        <div>
+                            <li *ngIf="isLoadingInvoice" class="empWrap">
+                                <div class="text-center">
+                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                </div>
+                            </li>
+                            <li *ngIf="invoiceGroups.length === 0 && !isLoadingInvoice" class="empWrap">
+                                <div>No data available in table</div>
+                            </li>
+                        </div>
+                        <div>
+                            <ul class="pending-bills" *ngFor="let invoice of invoiceGroups">
+                                <li class="empWrap" (click)="onSelectedInvoice(invoice)">
+                                    <div class="list-img">
+                                        <img *ngIf="invoice?.personDetails.profileImageObject != undefined" [src]="facilityService.transform(invoice?.personDetails.profileImageObject.thumbnail)">
+                                        <img *ngIf="invoice?.personDetails.profileImageObject == undefined" src="assets/images/users/default.png">
+                                    </div> -->
+<!-- <div class="list-labels">
+                                        <div class="pending-name">{{invoice?.invoiceNo}}</div>
+                                        <div class="pending-date">{{invoice?.patientObject?.personDetails?.firstName}} {{invoice?.patientObject?.personDetails?.lastName}}</div>
+                                        <div class="oda">
+                                            <div class="pending-date">{{invoice?.updatedAt|date:'medium'}}</div>
+                                            <div class="pending-amount">
+                                                <span>&#x20a6;</span>{{invoice?.balance|numberThr}}</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+<!-- Where to insert chart -->
+<!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas> -->
+<!-- 
+        </div>
+    </div>
+</div> -->
+<div class="container">
+    <h2 style="text-align: center;">Payment Overview</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div>
+                    <h2 style="padding-top:10px; text-align: center">
+                        Pending Bills
+                    </h2>
+                </div>
+                <div class="search-box">
+                    <i class="fa fa-2x fa-search"></i>
+                    <input type="text" placeholder="Search first name, Apmis ID" [formControl]="searchPendingBill">
+                </div>
+                <div class="card-list">
+                    <div class="card-list-item" *ngFor="let pendingBill of pendingBills; let i = index;" routerLink="/dashboard/payment/bill/{{pendingBill?.principalObject?._id }}">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <div class="list-img">
+
+                                </div>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="list-text">
+                                    <span class="title">{{pendingBill?.principalObject?.personDetails?.firstName}}
+                                        {{pendingBill?.principalObject?.personDetails?.lastName}}</span>
+                                    <span class="sub" *ngIf="pendingBill?.grandTotalExcludeInvoice!==0">{{
+                                        pendingBill?.updatedAt |date:'medium'}} <br>
+                                        Total Amount Due: <b>NGN{{ pendingBill?.grandTotalExcludeInvoice|numberThr }}</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="badge">
+                                    {{ pendingBill?.billItems.length }}
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="card-list-item" *ngIf="loadingPendingBills">
+                        <div class="text-center">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    <div *ngIf="pendingBills.length === 0 && !loadingPendingBills" class="card-list-item">
+                        <div>No data available in table</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="padding-top:10px; text-align: center">
+                        Invoices
+                    </h2>
+                </div>
+                <div class="search-box">
+                    <i class="fa fa-2x fa-search"></i>
+                    <input type="text" placeholder="Search Invoices, Apmis ID" [formControl]="searchPendingInvoices">
+                </div>
+                <div class="card-list">
+                    <div class="card-list-item" *ngFor="let invoice of invoiceGroups" (click)="onSelectedInvoice(invoice)">
+                        <div class="list-img">
+
+                        </div>
+                        <div class="list-text">
+                            <span class="title">{{invoice?.invoiceNo}}</span>
+                            <span class="sub">{{invoice?.patientObject?.personDetails?.firstName}}
+                                {{invoice?.patientObject?.personDetails?.lastName}}
+                                | {{invoice?.updatedAt|date:'medium'}} </span>
+                        </div>
+                        <div style="float:right">
+                            <h2>{{invoice?.balance|numberThr}}</h2>
+                        </div>
+                    </div>
+                    <div *ngIf="isLoadingInvoice" class="card-list-item">
+                        <div class="text-center">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div *ngIf="invoiceGroups.length === 0 && !isLoadingInvoice" class="card-list-item">
+                        <div>No data available in table</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="summary-card">
+                            <span class="summary-label">
+                                Amount Received
+                            </span>
+                            <span class="summary-title">
+                                <div class="row">
+                                    <div class="col-md-9">{{billSummaryData.PaidIvoices | currency:'NGN':true:'1.2-2'}}</div>
+                                    <div class="col-md-3"><i style="float: right; color: green" class="hidden-md fa-arrow-circle-o-down fa fa-2x"></i></div>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="summary-card">
+                            <span class="summary-label">
+                                Pending Invoice
+                            </span>
+                            <span class="summary-title">
+                                <div class="row">
+                                    <div class="col-md-9">{{billSummaryData.UnpaidInvoices |
+                                        currency:'NGN':true:'1.2-2'}}</div>
+                                    <div class="col-md-3"><i style="float: right; color: red" class="hidden-md fa-arrow-circle-o-up fa fa-2x"></i></div>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="summary-card">
+                            <span class="summary-label">
+                                Pending Bills
+                            </span>
+                            <span class="summary-title">
+                                <div class="row">
+                                    <div class="col-md-9">{{billSummaryData.UnpaidBills | currency:'NGN':true:'1.2-2'}}</div>
+                                    <div class="col-md-3"><i style="float: right; color: #3B86FF" class="fa-money fa fa-2x"></i></div>
+                                </div>
+
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card" style="padding:10p;">
+                        <app-payment-chart></app-payment-chart>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

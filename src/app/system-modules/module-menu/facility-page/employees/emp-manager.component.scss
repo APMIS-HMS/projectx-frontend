@@ -1,0 +1,122 @@
+@import "../../../../../globals/variables.scss";
+.inner-page-wrap {
+    position: relative;
+    margin-top: 0;
+}
+.btn-1{
+    width: 140px;
+}
+.top-tab-search {
+    border: 1px solid #9e9e9e;
+}
+.moduleNav{
+    padding: 0;
+}
+.moduleNav li {
+    padding: 0;
+    margin-right: 5px;
+}
+.modal-overlay{
+    position: fixed;
+    left: 0;
+}
+.searchInputWrap{
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 300px;
+    padding: 5px 2px;
+}
+.searchInputWrap i{
+    position: absolute;
+    color: #939393;
+    margin-left: 10px;
+}
+.searchInput{
+    border: 1px solid #eee;
+    background: #FAFAFA;
+    border-radius: 7px;
+    padding: 7px;
+    padding-left: 30px;
+    text-align: center;
+    width: 100%;
+}
+ul.topmenuwrap {
+    position: relative;
+    top: auto;
+    right: auto;
+    font-size: 1.2rem;
+    color: #0288D1;
+}
+ul.topmenuwrap li{
+    border: 1px solid #0288D1;
+    padding: 3px 5px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+ul.topmenuwrap li:hover{
+    border: 1px solid #0288D1;
+    background: #0288D1;
+    color: #000;
+}
+
+.fullwidth-topActions {
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 0px;
+    margin-bottom: 0px;
+}
+.sort-btn{
+    display: none;
+}
+.sort-txt{
+    margin-top:-15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+.sort-txt-mobile{
+    position: relative;
+    margin-top:-15px;
+    display: none;
+    width: 50%;
+    border: 1px solid #eee;
+    padding: 10px;
+}
+.x {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+}
+.x:hover {
+    color: #ff2500;
+}
+@media only screen and (max-width: 670px) {
+    .sort-btn{
+        display: block;
+    }
+    .sort-txt{
+        display: none;
+    }
+    .sort-txt-mobile{
+        display: block;
+    }
+    .fullwidth-topActions{
+        display: block;
+    }
+    .filters-wraper{
+        display: block;
+    }
+    .mat-form-field{
+        width: 100% !important;
+    }
+    .clickable-ico {
+        font-size: 1.8rem;
+        width: 100%;
+        text-align: center;
+    }
+    ul.topmenuwrap{
+        margin-bottom: 10px;
+    }
+}

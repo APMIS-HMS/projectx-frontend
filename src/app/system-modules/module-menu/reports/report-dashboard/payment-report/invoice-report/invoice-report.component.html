@@ -1,0 +1,371 @@
+<div class="gridLayout">
+  <div>
+    <h2>Summary Table</h2>
+    <mat-tab-group>
+      <mat-tab label="• Self (Out of Pocket)">
+        <div class="filterTop">
+          <div class="filterWrap" style="margin-left: 20px;">
+            <div class="row">
+              <div class="dr-wrap survery">
+                <app-date-range></app-date-range>
+              </div>
+            </div>
+          </div>
+          <mat-form-field>
+            <input matInput placeholder="Search Patient">
+          </mat-form-field>
+          <!-- <div style="flex: 0; padding-left: 10px;">
+            <apmis-lookup></apmis-lookup>
+          </div> -->
+        </div>
+
+        <div class="tbl-resp-wrap">
+          <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+              <tr class="th-r1 th-xxx">
+                <th>S/N</th>
+                <th>Date / Time</th>
+                <th>Patient Name</th>
+                <th>Services</th>
+                <th>Ammount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="th-xxx">
+                <td>1</td>
+                <td>02 Oct., 2018 10am</td>
+                <td>Olanrewaju Hammed</td>
+                <td class="tooltip">3 Services
+                  <div class="tooltiptext">
+                    <span>Widal Test,</span>
+                    <span>Pregnancy Test,</span>
+                    <span>Heart Surgery</span>
+                  </div>
+                </td>
+                <td>#75,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>2</td>
+                <td>08 Sep., 2018 3:55PM</td>
+                <td>Olanrewaju Hammed</td>
+                <td class="tooltip">5 Services
+                  <div class="tooltiptext">
+                    <span>Widal Test,</span>
+                    <span>Pregnancy Test,</span>
+                    <span>Heart Surgery,</span>
+                    <span>Diclofenac 600mg,</span>
+                    <span>X-Ray</span>
+                  </div>
+                </td>
+                <td>#105,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>3</td>
+                <td>08 Sep., 2018 9:00AM</td>
+                <td>Olanrewaju Hammed</td>
+                <td class="tooltip">5 Services
+                  <div class="tooltiptext">
+                    <span>Widal Test,</span>
+                    <span>Pregnancy Test,</span>
+                    <span>Heart Surgery,</span>
+                    <span>Diclofenac 600mg,</span>
+                    <span>X-Ray</span>
+                  </div>
+                </td>
+                <td>#155,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>4</td>
+                <td>08 Sep., 2018 10:15AM</td>
+                <td>Olanrewaju Hammed</td>
+                <td class="tooltip">5 Services
+                  <div class="tooltiptext">
+                    <span>Widal Test,</span>
+                    <span>Pregnancy Test,</span>
+                    <span>Heart Surgery,</span>
+                    <span>Diclofenac 600mg,</span>
+                    <span>X-Ray</span>
+                  </div>
+                </td>
+                <td>#90,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>5</td>
+                <td>08 Sep., 2018 7:05AM</td>
+                <td>Olanrewaju Hammed</td>
+                <td class="tooltip">5 Services
+                  <div class="tooltiptext">
+                    <span>Widal Test,</span>
+                    <span>Pregnancy Test,</span>
+                    <span>Heart Surgery,</span>
+                    <span>Diclofenac 600mg,</span>
+                    <span>X-Ray</span>
+                  </div>
+                </td>
+                <td>#30,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>6</td>
+                <td>08 Sep., 2018 2:25PM</td>
+                <td>Olanrewaju Hammed</td>
+                <td class="tooltip">5 Services
+                  <div class="tooltiptext">
+                    <span>Widal Test,</span>
+                    <span>Pregnancy Test,</span>
+                    <span>Heart Surgery,</span>
+                    <span>Diclofenac 600mg,</span>
+                    <span>X-Ray</span>
+                  </div>
+                </td>
+                <td>#200,000</td>
+              </tr>
+            </tbody>
+          </table>
+          <mat-paginator [length]="150" [pageSize]="30" [pageSizeOptions]="[5, 10, 25, 100]">
+          </mat-paginator>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="• HMO">
+        <div class="filterTop">
+          <div class="selectWrap">
+            <mat-form-field>
+              <mat-select placeholder="Select HMO">
+                <mat-option>Hygia</mat-option>
+                <mat-option>AIICO Multishield</mat-option>
+                <mat-option>AVON</mat-option>
+                <mat-option>Sterling HMO</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <mat-form-field>
+            <input matInput placeholder="Search Patient">
+          </mat-form-field>
+          <!-- <div style="flex: 0; padding-left: 10px;">
+              <apmis-lookup></apmis-lookup>
+            </div> -->
+        </div>
+
+        <div class="tbl-resp-wrap">
+          <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+              <tr class="th-r1 th-xxx">
+                <th>S/N</th>
+                <th>Date / Time</th>
+                <th>Patient Name</th>
+                <th>HMO</th>
+                <th>Services</th>
+                <th>Authorization Code</th>
+                <th>Ammount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="th-xxx">
+                <td>1</td>
+                <td>02 Oct., 2018 3:00PM</td>
+                <td>Olanrewaju Hammed</td>
+                <td>Hygia</td>
+                <td>Heart Surgery</td>
+                <td>HS/77736/CCC</td>
+                <td>#250,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>2</td>
+                <td>08 Sep., 2018 9:00AM</td>
+                <td>Olanrewaju Hammed</td>
+                <td>Hygia</td>
+                <td>Abdominal X-Ray</td>
+                <td>AX-R/289367JJK</td>
+                <td>#105,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>3</td>
+                <td>08 Sep., 2018 8:45AM</td>
+                <td>Olanrewaju Hammed</td>
+                <td>Hygia</td>
+                <td>Physician Consultation</td>
+                <td>CON/083646TTF</td>
+                <td>#155,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>4</td>
+                <td>08 Sep., 2018</td>
+                <td>Tinubu Hammed</td>
+                <td>AVON</td>
+                <td>Ankle X-Ray</td>
+                <td>AX-R/72746GGF</td>
+                <td>#90,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>5</td>
+                <td>08 Sep., 2018</td>
+                <td>Tinubu Hammed</td>
+                <td>AVON</td>
+                <td>24 Hours Hotler Monitor</td>
+                <td>HM/023884TF</td>
+                <td>#30,000</td>
+              </tr>
+            </tbody>
+          </table>
+          <mat-paginator [length]="150" [pageSize]="30" [pageSizeOptions]="[5, 10, 25, 100]">
+          </mat-paginator>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="• Company">
+        <div class="filterTop">
+          <div class="selectWrap">
+            <mat-form-field>
+              <mat-select placeholder="Select Company">
+                <mat-option>Firtbank PLC</mat-option>
+                <mat-option>SIDMACH</mat-option>
+                <mat-option>Shell</mat-option>
+                <mat-option>NNPC</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <mat-form-field>
+            <input matInput placeholder="Search Patient">
+          </mat-form-field>
+          <!-- <div style="flex: 0; padding-left: 10px;">
+                <apmis-lookup></apmis-lookup>
+              </div> -->
+        </div>
+
+        <div class="tbl-resp-wrap">
+          <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+              <tr class="th-r1 th-xxx">
+                <th>S/N</th>
+                <th>Date / Time</th>
+                <th>Patient Name</th>
+                <th>Company Name</th>
+                <th>Services</th>
+                <th>Ammount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="th-xxx">
+                <td>1</td>
+                <td>02 Oct., 2018 3:00PM</td>
+                <td>Otolo Tomide</td>
+                <td>SIDMACH</td>
+                <td>Heart Surgery</td>
+                <td>#250,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>2</td>
+                <td>08 Sep., 2018 9:00AM</td>
+                <td>Otolo Tomide</td>
+                <td>SIDMACH</td>
+                <td>Abdominal X-Ray</td>
+                <td>#105,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>3</td>
+                <td>08 Sep., 2018 8:45AM</td>
+                <td>Omolade Kehinde</td>
+                <td>Shell</td>
+                <td>Physician Consultation</td>
+                <td>#155,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>4</td>
+                <td>08 Sep., 2018</td>
+                <td>Omolade Kehinde</td>
+                <td>Shell</td>
+                <td>Ankle X-Ray</td>
+                <td>#90,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>5</td>
+                <td>08 Sep., 2018</td>
+                <td>Susan Chinwe</td>
+                <td>First Bank</td>
+                <td>24 Hours Hotler Monitor</td>
+                <td>#30,000</td>
+              </tr>
+            </tbody>
+          </table>
+          <mat-paginator [length]="150" [pageSize]="30" [pageSizeOptions]="[5, 10, 25, 100]">
+          </mat-paginator>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="• Family Cover">
+        <div class="filterTop">
+          <mat-form-field>
+            <input matInput placeholder="Search Family Firstname">
+          </mat-form-field>
+          <!-- <div style="flex: 0; padding-left: 10px;">
+                  <apmis-lookup></apmis-lookup>
+                </div> -->
+        </div>
+
+        <div class="tbl-resp-wrap">
+          <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+              <tr class="th-r1 th-xxx">
+                <th>S/N</th>
+                <th>Date / Time</th>
+                <th>Patient Name</th>
+                <th>Services</th>
+                <th>Ammount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="th-xxx">
+                <td>1</td>
+                <td>02 Oct., 2018 3:00PM</td>
+                <td>Otolo Tomide</td>
+                <td>Heart Surgery</td>
+                <td>#250,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>2</td>
+                <td>08 Sep., 2018 9:00AM</td>
+                <td>Otolo Tomide</td>
+                <td>Abdominal X-Ray</td>
+                <td>#105,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>3</td>
+                <td>08 Sep., 2018 8:45AM</td>
+                <td>Omolade Kehinde</td>
+                <td>Physician Consultation</td>
+                <td>#155,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>4</td>
+                <td>08 Sep., 2018</td>
+                <td>Omolade Kehinde</td>
+                <td>Ankle X-Ray</td>
+                <td>#90,000</td>
+              </tr>
+              <tr class="th-xxx">
+                <td>5</td>
+                <td>08 Sep., 2018</td>
+                <td>Susan Chinwe</td>
+                <td>24 Hours Hotler Monitor</td>
+                <td>#30,000</td>
+              </tr>
+            </tbody>
+          </table>
+          <mat-paginator [length]="150" [pageSize]="30" [pageSizeOptions]="[5, 10, 25, 100]">
+          </mat-paginator>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div class="chartWrap">
+    <div style="text-align: center;">
+      <canvas style="max-height: 380px;" class="pieChart" baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+        (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+      </canvas>
+      <div style="display: flex; margin-left: 30%;">
+        <h3>Total Amount: #690,000</h3>
+      </div>
+    </div>
+  </div>
+</div>

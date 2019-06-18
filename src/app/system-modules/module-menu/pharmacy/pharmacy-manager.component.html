@@ -1,0 +1,18 @@
+<ul class="pg-menuWrap">
+    <li (click)="changeRoute('prescriptions')" [class.pg-menuActive]="prescriptionNavMenu" routerLink="/dashboard/pharmacy/prescriptions"><i class="fa fa-home" aria-hidden="true"></i> Prescriptions</li>
+    <li (click)="changeRoute('external-prescriptions')" [class.pg-menuActive]="externalPrescriptionNavMenu" routerLink="/dashboard/pharmacy/external-prescriptions"><i class="fa fa-braille" aria-hidden="true"></i> External Prescriptions</li>
+    <li (click)="changeRoute('dispense')" [class.pg-menuActive]="walkInNavMenu" routerLink="/dashboard/pharmacy/dispense"><i class="fa fa-building" aria-hidden="true"></i> Walk in</li>
+    <li routerLink="/dashboard/store/home"><i class="fa fa-building" aria-hidden="true"></i> Go to Store</li>
+    <li (click)="modal_on=true"><i class="fa fa-building" aria-hidden="true"></i> Check into Store</li>
+</ul>
+<div class="inner-wrap-b body-wrap">
+    <div class="facility-title" (pageInView)="pageInViewLoader($event)">{{pageInView}}</div>
+    <div *ngIf="isStoreAvailable" class="pharm-title">{{storeTitle}}</div>
+    <div class="inner-page-wrap">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<div *ngIf="modal_on" class="modal-overlay">
+    <app-store-check-in [loginEmployee]="loginEmployee" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-store-check-in>
+</div>

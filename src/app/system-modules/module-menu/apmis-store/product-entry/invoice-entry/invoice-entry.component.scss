@@ -1,0 +1,51 @@
+@import "./../../apmis-store-home/store-home-main/all-products/all-products.component.scss";
+@import "./../initialize-store/initialize-store.component.scss";
+@import "./../purchase-list/new-purchase-list/new-purchase-list.component.scss";
+
+
+
+
+.inv-action {
+    display: flex;
+    justify-content: space-between;
+
+    .btn-act-margin {
+        margin-right: 10px;
+    }
+}
+
+.orange-lbl {
+    color: #FF8A00;
+}
+
+.green-lbl {
+    color: #00D455;
+}
+
+.red-lbl {
+    color: #FF3838;
+}
+
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.tbl-btn-action {
+    padding: 0;
+}
+
+.new-link-blue {
+    color: #0288D1;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}

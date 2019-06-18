@@ -1,0 +1,132 @@
+<div class="searchSect mainContentArea">
+
+    <div class="searchInputWrap">
+        <input type="search" autofocus class="searchInput" placeholder="search for available health facilities">
+    </div>
+
+    <div class="inner-menu1-wrap">
+        <i id="contentSecMenuToggle" (click)="contentSecMenuToggle()" [class.content-sec-icoActive]="contentSecMenuShow" class=" content-sec-ico fa fa-ellipsis-v" aria-hidden="true"></i>
+        <ul id="innerMenu-ul" *ngIf="contentSecMenuShow" class="innerMenu-ul shadow">
+            <li (click)="homeShow()"><i class="fa fa-home" aria-hidden="true"></i> Home</li>
+            <li (click)="activeCoversShow()"><i class="fa fa-hospital-o" aria-hidden="true"></i> Company Health Covers</li>
+            <li (click)="pendingCoversShow()"><i class="fa fa-pause" aria-hidden="true"></i> Pending Requests</li>
+            <li (click)="deptsShow()"><i class="fa fa-building-o" aria-hidden="true"></i> Departments</li>
+            <li (click)="logOutShow()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</li>
+        </ul>
+    </div>
+
+    <div *ngIf="contentListings" class="contentListings">
+        <div (click)="loadDetail(facility)" *ngFor="let facility of facilities">
+            <app-facility-listing [selectedFacility]="facility"></app-facility-listing>
+        </div>
+    </div>
+
+    <div *ngIf="healthCovers" class="contentListings">
+        <div class="sectTitle">Active Health Covers</div>
+        <div *ngFor="let active of activeHealthCovers" (click)="loadDetail(active.facility)" class="ContentListing">
+            <img *ngIf="active.facility?.logoObject == undefined" src="assets/images/logos/default.jpg">
+            <img *ngIf="active.facility?.logoObject != undefined" [src]="facilityService.transform(active.facility?.logoObject?.thumbnail)">
+            <div>
+                <div class="listedFacility">{{active.facility.name}}</div>
+                <div class="listedFacilityDesc">300 Employees Covered</div>
+                <div class="listedFacilityLoc">
+                    <span>{{active.facility.countryItem?.name}} </span><strong>.</strong>
+                    <span>{{getPendingState(active.facility)}}</span><strong>.</strong>
+                    <span>{{active.facility.email}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="pendingCovers" class="contentListings">
+        <div class="sectTitle">Pending Health Covers</div>
+        <div *ngFor="let pending of pendingHealthCovers" (click)="loadDetail(pending.facility)" class="ContentListing">
+            <img *ngIf="pending.facility?.logoObject == undefined" src="assets/images/logos/default.jpg">
+            <img *ngIf="pending.facility?.logoObject != undefined" [src]="facilityService.transform(pending.facility?.logoObject?.thumbnail)">
+            <div>
+                <div class="listedFacility">{{pending.facility?.name}}</div>
+                <div class="listedFacilityDesc">{{pending.facility.description}}</div>
+                <!--<div class="listedFacilityDesc">{{pending.facility.description | shorten: 200: '...':wordBreak:true}}</div>-->
+                <div class="listedFacilityLoc">
+                    <span>{{pending.facility.countryItem?.name}} </span><strong>.</strong>
+                    <span>{{getPendingState(pending.facility)}}</span><strong>.</strong>
+                    <span>{{pending.facility.email}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="detailSect" class="detailSect">
+
+        <div class="successAlert animated shake" *ngIf="successAlert"><i class="fa fa-check" aria-hidden="true"></i> {{alertMsg}}</div>
+
+        <div class="btnWrap" [hidden]="successAlert">
+            <div *ngIf="!hasPending" (click)="requestCover()" class="btn-1 btn-blue"><i class="fa fa-medkit" aria-hidden="true"></i> Request Health Cover</div>
+        </div>
+        <div *ngIf="hasPending" class="requestPending">Request Pending</div>
+
+        <div class="detailHeader">
+            <div class="detailLogoWrap">
+                <img *ngIf="selectedDetailFacility?.logoObject == undefined" src="assets/images/logos/default.jpg">
+                <img *ngIf="selectedDetailFacility?.logoObject != undefined" [src]="facilityService.transform(selectedDetailFacility?.logoObject?.thumbnail)">
+            </div>
+
+            <div class="detailContentWrap">
+                <div>
+                    <div class="listedFacility">{{selectedDetailFacility?.name}}</div>
+                    <div class="listedFacilityDesc">
+                        {{selectedDetailFacility.description}}
+                    </div>
+
+                    <div class="listedFacilityLoc">
+                        <div class="listedFacilityAddress">We are located at {{selectedDetailFacility?.address?.street}}, {{selectedCity?.name}}.</div>
+                        <span>{{selectedDetailFacility?.countryItem?.name}} </span><strong>.</strong>
+                        <span>{{selectedState?.name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detailAnalytics">
+            <div class="detailAnalytic">
+                <div class="analyticNo">20</div>
+                <div class="analyticText">Company Health Covers</div>
+            </div>
+
+            <div class="detailAnalytic">
+                <div class="analyticNo">8000</div>
+                <div class="analyticText">Family Health Covers</div>
+            </div>
+
+            <div class="detailAnalytic">
+                <div class="analyticNo">202</div>
+                <div class="analyticText">Company Health Covers</div>
+            </div>
+        </div>
+
+        <div class="secTitleInner">Clients</div>
+        <div class="corporateClients">
+
+            <div class="clientsWrap">
+                <div class="clientWrap">
+                    <img src="assets/images/logos/dangote.jpg">
+                </div>
+
+                <div class="clientWrap">
+                    <img src="assets/images/logos/cocacola.png">
+                </div>
+
+                <div class="clientWrap">
+                    <img src="assets/images/logos/mtn.png">
+                </div>
+
+                <div class="clientWrap">
+                    <img src="assets/images/logos/microsoft.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="logoutConfirm_on" class="modal-overlay">
+        <app-logout-confirm (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-logout-confirm>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="ContentListing">
+  <img *ngIf="selectedFacility.logoObject == undefined" src="assets/images/logos/default.jpg">
+   <img *ngIf="selectedFacility.logoObject != undefined" [src]="facilityService.transform(selectedFacility.logoObject?.thumbnail)">
+  <div>
+    <div class="listedFacility">{{selectedFacility.name}}</div>
+    <div class="listedFacilityDesc">
+    {{selectedFacility.description}}
+    </div>
+    <div class="listedFacilityLoc">
+      <span>{{selectedFacility.countryItem?.name}} </span><strong>.</strong>
+      <span>{{state}}</span><strong>.</strong>
+      <span>{{selectedFacility.email}}</span>
+    </div>
+  </div>
+</div>

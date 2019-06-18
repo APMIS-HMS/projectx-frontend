@@ -1,0 +1,60 @@
+.frm-label{
+    position: absolute;
+    top: -10px;
+    left: 0;
+    font-size: 1.2rem;
+    color: #515151;
+}
+
+.modal_title {
+    text-align: center;
+    border-bottom: 0px;
+    color: #0d47a1;
+    margin-bottom: 0;
+}
+
+.mainfrmwrap{
+    display: flex;
+    justify-content: space-between;
+}
+
+.survery input, .survery select {
+    width: 350px !important;
+}
+.frmArrayclinicWrap {
+    width: 354px;
+    border: 1px solid transparent;
+    padding: 3px;
+    margin-bottom: 12px;
+}
+.valSpan {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.btn-2{
+    width: 100px;
+    margin-top: 15px;
+    padding: 15px;
+}
+
+.frm-item-wrap {
+    padding-bottom: 10px;
+}
+.frm-item-wrap small, .frm-singleItem-wrap small {
+    bottom: -3px;
+}
+.frm-item-inner-wrap{
+    margin-left: 40px;
+}
+.mat-mini-fab.mat-accent {
+    background-color: #f5f5f5;
+    margin-top: 20px;
+}
+.apmis-blue {
+    max-width: 200px;
+    text-align: center;
+    background: #0288D1;
+    color: #fff;
+    padding: 2px 15px;
+}

@@ -1,0 +1,23 @@
+.top-links {
+    align-items: right;
+    display: flex;
+}
+
+.blue-nav {
+    font-size: 1.7rem;
+    padding-right: 10px;
+    color: #0288d1;
+    cursor: pointer;
+    &.active {
+        text-decoration: underline;
+        border-bottom: 3px solid #194985;
+    }
+}
+
+.blue-nav:hover {
+    // border-bottom: 3px solid #194985;
+    text-decoration: underline;
+    // padding-top: 5px;
+    font-weight: bolder;
+    color: #194985;
+}

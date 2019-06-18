@@ -1,0 +1,19 @@
+<mat-card class="ex-form">
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <div>
+          <mat-form-field style="width:100%;">
+            <textarea matInput placeholder="Note" [formControl]="noteFormCtrl"></textarea>
+          </mat-form-field>
+        </div>
+      </td>
+      <td>
+        <div class="ex-radio-group">
+          <span class="btn_span" (click)="onUpdate()"><i class="fa fa-check green" style="padding:3px;" aria-hidden="true"></i>Save</span>
+          <span class="btn_span"><i class="fa fa-times red" style="padding:3px;" aria-hidden="true"></i>Cancel</span>  
+        </div>
+      </td>
+    </tr>
+  </table>
+</mat-card>

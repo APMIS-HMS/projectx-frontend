@@ -1,0 +1,75 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Consulting Room Check In</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+                <!-- <div class="postStrap-title">Check Into Consulting Room</div> -->
+        <div class="cont-wrap">
+            <div class="cont-item">
+                <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+                <form style="width:200px;" [formGroup]="roomCheckin" novalidate>
+                    <div class="frm-item-wrap">
+                        <mat-form-field>
+                            <mat-select placeholder="Location" formControlName="location">
+                                <mat-option value="" disabled selected>Select Location</mat-option>
+                                <mat-option *ngFor="let location of locations" value={{location.name}}>{{location.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="frm-item-wrap">
+                        <mat-form-field>
+                            <mat-select placeholder="Room" formControlName="room">
+                                <mat-option value="" disabled selected>Select Room</mat-option>
+                                <mat-option *ngFor="let room of selectedConsultingRoom.rooms" value={{room.name}}>{{room.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="set-default">
+                        <mat-checkbox formControlName="isDefault">Set as default!</mat-checkbox>
+                    </div>
+
+                    <div class="btn-group">
+                        <button [disabled]="!roomCheckin.valid" (click)="checkIn(roomCheckin.valid, roomCheckin.value)" class="apmis-blue" mat-raised-button>Check In</button>
+                        <button class="apmis-danger" (click)="close_onClick()" mat-raised-button>Cancel</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="cont-item recent-rooms">
+                <div class="item-title">Recent Rooms</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Consulting Room</th>
+                            <th>Last Check-In</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let checkIn of loginEmployee.consultingRoomCheckIn">
+                            <td>{{checkIn?.minorLocationId}}</td>
+                            <td>{{checkIn?.roomId}}</td>
+                            <td>{{checkIn?.lastLogin | date:'medium'}}</td>
+                            <td class="tblMenu">
+                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                <ul class="popMenu">
+                                    <li (click)="changeRoom(checkIn)">Switch To Room</li>
+                                    <li><i class="fa fa-trash tblMenu" aria-hidden="true"></i> Delete History</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    </div>
+
+</div>

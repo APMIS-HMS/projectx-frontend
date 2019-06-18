@@ -1,0 +1,35 @@
+<div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+<form [formGroup]="frm_selectModules" *ngIf="f_module" novalidate>
+    <div class="modal_mini_title2">Select required modules for your facility</div>
+    <div class="control-group">
+        <label *ngFor="let module of partOneModules" class="control control--checkbox">{{module.name}}
+          <input type="checkbox" formControlName="chk_pharmacy" (click)="addModuleItem(module)" [checked]="module.checked"/>
+          <div class="control__indicator"></div>
+        </label>
+    </div>
+
+    <div class="control-group">
+        <label *ngFor="let module of partTwoModules" class="control control--checkbox">{{module.name}}
+          <input type="checkbox" formControlName="chk_pharmacy" (click)="addModuleItem(module)" [checked]="module.checked"/>
+          <div class="control__indicator"></div>
+        </label>
+    </div>
+    <div (click)="back_selectModules()" class="backBtn"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>Go Back</div>
+    <div (click)="selectModules_next()" class="cta-1">
+        CONTINUE
+    </div>
+</form>
+<!--<app-final-step *ngIf="sg4_show" class="f_sg3 animated zoomIn"></app-final-step>-->
+
+<div *ngIf="sg4_show" class="f_sg4 animated zoomIn">
+
+    <form [formGroup]="facilityForm4" novalidate>
+        <div class="clear"></div>
+        <div (click)="back_facilityForm4()" class="backBtn"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>Go Back</div>
+        <button (click)="facilitySetup_finish()" class="cta-1">
+      FINISH
+    </button>
+    </form>
+</div>
+<!-- <app-verify-token *ngIf="back_f_module" (closeModal)="close_onClick($event)" [tokenValue] = "inputFacility.verificationToken" class="f_sg2 animated zoomIn" [backBtnVisible]="true" [inputFacility]="inputFacility"></app-verify-token> -->
+<!--<app-add-facility-logo *ngIf="back_f_module"></app-add-facility-logo>-->

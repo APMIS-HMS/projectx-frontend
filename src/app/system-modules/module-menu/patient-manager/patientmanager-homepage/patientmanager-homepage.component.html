@@ -1,0 +1,561 @@
+<!-- <div class="tbl-resp-wrap">
+    
+</div> -->
+
+
+<div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="table-head col-xs-3">
+                    Patient
+                </div>
+                <div class="table-head col-xs-1">
+                    Age
+                </div>
+                <div class="table-head col-xs-1">
+                    Gender
+                </div>
+                <div class="table-head col-xs-2">
+                    Phone
+                </div>
+                <div class="table-head col-xs-2">
+                    Email
+                </div>
+                <div class="table-head col-xs-1">
+                    No. Of Tags
+                </div>
+                <div class="table-head col-xs-2">
+                    Apmis ID
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <div *ngIf="patients.length === 0 && !loading" class="row">
+                <div class="card-list-item col-xs-12 table-list">
+                    No data available in table
+                </div>
+            </div>
+            <div *ngIf="patients.length === 0 && loading" class="row">
+                <div class="card-list-item col-xs-12 table-list">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue"></i>
+                </div>
+            </div>
+            <div class="card-list-item pointer" *ngFor="let patient of patients">
+                <div class="row">
+                    <div (click)="navEpDetail(patient)" class="table-list col-xs-3">
+                        <div class="empWrap">
+                            <span class="list-img">
+                                <img *ngIf="patient?.personDetails?.profileImageObject == undefined" src="assets/images/users/default.png">
+                                <img *ngIf="patient?.personDetails?.profileImageObject != undefined" class="shadow"
+                                    [src]="patient?.personDetails?.profileImageObject?.thumbnail">
+                            </span>
+                            <span *ngIf="!patient.isUnknown"> {{patient.personDetails?.lastName}} {{patient.personDetails?.firstName}}</span>
+                            <span *ngIf="patient.isUnknown"> {{patient.personDetails?.firstName}}</span>
+                        </div>
+                    </div>
+                    <div (click)="navEpDetail(patient)" class="table-list col-xs-1">{{patient?.age}}</div>
+                    <div (click)="navEpDetail(patient)" class="table-list col-xs-1">
+                        <span *ngIf="patient.personDetails?.gender ==='Male'">M</span>
+                        <span *ngIf="patient.personDetails?.gender ==='Female'">F</span>
+                        <span *ngIf="patient.personDetails?.gender!='Female' && patient.personDetails?.gender!='Male'">N</span>
+                    </div>
+                    <div (click)="navEpDetail(patient)" class="table-list col-xs-2">
+                        {{patient.personDetails?.primaryContactPhoneNo}}
+                    </div>
+                    <div (click)="navEpDetail(patient)" class="table-list col-xs-2">{{patient.personDetails?.email}}</div>
+                    <div (click)="navEpDetail(patient)" class="table-list col-xs-1 td-tagPopover">
+                        <span class="badge badge-secondary">{{patient?.tags?.length}}</span>
+                        <ul class="tagPopover-listWrap animated zoomIn" *ngIf="patient?.tags?.length > 0">
+                            <div class="listWrapper">
+                                <!-- <li class="tagPopover-listItem" *ngFor="let tag of patient?.tags">
+                                            <ng-container>
+                                                <span>{{tag.name}}</span>
+                                            </ng-container>
+                                        </li> -->
+                                <span>{{combineTagsToString(patient?.tags)}}</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div (click)="navEpDetail(patient)" class="table-list col-xs-1">
+                        {{patient.personDetails?.apmisId}}
+                    </div>
+                    <div class="table-list col-xs-1 action-placeholder">
+                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                        <div class="action-container shadow-RB">
+                            <div (click)="slideEdit(patient)" class="action-item">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <span>Edit Patient</span>
+                            </div>
+
+                            <div (click)="idTags(patient)" class="action-item">
+                                <i class="fa fa-tags" aria-hidden="true"></i>
+                                <span>ID Tags</span>
+                            </div>
+
+                            <div (click)="setAppointment(patient)" class="action-item">
+                                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                                <span>Set Appointment</span>
+                            </div>
+
+                            <div (click)="payPlanShow(patient)" class="action-item">
+                                <i class="fa fa-money" aria-hidden="true"></i>
+                                <span>Payment Plans</span>
+                            </div>
+
+                            <div (click)="newUpload_show(patient)" class="action-item">
+                                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                <span>Upload File</span>
+                            </div>
+                            <input style="display:none;" #fileInput type="file" id="uploadResult" (click)="onChange($event)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div style="margin-top: 20px;">
+        <apmis-data-pager [show-next-prev]="true" color="blue"
+                          (onPageClick)="pageClickedEvent($event)" [in-progress]="loading"
+                          [show-progress]="true" next-prev-color="grey" [pager-source]="paginationObj"></apmis-data-pager>
+    </div>
+    
+      
+    <!--<div class="btn-center">
+        <button (click)="loadMore()" class="apmis-blue" mat-raised-button *ngIf="showLoadMore || patients.length === 0">Load
+            More</button>
+    </div>
+    <div style="text-align:center; margin-top:20px;" *ngIf="total > 0">{{loadMoreText}} </div>-->
+</div>
+
+<div *ngIf="editPatient">
+    <div class="survery">
+        <div class="cover-edit">
+            <form class="form-signin">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <a (click)="close_onClick()" aria-hidden="true" class="modal-close-ico">X</a>
+                                    <legend class="modal_title">
+                                        Edit Patient
+                                        <br>
+                                        <h4>{{selectedPatient.firstName}} {{selectedPatient.lastName}}</h4>
+                                    </legend>
+                                    <form class="form form-signup" role="form" [formGroup]="patientEditForm" (click)="hideSuggestions()">
+                                        <mat-tab-group style="padding: 10px;" #tabGroup selectedIndex="{{selectedIndex}}">
+                                            <mat-tab label="Patient" style="padding: 10px;">
+                                                <div class="patient-detail-wrapper">
+                                                    <div class="col-sm-6">
+                                                        <mat-form-field>
+                                                            <mat-select formControlName="title" placeholder="Title">
+                                                                <mat-option *ngFor="let title of titles" [value]="title.name">
+                                                                    {{title.name}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <mat-input-container>
+                                                            <input matInput formControlName="firstName" placeholder="First Name"
+                                                                name="firstName" [(ngModel)]="selectedPatient.firstName">
+                                                        </mat-input-container>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <mat-input-container>
+                                                            <input matInput formControlName="lastName" placeholder="Last Name"
+                                                                name="lastName" [(ngModel)]="selectedPatient.lastName">
+                                                        </mat-input-container>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <mat-input-container>
+                                                            <input matInput type="email" formControlName="email"
+                                                                placeholder="Email" name="email" [(ngModel)]="selectedPatient.email">
+                                                        </mat-input-container>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <mat-form-field>
+                                                            <mat-select placeholder="Blood Group" formControlName="bloodGroup"
+                                                                [compareWith]="compareState">
+                                                                <mat-option>
+                                                                    <em>None</em>
+                                                                </mat-option>
+                                                                <mat-option *ngFor="let bloodGroup of bloodGroups"
+                                                                    [value]="bloodGroup.name">
+                                                                    {{bloodGroup.name}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <mat-form-field>
+                                                            <mat-select placeholder="Genotype" formControlName="genotype"
+                                                                [compareWith]="compareState">
+                                                                <mat-option>
+                                                                    <em>None</em>
+                                                                </mat-option>
+                                                                <mat-option *ngFor="let geno of genotypes" [value]="geno.name">
+                                                                    {{geno.name}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <mat-input-container>
+                                                            <input matInput type="number" formControlName="phoneNumber"
+                                                                placeholder="Mobile Number" name="phoneNumber"
+                                                                [(ngModel)]="selectedPatient.primaryContactPhoneNo">
+                                                        </mat-input-container>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <mat-form-field>
+                                                            <input matInput [matDatepicker]="picker" placeholder="Date of Birth (DD/MM/YYYY)"
+                                                                formControlName="dob">
+                                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                            <mat-datepicker #picker></mat-datepicker>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <mat-form-field>
+                                                            <mat-select formControlName="gender" placeholder="Gender">
+                                                                <mat-option *ngFor="let gender of genders" [value]="gender.name">
+                                                                    {{gender.name}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <mat-form-field>
+                                                            <mat-select placeholder="Contact Country" formControlName="country">
+                                                                <mat-option *ngFor="let country of countries" [value]="country.name">
+                                                                    {{country.name}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <mat-form-field>
+                                                            <mat-select placeholder="Contact State" formControlName="state"
+                                                                [compareWith]="compareState">
+                                                                <mat-option>
+                                                                    <em>None</em>
+                                                                </mat-option>
+                                                                <mat-option *ngFor="let state of states" [value]="state.name">
+                                                                    {{state.name}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <mat-form-field>
+                                                            <mat-select placeholder="Contact City" formControlName="city"
+                                                                [compareWith]="compareState">
+                                                                <mat-option>
+                                                                    <em>None</em>
+                                                                </mat-option>
+                                                                <mat-option *ngFor="let city of cities" [value]="city.name">
+                                                                    {{city.name}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <mat-form-field>
+                                                            <mat-select placeholder="Contact L.G.A" formControlName="lga"
+                                                                [compareWith]="compareState">
+                                                                <mat-option>
+                                                                    <em>None</em>
+                                                                </mat-option>
+                                                                <mat-option *ngFor="let lga of lgas" [value]="lga.name">
+                                                                    {{lga.name}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+
+                                                    <div class="col-xs-12">
+                                                        <mat-input-container style="width: 100%;">
+                                                            <textarea matInput placeholder="Street" formControlName="street"></textarea>
+                                                        </mat-input-container>
+                                                    </div>
+                                                </div>
+                                            </mat-tab>
+                                            <mat-tab label="ID Tags" style="padding: 10px;">
+                                                <div class="patient-detail-wrapper">
+                                                    <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+                                                    <div class="row">
+                                                        <div class="col-xs-6">
+                                                            <mat-input-container class="example-full-width">
+                                                                <input matInput [formControl]="tagName" placeholder="Tag Name"
+                                                                    autocomplete="off">
+                                                            </mat-input-container>
+                                                            <ul class="suggestions nice-scroll" *ngIf="showSearchResult">
+                                                                <li *ngIf="dictionaries?.length === 0">No data
+                                                                    available
+                                                                </li>
+                                                                <li class="suggestion" *ngFor="let dic of dictionaries"
+                                                                    (click)="fillingWithSearchInfo(dic)">
+                                                                    <div class="listing-label">{{dic.name}}</div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            <mat-checkbox [formControl]="identity" (click)="changeButton()">Identity!</mat-checkbox>
+                                                        </div>
+                                                        <div claass="col-xs-4">
+                                                            <button (click)="newTag(tagName.valid)" *ngIf="!changetagButton"
+                                                                class="apmis-blue mat-raised-button" [disabled]="!tagName.valid || tagLoader"
+                                                                mat-raised-button>
+                                                                {{btnLabel}}
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <span class="badge blue-gradient" *ngFor="let tag of patientToEdit?.tags"
+                                                            style="padding:10px 20px; margin: 3px; border-radius: 25px; font-size: 12px;">
+                                                            <span class="big-label">
+                                                                {{tag.name}}
+                                                            </span> &nbsp;
+                                                            <i *ngIf="tag.tagType === 'identification'" class="fa fa-info"></i>
+                                                            &nbsp;&nbsp;
+                                                            <i (click)="removeTag(tag)" class="fa fa-trash-o big-label cursor-pointer"
+                                                                aria-hidden="true"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </mat-tab>
+                                            <mat-tab label="Next Of Kin">
+                                                <div class="next-of-kin-body-wrapper">
+                                                    <div formArrayName="nextOfKin">
+                                                        <div *ngFor="let nextOfKin of patientEditForm.controls['nextOfKin'].controls; let i=index"
+                                                            class="next-of-kin panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <span>Next Of Kin {{i + 1}}</span>
+                                                                <span (click)="removeNextOfKin(i)" style="float: right;">
+                                                                    <i class="fa fa-times"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="panel-body" [formGroupName]="i">
+                                                                <mat-input-container class="example-full-width">
+                                                                    <input matInput type="text" formControlName="fullName"
+                                                                        placeholder="Full Name">
+                                                                </mat-input-container>
+                                                                <mat-input-container class="example-full-width" style="margin-left: 5px;">
+                                                                    <input matInput placeholder="Address"
+                                                                        formControlName="address">
+                                                                </mat-input-container>
+                                                                <mat-input-container class="example-full-width">
+                                                                    <input matInput type="tel" placeholder="Mobile Number"
+                                                                        formControlName="phoneNumber">
+                                                                </mat-input-container>
+                                                                <mat-input-container class="example-full-width" style="margin-left: 5px;">
+                                                                    <input matInput type="email" placeholder="Email"
+                                                                        formControlName="email">
+                                                                </mat-input-container>
+                                                                <mat-form-field>
+                                                                    <mat-select placeholder="Relationship"
+                                                                        formControlName="relationship">
+                                                                        <mat-option *ngFor="let relationship of relationships"
+                                                                            [value]="relationship.name">
+                                                                            {{relationship.name}}
+                                                                        </mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-next-of-kin-box">
+                                                        <a class="btn btn-blue" (click)="addNewNextOfKin();"> Add Next
+                                                            Of Kin
+                                                            <i class="fa fa-plus"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </mat-tab>
+                                            <mat-tab label="Plan">
+                                                <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+                                                <div class="next-of-kin-body-wrapper">
+                                                    <div class="row" *ngIf="!isEdit">
+                                                        <div class="col-xs-12" *ngFor="let pat of patient.paymentPlan"
+                                                            style="margin-bottom: 10px">
+                                                            <div class="card blue-gradient">
+                                                                <div class="row">
+                                                                    <div class="col-xs-8 left">
+                                                                        <i class="big-label"> {{(pat.isDefault ===
+                                                                            true) ? 'Current Plan |' : ''}}
+                                                                            {{(pat.planType === 'wallet') ? 'Out Of
+                                                                            Pocket'
+                                                                            : pat.planType}}
+                                                                        </i>
+                                                                    </div>
+                                                                    <div (click)="isEditFn(patient, pat.planType)"
+                                                                        class="col-xs-2 right">
+                                                                        <i class="fa fa-pencil-square-o big-label"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <a class="float" (click)="isEditFn(patient, '', 'create')">
+                                                            <i class="my-float">+</i>
+                                                        </a>
+                                                    </div>
+
+                                                    <div *ngIf="isEdit">
+                                                        <div class="doc-mainWrap">
+                                                            <div class="tab-wrap">
+                                                                <!-- <div (click)="tabWallet_click()" [class.tab-item-active]="tabWallet" class="tab-item">Out of Pocket</div> -->
+                                                                <div (click)="tabInsurance_click()"
+                                                                    [class.tab-item-active]="tabInsurance" class="tab-item">Insurance</div>
+                                                                <div (click)="tabCompany_click()"
+                                                                    [class.tab-item-active]="tabCompany" class="tab-item">Company
+                                                                    Cover
+                                                                </div>
+                                                                <div (click)="tabFamily_click()"
+                                                                    [class.tab-item-active]="tabFamily" class="tab-item">Family
+                                                                    Cover
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="tab-content">
+
+                                                                <div *ngIf="tabInsurance">
+                                                                    <div class="plan">
+                                                                        <div class="plan-title">Insurance</div>
+                                                                        <div class="row frm-item-wrap">
+                                                                            <mat-form-field class="col-xs-12 col-sm-6 example-full-width">
+                                                                                <input matInput placeholder="Pick HMO"
+                                                                                    aria-label="HMOs" [matAutocomplete]="auto"
+                                                                                    [formControl]="hmoPlanId">
+                                                                                <mat-autocomplete #auto="matAutocomplete"
+                                                                                    [displayWith]="displayFn">
+                                                                                    <mat-option *ngFor="let hmo of filteredHmos | async"
+                                                                                        [value]="hmo">
+                                                                                        {{hmo.hmoName}}
+                                                                                    </mat-option>
+                                                                                </mat-autocomplete>
+                                                                            </mat-form-field>
+                                                                            <mat-form-field class="col-xs-12 col-sm-6">
+                                                                                <input matInput mat-error placeholder="Insurance ID"
+                                                                                    [formControl]="insuranceId">
+                                                                            </mat-form-field>
+                                                                        </div>
+                                                                        <!-- <div class="another">Another Insurance</div> -->
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Company Cover yet to be implemented. -->
+                                                                <div *ngIf="tabCompany">
+                                                                    <div class="plan">
+                                                                        <div class="plan-title">Company Cover</div>
+                                                                        <div class="frm-item-wrap row">
+                                                                            <mat-form-field class="col-xs-12 col-sm-6 example-full-width">
+                                                                                <input matInput placeholder="Pick Company"
+                                                                                    aria-label="Companys"
+                                                                                    [matAutocomplete]="auto"
+                                                                                    [formControl]="ccPlanId">
+                                                                                <mat-autocomplete #auto="matAutocomplete"
+                                                                                    [displayWith]="displayFnc">
+                                                                                    <mat-option *ngFor="let cc of filteredccs | async"
+                                                                                        [value]="cc">
+                                                                                        {{cc?.name}}
+                                                                                    </mat-option>
+                                                                                </mat-autocomplete>
+                                                                            </mat-form-field>
+                                                                            <mat-form-field class="col-xs-12 col-sm-6">
+                                                                                <input matInput mat-error placeholder="Employee Id"
+                                                                                    [formControl]="employeeId">
+                                                                            </mat-form-field>
+                                                                        </div>
+                                                                        <!-- <div class="another">Another Company</div> -->
+                                                                    </div>
+                                                                </div>
+
+                                                                <div *ngIf="tabFamily">
+                                                                    <div class="plan">
+                                                                        <div class="plan-title">Family Cover</div>
+                                                                        <div class="frm-item-wrap">
+                                                                            <div class="row frm-item-wrap">
+                                                                                <mat-input-container class="col-xs-12 col-sm-6">
+                                                                                    <input matInput mat-error
+                                                                                        placeholder="Principal ID"
+                                                                                        [formControl]="familyPlanId">
+                                                                                </mat-input-container>
+                                                                                <mat-form-field class="col-xs-12 col-sm-6">
+                                                                                    <input matInput mat-error
+                                                                                        placeholder="Client ID"
+                                                                                        [formControl]="faFileNo">
+                                                                                </mat-form-field>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="set-default">
+                                                                    <mat-checkbox [formControl]="isDefault">Set as
+                                                                        default!
+                                                                    </mat-checkbox>
+                                                                </div>
+
+                                                                <div class="btn-box">
+                                                                    <button class="small-btn" (click)="next('wallet')"
+                                                                        *ngIf="tabWallet" [disabled]="!walletPlan.valid || loading"
+                                                                        mat-raised-button>
+                                                                        <span *ngIf="!loading">Next</span>
+                                                                        <span *ngIf="loading">Loading...</span>
+                                                                    </button>
+                                                                    <button class="small-btn" (click)="next('insurance')"
+                                                                        [disabled]="!hmoPlanId.valid && !hmoPlan.valid || loading"
+                                                                        *ngIf="tabInsurance" mat-raised-button>
+                                                                        <span *ngIf="!loading">Next</span>
+                                                                        <span *ngIf="loading">Loading...</span>
+                                                                    </button>
+                                                                    <button class="small-btn" (click)="next('company')"
+                                                                        *ngIf="tabCompany" [disabled]="(!ccPlanId.valid && !employeeId.valid) || loading"
+                                                                        mat-raised-button>
+                                                                        <span *ngIf="!loading">Next</span>
+                                                                        <span *ngIf="loading">Loading...</span>
+                                                                    </button>
+                                                                    <button class="small-btn" (click)="next('family')"
+                                                                        *ngIf="tabFamily" mat-raised-button [disabled]="(!familyPlanId.valid && !faPlan.valid && !faPlanPrice) || loading">
+                                                                        <span *ngIf="!loading">Next</span>
+                                                                        <span *ngIf="loading">Loading...</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="back-btn-box">
+                                                                    <span (click)="backBtn()" class="backBtn">
+                                                                        <i class="fa fa-arrow-circle-o-left"
+                                                                            aria-hidden="true"></i>Go Back</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </mat-tab>
+                                        </mat-tab-group>
+                                    </form>
+                                </div>
+                                <div class="example-full-width" id="example-full-width">
+                                    <button [disabled]="!patientEditForm.valid" (click)="updatePatient(patientEditForm.value, patientEditForm.valid)"
+                                        class="apmis-blue" mat-raised-button [innerHtml]="updatePatientBtnText"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="payPlan" class="modal-overlay">
+    <app-patient-payment-plan [selectedPatient]="selectedPatient" (closeModal)="close_onClick($event)" id="form-modal"
+        class="form-modal center-center"></app-patient-payment-plan>
+</div>
+<div *ngIf="newUpload" class="modal-overlay">
+    <app-doc-upload [selectedPatient]="selectedPatient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-doc-upload>
+</div>

@@ -1,0 +1,51 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Immunization Register Entry</legend>
+    <div class="modal_mini_title">Continental Hospital</div>
+  </div>
+
+  <div class="modal-content-overlay">
+    <form class="frm-down" [formGroup]="frm_UpdateHFM" novalidate>
+      <div class="container" style="padding-top:10px; padding-left:35px;">
+        <div class="row">
+          <div class="col-sm">
+            <div>
+              <mat-form-field>
+                <mat-select placeholder="Session Type">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Fixed</mat-option>
+                  <mat-option value="option3">Outreach</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            
+            <div>
+              <h3>OPV 0 (Birth)</h3>
+              <mat-checkbox>0 - 2 WEEKS</mat-checkbox>
+            </div>
+            <div>
+              <h3>Hep.B 0 (Birth)</h3>
+              <mat-checkbox>0 - 2 Weeks</mat-checkbox>
+            </div>
+            <div>
+              <h3>BCG</h3>
+              <mat-checkbox>0 - 11 Months</mat-checkbox>
+            </div>
+          </div>
+          <div class="col-sm">
+
+          </div>
+          <div class="col-sm">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 text-center">
+        <div style="padding: 20px 10px;">
+          <button mat-raised-button type="submit" class="mat-lg-btn">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

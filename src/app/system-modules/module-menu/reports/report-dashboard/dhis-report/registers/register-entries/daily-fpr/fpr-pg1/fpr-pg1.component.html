@@ -1,0 +1,315 @@
+<div class="pp-card shadow-grey">
+    <div class="card-title">
+        <div>HEALTH FACILITY FAMILY PLANNING DAILY REGISTER</div>
+        <!-- <div class="top-btns">
+            <div (click)="back_registers()" class="top-btn"><i class="fa fa-arrow-left"></i> Registers</div>
+        </div> -->
+    </div>
+    <div class="content-wrap">
+
+        <div class="tbl-resp-wrap">
+            <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+                <thead>
+                    <tr>
+                        <th colspan="61">
+                            <div class="th1-wrap">
+                                <div class="filters">
+                                    <div class="filter">
+                                        <input class="search" placeholder="search for patient...">
+                                    </div>
+                                </div>
+                                <div class="tp-rhs">
+                                    <div class="dr-wrap survery">
+                                        <app-date-range [dateRange]="dateRange" (dateRangeChange)="setReturnValue($event)"></app-date-range>
+                                        <span *ngIf="loadIndicatorVisible" class="fa fa-spinner fa-spin"></span>
+                                    </div>
+                                    <div (click)="newEntry()" class="th1-cta"><i class="fa fa-plus"></i> </div>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr class="th-r1 th-xxx">
+                        <th rowspan="4">S/N</th>
+                        <th rowspan="4">Date</th>
+                        <th rowspan="4">Name of Client</th>
+                        <th rowspan="4">CLient Number</th>
+                        <th rowspan="4">Address / Telephone Number</th>
+                        <th rowspan="4">Sex</th>
+                        <th rowspan="4">Age</th>
+                        <th rowspan="4">
+                            <div>Source</div>
+                            <div>State Where reffered from</div>
+                        </th>
+                        <th rowspan="4">Parity</th>
+                        <th rowspan="4">Counselled on FP?</th>
+                        <th colspan="4">Oral Pills</th>
+                        <th colspan="3">Injection</th>
+                        <th colspan="3">IUCD</th>
+                        <th colspan="4">Condoms</th>
+                        <th colspan="5">Implant</th>
+                        <th rowspan="4">
+                            <div class="vertical-txt">Sterilisation</div>
+                        </th>
+                        <th colspan="4">Natural Methods</th>
+                        <th colspan="6">No of Refferal</th>
+                        <th rowspan="4">FP clients accessed HCT Service (Tick)</th>
+                        <th colspan="20">HIV counseling and testing (at FP clinic)</th>
+                    </tr>
+                    <tr class="th-r2 th-xxx">
+                        <th rowspan="3">Name of Pill</th>
+                        <th rowspan="3">NA</th>
+                        <th rowspan="3">RV</th>
+                        <th rowspan="3">QTY</th>
+                        <th rowspan="3">Name of Injectable</th>
+                        <th rowspan="3">NA</th>
+                        <th rowspan="3">RV</th>
+                        <th colspan="2">IN</th>
+                        <th rowspan="3">Out</th>
+                        <th rowspan="3">Type of Condoms</th>
+                        <th rowspan="3">NA</th>
+                        <th rowspan="3">RV</th>
+                        <th rowspan="3">QTY</th>
+                        <th rowspan="3">Type of Implant</th>
+                        <th colspan="2">IN</th>
+                        <th rowspan="3">Out</th>
+                        <th rowspan="3">RV</th>
+                        <th colspan="2">Cycle Beads</th>
+                        <th colspan="2">Others</th>
+                        <th rowspan="3">OR</th>
+                        <th rowspan="3">IJ</th>
+                        <th rowspan="3">IP</th>
+                        <th rowspan="3">IUCD</th>
+                        <th rowspan="3">SR</th>
+                        <th rowspan="3">MR</th>
+                        <th colspan="10">Male</th>
+                        <th colspan="10">Female</th>
+                    </tr>
+                    <tr class="th-r3 th-xxx">
+                        <th rowspan="2">NA</th>
+                        <th rowspan="2">RV</th>
+                        <th rowspan="2">NA</th>
+                        <th rowspan="2">RV</th>
+                        <th rowspan="2">NA</th>
+                        <th rowspan="2">RV</th>
+                        <th rowspan="2">NA</th>
+                        <th rowspan="2">RV</th>
+                        <th colspan="5">HIV Counsel, Test & Result</th>
+                        <th colspan="5">HIV Test Result: Positive</th>
+                        <th colspan="5">HIV Counsel, Test & Result</th>
+                        <th colspan="5">HIV Test Result: Positive</th>
+
+                    </tr>
+                    <tr class="th-r4 th-xxx">
+                        <th>
+                            <div class="vertical-txt">0-14 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">15-19 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">20-25 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">26-49 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">50 years +</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">0-14 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">15-19 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">20-25 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">26-49 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">50 years +</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">0-14 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">15-19 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">20-25 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">26-49 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">50 years +</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">0-14 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">15-19 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">20-25 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">26-49 years</div>
+                        </th>
+                        <th>
+                            <div class="vertical-txt">50 years +</div>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>11th Oct 2018</td>
+                        <td>
+                            <div class="empWrap">
+                                <div class="list-img">
+                                    <img src="assets/images/users/default.png">
+                                </div>
+                                <div>Sam Dede</div>
+                            </div>
+                        </td>
+                        <td>RC/993/DC</td>
+                        <td>Alausa Ikelja 08142214995</td>
+                        <td>Male</td>
+                        <td>26 Years</td>
+                        <td>PNC</td>
+                        <td>2 </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td>Estrostep</td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td>2 Packs</td>
+                        <td>Makena</td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td>Male Condom</td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check red"></i> </td>
+                        <td>3</td>
+                        <td>Norplant</td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td>Tubal ligation</td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>5</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>35</td>
+                        <td>5</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>18</td>
+                        <td>12</td>
+                        <td>3</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>35</td>
+                        <td>5</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>18</td>
+                        <td>12</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>11th Oct 2018</td>
+                        <td>
+                            <div class="empWrap">
+                                <div class="list-img">
+                                    <img src="assets/images/users/default.png">
+                                </div>
+                                <div>Sam Dede</div>
+                            </div>
+                        </td>
+                        <td>RC/993/DC</td>
+                        <td>Alausa Ikelja 08142214995</td>
+                        <td>Male</td>
+                        <td>26 Years</td>
+                        <td>PNC</td>
+                        <td>2 </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td>Estrostep</td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td>2 Packs</td>
+                        <td>Makena</td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td>Male Condom</td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check red"></i> </td>
+                        <td>3</td>
+                        <td>Norplant</td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td>Tubal ligation</td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>5</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>35</td>
+                        <td>5</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>18</td>
+                        <td>12</td>
+                        <td>3</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>35</td>
+                        <td>5</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>Nil</td>
+                        <td>18</td>
+                        <td>12</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showNewEntry" class="modal-overlay">
+    <app-new-fpr-entry (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-fpr-entry>
+</div>

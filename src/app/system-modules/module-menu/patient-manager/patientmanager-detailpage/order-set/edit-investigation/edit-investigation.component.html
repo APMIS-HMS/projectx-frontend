@@ -1,0 +1,23 @@
+<div class="box animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Add Investigation</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <form [formGroup]="addInvestigationForm" novalidate>
+            <div class="frmArrWrap">
+                <div class="frm-x2">
+                    <div class="frm-item-wrap">
+                        <apmis-lookup formControlName="investigation" [url]="apmisLookupUrl" [query]="apmisLookupQuery" [isSocket]="true" [displayImage]="false" [multipleKeys]="false" [displayKey]="apmisLookupDisplayKey" placeholder="Investigation" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                    </div>
+                </div>
+            </div>
+
+            <div class="addDrugBtn" (click)="onClickAddInvestigation(addInvestigationForm.valid, addInvestigationForm.value);">
+                <i [hidden]="newTemplate" class="fa fa-plus" aria-hidden="true"></i>
+                <span>ADD INVESTIGATION</span>
+            </div>
+        </form>
+    </div>
+</div>

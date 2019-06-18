@@ -1,0 +1,91 @@
+@import "./../../initialize-store/initialize-store.component.scss";
+
+.div-space {
+    height: 40px;
+}
+
+.sel-txt {
+    text-align: center;
+    align-self: center;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.supplier-wrap {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.supplier-list-wrap {
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+
+.sup-name-wrap{
+    display: flex;
+    justify-content: space-between;
+    .cls-ico {
+        //margin-left: 100px;
+        cursor: pointer;
+    }
+}
+
+
+.in-tr {
+    grid-template-columns: 3fr 1fr 2fr repeat(2, 1fr) !important;
+}
+
+.item-action,
+.cls-ico {
+    i {
+        padding-right: 10px;
+        color: #BEBEBE;
+    }
+
+    i:hover {
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.623);
+    }
+}
+
+.tbl-btn-action {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+}
+
+.action-pad {
+    padding: 0px 5px;
+}
+
+.sel-sup {
+    display: flex;
+
+    .input-group-x2 {
+        padding-left: 10px;
+        width: 75% !important;
+    }
+}
+
+.multi-sup-list-wrap {
+    display: block;
+    margin-left: 20px;
+}
+
+.multi-sup-list {
+    overflow: auto;
+    display: inline-table;
+    position: relative;
+    border-right: 1px solid #C4C4C4;
+    width: 300px;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}

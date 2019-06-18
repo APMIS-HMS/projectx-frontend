@@ -1,0 +1,63 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Add Dependant</legend>
+    <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+  <div class="modal-baseWrap">
+
+    <div class="popupWrap">
+      <div class="pd-popupHeader">
+        <div *ngIf="dependantType=='Company'" class="headerContent">
+          <img *ngIf="selectedPersonPrincipal?.personDetails?.profileImageObject == undefined" src="assets/images/users/default.png">
+          <img *ngIf="selectedPersonPrincipal?.personDetails?.profileImageObject != undefined" [src]="facilityService.transform(selectedPersonPrincipal?.personDetails?.profileImageObject?.thumbnail)">
+          <div class="pd-principalName">{{selectedPersonPrincipal?.personDetails?.lastName}} {{selectedPersonPrincipal?.personDetails?.firstName}}</div>
+          <div class="pd-principalPhone">{{selectedPersonPrincipal?.personDetails?.phoneNumber}}</div>
+        </div>
+        <div *ngIf="dependantType=='Family'" class="headerContent">
+          <img *ngIf="selectedPersonPrincipal?.profileImageObject == undefined" src="assets/images/users/default.png">
+          <img *ngIf="selectedPersonPrincipal?.profileImageObject != undefined" [src]="facilityService.transform(selectedPersonPrincipal?.profileImageObject?.thumbnail)">
+          <div class="pd-principalName">{{selectedPersonPrincipal?.lastName}} {{selectedPersonPrincipal?.firstName}}</div>
+          <div class="pd-principalPhone">{{selectedPersonPrincipal?.phoneNumber}}</div>
+        </div>
+
+        <div *ngIf="showFrmDependant" class="frmDependantWrap animated fadeIn">
+          <form [formGroup]="frmAddDepd" novalidate>
+            <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+            <div class="frm-item-wrap">
+              <input type="text" formControlName="dependant" placeholder="Dependant" autocomplete="off">
+            </div>
+            <div class="frm-item-wrap">
+              <select formControlName="relationship">
+                <option  value="" disabled selected>Relationship</option>
+                <option *ngFor="let relationship of relationships" [value]="relationship._id">{{relationship.name}}</option>
+              </select>
+            </div>
+
+            <div (click)="newDepd(frmAddDepd.valid, frmAddDepd.value)" class="cta-1">
+              ADD DEPENDANT
+            </div>
+
+          </form>
+        </div>
+
+        <div class="ctas">
+          <div (click)="frmDependantToggle()" class="addDependant"><i class="fa fa-plus" aria-hidden="true"></i><span>Add Dependant</span></div>
+          <div class="rmvEmp"><i class="fa fa-trash" aria-hidden="true"></i><span>Remove</span></div>
+        </div>
+      </div>
+
+      <div class="pd-popupDependants">
+        <div class="popTitle">Dependants</div>
+        <div *ngFor="let dependant of dependants" class="pd-popupDependant">
+          <img class="pd-dependantImg" *ngIf="dependant?.personDetails?.profileImageObject == undefined" src="assets/images/users/default.png">
+          <img class="pd-dependantImg" *ngIf="dependant?.personDetails?.profileImageObject != undefined" [src]="facilityService.transform(dependant?.personDetails?.profileImageObject?.thumbnail)">
+          <div class="pd-dependantName">{{dependant?.personDetails?.lastName}} {{dependant?.personDetails?.firstName}}</div>
+          <div class="pd-dependantPhone">{{dependant?.personDetails?.phoneNumber}}</div>
+          <div (click)="removeDependant(dependant)" class="rmvEmp"><i class="fa fa-trash" aria-hidden="true"></i><span>Remove</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

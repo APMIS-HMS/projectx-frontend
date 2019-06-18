@@ -1,0 +1,13 @@
+<div class="inner-wrap-b body-wrap">
+  <div class="facility-title">{{pageInView}}</div>
+  
+  <div class="rpt-wrap">
+    <ul class="top-links">
+      <i class="fa fa-home fa-2x blue-nav" (click)="back_dashboard()" aria-hidden="true"></i>
+      <li (click)="route('clinic-attendance')" [class.top-links-active]="clinicAttendance">Clinic Attendace Report</li>
+      <li (click)="route('diagnosis')" [class.top-links-active]="diagnosis">Diagnosis</li>
+    </ul>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,157 @@
+// .supplierBase {
+//     display: grid;
+//     grid-template-columns: 25% 75%;
+//     column-rule: 1px solid #c4c4c4;
+//     align-items: left;
+//     grid-auto-rows: auto;
+//     grid-auto-flow: column;
+// }
+
+
+// @import "../../product-entry/invoice-entry/view-invoice/view-invoice.component.scss";
+// @import "../../product-entry/invoice-entry/invoice-entry.component.scss";
+// @import "../../product-entry/purchase-list/new-purchase-list/new-purchase-list.component.scss";
+
+.contentLeftGrid {
+    padding: 30px;
+}
+
+.src-content {
+    // position: absolute;
+    z-index: 10;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: 0 8px 16px var(--shadow-color);
+
+    ul {
+        width: 100%;
+        min-height: 100px;
+        overflow: auto;
+
+        span {
+            color: #777777;
+        }
+
+        .ul-action {
+            background: #dddddd;
+            cursor: pointer;
+            height: 15px;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+
+            i,
+            span {
+                color: #0288d1;
+            }
+        }
+
+        .selected-li {
+            background: #337ab7;
+
+            i,
+            span,
+            h3 {
+                color: white;
+            }
+        }
+    }
+
+    .src-item {
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:hover {
+            background: #f8f8f8;
+        }
+
+        .src-input-wrap {
+            position: relative;
+            width: 100%;
+        }
+
+        .src-ico {
+            position: absolute;
+            left: 16px;
+            top: 23px;
+            margin-right: 8px;
+        }
+
+        .src-input {
+            font-size: 12px;
+            color: #777777;
+            border: 1px solid #c4c4c4;
+            padding: 7px;
+            box-sizing: border-box;
+            border-radius: 3px;
+            box-shadow: -1px 0px 5px 0px #c4c4c4;
+            width: 100% !important;
+        }
+    }
+}
+
+// .x2 {
+//     margin-top: 20px;
+//     align-content: center !important;
+//     justify-content: space-between;
+// }
+
+// .lst-inner-wrap {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+// }
+
+// .con-inner {
+//     display: flex;
+
+//     .fa-icon {
+//         margin-right: 20px;
+//         display: -webkit-box;
+//         display: -ms-flexbox;
+//         align-content: center;
+//     }
+// }
+
+// .tbl-header-lhs {
+//     h2 {
+//         color: #337ab7;
+//     }
+// }
+
+// .supp-ft-btn {
+//     width: fit-content;
+//     padding: 8px;
+//     font-size: 1.2rem;
+//     text-align: center;
+//     color: #0288d1;
+//     -ms-flex-pack: distribute;
+//     justify-content: space-around;
+//     border: 1px solid #878484;
+//     cursor: pointer;
+//     border-radius: 4px;
+//     align-self: center;
+//     margin-right: 5px;
+//     margin-left: 5px;
+// }
+
+// .pur-wrap {
+//     display: -webkit-box;
+//     display: -ms-flexbox;
+//     display: flex;
+//     align-items: center;
+//     margin-top: 25px;
+// }
+
+// .pur-con-wrap {
+//     padding: 0px 70px 0px 0px;
+// }
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}

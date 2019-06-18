@@ -1,0 +1,48 @@
+<div class="animated pulse" (click)="hideSuggestions()">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Add Tags</legend>
+    <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+  <div class="modal-baseWrap">
+    <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+    <!-- <div>
+      <div>
+        <mat-input-container>
+          <input matInput placeholder="Severity">
+        </mat-input-container>
+      </div>
+      <div>
+        <mat-input-container>
+          <textarea matInput placeholder="Note"></textarea>
+        </mat-input-container>
+      </div>
+      <button>
+        SAVE
+        <span *ngIf="isSaving" class="fa fa-spinner fa-spin"></span>
+      </button>
+    </div> -->
+    <div class="row">
+      <div class="col-xs-6">
+        <mat-input-container class="example-full-width">
+          <input matInput [formControl]="tagName" placeholder="Tag Name" autocomplete="off">
+        </mat-input-container>
+        <ul class="suggestions nice-scroll" *ngIf="showSearchResult">
+          <li *ngIf="dictionaries?.length === 0">No data available</li>
+          <li class="suggestion" *ngFor="let dic of dictionaries" (click)="fillingWithSearchInfo(dic)">
+            <div class="listing-label">{{dic.name}}</div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-xs-2">
+        <mat-checkbox [formControl]="identity" (click)="changeButton()">Identity!</mat-checkbox>
+      </div>
+      <div claass="col-xs-4">
+        <button (click)="newTag(tagName.valid)" *ngIf="!changetagButton" class="apmis-blue mat-raised-button" [disabled]="!tagName.valid || tagLoader"
+          mat-raised-button>
+          {{btnLabel}}
+        </button>
+      </div>
+    </div>
+  </div>

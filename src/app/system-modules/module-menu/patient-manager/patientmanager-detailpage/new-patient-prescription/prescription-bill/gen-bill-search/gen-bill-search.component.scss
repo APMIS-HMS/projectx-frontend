@@ -1,0 +1,8 @@
+@import "./../../prescription-history/prescription-history.component.scss";
+@import "./../../prescribe-drug/prescribe-drug.component.scss";
+@import "./../prescription-bill.component.scss";
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}

@@ -1,0 +1,173 @@
+<div class="modal-baseWrap animated pulse">
+
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <div class="facility-title">Make Payment</div>
+    <div class="total">&#x20a6;{{subCharge_cost| number}}</div>
+    <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+    <div *ngIf="success" class="successAlert animated shake" [hidden]="mainErr">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        <span>{{successMsg}}</span>
+    </div>
+    <!-- <div class="pay-wrap">
+      <button mat-raised-btn class="btn btn-primary" [disabled]="isProcessing" (click)="onPartPay()">Part Pay</button>
+    <div *ngIf="isPartPay== true">
+      <div class="frm-item-wrap">
+        <mat-input-container>
+          <input matInput mat-error currencyMask [options]="{ prefix: '&#x20a6; '}" [formControl]="amount" placeholder="Enter Amount">
+        </mat-input-container>
+      </div>
+
+      <div class="frm-item-wrap">
+        <mat-input-container>
+          <input matInput mat-error currencyMask [options]="{ prefix: '&#x20a6; '}" [formControl]="balance" placeholder="Amount Balance"
+            readonly>
+        </mat-input-container>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button mat-raised-btn class="btn btn-primary" [disabled]="isProcessing" (click)="makePayment()">
+        <span>
+          <div [hidden]="isProcessing">
+            Make Payment
+          </div>
+          <div [hidden]="!isProcessing">
+            Processing...
+            <i class='fa fa-spinner fa-spin'></i>
+          </div>
+        </span>
+      </button>
+
+      <button class="btn btn-red" (click)="close_onClick()">Cancel</button>
+    </div>
+  </div> -->
+    <div>
+        <div class="doc-mainWrap">
+            <!-- <div class="tab-wrap">
+                <div (click)="tabWallet_click()" [class.tab-item-active]="tabWallet" class="tab-item">Out of Pocket</div>
+                <div (click)="tabInsurance_click()" [class.tab-item-active]="tabInsurance" class="tab-item">Insurance</div> -->
+            <!-- <div (click)="tabCompany_click()" [class.tab-item-active]="tabCompany" class="tab-item">Company Cover</div>
+                <div (click)="tabFamily_click()" [class.tab-item-active]="tabFamily" class="tab-item">Family Cover</div>
+            </div> -->
+
+            <div class="plan">
+                <div class="plan-title">Out of Pocket</div>
+                <div class="frm-item-wrap">
+                    <label class="control control--checkbox">Exact Charges
+                        <input type="checkbox" [formControl]="selectOutOfPocket" />
+                        <div class="control__indicator"></div>
+                    </label>
+                    <!-- <label class="control controlcheckbox" [hidden]="isExact">Waive
+                        <input type="checkbox" (change)="onWaverCharges($event)" [formControl]="selectWaved"/>
+                        <div class="control__indicator"></div>
+                    </label> -->
+                    <div class="frm-item-wrap" [hidden]="!checkAllWaive.value">
+                        <!--  <input type="text" [formControl]="wavedDescription" placeholder="Description"> -->
+                        <!-- <div class="wavedDescription" [hidden]="isExact">
+                            <textarea wrap="hard"> type="text" [formControl]="wavedDescription"  placeholder="Description"<div class="description"  </textarea>
+                            </div> -->
+                        <textarea class="desc-ta" name="" id="" cols="30" rows="10" [formControl]="wavedDescription"
+                            placeholder="Description"></textarea>
+                    </div>
+                    <div *ngIf="!selectOutOfPocket.value">
+                        <!-- <div class="frm-item-wrap">
+                            <mat-input-container>
+                                <input matInput mat-error currencyMask [options]="{ prefix: '&#x20a6; '}" [formControl]="amount" placeholder="Enter Amount">
+                            </mat-input-container>
+                        </div>
+                        <div class="frm-item-wrap">
+                            <mat-input-container>
+                                <input matInput mat-error currencyMask [options]="{ prefix: '&#x20a6; '}" [formControl]="balance" placeholder="Balance" readonly>
+                            </mat-input-container>
+                        </div> -->
+
+                        <table class="tblBg" [formGroup]="productTableForm">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Quantity</th>
+                                    <th>Item</th>
+                                    <th>Balance</th>
+                                    <th>Amount</th>
+                                    <th><input type="checkbox" [formControl]="checkAllWaive" />Waive</th>
+                                </tr>
+                            </thead>
+                            <tbody formArrayName="productTableArray">
+                                <tr formGroupName="{{i}}" *ngFor="let schedule of productTableForm.controls['productTableArray'].controls; let i = index;">
+                                    <td>{{schedule?.value?.date|date:'medium'}}</td>
+                                    <td>{{schedule?.value?.qty}}</td>
+                                    <td>{{schedule?.value?.facilityServiceObject?.service}}</td>
+                                    <td>{{schedule.value.totalPrice - schedule.value.amountPaid| number : '1.2-2'}}</td>
+                                    <td class="data"><input type="number" [attr.readonly]="schedule?.value?.isSubCharge ? 'true' : null"
+                                            min="0" formControlName="amountPaid" (change)="onChangeAmount(schedule)" />
+                                    </td>
+                                    <td class="data">
+                                        <input type="checkbox" formControlName="isWaiver" (change)="onChangeWaiver(schedule)"
+                                            *ngIf="!schedule?.value?.isSubCharge" />
+                                        <div *ngIf="schedule.value.isWaiver && !checkAllWaive.value">
+                                            <br>
+                                            <input type="text" placeholder="Reason for item waive" formControlName="waiverComment" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="btn-wrap">
+                <button mat-raised-btn class="btn btn-primary" *ngIf="tabWallet" [disabled]="isProcessing" (click)="onOutOfPocket()">
+                    <span class="makepaymentbtn">
+                        <div [hidden]="isProcessing">
+                            Complete
+                        </div>
+                        <div [hidden]="!isProcessing">
+                            Processing...
+                            <i class='fa fa-spinner fa-spin'></i>
+                        </div>
+                    </span>
+                </button>
+
+                <button mat-raised-btn class="btn btn-primary" *ngIf="tabInsurance" [hidden]="!insurancePlan.valid"
+                    [disabled]="isProcessing" (click)="onInsuranceCover()">
+                    <span>
+                        <div [hidden]="isProcessing">
+                            Complete
+                        </div>
+                        <div [hidden]="!isProcessing">
+                            Processing...
+                            <i class='fa fa-spinner fa-spin'></i>
+                        </div>
+                    </span>
+                </button>
+
+                <button mat-raised-btn class="btn btn-primary" *ngIf="tabCompany" [hidden]="!companyPlan.valid"
+                    [disabled]="isProcessing" (click)="onCompanyCover()">
+                    <span>
+                        <div [hidden]="isProcessing">
+                            Complete
+                        </div>
+                        <div [hidden]="!isProcessing">
+                            Processing...
+                            <i class='fa fa-spinner fa-spin'></i>
+                        </div>
+                    </span>
+                </button>
+
+                <button mat-raised-btn class="btn btn-primary" *ngIf="tabFamily" [disabled]="isProcessing" (click)="onFamilyCover()">
+                    <span>
+                        <div [hidden]="isProcessing">
+                            Complete
+                        </div>
+                        <div [hidden]="!isProcessing">
+                            Processing...
+                            <i class='fa fa-spinner fa-spin'></i>
+                        </div>
+                    </span>
+                </button>
+                <button class="btn btn-red" (click)="close_onClick()">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</div>

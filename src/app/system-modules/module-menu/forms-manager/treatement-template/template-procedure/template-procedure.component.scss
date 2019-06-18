@@ -1,0 +1,98 @@
+@import '../template-lab/template-lab.component.scss';
+.text-center {
+    text-align: center;
+}
+
+.cu-search-box {
+    position: relative;
+    min-width: 100px;
+    width: auto;
+    // margin-top: -20px;
+    .mat-form-field {
+        width: 100%;
+    }
+    .cu-search {
+        //background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+        //background-position: 10px 12px;
+        /* Position the search icon */
+        //background-repeat: no-repeat;
+        /* Do not repeat the icon image */
+        width: 100%;
+        /* Full-width */
+        /* Increase font-size */
+        //padding: 12px 11px;
+        /* Add some padding */
+        //border: 1px solid #ddd;
+        /* Add a grey border */
+        //margin-bottom: 12px;
+        /* Add some space below the input */
+    }
+    .cu-popup-wrapper {
+        position: absolute;
+        max-height: 736px;
+        width: 100%;
+        margin-top: 20px;
+        height: auto;
+        z-index: 1501;
+        top: 26px;
+        border: 1px solid #ddd;
+        background: #fff;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        color: #333;
+        font-weight: normal;
+        font-size: 1.4rem;
+        font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Verdana, sans-serif;
+        line-height: 1.35715;
+        .cu-header {
+            padding: 10px 20px;
+        }
+        .cu-dropdown {
+            /* Remove default list styling */
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 240px;
+            overflow-y: auto;
+            li {
+                a {
+                    padding: 8px 16px;
+                    /* Add some padding */
+                    text-decoration: none;
+                    /* Remove default text underline */
+                    font-size: 1.8rem;
+                    /* Increase the font-size */
+                    color: #333;
+                    /* Add a black text color */
+                    display: block;
+                    /* Make it into a block element to fill the whole list */
+                    overflow: hidden;
+                    -ms-text-overflow: ellipsis;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    font-size: 1.2rem;
+                    &.header {
+                        background-color: #e2e2e2;
+                        /* Add a darker background color for headers */
+                        cursor: default;
+                        /* Change cursor style */
+                    }
+                    &:hover:not(.header) {
+                        background-color: #eee;
+                        /* Add a hover effect to all links, except for headers */
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .cu-footer {
+            padding: 20px;
+            overflow: visible;
+            text-align: center;
+            button {
+                padding: 7px 18px 8px;
+            }
+        }
+    }
+}

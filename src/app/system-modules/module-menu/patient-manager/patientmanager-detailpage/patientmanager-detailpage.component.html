@@ -1,0 +1,253 @@
+<div class="patientPage-mainWrap">
+    <!-- <div class="page-title">Patient Page</div> -->
+    <div class="patientPage-sideTab">
+        <div class="sideTab-header">
+            <div class="header-secA">
+                <div class="patient-img">
+                    <div class="patient-img-wrap">
+                        <div *ngIf="patient?.personDetails?.profileImageObject === undefined || patient === null"><img
+                                src="assets/images/users/default.png"></div>
+                        <img *ngIf="patient?.personDetails?.profileImageObject !== undefined && patient !== null" class="shadow"
+                            [src]="patient?.personDetails?.profileImageObject?.thumbnail">
+                        <div (click)="show_changeUserImg()" class="pp-overlay">Change User Image</div>
+                    </div>
+                </div>
+                <div class="headerDetail-wrap">
+                    <div class="modal_title">{{patient?.personDetails?.title}} {{patient?.personDetails?.lastName}}
+                        {{patient?.personDetails?.firstName}}
+                    </div>
+                    <div class="headDetail-group">
+                        <div class="patient-apmisNo">
+                            <span>({{patient?.personDetails?.apmisId}})</span>
+                        </div>
+                    </div>
+                    <div class="head-minis">
+                        <div class="headDetail-group">
+                            <div class="patient-gender">{{patient?.personDetails?.gender}}</div>
+                            <div class="patient-email">
+                                <i class="fa fa-envelope"></i>
+                                <span *ngIf="patient?.personDetails?.email !== undefined">
+                                    {{patient?.personDetails?.email}}</span>
+                                <span *ngIf="patient?.personDetails?.email === undefined"> N/A</span>
+                            </div>
+                        </div>
+                        <div class="headDetail-group">
+                            <div class="patient-dob">{{patient?.personDetails?.dateOfBirth | date}}</div>
+                            <div class="patient-phone">
+                                <i class="fa fa-phone"></i>
+                                <span *ngIf="patient?.personDetails?.primaryContactPhoneNo !== undefined">
+                                    {{patient?.personDetails?.primaryContactPhoneNo}}</span>
+                                <span *ngIf="patient?.personDetails?.primaryContactPhoneNo === undefined"> N/A</span>
+                            </div>
+                        </div>
+                        <div class="headDetail-group">
+                            <div class="patient-dob">{{patient?.personDetails?.bloodGroup}}</div>
+                            <div class="patient-dob">{{patient?.personDetails?.genotype}}</div>
+                        </div>
+                    </div>
+                    <section class="accBal-wrap">
+                        <span class="accBal-label">Account Balances</span>
+                        <span class="{{ patient?.personDetails?.wallet?.balance > 0 ? 'text-blue' : 'accBal-val'}}">
+                            &#8358; {{patient?.personDetails?.wallet?.balance|numberThr}}
+                        </span>
+                    </section>
+                </div>
+            </div>
+
+            <ul class="topmenuwrap">
+                <li *ngIf="patient?.isFromWard" (click)="backToWard()">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    <span> Ward</span>
+                </li>
+                <li *ngIf="checkedIn">
+                    <a href="#/dashboard/clinic/check-in">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        <span> CheckIn Patients</span>
+                    </a>
+                </li>
+                <li (click)="checkoutPatient_show()" *ngIf="checkedIn">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    <span> Checkout</span>
+                </li>
+                <li (click)="setAppointment()">
+                    <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                    <span> Set Appointment</span>
+                </li>
+                <li (click)="addMergePatient_show()">
+                    <i class="fa fa-layer-group" aria-hidden="true"></i>
+                    <span> Merge Patient Data</span>
+                </li>
+                <li *ngIf="!menuResp" class="patientMenuResponsive" (click)="patientMenu()">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <span> Show Patient Menu</span>
+                </li>
+                <li *ngIf="menuResp" class="patientMenuResponsive" (click)="patientMenu()">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <span> Hide Patient Menu</span>
+                </li>
+            </ul>
+        </div>
+        <div class="sideTab-nav">
+            <div class="menu-sect">
+                <div (click)="menuSummary_click()" [class.active-menuItem]="menuSummary" class="menu-item">Patient
+                    Summary
+                </div>
+                <div (click)="menuDocs_click()" [class.active-menuItem]="menuDocs" class="menu-item">Documentation</div>
+                <div (click)="menuUploads_click()" [class.active-menuItem]="menuUploads" class="menu-item">Document
+                    Uploads
+                </div>
+                <div (click)="menuVitals_click()" [class.active-menuItem]="menuVitals" class="menu-item">Vitals</div>
+                <!-- <div (click)="menuTags_click()" [class.active-menuItem]="menuTags" class="menu-item">Tags</div> -->
+            </div>
+            <div class="menu-sect">
+                <div (click)="menuPrescriptions_click()" [class.active-menuItem]="menuPrescriptions" class="menu-item">Prescription
+                </div>
+                <div (click)="menuLab_click()" [class.active-menuItem]="menuLab" class="menu-item">Laboratory</div>
+                <div (click)="menuImaging_click()" [class.active-menuItem]="menuImaging" class="menu-item">Imaging</div>
+            </div>
+            <div class="menu-sect">
+                <div (click)="menuTreatmentPlan_click()" [class.active-menuItem]="menuTreatmentPlan" class="menu-item">Treatment
+                    Sheet
+                </div>
+                <div (click)="menuFluid_click()" [class.active-menuItem]="menuFluid" class="menu-item">Fluid Management</div>
+                <div (click)="menuImmunization_click()" [class.active-menuItem]="menuImmunization" class="menu-item">Immunization</div>
+            </div>
+            <div class="menu-sect">
+                <div (click)="menuBilling_click()" [class.active-menuItem]="menuBilling" class="menu-item">Billing</div>
+                <div (click)="menuPayment_click()" [class.active-menuItem]="menuPayment" class="menu-item">Payment</div>
+                <div (click)="menuTimeline_click()" [class.active-menuItem]="menuTimeline" class="menu-item">Timeline</div>
+            </div>
+            <div class="menu-sect">
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                aria-controls="collapseOne">
+                                <h4 class="btn btn-link">Other</h4>
+                            </h2>
+                        </div>
+
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <div (click)="menuPregnant_click()" [class.active-menuItem]="menuPregnant" class="menu-item">Pregnancy
+                                    Manager
+                                </div>
+                                <div (click)="menuRegisters_click()" [class.active-menuItem]="menuRegisters" class="menu-item">Registers</div>
+                                <div (click)="menuBCRAssessment_click()" [class.active-menuItem]="menuBCRAssessment"
+                                    class="menu-item">Breast
+                                    Cancer Risk Assessment </div>
+                                <div (click)="menuPrescriptions2_click()" [class.active-menuItem]="menuPrescriptions"
+                                    class="menu-item">Old
+                                    Prescribe Drug</div>
+                                <div (click)="menuExternalPrescriptions_click()" [class.active-menuItem]="menuPrescriptions"
+                                    class="menu-item">Prescription
+                                    List
+                                </div>
+                                <div (click)="menuMedicationHistory_click()" [class.active-menuItem]="menuMedicationHistory"
+                                    class="menu-item">Medication
+                                    History
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="patientPage-contentArea">
+        <div *ngIf="menuResp" class="sideTab-nav-resp">
+            <div class="menu-sect">
+                <div (click)="menuSummary_click()" [class.active-menuItem]="menuSummary" class="menu-item">Patient
+                    Summary
+                </div>
+                <div (click)="menuTimeline_click()" [class.active-menuItem]="menuTimeline" class="menu-item">Timeline</div>
+                <div (click)="menuPayment_click()" [class.active-menuItem]="menuPayment" class="menu-item">Payment</div>
+                <div (click)="menuBilling_click()" [class.active-menuItem]="menuBilling" class="menu-item">Billing</div>
+                <!-- <div (click)="menuTags_click()" [class.active-menuItem]="menuTags" class="menu-item">Tagss</div> -->
+            </div>
+            <div class="menu-sect">
+                <div (click)="menuDocs_click()" [class.active-menuItem]="menuDocs" class="menu-item">Documentation</div>
+                <div (click)="menuPregnant_click()" [class.active-menuItem]="menuPregnant" class="menu-item">Pregnancy
+                    Manager
+                </div>
+                <div (click)="menuTreatmentPlan_click()" [class.active-menuItem]="menuTreatmentPlan" class="menu-item">Treatment
+                    Sheet
+                </div>
+                <div (click)="menuFluid_click()" [class.active-menuItem]="menuFluid" class="menu-item">Fluid</div>
+                <div (click)="menuRegisters_click()" [class.active-menuItem]="menuRegisters" class="menu-item">Registers</div>
+                <div (click)="menuVitals_click()" [class.active-menuItem]="menuVitals" class="menu-item">Vitals</div>
+                <div (click)="menuUploads_click()" [class.active-menuItem]="menuUploads" class="menu-item">Document
+                    Uploads
+                </div>
+            </div>
+            <div class="menu-sect">
+                <div (click)="menuLab_click()" [class.active-menuItem]="menuLab" class="menu-item">Laboratory</div>
+                <div (click)="menuImaging_click()" [class.active-menuItem]="menuImaging" class="menu-item">Imaging</div>
+                <div (click)="menuImmunization_click()" [class.active-menuItem]="menuImmunization" class="menu-item">Immunization</div>
+                <div (click)="menuBCRAssessment_click()" [class.active-menuItem]="menuBCRAssessment" class="menu-item">Breast
+                    Cancer Risk Assessment </div>
+            </div>
+            <div class="menu-sect">
+                <div (click)="menuPrescriptions_click()" [class.active-menuItem]="menuPrescriptions" class="menu-item">Prescribe
+                    Drug
+                </div>
+                <div (click)="menuPrescriptions2_click()" [class.active-menuItem]="menuPrescriptions" class="menu-item">
+                    Old Prescribe
+                    Drug
+                </div>
+                <div (click)="menuExternalPrescriptions_click()" [class.active-menuItem]="menuPrescriptions" class="menu-item">Prescription
+                    List
+                </div>
+                <div (click)="menuMedicationHistory_click()" [class.active-menuItem]="menuMedicationHistory" class="menu-item">Medication
+                    History
+                </div>
+            </div>
+        </div>
+
+        <app-patient-summary [patient]="patient" *ngIf="menuSummary && patient !== undefined"></app-patient-summary>
+        <app-documentation [patient]=patient *ngIf="menuDocs"></app-documentation>
+        <app-pregnancy-manager *ngIf="menuPregnant"></app-pregnancy-manager>
+        <app-timeline [patient]="patient" *ngIf="menuTimeline"></app-timeline>
+        <app-patient-landing-billing [selectedPatient]="patient" *ngIf="menuBilling && patient !== undefined"></app-patient-landing-billing>
+        <app-fluid *ngIf="menuFluid"></app-fluid>
+        <app-patient-registers *ngIf="menuRegisters"></app-patient-registers>
+        <app-patient-vitals [patient]="patient" *ngIf="menuVitals"></app-patient-vitals>
+        <app-doc-uploads [patient]=patient *ngIf="menuUploads"></app-doc-uploads>
+        <app-new-patient-prescription [selectedAppointment]="selectedAppointment" [patientDetails]="patient" *ngIf="menuPrescription"></app-new-patient-prescription>
+        <app-patient-prescription [selectedAppointment]="selectedAppointment" [patientDetails]="patient" *ngIf="menuPrescription2"></app-patient-prescription>
+        <app-medication-history *ngIf="menuMedicationHistory"></app-medication-history>
+        <app-patient-immunization [patient]="patient" *ngIf="menuImmunization"></app-patient-immunization>
+        <app-external-prescription [patientDetails]="patient" *ngIf="menuExternalPrescription"></app-external-prescription>
+        <app-lab-requests [appointment]="selectedAppointment" [isLaboratory]="false" [patientId]="patient" *ngIf="menuLab"></app-lab-requests>
+        <app-rad-requests [appointment]="selectedAppointment" [isLaboratory]="false" *ngIf="menuImaging" [patientId]="patient"></app-rad-requests>
+        <app-payment [patient]="patient" *ngIf="menuPayment"></app-payment>
+        <app-patient-tags *ngIf="menuTags"></app-patient-tags>
+        <app-treatement-plan [patient]="patient" *ngIf="menuTreatmentPlan"></app-treatement-plan>
+        <app-bcr-assessment *ngIf="menuBCRAssessment"></app-bcr-assessment>
+    </div>
+
+
+    <div *ngIf="mergePatient" class="modal-overlay">
+        <app-unknown-patient-merge [selectedPatient]="patient" (personValueChanged)="onPersonValueUpdated($event)"
+            (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-unknown-patient-merge>
+    </div>
+    <div *ngIf="addVitalsPop" class="modal-overlay">
+        <app-add-vitals [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-vitals>
+    </div>
+    <div *ngIf="addTagsPop" class="modal-overlay">
+        <app-add-tags (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-tags>
+    </div>
+    <div *ngIf="checkoutPatient" class="modal-overlay">
+        <app-checkout-patient [patientDetails]="patientDetails" [selectedAppointment]="selectedAppointment"
+            (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-checkout-patient>
+    </div>
+    <div *ngIf="changeUserImg" class="modal-overlay">
+        <app-image-update [selectedPerson]="patient.personDetails" (closeModal)="close_onClick($event)" id="form-modal"
+            class="form-modal center-center"></app-image-update>
+    </div>
+</div>
+<div *ngIf="authorizationNotApproved && USE_DOC_AUTHORIZATION" class="con-pass-wrap">
+    <app-pass-continue (closeModal)="close_authoricationClick($event)" [facilityId]="selectedFacility._id" [employeeId]="loginEmployee._id"
+        [headerText]="headerText" [authorizationType]="authorizationType" [patientId]="patient._id"></app-pass-continue>
+</div>

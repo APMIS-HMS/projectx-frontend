@@ -1,0 +1,26 @@
+<!-- <div class="doc-mainWrap">
+  <app-cover-bill></app-cover-bill>
+</div>
+<div class="pg-subtitle">PAYMENT</div> -->
+<div class="doc-mainWrap">
+  <div class="tab-wrap">
+    <div (click)="tabInsurance_click()" [class.tab-item-active]="tabInsurance" class="tab-item">Insurance</div>
+    <div (click)="tabCompany_click()" [class.tab-item-active]="tabCompany" class="tab-item">Company Cover</div>
+    <div (click)="tabFamily_click()" [class.tab-item-active]="tabFamily" class="tab-item">Family Cover</div>
+  </div>
+
+  <div class="tab-content">
+    <div *ngIf="tabInsurance">
+      <app-cover-bill (toList)="toggler()" *ngIf="hmo_bill"></app-cover-bill>
+      <app-cover-list (toBill)="toggler()" *ngIf="hmo_list"></app-cover-list>
+    </div>
+    <div *ngIf="tabCompany">
+      <app-company-bill (toList)="toggler2()" *ngIf="company_bill"></app-company-bill>
+      <app-company-list (toBill)="toggler2()" *ngIf="company_list"></app-company-list>
+    </div>
+    <div *ngIf="tabFamily">
+      <app-family-bill (toList)="toggler3()" *ngIf="family_bill"></app-family-bill>
+      <app-family-list (toBill)="toggler3()" *ngIf="family_list"></app-family-list>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<!--<div class="filter-wrap">
+    <div class="filter-item">
+        <mat-form-field>
+            <mat-select class="example-full-width" placeholder="Choose">
+                <mat-option></mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filter-item">
+        <mat-input-container class="example-full-width">
+            <input matInput mat-error placeholder="search">
+        </mat-input-container>
+    </div>
+</div>
+
+<div class="product-parentWrap">
+    <div class="prod-row prodParent-header">
+        <div class="prod-rowItem item1">Transfer To</div>
+        <div class="prod-rowItem item4">Value (&#8358;)</div>
+        <div class="prod-rowItem item2">Date</div>
+        <div class="prod-rowItem item3">Transfer By</div>
+    </div>
+
+    <div class="prodParent-content" *ngIf="transferHistories.length > 0">
+        <div class="prodWrap" *ngFor="let producthistory of transferHistories">
+            <div class="prod-row">
+                <div (click)="onShowBatch(producthistory)" class="prod-rowItem item1">{{producthistory.destinationStoreObject?.name}}</div>
+                <div (click)="onShowBatch(producthistory)" class="prod-rowItem item4">{{producthistory.totalCostPrice|number:'1.2-2'}}</div>
+                <div (click)="onShowBatch(producthistory)" class="prod-rowItem item2">{{producthistory.createdAt|date:'short'}}</div>
+                <div (click)="onShowBatch(producthistory)" class="prod-rowItem item3">{{producthistory.transferByObject?.firstName}} {{producthistory.transferByObject?.lastName}}</div>
+            </div>
+            <div *ngIf="producthistory.isOpen===true && (selectedInventoryTransfer._id === producthistory._id)" class="prodBatch-wrap animated flipInX">
+                <div class="prodBatch-row batchHeader">
+                    <div class="prodBatch-item batchItem1">Product</div>
+                    <div class="prodBatch-item batchItem5">Batch No</div>
+                    <div class="prodBatch-item batchItem2">Value</div>
+                    <div class="prodBatch-item batchItem3">Transfer Qty</div>
+                    <div class="prodBatch-item batchItem4">Status</div>
+                </div>
+                <div class="prodBatch-row batchContent" *ngFor="let transaction of producthistory.inventoryTransferTransactions">
+                    <div class="prodBatch-item batchItem1">
+                        <mat-checkbox [checked]="false">{{transaction?.productObject?.name}}</mat-checkbox>
+                    </div>
+                    <div class="prodBatch-item batchItem5">{{transaction?.transactionObject?.batchNumber}}</div>
+                    <div class="prodBatch-item batchItem2">{{transaction.lineCostPrice|number:'1.2-2'}}</div>
+                    <div class="prodBatch-item batchItem3">{{transaction.quantity}}</div>
+                    <div class="prodBatch-item batchItem4">
+                        <div>{{transaction?.transferStatusObject?.name}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-xs-3 table-head">Transfer To</div>
+            <div class="col-xs-2 table-head">Value (&#8358;)</div>
+            <div class="table-head col-xs-3">Date</div>
+            <div class="table-head col-xs-3">Transfer By</div>
+            <div class="table-head col-xs-1">
+                <i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i>
+            </div>
+        </div>
+        <div class="row" *ngIf="searchOpen">
+            <div class="col-md-5">
+                <input [formControl]="searchControl" class="table-header-input" type="text" placeholder="Search for Products">
+            </div>
+            <div class="col-md-4">
+                <mat-form-field>
+                    <mat-select class="example-full-width" placeholder="Choose" [formControl]="frmStore">
+                        <mat-option *ngFor="let store of stores" [value]="store._id">{{store.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-1 table-head">
+                <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+            </div>
+        </div>
+    </div>
+    <div class="card-content">
+        <div class="card-list-item" *ngIf="transferHistories.length === 0 && !loading">
+            <div class="col-xs-12" style="text-align:center">
+                No data available......
+            </div>
+        </div>
+        <div class="card-list-item" *ngIf="transferHistories.length === 0 && loading">
+            <div class="col-xs-12" style="text-align:center">
+                <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="card-list-item" *ngFor="let producthistory of transferHistories">
+            <div class="row">
+                <div class="table-list col-xs-3" (click)="onShowBatch(producthistory)"> {{producthistory?.destinationStoreObject?.name}}</div>
+                <div class="table-list col-xs-2" (click)="onShowBatch(producthistory)">{{producthistory?.totalCostPrice|number:'1.2-2'}}</div>
+                <div class="table-list col-xs-3" (click)="onShowBatch(producthistory)">{{producthistory?.createdAt|date:'short'}} </div>
+                <div class="table-list col-xs-3" (click)="onShowBatch(producthistory)">{{producthistory?.employeeObject?.personDetails?.firstName}} {{producthistory.employeeObject?.personDetails?.lastName}}</div>
+            </div>
+
+            <div *ngIf="producthistory.isOpen===true && (selectedInventoryTransfer._id === producthistory._id)" class="prodBatch-wrap animated flipInX">
+                <div div class="card-header">
+                    <div class="row">
+                        <div class="col-xs-3 table-head">Product</div>
+                        <div class="col-xs-3 table-head">Value</div>
+                        <div class="col-xs-1 table-head">Transfer Qty</div>
+                        <div class="col-xs-2 table-head">Status</div>
+                    </div>
+                </div>
+                <div class="card-list-item" *ngFor="let transaction of producthistory.inventoryTransferTransactions">
+                    <div class="row">
+                        <div class="table-list col-xs-3">{{transaction?.productObject.data.name}}</div>
+                        <div class="table-list col-xs-3">{{transaction?.lineCostPrice|number:'1.2-2'}}</div>
+                        <div class="table-list col-xs-1">{{transaction?.quantity}}</div>
+                        <div class="table-list col-xs-2">{{transaction?.transferStatusObject?.name}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

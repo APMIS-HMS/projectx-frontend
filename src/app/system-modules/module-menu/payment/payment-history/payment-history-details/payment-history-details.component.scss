@@ -1,0 +1,26 @@
+@import "../../payment.component.scss";
+
+.card .card-list{
+    max-height: unset;
+}
+.name-label {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+.oda-label {
+    font-size: 1.2rem;
+}
+.oda-label span{
+    font-weight: bold;
+    color: #ff2500;
+    font-size: 1.6rem;
+}
+.top-labels{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: -10px;
+    background: #eee;
+    padding: 3px 10px;
+    border-top: 2px solid #ddd;
+}

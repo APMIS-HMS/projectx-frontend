@@ -1,0 +1,523 @@
+<div class="pg-subtitle">PATIENT PAGE - TREATEMENT PLAN</div>
+
+
+<div class="doc-mainWrap">
+    <div class="doc-contentArea">
+        <!-- <div class="tbl-listWrap">
+            <div class="sect-title">              
+                <mat-form-field style="width: 350px !important;">
+                    <mat-select [formControl]="problemFormControl" placeholder="Select Patient Problem">
+                        <mat-option *ngFor="let item of treatmentSheetItems" [value]="item">
+                            <div>{{ item?.problem?.problem }} - <span>({{item.createdByName}} -</span>
+                                <span>{{item.createdAt|date:'short'}})</span>
+                            </div>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div>
+                    <h3>**** Note: {{treatmentSheetData?.problem?.note}} ****</h3>
+                </div>
+            </div>
+        </div> -->
+
+        <div *ngIf="!treatmentSheetData.completed && treatmentSheetData.completed !== undefined">
+            <div (click)="onEditTreatmentSheet()" class="act-wrap">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                <span>Edit Treatment Sheet</span>
+            </div>
+            <!-- 
+            <button *ngIf="problemFormControl.valid" (click)="onEditTreatmentSheet()">Edit
+                Treatment Sheet</button> -->
+            <div style="margin: 25px;">
+                <div class="row">
+
+
+                    <!-- MEdication -->
+                    <div class="col-sm-12 sheet-column">
+                        <div class="row sheet-table-list sheet-sub-header" (click)="showMedication()">
+                            <div class="col-sm-8">
+                                Medication
+                            </div>
+                            <div class="col-sm-3">
+                                Item Count ({{treatmentSheet?.medications?.length}})
+                            </div>
+                        </div>
+                        <div *ngIf="toggleMedication">
+                            <div class="row sheet-table-list">
+                                <div style="min-width: 100%;">
+                                    <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5"
+                                        [formGroup]="medicationTableForm">
+                                        <thead>
+                                            <tr class="th-r1 th-xxx">
+                                                <th>Medication(s)</th>
+                                                <th>Status</th>
+                                                <th>Comment / Remark</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody formArrayName="medicationTableArray">
+                                            <tr *ngIf="treatmentSheet?.medications === undefined">
+                                                <td class="text-center" colspan="5"> No data available in table</td>
+                                            </tr>
+                                            <tr [formGroupName]="i" *ngFor="let medication of medicationTableForm['controls'].medicationTableArray['controls'];let i = index">
+                                                <td>{{ medication?.value.name }}</td>
+                                                <td>{{ medication?.value.status }}</td>
+                                                <td>
+                                                    <div style="padding: 0px 10px 0px 10px;">
+                                                        <mat-input-container>
+                                                            <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
+                                                        </mat-input-container>
+                                                    </div>
+                                                </td>
+                                                <td class="action-placeholder" style="text-align:center;">
+                                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                                    <div class="action-container shadow-RB">
+                                                        <div *ngIf="medication.value.status!==treatmentItemStatusValue.SUSPENDED && medication.value.status!==treatmentItemStatusValue.COMPLETED && medication.value.status!==treatmentItemStatusValue.DISCONTINUED"
+                                                            (click)="administer(medication.value)" class="action-item">
+                                                            <i class="fa fa-user-md" aria-hidden="true"></i>
+                                                            <span>Administer</span>
+                                                        </div>
+
+                                                        <div *ngIf="medication.value.status!==treatmentItemStatusValue.SUSPENDED && 
+                                                                                medication.value.status!==treatmentItemStatusValue.COMPLETED && medication.value.status!==treatmentItemStatusValue.DISCONTINUED"
+                                                            (click)="suspendMedication(medication.value)" class="action-item">
+                                                            <i class="fa fa-pause text-yellow" aria-hidden="true"></i>
+                                                            <span>Suspend</span>
+                                                        </div>
+                                                        <div *ngIf="medication.value.status===treatmentItemStatusValue.SUSPENDED || medication.value.status===treatmentItemStatusValue.COMPLETED || medication.value.status!==treatmentItemStatusValue.DISCONTINUED"
+                                                            (click)="activateMedication(medication.value)" class="action-item">
+                                                            <i class="fa fa-play text-green" aria-hidden="true"></i>
+                                                            <span>Activate</span>
+                                                        </div>
+
+                                                        <div *ngIf="medication.value.status!==treatmentItemStatusValue.SUSPENDED && medication.value.status!==treatmentItemStatusValue.COMPLETED && medication.value.status!==treatmentItemStatusValue.DISCONTINUED"
+                                                            (click)="discontinueMedication(medication.value)" class="action-item">
+                                                            <i class="fa fa-ban text-red" aria-hidden="true"></i>
+                                                            <span>Discontinue</span>
+                                                        </div>
+
+                                                        <div *ngIf="medication.value.status!==treatmentItemStatusValue.SUSPENDED && 
+                                                                                medication.value.status!==treatmentItemStatusValue.COMPLETED && 
+                                                                                medication.value.status!==treatmentItemStatusValue.DISCONTINUED"
+                                                            (click)="completeMedication(medication.value)" class="action-item">
+                                                            <i class="fa fa-check text-green" aria-hidden="true"></i>
+                                                            <span>Completed</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <!-- investigation -->
+                    <div class="col-sm-12 sheet-column">
+                        <div class="row sheet-table-list sheet-sub-header" (click)="showInvestigation()">
+                            <div class="col-sm-8">
+                                Investigations
+                            </div>
+                            <div class="col-sm-3">
+                                Item Count ({{treatmentSheet?.investigations?.length}})
+                            </div>
+                        </div>
+                        <div *ngIf="toggleInvestigation">
+                            <div class="row sheet-table-list">
+                                <div style="min-width: 100%;">
+                                    <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5"
+                                        [formGroup]="investigationTableForm">
+                                        <thead>
+                                            <tr class="th-r1 th-xxx">
+                                                <th>Investigation Name</th>
+                                                <th>Status</th>
+                                                <th>Comment / Remark</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody formArrayName="investigationTableArray">
+                                            <tr *ngIf="treatmentSheet?.investigations === undefined">
+                                                <td class="text-center" colspan="4"> No data available in table</td>
+                                            </tr>
+                                            <tr [formGroupName]="i" *ngFor="let investigation of investigationTableForm['controls'].investigationTableArray['controls'];let i = index">
+                                                <td> {{ investigation.value?.name }} </td>
+                                                <td>
+                                                    <span>{{investigation.value?.status}}</span>
+                                                </td>
+                                                <td>
+                                                    <div style="padding: 0px 10px 0px 10px;">
+                                                        <mat-input-container>
+                                                            <textarea matInput placeholder="Valid comment for your action"
+                                                                formControlName="comment"></textarea>
+                                                        </mat-input-container>
+                                                    </div>
+                                                </td>
+                                                <td class="action-placeholder" style="text-align:center;">
+                                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                                    <div class="action-container shadow-RB">
+                                                        <div *ngIf="investigation.value.status !== treatmentItemStatusValue.DONE && investigation.value.status !== treatmentItemStatusValue.SUSPENDED"
+                                                            class="action-item" (click)="onAdministerInvestigationItem(investigation.value)">
+                                                            <i class="fa fa-check text-green" aria-hidden="true"></i>Done</div>
+                                                        <div *ngIf="investigation.value.status !== treatmentItemStatusValue.DONE && investigation.value.status!==treatmentItemStatusValue.SUSPENDED"
+                                                            class="action-item" (click)="onSuspendInvestigationItem(investigation.value,true)"><i
+                                                                class="fa fa-pause text-yellow" aria-hidden="true"></i>Suspend</div>
+                                                        <div *ngIf="investigation.value.status !== treatmentItemStatusValue.DONE && investigation.value.status === treatmentItemStatusValue.SUSPENDED"
+                                                            class="action-item" (click)="onSuspendInvestigationItem(investigation.value,false)"><i
+                                                                class="fa fa-check text-green" aria-hidden="true"></i>Activate</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!-- Procedure -->
+                    <div class="col-sm-12 sheet-column">
+                        <div class="row sheet-table-list sheet-sub-header" (click)="showProcedure()">
+                            <div class="col-sm-8">
+                                Procedure
+                            </div>
+                            <div class="col-sm-3">
+                                Item Count ({{treatmentSheet?.procedures?.length}})
+                            </div>
+                        </div>
+                        <div *ngIf="toggleProcedure">
+                            <div class="row sheet-table-list">
+                                <div style="min-width: 100%;">
+                                    <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5"
+                                        [formGroup]="procedureTableForm">
+                                        <thead>
+                                            <tr class="th-r1 th-xxx">
+                                                <th>Procedure</th>
+                                                <th>Status</th>
+                                                <th>Comment / Remark</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody formArrayName="procedureTableArray">
+                                            <tr *ngIf="treatmentSheet?.procedures === undefined">
+                                                <td class="text-center" colspan="4"> No data available in table</td>
+                                            </tr>
+                                            <tr [formGroupName]="i" *ngFor="let procedure of procedureTableForm['controls'].procedureTableArray['controls'];let i = index">
+                                                <td> {{ procedure.value.name }} </td>
+                                                <td> {{ procedure.value.status }}</td>
+                                                <td>
+                                                    <div style="padding: 0px 10px 0px 10px;">
+                                                        <mat-input-container>
+                                                            <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
+                                                        </mat-input-container>
+                                                    </div>
+                                                </td>
+                                                <td class="action-placeholder" style="text-align:center;">
+                                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                                    <div class="action-container shadow-RB">
+                                                        <div *ngIf="procedure.value.status !== treatmentItemStatusValue.DONE && procedure.value.status !== treatmentItemStatusValue.SUSPENDED"
+                                                            (click)="onDoneProcedure(procedure.value)" class="action-item"><i
+                                                                class="fa fa-check text-green" aria-hidden="true"></i>Done</div>
+                                                        <div *ngIf="procedure.value.status !== treatmentItemStatusValue.DONE && procedure.value.status !== treatmentItemStatusValue.SUSPENDED"
+                                                            (click)="onSuspendProcedure(procedure.value,true)" class="action-item"><i
+                                                                class="fa fa-pause text-yellow" aria-hidden="true"></i>Suspend</div>
+                                                        <div *ngIf="procedure.value.status !== treatmentItemStatusValue.DONE && procedure.value.status === treatmentItemStatusValue.SUSPENDED"
+                                                            (click)="onSuspendProcedure(procedure.value,false)" class="action-item"><i
+                                                                class="fa fa-check text-green" aria-hidden="true"></i>Activate</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!-- Nursing Care -->
+                    <div class="col-sm-12 sheet-column">
+                        <div class="row sheet-table-list sheet-sub-header" (click)="showNursingCare()">
+                            <div class="col-sm-8">
+                                Nursing Care
+                            </div>
+                            <div class="col-sm-3">
+                                Item Count ({{treatmentSheet?.nursingCares?.length}})
+                            </div>
+                        </div>
+                        <div *ngIf="toggleNurseingCare">
+                            <div class="row sheet-table-list">
+                                <div style="min-width: 100%;">
+                                    <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5"
+                                        [formGroup]="nursingCareTableForm">
+                                        <thead>
+                                            <tr class="th-r1 th-xxx">
+                                                <th>Nurse's Instruction(s)</th>
+                                                <th>Status</th>
+                                                <th>Comment / Remark</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody formArrayName="nursingCareTableArray">
+                                            <tr *ngIf="treatmentSheet?.nursingCares === undefined">
+                                                <td class="text-center" colspan="4"> No data available in table</td>
+                                            </tr>
+                                            <tr [formGroupName]="i" *ngFor="let nursingCare of nursingCareTableForm['controls'].nursingCareTableArray['controls'];let i = index">
+                                                <td> {{ nursingCare.value.name }} </td>
+                                                <td> {{ nursingCare.value.status }}</td>
+                                                <td>
+                                                    <div style="padding: 0px 10px 0px 10px;">
+                                                        <mat-input-container>
+                                                            <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
+                                                        </mat-input-container>
+                                                    </div>
+                                                </td>
+                                                <td class="action-placeholder" style="text-align:center;">
+                                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                                    <div class="action-container shadow-RB">
+                                                        <div *ngIf="nursingCare.value.status !== treatmentItemStatusValue.DONE && nursingCare.value.status !== treatmentItemStatusValue.SUSPENDED"
+                                                            (click)="onDoneNursingCare(nursingCare.value)" class="action-item">
+                                                            <i class="fa fa-check text-green" aria-hidden="true"></i>
+                                                            <span> Done</span>
+                                                        </div>
+                                                        <div *ngIf="nursingCare.value.status !== treatmentItemStatusValue.DONE && nursingCare.value.status !== treatmentItemStatusValue.SUSPENDED"
+                                                            (click)="onSuspendNursingCare(nursingCare.value,true)"
+                                                            class="action-item">
+                                                            <i class="fa fa-pause text-yellow" aria-hidden="true"></i>
+                                                            <span> Suspend </span>
+                                                        </div>
+                                                        <div *ngIf="nursingCare.value.status !== treatmentItemStatusValue.DONE && nursingCare.value.status === treatmentItemStatusValue.SUSPENDED"
+                                                            (click)="onSuspendNursingCare(nursingCare.value,false)"
+                                                            class="action-item">
+                                                            <i class="fa fa-play text-green" aria-hidden="true"></i><span>
+                                                                Activate </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <!-- Physician Order -->
+                    <div class="col-sm-12 sheet-column">
+                        <div class="row sheet-table-list sheet-sub-header" (click)="showPhysicianOrder()">
+                            <div class="col-sm-8">
+                                Physician Order
+                            </div>
+                            <div class="col-sm-3">
+                                Item Count ({{treatmentSheet?.physicianOrders?.length}})
+                            </div>
+                        </div>
+                        <div *ngIf="togglePhysicianOrder">
+                            <div class="row sheet-table-list">
+                                <div style="min-width: 100%;">
+                                    <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5"
+                                        [formGroup]="physicianOrderTableForm">
+                                        <thead>
+                                            <tr class="th-r1 th-xxx">
+                                                <th>Physician's Order(s)</th>
+                                                <th>Status</th>
+                                                <th>Comment / Remark</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody formArrayName="physicianOrderTableArray">
+                                            <tr *ngIf="treatmentSheet?.physicianOrders === undefined">
+                                                <td class="text-center" colspan="4"> No data available in table</td>
+                                            </tr>
+                                            <tr [formGroupName]="i" *ngFor="let physicianOrder of physicianOrderTableForm['controls'].physicianOrderTableArray['controls'];let i = index">
+                                                <td> {{ physicianOrder.value.name }} </td>
+                                                <td> {{ physicianOrder.value.status }}</td>
+                                                <td>
+                                                    <div style="padding: 0px 10px 0px 10px;">
+                                                        <mat-input-container>
+                                                            <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
+                                                        </mat-input-container>
+                                                    </div>
+                                                </td>
+                                                <td class="action-placeholder" style="text-align:center;">
+                                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                                    <div class="action-container shadow-RB">
+                                                        <div *ngIf="physicianOrder.value.status !== treatmentItemStatusValue.DONE && physicianOrder.value.status !== treatmentItemStatusValue.SUSPENDED"
+                                                            (click)="onDonePhysicianOrderItem(physicianOrder.value)"
+                                                            class="action-item"><i class="fa fa-check text-green"
+                                                                aria-hidden="true"></i>Done</div>
+                                                        <div *ngIf="physicianOrder.value.status !== treatmentItemStatusValue.DONE && physicianOrder.value.status !== treatmentItemStatusValue.SUSPENDED"
+                                                            (click)="onSuspendPhysicianOrderItem(physicianOrder.value,true)"
+                                                            class="action-item">
+                                                            <i class="fa fa-pause text-yellow" aria-hidden="true"></i>Suspend</div>
+                                                        <div *ngIf="physicianOrder.value.status !== treatmentItemStatusValue.DONE && physicianOrder.value.status === treatmentItemStatusValue.SUSPENDED"
+                                                            (click)="onSuspendPhysicianOrderItem(physicianOrder.value,false)"
+                                                            class="action-item">
+                                                            <i class="fa fa-play text-green" aria-hidden="true"></i>Activate</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <div class="buttom-sect">
+                        <mat-form-field>
+                            <textarea style="height:80px !important;" [formControl]="completionInfo" matInput class="textarea"
+                                placeholder="Notes"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <div (click)="onCompletedTreatmentSheet()" class="cta-1"><i class="fa fa-floppy-o" aria-hidden="true"></i>Save</div>
+                </div>
+            </div>
+            <div style="clear:right;"></div>
+        </div>
+
+
+        <div style="margin: 25px;">
+            <div class="row">
+                <!-- investigation -->
+                <div class="col-sm-12 sheet-column">
+                    <div class="row sheet-table-list sheet-sub-header">
+                        <div class="col-sm-8" (click)="showSheetDetails()">
+                            Treatment Sheet Track Details
+                        </div>
+                        <div class="col-sm-3" (click)="showSheetDetails()">
+                            Problem: {{treatmentSheetData?.problem?.problem}}
+                        </div>
+                    </div>
+                    <div *ngIf="toggleSheetDetails">
+                        <div class="row sheet-table-list">
+                            <div style="min-width: 100%;">
+                                <div *ngFor="let item of trackValues">
+                                    <h3 style="text-align: center;">{{item.label}}</h3>
+                                    <div style="background: white; border-radius: 10px; padding:10px;">
+                                        <div *ngFor="let track of item.tracks;let i=index">
+                                            <div class="sect-title">{{track.name}}</div>
+                                            <table class="card" style="color:black;" cellpadding="0" cellspacing="0"
+                                                border="0.5">
+                                                <thead>
+                                                    <tr class="th-r1 th-xxx">
+                                                        <th>Date</th>
+                                                        <th>Employee</th>
+                                                        <th>Action</th>
+                                                        <th>Comment</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let activity of track.tracks">
+                                                        <td>{{activity.createdAt|date:'medium'}}</td>
+                                                        <td (click)="onViewEmployee(activity)"><span *ngIf="activity.createdByName===undefined">View
+                                                                employee</span><span>{{activity?.createdByName}}</span></td>
+                                                        <td>{{activity.action}}</td>
+                                                        <td>{{activity.comment}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <br>
+                                <br>
+
+
+                                <!-- <table cellpadding="0" cellspacing="0" border="0.5">
+                                    <tbody>
+                                        <tr *ngFor="let item of trackValues">
+                                            <td class="sect-title">
+                                                {{item.label}}
+                                        <tr *ngFor="let track of item.tracks;let i=index">
+                                            <td>
+                                                <div class="sect-title">{{track.name}}</div>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Employee</th>
+                                                        <th>Action</th>
+                                                        <th>Comment</th>
+                                                    </tr>
+                                                </thead>
+
+                                    <tbody>
+                                        <tr *ngFor="let activity of track.tracks">
+                                            <td>{{activity.createdAt|date:'medium'}}</td>
+                                            <td (click)="onViewEmployee(activity)"><span *ngIf="activity.createdByName===undefined">View
+                                                    employee</span><span>{{activity?.createdByName}}</span></td>
+                                            <td>{{activity.action}}</td>
+                                            <td>{{activity.comment}}</td>
+                                        </tr>
+                                    </tbody>
+                                    </td>
+                                    </tr>
+                                    </td>
+                                    </tr>
+                                    </tbody>
+                                </table> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div>
+            <div class="tbl-listWrap">
+                <div class="sect-title">Treatment Sheet Tracks</div>
+                <div class="sect-title">Problem: {{treatmentSheetData?.problem?.problem}}</div>
+                <div class="sect-title">{{treatmentSheetData?.completionDescription}}</div>
+                <table cellpadding="0" cellspacing="0" border="0.5">
+                    <tbody>
+                        <tr *ngFor="let item of trackValues">
+                            <td class="sect-title">
+                                {{item.label}}
+                        <tr *ngFor="let track of item.tracks;let i=index">
+                            <td>
+                                <div class="sect-title">{{track.name}}</div>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Employee</th>
+                                        <th>Action</th>
+                                        <th>Comment</th>
+                                    </tr>
+                                </thead>
+
+                    <tbody>
+                        <tr *ngFor="let activity of track.tracks">
+                            <td>{{activity.createdAt|date:'medium'}}</td>
+                            <td (click)="onViewEmployee(activity)"><span *ngIf="activity.createdByName===undefined">View
+                                    employee</span><span>{{activity?.createdByName}}</span></td>
+                            <td>{{activity.action}}</td>
+                            <td>{{activity.comment}}</td>
+                        </tr>
+                    </tbody>
+                    </td>
+                    </tr>
+                    </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div> -->
+    </div>
+
+</div>
+<div *ngIf="isEditTreatmentSheet" class="modal-overlay">
+    <app-order-set [selectedPatient]="patient" [treatmentSheetId]="treatmentSheetId" class="form-modal center-center"
+        (closeModal)="close_onClick($event)"></app-order-set>
+</div>

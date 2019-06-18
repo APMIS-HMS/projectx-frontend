@@ -1,0 +1,28 @@
+<div class="box animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Add Physician Order</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <form [formGroup]="addPhysicianOrderForm" novalidate>
+            <div class="frmArrWrap">
+                <div class="frm-x2">
+                    <div class="frm-item-wrap">
+                        <div class="frm-item-wrap">
+                            <textarea style="border:1px solid #777; padding:10px;" matInput formControlName="physicianOrder" class="textarea" cols="30" rows="10"></textarea>
+                        </div>
+                        <!-- <mat-form-field>
+                        <textarea matInput formControlName="physicianOrder" class="textarea" cols="30" rows="10"></textarea>
+                    </mat-form-field> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="addDrugBtn" (click)="onClickAddPhysicianOrder(addPhysicianOrderForm.valid, addPhysicianOrderForm.value);">
+                <i [hidden]="newTemplate" class="fa fa-plus" aria-hidden="true"></i>
+                <span>ADD PHYSICIAN ORDER</span>
+            </div>
+        </form>
+    </div>
+</div>

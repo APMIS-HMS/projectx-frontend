@@ -1,0 +1,42 @@
+.modal-baseWrap {
+    padding: 30px;
+    width: 100%;
+}
+
+.box {
+    width: 450px;
+}
+
+.modal_title {
+    margin-bottom: 15px;
+}
+
+.frm-item-wrap {
+    padding: 10px;
+}
+
+.lhs {
+    float: none;
+}
+
+.edit-control {
+    background-color: transparent;
+    margin-right: 0;
+    padding: 10px;
+    width: 93% !important;
+    border: 0.5px solid #37474F;
+}
+
+.btn-box {
+    text-align: center;
+    padding: 20px 10px;
+    .btn {
+        color: #fff;
+    }
+}
+
+input,
+select,
+mat-input-container {
+    width: 100%;
+}

@@ -1,0 +1,169 @@
+<div class="row">
+    <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+    <form [formGroup]="frm_purchaseOrder" class="col-md-8" novalidate>
+
+        <div class="row">
+            <!-- <mat-form-field class="col-xs-3">
+                <mat-select class="frm-item-wrap" placeholder="Store" formControlName="store">
+                    <mat-option *ngFor="let store of stores" [value]="store._id">{{store.name}}</mat-option>
+                </mat-select>
+            </mat-form-field> -->
+
+            <mat-form-field class="col-xs-3">
+                <mat-select class="frm-item-wrap" placeholder="Supplier" formControlName="supplier">
+                    <mat-option *ngFor="let supplier of suppliers" [value]="supplier._id">{{supplier.supplier.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-xs-3">
+                <mat-select class="frm-item-wrap" placeholder="Order Id" formControlName="orderId">
+                    <mat-option *ngFor="let order of orders" [value]="order._id">{{order.purchaseOrderNumber}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-input-container class="col-xs-2">
+                <input matInput formControlName="deliveryDate" [matDatepicker]="picker" placeholder="Delivery Date (Choose a date)">
+            </mat-input-container>
+            <mat-datepicker-toggle mdSuffix [for]="picker" class="col-xs-1"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+
+
+            <mat-input-container class="col-xs-4">
+                <input matInput mat-error placeholder="Invoice Number" formControlName="invoiceNo">
+            </mat-input-container>
+
+            <mat-input-container class="col-xs-2">
+                <input type="number" matInput mat-error placeholder="Amount" formControlName="amount">
+            </mat-input-container>
+
+            <mat-input-container class="col-xs-6">
+                <textarea matInput mat-error placeholder="Remark" formControlName="desc"></textarea>
+            </mat-input-container>
+        </div>
+
+        <div class="col-b">
+
+            <form *ngIf="productTableForm.controls['productTableArray'].value.length > 0" [formGroup]="productTableForm">
+                <div formArrayName="productTableArray" class="frmArrayWrap">
+                    <div class="frmArray" *ngFor="let schedule of productTableForm.controls['productTableArray'].controls; let i = index;">
+                        <div formGroupName="{{i}}">
+                            <div class="prod-wrap">
+
+                                <div class="inputWrap-productDetail row">
+                                    <div (click)="removeProduct(i, productTableForm.controls['productTableArray'].controls)" class="modal-close-ico" aria-hidden="true">
+                                        <i class="fa fa-close fa-fw"></i>
+                                    </div>
+
+
+                                    <mat-input-container class="col-md-3">
+                                        <input matInput mat-error placeholder="Product" formControlName="product">
+                                    </mat-input-container>
+
+                                    <mat-input-container class="col-md-3">
+                                        <input matInput mat-error placeholder="Batch No" formControlName="batchNo">
+                                    </mat-input-container>
+
+                                    <mat-input-container class="col-md-3">
+                                        <input [step]="0.01" (change)="getCostSummary(i,productTableForm.controls['productTableArray'].controls)" matInput mat-error placeholder="Cost Price" formControlName="costPrice">
+                                    </mat-input-container>
+
+                                    <mat-input-container class="col-md-3">
+                                        <input type="number" (change)="getCostSummary(i,productTableForm.controls['productTableArray'].controls)" matInput mat-error placeholder="Quantity" formControlName="qty"
+                                            readonly>
+                                    </mat-input-container>
+
+                                    <div class="row example-full-width" formArrayName="config">
+                                        <!--<div class="col-md-{{12/getProductConfig(schedule).length}}" [formGroupName]="j" *ngFor="let item of getProductConfig(schedule); let j = index">
+                                                        <mat-input-container class="example-full-width">
+                                                            <input type="number" formControlName="size" min="1" (change)="onPackageSize(i)" matInput placeholder="{{item.value.name}}">
+                                                        </mat-input-container>
+                                                    </div>-->
+                                        <div class="row col-md-3" [formGroupName]="k" *ngFor="let itm of schedule.controls.config.controls;let k = index">
+                                            <mat-input-container class="col-md-4">
+                                                <input type="number" min="1" [readonly]="itm.value.packItem === null" matInput mat-error formControlName="size" (change)="onPackageSize(i,productTableForm.controls['productTableArray'].controls)">
+                                            </mat-input-container>
+                                            <mat-form-field class="col-md-6">
+                                                <mat-select placeholder="Select Packsize" formControlName="packItem" [compareWith]="compareItems">
+                                                    <mat-option disabled="">None</mat-option>
+                                                    <mat-option [value]="item._id" *ngFor="let item of itm.value.packsizes">
+                                                            <span>{{item.name}}</span>
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <div class="ico-wrap">
+                                                <i *ngIf="itm.value?.packsizes?.length !== k+1 && schedule.controls?.config?.controls?.length===k+1" class="col-md-2 fa fa-fw fa-plus"
+                                                    (click)="onAddPackSize(itm.value.packsizes,schedule)"></i>
+                                                <i class="fa fa-close fa-fw" *ngIf="schedule.controls.config.controls.length > 1" (click)="onRemovePack(schedule,productTableForm.controls['productTableArray'].controls,k,i)"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-6">
+                                        <input matInput formControlName="expiryDate" [matDatepicker]="picker" placeholder="Expiry Date">
+                                        <mat-datepicker-toggle mdSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </div>
+                                    <mat-input-container class="col-sm-6">
+                                        <input formControlName="total" matInput mat-error placeholder="Total Cost" readonly>
+                                    </mat-input-container>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="bottomwrap">
+
+            <div class="sec-c">
+                <div class="frm-item-wrap" style="width:50%">
+                    <mat-input-container class="example-full-width">
+                        <input type="number" matInput mat-error placeholder="Discount" formControlName="discount">
+                    </mat-input-container>
+
+                </div>
+                <div class="frm-item-wrap" style="width:50%">
+                    <mat-input-container class="example-full-width">
+                        <input type="number" matInput mat-error placeholder="VAT" formControlName="vat">
+                    </mat-input-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="clear">
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+
+
+        <div style="width: 100%;height: 50px; text-align: center;">
+            <button mat-raised-button (click)="cancelAll();">Reset</button>
+            <button mat-raised-button class="mat-lg-btn" (click)="create(frm_purchaseOrder.valid, frm_purchaseOrder.value)" style="line-height: 1;">Done</button>
+        </div>
+    </form>
+    <div class="col-md-4">
+        <mat-input-container class="example-full-width">
+            <input matInput mat-error placeholder="search product here..." [formControl]="searchControl">
+        </mat-input-container>
+        <div class="filter-sect">
+            <mat-checkbox [formControl]="myInventory">My Inventory</mat-checkbox>
+
+            <mat-checkbox [formControl]="zeroQuantity">Out of stock</mat-checkbox>
+
+            <mat-checkbox [formControl]="reOrderLevelQuantity">Re-order Level</mat-checkbox>
+        </div>
+        <div class="control-group" style="width:100%" *ngFor="let group of superGroups">
+            <label *ngFor="let item of group;let j=index" class="control control--checkbox">{{item.name}}
+                <div class="control__indicator">
+                    <mat-checkbox (change)="onProductCheckChange($event,item,j)" [checked]="item.checked"></mat-checkbox>
+                </div>
+            </label>
+        </div>
+    </div>
+
+</div>

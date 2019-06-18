@@ -1,0 +1,119 @@
+<div class="pg-subtitle">INVESTIGATION PRICING</div>
+<div>
+    <div class="doc-mainWrap">
+        <div class="doc-contentArea">
+            <div class="clinicalNoteWrap">
+                <div class="actSect">
+                    <div (click)="pricing_show()" class="act-wrap">
+                        <i *ngIf="pricing_view" class="fa fa-minus" aria-hidden="true"></i>
+                        <i [hidden]="pricing_view" class="fa fa-plus" aria-hidden="true"></i>
+                        <span>Set Price</span>
+                    </div>
+                    <form *ngIf="pricing_view" [formGroup]="frmNewPrice" novalidate>
+                        <div class="row">
+                            <div class="frm-item-wrap col-sm-4">
+                                <apmis-lookup formControlName="workbench" [(ngModel)]="apmisLookupText" [url]="apmisLookupUrl" [query]="apmisLookupQuery" placeholder="Select Modality" [isSocket]="true" [displayKey]="apmisLookupDisplayKey" (selectedItem)="apmisLookupHandleSelectedItem($event)"
+                                    [multipleKeys]="true" [otherKeys]="apmisLookupOtherKeys"></apmis-lookup>
+                            </div>
+                            <div class="frm-item-wrap col-sm-4">
+                                <apmis-lookup formControlName="investigation" [(ngModel)]="apmisInvestigationLookupText" [url]="apmisInvestigationLookupUrl" [query]="apmisInvestigationLookupQuery" placeholder="Select Investigation" [isSocket]="true" [displayKey]="apmisInvestigationLookupDisplayKey"
+                                    (selectedItem)="apmisInvestigationLookupHandleSelectedItem($event)"></apmis-lookup>
+                            </div>
+                            <div class="frm-item-wrap col-sm-4">
+                                <mat-input-container>
+                                    <input type="number" matInput placeholder="Price" formControlName="price">
+                                </mat-input-container>
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <button mat-raised-button [disabled]="!frmNewPrice.valid || disableBtn" (click)="setPrice(frmNewPrice.valid, frmNewPrice.value)" class="btn">
+                                <span *ngIf="updatePrice">Update Price</span>
+                                <span *ngIf="updatingPrice">Updating Price... <i class="fa fa-spin fa-spinner"></i> </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tblWrapa" class="actSect">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="table-head col-xs-1">No</div>
+                                <div class="table-head col-xs-3">Radiology</div>
+                                <div class="table-head col-xs-2">Modality</div>
+                                <div class="table-head col-xs-2">Investigation</div>
+                                <div class="table-head col-xs-2">Price</div>
+                                <div class="table-head col-xs-1">Status</div>
+                                <div class="table-head col-xs-1"><i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i></div>
+                            </div>
+                            <div class="row" *ngIf="searchOpen">
+                                <div class="col-md-8">
+                                    <input [formControl]="searchControl" class="table-header-input" type="text" placeholder="Search for Investigation Price">
+                                </div>
+                                <div class="col-md-3">
+                                    <!-- <input class="table-header-input" type="date" placeholder="Choose a date"> -->
+                                </div>
+                                <div class="col-md-1 table-head">
+                                    <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-list-item" *ngIf="investigations.length === 0 && !loading">
+                                <div class="col-xs-12" style="text-align:center">
+                                    No data available in table
+                                </div>
+                            </div>
+                            <div class="card-list-item" *ngIf="investigations.length === 0 && loading">
+                                <div class="col-xs-12" style="text-align:center">
+                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card-list-item" *ngFor="let investigation of investigations; let i = index;">
+                                <div class="row">
+                                    <div class="table-list col-xs-1">
+                                        {{ i+1 }}
+                                    </div>
+                                    <div class="table-list col-xs-3">
+                                        {{getLaboratoryFromInvestigation(investigation.LaboratoryWorkbenches)}}
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        {{getWorkbenchFromInvestigation(investigation.LaboratoryWorkbenches)}}
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        {{investigation.name}}
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        &#x20a6; {{gePriceFromInvestigation(investigation.LaboratoryWorkbenches)}}
+                                    </div>
+                                    <div class="table-list col-xs-1 action-placeholder">
+                                        Active
+                                    </div>
+                                    <div class="table-list col-xs-1 action-placeholder">
+                                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                        <div class="action-container shadow-RB">
+                                            <div (click)="reqDetail(investigation)" class="action-item">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                                <span>Edit</span>
+                                            </div>
+
+                                            <div class="action-item">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                <span>Delete</span>
+                                            </div>
+
+                                            <div class="action-item">
+                                                <i class="fa fa-ban" aria-hidden="true"></i>
+                                                <span>Deactivate</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

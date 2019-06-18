@@ -1,0 +1,52 @@
+<div class="c-page-header">
+    <div class="back-btn pull-right">
+        <span routerLink="/dashboard/ward-manager/admitted/{{admittedPatientId}}"><i class="fa fa-arrow-circle-o-left"></i> Go Back</span>
+    </div>
+</div>
+<div class="c-page-body">
+    <div class="inPatients">
+        <div class="patient-img">
+            <img [src]="_inPatientService.transform(patientData?.patientDetails?.personDetails.profileImageObject?.detailthumbnail)" alt=" ">
+        </div>
+        <div class="details">
+            <div class="subsect-itemWrap">
+                <div class="subsect-label ">Full Name</div>
+                <div class="subsect-val ">{{patientData?.patientDetails.personDetails.personFullName}}</div>
+            </div>
+            <div class="subsect-itemWrap">
+                <div class="subsect-label ">Admission Date</div>
+                <div class="subsect-val ">{{patientData?.admissionDate}}</div>
+            </div>
+            <div class="subsect-itemWrap">
+                <div class="subsect-label ">Type of patient</div>
+                <div class="subsect-val ">
+                    Insurrance: <small>Esusu Insurrance</small><br>, Company Cover: <small>Sidmach Technologies</small><br>, Family Cover: <small>Mr. Johnson Ademoloye</small>
+                </div>
+            </div>
+            <div class="subsect-itemWrap">
+                <div class="subsect-label ">Ward</div>
+                <div class="subsect-val ">{{patientData?.wardItem.name}}</div>
+            </div>
+            <div class="subsect-itemWrap ">
+                <div class="subsect-label ">Room</div>
+                <div class="subsect-val ">{{patientData?.wardItem.room}}</div>
+            </div>
+            <div class="subsect-itemWrap">
+                <div class="subsect-label ">Bed</div>
+                <div class="subsect-val ">{{patientData?.wardItem.bed}}</div>
+            </div>
+            <div class="subsect-itemWrap">
+                <div class="subsect-label ">Number of days on admission</div>
+                <div class="subsect-val ">{{patientData?.daysOnAdmission}}</div>
+            </div>
+            <div class="subsect-itemWrap">
+                <div class="subsect-label ">Financial Balance</div>
+                <div class="subsect-val ">30,000</div>
+            </div>
+            <div class="subsect-itemWrap">
+                <div class="subsect-label ">Amount Accumulated</div>
+                <div class="subsect-val ">50,000</div>
+            </div>
+        </div>
+    </div>
+</div>

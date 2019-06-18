@@ -1,0 +1,185 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Daily Labour Delivery Data Entry</legend>
+    <div class="modal_mini_title">Continental Hospital</div>
+  </div>
+
+  <div class="modal-content-overlay">
+    <form class="frm-down" [formGroup]="frmLDR_Update" novalidate>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div>
+              <mat-form-field>
+                <input matInput placeholder="Date" type="date">
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <input matInput placeholder="Patient Name">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <input matInput placeholder="Patient Number">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <input matInput type="number" placeholder="Age">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-select placeholder="Type of Client">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Booked</mat-option>
+                  <mat-option value="option3">Unbooked</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <input matInput placeholder="Parity">
+              </mat-form-field>
+            </div>
+            <div>
+              <h3 class="h3">HIV Counselling, Testing at L&D</h3>
+              <mat-radio-group>
+                <mat-radio-button value="1">Previously Known HIV - Positive Status</mat-radio-button>
+                <mat-radio-button value="2">HIV Counselled, Tested & Recieved result at L&D</mat-radio-button>
+                <mat-radio-button value="3">HIV - Tested positive at L&D</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="col-sm section_border">
+            <div>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Date of Delivery">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-select placeholder="Mode of Delivery">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">SVD</mat-option>
+                  <mat-option value="option3">CS</mat-option>
+                  <mat-option value="option1">AD</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <h3 class="h3">Pathograph used?</h3>
+              <mat-radio-group>
+                <mat-radio-button value="1">Yes</mat-radio-button>
+                <mat-radio-button value="2">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div>
+              <h3 class="h3">Active Management od 3rd Stage of Labour used?</h3>
+              <mat-radio-group>
+                <mat-radio-button value="1">Yes</mat-radio-button>
+                <mat-radio-button value="2">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-select placeholder="Material Complication Seen">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">APH</mat-option>
+                  <mat-option value="option3">PPH</mat-option>
+                  <mat-option value="option1">RPC</mat-option>
+                  <mat-option value="option1">PL</mat-option>
+                  <mat-option value="option3">PET</mat-option>
+                  <mat-option value="option1">ET</mat-option>
+                  <mat-option value="option3">RU</mat-option>
+                  <mat-option value="option1">Sep.</mat-option>
+                  <mat-option value="option1">OL Abt.</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <h3>Pregnancy Outcome (Mother)</h3>
+              <mat-form-field>
+                <mat-select placeholder="Alive">
+                  <mat-option value="option1">Admitted</mat-option>
+                  <mat-option value="option3">Discharge</mat-option>
+                  <mat-option value="option1">Reffered</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div>
+                <mat-radio-group>
+                  <h4>Dead</h4>
+                  <mat-radio-button value="1">Yes</mat-radio-button>
+                  <mat-radio-button value="2">No</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm section_border">
+            <div>
+              <h3>Pregnancy Outcome (Baby)</h3>
+              <mat-radio-group>
+                <mat-radio-button value="1">Abortion</mat-radio-button>
+                <mat-radio-button value="2">Pre-tern</mat-radio-button>
+                <mat-radio-button value="1">Birth Asphyxla</mat-radio-button>
+              </mat-radio-group>
+              <mat-radio-group>
+                <h4>Live Birth</h4>
+                <mat-radio-button value="1">&lt; 25Kg</mat-radio-button>
+                <mat-radio-button value="2">&ge; 25Kg</mat-radio-button>
+              </mat-radio-group>
+              <mat-form-field>
+                <mat-select placeholder="Still Birth">
+                  <mat-option>FSB</mat-option>
+                  <mat-option>MSB</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-checkbox>Dead &le; 7Days</mat-checkbox>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-select placeholder="Sex of Baby">
+                  <mat-option value="option1">Male</mat-option>
+                  <mat-option value="option3">Female</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-select placeholder="Who took Delivery">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Doctor</mat-option>
+                  <mat-option value="option3">Midwife</mat-option>
+                  <mat-option value="option1">Nurse</mat-option>
+                  <mat-option value="option1">Other</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <mat-checkbox>Immediate Newborn Care Provided</mat-checkbox>
+            <div>
+              <h3 class="h3">Exclusive Breast Feeding / LAM</h3>
+              <mat-radio-group>
+                <mat-radio-button value="1">Counselled</mat-radio-button>
+                <mat-radio-button value="2">Accepted</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div>
+              <mat-form-field>
+                <input matInput placeholder="Name of the Person Who Delivery the Baby">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 text-center">
+        <div style="padding: 20px 10px;">
+          <button mat-raised-button type="submit" (click)="next_onClick()" class="mat-lg-btn">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>

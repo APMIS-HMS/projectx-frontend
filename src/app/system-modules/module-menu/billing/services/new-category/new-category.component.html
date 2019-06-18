@@ -1,0 +1,53 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">New Service Category</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap" *ngIf="!categoryBool">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <div class="f_sg1">
+
+            <form [formGroup]="frmNewcat" novalidate>
+
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <input type="text" matInput mat-error placeholder="Category Name" formControlName="catName" class="input">
+                    </mat-input-container>
+                </div>
+
+                <div class="text-center">
+                    <button mat-raised-button (click)="newcat(frmNewcat.value, frmNewcat.valid)" class="mat-lg-btn">
+                    {{btnTitle}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- edit category modal
+    <div class="modal-baseWrap" *ngIf="categoryBool">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <div class="f_sg1">
+
+            <form [formGroup]="frmEditcat" novalidate>
+
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <input type="text" matInput mat-error placeholder="Category Name" formControlName="catName" [value]="selectedCategory.name">
+                    </mat-input-container>
+                </div>
+
+                <div class="text-center">
+                    <button mat-raised-button (click)="newcat(frmNewcat.value, frmNewcat.valid)" class="mat-lg-btn">
+                  Save
+                  </button>
+                </div>
+            </form>
+        </div>
+
+    </div>-->
+</div>

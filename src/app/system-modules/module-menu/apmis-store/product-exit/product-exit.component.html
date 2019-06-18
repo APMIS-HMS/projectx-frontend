@@ -1,0 +1,21 @@
+<div class="home-main" style="margin-top: 30px;">
+  <ul class="hm-tabs">
+    <li (click)="tab_click('sales')" [class.hm-tab-active]='tab_sales' class="hm-tab">Sales</li>
+    <li (click)="tab_click('customers')" [class.hm-tab-active]='tab_customers' class="hm-tab">Customers</li>
+    <li (click)="tab_click('refund')" [class.hm-tab-active]='tab_refund' class="hm-tab">Refund</li>
+  </ul>
+
+
+
+  <div class="" *ngIf="tab_sales">
+    <app-sales></app-sales>
+  </div>
+
+  <div class="tab-content" *ngIf="tab_refund">
+    <app-refund></app-refund>
+  </div>
+
+  <div class="tab-content" *ngIf="tab_customers">
+    <!-- <app-customer></app-customer> -->
+  </div>
+</div>

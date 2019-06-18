@@ -1,0 +1,70 @@
+<div class="inner-wrap-b body-wrap">
+    <div class="card-title">{{pageInView}}</div>
+
+    <div class="fullwidth-topActions">
+        <div class="filters-wraper">
+            <ul *ngIf="!homeContentArea" class="moduleNav">
+                <li [class.navActive]="homeContentArea" (click)="HomeContentArea_show()"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>Go Back</li>
+            </ul>
+            <mat-input-container style="width:200px;margin-right: 10px;" *ngIf="homeContentArea" class="example-full-width">
+                <input matInput mat-error type="search" placeholder="Search for employee" [formControl]="searchControl">
+            </mat-input-container>
+            <mat-form-field>
+                <mat-select placeholder="Department" [formControl]="department">
+                    <mat-option *ngFor="let item of departments" [value]="item">{{item.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="Unit" [formControl]="unit">
+                    <mat-option *ngFor="let item of units" [value]="item.name">{{item.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <i (click)="reset()" class="fa fa-fw fa-2x fa-refresh clickable-ico orange tooltip" data-tooltip="Referesh" aria-hidden="true"></i>
+            <div *ngIf="mobileSort" class="sort-txt-mobile shadow-RB">
+                <div (click)="sort_pop()" class="x">X</div>
+                <div>
+                    <mat-form-field>
+                        <mat-select placeholder="Department" [formControl]="department">
+                            <mat-option *ngFor="let item of departments" [value]="item">{{item.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-select placeholder="Unit" [formControl]="unit">
+                            <mat-option *ngFor="let item of units" [value]="item.name">{{item.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <ul class="topmenuwrap">
+            <!-- <li class="sort-btn" (click)="sort_pop()">
+                <i class="fa fa-sort" aria-hidden="true"></i>
+                <span>Sort List</span>
+            </li> -->
+            <li (click)="assignUnit_pop()">
+                <i class="fa fa-fw fa-2x fa-plus-circle orange tooltip" data-tooltip="ggdhshs" aria-hidden="true"></i>
+                <span>Assign Unit</span>
+            </li>
+        </ul>
+    </div>
+    <div class="col-mat-12">
+        <span (click)="newEmpShow()" id="floating-button">
+            <div class="plus">+</div>
+        </span>
+    </div>
+
+    <div class="inner-page-wrap">
+
+        <app-empmanager-homepage [resetData]="resetData" (resetDataNew)="resetDataLoader($event)" (empDetail)="empDetailShow($event)" (pageInView)="pageInViewLoader($event)" *ngIf="homeContentArea" class="fullwidth"></app-empmanager-homepage>
+        <!-- <app-employeemanager-detailpage [employee]="employee" *ngIf="employeeDetailArea" class="fullwidth"></app-employeemanager-detailpage> -->
+
+        <div *ngIf="newEmp" class="modal-overlay">
+            <app-new-fac-employee (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-fac-employee>
+        </div>
+        <div *ngIf="assignUnitPop" class="modal-overlay">
+            <!-- <app-assign-unit [selectedEmployee]="employee" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-assign-unit> -->
+        </div>
+    </div>
+</div>

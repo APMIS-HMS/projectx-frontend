@@ -1,0 +1,11 @@
+<ul class="pg-menuWrap">
+    <!-- <li (click)="onClickImmunizationMenuShow('')" [class.pg-menuActive]="immunizationSchedule"><i class="fa fa-braille" aria-hidden="true"></i> Immunization Schedule</li> -->
+    <li (click)="onClickImmunizationMenuShow('')" [class.pg-menuActive]="immunizationSchedule"><i class="fa fa-braille" aria-hidden="true"></i> Batch Schedule</li>
+</ul>
+<div class="inner-wrap-b body-wrap">
+    <div class="facility-title">{{pageInView}}</div>
+    <div class="rhs inner-page-contentArea c-page-wrapper">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="clear"></div>
+</div>

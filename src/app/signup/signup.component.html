@@ -1,0 +1,44 @@
+<div class="base-wrap">
+
+    <div class="logo-wrap">
+        <img src="assets/images/app_logo/apmis_vector.svg">
+    </div>
+
+    <div class="nav-right-content home-wrap">
+        <div class="signin-upWrap">
+
+            <div class="txt1">APMIS</div>
+            <div class="txt2">All Purpose Medical Information System</div>
+
+            <div class="CTAs-wrap">
+                <div class="wrapLabel">sign up as...</div>
+                <div class="cta-1" (click)="personAccount_show()">Get APMIS ID</div>
+                <div class="cta-1" (click)="facilitySetup1_show()">Health Facility</div>
+                <!-- <div class="cta-1" (click)="corporateSignup_show()">Corporate Facility</div> -->
+
+                <!--<div class="wrapLabel actionTxt">Already have an account? <span routerLink='' class="txtLink">Log In</span></div>-->
+                <div class="wrapLabel actionTxt">Already have an account? <span (click)="login_show()" class="txtLink">Log In</span></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div *ngIf="modal_on" class="modal-overlay">
+    <app-facility-setup (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-facility-setup>
+</div>
+
+<div *ngIf="personAccount_on" class="modal-overlay">
+    <app-person-account (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-person-account>
+</div>
+<div *ngIf="corporateSignup_on" class="modal-overlay">
+    <app-corporate-signup (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-corporate-signup>
+</div>
+
+<div *ngIf="login_on" class="modal-overlay">
+    <app-login (closeModal)="close_onClick($event)" (pwordReset)="pwdReset_show($event)" id="form-modal" class="form-modal center-center"></app-login>
+</div>
+<div *ngIf="pwdReset_on" class="modal-overlay">
+    <app-password-reset (closeModal)="close_onClick($event)" (loginEmit)="login_show()" id="form-modal" class="form-modal center-center"></app-password-reset>
+</div>

@@ -1,0 +1,140 @@
+<div class="pg-subtitle">RADIOLOGY TEMPLATE</div>
+<div>
+    <div class="doc-mainWrap">
+        <div class="doc-contentArea">
+            <div class="clinicalNoteWrap">
+                <div class="actSect">
+                    <div class="act-actions-wrap">
+                        <div (click)="template_show()" class="act-wrap">
+                            <i *ngIf="template_view" class="fa fa-minus" aria-hidden="true"></i>
+                            <i [hidden]="template_view" class="fa fa-plus" aria-hidden="true"></i>
+                            <span>New Template</span>
+                        </div>
+                    </div>
+                    <div *ngIf="template_view">
+                        <div>
+                            <form class="row"[formGroup]="templateFormGroup">
+                                <div class="col-sm-4">
+                                            <div class="form-control-box">
+                                                <mat-input-container>
+                                                    <input matInput placeholder="Template Name" formControlName="name">
+                                                </mat-input-container>
+                                            </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-control-box">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Scope Level" formControlName="apmisScopeLevel">
+                                                <mat-option *ngFor="let scopeLevel of scopeLevels" [value]="scopeLevel">{{scopeLevel.name}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-control-box">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Select Investigation" formControlName="investigation">
+                                                <mat-option *ngFor="let investigation of investigations" [value]="investigation">
+                                                    {{ investigation.name }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+            
+                                <div class="col-sm-4">
+                                    <div class="form-control-box">
+                                        <mat-input-container>
+                                            <textarea formControlName="result" matInput placeholder="Result"></textarea>
+                                        </mat-input-container>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-control-box">
+                                        <mat-input-container>
+                                            <textarea formControlName="conclusion" matInput placeholder="Conclusion"></textarea>
+                                        </mat-input-container>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-control-box">
+                                        <mat-input-container>
+                                            <textarea formControlName="recommendation" matInput placeholder="Recommendation"></textarea>
+                                        </mat-input-container>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                    <button class="text-white" mat-raised-button (click)="createTemplate(templateFormGroup.valid, templateFormGroup.value);" [disabled]="!templateFormGroup.valid" [innerHtml]="templateBtnText"></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 style="text-align: center; width: 100%; padding-top: 20px;">Templates Created</h2>
+                <div class="tblWrapa" class="actSect">
+                        <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="table-head col-xs-1">Name</div>
+                                        <div class="table-head col-xs-2">Scope Level</div>
+                                        <div class="table-head col-xs-2">Investigation</div>
+                                        <div class="table-head col-xs-2">Result</div>
+                                        <div class="table-head col-xs-2">Conclusion</div>
+                                        <div class="table-head col-xs-2">Recommendation</div>
+                                        <div class="table-head col-xs-1"><i class="fa fa-search fa-fw pointer"></i></div>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-list-item" *ngIf="templates.length === 0 && !loading">
+                                        <div class="col-xs-12" style="text-align:center">
+                                            No data available in table
+                                        </div>
+                                    </div>
+                                    <div class="card-list-item" *ngIf="templates.length === 0 && loading">
+                                        <div class="col-xs-12" style="text-align:center">
+                                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>                                  
+                                        </div>
+                                    </div>
+                                    <div class="card-list-item" *ngFor="let template of templates; let i = index;">
+                                        <div class="row">
+                                            <div class="table-list col-xs-1">
+                                                    {{ template?.name }}
+                                            </div>
+                                            <div class="table-list col-xs-2">
+                                                    {{ template?.scopeLevel.name }}
+                                            </div>
+                                            <div class="table-list col-xs-2">
+                                                    {{ template?.investigation.name }}
+                                            </div>
+                                            <div class="table-list col-xs-2">
+                                                    {{ template?.result }}
+                                            </div>
+                                            <div class="table-list col-xs-2 action-placeholder">
+                                                    {{ template?.conclusion }}
+                                            </div>
+                                            <div class="table-list col-xs-2 action-placeholder">
+                                                    {{ template?.recommendation }}
+                                            </div>
+                                            <div class="table-list col-xs-1 action-placeholder">
+                                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                                        <div class="action-container shadow-RB">
+                                                            <div (click)="editTemplate(template);" class="action-item">
+                                                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                                                <span>Edit</span>
+                                                            </div>
+                                                            <div class="action-item">
+                                                                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                                                <span>Delete</span>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

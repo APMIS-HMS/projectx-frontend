@@ -1,0 +1,122 @@
+@import "../../../../../../../globals/variables.scss";
+.addDrugBtn{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #777;
+    width: 170px;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #777;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+.addDrugBtn:hover{
+    background: #fff;
+    color: #009ADF;
+}
+.frm-item-wrap {
+    width: 100%;
+    max-width: 400px;
+}
+.frmOuter-wrap{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+}
+.frmInner-wrap1, .frmInner-wrap2{
+    min-width: 300px;
+    box-sizing: border-box;
+    padding: 30px;
+    box-sizing: border-box;
+    min-height: 400px;
+}
+.frmInner-wrap1{
+    width: 39%;
+    background: #f8f8f8;
+    overflow: hidden;
+}
+.frmInner-wrap2{
+    width: 59%;
+}
+.plus-link {
+    color: #0D47A1;
+    font-size: 1.2rem;
+    width: 100%;
+    cursor: pointer;
+    text-align: right;
+}
+.plus-link:hover{
+    text-decoration: underline;
+}
+.plus-link i{
+    padding-right: 10px;
+}
+// .modal-baseWrap{
+//     width: 80%;
+//     padding: 0;
+// }
+
+
+.modal-baseWrap {
+    position: relative;
+    width: 800px;
+    min-width: 480px;
+    height: auto;
+    min-height: 60vh;
+    overflow-y: auto;
+    background: #fff;
+    /* overflow: unset; */
+    padding: 20px 50px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.typeCat li{
+    display: block;
+    width: 100%;
+}
+.pop-tabs{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    margin-top: 15px;
+}
+.pop-tab {
+    color: #777;
+}
+th{
+    height: 26px;
+    padding: none;
+}
+.docDiagBtn{
+    font-size: 16px !important;
+    padding: .5em 4em;
+    width: 0px !important;
+    height: 20px !important;
+}
+.pop-tab{
+    padding: 5px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+.pop-tab:hover, .popTab-active{
+    color: #0D47A1;
+    border-bottom: 2px solid #0D47A1;
+}
+.delItem i{
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+.delItem i:hover{
+    color: #ff2500;
+}
+.cta-1{
+    width: 180px;
+    height: 38px;
+}

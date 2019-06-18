@@ -1,0 +1,14 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Upload Image</legend>
+    <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+  <div class="modal-baseWrap">
+    <input (change)="fileChangeListener($event)"  type="file" ngFileSelect [options]="options" [events]="uploadEvents" (onUpload)="handleUpload($event)" (beforeUpload)="beforeUpload($event)">
+    <img-cropper  (onCrop)="cropped($event)" #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+    <div (click)="uploadButton()" class="cta-1">Upload</div>
+    <!--<img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">-->
+
+  </div> 
+</div>

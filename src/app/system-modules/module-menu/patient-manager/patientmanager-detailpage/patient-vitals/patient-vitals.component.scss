@@ -1,0 +1,30 @@
+@import "../patient-summary/patient-summary.component.scss";
+.tbl-resp-wrap{
+    min-width: 100%;
+    padding-bottom: 100px;
+    overflow-y: auto; 
+}
+.tbl-resp-wrap table{
+    min-width: 500px;
+}
+.doc-contentArea {
+    width: 100%;
+}
+td{
+    border: 0px solid transparent;
+}
+th{
+    font-size: 1.5rem;
+    text-align: left;
+    font-weight: normal;
+    color: #194985;
+    border-bottom: 1px solid #194985;
+}
+.modal_title {
+    position: relative;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.dr-wrap{
+    margin-bottom: 10px;
+}

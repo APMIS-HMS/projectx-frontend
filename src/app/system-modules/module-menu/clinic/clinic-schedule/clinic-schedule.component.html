@@ -1,0 +1,158 @@
+<div class="schedule-wrap">
+    <div class="lhsInnerFrm">
+        <div class="sect-title">Add Clinic Schedule</div>
+        <div class="dx-fieldset">
+            <form>
+                <div class="frmitemwrap">
+                    <mat-form-field>
+                        <mat-select placeholder="Clinic" [formControl]="locationTypeControl">
+                            <mat-option *ngFor="let clinic of clinics" [value]="clinic">{{ clinic.clinicName }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <form *ngIf="locationTypeControl.value != null" [formGroup]="clinicScheduleForm" class="form-horizontal"
+                    (ngSubmit)="onSubmit()">
+                    <div formArrayName="clinicScheduleArray" class="frmArrayWrap">
+                        <div class="frmArray" *ngFor="let schedule of clinicScheduleForm.controls['clinicScheduleArray'].controls; let i = index;">
+                            <div (click)="closeClinicSchedule(schedule, i)" class="closeIcon"><i class="fa fa-times-circle-o"
+                                    aria-hidden="true"></i></div>
+                            <div formGroupName="{{i}}">
+                                <div>
+                                    <div class="frmitemwrap">
+                                        <div class="frm-x2-mini">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Days" formControlName="day">
+                                                    <mat-option *ngFor="let day of days" [value]="day">{{day}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="frm-x2-mini">
+                                            <mat-input-container>
+                                                <input matInput type="number" min="0" placeholder="Maximum Slots"
+                                                    formControlName="noSlots">
+                                            </mat-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="frmitemwrap">
+                                        <div class="dx-field">
+                                            <div class="frm-label">Start Time</div>
+                                            <div class="dx-field-value">
+                                                <div class="survery">
+                                                    <ngb-timepicker formControlName="startTime" [meridian]="true"></ngb-timepicker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <mat-input-container class="example-full-width">
+                                            <input type="time" matInput placeholder="Start Time">
+                                        </mat-input-container> -->
+                                    </div>
+
+                                    <div class="frmitemwrap">
+                                        <div class="dx-field">
+                                            <div class="frm-label">End Time</div>
+                                            <div class="dx-field-value">
+                                                <div class="survery">
+                                                    <ngb-timepicker formControlName="endTime" [meridian]="true"></ngb-timepicker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="frmitemwrap">
+                                        <div class="frm-x2-mini">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Location" formControlName="location">
+                                                    <mat-option *ngFor="let location of clinicLocations" [value]="location">{{
+                                                        location.name }}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="frm-x2-mini">
+                                            <div class="frmitemwrap">
+                                                <label>Time Slots</label>
+                                                <div class="frm-x2-mini">
+                                                    <mat-input-container>
+                                                        <input matInput type="number" min="0" placeholder=""
+                                                            formControlName="timePerSlot">
+                                                    </mat-input-container>
+                                                </div>
+                                                <div class="frm-x2-mini">
+                                                    <mat-form-field>
+                                                        <mat-select placeholder="" formControlName="timeUnit"
+                                                            [compareWith]="compareTimeUnit">
+                                                            <mat-option *ngFor="let unit of durationUnits" [value]="unit.name">{{unit.name}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <!-- <mat-select placeholder="State" formControlName="facilitystate" [compareWith]="compareState">
+    <mat-option [value]="state.name" *ngFor="let state of states">{{state.name}}</mat-option>
+</mat-select> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="schedule.value.readOnly == true || schedule.value.valid == true" (click)="pushNewClinicSchedule()"
+                                class="addFrmLink"><i class="fa fa-plus" aria-hidden="true"></i><span>Add Schedule</span></div>
+                        </div>
+                    </div>
+
+                </form>
+
+                <div *ngIf="clinicScheduleForm.controls['clinicScheduleArray'].value.length === 0 && locationTypeControl.value != null"
+                    (click)="pushNewClinicSchedule()" class="addFrmLink"><i class="fa fa-plus" aria-hidden="true"></i><span>Add
+                        Schedule</span></div>
+                <button *ngIf="locationTypeControl.value != null" [disabled]="clinicScheduleForm.controls['clinicScheduleArray'].valid == false ||
+                clinicScheduleForm.controls['clinicScheduleArray'].value.length === 0"
+                    class="apmis-blue" (click)="onCreateSchedule()" mat-raised-button>{{btnCreatText}}</button>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="rhsInnerCArea">
+        <ul>
+            <li class="listHeader">
+                <div class="li-Item" style="cursor: pointer;">Clinic<i style="padding-left: 10px;" class="fa fa-sort tooltip"
+                        data-tooltip="sort-by Clinic" aria-hidden="true"></i></div>
+                <div class="li-Item" style="cursor: pointer;">Department<i style="padding-left: 10px;" class="fa fa-sort tooltip"
+                        data-tooltip="sort-by Dept" aria-hidden="true"></i></div>
+                <div class="li-Item" style="cursor: pointer;">Unit<i style="padding-left: 10px;" class="fa fa-sort tooltip"
+                        data-tooltip="sort-by unit" aria-hidden="true"></i></div>
+                <div class="li-Item-group">Schedule</div>
+                <div class="li-cta"></div>
+            </li>
+            <li *ngIf="scheduleManagers.length === 0 && !loading" class="li-itemWrap">
+                <div class="table-content">No data available in table</div>
+            </li>
+            <li *ngIf="scheduleManagers.length === 0 && loading" class="li-itemWrap">
+                <div class="table-content">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                </div>
+            </li>
+
+            <li (click)="onSelectSchedulerManager(manager)" *ngFor="let manager of scheduleManagers; let i = index;"
+                class="li-itemWrap">
+                <div class="li-Item">{{manager.clinic}}</div>
+                <div class="li-Item">{{manager.department}}</div>
+                <div class="li-Item">{{manager.unit}}</div>
+                <div class="li-Item-group">
+                    <div class="group-wrap" *ngFor="let schedule of manager.schedules">
+                        <div class="group-Item">{{schedule.day}}</div>
+                        <div class="group-Item">{{schedule.startTime | date:'shortTime'}} - {{schedule.endTime |
+                            date:'shortTime'}}</div>
+                        <div class="group-Item">{{schedule.location.name}}</div>
+                    </div>
+                </div>
+                <div class="li-cta">
+                    <i (click)="onSelectSchedulerManager(manager)" class="fa fa-fw fa-2x fa-pencil-square-o orange tooltip"
+                        data-tooltip="Edit" aria-hidden="true"></i>
+                    <i (click)="deleteSelectedSchedulerManager(manager, i)" class="fa fa-fw fa-2x fa-trash orange tooltip"
+                        data-tooltip="Delete" aria-hidden="true"></i>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

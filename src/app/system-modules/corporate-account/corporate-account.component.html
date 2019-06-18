@@ -1,0 +1,69 @@
+<!--<div (click)="innerMenuHide($event)" class="secondary-tab">
+    <div class="inner-wrap inner-wrap-sec">
+        <div class="menuBar-facilityName">
+            <div class="menubar_facilityLogo orgLogo-wrap">
+                <img *ngIf="selectedFacility.logoObject != undefined" [src]="facilityService.transform(selectedFacility.logoObject.thumbnail)">
+                <img *ngIf="selectedFacility.logoObject == undefined" src="assets/images/logos/default.png">
+                <div (click)="show_changeFacilityLogo()" class="pp-overlay">Change Logo</div>
+            </div>
+            <span>{{selectedFacility.name}}</span>
+        </div>
+    </div>
+</div>-->
+
+<div class="component-header">{{ pageInView }}</div>
+
+<div (click)="innerMenuHide($event)" class="inner-wrap bodyWrap">
+    <div class="coverProviders">
+        <div class="secTitle">Top 10 Facilities</div>
+        <div class="coverProvider" *ngFor="let facility of facilities">
+            <img *ngIf="!facility?.logoObject" src="assets/images/logos/default.jpg">
+            <img *ngIf="facility?.logoObject" [src]="facilityService.transform(facility?.logoObject?.thumbnail)">
+            <div class="txtWrap">
+                <div class="facility">{{ facility.name }}</div>
+                <div class="listedFacilityDesc">{{ facility.description }}</div>
+            </div>
+        </div>
+    </div>
+
+    <router-outlet class="menuContent"></router-outlet>
+
+    <div class="activitiesFeeds">
+        <div class="secTitle">Activities</div>
+        <div class="activityFeed">
+            <img src="assets/images/users/default.png">
+            <div class="txtWrap">
+                <div class="theUser">Aiyk Ekwe</div>
+                <div class="theActivity">added <span class="lineLink"> sammy clint</span> under <span class="lineLink">Continental hospital's</span> health coverage <span class="feedTime">Just Now</span></div>
+            </div>
+        </div>
+        <div class="activityFeed">
+            <img src="assets/images/users/default.png">
+            <div class="txtWrap">
+                <div class="theUser">Aiyk Ekwe</div>
+                <div class="theActivity">added <span class="lineLink"> sammy clint</span> under <span class="lineLink">Continental hospital's</span> health coverage <span class="feedTime">5 minutes ago</span></div>
+            </div>
+        </div>
+        <div class="activityFeed">
+            <img src="assets/images/users/default.png">
+            <div class="txtWrap">
+                <div class="theUser">Aiyk Ekwe</div>
+                <div class="theActivity">added <span class="lineLink"> sammy clint</span> under <span class="lineLink">Continental hospital's</span> health coverage <span class="feedTime">2 days ago</span></div>
+            </div>
+        </div>
+        <div class="activityFeed">
+            <img src="assets/images/users/default.png">
+            <div class="txtWrap">
+                <div class="theUser">Aiyk Ekwe</div>
+                <div class="theActivity">added <span class="lineLink"> sammy clint</span> under <span class="lineLink">Continental hospital's</span> health coverage <span class="feedTime">12th Dec, 2016.</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="logoutConfirm_on" class="modal-overlay">
+        <app-logout-confirm (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-logout-confirm>
+    </div>
+</div>
+<div *ngIf="changeFacilityLogo" class="modal-overlay">
+    <app-logo-update [selectedCorporateFacility]="selectedFacility" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-logo-update>
+</div>

@@ -1,0 +1,27 @@
+@import "../home/home.component.scss";
+
+.CTAs-wrap{
+    border: 1px solid #777;
+}
+.cta-1{
+    width: 250px;
+}
+.wrapLabel{
+    text-align: left;
+}
+.modal-overlay{
+    z-index: 15;
+}
+@media only screen and (max-width: 420px){
+    .CTAs-wrap {
+        margin-top: 10px;
+    }
+    .cta-1{
+        width: 80%;
+        height: 35px;
+        font-size: 1.3rem;
+    }
+    .wrapLabel.actionTxt{
+        margin-top: 10px;
+    }
+}

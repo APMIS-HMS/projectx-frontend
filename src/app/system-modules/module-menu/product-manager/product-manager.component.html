@@ -1,0 +1,76 @@
+<!-- <ul class="pg-menuWrap">
+    <li [class.pg-menuActive]="" routerLink="/dashboard/store">Home</li>
+    <li [class.pg-menuActive]="productNavMenu" routerLink="/dashboard/product-manager/products" (click)="changeRoute('products')">Product</li>
+    <li [class.pg-menuActive]="supplierNavMenu" routerLink="/dashboard/product-manager/suppliers" (click)="changeRoute('suppliers')">Supplier</li>
+    <li [class.pg-menuActive]="categoryNavMenu" (click)="productCatPopShow()">Product Category</li>
+    <li [class.pg-menuActive]="genericNavMenu" (click)="genericSlide()">Generic</li>
+    <li [class.pg-menuActive]="manufacturerNavMenu" (click)="manufacturerSlide()">Manufacturer</li>
+    <li [class.pg-menuActive]="presentationNavMenu" (click)="presentationSlide()">Presentation</li>
+    <li [class.pg-menuActive]="routeNavMenu" (click)="routeSlide()">Route</li>
+    <li [class.pg-menuActive]="strengthNavMenu" (click)="strengthSlide()">Strength</li>
+</ul> -->
+<div class="main-wrapper">
+    <div class="content-sect">
+        <div class="bar-1">
+            <div class="active-store"></div>
+            <div class="post-ql-open">
+                <div class="ql-tip">Quick Links</div>
+                <i (click)="toggleQl()" class="fa fa-link ql-open rotating"></i>
+            </div>
+        </div>
+
+        <div class="active-store"> {{ checkingStore?.storeObject?.name }}</div>
+        <div class="pg-labels-wrap">
+            <div class="main-title">{{pageInView}}</div>
+            <div class="labels-right">
+                <div class="label-right" routerLink="/dashboard/store/pos">Point of Sale</div>
+                <div class="label-right" (click)="onChangeCheckedIn()">Switch Store</div>
+            </div>
+        </div>
+        <div class="rhs inner-page-contentArea c-page-wrapper">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="store-quick-link-box">
+        <app-store-quick-links *ngIf="Ql_toggle" (toggleQl)="toggleQl()"></app-store-quick-links>
+    </div>
+
+
+
+
+
+    <!-- <div class="inner-wrap-b body-wrap">
+        <div class="facility-title" (pageInView)="pageInViewLoader($event)">{{pageInView}}</div>
+        <div class="inner-page-wrap" id="inner-page-wrap">
+            <div class="rhs inner-page-contentArea c-page-wrapper">
+                <router-outlet></router-outlet>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div> -->
+</div>
+
+<div *ngIf="isProductCat" class="modal-overlay center-center">
+    <app-category-manager (closeModal)="close_onClick($event);"></app-category-manager>
+</div>
+
+<!-- <div *ngIf="isGeneric" class="modal-overlay center-center">
+    <app-generic-manager (closeModal)="close_onClick($event);"></app-generic-manager>
+</div>
+
+<div *ngIf="isProductRoute" class="modal-overlay center-center">
+    <app-route-manager (closeModal)="close_onClick($event);"></app-route-manager>
+</div>
+
+<div *ngIf="isManufacturer" class="modal-overlay center-center">
+    <app-manufacturer-manager (closeModal)="close_onClick($event);"></app-manufacturer-manager>
+</div>
+
+<div *ngIf="isPresentation" class="modal-overlay center-center">
+    <app-presentation-manager (closeModal)="close_onClick($event);"></app-presentation-manager>
+</div>
+
+<div *ngIf="isStrength" class="modal-overlay center-center">
+    <app-strength-manager (closeModal)="close_onClick($event);"></app-strength-manager>
+</div> -->

@@ -1,0 +1,86 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico">X</div>
+        <legend class="modal_title">Checkout Patient</legend>
+    </div>
+
+    <div class="contWrap modal-baseWrap">
+        <div class="CTAs-wrap">
+            <div class="checkoutBtn" (click)='checkOutPatient("No Futher Appointment")'>No Futher Appointment</div>
+            <div class="checkoutBtn" (click)='checkOutPatient("Follow-Up With Appointment")'>Follow-Up With Appointment</div>
+            <div (click)="checkoutWard()" class="checkoutBtn">Send for Admission</div>
+            <div (click)="deathCheckout()" class="checkoutBtn">Death</div>
+        </div>
+        <div class="rightsect">
+            <div *ngIf="ward_checkout" class="selectedCheck">
+                <div *ngIf="!admittedWard.isAdmitted && !loading">
+                    <div class="sub-header">Send {{ patientDetails?.personDetails?.firstName }} {{ patientDetails?.personDetails?.lastName }} to be admitted</div>
+                    <form [formGroup]="admitFormGroup" novalidate>
+                        <div class="frm-item-wrap">
+                            <mat-form-field>
+                                <mat-select placeholder="Ward" formControlName="ward">
+                                    <mat-option *ngFor="let ward of wards" [value]="ward"> {{ ward.name }} </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="frm-item-wrap">
+                            <mat-form-field>
+                                <textarea formControlName="desc" matInput placeholder="Description (optional)"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </form>
+                    <div class="btn-box">
+                        <button mat-raised-button [disabled]="!admitFormGroup.valid || disableAdmissionBtn" class="btn" (click)="onClickAdmit(admitFormGroup.value, admitFormGroup.valid);">
+                          <span *ngIf="admitBtn"> Send <i class="fa fa-check-circle"></i></span>
+                          <span *ngIf="admittingBtn">Sending... <i class="fa fa-spin fa-spinner"></i></span>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="admittedWard.isAdmitted && !loading">
+                    <div style="width:100%;">
+                        <span style="padding:50px;">{{ admittedWard.msg }} </span>
+                    </div>
+                </div>
+                <div *ngIf="!admittedWard.isAdmitted && loading">
+                    <div>
+                        <span> Loading</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="death_checkout" class="selectedCheck">
+                <div *ngIf="!admittedWard.isAdmitted && !loading">
+                    <div class="sub-header">Checkout {{ patientDetails?.personDetails?.personFullName }} since he/she is Dead</div>
+                    <form [formGroup]="deathFormGroup" novalidate>
+                        <div class="frm-item-wrap">
+                            <mat-form-field>
+                                <input formControlName="deathTime" matInput [matDatepicker]="picker" placeholder="Choose a date">
+                                <mat-datepicker-toggle mdSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="frm-item-wrap">
+                            <mat-form-field>
+                                <textarea formControlName="desc" matInput placeholder="Description (optional)"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </form>
+                    <div class="btn-box">
+                        <button mat-raised-button [disabled]="!deathFormGroup.valid || loading" class="btn" (click)="checkOutPatient('death', deathFormGroup.value, deathFormGroup.valid);" [innerHtml]="admitBtnText"></button>
+                    </div>
+                </div>
+                <div *ngIf="admittedWard.isAdmitted && !loading">
+                    <div style="width:100%;">
+                        <span style="padding:50px;">{{ admittedWard.msg }} </span>
+                    </div>
+                </div>
+                <div *ngIf="!admittedWard.isAdmitted && loading">
+                    <div>
+                        <span> Loading</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

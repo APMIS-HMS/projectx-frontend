@@ -1,0 +1,78 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">New Beneficiary</legend>
+    <div class="modal_mini_title">{{selectedFacility.name}}</div>
+  </div>
+  <div class="modal-baseWrap">
+    <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+    <form class="frm-down" [formGroup]="frm_UpdateCourse" novalidate>
+      <div class="form-group">
+        <label for="firstname">First Name</label>
+        <input formControlName="firstname">
+      </div>
+      <div class="form-group">
+        <label for="surname">Last Name</label>
+        <input formControlName="surname">
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <select formControlName="gender">
+          <option>Select Gender</option>
+          <option *ngFor="let item of genders" [value]="item" [selected]="item===selectedBeneficiary.gender">{{item}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="filNo">Insurance ID</label>
+        <input formControlName="filNo">
+      </div>
+      <div class="form-group">
+        <label for="filNo">Date</label>
+        <input type="date" formControlName="date">
+      </div>
+
+      <div class="form-group">
+        <label for="plan">Plan</label>
+        <input formControlName="plan">
+      </div>
+
+      <div class="form-group">
+        <label for="type">Type</label>
+        <select formControlName="type">
+          <option>Select Type</option>
+          <option *ngFor="let item of types" [value]="item">{{item}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="sponsor">Sponsor</label>
+        <input formControlName="sponsor">
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <input formControlName="category">
+      </div>
+
+
+      <div class="pretty p-default">
+        <input type="checkbox" formControlName="status" />
+        <div class="state">
+          <label>
+            <span></span>Active</label>
+        </div>
+      </div>
+      <div class="btn-wrap-x2">
+        <button type="submit" (click)="view()" class="btn btn-primary" [disabled]="disableButton">
+          <span *ngIf="selectedBeneficiary.index!==''">Update</span>
+          <span *ngIf="selectedBeneficiary.index===''">Save</span>
+          <i class="fa fa-check"></i>
+        </button>
+        <button (click)="close_onClick()" class="btn btn-danger">Cancel
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

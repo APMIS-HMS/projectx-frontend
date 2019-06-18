@@ -1,0 +1,64 @@
+@import "../../../payment/bill-lookup/bill-lookup.component.scss";
+
+.contentCol{
+    width: 100%;
+}
+.bck{
+    cursor: pointer;
+    font-size: 2rem;
+    color: #bebebe;
+    position: absolute;
+    top: 52px;
+}
+.bck:hover{
+    color: #03A9F4;
+}
+.type-wrap{
+    position: relative;
+}
+.floating-action {
+    position: absolute;
+    background: #fff;
+    min-width: 300px;
+    width: auto;
+    padding: 10px;
+    border: 1px solid #777;
+    top: -109px;
+    right: -75%;
+    z-index: 1;
+}
+.floating-action button{
+    padding: 5px;
+    margin: 10px 0;
+    border: 1px solid #777;
+}
+.btn-wrap{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;   
+}
+.input-x2{
+    display: flex;
+    justify-content: space-between;
+    padding: 3px;
+    box-sizing: border-box;
+}
+.half-width{
+    width: 47%;
+}
+.generateInvoiceWrap{
+    margin: 0 5px;
+}
+.btn-x2{
+    display: flex;
+    justify-content: space-around;;
+    width: 340px;
+    margin: 0 auto;
+}
+.mod-price{
+    background: #E1F5FE;
+    padding: 3px 10px;
+    color: #000;
+}

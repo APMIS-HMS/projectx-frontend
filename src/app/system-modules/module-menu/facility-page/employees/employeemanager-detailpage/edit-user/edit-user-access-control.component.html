@@ -1,0 +1,12 @@
+<div class="privi-carousel-parentwrap">
+    <span class="privi-carousel-parentlabel">{{selectedAccessControlObject?.name}}</span>
+    <div class="featuresWrapper">
+        <div *ngFor="let feature of selectedFeatures; let i = even; let k = odd" [class.color1]="i" [class.color2]="k">
+            <app-edit-user-features [selectedFeature]="feature"></app-edit-user-features>
+        </div>
+    </div>
+</div>
+
+<!-- <div *ngIf="createWorkspace" class="modal-overlay">
+    <app-create-workspace [selectedEmployee]="employee" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-create-workspace>
+</div> -->

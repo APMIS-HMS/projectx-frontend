@@ -1,0 +1,218 @@
+<!-- <ul class="pg-menuWrap">
+    <li (click)="changeRoute('service')" [class.pg-menuActive]="">
+        <i class="fa fa-home" aria-hidden="true"></i> Services</li>
+    <li (click)="changeRoute('Price List')" [class.pg-menuActive]="">
+        <i class="fa fa-file-text-o" aria-hidden="true"></i> Price List</li>
+    <li (click)="changeRoute('payment')" [class.pg-menuActive]=" ">
+        <li [routerLink]="['/dashboard/payment/bill']"><i class="fa fa-money" aria-hidden="true"></i> Payment</li>
+</ul>-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row" *ngIf="!searchShowc">
+                        <div class="col-xs-9">
+                            Category
+                        </div>
+                        <div class="col-xs-1">
+                            <i (click)="newCategoryPopup_show({})" class="fa fa-plus fa-fw"></i>
+                            <div *ngIf="newCategoryPopup" class="modal-overlay">
+                                <app-new-category [selectedCategory]="selectedCategory" (refreshCategory)="onRefreshCategory($event)" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-category>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <i (click)="showSearchc()" class="fa fa-search fa-fw"></i>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="searchShowc">
+                        <div class="col-xs-11">
+                            <input type="text" placeholder="Search..." [formControl]="searchCategory" class="card-header-box">
+                        </div>
+                        <div class="col-xs-1">
+                            <i (click)="closeSearchc()" class="fa fa-close fa-fw"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content scrollable">
+                    <div *ngFor="let category of categories" [ngClass]="{ 'undefined' : category.name == selectedCategory.name}" class="card-list-item" (click)="selectCategory(category)">
+                        <div class="row">
+                            <div class="col-xs-8 cat-name">
+                                {{category.name}}
+                            </div>
+                            <div class="col-xs-1 options">
+                                <i (click)="newCategoryPopup_show(category);" data-toggle="tooltip" title="Edit" data-placement="left" class="fa fa-edit blue-text fa-fw media-tooltip"></i>
+                            </div>
+                            <div class="col-xs-1 options">
+                                <i data-toggle="tooltip" title="delete" data-placement="left" class="fa fa-trash red-text fa-fw"></i>
+                            </div>
+                            <div class="col-xs-2  options">
+                                <i (click)="newServicePopup_show({})" data-toggle="tooltip" title="Add Service" data-placement="left" class="fa fa-plus-square  blue-text"></i>
+                            </div>
+                            <!-- <div class="col-xs-1 options">
+                                  <i (click)="newServicePopup_show()" data-toggle="tooltip" title="Add New Service" data-placement="left" class="fa fa-plus blue-text"></i>
+                                 <div *ngIf="newServicePopup" class="modal-overlay">
+                                    <app-new-service [selectedService]="selectedService" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-service>
+                                </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row" *ngIf="!searchShow">
+                        <div class="col-xs-5">
+                            {{selectedCategory.name}} | Services
+                        </div>
+                        <!--<div class="col-xs-2">
+                            {{selectedCategory.serviceCode}} | Service Code
+                        </div>-->
+                        <div class="col-xs-4">
+                            <!-- {{selectedCategory.serviceCharge}} | Price -->
+                        </div>
+                        <div class="col-xs-1">
+                            <i (click)="newServicePopup_show({})" class="fa fa-plus fa-fw"></i>
+                            <div *ngIf="newServicePopup" class="modal-overlay">
+                                <app-new-service [selectedService]="selectedService" [selectedCategory]="selectedCategory" (refreshService)="onRefreshService($event)" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-service>
+                            </div>
+                        </div>
+                        <div class="col-xs-1">
+                            <i (click)="showSearch()" class="fa fa-search fa-fw"></i>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="searchShow">
+                        <div class="col-xs-11">
+                            <input type="text" placeholder="Search..." [formControl]="searchService" class="card-header-box">
+                        </div>
+                        <div class="col-xs-1">
+                            <i (click)="closeSearch()" class="fa fa-close fa-fw"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content scrollable">
+                    <div *ngFor="let service of selectedServices" class="card-list-item">
+                        <div class="row">
+                            <div class="col-xs-5 cat-name">
+                                <i class="{{ service.panels.length>0 ? ' fa fa-file-text-o': ' div'}}"> {{service.name}} </i>
+                                <div class="Container">
+                                    <ul class="listOfPanels" *ngFor="let item of service.panels; let i=index">
+                                        <li>• {{item.service}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- <div class="col-xs-2">{{service?.code}}</div>-->
+                            <div class="col-xs-4 cat-name">
+                                <!-- Price with Tags -->
+                                <div *ngFor="let item of service.price">
+                                    <div> {{ item.name }} <span class="badge-blue">  &#x20a6;{{item?.price | number:'1.2-2'}} </span></div><br/>
+                                </div>
+                            </div>
+                            <div class="col-xs-3 options">
+                                <i (click)="newServicePopup_show(service)" data-toggle="tooltip" title="edit" data-placement="left" class="fa fa-pencil-square-o blue-text" aria-hidden="true"></i>
+                                <!-- <i class="fa fa-trash red-text" data-toggle="tooltip" title="delete" data-placement="left" aria-hidden="true"></i> -->
+                                <div (click)="onClickshowNewModifer(service)" class="btn-1 btn-blue">
+                                    <span class="fa fa-plus-square" aria-hidden="true"></span> Add Modifier</div>
+                            </div>
+                            <!--<div class="col-xs-1 options"><i (click)="newServicePopup_show()" class="fa fa-edit blue-text"></i></div>
+                            <div class="col-xs-1 options"><i class="fa fa-trash red-text"></i></div>-->
+                        </div>
+                    </div>
+                    <div *ngIf="selectedServices.length == 0" style="text-align : center" class="card-list-item">
+                        <div class="row">
+                            <div class="col-xs-12">No service in this category</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showNewModifer" class="modal-overlay">
+    <app-new-modefier (closeModal)="close_onClick($event)" (refreshModifiers)="onRefreshService($event)" [selectedFacilityServicePrice]="selectedPriceItem" class="form-modal center-center"></app-new-modefier>
+</div>
+
+
+<!-- <div class="pgWrapper">
+
+    <div class="service">
+        <div class="tblWrap">
+            <div class="tblTitle">Services</div>
+            <div class="tblTop">
+                <div (click)="newServicePopup_show()" class="btn-1 btn-blue"><i class="fa fa-plus-square" aria-hidden="true"></i> New Service</div>
+                <mat-input-container class="example-full-width">
+                    <input type="search" autofocus matInput mat-error placeholder="search for a service" [formControl]="searchService">
+                </mat-input-container>
+            </div>
+            <table class="tblBg">
+                <thead>
+
+                    <tr>
+                        <th>Service</th>
+                        <th>Category</th>
+                        <th>Service Code</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr (dblclick)="onDoubleClick(category)" *ngFor="let category of globalCategories">
+                        <td>{{category.service}} <span class="scope" *ngIf="category.isGlobal">GLOBAL</span></td>
+                        <td>{{category.category}}</td>
+                        <td>{{category.serviceCode}}</td>
+                        <td>
+                            <i (click)="onDoubleClick(category)" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div (click)="loadMoreGlobalCategories()" class="btn-1 btn-blue" *ngIf="showLoadMore"><i class="fa fa-plus-square" aria-hidden="true"></i> Load More</div>
+        </div>
+    </div>
+    <div class="category">
+        <div class="tblWrap">
+            <div class="tblTitle">Service Categories</div>
+            <div class="tblTop">
+                <div (click)="newCategoryPopup_show()" class="btn-1 btn-blue"><i class="fa fa-plus-square" aria-hidden="true"></i> New Category</div>
+                <mat-input-container class="example-full-width">
+                    <input type="search" autofocus matInput mat-error placeholder="search for a category" [formControl]="searchCategory">
+                </mat-input-container>
+            </div>
+            <table class="tblBg">
+                <thead>
+
+                    <tr>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr (dblclick)="onDoubleClickCategory(category)" *ngFor="let category of categories">
+                        <td>{{category.name}}</td>
+                        <td>
+                            <i (click)="onDoubleClickCategory(category)" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div *ngIf="newServicePopup" class="modal-overlay">
+        <app-new-service [selectedService]="selectedService" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-service>
+    </div>
+
+    <div *ngIf="newCategoryPopup" class="modal-overlay">
+        <app-new-category [selectedCategory]='selectedCategory' (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-category>
+    </div>
+
+
+</div> -->

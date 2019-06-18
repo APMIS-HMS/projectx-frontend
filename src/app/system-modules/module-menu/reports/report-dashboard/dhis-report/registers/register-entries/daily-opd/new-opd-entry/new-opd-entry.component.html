@@ -1,0 +1,162 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Daily OPD Data Entry</legend>
+    <div class="modal_mini_title">Continental Hospital</div>
+  </div>
+
+  <div class="modal-content-overlay">
+    <form class="frm-down" [formGroup]="frm_UpdateCourse" novalidate>
+      <div class="container modal_padding">
+        <div class="row">
+          <div class="col-sm section_width">
+            <div>
+              <mat-form-field>
+                <input matInput placeholder="Date" type="date">
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <input matInput placeholder="Patient Name">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <input matInput placeholder="Patient Number">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-select placeholder="Sex">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Male</mat-option>
+                  <mat-option value="option3">Female</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <input matInput type="number" placeholder="Age">
+              </mat-form-field>
+            </div>
+            <div>
+              <h3 class="h3">Type of Attendance</h3>
+              <mat-radio-group>
+                <mat-radio-button value="1">New</mat-radio-button>
+                <mat-radio-button value="2">Follow-Up</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div>
+              <mat-form-field class="full_width">
+                <textarea matInput placeholder="Presenting Complaint"></textarea>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="full_width">
+                <textarea matInput placeholder="Diagnosis"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-sm section_border section_width">
+            <div>
+              <mat-form-field class="full_width">
+                <textarea matInput placeholder="Laboratory Investigation done"></textarea>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="full_width">
+                <textarea matInput placeholder="Drugs Given"></textarea>
+              </mat-form-field>
+            </div>
+            <div>
+              <h3 class="h3">Outcome of Visits</h3>
+              <mat-radio-group>
+                <mat-radio-button value="1">NT</mat-radio-button>
+                <mat-radio-button value="2">T</mat-radio-button>
+                <mat-radio-button value="3">A</mat-radio-button>
+                <mat-radio-button value="4">RO</mat-radio-button>
+                <mat-radio-button value="5">D</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <br>
+            <div>
+              <h2 style=" padding-left: 150px;">Malaria</h2>
+              <div>
+                <h3>Clinical Diagnosis only</h3>
+                <mat-radio-group>
+                  <mat-radio-button value="1">&lt; 5yrs</mat-radio-button>
+                  <mat-radio-button value="2">&ge; 5yrs</mat-radio-button>
+                  <mat-radio-button value="2">PW</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="container">
+              <div>
+                <h3 class="h3">Laboratory Diagnosis</h3>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h4>RDT</h4>
+                    <mat-radio-group>
+                      <mat-radio-button value="1">&lt; 5yrs</mat-radio-button>
+                      <mat-radio-button value="2">&ge; 5yrs</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="col-sm-3">
+                    <h4>Microscopy</h4>
+                    <mat-radio-group>
+                      <mat-radio-button value="1">&lt; 5yrs</mat-radio-button>
+                      <mat-radio-button value="2">&ge; 5yrs</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </div>
+              </div>
+              </div>  
+            </div>
+            <div>
+              <h3 class="h3">Confirmed Uncomplicated Malaria</h3>
+              <mat-radio-group>
+                <mat-radio-button value="1">&lt; 5yrs</mat-radio-button>
+                <mat-radio-button value="2">&ge; 5yrs</mat-radio-button>
+                <mat-radio-button value="3">PW</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h3 class="h3">Severe Malaria (if Malaria is Positive)</h3>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">&lt; 5yrs</mat-radio-button>
+                    <mat-radio-button value="2">&ge; 5yrs</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div class="col-sm-4">
+                  <h3 class="h3">Tick if ACT is given</h3>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">&lt; 5yrs</mat-radio-button>
+                    <mat-radio-button value="2">&ge; 5yrs</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="h3">Tick if other antimalarial is given</h3>
+              <mat-radio-group>
+                <mat-radio-button value="1">Yes</mat-radio-button>
+                <mat-radio-button value="2">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 text-center">
+        <div style="padding: 20px 10px;">
+          <button mat-raised-button type="submit" (click)="next_onClick()" class="mat-lg-btn">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  

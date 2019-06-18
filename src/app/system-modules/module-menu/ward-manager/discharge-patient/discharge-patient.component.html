@@ -1,0 +1,31 @@
+<div class="animated box pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Discharge Patient</legend>
+        <div class="modal_mini_title">{{ selectedPatient?.patientId?.personDetails?.personFullName }}</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <form [formGroup]="dischargeFormGroup" novalidate>
+            <div class="frm-item-wrap">
+                <mat-form-field>
+                    <mat-select placeholder="Discharge Type" formControlName="dischargeType">
+                        <mat-option *ngFor="let discharge of dischargeTypeItems" [value]="discharge">{{discharge.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container>
+                    <textarea matInput formControlName="comment" placeholder="Reason for discharge"></textarea>
+                </mat-input-container>
+            </div>
+        </form>
+        <div class="btn-box">
+            <button mat-raised-button [disabled]="!dischargeFormGroup.valid || disableBtn" (click)="onDischarge(dischargeFormGroup.value, dischargeFormGroup.valid);" class="btn">
+              <span *ngIf="dischargeBtn"><i class="fa fa-close"></i> Discharge Patient</span>
+              <span *ngIf="dischargingBtn">Discharging Patient... <i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </div>
+</div>

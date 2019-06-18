@@ -1,0 +1,127 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick($event)" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">{{investigation?.name}} Lab Request</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+
+        <div class="pre-sects">
+            <div class="status">
+                <span *ngIf="investigation.isUploaded !== undefined" class="green-txt">Uploaded</span>
+                <span *ngIf="investigation.isUploaded === undefined" class="red-txt">Pending</span>
+            </div>
+            <div class="payment">
+                <span *ngIf="investigation.isPaid" class="green-txt">Paid</span>
+                <span *ngIf="!investigation.isPaid" class="red-txt">Not Paid</span>
+            </div>
+            <div class="date">{{investigation?.createdAt | date:'short'}}</div>
+        </div>
+
+        <div class="sect-1">
+            <div class="patientImg-wrap">
+                <div *ngIf="investigation?.patient?.profileImageObject === undefined"><img src="assets/images/users/default.png"></div>
+                <img *ngIf="investigation?.patient?.profileImageObject !== undefined" [src]="facilityService.transform(investigation?.patient?.profileImageObject?.detailthumbnail)">
+            </div>
+            <div class="sect1-content">
+                <div class="sect-inner">
+                    <div class="txt-wrap">
+                        <div class="txt-label">Full Name</div>
+                        <div class="txt-val">{{investigation?.patient?.firstName }} {{investigation?.patient?.lastName }}</div>
+                    </div>
+
+                    <div class="txt-wrap">
+                        <div class="txt-label">Gender</div>
+                        <div class="txt-val">{{investigation?.patient?.gender}}</div>
+                    </div>
+
+                    <div class="txt-wrap">
+                        <div class="txt-label">Investigation</div>
+                        <div class="txt-val">{{investigation?.name}}</div>
+                    </div>
+
+                    <div class="txt-wrap">
+                        <div class="txt-label">Sample</div>
+                        <div *ngIf="hasSample" class="txt-val"><i class="fa fa-check" aria-hidden="true"></i></div>
+                        <div *ngIf="!hasSample" class="txt-val flex-btw">
+                            <span class="sampleNotTaken">Not Taken</span>
+                            <div (click)="takeSample()" class="lab-btn"><i class="fa fa-plus" aria-hidden="true"></i>Take Sample</div>
+                        </div>
+                    </div>
+
+                    <div class="txt-wrap">
+                        <div class="txt-label">Specimen</div>
+                        <div *ngIf="hasSpecimen" class="txt-val">{{localInvestigation?.investigation?.name}} - {{localInvestigation?.specimenNumber}}</div>
+                        <div *ngIf="!hasSpecimen" class="txt-val hasBg">
+                            <mat-input-container style="position:relative;">
+                                <input [formControl]="specimenNumber" matInput autocomplete="off">
+                                <span class="input-tag">{{localInvestigation?.investigation?.name}}</span>
+                            </mat-input-container>
+                            <div (click)="(specimenNumber.valid) ? receiveSpecimen() : ''" class="lab-btn"><i class="fa fa-plus" aria-hidden="true"></i>Receive Specimen</div>
+                        </div>
+                    </div>
+
+                    <div class="txt-wrap">
+                        <div class="txt-label">Lab Number</div>
+                        <div *ngIf="hasLabNo" class="txt-val">{{investigation.labNumber}}</div>
+                        <div *ngIf="!hasLabNo" class="txt-val hasBg">
+                            <mat-input-container>
+                                <input [formControl]="labNumber" matInput autocomplete="off">
+                            </mat-input-container>
+                            <div (click)="assignLabNo()" class="lab-btn"><i class="fa fa-plus" aria-hidden="true"></i>Assign</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sect-inner">
+
+                    <div class="txt-wrap">
+                        <div class="txt-label">Physician</div>
+                        <div class="txt-val">
+                            <div class="empWrap">
+                                <div class="list-img">
+                                    <div *ngIf="investigation?.createdBy?.profileImageObject === undefined"><img src="assets/images/users/default.png"></div>
+                                    <img *ngIf="investigation?.createdBy?.profileImageObject !== undefined" [src]="facilityService.transform(investigation?.createdBy?.profileImageObject?.thumbnail)">
+                                </div>
+                                <div>{{investigation?.createdBy?.firstName }} {{investigation?.createdBy?.lastName }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="txt-wrap">
+                        <div class="txt-label">Source</div>
+                        <div class="txt-val">{{investigation?.facility?.name}}
+                            <span *ngIf="investigation.source !== undefined">{{investigation.source?.name}}</span>
+                            <span *ngIf="investigation.source === undefined">In-House Request</span>
+                        </div>
+                    </div>
+
+                    <div class="txt-wrap">
+                        <div class="txt-label">Diagnosis</div>
+                        <div class="txt-val">
+                            {{investigation?.diagnosis}}
+                        </div>
+                    </div>
+
+                    <div class="txt-wrap">
+                        <div class="txt-label">Clinical Information</div>
+                        <div class="txt-val">
+                            {{investigation?.clinicalInformation}}
+                        </div>
+                    </div>
+
+                    <div class="txt-wrap">
+                        <div class="txt-label">External</div>
+                        <div class="checka">
+                            <mat-checkbox [checked]="investigation?.isExternal"></mat-checkbox>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                        <span>Write Report</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

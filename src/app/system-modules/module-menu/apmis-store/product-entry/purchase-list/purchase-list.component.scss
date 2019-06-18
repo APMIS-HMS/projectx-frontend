@@ -1,0 +1,57 @@
+@import "./new-purchase-list/new-purchase-list.component.scss";
+
+
+
+.list-wrap{
+    padding: 20px;
+    display: block;
+    border: 1px solid #dddddd;
+    margin-bottom: 10px;
+}
+
+.list-con{
+    border: 1px solid #dddddd;
+}
+
+.list-con-wrap {
+    display: flex; 
+    padding-bottom: 5px;
+}
+
+.sup-list{
+    margin-top: 3px;
+    display: flex;
+    background: #dddddd1a;
+    padding: 5px;
+    border-radius: 3px;
+    .sup-list-items{
+        //background: #dddddd;
+        padding-right: 20px;
+        cursor: pointer;
+    }
+}
+
+.con-wrap{
+    padding: 0px 50px;
+}
+
+
+.action-placeholder-hr{
+    position: relative;
+    font-size: 1.6rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+}
+.action-placeholder-hr:hover {
+    .action-container {
+        display: block;
+    }
+}
+
+
+.action-lft{
+    display: flex;
+    justify-content: space-between;
+}

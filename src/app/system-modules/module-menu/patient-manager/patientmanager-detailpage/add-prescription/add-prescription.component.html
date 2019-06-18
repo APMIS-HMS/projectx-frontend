@@ -1,0 +1,85 @@
+<div>
+    <table cellpadding="0" cellspacing="0" border="0.5">
+        <thead style="text-align: left">
+            <tr class="table-header">
+                <th class="table-header-data" style="width: 5%;">
+                    <span style="padding-left: 3px;">S/N</span>
+                </th>
+                <th class="table-header-data" style="width: 55%;">
+                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    <span style="padding-left: 3px;">Prescription</span>
+                </th>
+                <th class="table-header-data" style="width: 15%;">
+                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    <span style="padding-left: 3px;">Instruction</span>
+                </th>
+                <th class="table-header-data" style="width: 25%;">
+                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    <span style="padding-left: 3px;">Action</span>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngIf="prescriptionItems.prescriptionItems.length === 0 && !loading">
+                <td class="table-content" colspan="4" style="text-align: center !important; padding: 10px !important;"> No data available in table</td>
+            </tr>
+            <tr *ngIf="prescriptionItems.prescriptionItems.length === 0 && loading">
+                <td class="table-content" colspan="4" style="text-align: center !important; padding: 10px !important;">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                </td>
+            </tr>
+            <tr *ngFor="let prescription of prescriptionItems.prescriptionItems; let i = index;" style="text-align: left">
+                <td class="table-content" style="width: 5%;">{{ i+1 }}</td>
+                <td class="table-content" style="width: 55%;">
+                    {{ prescription?.genericName }} - {{ prescription?.dosage }},
+                    <span *ngFor="let reg of prescription?.regimen">
+                        {{reg?.frequency }} for {{ reg?.duration }} {{ reg?.durationUnit }},
+                    </span>
+                        {{ prescription?.routeName }} ({{prescription.refillCount }})
+                    <br>
+                    <span *ngIf="prescription.isBilled" style="color:#2e7d32;">
+                        Drug: {{ prescription?.productName?.productObject?.name }}, Quantity: {{ prescription?.quantity }}, Unit Price: {{ prescription?.cost }}, Cost: {{ prescription?.totalCost }}
+                    </span>
+                </td>
+                <td class="table-content" style="width: 15%;">{{ prescription?.patientInstruction }}</td>
+                <td class="table-content" style="width: 25%; padding: 5px !important;">
+                    <div *ngIf="isPrescriptionPage" class="pres-data action-long">
+                        <a class="trash-box" (click)="onClickDeleteItem(i, prescription);"><i class="fa fa-trash"></i></a>
+                        <mat-checkbox *ngIf="!prescription.isBilled" (change)="onClickIsExternal(i, $event.checked, prescription);" [checked]="prescription.isExternal">External?</mat-checkbox>
+                        <button mat-raised-button *ngIf="!prescription.initiateBill" (click)="toggleBill(i, prescription);" class="btn {{ prescription.isBilled ? ' btn-green': ' btn-default'}}">
+                            <span *ngIf="!prescription.isBilled">Bill</span>
+                            <span *ngIf="prescription.isBilled" style="color: #fff;">Billed</span>
+                        </button>
+                    </div>
+                    <div *ngIf="isDispensePage" class="pres-data action-long">
+                        <!-- <a class="trash-box" (click)="toggleBill(i, prescription);"><i class="fa fa-edit"></i></a> -->
+                        <mat-checkbox *ngIf="!prescription.isBilled" (change)="onClickIsExternal(i, $event.checked, prescription);" [checked]="prescription.isExternal">External?</mat-checkbox>
+                        <button mat-raised-button *ngIf="!prescription.initiateBill" (click)="toggleBill(i, prescription);" class="btn {{ prescription.isBilled ? ' btn-green': ' btn-default'}}">
+                            <span *ngIf="!prescription.isBilled">Bill</span>
+                            <span *ngIf="prescription.isBilled" style="color: #fff;">Billed</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="!isDispensePage">
+    <div class="row">
+        <div class="col-sm-12 col-md-12" style="padding-top: 10px;">
+            <div class="col-sm-6 pull-right" style="padding-right: 20px;">
+                <p class="pull-right"><strong>Total Quantity:</strong> <span> {{ totalQuantity }}</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="col-sm-6 pull-right" style="padding-right: 20px;">
+                <p class="pull-right"><strong>Total Bill:</strong> <span> &#x20A6;{{ totalCost }}</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-bill-prescription *ngIf="billShow" [storeId]="storeId" [prescriptionData]="prescriptionData" (closeModal)="close_onClick($event)"></app-bill-prescription>

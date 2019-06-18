@@ -1,0 +1,236 @@
+@import "../../../../../../globals/variables.scss";
+@import "../../facility-page-home.component.scss";
+.survery select {
+    min-width: 140px;
+}
+.top-buttons{
+    width: 90%;
+    margin: 0 auto;
+}
+.top-buttons button{
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    color: #fff !important;
+}
+.top-buttons .mat-raised-button{
+    max-width: 100%;
+}
+.side-sec{
+    width: 35%;
+    border: 1px solid #f5f5f5;
+    height: 500px;
+    overflow-y: scroll;
+}
+.content-sec{
+    // position: relative;
+    width: 100%;
+    // border: 1px solid #f5f5f5;
+    // padding: 2px;
+    // padding-bottom: 20px;
+    // min-height: 200px;
+}
+.col-lg-6 {
+    padding-left: 0;
+}
+.dataMix-wrap .rhs {
+    width: auto;
+}
+.tbl-row {
+    border: 3px solid #fff;
+}
+.tbl-item {
+    width: 100%;
+}
+.top-tab-search{
+    margin: 10px auto;
+    width: 90%;
+    display: block;
+    padding: 9px;
+}
+.emp-nameRow{
+    display: flex;
+    align-items: center;
+}
+.emp-img-wrap{
+    position: relative;
+    width: 190px;
+    float: right;
+    text-align: center;
+}
+.emp-img-wrap:hover{
+    .pp-overlay{
+        display: flex;
+    }
+}
+.empImageWrap{
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+}
+.pp-overlay{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: underline;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    font-size: 1.2rem;
+    border-radius: 100%;
+}
+.emp-nameRow img{
+    width: 100%;
+    border-radius: 100%;
+    margin-right: 10px;
+    height: 100%;
+}
+.empData-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.empData-header .emp-data{
+    text-align: left;
+    margin-left: 16px;
+    margin-top: 52px;
+}
+.emp-data, .emp-img{
+    width: 50%;
+}
+.emp-img{
+    text-align: right;
+    padding-top: 20px;
+}
+.emp-img img{
+    width: 190px;
+    border-radius: 100%;
+}
+.emp-name{
+    font-size: 4rem;
+    color: #0D47A1;
+    font-family: $font-titles;
+}
+.emp-apmisId{
+    color: #ff2500;
+    font-size: 1.6rem;
+}
+.emp-dept, .emp-number{
+    font-size: 1.6rem;
+    color: #757575;
+}
+.emp-status{
+    font-size: 1.4rem;
+    color: #7CB342;
+}
+.emp-email{
+    font-size: 1.4rem;
+    color: #0D47A1;
+    text-decoration: underline;
+    line-height: 1.5;
+}
+.empData-block{
+    margin: 30px 0;
+    color: #424242;
+    font-size: 2rem;
+}
+.inner-menu1-wrap{
+    top: 10px;
+    right: auto;
+    left: 0px;
+}
+.content-sec-ico{
+    font-size: 2rem;
+    color: #757575;
+    padding: 4px;
+    width: 21px;
+    height: 21px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content-sec-ico:hover, .content-sec-icoActive{
+    background: #F5F5F5;
+    color: #4bb8ef;
+}
+.editButton {
+    float: right;
+    cursor: pointer;
+    padding-right: 10px; 
+}
+.padding {
+    padding:10px;
+}
+.box {
+    padding: 10px;
+    background: #f5f5f5;
+}
+
+.lhs {
+     padding-right: 0; 
+}
+.dataMix-wrap {
+    display: flex;
+    align-items: center;
+}
+.fa-check {
+    cursor: pointer;
+}
+.back-btn {
+    float: right;
+    background: transparent;
+}
+.backBtn{
+    position: absolute;
+    left: 21px;
+    top: 0;
+    outline: none;
+}
+.second-menu {
+    width: 100%;
+    margin: -7px auto 0;
+    text-align: left;
+}
+.btning {
+    padding: 10px 5px;
+}
+.facility-title{
+    margin-bottom: 10px;
+}
+.x2-card-wrap{
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row-reverse;
+}
+.card-a3{
+    width: 30%;
+}
+.card-a7{
+    width: 69%;
+}
+.empDataBlock-title {
+    color: #1d549b;
+    font-size: 1.6rem;
+}
+.inner-wrap-b{
+    padding: 0;
+}
+
+@media only screen and (max-width: 900px) {
+    .fac-card{
+        display: none;
+    }
+    .x2-card-wrap{
+        display: block;
+    }
+    .card-a3, .card-a7{
+        width: 100%;    
+    }
+}

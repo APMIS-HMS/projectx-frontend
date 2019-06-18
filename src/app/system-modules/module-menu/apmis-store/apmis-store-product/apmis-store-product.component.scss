@@ -1,0 +1,28 @@
+@import "./../apmis-store-home/store-home-main/store-home-main.component.scss";
+
+.st-btn {
+    width: 150px;
+    position: relative;
+    padding: 8px;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #000;
+    justify-content: space-around;
+    background: #fff;
+    cursor: pointer;
+    border: 1px solid rgb(53, 53, 255);
+    border-radius: 3px;
+}
+
+.btnContainer{
+    align-self: center;
+    right: 0;
+    /* flex: 1; */
+    /* float: right; */
+    position: absolute;
+    margin-right: 60px;
+}
+
+.fa{
+    padding-right: 15px !important;
+}

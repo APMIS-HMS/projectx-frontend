@@ -1,0 +1,16 @@
+<div class="home-main" style="margin-top: 7px;">
+  <ul class="hm-tabs">
+    <li (click)="tab_click('prescribeDrug')" [class.hm-tab-active]='tab_prescribe_drug' class="hm-tab">Prescribe Drug</li>
+    <li (click)="tab_click('prescriptionHistory')" [class.hm-tab-active]='tab_prescription_history' class="hm-tab">Medication
+      History</li>
+  </ul>
+
+
+
+  <div class="tab-content" *ngIf="tab_prescribe_drug">
+    <app-prescribe-drug [selectedAppointment]="selectedAppointment" [patientDetails]="patientDetails"></app-prescribe-drug>
+  </div>
+  <div class="tab-content" *ngIf="tab_prescription_history">
+    <app-prescription-history [selectedAppointment]="selectedAppointment" [patientDetails]="patientDetails"></app-prescription-history>
+  </div>
+</div>

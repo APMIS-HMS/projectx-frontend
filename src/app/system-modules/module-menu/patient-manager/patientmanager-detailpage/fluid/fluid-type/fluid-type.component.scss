@@ -1,0 +1,33 @@
+@import "../fluid.component.scss";
+form{
+    display: flex;  
+}
+.tbl-action{
+    text-align: center;
+    width: 100%;
+}
+.tbl-action i {
+    color: #0288D1;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+.tbl-action i:hover{
+    color: #ff2500;
+}
+.modal_title{
+    border: 0;
+}
+.act-btn-wrap{
+    margin-left: 10px;
+    color: #fff;
+}
+th{
+    border-bottom: 1px solid #f8f8f8;
+    color: #0288D1;
+}
+.modal-baseWrap{
+    width: 500px;
+}
+.frm-item-wrap{
+    margin-right: 10px;
+}

@@ -1,0 +1,64 @@
+//fonts
+$font-main: 'Montserrat',
+sans-serif;
+$font-titles: 'Josefin Sans',
+sans-serif;
+//sizes
+$innerWrapWidth: 1200px;
+//colors
+$primaryColor: rgb(21, 61, 112);
+$secondaryColor: rgb(75, 184, 239);
+$navBar: rgba(255, 255, 255, 0.5);
+$td-border: #ddd;
+$th-background: #4bb8ef;
+$th-border: #35a7e0;
+$tr-hover: #f5f5f5;
+$tr-stripe: #f8f8f8;
+// Color
+$grey-bg: #e2e2e2;
+$red: #ff2500;
+$green: #00cc00;
+$orange: #ffa500;
+$orange-1: #cc8400;
+$green-1: #009900;
+$blue: blue;
+$white: #ffffff;
+$black: #000000;
+$yellow: #FFB80A;
+//query
+$break-small: 768px;
+$break-large:1024px;
+.tooltip {
+    opacity:1 !important; //simpa added for missing elements
+    position: relative !important; //simpa added for missing elements
+    font-size: 1.3em !important;
+  
+    &:after {
+      font-family: Arial, Helvetica, sans-serif;
+      opacity: 0;
+      transition: all .4s;
+      font-size: 1.2rem !important;
+      position: absolute;
+      margin-left: -100px;
+      display: block;
+      padding: 3px;
+      content: attr(data-tooltip);
+      background: rgba(0, 0, 0, 0.74);
+      border-radius: 6px;
+      color: #fff;
+      min-width: auto;
+      text-align: center;
+    }
+  
+    &:hover {
+      &:after {
+        opacity: 1;
+        margin-left: -20px;
+        //margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+      }
+    }
+  }
+  

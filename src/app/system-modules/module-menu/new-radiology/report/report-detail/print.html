@@ -1,0 +1,92 @@
+<head>
+    <style>
+
+    </style>
+</head>
+
+<div class="print-doc">
+    <div class="report-header">
+        <h1 style="border-bottom: 6px solid #337ab7"> Blossom Care hospital </h1>
+        <h3>Laboratory report</h3>
+    </div>
+    <section class="patientDetails">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="sel-patient-name">{{ selectedInvestigationData?.patient?.firstName }} {{ selectedInvestigationData?.patient?.lastName }}</h2>
+                <h3 class="sel-patient-detaills">{{ selectedInvestigationData?.patient?.apmisId }} <span style="color:#0288D1; font-size: 1.4rem">|</span> {{ selectedInvestigationData?.patient?.dateOfBirth | date: 'shortDate' }} <span style="color:#0288D1; font-size: 1.4rem">|</span>{{
+                    selectedInvestigationData?.patient?.gender }}</h3>
+            </div>
+        </div>
+        <div class="col-xs-7">
+            <div>
+                <div class="initial-contenet invstn-val" style="margin-bottom: 10px;
+                    background: #f8f8f8;
+                    padding: 5px 20px;">
+                    <div class="report-title">Clinical Information</div>
+                    <!--<div class="initial-val">
+                            {{ selectedInvestigationData?.clinicalInformation }}
+                        </div>-->
+                    <div class="initial-val">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam posuere mattis leo auctor luctus. Praesent ac sem quis lectus volutpat fringilla nec quis neque. Fusce a ante id felis eleifend feugiat. Integer et cursus odio. Nulla facilisi. Nunc imperdiet,
+                        risus sit amet iaculis tincidunt, erat sem efficitur justo, sit amet vestibulum purus ex quis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at risus sed ante venenatis interdum. Sed justo felis, scelerisque
+                        ut lacus ut, lacinia condimentum eros. Aenean purus sem, luctus sed ornare porta, sodales vel ipsum. Curabitur sit amet maximus eros. Duis et sapien sed mi cursus sollicitudin in quis lorem. Praesent varius eget purus eu ullamcorper.
+                        Nunc velit risus, pretium nec nibh et, bibendum facilisis erat. Sed sem elit, lobortis sed sapien vitae, placerat vehicula nunc. Duis in lacus egestas, auctor arcu non, ultrices dui. Nulla metus felis, facilisis a porttitor et,
+                        ultricies ut libero. Fusce ac ex mattis, molestie elit in, scelerisque odio. Integer id tellus eget magna volutpat pellentesque. Nulla eget purus luctus, auctor purus tincidunt, finibus neque. Phasellus neque odio,rutrum eu congue
+                        vitae,tincidunt a leo.
+                    </div>
+                </div>
+                <div class="initial-contenet invstn-val">
+                    <div class="report-title">Diagnosis</div>
+                    <div class="initial-val">
+                        {{ selectedInvestigationData?.diagnosis }}
+                    </div>
+                </div>
+            </div>
+            <div class="resultSect-title">Investigation Result</div>
+            <div class="invstn-wrap">
+                <div class="lettering-wrap">
+                    <div class="report-title">{{ selectedInvestigationData?.name }}</div>
+                    <div class="invstn-vals">
+                        <div class="invstn-val">
+                            <div class="val-label">Reference:</div>
+                            <div class="val-val" *ngIf="selectedInvestigationData.reportType.name == 'Text'">{{ selectedInvestigationData?.reportType.ref }}</div>
+                            <div class="val-val" *ngIf="selectedInvestigationData.reportType.name == 'Numeric'">{{ selectedInvestigationData?.reportType.ref.min }} - {{ selectedInvestigationData?.reportType.ref.min }}({{ selectedInvestigationData?.unit }})</div>
+                        </div>
+                        <div class="invstn-val">
+                            <div class="val-label">Sample NO:</div>
+                            <div class="val-val">1220</div>
+                        </div>
+                        <div class="invstn-val">
+                            <div class="val-label">Test Result:</div>
+                            <div class="val-val" *ngIf="selectedInvestigationData.reportType.name == 'Text'">
+                                <ul>
+                                    <li *ngFor="let result of selectedInvestigationData.report.result">{{result.result}}</li>
+                                </ul>
+                            </div>
+                            <div class="val-val" *ngIf="selectedInvestigationData.reportType.name == 'Numeric'">
+                                <ul>
+                                    <li *ngFor="let result of selectedInvestigationData.report.result">{{result.result}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="initial-contenet invstn-val">
+                <div class="report-title">Conclusion</div>
+                <div class="initial-val">
+                    {{ selectedInvestigationData?.report?.conclusion }}
+                </div>
+            </div>
+            <div class="initial-contenet invstn-val">
+                <div class="report-title">Recommendation</div>
+                <div class="initial-val">
+                    {{ selectedInvestigationData?.report?.recommendation }}
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        Powered by APMIS Health Management Systems
+    </footer>
+</div>

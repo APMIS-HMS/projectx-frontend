@@ -1,0 +1,136 @@
+<div class="main-wrapper">
+    <div class="content-sect">
+        <div class="bar-1">
+            <div class="active-store"></div>
+            <div class="post-ql-open">
+                <div class="ql-tip">Quick Links</div>
+                <i (click)="toggleQl()" class="fa fa-link ql-open rotating"></i>
+            </div>
+        </div>
+
+        <div class="active-store"> {{ checkingStore?.storeObject?.name }}</div>
+        <div class="pg-labels-wrap">
+            <div class="main-title">Store Summary</div>
+            <div class="labels-right">
+                <div class="label-right" routerLink="/dashboard/store/pos">Point of Sale</div>
+                <div class="label-right" (click)="onChangeCheckedIn()">Switch Store</div>
+            </div>
+        </div>
+
+        <div class="col-sm-8n">
+            <store-summary [data]="storeStatusLabel" (onItemDetailsClicked)="logCurrentSelectedItem($event)"></store-summary>
+        </div>
+        <dialog-host [visible]="showDialog">
+            <store-summary-dialog class="center-center" [title]="selectedItem?.key "  (onClose)="showDialog  = !$event">
+                <div *ngIf="selectedItem">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p class="lead text-muted">
+                                {{selectedItem?.key}}
+
+                            </p>
+                            <h2>{{selectedItem?.value}}</h2>
+                        </div>
+                        <div class="col-sm-8">
+                            <p class="text-blue bold">
+                                Details for {{selectedItem?.key}}
+                            </p>
+                            <div>
+                                <h1>Chart Visualization goes here</h1>
+                            </div>
+                            <div>
+                                <p>Details loaded from server</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </store-summary-dialog>
+        </dialog-host>
+
+        <div class="half-outer">
+            <div class="sect sect-half">
+                <div class="sect-header">
+                    <div class="head-inner-lhs">
+                        <div class="counta">{{ transferCount }}</div>
+                        <div class="head-inner-label">Requisition</div>
+                    </div>
+                </div>
+                <div class="sect-content">
+                    <div>
+                        <div *ngIf="requisitions.length === 0 && !transferLoading">
+                            <div style="width: 100%; text-align:center;">No data available in table.</div>
+                        </div>
+
+                        <div *ngIf="requisitions.length === 0 && transferLoading">
+                            <div style="width: 100%; text-align:center;">
+                                <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                            </div>
+                        </div>
+
+                        <div *ngIf="requisitions.length > 0 && !transferLoading">
+                            <div class="content-row" *ngFor="let requisition of requisitions">
+                                <div class="row-item">{{ requisition?.storeRequisitionNumber }}</div>
+                                <div class="row-item">
+                                    <div class="item-label">Store</div>
+                                    <div class="item-val">{{ requisition?.storeObject?.name }}</div>
+                                </div>
+                                <div class="row-item">
+                                    <div class="item-label">Employee</div>
+                                    <div class="item-val">{{ requisition?.employeeObject?.personDetails?.firstName }} {{ requisition?.employeeObject?.personDetails?.lastName }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="{{ transfers.length > 0 ? ' card-link ' : ' '}}" *ngIf="transfers.length > 0 && !transferLoading" routerLink="/dashboard/inventory-manager/inventory">View All</div>
+                </div>
+            </div>
+
+            <div class="sect sect-half">
+                <div class="sect-header">
+                    <div class="head-inner-lhs">
+                        <div class="counta">{{ purchaseOrderCount }}</div>
+                        <div class="head-inner-label">Purchase Order</div>
+                    </div>
+                </div>
+                <div class="sect-content">
+                    <div>
+                        <div *ngIf="purchaseOrders.length === 0 && !purchaseOrderLoading">
+                            <div style="width: 100%; text-align:center;">No data available in table.</div>
+                        </div>
+
+                        <div *ngIf="purchaseOrders.length === 0 && purchaseOrderLoading">
+                            <div style="width: 100%; text-align:center;">
+                                <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                            </div>
+                        </div>
+
+                        <div *ngIf="purchaseOrders.length > 0 && !purchaseOrderLoading">
+                            <div class="content-row" *ngFor="let purchaseOrder of purchaseOrders; let i=index">
+                                <div class="row-item">{{ purchaseOrder?.purchaseOrderNumber }}</div>
+                                <div class="row-item">
+                                    <div class="item-label">Store</div>
+                                    <div class="item-val">{{ purchaseOrder?.storeObject?.name }}</div>
+                                </div>
+                                <div class="row-item">
+                                    <div class="item-label">Supplier</div>
+                                    <div class="item-val">{{ purchaseOrder?.supplierObject?.supplier?.name }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="{{ purchaseOrders.length > 0 ? ' card-link ' : ' '}}" *ngIf="purchaseOrders.length > 0 && !purchaseOrderLoading" routerLink="/dashboard/inventory-manager/inventory">View All</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <app-quick-links *ngIf="Ql_toggle" (toggleQl)="toggleQl()"></app-quick-links> -->
+    <app-store-quick-links *ngIf="Ql_toggle" (toggleQl)="toggleQl()"></app-store-quick-links>
+</div>
+<div *ngIf="modal_on" class="modal-overlay">
+    <app-store-check-in [workSpace]="workSpace" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-store-check-in>
+</div>

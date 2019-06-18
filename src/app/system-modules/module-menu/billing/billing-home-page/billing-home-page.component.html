@@ -1,0 +1,103 @@
+<div class="pgWrapper drop-shadow raised">
+    <div class="tblWrap">
+        <div class="tblTitle">Price List</div>
+
+        <div class="row">
+            <div class="tblTop start-xs">
+                <div (click)="newPricePopup_show()" class="btn-1 btn-blue"><i class="fa fa-plus-square" aria-hidden="true"></i> New Price</div>
+            </div>
+            <div class="searchInputWrap end-xs">
+                <input type="search" class="searchInput" placeholder="search service">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="card blue-gradient" style="padding: 10px;border-radius: 5px 5px 0 0;">
+                    <div class="row middle-xs thick-text small-text">
+                        <div class="col-xs-1 center">No</div>
+                        <div class="col-xs-3 center">Category</div>
+                        <div class="col-xs-4 center">Service</div>
+                        <div class="col-xs-1 center">Price</div>
+                        <div class="col-xs-2 center">action</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row" style="margin-top: -13px;">
+            <div class="col-xs-12">
+                <div style="padding: 0px 10px;border: 1px solid #ccc;">
+                    <div class="card-list-item" *ngIf="prices.length===0 && !loading">
+                        <div class="col-xs-12 center">No data available in table</div>
+                    </div>
+                    <div class="card-list-item" *ngIf="prices.length===0 && loading ">
+                        <div class="col-xs-12 center">
+                            <mat-spinner class="small-spinner "></mat-spinner>
+                        </div>
+                    </div>
+                    <div class="card-list-item" *ngFor="let price of prices; let i=index; ">
+                        <div class="row middle-xs">
+                            <div class="col-xs-1 center">{{i+1}}</div>
+                            <div class="col-xs-3 center" style="cursor: pointer;" (click)="serviceDetail_show(price)">{{price?.service?.name}}</div>
+                            <div class="col-xs-4 center" style="cursor: pointer;" (click)="serviceDetail_show(price)">{{price?.category}}</div>
+                            <div class="col-xs-1 center" style="cursor: pointer;" (click)="serviceDetail_show(price)">{{price?.price}}</div>
+                            <div class="col-xs-2 center">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                <div (click)="newModefierPopup_show(price)" class="btn-1 btn-blue"><i class="fa fa-plus-square" aria-hidden="true"></i> Add Modifier</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <table class="tblBg">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Category</th>
+                    <th>Price(Naira)</th>
+                    <th>Actions</th>
+                </tr>
+
+                <tr>
+                    <td colspan="4">
+                        <div class="searchInputWrap">
+                            <input type="search" class="searchInput" placeholder="search for a tag">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let price of prices">
+                    <td style="cursor: pointer;" (click)="serviceDetail_show(price)">{{price?.service?.name}}</td>
+                    <td style="cursor: pointer;" (click)="serviceDetail_show(price)">{{price?.category}}</td>
+                    <td style="cursor: pointer;" (click)="serviceDetail_show(price)">{{price?.price}}</td>
+                    <td>
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <div (click)="newModefierPopup_show(price)" class="btn-1 btn-blue"><i class="fa fa-plus-square" aria-hidden="true"></i> Add Modifier</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table> -->
+    </div>
+
+    <div *ngIf="serviceDetail" class="modal-overlay">
+        <app-service-detail [selectedFacilityServicePrice]="selectedFacilityServicePrice" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-service-detail>
+    </div>
+
+    <div *ngIf="newPricePopup" class="modal-overlay">
+        <app-new-price (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-price>
+    </div>
+
+    <div *ngIf="newModefierPopup" class="modal-overlay">
+        <app-new-modefier [selectedFacilityServicePrice]="selectedFacilityServicePrice" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-modefier>
+    </div>
+
+</div>

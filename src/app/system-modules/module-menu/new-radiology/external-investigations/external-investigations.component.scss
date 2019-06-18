@@ -1,0 +1,65 @@
+@import '../../clinic/check-in-patient/check-in-patient.component.scss';
+@import '../../product-manager/category-manager/category-manager.component.scss';
+@import '../../facility-page/facilitypage-workspace/facilitypage-workspace.component.scss';
+@import '../radiology-requests/radiology-requests.component.scss';
+.table-content {
+    padding: 10px;
+}
+
+.survery table {
+    color: #000;
+}
+
+.inner-radio {
+    margin-left: 0px;
+}
+
+.survery th {
+    text-align: center;
+}
+
+.inPatient-activityTimeline {
+    z-index: 10;
+    height: 100vh;
+    top: 114px;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.border-box {
+    padding: 20px;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.workspace-count {
+    padding: 0 0 20px 0;
+    cursor: pointer;
+    &:hover {
+        .workspace-listWrap {
+            display: block;
+        }
+    }
+}
+
+.workspace-listWrap {
+    right: 20px;
+    .pointer-wrap {
+        margin-left: -90px;
+    }
+}
+
+.investigation {
+    background: #f5f5f5;
+    padding: 10px;
+}
+
+.invest-header {
+    padding: 0px 20px 20px 20px;
+    font-size: 1.4rem;
+    font-weight: bold;
+}

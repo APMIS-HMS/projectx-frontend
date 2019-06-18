@@ -1,0 +1,15 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Upload Logo</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="content-box">
+            <!-- <input type="file" ngFileSelect [events]="uploadEvents" (onUpload)="handleUpload($event)" [options]="options" (beforeUpload)="beforeUpload($event)"> -->
+        </div>
+        <div class="btn-box">
+            <button class="small-btn" (click)="uploadButton();" mat-raised-button>Upload</button>
+        </div>
+    </div>
+</div>

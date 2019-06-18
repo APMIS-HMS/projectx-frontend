@@ -1,0 +1,85 @@
+<div class="search-container">
+  <div *ngIf="InvoiceEntryLanding" class="searchproduct">
+    <div class="InputGroup">
+      <input class="customInput" type="text" required>
+      <span class="highlight"></span>
+      <label class="customLabel"><i class="fa fa-search" aria-hidden="true"></i>Search</label>
+      **Please un-comment the search result**
+      <!-- <ul class="search-sugestions">
+        <li class="search-sugestion">INVOICE1234567890</li>
+        <li class="search-sugestion">INVOICE1234567890</li>
+        <li class="search-sugestion">INVOICE1234567890</li>
+      </ul> -->
+    </div>
+  </div>
+  <div (click)="toggleView()" class="tbl-btn-action">
+    <div class="action-pad">
+      <div *ngIf="InvoiceEntryLanding" class="new-btn-blue">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <span>New Invioce Entry</span>
+      </div>
+      <div *ngIf="!InvoiceEntryLanding" class="new-link-blue">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <span>Go back to invoice list</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="InvoiceEntryLanding" class="store-table">
+  <div class="store-thead">
+    <div class="store-tr">
+      <div class="store-th store-td-actions">
+        <input type="checkbox">
+      </div>
+      <div class="invoice-tr-in">
+        <div class="store-th">Invoices</div>
+        <div class="store-th">Supplier</div>
+        <div class="store-th">Invoice Date</div>
+        <div class="store-th">Status</div>
+        <div class="store-th">Amount</div>
+        <div class="store-th">Action</div>
+      </div>
+      <div class="store-th store-td-actions"></div>
+    </div>
+  </div>
+
+  <div class="store-tbody">
+    <div class="store-pre-tr">
+      <div class="store-tr" *ngFor="let invoice of invoices">
+        <div class="store-td store-td-actions">
+          <input type="checkbox">
+        </div>
+        <div class="invoice-tr-in">
+          <div class="store-td">{{invoice.invoiceNumber}}</div>
+          <div class="store-td">{{invoice.supplierObject?.supplier.name}}</div>
+          <div class="store-td">{{invoice.createdAt | date:'fullDate'}}</div>
+          <div class="store-td green-lbl">
+            <span *ngIf="invoice.amountPaid >= invoice.invoiceAmount" [class.green-lbl]="invoice.amountPaid>= invoice.invoiceAmount">Paid></span>
+            <span *ngIf="invoice.amountPaid === 0" [class.red-lbl]="invoice.amountPaid === 0">Unpaid</span>
+            <span *ngIf="invoice.amountPaid > 0 && invoice.amountPaid < invoice.invoiceAmount" [class.orange-lbl]="invoice.amountPaid > 0 && invoice.amountPaid < invoice.invoiceAmount">Partial
+              Payment</span>
+          </div>
+          <div class="store-td">#{{invoice.invoiceAmount | number}}</div>
+          <div class="store-td">
+            <div class="inv-action">
+              <div (click)="viewInvoice(invoice)" class="ft-btn btn-act-margin">
+                <span>View Invoice</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="store-th store-td-actions">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-apmis-pagination (emitCurrentPage)="loadCurrentPage($event)" [total]="total"></app-apmis-pagination>
+</div>
+
+<app-new-invoice-entry *ngIf="!InvoiceEntryLanding"></app-new-invoice-entry>
+<div *ngIf="showViewInvoice" class="modal-overlay">
+  <app-view-invoice [loginEmployeeId]="loginEmployee._id" [selectedInvoice]="selectedInvoice" [invoiceProduct]="invoiceProduct"
+    (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-view-invoice>
+</div>

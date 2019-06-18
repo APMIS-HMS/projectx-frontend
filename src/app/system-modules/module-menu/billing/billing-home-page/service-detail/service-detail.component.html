@@ -1,0 +1,22 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick($event)" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Service Detail</legend>
+    <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+  <div class="modal-baseWrap">
+    <div class="headWrap">
+      <div class="service-name">{{selectedFacilityServicePrice?.service?.name}}</div>
+      <div class="service-cat">{{selectedFacilityServicePrice?.category}}</div>
+      <div class="service-amount">{{selectedFacilityServicePrice?.price}}</div>
+    </div>
+    <div class="tags">
+      <div  *ngFor="let modifier of selectedFacilityServicePrice.modifiers" class="tag">
+        <div (click)="removeTag(modifier)" class="closeTag"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <span>{{modifier?.tagDetails?.name}}</span>
+        <span *ngIf="modifier?.modifierType=='Percentage'">{{modifier?.modifierValue}}%</span>
+        <span *ngIf="modifier?.modifierType=='Amount'">{{modifier?.modifierValue}}(Naira)</span>
+      </div>
+    </div>
+  </div>
+</div>

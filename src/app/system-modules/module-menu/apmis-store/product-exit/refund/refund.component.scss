@@ -1,0 +1,24 @@
+@import "./../sales/sales.component.scss";
+
+.sch-wrap{
+    display: flex;
+    justify-content: center;
+    .searchproduct{
+        width: 30% !important;
+        .InputGroup{
+            .customLabel{
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+.div-space{
+    margin-top:10px;
+    margin-bottom: 10px;
+    height: 20px;
+}
+
+.cus-details{
+    width: 600px;
+}

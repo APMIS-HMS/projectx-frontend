@@ -1,0 +1,18 @@
+@import "./../prescribe-drug/prescribe-drug.component.scss";
+
+.bill-view-wrap {
+    position: absolute;
+    border: 1px solid #C4C4C4;
+    width: 55%;
+    height: 100%;
+    top: 0;
+    right: -15px;
+    background: #fff;
+    z-index: 12;
+    max-height: 745px;
+    overflow: auto;
+}
+
+.align-top {
+    vertical-align: top;
+}

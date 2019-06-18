@@ -1,0 +1,29 @@
+
+
+.leftSection{
+    width: 40%; 
+    position:relative; 
+    margin-right : 40px ;
+}
+
+.rightSection{
+    float: right; 
+    position:relative; 
+    margin-right : 40px ;
+}
+
+.h3{
+   width: 200px;
+}
+
+.modal-content-overlay {
+    position: relative;
+    width: 800px;
+    min-width: 440px;
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #fff;
+    /* overflow: unset; */
+    padding: 20px 50px;
+}

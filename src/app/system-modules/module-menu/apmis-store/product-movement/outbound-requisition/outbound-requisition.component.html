@@ -1,0 +1,203 @@
+<div class="filterTop">
+  <div class="tbl-header-lhs">
+    <div class="input-group-x2">
+      <div class="dropDown-container">
+        <div class="select">
+          <label>Store Location:</label>
+          <select [formControl]="storeLocation" name="dropDown-container" id="dropDown-container">
+            <option *ngFor="let item of minorLocations" value="{{item._id}}">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="dropDown-container">
+        <div class="select">
+          <label>Store Name:</label>
+          <select [formControl]="storeName" name="dropDown-container" id="dropDown-container">
+            <option *ngFor="let item of stores" value="{{item._id}}">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tbl-header-rhs">
+    <div class="items">
+      <label class="label">Total Items Requested</label>
+      <div class="val">{{totalCount}}</div>
+    </div>
+    <div class="items">
+      <label class="label">Total Items Value</label>
+      <div class="val">#{{totalCostPrice | number : '1.2-2'}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="tbl-sect-wrap">
+  <div class="store-table">
+    <div class="store-thead">
+      <div class="store-tr">
+        <div class="store-th store-td-actions">
+          <input type="checkbox" [formControl]="check" (change)="onCheckAll($event)" />
+        </div>
+        <div class="store-tr-in">
+          <div class="store-th">Product</div>
+          <div class="store-th">Qty Available</div>
+          <div class="store-th">Qty On Hold</div>
+          <div class="store-th">Qty To Send</div>
+          <div class="store-th">Amount</div>
+        </div>
+        <div class="store-th store-td-actions"></div>
+      </div>
+    </div>
+    <div class="store-tbody">
+      <div class="store-pre-tr">
+        <div *ngFor="let item of transferObjs;let i=index" class="store-tr">
+          <div class="store-td store-td-actions">
+            <input type="checkbox" [formControl]="check" [checked]="item?.isSelected" (change)="onCheckItem($event,item)" />
+          </div>
+          <div class="store-tr-in">
+            <div class="store-td">{{item?.productObject?.name}}</div>
+            <div class="store-td">{{item?.totalQuantity}}
+              {{item?.baseUnit}}</div>
+            <div class="store-td">{{item?.totalQuantity - item?.availableQuantity}} {{item?.baseUnit}}</div>
+            <div class="store-td" *ngIf="!item?.isEdit">{{item?.quantityRequested}} {{item?.baseUnit}}</div>
+            <div class="store-td" *ngIf="item?.isEdit"><input (focusout)="onFocusChangeItemValue($event,i)"> {{item?.baseUnit}}</div>
+            <div class="store-td">#{{item?.costPrice}}/{{item?.baseUnit}}</div>
+          </div>
+          <div class="store-td store-td-actions">
+            <div class="table-list col-xs-1 action-placeholder">
+              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+              <div class="action-container shadow-RB">
+                <div class="action-item" (click)="onEditItem(i)">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <span>Edit</span>
+                </div>
+                <div class="action-item" (click)="onRemoveItem(i)">
+                  <i class="fa fa-tags" aria-hidden="true"></i>
+                  <span>Remove</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!hideSearchTool" class="store-tr-in">
+          <div *ngIf="hideSearchResultList" class="store-td">{{selectedProduct?.productName}}</div>
+          <div class="store-td">
+            <div *ngIf="selectedProduct.productId === undefined" class="apmis-search-item input-wrap">
+              <input class="input" [formControl]="productSearch" type="text">
+              <div *ngIf="!hideSearchResultList">
+                <div *ngFor="let item of inventorySearchResults" class="store-tr">
+                  <div class="store-tr-in" (click)="onSelectProduct(item)">{{item.productName}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="store-td">
+            <div class="dropDown-container" *ngIf="selectedProduct?.transactions?.length > 0">
+              <div class="select">
+                <label>Batch:</label>
+                <select [formControl]="productQtyBatch" name="dropDown-container" id="dropDown-container">
+                  <option *ngFor="let item of selectedProduct?.transactions" [ngValue]="item">{{item.batchNumber}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="store-td">{{selectedProduct.batchAvailableQuantity}}</div>
+          <div class="store-td">{{selectedProduct?.batchQuantity - selectedProduct?.batchAvailableQuantity}}</div>
+          <div class="store-td">
+            <div class="apmis-search-item input-wrap">
+              <input class="input" [formControl]="productQtyRequestSearch" (focusout)="focusOutQties()" type="text">
+            </div>
+          </div>
+          <div class="store-td">#{{selectedProduct?.price}}/{{selectedProduct?.productConfiguration?.name}}</div>
+          <div class="store-td">#{{productQtyRequestSearch.value * selectedProduct?.price}}</div>
+        </div>
+        <div class="store-tr">
+          <div *ngIf="hideSearchTool" class="tbl-cont-cta" (click)="onAddNewTransItem()"><i class="fa fa-plus"></i> Add
+            Another Item</div>
+          <div *ngIf="!hideSearchTool" class="tbl-cont-cta" (click)="onRemoveNewtem()"><i class="fa fa-plus"></i>
+            Remove Item</div>
+        </div>
+      </div>
+    </div>
+    <!-- <app-apmis-pagination></app-apmis-pagination> -->
+  </div>
+  <div class="ob-btn-wrap">
+    <button (click)="sendRequest()" class="ob-btn">Send Items</button>
+  </div>
+</div>
+
+<div class="tbl-sect-wrap tbl-top-with-border" *ngFor = "let item of existingStockTransfers;let i = index">
+  <div class="has-title">Outbound Transfer Status</div>
+  <div class="date-sent">
+    <span>Store Sent:</span>
+    <div class="val">{{item?.destinationStoreObject?.name}}</div>
+  </div>
+  <div class="date-sent">
+    <span>Requisition:</span>
+    <div class="val">{{item.storeRequisitionNumber}}</div>
+  </div>
+  <div class="date-sent">
+    <span>Date Sent:</span>
+    <div class="val">{{item.createdAt|date:'short'}}</div>
+  </div>
+  <div class="store-table">
+    <div class="store-thead">
+      <div class="store-tr">
+        <div class="store-th store-td-actions">
+          <!-- <input type="checkbox" [formControl]="check" /> -->
+        </div>
+        <div class="store-tr-in">
+          <div class="store-th">Product</div>
+          <div class="store-th">Qty Available</div>
+          <div class="store-th">Qty On Hold</div>
+          <div class="store-th">Requsted Qty</div>
+          <div class="store-th">Unit Price</div>
+          <div class="store-th">Amount</div>
+          <div class="store-th"></div>
+        </div>
+        <div class="store-th store-td-actions"></div>
+      </div>
+    </div>
+
+    <div class="store-tbody">
+      <div class="store-pre-tr">
+        <div class="store-tr" *ngFor="let stock of item.products;let j = index">
+          <div class="store-td store-td-actions">
+            <!-- <input type="checkbox" [formControl]="check" /> -->
+          </div>
+          <div class="store-tr-in">
+            <div class="store-td">{{stock.productObject.name}}</div>
+            <div class="store-td">{{stock.availableQuantity}} {{stock.baseUnit}}</div>
+            <div class="store-td">{{stock.quantityOnHold}} {{stock.baseUnit}}</div>
+            <div class="store-td" *ngIf="!stock?.isEdit">{{stock.quantityRequested}} {{stock.baseUnit}}</div>
+            <div class="store-td" *ngIf="stock?.isEdit"><input (focusout)="onFocusChangeExistingItemValue($event,i,j)"> {{stock.baseUnit}}</div>
+            <div class="store-td">#{{stock.costPrice}}/{{stock.baseUnit}}</div>
+            <div class="store-td">#{{stock.costPrice * stock.quantityRequested}} </div>
+            <div class="store-td">
+              <div class="tbl-status status-red">{{stock.status}}</div>
+            </div>
+          </div>
+          <div class="store-td store-td-actions">
+            <div class="table-list col-xs-1 action-placeholder">
+              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+              <div class="action-container shadow-RB">
+                <div class="action-item" *ngIf="stock.status !=='Completed'" (click)="onEditExistingItem(i, j)">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <span>Edit</span>
+                </div>
+                <div class="action-item" *ngIf="stock.status !=='Completed'" (click)="onRemoveExistingItem(i, j)">
+                  <i class="fa fa-tags" aria-hidden="true"></i>
+                  <span>Remove</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="store-tr">
+          <div class="tbl-cont-cta"><i class="fa fa-plus"></i> Add Another Item</div>
+        </div> -->
+      </div>
+    </div>
+    <!-- <app-apmis-pagination></app-apmis-pagination> -->
+  </div>
+</div>

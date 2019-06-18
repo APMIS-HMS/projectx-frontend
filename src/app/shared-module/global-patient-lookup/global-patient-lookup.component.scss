@@ -1,0 +1,99 @@
+.patientLookupWrap {
+    position: relative;
+    width: 220px;
+    background: #E3F2FD;
+    padding: 5px;
+    border: 1px solid #03A9F4;
+    z-index: 10;
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+	   -moz-box-shadow: 0 8px 6px -6px black;
+	        box-shadow: 0 8px 6px -6px black;
+}
+.title {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #03A9F4;
+    padding: 2px;
+}
+input{
+    border: 1px solid #03A9F4;
+    margin-top: 5px;
+    width: 94%;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    padding: 5px;
+    outline: none;
+}
+ul.lookupListings {
+    margin: 0;
+    padding: 0;
+    margin: 10px 0;
+    max-height: 330px;
+    overflow-y: scroll;
+}
+.lookupListing{
+    display: flex;
+    align-items: center;
+}
+.lookupListing img{
+    width: 30px;
+    border-radius: 100%;
+    border: 2px solid #03A9F4;
+    margin-right: 5px;
+}
+.lookupControl {
+    position: absolute;
+    top: -21px;
+    border: 1px solid #03A9F4;
+    border-bottom: 0;
+    background: #E3F2FD;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: -1px;
+    color: #424242;
+    cursor: pointer;
+}
+.lookupControl:hover{
+    color: #03A9F4;
+}
+li.lookupListing {
+    background: #BBDEFB;
+    margin: 10px 0;
+    padding: 2px 5px;
+    cursor: pointer;
+}
+li.lookupListing:hover{
+    background: #64B5F6;
+    .listingName{
+        color: #212121;
+    }
+    .listingOthers{
+        color: #fff;
+    }
+}
+.activeListing{
+    background: #64B5F6;
+    .listingName{
+        color: #212121;
+    }
+    .listingOthers{
+        color: #fff;
+    }
+}
+.listingName {
+    font-size: 1.2rem;
+    color: #424242;
+    border-bottom: 1px solid #424242;
+}
+.listingOthers {
+    font-size: 0.9rem;
+    line-height: 14px;
+    color: #757575;
+    // margin-left: 10px;
+}

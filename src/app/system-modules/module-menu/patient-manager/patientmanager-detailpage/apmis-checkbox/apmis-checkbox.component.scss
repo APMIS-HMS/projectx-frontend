@@ -1,0 +1,216 @@
+ @import "../../../facility-page/employees/employeemanager-detailpage/generate-user/generate-user.component.scss";
+
+.inner-menu1-wrap {
+    top: auto;
+}
+.title-label{
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.top-tab-search {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #bdbdbd;
+}
+.modal_title {
+    font-size: 1.6rem;
+}
+.modal-content-wrap{
+	justify-content: center;
+}
+.checker-subgroup{
+    margin-top: 20px !important
+}
+.check-group-wide{
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.noToken_wrap{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+    color: #616161;
+}
+.noToken_txt1 span{
+    border-bottom: 1px solid;
+    color: #0D47A1;
+    margin: 0px 5px;
+    cursor: pointer;
+}
+.noToken_txt1 span:hover{
+    color: #ff2500;
+}
+.noToken_txt2{
+    text-decoration: underline;
+    color: #ff2500;
+    cursor: pointer;
+    width: 105px;
+    margin: 10px auto;
+}
+.noToken_txt2:hover{
+    color: #0D47A1;
+}
+.file-over{
+    height: 200px;
+    border: dotted 3px red;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #616161;
+}
+.f_sg3 input{
+    border-bottom: 0px;
+}
+.control-group {
+	display: inline-block;
+    width: 200px;
+    margin: 10px;
+    padding: 30px;
+    text-align: left;
+    vertical-align: top;
+    background: rgba(255,255,255,0.3);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+.control {
+	font-size: 1.8rem;
+	position: relative;
+	display: block;
+	padding-left: 30px;
+	cursor: pointer;
+}
+
+.control input {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+.control__indicator {
+	position: absolute;
+	top: 2px;
+	left: 0;
+	width: 20px;
+	height: 20px;
+	background: #f5f5f5;
+}
+
+.control--radio .control__indicator {
+	border-radius: 50%;
+}
+/* Hover and focus states */
+.control:hover input ~ .control__indicator,
+.control input:focus ~ .control__indicator {
+	background: #EEEEEE;
+}
+
+/* Checked state */
+.control input:checked ~ .control__indicator {
+	background: #2aa1c0;
+}
+
+/* Hover state whilst checked */
+.control:hover input:not([disabled]):checked ~ .control__indicator,
+.control input:checked:focus ~ .control__indicator {
+	background: #0e647d;
+}
+
+/* Disabled state */
+.control input:disabled ~ .control__indicator {
+	pointer-events: none;
+	opacity: .6;
+	background: #e6e6e6;
+}
+
+/* Check mark */
+.control__indicator:after {
+	position: absolute;
+	display: none;
+	content: '';
+}
+
+/* Show check mark */
+.control input:checked ~ .control__indicator:after {
+	display: block;
+}
+
+/* Checkbox tick */
+.control--checkbox .control__indicator:after {
+	top: 4px;
+	left: 8px;
+	width: 3px;
+	height: 8px;
+	transform: rotate(45deg);
+	border: solid #fff;
+	border-width: 0 2px 2px 0;
+}
+
+/* Disabled tick colour */
+.control--checkbox input:disabled ~ .control__indicator:after {
+	border-color: #7b7b7b;
+}
+
+/* Radio button inner circle */
+.control--radio .control__indicator:after {
+	top: 7px;
+	left: 7px;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #fff;
+}
+
+/* Disabled circle colour */
+.control--radio input:disabled ~ .control__indicator:after {
+	background: #7b7b7b;
+}
+.searchWrap {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 86px;
+    right: 22px;
+}
+.searchWrap i{
+    color: #bdbdbd;
+    font-size: 2.4rem;
+    padding-left: 10px;
+    cursor: pointer;
+}
+.searchWrap i, .searchWrap input{
+    margin: 0;
+}
+.featuresMainWrap{
+    position: relative;
+    border: 1px solid #bdbdbd; 
+    margin-top: 20px; 
+    padding: 10px;
+}
+#txtAccessName{
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid #bdbdbd;
+    background: transparent;
+    font-size: 1.8rem;
+}
+
+.check-group-wide{
+    width: 300px !important;
+}

@@ -1,0 +1,42 @@
+<div class="survery">
+    <div class="">
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th><i class="fa fa-sort-alpha-asc"></i>Date</th>
+                    <th><i class="fa fa-sort-alpha-asc"></i>Supplier</th>
+                    <th><i class="fa fa-sort-alpha-asc"></i>Invoice ID</th>
+                    <th><i class="fa fa-sort-alpha-asc"></i>Amount</th>
+                    <th><i class="fa fa-sort-alpha-asc"></i>Paid</th>
+                    <th><i class="fa fa-sort-alpha-asc"></i>Outstanding</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="6" class="td-col-span-8">
+                        <div class="col-sm-6">
+                            <select class="form-control">
+                                <option value="" disabled selected>Sort by...</option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="search" placeholder="Search..." class="searchInput" />
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="histories.length === 0">
+                    <td colspan="6"> No data available in table</td>
+                </tr>
+                <tr>
+                    <td>11-05-2017</td>
+                    <td>Maiden Pharmaceuticals Ltd</td>
+                    <td>120904AD</td>
+                    <td>#200,000.00</td>
+                    <td>#150,000.00</td>
+                    <td>#50,000.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

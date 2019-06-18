@@ -1,0 +1,98 @@
+<div class="">
+    <div class="row sheet-table-list">
+        <div style="min-width: 100%;">
+            <div class="invoice-item-details">
+
+                <table class="tblBg" style="padding: 1em;">
+
+                    <!--this is the invoice status if Paid or Unpaid-->
+                    <thead>
+                    <tr>
+                        <th class="col1">Item Description</th>
+                        <th class="col2">Unit Price</th>
+                        <th class="col3">Quantity</th>
+                        <th class="col4">Total Price</th>
+                        <th class="col2">Amount Paid</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr *ngFor="let i of invoiceItems">
+                        <td class="col1">
+                            <div class="itemName">{{i?.facilityServiceObject?.service}}
+                                <span style="color:dodgerblue; font-weight: bold;font-size: 11px;">
+                                 In:  {{i?.facilityServiceObject?.category}}
+                                </span>
+                            </div>
+
+                        </td>
+                        <td class="col2">
+                            <div class="topTotal">
+                                <naira-currency></naira-currency>
+                                {{(i.totalPrice / i.qty) | number }}
+                            </div>
+
+                        </td>
+                        <td class="col3">
+                            <div class="topTotal">
+                                <naira-currency></naira-currency>
+                                {{i.qty | number}}
+                            </div>
+
+                        </td>
+                        <td class="col4">
+                            <div class="topTotal">
+                                <naira-currency></naira-currency>
+                                {{i.totalPrice | number}}
+                            </div>
+                        </td>
+                        <td class="col2">
+                            <div class="topTotal">
+                                <naira-currency></naira-currency>
+                                {{i.amountPaid | number}}
+                                <span style="color:red"><br>
+                                  Bal:  <naira-currency> </naira-currency>{{i.balance | number}}
+                                </span>
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="billSummarySect">
+                    <table class="rhs">
+                        <div class="summaryItems">
+                            <tr class="summaryItem">
+                                <td class="label">Sub Total</td>
+                                <td class="data">
+                                    <naira-currency></naira-currency>
+                                    {{subTotal|number}}
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr class="summaryItem">
+                                <td class="label">Discount</td>
+                                <td class="data">
+                                    <naira-currency></naira-currency>
+                                    {{discount | number}}
+                                </td>
+                                <td></td>
+                            </tr>
+                        </div>
+                        <tr class="grandTotalWrap">
+                            <td class="label">GRAND TOTAL</td>
+                            <td class="data">
+                                <naira-currency></naira-currency>
+                                {{grandTotal | number}}
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

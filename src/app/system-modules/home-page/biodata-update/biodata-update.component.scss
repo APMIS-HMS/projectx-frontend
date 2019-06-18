@@ -1,0 +1,55 @@
+.modal-baseWrap{
+    width: 590px;
+    padding: 10px 50px;
+}
+.dx-texteditor{
+    border: 0;
+    border-bottom: 0.5px solid #37474F;
+    font-size: 1.4rem;
+    color: #37474F;
+    width: 245px;
+    border-radius: 0;
+}
+.modal-baseWrap .mat-input-container {
+    width: 100%;
+}
+.frm-x2 .frm-item-wrap{
+    width: 49% !important;
+}
+.card-title {
+    margin-top: 20px;
+    width: 100%;
+    font-size: 1.6rem;
+    color: #ff2500;
+    font-weight: bold;
+}
+.btn-1{
+    height: auto;
+}
+.right-wrap{
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media only screen and (max-width: 700px) {
+    .modal-baseWrap {
+        padding: 10px 20px;
+        min-width: 100%;
+        width: 100%;
+    }
+    .modal-header-wrap {
+        min-width: 100%;
+        width: 100%;
+    }
+    .pulse {
+        width: 90%;
+    }
+    .frm-x2 .frm-item-wrap {
+        width: 100% !important;
+    }
+    .frm-x2{
+        padding-bottom: 15px;
+        display: block;
+        width: 100%;
+    }
+}

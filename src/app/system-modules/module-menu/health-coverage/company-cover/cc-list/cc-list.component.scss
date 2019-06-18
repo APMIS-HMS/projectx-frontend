@@ -1,0 +1,56 @@
+@import "../../hmo-cover/hmo-cover.component.scss";
+
+.frmArray{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+.frm-x2{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.frm-title {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    padding-top: 10px;
+    color: #333;
+}
+.frmArrayBtn {
+    margin-left: 12px;
+    border: 1px solid #777;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.frmArrayBtn:hover{
+    background: #f8f8f8;
+}
+.dv-wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #bebebe;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px 0;
+}
+.frmNoteWrap{
+    padding: 10px;
+}
+tr{
+    cursor: pointer;
+}
+th {
+    height: 50px !important;
+    background: #337ab7 !important;
+    border: 0.5px solid !important;
+    border-color: #3e51b8 !important;
+    color: white !important;
+    padding-left: .8em !important;
+}

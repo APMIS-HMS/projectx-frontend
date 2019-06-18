@@ -1,0 +1,61 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Add Item To Invoice</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+        <div *ngIf="success" class="successAlert animated shake" [hidden]="mainErr">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            <span>{{successMsg}}</span>
+        </div>
+
+        <div class="f_sg1">
+
+            <form [formGroup]="frmAddItem" novalidate>
+
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <input matInput mat-error placeholder="Search for Service" autocomplete="off" formControlName="itemName">
+                    </mat-input-container>
+                    <div class="suggestionFeeds" *ngIf="isCollapse">
+                        <div class="suggestedItem" *ngFor="let service of services">
+                            <div (click)="onSelectService(service)" class="suggetedName">{{service.service}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="frm-item-wrap">
+                    <mat-input-container>
+                        <input matInput mat-error placeholder="Description" formControlName="itemDesc">
+                    </mat-input-container>
+                </div>
+
+                <div class="frm-item-wrap">
+                    <mat-input-container>
+                        <input type="number" matInput mat-error formControlName="unitPrice" placeholder="Unit Price" min="0">
+                    </mat-input-container>
+                </div>
+
+                <div class="frm-item-wrap">
+                    <mat-input-container>
+                        <input type="number" matInput mat-error placeholder="Quantity" formControlName="qty" min="0">
+                    </mat-input-container>
+                </div>
+
+                <div class="frm-item-wrap">
+                    <mat-input-container>
+                        <input type="number" matInput mat-error formControlName="amount" placeholder="Amount" min="0">
+                    </mat-input-container>
+                </div>
+
+                <button (click)="addItem(frmAddItem.value, frmAddItem.valid)" class="cta-1">
+          ADD ITEM
+        </button>
+
+            </form>
+        </div>
+
+    </div>
+</div>

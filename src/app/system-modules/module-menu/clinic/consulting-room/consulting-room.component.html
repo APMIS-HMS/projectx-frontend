@@ -1,0 +1,82 @@
+<div class="room-wrap">
+    <div class="lhsInnerFrm">
+        <div class="sect-title">New Consulting Room</div>
+        <div class="dx-fieldset">
+            <form action="/Login" method="post">
+                <div class="frmitemwrap">
+                    <mat-form-field>
+                        <mat-select placeholder="Location" [formControl]="locationTypeControl">
+                            <mat-option *ngFor="let cliniclocation of clinicLocations" [value]="cliniclocation.name">{{ cliniclocation.name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <form *ngIf="locationTypeControl.value != null" [formGroup]="consultingRoomForm" class="form-horizontal" (ngSubmit)="onSubmit()">
+                    <div formArrayName="consultingRoomArray" class="frmArrayWrap">
+                        <div class="frmArray" *ngFor="let room of consultingRoomForm.controls['consultingRoomArray'].controls; let i = index;">
+                            <div (click)="closeConsultingRoom(room, i)" class="closeIcon"><i class="fa fa-times-circle-o" aria-hidden="true"></i></div>
+                            <div formGroupName="{{i}}">
+                                <div>
+                                    <div class="frmitemwrap">
+                                        <div class="dx-field">
+                                            <mat-input-container class="example-full-width">
+                                                <input matInput placeholder="Room Name" formControlName="name">
+                                            </mat-input-container>
+                                        </div>
+                                    </div>
+
+                                    <div class="frmitemwrap">
+                                        <div class="dx-field">
+                                            <mat-input-container class="example-full-width">
+                                                <input matInput placeholder="Room capacity" formControlName="capacity">
+                                            </mat-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="room.readOnly == true || room.valid == true" (click)="pushNewConsultingRoom(room)" class="addFrmLink"><i class="fa fa-plus" aria-hidden="true"></i><span>Another Room</span></div>
+                        </div>
+                    </div>
+
+                </form>
+
+                <div *ngIf="consultingRoomForm.controls['consultingRoomArray'].value.length === 0 && locationTypeControl.value != null" (click)="pushNewConsultingRoom(room)" class="addFrmLink"><i class="fa fa-plus" aria-hidden="true"></i><span>Another Room</span>
+                </div>
+                <button (click)="onCreateSchedule()" *ngIf="locationTypeControl.value != null" [disabled]="consultingRoomForm.controls['consultingRoomArray'].valid == false || consultingRoomForm.controls['consultingRoomArray'].value.length === 0" mat-raised-button class="apmis-blue">Create</button>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="rhsInnerCArea">
+        <ul>
+            <li class="listHeader">
+                <div class="li-Item" style="cursor: pointer;">Location<i style="padding-left: 10px;" class="fa fa-fw fa-2x fa-sort orange tooltip" data-tooltip="sort-by loc" aria-hidden="true"></i></div>
+                <div class="li-Item" style="cursor: pointer;">Room Name<i style="padding-left: 10px;" class="fa fa-fw fa-2x fa-sort orange tooltip" data-tooltip="sort-by name" aria-hidden="true"></i></div>
+                <div class="li-Item" style="cursor: pointer;">Room Capacity<i style="padding-left: 10px;" class="fa fa-fw fa-2x fa-sort orange tooltip" data-tooltip="sort-by capacity" aria-hidden="true"></i></div>
+                <div class="li-cta"></div>
+            </li>
+            <li *ngIf="roomManager?.length === 0 && !loading" class="li-itemWrap">
+                <div class="table-content">No data available in table</div>
+            </li>
+            <li *ngIf="roomManager?.length === 0 && loading" class="li-itemWrap">
+                <div class="table-content">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                </div>
+            </li>
+            <li (click)="onSelectSchedulerManager(manager)" *ngFor="let manager of roomManager" class="li-itemWrap">
+                <div class="li-Item">{{manager.minorLocationId}}</div>
+                <div class="li-Item-group">
+                    <div class="group-wrap" *ngFor="let room of manager.rooms">
+                        <div class="group-Item">{{room.name}}</div>
+                        <div class="group-Item">{{room.capacity}}</div>
+                    </div>
+                </div>
+                <div class="li-cta">
+                    <i (click)="onSelectSchedulerManager(manager)" class="fa fa-fw fa-2x fa-pencil-square-o orange tooltip" data-tooltip="Edit" aria-hidden="true"></i>
+                    <i class="fa fa-fw fa-2x fa-trash orange tooltip" data-tooltip="Delete" aria-hidden="true"></i>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

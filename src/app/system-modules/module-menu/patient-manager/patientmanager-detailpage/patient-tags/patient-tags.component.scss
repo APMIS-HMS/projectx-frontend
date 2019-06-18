@@ -1,0 +1,23 @@
+@import "../documentation/documentation.component.scss";
+
+th{
+    height: 30px;
+}
+.tbl-wrap{
+    background: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+.tbl-add-ico{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 2rem;
+    color: #777;
+    z-index: 1;
+}
+.tbl-add-ico:hover{
+    color: #2e6ebd;
+}

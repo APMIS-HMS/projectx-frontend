@@ -1,0 +1,15 @@
+<form [formGroup]="addPhysicianOrderForm" novalidate>
+    <div class="frmArrWrap">
+        <div class="frm-x2">
+            <div class="frm-item-wrap">
+                <mat-form-field>
+                    <textarea matInput formControlName="physicianOrder" class="textarea" cols="30" rows="10"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="addDrugBtn" (click)="onClickAddPhysicianOrder(addPhysicianOrderForm.valid, addPhysicianOrderForm.value)">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    <span>ADD Physician Order</span>
+</div>

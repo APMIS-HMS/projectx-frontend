@@ -1,0 +1,96 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">{{selectedBill.principalObject?.personDetails?.firstName}}
+      {{selectedBill.principalObject?.personDetails?.lastName}}</legend>
+    <div class="modal_mini_title">HMO Bills Generated</div>
+    <div class="modal_mini_title">{{selectedBill.updatedAt|date:'medium'}}</div>
+  </div>
+  <div class="modal-baseWrap">
+    <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+      <thead>
+        <tr>
+          <th>
+            <span style="padding-left: 3px;">Service</span>
+          </th>
+          <th>
+            <span style="padding-left: 3px;">Patient</span>
+          </th>
+          <th>
+            <span style="padding-left: 3px;">Amount</span>
+          </th>
+          <th>
+            <span style="padding-left: 3px;">Type</span>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bill of selectedBill.billItems;let i=index">
+          <td>{{bill?.serviceObject?.name}}</td>
+          <td>
+            <div class="empWrap">
+              <div class="list-img" *ngIf="bill?.patientObject?.personDetails?.profileImageObject === undefined">
+                <img src="assets/images/users/default.png">
+              </div>
+              <div class="list-img" *ngIf="bill?.patientObject?.personDetails?.profileImageObject !== undefined">
+                <img [src]="facilitiesService.transform(bill?.patientObject?.personDetails?.profileImageObject?.thumbnail)">
+              </div>
+              <div>{{bill?.patientObject?.personDetails?.firstName}} {{bill?.patientObject?.personDetails?.lastName}}</div>
+            </div>
+          </td>
+          <td class="td-worspace">&#8358; <mat-form-field class="sel-rap">
+              <input matInput [formControl]="priceControl" (change)="onChangePrice(i)" placeholder="Price">
+            </mat-form-field>
+            <!-- {{bill.totalPrice|number:'1.2-2'}}-->
+          </td>
+          <td>
+            <div class="input-x2-wrap">
+              <!-- <mat-form-field class="sel-rap">
+                      <mat-select [formControl]="hmoTypeControl" placeholder="Cover Type">
+                        <mat-option>
+                          </mat-option>
+                      </mat-select>
+                    </mat-form-field> -->
+              <div *ngIf="bill.covered.isVerify===undefined">
+                <mat-form-field class="sel-rap">
+                  <mat-select [formControl]="hmoTypeControl" placeholder="Cover Type">
+                    <mat-option *ngFor="let item of hmoPaymentType" [value]="item.id">
+                      {{ item.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="sel-rap" *ngIf="authCode_show">
+                  <input matInput [formControl]="authCodeControl" placeholder="Code">
+                </mat-form-field>
+              </div>
+              <div class="sel-rap" *ngIf="bill.covered.isVerify">
+                <span>
+                  <div *ngIf="bill.covered.authorizationCode !== undefined">
+                    Fee for service :
+                  </div>
+                  <div *ngIf="bill.covered.authorizationCode === undefined">
+                    Capitalization
+                  </div>
+                </span>
+                <span>
+                  {{bill.covered.authorizationCode}}
+                </span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="td-ctaWrap" *ngIf="bill.covered.isVerify===undefined">
+              <i (click)="confirmBill_onClick(bill)" class="fa fa-check-circle" aria-hidden="true"></i>
+              <i (click)="declineBill_onClick(bill)" class="fa fa-times-circle" aria-hidden="true"></i>
+            </div>
+            <div class="td-ctaWrap" *ngIf="bill.covered.isVerify!==undefined">
+              <span style="color:green" *ngIf="bill.covered.billAccepted">Approved</span>
+              <span style="color:red" *ngIf="!bill.covered.billAccepted">Denied</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,114 @@
+@import '../patient-prescription/patient-prescription.component.scss';
+.table-wrapper {
+    border: 1px solid #ddd;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+mat-input-container {
+    textarea {
+        height: 60px !important;
+    }
+}
+
+.wrap-th {
+    border-radius: 0;
+}
+
+.btn {
+    padding: 0px 6px !important;
+}
+
+.trash-box {
+    display: block;
+    width: 20px;
+    color: #676a6c;
+    margin-right: 7px;
+    padding: 4px 10px 0 0;
+    height: 20px;
+    float: left;
+    .fa-trash,
+    .fa-edit {
+        font-size: 2rem;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.td-worspace:hover .workspace-listWrap {
+    display: block;
+}
+
+.workspace-listWrap:hover {
+    display: block;
+}
+
+.workspace-listWrap {
+    position: absolute;
+    bottom: 40%;
+    padding: 2px;
+    background: #ddd;
+    z-index: 200;
+    border: 1px solid #989898;
+    border-radius: 7px;
+    font-size: 1.2rem;
+}
+
+.workspace-listWrap:hover {
+    display: block;
+}
+
+.workspace-listItem:hover {
+    background: #D0D3D4;
+}
+
+.workspace-listItem span {
+    padding-right: 2px;
+}
+
+.workspace-listItem {
+    padding: 5px 20px;
+}
+
+.pointer-wrap {
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.pointer-wrap i {
+    position: absolute;
+    font-size: 3.5rem;
+    color: #989898;
+    top: -10px;
+    right: 44px;
+    z-index: 1;
+}
+
+.center {
+    margin-top: 31px;
+}
+
+.table-header {
+    background-color: #4bb8ef;
+    color: #000;
+    .table-header-data {
+        padding: 10px;
+    }
+}
+
+.pres-data {
+    border: 0;
+}
+
+.action-long {
+    width: 100% !important;
+    padding: 0;
+}
+
+.table-content {
+    padding: 10px 10px;
+    text-align: left;
+}

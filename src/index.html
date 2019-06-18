@@ -1,0 +1,109 @@
+<!doctype html>
+<html style="min-height:100vh;">
+
+<head>
+    <meta charset="utf-8">
+    <title>APMIS</title>
+    <base href="/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="assets/images/app_logo/3.jpg">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="assets/libs/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/libs/pretty-checkbox-master/dist//pretty-checkbox.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="assets/libs/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/libs/bootstrap/css/bootstrap.css" media="all">
+    <!-- <link href="https://surveyjs.azureedge.net/0.12.11/surveyeditor.css" type="text/css" rel="stylesheet" />
+    <link href="https://surveyjs.azureedge.net/0.12.20/survey.css" type="text/css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="assets/libs/custom-editor.css" media="all">
+    <link rel="stylesheet" href="assets/libs/style-bootstrap.css" media="all">
+    <link rel="stylesheet" href="assets/libs/style-default.css" media="all">
+    <link rel="stylesheet" href="assets/libs/style-material.css" media="all">
+    <!-- <link rel="stylesheet" href="assets/libs/dragular/dragula.min.css" media="all"> -->
+    <link rel="stylesheet" href="assets/libs/picker.min.css" media="all">
+
+    <!-- <script src="https://code.angularjs.org/tools/system.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.20.18/system.js"></script>
+    <script src="assets/libs/chart.js/dist/Chart.min.js"></script>
+    <!-- <script src="assets/libs/chart.js/dist/Chart.bundle.min.js"></script> -->
+    <!-- jQuery -->
+    <script src="assets/libs/jquery-3.1.0.min.js"></script>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether-theme-arrows-dark.css" />-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
+
+    <!--<script src="assets/libs/intl-tel-input-9.0.3/build//js/intlTelInput.js"></script>-->
+
+
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyB6ywArqljTvZ5WiIvQqnjOnwMuSVFJ1-I&libraries=places&language=en-US"></script>
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ywArqljTvZ5WiIvQqnjOnwMuSVFJ1-I&callback=initMap" type="text/javascript"></script> -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <!-- <script src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script> -->
+    <!-- <div id="paystackEmbedContainer"></div> -->
+    <!-- <script src="assets/libs/paystack.js"></script> -->
+</head>
+
+<body style="min-height:100vh;" onclick="formIdFunction()">
+<body style="min-height:100vh;">
+    <app-root>
+
+        <div class="loading_screen">
+            <div id="outer_circle">
+                <div id="animated_circle">
+                </div>
+                <div id="inner_circle">
+                    <img src="assets/images/app_logo/logo2.png" />
+                </div>
+            </div>
+        </div>
+
+
+    </app-root> 
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+         function formIdFunction() {            
+            var formId = event.target.id;
+            if(formId.startsWith("sq_") || formId.startsWith("sp_")){                
+                localStorage.setItem("formKey", formId)
+            }
+        }
+    </script>
+  
+</body>
+<script>
+    // PaystackPop.setup({
+    //     key: 'pk_test_3c53bcffeb3c889d04ea0f905c44d36fc342aa85',
+    //     email: 'sunday.orimoyegun@apmis.ng',
+    //     amount: 100000,
+    //     container: 'paystackEmbedContainer',
+    //     callback: function (response) {
+    //         alert('successfully subscribed. transaction ref is ' + response.reference);
+    //         // verify endpoint
+    //         // store this authorization token
+    //     },
+    // });
+</script>
+<!-- Google Analytics -->
+<script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-122917471-1', 'auto');
+    ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+</html>

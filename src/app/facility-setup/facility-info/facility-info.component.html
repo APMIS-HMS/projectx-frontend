@@ -1,0 +1,68 @@
+<div class="modal-baseWrap">
+    <div class="infoAlert"><i class="fa fa-info-circle" aria-hidden="true"></i>Note that a verification token will be sent to the number supplied below
+    </div>
+    <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+    <form [formGroup]="facilityForm1" novalidate (submit)="save(facilityForm1.value)">
+
+        <div class="frm-item-wrap">
+            <mat-input-container class="example-full-width">
+                <input matInput mat-error placeholder="Organisation Name" formControlName="facilityname">
+            </mat-input-container>
+        </div>
+        <ng4geo-autocomplete [userSettings]="userSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+        <div class="frm-item-wrap">
+            <div class="frm-item-x2">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Street Address" formControlName="facilitystreet">
+                </mat-input-container>
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="City" formControlName="facilitycity">
+                </mat-input-container>
+            </div>
+        </div>
+        <div class="frm-item-wrap">
+            <div class="frm-item-x2">
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Country" formControlName="facilitycountry">
+                        <mat-option [value]="country.name" *ngFor="let country of countries">{{country.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="State" formControlName="facilitystate" [compareWith]="compareState">
+                        <mat-option [value]="state.name" *ngFor="let state of states">{{state.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="frm-item-wrap">
+            <mat-input-container class="example-full-width">
+                <input type="email" matInput mat-error placeholder="Email Address" formControlName="facilityemail">
+            </mat-input-container>
+        </div>
+        <div class="frm-item-wrap">
+            <mat-input-container class="example-full-width">
+                <input matInput mat-error placeholder="CAC Reg No" formControlName="cac">
+            </mat-input-container>
+        </div>
+        <div class="frm-item-wrap">
+            <mat-input-container>
+                <input type="tel" matInput mat-error placeholder="Contact Number" formControlName="facilityphonNo">
+            </mat-input-container>
+        </div>
+
+        <div class="frm-item-wrap checkwrap">
+            <label class="container">
+                <input type="checkbox" formControlName="facilityhdo">
+                <span class="checkmark"></span>
+                <span style="font-size:16px; padding-left: 15px;">is Health Delivery Organisation</span>                                
+             </label>
+        </div>
+        <br>
+        <br>
+
+        <button [disabled]="(!facilityForm1.valid && !isSaving) || isSaving" class="cta-1" [ngClass]="{'cta-1':(facilityForm1.valid && !isSaving), 'cta-1-disable':(!facilityForm1.valid && !isSaving) || isSaving}"> 
+        SIGN UP
+        </button>
+
+    </form>
+</div>

@@ -1,0 +1,25 @@
+.new-supp-base {
+    padding: 30px;
+}
+
+@import "./../../../apmis-store-home/store-home-main/store-home-main.component.scss";
+
+.blue-lbl {
+    color: #0288D1
+}
+
+.btn-con {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .new-btn-solid-blue,
+    .new-btn-blue {
+        margin-right: 20px;
+    }
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}

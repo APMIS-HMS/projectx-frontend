@@ -1,0 +1,12 @@
+<div class="check-item">
+  <label class="control control--checkbox">{{selectedFeature.name}}
+              <!--<input type="checkbox" (change)="checked($event, selectedFeature)" [(ngModel)]="selectedFeature.checked" />-->
+              <mat-checkbox (change)="checked($event, selectedFeature)" [(ngModel)]="selectedFeature.checked"></mat-checkbox>
+              <div class="control__indicator"></div>
+            </label>
+  <div *ngIf="expand" class="checker-subgroup">
+    <div class="checker-wrap-inner" *ngFor="let crud of selectedFeature.cruds">
+      <app-apmis-checkbox-child [crudItem]="crud"></app-apmis-checkbox-child>
+    </div>
+  </div>
+</div>

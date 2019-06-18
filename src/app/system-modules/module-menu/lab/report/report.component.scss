@@ -1,0 +1,400 @@
+@import '../lab-requests/lab-requests.component.scss';
+.text-center {
+    text-align: center;
+}
+
+.frm-l {
+    float: left;
+    overflow: hidden;
+}
+
+.frm-r {
+    float: right;
+}
+
+.frm-l table,
+.frm-r table {
+    border-collapse: collapse;
+}
+
+.frm-l table,
+.frm-l td,
+.frm-r table,
+.frm-r td {
+    border: 0px solid transparent;
+}
+
+.frm-l td,
+.frm-r td {
+    vertical-align: center;
+    text-align: left;
+    padding: 2px;
+}
+
+.frm-l th,
+.frm-r th {
+    height: 50px;
+    background: transparent;
+    border: 0px solid transparent;
+    text-align: left;
+}
+
+.frm-l td,
+.frm-r td {
+    padding: 5px;
+}
+
+.listWrap {
+    background: #f8f8f8;
+    padding: 10px;
+    height: 187px;
+    overflow-y: auto;
+}
+
+.list-title {
+    font-size: 1.2rem;
+    margin: 14px 0;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.list-label {
+    width: 80%;
+    text-align: left;
+    color: #000;
+}
+
+.tab-key {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.act-wrap {
+    margin-right: 5px;
+    border: 5px solid transparent;
+    padding: 5px;
+}
+
+.actWrap-active,
+.act-wrap:hover {
+    background: #f8f8f8;
+    border: 5px solid #fff;
+}
+
+.investigation {
+    background: #fff;
+    border: 1px solid transparent;
+    margin-bottom: 10px;
+}
+
+.investigation:hover {
+    border: 1px solid #eee;
+}
+
+.panel-wrap {
+    margin-bottom: 10px;
+    background: #fff;
+    padding: 2px;
+}
+
+.panel-wrap:hover {
+    .child-list {
+        display: block;
+    }
+}
+
+.panel {
+    background: #eee;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.panel:hover {
+    border: 1px solid #fff;
+}
+
+.child-list {
+    display: none;
+}
+
+.child-item {
+    font-size: 1.2rem;
+    margin: 5px;
+    margin-left: 15px;
+    color: #777;
+}
+
+.lone-input {
+    background: #f8f8f8;
+    padding: 0px 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.frm-l {
+    width: 38%;
+    padding: 0;
+    border: 1px solid #bebebe;
+    border-radius: 10px;
+}
+
+.frm-r {
+    width: 59%;
+    padding: 5px;
+}
+
+.frm-l .frm-item-wrap {
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.tbl-panel {
+    border-top: 5px solid #fff;
+    border-bottom: 5px solid #fff;
+}
+
+.panel-label {
+    background-color: #B9F6CA !important;
+}
+
+.panel-foot {
+    color: transparent;
+    background-color: #B9F6CA !important;
+}
+
+.selected-patient-wrap {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    min-height: 50px;
+    background-color: #ffffff;
+    display: table;
+}
+
+.sel-patient-img {
+    width: 25%;
+    padding: 5px;
+    float: left;
+}
+
+.sel-patient-img img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.sel-patient-details {
+    line-height: 1.5;
+    width: 64%;
+    float: left;
+    padding: 5px;
+    font-size: 1.2rem;
+    color: #000;
+    .patient-details-left {
+        float: left;
+        width: 60%;
+    }
+    .patient-details-right {
+        float: right;
+        width: 40%;
+    }
+}
+
+.pending-req-wrap {
+    margin: 0 auto;
+    margin-top: 0px;
+    padding: 0 0 20px 0;
+    width: 98%;
+}
+
+.active{
+    background: #bebebe !important;
+}
+
+.tab-title {
+    margin-top: 10px;
+    color: #ff2500;
+    border-bottom: 1px solid #ff2500;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+td .mat-select {
+    height: 23px;
+}
+
+.mat-select {
+    height: 0px;
+}
+
+.initial-contenet {
+    margin-bottom: 10px;
+    background: #f8f8f8;
+    padding: 5px 20px;
+}
+
+.lettering-wrap {
+    margin-top: 20px;
+}
+
+.report-title {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.8rem;
+    color: #0288D1;
+    border-bottom: 1px solid #bebebe;
+    margin-bottom: 5px;
+}
+
+.report-title .action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #bebebe;
+    cursor: pointer;
+    padding: 2px 8px;
+    border: 1px solid transparent;
+}
+
+.report-title .action:hover {
+    border: 1px solid #bebebe;
+    color: #000;
+}
+
+.invstn-vals {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #000;
+}
+
+.invstn-vals .frm-item-wrap {
+    min-width: 240px;
+}
+
+.initial-val {
+    color: #000;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.invstn-wrap {
+    padding: 2px 10px;
+    border: 1px solid #bebebe;
+    margin-bottom: 20px;
+}
+
+.frmNoteWrap {
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+.act-actions-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.act-right-actions {
+    display: flex;
+    font-size: 1.2rem;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.act-right-actions .action-item {
+    margin-left: 10px;
+}
+
+.act-right-actions .action-item:hover {
+    background: #fff;
+}
+
+.resultSect-title {
+    margin-top: 20px;
+    color: #777;
+    font-size: 1.4rem;
+    margin-bottom: 2px;
+}
+
+.template-box {
+    font-size: 1.2rem;
+    float: right;
+    margin-top: -15px;
+    cursor: pointer;
+}
+
+.no-selected-patient-wrap {
+    padding: 20px;
+    text-align: center;
+}
+
+.frm-container-l {
+    width: 100%;
+}
+
+.frm-container-r {
+    display: none;
+}
+
+.table-content {
+    padding: 10px !important;
+}
+
+.hover {
+    cursor: pointer;
+}
+
+.isSample {
+    color: #4CAF50;
+}
+
+.notSample {
+    color: #ff2500;
+}
+
+.isDraft {
+    color: #FFEB3B;
+}
+
+.status-wrap {
+    text-align: left;
+    font-size: 1rem;
+    padding: 0 5px;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.status-val {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+.activeInvestigation {
+    //background-color: #d0edfc !important;
+    background-color: #e6dfdf !important;
+}
+
+.table-background-color {
+    background-color: #4bb8ef !important;
+    tr {
+        &:hover {
+            background-color: #4bb8ef;
+        }
+    }
+}

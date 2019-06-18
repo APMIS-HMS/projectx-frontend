@@ -1,0 +1,16 @@
+@import "../../lab/lab-requests/lab-requests.component.scss";
+
+.doc-mainWrap{
+    position: relative;
+    margin-bottom: 100px;
+}
+.tabs{
+    position: absolute;
+    right: 0;
+    top: -40px;
+    display: flex;
+}
+.tab:hover, .tab-active{
+    color: #0288D1 !important;
+    border-bottom: 3px solid #0288D1 !important;
+}

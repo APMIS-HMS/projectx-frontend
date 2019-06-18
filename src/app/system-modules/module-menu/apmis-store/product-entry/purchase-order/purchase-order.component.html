@@ -1,0 +1,50 @@
+<div class="tbl-btn-action" style="padding:none !important; cursor: pointer;" *ngIf="back_to_purchaseOrderList">
+  <div class="action-pad">
+    <div (click)="backPurchaseOrderList()">
+      <i style="color:  #0288D1; font-weight: bold;">Back to Purchase Order</i>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="purchaseOrderList">
+  <div class="tbl-btn-action">
+    <div class="action-pad">
+      <div (click)="showNewPurchaseOrderList()" class="new-btn-blue">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <span>Add New Purchase Order</span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="list-wrap" *ngFor="let order of purchaseOrderCollection">
+    <div class="list-con-wrap">
+      <div class="con-wrap">
+        <span>Date Generated</span>
+        <h3>{{order.createdAt | date: 'fullDate'}}</h3>
+      </div>
+      <div class="con-wrap">
+        <span>Status</span>
+        <h3 *ngIf="order.isSupplied===true">Pending</h3>
+        <h3 *ngIf="!order.isSupplied===true">Pending</h3>
+      </div>
+      <div class="con-wrap">
+        <span>Supplier</span>
+        <h3>{{order.supplierObject.name}} </h3>
+      </div>
+    </div>
+
+    <div class="list-con-wrap">
+      <div class="con-wrap">
+        <span>Action</span>
+        <div class="ft-btn" (click)="showPurchaseOrderListDetail(order)">
+          <span>View Purchase Order Items</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-new-purchase-order-list *ngIf="newPurcaseOrderList"></app-new-purchase-order-list>
+<app-purchase-order-list-details [selectedOrder]="selectedOrder" *ngIf="purchaseOrderListDetails"></app-purchase-order-list-details>

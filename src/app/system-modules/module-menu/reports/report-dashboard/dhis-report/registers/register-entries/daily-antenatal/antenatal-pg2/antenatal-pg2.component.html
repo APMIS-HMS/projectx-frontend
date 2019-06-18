@@ -1,0 +1,118 @@
+<div class="pp-card shadow-grey">
+  <div class="card-title">
+      <div>DAILY ANTE NATAL CLINIC (pg2)</div>
+      <!-- <div class="top-btns">
+          <div (click)="back_registers()" class="top-btn"><i class="fa fa-arrow-left"></i> Registers</div>
+      </div> -->
+  </div>
+  <div class="content-wrap">
+
+    <div class="tbl-resp-wrap">
+      <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+          <thead>
+            <tr>
+              <th colspan="22">
+                <div class="th1-wrap">
+                  <!-- <div class="th1-title">DAILY ANTE NATAL CLINIC</div> -->
+                  <div class="filters">
+                    <div class="filter">
+                        <input class="search" placeholder="search for patient...">
+                    </div>
+                  </div>
+                  <div class="tp-rhs">
+                    <div class="dr-wrap survery">
+                        <app-date-range [dateRange]="dateRange" (dateRangeChange)="setReturnValue($event)"></app-date-range> <span *ngIf="loadIndicatorVisible" class="fa fa-spinner fa-spin"></span>
+                    </div>
+                    <div (click)="newEntry()" class="th1-cta"><i class="fa fa-plus"></i> </div>
+                    <div (click)="switcher_onClick()" class="top-btn-outline"><i class="fa fa-arrow-left"></i> Previous Page</div>
+                  </div>
+                </div>
+              </th>
+            </tr>
+            <tr class="th-r1 th-xxx">
+              <th colspan="14"></th>
+              <th colspan="8"> Postnatal Care</th>
+            </tr>
+            <tr class="th-r2 th-xxx">
+              <th colspan="2"></th>
+              <th colspan="2"> Urinalysis (Please write result )</th>
+              <th>LLIN given</th>
+              <th colspan="2">Doses of IPT given</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th colspan="4"> Outcome of visit</th>
+              <th colspan="3">Mother & Newborn </th>
+              <th colspan="3">
+                <div class="vertical-text">Newborn Care</div>
+                <div class="vertical-text">Neonatal Complications </div>
+              </th>
+              <th colspan="2">
+                  <div class="vertical-text">Newborn Care</div>
+                  <div class="vertical-text">KMC</div>
+              </th>
+            </tr>
+            <tr class="th-r3 th-xxx">
+              <th>Tag ID</th>
+              <th> HB/PCV (Please write the result of the PCV/Hb test)</th>
+              <th>Sugar</th>
+              <th>Protiens</th>
+              <th><div class="vertical-text">given LLIN during ANC visit</div></th>
+              <th>1st</th>
+              <th>2nd</th>
+              <th>Hematinics (IFAS) Given</th>
+              <th>TT indicate: T1,T2,T3,T4 & T5 as apprioprate</th>
+              <th>Associated problems</th>
+              <th>NT</th>
+              <th>T</th>
+              <th>A</th>
+              <th>RO (Please state reason for referral)</th>
+              <th>1 Day</th>
+              <th>3 Days</th>
+              <th>7 Days & After</th>
+              <th>Neonatal Sepis</th>
+              <th>Neonatal Tetanus</th>
+              <th>Neonatal Jaundice </th>
+              <th>A</th>
+              <th>DS</th>
+              <!-- <th>
+                  <div class="vertical-text">Treated </div>
+              </th> -->
+              <!-- <th colspan="4">Comment</th> -->
+            </tr>
+          </thead>
+
+          <tbody>
+              <tr>
+                <td>AZ2100</td>
+                <td>22yrs</td>
+                <td>AZ2100</td>
+                <td>11th Oct 1995</td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td>18wks</td>
+                <td>5</td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-times green"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showNewEntry" class="modal-overlay">
+    <app-new-antenatal-entry (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-antenatal-entry>
+</div>

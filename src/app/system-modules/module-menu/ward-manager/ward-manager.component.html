@@ -1,0 +1,29 @@
+<ul class="pg-menuWrap">
+    <li [class.pg-menuActive]="admissionNavMenu" (click)="onClickNavMenu('/dashboard/ward-manager/admission', 'admission')"><i class="fa fa-list-alt" aria-hidden="true"></i> Admission List</li>
+    <li [class.pg-menuActive]="admittedNavMenu" (click)="onClickNavMenu('/dashboard/ward-manager/admitted', 'admitted')"><i class="fa fa-bed" aria-hidden="true"></i> Admitted Patients</li>
+    <li [class.pg-menuActive]="setupNavMenu" (click)="onClickNavMenu('/dashboard/ward-manager/setup', 'setup')"><i class="fa fa-cog" aria-hidden="true"></i> Setup</li>
+    <!-- <li [class.pg-menuActive]="wardNavMenu" (click)="onClickNavMenu('/dashboard/ward-manager/wards', 'wards')"><i class="fa fa-building" aria-hidden="true"></i> Wards</li> -->
+</ul>
+<div class="inner-page-wrap">
+    <div class="inner-wrap-b body-wrap">
+        <div class="facility-title">{{pageInView}}</div>
+        <div class="title2">{{checkedInObject?.typeObject?.minorLocationId?.name}}</div>
+    </div>
+    <div class="top-button-box">
+        <ul class="topmenuwrap" (click)="checkIntoWard();">
+            <li tabindex="0">
+                <!--<i class="fas fa-clipboard-check"> </i>
+                <span>Check into Ward</span>-->
+                <i class="fa fa-plus-circle"></i>
+                <span>Check into Ward</span>
+            </li>
+        </ul>
+    </div>
+    <div class="rhs inner-page-contentArea c-page-wrapper">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="clear"></div>
+</div>
+<div *ngIf="modal_on" class="modal-overlay">
+    <app-ward-check-in (checkedInWard)="getCheckedInWard($event);" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-ward-check-in>
+</div>

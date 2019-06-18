@@ -1,0 +1,162 @@
+.schedule-wrap {
+    padding: 10px 0;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.btn-box {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.btn {
+    color: #fff;
+}
+
+.pill {
+    background-color: #003cff;
+    color: #ffffff;
+    height: 25px;
+    width: 100px;
+    border-radius: 25px;
+    line-height: 1.2rem;
+    font-size: 1.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    margin: 2px;
+    .pill-img {
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        float: left;
+    }
+    span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 25px;
+    }
+}
+
+.frm-appointment {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sect-wrap {
+    position: relative;
+    width: 33%;
+}
+
+.sect-wrap .tr-act-btn {
+    width: 180px;
+    font-size: 1.2rem;
+}
+
+.sect-wrap .tr-act-btn1 {
+    position: absolute;
+    top: 92px;
+}
+
+.sect-wrap .tr-act-btn2 {
+    position: absolute;
+    top: 160px;
+}
+
+.sect-wrap .tr-act-btn3 {
+    position: absolute;
+    top: 226px;
+}
+
+.cta-1 {
+    height: 35px;
+    font-size: 1.4rem;
+}
+
+.sect-wrap .frm-item-wrap {
+    width: 100%;
+}
+
+.mat-input-infix {
+    border-top: 0em solid transparent !important;
+}
+
+.immune-box {
+    padding: 0;
+    .box {
+        padding: 0;
+        // background: #dfdfdf;
+        padding: 10px 0;
+        min-height: 200px;
+        height: auto;
+        margin-right: 0;
+        margin-left: 0;
+        .immune-search-box {
+            .search-box {
+                padding: 0;
+            }
+        }
+        .immune-search-result {
+            border: 1px solid #ccc;
+            margin-top: -22px;
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            .immune-group-item {
+                border: 1px solid #ccc;
+                padding: 8px;
+                margin-bottom: 10px;
+                background-color: #EEE;
+                // .list-group :not(:first-child)
+                &.active {
+                    background-color: rgb(66, 139, 202);
+                    color: #fff;
+                }
+                &:first-child {
+                    border-top-right-radius: 0px;
+                    border-top-left-radius: 0px;
+                }
+                &:last-child {
+                    border-bottom-right-radius: 0px;
+                    border-bottom-left-radius: 0px;
+                }
+            }
+        }
+        .immune-result-right {
+            .box {
+                border: 1px solid #ccc;
+                height: 225px;
+                padding: 5px 0px 15px 0px;
+                .header {
+                    padding: 0px 10px;
+                    border-bottom: 1px solid #ccc;
+                }
+                .content {
+                    padding: 10px;
+                    height: 200px;
+                    overflow-y: auto;
+                    .immune-content-group-item {
+                        border: 1px solid #ccc;
+                        padding: 8px;
+                        margin-bottom: 10px;
+                        background-color: #EEE;
+                        .mat-checkbox {
+                            .mat-checkbox-inner-container {
+                                margin-top: 0px;
+                            }
+                        }
+                        .mat-checkbox-layout .mat-checkbox-label {
+                            line-height: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

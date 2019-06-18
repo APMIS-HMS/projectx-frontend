@@ -1,0 +1,100 @@
+<div class="pp-card shadow-grey">
+
+    <div class="card-title" style="background:#eee;padding:5px 0;">Family Cover List</div>
+
+    <ul class="pg-menuWrap">
+        <li (click)="tab1_click()" [class.pg-menuActive]="tab1">
+            <i class="fa fa-pause" aria-hidden="true"></i> Pending Bills</li>
+        <li (click)="tab2_click()" [class.pg-menuActive]="tab2">
+            <i class="fa fa-history" aria-hidden="true"></i>Billing History</li>
+    </ul>
+    <div *ngIf="tab1">
+        <div class="card-title">Pending Bills</div>
+
+        <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+                <tr>
+                    <th>
+                        <span style="padding-left: 3px;">Date</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">File No</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Principal</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Amount</span>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let bill of bills" (click)="billDetail(bill)">
+                    <td>{{bill.updatedAt|date:'medium'}}</td>
+                    <td>{{bill.coverFile.id}}</td>
+                    <td>
+                        <div class="empWrap">
+                            <div class="list-img">
+                                <img src="assets/images/users/default.png">
+                            </div>
+                            <div>{{bill.coverFile.name}}</div>
+                        </div>
+                    </td>
+                    <td class="td-worspace">&#8358; {{bill.grandTotal}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="tab2">
+        <div class="card-title">Billing History</div>
+        <button class="btn-norm" (click)="familyCover_report()"><i class="fa fa-file"></i> &nbsp; Generate Report</button>
+        <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+                <tr>
+                    <th>
+                        <span style="padding-left: 3px;">Date</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">File No</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Principal</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Amount</span>
+                    </th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr *ngFor="let bill of historyBills" (click)="billHistoryDetail(bill)">
+                    <td>{{bill.updatedAt|date:'medium'}}</td>
+                    <td>{{bill.coverFile.id}}</td>
+                    <td>
+                        <div class="empWrap">
+                            <div class="list-img">
+                                <img src="assets/images/users/default.png">
+                            </div>
+                            <div>{{bill.coverFile.name}}</div>
+                        </div>
+                    </td>
+                    <td class="td-worspace">&#8358; {{bill.grandTotal}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+            <tr style="font-weight: bold;background-color: #ededed;">
+                <td colspan="3">Grand Total </td>
+                <td>{{grandTotal | number:'1.2-2'}}</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="billDetail_show" class="modal-overlay">
+  <app-family-bill-detail (closeModal)="close_onClick($event)" (refreshBills)="onRefreshBills($event)" [selectedBill]="selectedBill" id="form-modal" class="form-modal center-center"></app-family-bill-detail>
+</div>
+<div *ngIf="billHistoryDetail_show" class="modal-overlay">
+  <app-family-bill-history-detail (closeModal)="close_onClick($event)" [selectedBill]="selectedBill" id="form-modal" class="form-modal center-center"></app-family-bill-history-detail>
+</div>

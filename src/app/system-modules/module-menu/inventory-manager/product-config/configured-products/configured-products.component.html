@@ -1,0 +1,42 @@
+<div class="pp-card shadow-grey" >
+  <div class="tbl-top-items">
+      <div class="card-title">List Of Configured Products</div>
+      <div class="searchInputWrap">
+          <input [formControl]="searchControl" type="search" autofocus class="searchInput" placeholder="search">
+          <i class="fa fa-search" aria-hidden="true"></i>
+      </div>
+    </div>
+    <div class="tbl-resp-wrap">
+        <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+                <tr>
+                    <th>
+                        <span style="padding-left: 3px;">Product Name</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Product Configuration</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Date</span>
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let item of productConfigList">
+                    <td>{{item?.productObject?.name}}</td>
+                    <td>
+                      <ul class="config-ul" *ngFor="let size of item.packSizes">
+                        <li>{{size.size}} {{size.name}}</li>
+                      </ul>
+                    </td>
+                    <td>{{item.createdAt|date:'short'}}</td>
+                    <td>
+                      <i class="fa fa-edit" (click)="onEditConfig(item)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

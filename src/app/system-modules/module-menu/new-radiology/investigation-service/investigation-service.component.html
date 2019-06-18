@@ -1,0 +1,210 @@
+<div class="pg-subtitle">
+    INVESTIGATION</div>
+<div>
+    <div class="doc-mainWrap">
+        <div class="doc-contentArea">
+            <div class="clinicalNoteWrap">
+                <div class="actSect">
+                    <div class="tab-key">
+                        <div [class.actWrap-active]="investigation_view" (click)="investigation_show()" class="act-wrap">
+                            <i *ngIf="investigation_view" class="fa fa-minus" aria-hidden="true"></i>
+                            <i [hidden]="investigation_view" class="fa fa-plus" aria-hidden="true"></i>
+                            <span>New Investigation</span>
+                        </div>
+
+                        <div [class.actWrap-active]="pannel_view" (click)="pannel_show()" class="act-wrap">
+                            <i *ngIf="pannel_view" class="fa fa-minus" aria-hidden="true"></i>
+                            <i [hidden]="pannel_view" class="fa fa-plus" aria-hidden="true"></i>
+                            <span>Create Panel</span>
+                        </div>
+                    </div>
+                    <form class="frmNoteWrap" *ngIf="investigation_view" [formGroup]="frmNewInvestigationh" novalidate>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="frm-item-wrap">
+                                    <mat-input-container>
+                                        <input matInput placeholder="Investigation Name" formControlName="investigationName" autocomplete="off">
+                                    </mat-input-container>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="frm-item-wrap">
+                                    <mat-input-container>
+                                        <input matInput placeholder="Modality" [matAutocomplete]="autoPatient" formControlName="reportType" autocomplete="off">
+                                    </mat-input-container>
+                                    <mat-autocomplete #autoPatient="matAutocomplete">
+                                        <mat-option *ngFor="let report of reportTypes" [value]="report">
+                                            {{ report }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="btn-box">
+                            <button mat-raised-button [disabled]="isBtnDisable" (click)="createInvestigation(frmNewInvestigationh.valid, frmNewInvestigationh.value)" class="btn">
+                                <span *ngIf="addInvestBtn">
+                                    <i class="fa fa-plus"></i> Create Investigation</span>
+                                <span *ngIf="addingInvestBtn">Creating Investigation
+                                    <i class="fa fa-spin fa-spinner"></i>
+                                </span>
+                                <span *ngIf="editInvestBtn">
+                                    <i class="fa fa-plus"></i> Edit Investigation</span>
+                                <span *ngIf="editingInvestBtn">Editing Investigation
+                                    <i class="fa fa-spin fa-spinner"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <form class="frmNoteWrap" *ngIf="pannel_view" [formGroup]="frmNewPanel" novalidate>
+                        <div class="frm-item-wrap lone-input">
+                            <mat-input-container>
+                                <input matInput placeholder="Panel Name" formControlName="panelName" autocomplete="off">
+                            </mat-input-container>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="list-title">PANELS AND INVESTIGATIONS LIST</div>
+                                <mat-input-container class="panel-wrap">
+                                    <input matInput placeholder="Search Panel" formControlName="searchPanelName" autocomplete="off">
+                                </mat-input-container>
+                                <div class="listWrap" [dragula]='"first-bag"' [dragulaModel]='bindInvestigations'>
+                                    <div *ngFor="let investigation of bindInvestigations">
+                                        <div *ngIf="investigation.isPanel" class="panel-wrap">
+                                            <div class="list-item panel">
+                                                <div class="list-label">{{investigation.name}}</div>
+                                                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                                            </div>
+
+                                            <div *ngFor="let panel of investigation.panel" class="child-list">
+                                                <div class="child-item">{{panel.name}}</div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="!investigation.isPanel" class="list-item investigation">
+                                            <div class="list-label">{{investigation.name}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="list-title">NEW PANNEL DROP ZONE</div>
+                                <div class="listWrap" [dragula]='"first-bag"' [dragula]='"first-bag"' [dragulaModel]='movedInvestigations'>
+                                    <div *ngFor="let investigation of movedInvestigations">
+                                        <div *ngIf="investigation.isPanel" class="panel-wrap">
+                                            <div class="list-item panel">
+                                                <div class="list-label">{{investigation.name}}</div>
+                                                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                                            </div>
+
+                                            <div *ngFor="let panel of investigation.panel" class="child-list">
+                                                <div class="child-item">{{panel.name}}</div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="!investigation.isPanel" class="list-item investigation">
+                                            <div class="list-label">{{investigation.name}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="btn-box">
+                            <button mat-raised-button [disabled]="!frmNewPanel.valid || addingPInvestBtn" (click)="createPanel(frmNewPanel.valid, frmNewPanel.value)" class="btn">
+                                <span *ngIf="addPInvestBtn">
+                                    <i class="fa fa-plus"></i> Create Panel</span>
+                                <span *ngIf="addingPInvestBtn">Creating Panel
+                                    <i class="fa fa-spin fa-spinner"></i>
+                                </span>
+                                <span *ngIf="editPInvestBtn">
+                                    <i class="fa fa-plus"></i> Edit Panel</span>
+                                <span *ngIf="editingPInvestBtn">Editing Panel
+                                    <i class="fa fa-spin fa-spinner"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tblWrapa" class="actSect">
+                    <div class="card">
+                        <mat-input-container class="panel-wrap" *ngIf="investigation_list_search">
+                            <input matInput placeholder="Search Investigation" [formControl]="searchInvestigationName" autocomplete="off">
+                        </mat-input-container>
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="table-head col-xs-1">No</div>
+                                <div class="table-head col-xs-3">Investigation Name</div>
+                                <div class="table-head col-xs-2">Specimen</div>
+                                <div class="table-head col-xs-2">Reference Value</div>
+                                <div class="table-head col-xs-1">Unit</div>
+                                <div class="table-head col-xs-2">Report Type</div>
+                                <div class="table-head col-xs-1">
+                                    <i class="fa fa-search fa-fw pointer" (click)="onSearchInvestigation()"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-list-item" *ngIf="investigations.length === 0 && !loading">
+                                <div class="col-xs-12" style="text-align:center">
+                                    No data available in table
+                                </div>
+                            </div>
+                            <div class="card-list-item" *ngIf="investigations.length === 0 && loading">
+                                <div class="col-xs-12" style="text-align:center">
+                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card-list-item" *ngFor="let investigation of investigations; let i = index;">
+                                <div class="row">
+                                    <div class="table-list col-xs-1">
+                                        {{ i+1 }}
+                                    </div>
+                                    <div class="table-list col-xs-3">
+                                        {{investigation.name}}
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        <span *ngIf="investigation.specimen?.name !== undefined">{{investigation.specimen?.name}}</span>
+                                        <span *ngIf="investigation.specimen?.name === undefined">{{investigation.specimen}}</span>
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        {{getRefrenceValues(investigation?.reportType)}}
+                                    </div>
+                                    <div class="table-list col-xs-1">
+                                        {{investigation.unit}}
+                                    </div>
+                                    <div class="table-list col-xs-2 action-placeholder">
+                                        {{investigation.reportType?.name}}
+                                    </div>
+                                    <div class="table-list col-xs-1 action-placeholder">
+                                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                        <div class="action-container shadow-RB">
+                                            <div (click)="editInvestigation(investigation)" class="action-item">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                                <span>Edit</span>
+                                            </div>
+
+                                            <div class="action-item">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                <span>Delete</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-center">
+                        <button (click)="loadMore()" class="apmis-blue" mat-raised-button *ngIf="showLoadMore">Load More</button>
+                    </div>
+                    <div style="text-align:center; margin-top:20px;" *ngIf="total > 0">{{loadMoreText}} </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

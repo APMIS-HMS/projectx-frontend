@@ -1,0 +1,117 @@
+<div id="purchase-order">
+    <div>
+         <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-xs-3 table-head">Order Date</div>
+                    <div class="col-xs-3 table-head">Supplier</div>
+                    <div class="table-head col-xs-3">Expected Delivery Date</div>
+                    <div class="table-head col-xs-3">
+                        Purchase Order ID
+                    </div>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-list-item" *ngIf="orders?.length === 0">
+                    <div class="col-xs-12" style="text-align:center">
+                        No data available in table<br/>
+                    </div>
+                </div>
+                <div class="card-list-item" *ngFor="let order of orders">
+                    <div class="row">
+                            <div class="col-xs-3" style="text-align:center">
+                                    {{order.createdAt | date:'short'}}
+                            </div>
+                            <div class="col-xs-3" style="text-align:center">
+                                    {{order.supplierObject.supplier.name}}
+                            </div>
+                            <div class="col-xs-3" style="text-align:center">
+                                    {{order.expectedDate | date:'short'}}
+                            </div>
+                            <div class="col-xs-2" style="text-align:center">
+                                    {{order.purchaseOrderNumber}}
+                            </div>
+                            <div class="col-xs-1">
+                                    <a (click)="slidePurchaseDetailsToggle(order, $event)"><span><i class="fa fa-eye"></i></span></a>
+                                    <a (click)="onNavigateToDetail(order)"><span><i class="fa fa-pencil"></i></span></a>
+                                    <a (click)="onRemoveOrder(order)" style="color:#ff2500;"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    <a *ngIf = "!order.isSupplied" (click)="onNavigateToAddStore(order)"><span class="txt-link">Add to Stock</span>
+                                    </a>
+                            </div>
+                    </div>
+                    
+                </div>
+            </div>
+         </div>
+    
+        <div class="col-md-12">
+            <a id="floating-button" routerLink="/dashboard/purchase-manager/new-order">
+                <p class="plus">+</p>
+            </a>
+        </div>
+        <!-- purchase order details-->
+        <div *ngIf="slidePurchaseDetails" class="inPatient-activityTimeline shadow-RB animated slideInRight">
+            <div class="container">
+                <div (click)="slidePurchaseDetailsToggle(purchases, $event)" class="hide-actionWrap">
+                    <i class="fa fa-close pull-right" aria-hidden="true"></i>
+                </div>
+
+                <div class="purchasedetails">
+                    <div class="wrap-first-row text-center">
+                        <p style="color:#9b5c0b;">{{selectedFacility.name}}</p>
+                        <h4 style="color:#343434;">{{selectedOrder?.supplierObject.name}}</h4>
+                        <p style="color:#e50000">Order Details</p>
+                        <p style="color:#2b6ac8">{{selectedOrder?.purchaseOrderNumber}}</p>
+                    </div>
+                    <div id="second-col-wrap">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Order Date</th>
+                                        <td>{{selectedOrder.createdAt | date:'short'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Delivery Date</th>
+                                        <td>{{selectedOrder?.expectedDate | date:'short'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="order-print pull-right">
+                                <span><i class="fa fa-paperclip"></i></span>
+                                <span><i class="fa fa-file-pdf-o"></i></span>
+                                <span><i class="fa fa-print"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="third-col-wrap">
+                        <div class="">
+                            <table class="table  table-border">
+                                <tbody>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Qty</th>
+                                    </tr>
+                                    <tr *ngFor="let product of selectedOrder.orderedProducts">
+                                        <td>{{product?.productObject?.name}}</td>
+                                        <td>
+                                            <ul *ngFor="let item of getPackItemNames(product)">
+                                                <li>{{item?.quantity}}-{{item?.packName}}</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="remark">
+                        <h5>Remark</h5>
+                        <p>All goods received in good condition and have since been distributed to the various stores in need of supplies. From this point onwards, its business as usual at all our various store.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end purchase order details-->
+    </div>
+</div>

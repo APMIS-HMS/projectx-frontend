@@ -1,0 +1,17 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick($event)" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Uploaded Document</legend>
+    <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+  <div class="modal-baseWrap">
+    <span *ngIf="loading" colspan="4"><span class="fa fa-spinner fa-spin"></span> Please wait while loading document!</span>
+    <span *ngIf="loadingError" colspan="4" class="loadingError">
+      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i><br>
+      Something happened while loading your document, please retry
+    </span>
+    <pdf-viewer *ngIf="docPdf" [src]="currentPDF" (after-load-complete)="onComplete($event)" (error)="onError($event)"
+      (on-progress)="onProgress($event)"></pdf-viewer>
+    <img [src]="currentImg" alt="" *ngIf="docImg">
+  </div>
+</div>

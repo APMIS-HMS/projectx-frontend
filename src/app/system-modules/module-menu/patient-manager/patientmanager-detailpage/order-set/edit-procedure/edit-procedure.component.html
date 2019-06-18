@@ -1,0 +1,72 @@
+<div class="box animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Add Procedure</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <form [formGroup]="addProcedureForm" novalidate>
+            <div class="frmArrWrap">
+                <div class="frm-x2">
+                    <div class="frm-item-wrap">
+                        <div class="cu-search-box">
+                            <mat-form-field>
+                                <input matInput formControlName="procedure" class="cu-search" placeholder="Search Procedure"
+                                    (focus)="focusSearch()" (focusout)="focusOutSearch()" autocomplete="off">
+                            </mat-form-field>
+                            <div class="cu-popup-wrapper" *ngIf="showCuDropdown">
+                                <div class="cu-popover-arrow"></div>
+                                <div class="cu-header">
+                                    <p></p>
+                                </div>
+                                <ul class="cu-dropdown">
+                                    <li>
+                                        <a class="header">Select Procedure</a>
+                                    </li>
+                                    <li *ngIf="results.length === 0 && !cuDropdownLoading" class="text-center">
+                                        <a>Result is empty</a>
+                                    </li>
+                                    <li *ngIf="results.length === 0 && cuDropdownLoading" class="text-center">
+                                        <a>
+                                            <i class="fa fa-spinner fa-spin"></i>
+                                        </a>
+                                    </li>
+                                    <li *ngFor="let item of results" (click)="apmisLookupHandleSelectedItem(item);"
+                                        class="lookupListing">
+
+                                        <div>
+                                            <a>{{ item.name }}</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="cu-footer">
+                                    <button class="btn btn-default">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pri-wrap">
+                <div *ngIf="!onEditProcedurePrice">
+                    <h1> &#x20A6; {{ selectedProcedure?.price?.price }}</h1>
+                </div>
+                <div style="padding-left: 10px;">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEditProcedure()"></i>
+                </div>
+            </div>
+
+            <div class="col-xs-6 control-group" *ngIf="onEditProcedurePrice">
+                <div>
+                    <mat-form-field>
+                        <input matInput [formControl]="costForm" placeholder="Enter New Price" type="number">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="addDrugBtn" (click)="onClickAddProcedure(addProcedureForm.valid, addProcedureForm.value);">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>ADD PROCEDURE</span>
+            </div>
+        </form>
+    </div>
+</div>

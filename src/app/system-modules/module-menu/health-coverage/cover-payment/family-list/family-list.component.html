@@ -1,0 +1,90 @@
+<div class="tbl-title">Family Cover Bills</div>
+
+<table cellpadding="0" cellspacing="0" border="0.5">
+    <thead>
+        <tr>
+            <th>
+                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                <span style="padding-left: 3px;">Beneficiary</span>
+            </th>
+            <th>
+                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                <span style="padding-left: 3px;">Role</span>
+            </th>
+            <th>
+                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                <span style="padding-left: 3px;">Billed Amount</span>
+            </th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+            <td colspan="10">
+                <div class="tbl-actionRow">
+                    <!-- <div class="frm-item-wrap">
+      <apmis-lookup [(ngModel)]="apmisLookupText" 
+      url="apmisLookupUrl" query="apmisLookupQuery" placeholder="Patient"
+      isSocket="false" displayKey="apmisLookupDisplayKey" 
+      (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+    </div>
+
+    <div class="frm-item-wrap">
+      <apmis-lookup [(ngModel)]="apmisLookupText" 
+          url="apmisLookupUrl" query="apmisLookupQuery" placeholder="Practitioner"
+          isSocket="false" displayKey="apmisLookupDisplayKey" 
+          (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+    </div>
+
+    <div class="frm-item-wrap">
+      <apmis-lookup [(ngModel)]="apmisLookupText" 
+          url="apmisLookupUrl" query="apmisLookupQuery" placeholder="Location"
+          isSocket="false" displayKey="apmisLookupDisplayKey" 
+          (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+    </div> -->
+                </div>
+            </td>
+        </tr>
+
+        <tr (click)="hmoList_click()">
+            <td>Julia Jones</td>
+            <td>
+              <div class="role">P</div>
+            </td>
+            <td><span>&#x20a6;</span>4,000</td>
+            <td>11th Jan, 2017. 09:00AM</td>
+        </tr>
+
+        <tr (click)="hmoList_click()">
+            <td>Julia Jones</td>
+            <td>
+              <div class="role">D</div>
+            </td>
+            <td><span>&#x20a6;</span>3,400</td>
+            <td>11th Jan, 2017. 09:00AM</td>
+        </tr>
+
+        <tr (click)="hmoList_click()">
+            <td>Julia Jones</td>
+            <td>
+              <div class="role">P</div>
+            </td>
+            <td><span>&#x20a6;</span>5,000</td>
+            <td>11th Jan, 2017. 09:00AM</td>
+        </tr>
+
+        <tr (click)="hmoList_click()">
+            <td>Julia Jones</td>
+            <td>
+              <div class="role">D</div>
+            </td>
+            <td><span>&#x20a6;</span>1,200</td>
+            <td>11th Jan, 2017. 09:00AM</td>
+        </tr>
+    </tbody>
+</table>

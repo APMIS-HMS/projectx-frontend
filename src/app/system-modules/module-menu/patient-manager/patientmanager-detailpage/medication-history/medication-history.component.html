@@ -1,0 +1,232 @@
+<section id="history">
+  <div class="survery">
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <div class="dx-field-value">
+          <!--<dx-lookup [items]="employees" [value]="employees[0]" [showPopupTitle]="false">
+          </dx-lookup>-->
+          <select>
+            <option *ngFor="let item of employees"  value="{{item}}"></option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <div class="pull-right">
+          <button class="btn btn-default"><i class="fa fa-long-arrow-right"></i>Past Medication</button>
+          <button class="btn btn-default"><i class="fa fa-long-arrow-right"></i>Past Medication</button>
+        </div>
+      </div>
+    </div>
+    <div class="table-th margin-top-20">
+      <div class="inner-tb-th">
+        Date
+      </div>
+      <div class="inner-tb-th" style="width:300px">
+        Drug
+      </div>
+      <div class="inner-tb-th">
+        Status
+      </div>
+      <div class="inner-tb-th" style="width:200px;">
+        Prescriber
+      </div>
+      <div class="inner-tb-th">
+        Actions
+      </div>
+    </div>
+    <div *ngFor="let history of medicationHistory" class="table-tr">
+      <div class="inner-tr">
+        {{history.date}}
+      </div>
+      <div class="inner-tr" style="width:300px">
+        {{history.drugs}}
+      </div>
+      <div class="inner-tr">
+        <ul *ngFor="let items of status">
+          <li>{{items}} </li>
+        </ul>
+      </div>
+      <div class="inner-tr" style="width:200px;">
+        <img class="img-circle img-responsive" src="http://placeholder.pics/svg/30" /> <span class="absolute">{{history.prescriber}}</span>
+      </div>
+      <div class="inner-tr">
+        <button class="btn btn-default">Discontinew</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--<section id="history">
+  <div class="survery">
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <button (click)="onshowPrescription()" class="btn btn-default">PRESCRPTION</button>
+            <button (click)="onshownonPrescription()" class="btn btn-default">NON-PRESCRPTION</button>
+          </div>
+        </div>
+    <div *ngIf="prescription" class="">
+        <div class="add-sect">
+          <div class="row margin-top-20">
+            <div class="col-sm-12 col-md-12">
+              <div class="col-sm-5 col-md-5">
+                <div class="dx-field-value">
+                    <dx-text-box placeholder="Enter full name here..."></dx-text-box>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-th margin-top-20">
+            <div class="inner-tb-th">
+              <dx-check-box [value]="true" [width]="80" text="Date">
+                </dx-check-box>
+            </div>
+            <div class="inner-tb-th">
+              Drug
+            </div>
+            <div class="inner-tb-th">
+              Patient
+            </div>
+            <div class="inner-tb-th">
+              Prescription
+            </div>
+            <div class="inner-tb-th">
+              Status
+            </div>
+          </div>
+          <div class="table-tr">
+            <div class="inner-tr">
+              <dx-check-box [value]="true" [width]="150" text="11-20-2017">
+              </dx-check-box>
+            </div>
+            <div class="inner-tr">
+              drugs name
+            </div>
+            <div class="inner-tr">
+              <img class="img-circle img-responsive" src="http://placeholder.pics/svg/30" /> <span class="absolute">Patient Name</span>
+            </div>
+            <div class="inner-tr">
+              prescription name
+            </div>
+            <div class="inner-tr">
+              Pending
+            </div>
+          </div>
+          <div class="row margin-top-20 padding-10">
+            <div class="col-sm-4 col-md-4">
+              <dx-lookup
+                [items]="employees"
+                [value]="employees[0]"
+                [showPopupTitle]="false">
+            </dx-lookup>
+            </div>
+            <div class="col-sm-4 col-md-4">
+              <dx-lookup
+                [items]="employees"
+                [value]="employees[0]"
+                [showPopupTitle]="false">
+            </dx-lookup>
+            </div>
+            <div class="col-sm-4 col-md-4">
+              <div class="dx-field-value">
+                    <dx-text-box placeholder="Quantity"></dx-text-box>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 text-center">
+            <button class="btn btn-default">Add</button>
+          </div>
+        </div>
+        <div class="row margin-top-20 padding-10">
+            <div class="table-th">
+              <div class="inner-tb-th" id="inner-tr">
+                Drug
+              </div>
+              <div class="inner-tb-th">
+                Batch
+              </div>
+              <div class="inner-tb-th ">
+                Quantity
+              </div>
+            </div>
+            <div class="table-tr">
+              <div class="inner-tr" id="inner-tr">
+                Drug name
+              </div>
+              <div class="inner-tr">
+                AA02238
+              </div>
+              <div class="inner-tr">
+                2 Cards
+              </div>
+          </div>
+        </div>
+        <div claass="row margin-top-20">
+          <div class="col-sm-12 col-md-12 text-center">
+            <button class="cta-1">Authorize Rx</button>
+          </div>
+        </div>
+    </div>
+     <div *ngIf="nonprescription" class="">
+       <div class="row">
+         <div class="col-sm-9 col-md-9 margin-bottom-20 margin-top-20">
+           <dx-lookup
+                [items]="employees"
+                [value]="employees[0]"
+                [showPopupTitle]="false">
+            </dx-lookup>
+         </div>
+         <div class="col-sm-4 col-md-4">
+           <dx-lookup
+                [items]="employees"
+                [value]="employees[0]"
+                [showPopupTitle]="false">
+            </dx-lookup>
+         </div>
+         <div class="col-sm-4 col-md-4">
+           <dx-lookup
+                [items]="employees"
+                [value]="employees[0]"
+                [showPopupTitle]="false">
+            </dx-lookup>
+         </div>
+         <div class="col-sm-4 col-md-4">
+           <div class="dx-field-value">
+                    <dx-text-box placeholder="Quantity"></dx-text-box>
+              </div>
+         </div>
+       </div>
+            <div class="row margin-top-20 padding-10">
+              <div class="table-th">
+                <div class="inner-tb-th" id="inner-tr">
+                  Drug
+                </div>
+                <div class="inner-tb-th">
+                  Batch
+                </div>
+                <div class="inner-tb-th ">
+                  Quantity
+                </div>
+              </div>
+              <div class="table-tr">
+                <div class="inner-tr" id="inner-tr">
+                  Drug name
+                </div>
+                <div class="inner-tr">
+                  AA02238
+                </div>
+                <div class="inner-tr">
+                  2 Cards
+                </div>
+            </div>
+          </div>
+          <div claass="row margin-top-20">
+            <div class="col-sm-12 col-md-12 text-center">
+              <button class="cta-1">Authorize Rx</button>
+            </div>
+          </div>
+     </div>
+  </div>
+</section>
+-->

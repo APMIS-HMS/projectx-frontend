@@ -1,0 +1,18 @@
+<div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+<label style="font-size: 1.1rem;margin-left: 5px;" *ngIf="f_logo_show">Company's Logo</label>
+<div class="f_sg3 animated zoomIn" *ngIf="f_logo_show">
+  <!--<input type="file" (change)="imageChange($event)">
+  <style>
+    .file-over {
+      border: dotted 3px red;
+    }
+    /* Default class applied to drop zones on over */
+  </style>
+  <div>
+    Response: {{ uploadFile | json }}
+  </div>-->
+  <div (click)="back_logoUp()" class="backBtn"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>Go Back</div>
+  <div (click)="f_sg4_show()" class="cta-1">CONTINUE</div>
+</div>
+<!--<app-verify-token *ngIf="back_selectModules_show"></app-verify-token>-->
+<app-add-facility-module *ngIf="selectModules_show" (closeModal)="close_onClick($event)" class="f_sg3 animated zoomIn" [inputFacility]="inputFacility"></app-add-facility-module>

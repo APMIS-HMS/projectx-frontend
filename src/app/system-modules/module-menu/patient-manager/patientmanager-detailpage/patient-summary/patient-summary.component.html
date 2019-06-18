@@ -1,0 +1,154 @@
+<div class="pg-subtitle">PATIENT PAGE - SUMMARY</div>
+<div class="doc-mainWrap">
+    <div class="doc-contentArea">
+        <div class="doc-cardWrap">
+            <div class="doc-card2">
+                <div class="modal_title">Bio Data</div>
+                <div class="docCard-header">
+                    <div>
+                        <div class="val-tag">Apmis ID</div>
+                        <div class="list-label">{{patient?.personDetails?.apmisId}}</div>
+                    </div>
+
+                    <div>
+                        <div class="val-tag">Age</div>
+                        <div class="list-label">{{patient?.age}}</div>
+                    </div>
+
+                    <div>
+                        <div class="val-tag">Account Balance</div>
+                        <div class="list-label">
+                            <span class="{{ patient?.personDetails?.wallet?.balance > 0 ? 'text-blue' : 'accBal-val'}}">
+                &#8358; {{patient?.personDetails?.wallet?.balance|numberThr}}
+              </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="docCard-body">
+                    <div class="body-divide">
+                        <div class="subsect-itemWrap">
+                            <div class="subsect-label">First Name</div>
+                            <div class="subsect-val">{{patient?.personDetails?.firstName}}</div>
+                        </div>
+
+                        <div class="subsect-itemWrap">
+                            <div class="subsect-label">Last Name</div>
+                            <div class="subsect-val">{{patient?.personDetails?.lastName}}</div>
+                        </div>
+
+                        <div class="subsect-itemWrap">
+                            <div class="subsect-label">Gender</div>
+                            <div class="subsect-val">{{patient?.personDetails?.gender}}</div>
+                        </div>
+
+                        <div class="subsect-itemWrap">
+                            <div class="subsect-label">Date of Birth</div>
+                            <div class="subsect-val">{{patient?.personDetails?.dateOfBirth | date}}</div>
+                        </div>
+
+                        <!-- <div class="subsect-itemWrap">
+              <div class="subsect-label">Tags</div>
+              <span class="badge blue-gradient" *ngFor="let tag of patient?.tags">{{tag.name}} 
+                  <i *ngIf="tag.tagType === 'identification'" class="fa fa-info"></i>
+              </span>
+            </div>-->
+                    </div>
+
+                    <div class="body-divide">
+
+                        <div class="subsect-itemWrap">
+                            <div class="subsect-label">Address</div>
+                            <div class="subsect-val">{{patient?.personDetails?.homeAddress?.street}} {{patient?.personDetails?.addressObj?.city}} {{patient?.personDetails?.addressObj?.state}} {{patient?.personDetails?.addressObj?.country}}.
+                            </div>
+                        </div>
+
+                        <div class="subsect-itemWrap">
+                            <div class="subsect-label">Mobile</div>
+                            <div class="subsect-val">{{patient?.personDetails?.primaryContactPhoneNo}}</div>
+                        </div>
+
+                        <div class="subsect-itemWrap">
+                            <div class="subsect-label">Email</div>
+                            <div class="subsect-val">{{patient?.personDetails?.email}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doc-card2">
+                <div class="modal_title">Vital Signs
+                    <i (click)="addVitals_show($event)" class="fa fa-plus-circle" aria-hidden="true"></i>
+                </div>
+                <div style="display: block; width:100% !important">
+                    <canvas baseChart style="width:100%;" height="300" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+
+            <div class="doc-card2">
+                <div class="modal_title">Contact Persons</div>
+
+                <div class="docCard-body">
+                    <div *ngFor="let kin of patient?.personDetails?.nextOfKin" class="nok-wrap">
+                        <div class="body-divide">
+                            <div class="subsect-itemWrap">
+                                <div class="subsect-label">Full Name</div>
+                                <div class="subsect-val">{{kin?.fullName}}</div>
+                            </div>
+
+                            <div class="subsect-itemWrap">
+                                <div class="subsect-label">Address</div>
+                                <div class="subsect-val">{{kin?.address}}.</div>
+                            </div>
+
+                            <div class="subsect-itemWrap">
+                                <div class="subsect-label">Mobile</div>
+                                <div class="subsect-val">{{kin?.phoneNumber}}</div>
+                            </div>
+                        </div>
+
+                        <div class="body-divide">
+
+                            <div class="subsect-itemWrap">
+                                <div class="subsect-label">Email</div>
+                                <div class="subsect-val">{{kin?.email}}</div>
+                            </div>
+
+                            <div class="subsect-itemWrap">
+                                <div class="subsect-label">Relationship</div>
+                                <div class="subsect-val">{{kin?.relationship}}</div>
+                            </div>
+                            <div class="isNOK shadow">Next of Kin</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="doc-rArea">
+        <app-right-tab [patient]="patient" (addTag)="addTag_show($event)" (addProblem)="addProblem_show($event)" (addAllergy)="addAllergy_show($event)" (addHistory)="addHistory_show($event)" (addVitals)="addVitals_show($event)"></app-right-tab>
+    </div>
+
+    <div *ngIf="addTag_view" class="modal-overlay">
+        <app-add-patient-tags [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-patient-tags>
+    </div>
+
+    <div *ngIf="addProblem_view" class="modal-overlay">
+        <app-add-patient-problem [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-patient-problem>
+    </div>
+
+    <div *ngIf="addAllergy_view" class="modal-overlay">
+        <app-add-allergy [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-allergy>
+    </div>
+
+    <div *ngIf="addHistory_view" class="modal-overlay">
+        <app-add-history (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-history>
+    </div>
+
+    <div *ngIf="addVitals_view" class="modal-overlay">
+        <app-add-vitals (closeModal)="close_onClick($event)" id="form-modal" [patient]="patient" (refreshVitalsChanged)="refreshVitalsChanged($event)" class="form-modal center-center"></app-add-vitals>
+    </div>
+</div>

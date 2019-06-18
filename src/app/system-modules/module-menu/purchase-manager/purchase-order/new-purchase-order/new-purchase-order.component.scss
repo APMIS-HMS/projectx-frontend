@@ -1,0 +1,384 @@
+.np-mainwrap {
+    width: 100%;
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.summaries {
+    font-size: 1.2rem;
+    text-align: left;
+    color: #515151;
+}
+
+.summary {
+    display: flex;
+}
+
+.summary-total {
+    display: flex;
+    font-size: 1.2rem;
+    text-align: left;
+    color: #ff2500;
+}
+.ico-wrap{
+    position: relative;
+}
+.ico-wrap .fa-plus{
+    position: absolute;
+    bottom: 50%;
+    right: -50px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.s-itemLabel,
+.s-divider,
+.s-itemVal {
+    width: 100px;
+}
+
+.s-divider {
+    text-align: center;
+}
+
+.s-itemLabel,
+.s-itemVal {
+    text-align: left;
+}
+.notice{
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: -20px;
+    font-size: 1.6rem;
+    color: royalblue;
+}
+.sec-a {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.main-frm{
+    width: 100%;
+}
+.row {
+    // display: flex;
+}
+.mat-form-field{
+    width: 100%;
+}
+label {
+    font-size: 1.2rem;
+    text-align: left;
+    color: #515151;
+}
+.wrap1{
+    width: 49%;
+    overflow: hidden;
+}
+.frm-item-wrap {
+    margin-right: 10px;
+    padding-bottom: 5px;
+    width: 99%;
+}
+
+.flyout{
+    position: relative;
+    top: unset;
+    right: unset;
+    z-index: unset;
+    height: auto;
+    width: 400px;
+}
+
+.sec-b,
+.sec-c {
+    position: relative;
+    border-radius: 10px;
+    border: solid 1px #cacaca;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sec-b {
+    margin-top: 20px;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0;
+}
+
+.sec-c {
+    margin-top: 10px;
+}
+
+.col-a {
+    width: 100%;
+}
+
+.filter-sect {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #cacaca;
+    padding-bottom: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    margin-top: 20px;
+}
+
+.product-sect {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.ps-col1 {
+    width: 100%;
+}
+
+.chkbox-wrap label {
+    margin-left: 10px;
+}
+
+.col-b {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.selected-product {
+    font-size: 1.4rem;
+    margin-left: 10px;
+    color: #0288d1;
+    width: 50%;
+    border-bottom: 1px solid #0288d1;
+}
+
+.prod-wrap {
+    box-sizing: border-box;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.inputWrap-productDetail {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cta-1 {
+    width: 150px;
+    height: 35px;
+}
+
+.modal-close-ico {
+    top: 0px;
+    z-index: 1;
+    padding: 1px 7px;
+    font-size: 0.9rem;
+}
+
+//brought in by sunday from create access scss file
+// .control-group {
+// 	display: inline-block;
+//     width: 200px;
+//     margin: 10px;
+//     padding: 30px;
+//     text-align: left;
+//     vertical-align: top;
+//     background: rgba(255,255,255,0.3);
+//     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+// }
+.control-group {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    display: inline-table;
+}
+
+.control {
+    font-size: 1.4rem;
+    position: relative;
+    display: flex;
+    margin-bottom: 15px;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+.control input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.control__indicator {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.control--radio .control__indicator {
+    border-radius: 50%;
+}
+
+
+/* Hover and focus states */
+
+.control:hover input~.control__indicator,
+.control input:focus~.control__indicator {
+    background: #EEEEEE;
+}
+
+
+/* Checked state */
+
+.control input:checked~.control__indicator {
+    background: #2aa1c0;
+}
+
+
+/* Hover state whilst checked */
+
+.control:hover input:not([disabled]):checked~.control__indicator,
+.control input:checked:focus~.control__indicator {
+    background: #0e647d;
+}
+
+
+/* Disabled state */
+
+.control input:disabled~.control__indicator {
+    pointer-events: none;
+    opacity: .6;
+    background: #e6e6e6;
+}
+
+
+/* Check mark */
+
+.control__indicator:after {
+    position: absolute;
+    display: none;
+    content: '';
+}
+
+
+/* Show check mark */
+
+.control input:checked~.control__indicator:after {
+    display: block;
+}
+
+
+/* Checkbox tick */
+
+.control--checkbox .control__indicator:after {
+    top: 4px;
+    left: 8px;
+    width: 3px;
+    height: 8px;
+    transform: rotate(45deg);
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+}
+
+
+/* Disabled tick colour */
+
+.control--checkbox input:disabled~.control__indicator:after {
+    border-color: #7b7b7b;
+}
+
+
+/* Radio button inner circle */
+
+.control--radio .control__indicator:after {
+    top: 7px;
+    left: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+
+/* Disabled circle colour */
+
+.control--radio input:disabled~.control__indicator:after {
+    background: #7b7b7b;
+}
+
+// end
+.flyout .search-input {
+    margin-bottom: 10px;
+    border: 1px solid #cacaca;
+    width: 100%;
+}
+
+.check-filterWrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.slideInWrap {
+    position: absolute;
+    left: -2px;
+    top: 5px;
+    font-size: 2.3rem;
+    cursor: pointer;
+    color: #ff2500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.txt-link {
+    color: #0288D1;
+    font-size: 1.2rem;
+    border: 1px solid #0288D1;
+    cursor: pointer;
+    padding: 3px;
+    width: 100px;
+    text-align: center;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 0px;
+    transition-property: background, color, border-radius;
+    transition-duration: 0.25s;
+    transition-timing-function: linear, ease-in-out;
+}
+
+.txt-link:hover {
+    border-radius: 10px;
+    background: #0288D1;
+    color: #fff;
+}
+.inputWrap-productDetail{
+    // border: solid 2px #6394ff;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,120 @@
+<section class="container">
+    <div class="row middle-xs">
+        <div class="col-xs-12 col-md-4">
+            <div class="box">
+                <div class="row middle-xs">
+                    <div class="col-xs-3 center">
+                        <i class="fa fa-5x fa-list-alt blue-text"></i>
+                    </div>
+                    <div class="col-xs-9 small-text">
+                        <span class="thick-text blue-text">{{totalTransaction}}</span> transactions have been made on the in this wallet.
+                        <p>
+                            <span class="thick-text green-text"><i class="fa fa-level-up fa-fw"></i> {{debitTransaction}}</span> debit transactions.<br>
+                            <span class="thick-text red-text"><i class="fa fa-level-down fa-fw"></i> {{creditTransaction}}</span> credit transactions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <div class="box">
+                <div class="card blue-gradient">
+                    <div class="row middle-xs">
+                        <div class="col-xs-4 center">
+                            <i class="fa transparent-icon fa-4x fa-credit-card-alt"></i>
+                        </div>
+                        <div class="col-xs-8">
+                            <span class="small-text thick-text">Wallet Balance</span><br>
+                            <span class="big-text thin-text">&#x20a6; {{ facility?.wallet.balance }}</span><br>
+                            <hr class="white">
+                            <span class="small-text thin-text">Ledger Balance | &#x20a6; {{ facility?.wallet.ledgerBalance }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <div class="box padding center">
+                <h1 class="small-text thick-text">Fund Wallet</h1>
+                <div>
+                    <form class="row" [formGroup]="paymentFormGroup">
+                        <div class="col-xs-6 frm-item-wrap">
+                            <mat-input-container>
+                                <input type="number" matInput placeholder="Enter amount e.g. &#x20a6;500" formControlName="fundAmount">
+                            </mat-input-container>
+                        </div>
+                        <div class="col-xs-6 frm-item-wrap">
+                            <mat-form-field>
+                                <mat-select formControlName="paymentType" placeholder="Payment Type" class="mat-select">
+                                    <mat-option *ngFor="let paymentChannel of paymentChannels" [(value)]="paymentChannel.name"> {{ paymentChannel.name }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </form>
+                </div>
+                <div *ngIf="flutterwavePayment">
+                    <angular-4-flutterwave [amount]="paymentFormGroup.controls['fundAmount'].value" [customer_email]="facility?.email" [PBFPubKey]="flutterwaveClientKey" [txref]="refKey" [currency]="'NGN'" [country]="'NG'" [payment_method]="'card'" [custom_title]="'APMIS'"
+                        [btnColor]="'btn-blue'" [custom_description]="" [exclude_banks]="" (close)="paymentCancel();" (callback)="paymentDone($event);"></angular-4-flutterwave>
+                </div>
+                <div *ngIf="paystackPayment">
+                    <angular4-paystack [key]="paystackClientKey" [email]="facility?.email" [amount]="paymentFormGroup.controls[ 'fundAmount'].value*100" [ref]="refKey" [class]=" 'btn btn-primary btn-medium btn-blue' " (close)="paymentCancel() " (callback)="paymentDone($event) ">Paystack</angular4-paystack>
+                </div>
+                <!-- <button class="blue-gradient button">Pay</button> -->
+            </div>
+        </div>
+
+
+    </div>
+    <div class="divider"></div>
+    <div class="row chart-wrap"> 
+        <div class="col-xs-12 center">
+            <canvas baseChart height="70px" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card blue-gradient" style="padding: 10px;border-radius: 5px 5px 0 0;">
+                <div class="row thick-text small-text">
+                    <div class="col-xs-1 center">No</div>
+                    <div class="col-xs-1 center">Date</div>
+                    <div class="col-xs-2 center">Description</div>
+                    <div class="col-xs-1 center">Ref. Code</div>
+                    <div class="col-xs-1 center">Type</div>
+                    <div class="col-xs-2 center">Amount</div>
+                    <div class="col-xs-2 center">Current Balance</div>
+                    <div class="col-xs-2 center">Available Balance</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row" style="margin-top: -13px;">
+        <div class="col-xs-12">
+            <div style="padding: 0px 10px;border: 1px solid #ccc;">
+                <div class="card-list-item" *ngIf="transactions.length===0 && !loading">
+                    <div class="col-xs-12 center">No data available in table</div>
+                </div>
+                <div class="card-list-item" *ngIf="transactions.length===0 && loading ">
+                    <div class="col-xs-12 center">
+                        <mat-spinner class="small-spinner "></mat-spinner>
+                    </div>
+                </div>
+                <div class="card-list-item" *ngFor="let tx of transactions; let i=index; ">
+                    <div class="row">
+                        <div class="col-xs-1 center">{{i+1}}</div>
+                        <div class="col-xs-1 center">{{tx.createdAt | date:'short'}}</div>
+                        <div class="col-xs-2 center">{{tx.description}}</div>
+                        <div class="col-xs-1 center">{{tx.refCode}}</div>
+                        <!-- <div class="col-xs-2 center">{{ (tx.transactionType === 'Cr') ? 'Credit' : 'Debit' }}</div> -->
+                        <div class="col-xs-1 center"><i class="{{ (tx.transactionType==='Cr' ) ? 'text-green' : 'text-red' }} fa big-text fa-1x {{ (tx.transactionType==='Cr' ) ? 'fa-level-up' : 'fa-level-down' }} fa-fw"></i></div>
+                        <div class="col-xs-2 center {{ (tx.transactionType==='Cr' ) ? 'text-green' : 'text-green' }} ">&#x20a6;<span>{{tx.amount}}</span></div>
+                        <div class="col-xs-2 center"><span>&#x20a6;</span>{{tx.ledgerBalance}}</div>
+                        <div class="col-xs-2 center"><span>&#x20a6;</span>{{tx.balance}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+</section>

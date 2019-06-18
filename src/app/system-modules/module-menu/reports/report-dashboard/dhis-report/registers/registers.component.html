@@ -1,0 +1,104 @@
+<div class="pp-card shadow-grey">
+    <div class="card-title">
+        <div>Registers</div>
+        <div class="top-btns">
+            <div class="top-btn"><i class="fa fa-plus"></i> New Register</div>
+        </div>
+    </div>
+    <div class="filters">
+        <div class="filter">
+            <input style="border-radius: 50px;" class="search" placeholder="search registers...">
+        </div>
+    </div>
+    <div class="content-wrap">
+        <div class="tbl-wrap">
+            <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+                <tbody class="tbody-regs">
+                    <tr (click)="call_opd()">
+                        <td>
+                            <div class="tbl-title">DAILY OPD</div>
+                            <div class="other-wrap">
+                                <div class="etr-tags">
+                                    <div class="etr-other">Last entry - 11th Oct 2018 02:25pm </div>
+                                    <div class="etr-other">26 Entries</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr (click)="call_register()">
+                        <td>
+                            <div class="tbl-title">TETANUS TOXOID REGISTER FOR WOMEN OF CHILD BEARING AGE</div>
+                            <div class="other-wrap">
+                                <div class="etr-tags">
+                                    <div class="etr-other">Last entry - 11th Oct 2018 02:25pm </div>
+                                    <div class="etr-other">26 Entries</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr (click)="call_antenatal()">
+                        <td>
+                            <div class="tbl-title">DAILY ANTE NATAL CLINIC</div>
+                            <div class="other-wrap">
+                                <div class="etr-tags">
+                                    <div class="etr-other">Last entry - 11th Oct 2018 02:25pm </div>
+                                    <div class="etr-other">26 Entries</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr (click)="irts_modal()">
+                        <td>
+                            <div class="tbl-title">DAILY IMMUNIZATION REGISTER AND TALLY SHEET</div>
+                            <div class="other-wrap">
+                                <div class="etr-tags">
+                                    <div class="etr-other">Last entry - 11th Oct 2018 02:25pm </div>
+                                    <div class="etr-other">26 Entries</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr (click)="call_ldr()">
+                        <td>
+                            <div class="tbl-title">LABOUR & DELIVERY DAILY REGISTER</div>
+                            <div class="other-wrap">
+                                <div class="etr-tags">
+                                    <div class="etr-other">Last entry - 11th Oct 2018 02:25pm </div>
+                                    <div class="etr-other">26 Entries</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr (click)="call_gmp()">
+                        <td>
+                            <div class="tbl-title">NUTRITION AND GROWTH MONITORING (0-5 YEARS) INFORMATION REGISTER</div>
+                            <div class="other-wrap">
+                                <div class="etr-tags">
+                                    <div class="etr-other">Last entry - 11th Oct 2018 02:25pm </div>
+                                    <div class="etr-other">26 Entries</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr (click)="call_fpr()">
+                        <td>
+                            <div class="tbl-title">DAILY FAMILY PLANNING REGISTER</div>
+                            <div class="other-wrap">
+                                <div class="etr-tags">
+                                    <div class="etr-other">Last entry - 11th Oct 2018 02:25pm </div>
+                                    <div class="etr-other">26 Entries</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="showModal" class="modal-overlay">
+    <app-irts-modal (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-irts-modal>
+</div>

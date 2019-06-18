@@ -1,0 +1,45 @@
+.pp-card{
+    border: 0 !important;
+}
+
+
+
+.blue-nav {
+    color: #194985;
+    padding-right: 30px;
+}
+
+
+.top-links {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+    margin-top: 20px;
+    font-size: 1.4rem;
+    color: #194985;
+    cursor: pointer;
+}
+.top-links li:hover, .top-links-active{
+    border-bottom: 3px solid #194985 !important;
+    font-weight: bold;
+}
+.top-links li{
+    margin-left: 10px;
+    border-bottom: 3px solid transparent;
+}
+
+.control-group{
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 20px;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+
+    control-group:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        } 
+}

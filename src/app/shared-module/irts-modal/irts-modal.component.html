@@ -1,0 +1,38 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Immunization Register List</legend>
+    <div class="modal_mini_title">Continental Hospital</div>
+  </div>
+  <div class="modal-baseWrap">
+    <legend class="modal_title"></legend>
+
+    <div class="userAccs-listing">
+      <div class="userAccs-listingWrap">
+
+        <div class="acc-listing" routerLink="/dashboard/reports/report-dashboard/dhisReport/registers/immunizationTally">
+          <div class="listing-imgWrap">
+            <i class="fas fa-band-aid"></i>
+          </div>
+          <div class="listing-name">Immunization Tally Sheet</div>
+        </div>
+
+        <div class="acc-listing" routerLink="/dashboard/reports/report-dashboard/dhisReport/registers/child-immunization">
+          <div class="listing-imgWrap">
+            <i class="fa fa-child"></i>
+          </div>
+          <div class="listing-name">Child Immunization</div>
+        </div>
+
+
+        <div class="acc-listing" routerLink="/dashboard/reports/report-dashboard/dhisReport/registers/health-facility-records">
+          <div class="listing-imgWrap">
+            <i class="fa fa-sticky-note"></i>
+          </div>
+          <div class="listing-name">Health Facility Monthly Record / Immunization Summary</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

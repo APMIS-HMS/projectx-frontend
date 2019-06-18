@@ -1,0 +1,154 @@
+<div>
+  <div class="top-wrap">
+    <div class="search-person">
+      <input (keyup)="search_call()" type="text" [formControl]="searchPerson" class="search-person-input" placeholder="select patient..." />
+      <ul *ngIf="suggestShow" class="person-suggest-list">
+        <li (click)="suggestItem_click()" class="suggest-item">
+          <div class="suggested-wrap">
+            <div class="suggested-img-wrap">
+              <img src="../../../../../../assets/images/users/default.png" >
+            </div>
+            <div class="suggested-label">Sydney James</div>
+          </div>
+        </li>
+        <li (click)="suggestItem_click()" class="suggest-item">
+          <div class="suggested-wrap">
+            <div class="suggested-img-wrap">
+              <img src="../../../../../../assets/images/users/default.png" >
+            </div>
+            <div class="suggested-label">Sydney James</div>
+          </div>
+        </li>
+        <li (click)="suggestItem_click()" class="suggest-item">
+          <div class="suggested-wrap">
+            <div class="suggested-img-wrap">
+              <img src="../../../../../../assets/images/users/default.png" >
+            </div>
+            <div class="suggested-label">Sydney James</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <button class="btn-1 btn-blue"><i class="fa fa-plus"></i> New Patient</button>
+  </div>
+
+  <div class="sect-wrapa">
+    <div class="selected-patient">
+      <div class="suggested-wrap">
+        <div class="active-liner"></div>
+        <div class="suggested-img-wrap">
+          <img src="../../../../../../assets/images/users/default.png" >
+        </div>
+        <div class="user-labels">
+          <div class="suggested-label">Sydney James</div>
+          <div (click)="userMore()" class="user-more">
+            <i [class.fa-arrow-circle-up]="isMore" [class.fa-arrow-circle-down]="!isMore" class="fa"></i> 
+            <span *ngIf="isMore">HIDE</span>
+            <span *ngIf="!isMore">SHOW</span>
+             USER DATA
+          </div>
+        </div>
+      </div>
+      <div class="request-source">
+        <div *ngIf="isWalkin" class="walkin">WALK IN</div>
+        <div *ngIf="!isWalkin" class="reffered">
+          <div class="ref-fac">Continental Hospital</div>
+          <div class="ref-person">Dr. Kosowo Alibaba</div>
+        </div>
+      </div>
+    </div>
+    <div class="grp-wrap">
+      <div *ngIf="isMore" class="flex-em">
+        <div class="pre-label-wrap">
+          <div>
+            <div class="pre-label-label">Radiology No:</div>
+            <div class="pre-label-val">AD-1222CA</div>
+          </div>
+          <div>
+            <div class="pre-label-label">Age:</div>
+            <div class="pre-label-val">28yrs</div>
+          </div>
+          <div>
+            <div class="pre-label-label">Gender:</div>
+            <div class="pre-label-val">Male</div>
+          </div>
+        </div>
+        <div>
+          <div class="pre-label-wrap">
+            <div class="pre-label-label">Clinical Information</div>
+            <div class="pre-label-val">{{clinicalInvestigation}}</div>
+          </div>
+          <div class="pre-label-wrap">
+            <div class="pre-label-label">Diagnosis</div>
+            <div class="pre-label-val">{{clinicalInvestigation}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="iv-lists">
+        <div class="modality-list">
+          <div class="sec-title">Modality</div>
+          <div class="inner-search-wrap">
+            <input (keyup)="search_call()" type="text" [formControl]="searchModality" class="search-person-input" placeholder="search modalities..." />
+          </div>
+          <ul>
+            <li (click)="modality_click(1)" [class.modality-item-active]="mod1" class="modality-item">X-Ray</li>
+            <li (click)="modality_click(2)" [class.modality-item-active]="mod2" class="modality-item">This is modal two</li>
+            <li (click)="modality_click(3)" [class.modality-item-active]="mod3" class="modality-item">This is modal three</li>
+            <li (click)="modality_click(4)" [class.modality-item-active]="mod4" class="modality-item">This is modal four</li>
+            <li (click)="modality_click(5)" [class.modality-item-active]="mod5" class="modality-item">This is modal five</li>
+          </ul>
+        </div>
+        <div class="investigation-list">
+            <div class="sec-title">X-Ray - Investigations</div>
+          <div class="inner-search-wrap">
+            <input (keyup)="search_call()" type="text" [formControl]="searchInvestigation" class="search-person-input" placeholder="search investigations..." />
+          </div>
+          <ul>
+            <li (click)="investigation_click(1)" [class.investigation-item-active]="item1" class="investigation-item">
+              <i class="fa fa-check-circle"></i>
+              This is investigation item one
+            </li>
+            <li (click)="investigation_click(2)" [class.investigation-item-active]="item2" class="investigation-item">
+              <i class="fa fa-check-circle"></i>
+              This is investigation item two
+            </li>
+            <li (click)="investigation_click(3)" [class.investigation-item-active]="item3" class="investigation-item">
+              <i class="fa fa-check-circle"></i>
+              This is investigation item three
+            </li>
+            <li (click)="investigation_click(4)" [class.investigation-item-active]="item4" class="investigation-item">
+              <i class="fa fa-check-circle"></i>
+              This is investigation item four
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- <form [formGroup]="frmNewRequest" novalidate></form> -->
+    </div>
+
+    <div class="tbl-resp-wrap">
+      <div class="sec-title">Selected Investigations List</div>
+      <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+          <thead>
+            <tr>
+              <th>Modality</th>
+              <th>Investigation</th>
+              <th></th>
+            </tr>
+          </thead>
+  
+          <tbody>
+              <tr>
+                <td>X-Ray</td>
+                <td>X-Ray of the right arm</td>
+                <td><i class="fa fa-times i-action red-txt"></i> </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+
+    <div class="btn-wrap">
+      <button class="btn-1 btn-blue"><i class="fa fa-image"></i> Make Request</button>
+    </div>
+  </div>  
+</div>

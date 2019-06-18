@@ -1,0 +1,30 @@
+<div class="con-pass-inwrap">
+    <div class="cp-logo-wrap">
+        <img src="../../../assets/images/app_logo/apmis_vector.svg">
+    </div>
+    <div class="img-label">{{headerText}}</div>
+
+    <form class="frm-conpass" [formGroup]="frm_conpass" novalidate autocomplete="new-password">
+        <div class="frm-item-wrap" *ngIf="authorizationTypeText == 'Medical'">
+            <mat-input-container class="example-full-width">
+                <input matInput mat-error placeholder="OTP" formControlName="otp" autocomplete="new-password">
+            </mat-input-container>
+        </div>
+        <div class="frm-item-wrap" *ngIf="authorizationTypeText == 'Patient'">
+            <mat-input-container class="example-full-width">
+                <input matInput mat-error placeholder="Patient Authorisation Code" formControlName="pac" autocomplete="new-password">
+            </mat-input-container>
+        </div>
+        <div class="frm-item-wrap" style="margin-bottom: 15px;">
+            <mat-input-container class="example-full-width">
+                <input type="password" matInput mat-error formControlName="password" placeholder="Password" autocomplete="new-password">
+            </mat-input-container>
+        </div>
+        <div class="back-btn-box">
+            <span class="forgetPword">forgot password?</span>
+        </div>
+        <div class="example-full-width" id="example-full-width">
+            <button (click)="send()" class="small-btn" mat-raised-button>{{btnText}}</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,53 @@
+<div class="">
+    <form class="new-supp-base">
+      <div style="width: 450px;">
+        <div class="InputGroup" style="width: 100% !important;">
+          <input class="customInput" style="width: 100% !important;" [formControl]="consumableSearch" [value]="selectedConsumableName"
+          type="text" required>
+          <span class="highlight"></span>
+          <label class="customLabel">Product Name</label>
+          <ul class="search-sugestions" *ngIf="showProduct">
+            <li class="search-sugestion" *ngFor="let consumable of consumables;let i = index" (click)="setSelectedProduct(consumable)">{{consumable.STR}}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ot-cons" *ngIf="showOtherProp">
+        <div class="InputGroup" style="margin-right: 20px;">
+          <input class="customInput" style="width: 100% !important;" [formControl]="manufacturerSearch" [value]="selectedManufacturerName"
+          type="text" required>
+          <span class="highlight"></span>
+          <label class="customLabel">Manufacturer</label>
+          <ul class="search-sugestions" *ngIf="showManufacturers">
+            <li class="search-sugestion" *ngFor="let manufacturer of manufacturers;let i = index" [value]="manufacturer.name" (click)="setSelectedManufacturer(manufacturer)">{{manufacturer.name}}</li>
+          </ul>
+        </div>
+        <div class="search-noResult" *ngIf="consumableExist">
+          <span>This product configuration
+            already exisst</span>
+        </div>
+        <div class="multi-sup-list-wrap" style="min-width: 200px;">
+          <div class="dropDown-container">
+            <label class="customLabel">Category</label>
+            <div class="select">
+              <select name="dropDown-container" (click)="onShowCategorySelect()" id="dropDown-container"></select>
+            </div>
+          </div>
+          <div *ngIf="category_select" class="multi-sup-list">
+              <app-apmis-search-result [data]="categories" (onSelectedItems)="onSearchSelectedItems($event)" (onCreateItem)="onCreateNewItem($event)"
+              (onCloseEvent)="onClickClose($event)"></app-apmis-search-result>
+          </div>
+        </div>
+      </div>
+      <div class="sv-btn-container">
+        <div class="new-btn-solid-blue" [class.disabled]="!canConfigure" (click)="onClickConfigure()">
+          <span>Configure</span>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="config-container">
+      <app-base-unit></app-base-unit>
+  </div>
+  <app-config-container [btnName]="configProductBtn" [selectedProduct]="selectedConsumable"></app-config-container>

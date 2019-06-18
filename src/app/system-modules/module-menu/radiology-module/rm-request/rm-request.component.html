@@ -1,0 +1,44 @@
+<div class="pg-subtitle">
+  RADIOLOGY REQUESTS
+</div>
+<div>
+  <div class="doc-mainWrap">
+    <div class="tabs">
+        <div [class.tab-active]="request_new" (click)="requestNew_show()" class="tab">Request Investigation</div>
+        <div [class.tab-active]="request_list" (click)="requestList_show()" class="tab">Appointments</div>
+        <div [class.tab-active]="reporting" (click)="reporting_show()" class="tab">Reporting</div>
+    </div>
+    <div class="doc-contentArea">
+        <div class="clinicalNoteWrap">
+            <div class="actSect">
+                <!-- <div (click)="request_show()" class="act-wrap">
+                    <i *ngIf="request_view" class="fa fa-minus" aria-hidden="true"></i>
+                    <i *ngIf="!request_view" class="fa fa-plus" aria-hidden="true"></i>
+                    <span>New Request</span>
+                </div> -->
+                <!-- <div *ngIf="isExternal===true" (click)="extList_show()" class="ext-listBtn">External Requests</div>
+
+                <div *ngIf="extList" class="ext-list shadow-RB">
+                    <div (click)="extList_close()" class="x">x</div>
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <tbody>
+                            <tr *ngFor="let external of pendingExternalRequests">
+                                <td>{{external.createdAt | date:'short'}}.</td>
+                                <td>{{external.name}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> -->
+
+                <app-rm-new-request *ngIf="request_new"></app-rm-new-request>
+                <app-rm-request-list *ngIf="request_list"></app-rm-request-list>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div *ngIf="reqDetail_view" class="modal-overlay">
+        <app-request-detail [investigation]="selectedInvestigation" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-request-detail>
+    </div>
+    <div *ngIf="personAcc_view" class="modal-overlay">
+        <app-new-patient (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-patient>
+    </div> -->

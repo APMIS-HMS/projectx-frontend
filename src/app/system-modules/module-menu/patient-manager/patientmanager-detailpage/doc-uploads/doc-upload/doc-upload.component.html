@@ -1,0 +1,48 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick($event)" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Document Upload</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+          <form [formGroup]="frmNewUpload" novalidate>
+              <div>
+                  <div class="fileUploadCount">
+                    <span>{{fileCount}}</span> files uploaded to this patient.
+                  </div>
+                  <br><br><br>
+                  <div class="upload-btn-wrapper">
+                      <button class="upload-btn">Select Document</button>
+                      <input type="file" name="fileInput" (change)="onFileChange($event)" #fileInput formControlName="fileUpload" />
+                        <span style="font-size: 0.79em; color: #aaa; font-weight: 900;">{{fileName}}</span>
+                    </div>
+                  <div class="frm-item-wrap">
+                      <mat-form-field>
+                        <mat-select placeholder="Document Types" formControlName="fileType">
+                            <mat-option *ngFor="let item of documentTypes" [value]="item.name">{{item.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                  </div>
+                  <div class="frm-item-wrap">
+                      <mat-input-container class="example-full-width">
+                          <input matInput mat-error placeholder="Document Name" formControlName="fileName">
+                      </mat-input-container>
+                  </div>
+                  <div class="frm-item-wrap">
+                      <mat-form-field>
+                          <textarea formControlName="desc" matInput placeholder="Description (optional)"></textarea>
+                      </mat-form-field>
+                  </div>
+              </div>
+
+              <div class="btn-box">
+                    <button class="small-btn" [disabled]="loading || !frmNewUpload.valid || !fileName " (click)="uploadDocument()" mat-raised-button>
+                        <span *ngIf="!loading">Upload Document</span>
+                        <span *ngIf="loading"><span class="fa fa-spinner fa-spin"></span>Uploading Document</span>
+                    </button>
+              </div>
+          </form>
+    </div>
+</div>

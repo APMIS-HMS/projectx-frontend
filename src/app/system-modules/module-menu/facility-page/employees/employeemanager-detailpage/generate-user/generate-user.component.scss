@@ -1,0 +1,77 @@
+@import "../empmanager-detailpage.component.scss";
+
+.modal-head-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F5F5F5;
+    padding: 10px;
+}
+.modal-head-wrap img{
+    width: 70px;
+    border-radius: 100%;
+    margin-right: 20px;
+}
+.optBtn-wrap{
+    display: flex;
+    justify-content: center;
+    margin: 0px auto;
+}
+.modal-content-wrap{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+.check-component{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+.checkComponent{
+    width: 100%;
+}
+.check-group-wrapper{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.check-item{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    font-family: $font-titles;
+    position: relative;
+    background: #fafafa;
+    padding: 10px 10px 0 10px;
+    border: 1px solid #eee;
+    margin: 10px;
+}
+.btn-1{
+    width: 140px;
+    padding: 20px;
+    margin: 20px auto;
+}
+.title-label{
+    margin: 20px auto;
+    margin-top: 20px;
+    color: #757575;
+    font-size: 1.7rem;
+}
+.modal_mini_title{
+    color: #9E9E9E;
+}
+.checker-subgroup{
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+}
+.checker-wrap-inner{
+    display: flex;
+    align-items: center;
+    margin: 15px 5px;
+}
+.checker-wrap-inner span{
+    font-size: 1.2rem;
+    color: #757575;
+}

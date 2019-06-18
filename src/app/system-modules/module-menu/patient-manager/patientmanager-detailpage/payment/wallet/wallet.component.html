@@ -1,0 +1,110 @@
+<div class="head">
+    <div class="wallet-summary shadow">
+        <div class="summary-item">
+            <div class="item-label">Ledger Balance</div>
+            <div class="item-val other-bal"><span>&#x20a6;</span> {{person?.wallet?.ledgerBalance|numberThr}}</div>
+        </div>
+        <div class="summary-item">
+            <div class="item-label">Balance</div>
+            <div class="item-val other-bal"><span>&#x20a6;</span> {{person?.wallet?.balance|numberThr}}</div>
+        </div>
+        <hr>
+        <div class="summary-item">
+            <div class="item-label">Available Balance</div>
+            <div class="item-val available-bal"><span>&#x20a6;</span> {{person?.wallet?.balance|numberThr}}</div>
+        </div>
+    </div>
+    <div class="head-others shadow">
+        <form [formGroup]="paymentFormGroup">
+            <div class="frm-item-wrap">
+                <mat-input-container>
+                    <input type="number" matInput placeholder="Enter amount e.g. &#x20a6;500" formControlName="fundAmount">
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-form-field>
+                    <mat-select formControlName="paymentType" placeholder="Payment Type" class="mat-select">
+                        <mat-option *ngFor="let paymentChannel of paymentChannels" [(value)]="paymentChannel.name"> {{ paymentChannel.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </form>
+        <div class="epayment-box">
+            <div *ngIf="flutterwavePayment">
+                <angular-4-flutterwave [amount]="paymentFormGroup.controls['fundAmount'].value" [customer_email]="(patient.personDetails.email===undefined)?patient.personDetails.apmisId+'@apmis.ng':patient.personDetails.email" [PBFPubKey]="flutterwaveClientKey" [txref]="refKey" [currency]="'NGN'" [country]="'NG'" [payment_method]="'card'" [custom_title]="'APMIS'"
+                    [btnColor]="'btn-blue'" [custom_description]="" [exclude_banks]="" (close)="paymentCancel();" (callback)="paymentDone($event);"></angular-4-flutterwave>
+            </div>
+            <div *ngIf="paystackPayment">
+                <angular4-paystack [key]="paystackClientKey" [email]="(patient.personDetails.email===undefined)?patient.personDetails.apmisId+'@apmis.ng':patient.personDetails.email" [amount]="paymentFormGroup.controls[ 'fundAmount'].value*100" [ref]="refKey" [class]=" 'btn btn-primary btn-medium btn-blue' " (close)="paymentCancel() " (callback)="paymentDone($event) ">Paystack</angular4-paystack>
+            </div>
+            <div *ngIf="cashPayment">
+                <button (click)="fundWalletViaCashPayment(paymentFormGroup.valid, paymentFormGroup.value); " [disabled]="disableBtn " class="btn btn-primary ">
+                  <span *ngIf="cashPaymentPay ">Pay</span>
+                  <span *ngIf="cashPaymentPaying ">Paying... <i class="fa fa-spinner fa-spin "></i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tbl-header ">
+    <div class="pg-subtitle ">Account Statement</div>
+    <div class="frm-item-wrap ">
+        <mat-input-container>
+            <input type="text " matInput placeholder="Search Activities " [formControl]="search ">
+        </mat-input-container>
+    </div>
+</div>
+<div class="tbl-resp-wrap">
+    <table cellpadding="0 " cellspacing="0 " border="0.5 ">
+        <thead>
+            <tr>
+                <th>
+                    <span style="padding-left: 3px; ">No</span>
+                </th>
+                <th>
+                    <span style="padding-left: 3px; ">Date</span>
+                </th>
+                <th>
+                    <span style="padding-left: 3px; ">Description</span>
+                </th>
+                <th>
+                    <span style="padding-left: 3px; text-align:center; ">Ref Code</span>
+                </th>
+                <th>
+                    <span style="padding-left: 3px; text-align:center; ">Transaction Type</span>
+                </th>
+                <th>
+                    <span style="padding-left: 3px; text-align:center; ">Amount</span>
+                </th>
+                <th>
+                    <span style="padding-left: 3px; text-align:center; ">Current Balance</span>
+                </th>
+                <th>
+                    <span style="padding-left: 3px; text-align:center; ">Available Balance</span>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngIf="transactions.length===0 && !loading ">
+                <td class="table-content " colspan="8 " style="text-align: center "> No data available in table</td>
+            </tr>
+            <tr *ngIf="transactions.length===0 && loading ">
+                <td class="table-content " colspan="8 " style="text-align: center ">
+                    <mat-spinner class="small-spinner "></mat-spinner>
+                </td>
+            </tr>
+            <tr *ngFor="let tx of transactions; let i=index; ">
+                <td>{{ i+1 }}</td>
+                <td>{{tx.createdAt | date:'short'}}</td>
+                <td>{{tx.description}}</td>
+                <td>{{tx.refCode}}</td>
+                <td>{{ (tx.transactionType === 'Cr') ? 'Credit' : 'Debit' }}</td>
+                <td class="{{ (tx.transactionType==='Cr' ) ? 'text-green' : 'text-green' }} "><span>&#x20a6;</span>{{tx.amount}}</td>
+                <td><span>&#x20a6;</span>{{tx.ledgerBalance}}</td>
+                <td><span>&#x20a6;</span>{{tx.balance}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

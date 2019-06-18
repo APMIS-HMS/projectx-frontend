@@ -1,0 +1,42 @@
+@import '../../../clinic/check-in-patient/check-in-patient.component.scss';
+@import '../../../product-manager/category-manager/category-manager.component.scss';
+@import '../../../facility-page/facilitypage-workspace/facilitypage-workspace.component.scss';
+.inPatient-activityTimeline {
+    z-index: 11;
+    height: 100vh;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.border-box {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.workspace-count {
+    padding: 0 0 20px 0;
+    cursor: pointer;
+    &:hover {
+        .workspace-listWrap {
+            display: block;
+        }
+    }
+}
+
+.workspace-listWrap {
+    right: 20px;
+    .pointer-wrap {
+        margin-left: -90px;
+    }
+}

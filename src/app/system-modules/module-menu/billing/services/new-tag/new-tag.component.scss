@@ -1,0 +1,51 @@
+.frm-item-wrap {
+    text-align: center;
+}
+.facility-title{
+    margin-bottom: 20px;
+}
+.cta-1{
+    font-size: 1.4rem;
+}
+.modal-baseWrap {
+    width: 340px;
+}
+.suggestionFeeds{
+    width: 245px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.suggestedItem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 185px;
+    background: #BDBDBD;
+    border-radius: 6px;
+    padding: 10px;
+    border: 0.5px solid #9E9E9E;
+    margin-top: 5px;
+    margin-left: 3px;
+    cursor: pointer;
+}
+.suggestedItem:hover{
+    background: #9E9E9E;
+}
+.suggestedItem img{
+    width: 20px;
+    margin-right: 10px;
+}
+.suggetedName {
+    font-size: 1.2rem;
+}
+.mat-raised-button {
+    max-width: 200px;
+    text-align: center;
+    background: #153d70;
+    color: #fff;
+}
+#example-full-width{
+    text-align: center;
+}

@@ -1,0 +1,181 @@
+<div class="container">
+  <h2 class="title">
+    <i class="fa fa-star fa-fw star"></i> Today's Cash Flow Summary
+  </h2>
+  <section class="row">
+    <div class="col-lg-6"> 
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-6 padding">
+            <canvas baseChart
+            [data]="paymentChartData"
+            [labels]="paymentChartLabels"
+            [chartType]="paymentChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+            <div class="pie-number summary-title">
+              380
+            </div>
+          </div>
+          <div class="col-lg-6 chart-side padding">
+            <span class="chart-subtitle">
+              Total Amount of Invoice
+            </span>
+            <span class="chart-title">
+                ₦ 520,000
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+          <div class="row">
+              <div class="col-lg-6 padding">
+                <canvas baseChart
+                [data]="invoiceChartData"
+                [labels]="invoiceChartLabels"
+                [chartType]="invoiceChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+                <div class="pie-number summary-title">
+                  780
+                </div>
+              </div>
+              <div class="col-lg-6 chart-side padding">
+                <span class="chart-subtitle">
+                  Total Amount of Payment
+                </span>
+                <span class="chart-title">
+                    ₦ 250,000
+                </span>
+              </div>
+            </div>
+      </div>
+    </div>
+  </section>
+  <h2 class="title">
+      <i class="fa fa-star fa-fw star"></i> Today's Payment Summary
+  </h2>
+  <section class="row">
+    <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="table-head col-lg-3">Patient</div>
+              <div class="table-head col-lg-3">Service</div>
+              <div class="table-head col-lg-1">Amount</div>
+              <div class="table-head col-lg-1">Count</div>
+              <div class="table-head col-lg-1">Type</div>
+              <div class="table-head col-lg-1">Date</div>
+              <div class="table-head col-lg-2">Collected By</div>
+            </div>
+          </div>
+          <div class="card-content">
+              <div class="card-list-item">
+                  <div class="row">
+                    <div class="table-list col-lg-3">John Doe</div>
+                    <div class="table-list col-lg-3">Consultancy</div>
+                    <div class="table-list col-lg-1">12,000</div>
+                    <div class="table-list col-lg-1">1</div>
+                    <div class="table-list col-lg-1">Transfer</div>
+                    <div class="table-list col-lg-1">12-Mar-2018</div>
+                    <div class="table-list col-lg-2">Jane Doe</div>
+                  </div>
+              </div>
+              <div class="card-list-item">
+                  <div class="row">
+                    <div class="table-list col-lg-3">John Doe</div>
+                    <div class="table-list col-lg-3">Consultancy</div>
+                    <div class="table-list col-lg-1">12,000</div>
+                    <div class="table-list col-lg-1">1</div>
+                    <div class="table-list col-lg-1">Transfer</div>
+                    <div class="table-list col-lg-1">12-Mar-2018</div>
+                    <div class="table-list col-lg-2">Jane Doe</div>
+                  </div>
+              </div>
+              <div class="card-list-item">
+                  <div class="row">
+                    <div class="table-list col-lg-3">John Doe</div>
+                    <div class="table-list col-lg-3">Consultancy</div>
+                    <div class="table-list col-lg-1">12,000</div>
+                    <div class="table-list col-lg-1">1</div>                    
+                    <div class="table-list col-lg-1">Transfer</div>
+                    <div class="table-list col-lg-1">12-Mar-2018</div>
+                    <div class="table-list col-lg-2">Jane Doe</div>
+                  </div>
+              </div>
+              <div class="card-list-item">
+                  <div class="row">
+                    <div class="table-list col-lg-3">John Doe</div>
+                    <div class="table-list col-lg-3">Consultancy</div>
+                    <div class="table-list col-lg-1">12,000</div>
+                    <div class="table-list col-lg-1">1</div>
+                    <div class="table-list col-lg-1">Transfer</div>
+                    <div class="table-list col-lg-1">12-Mar-2018</div>
+                    <div class="table-list col-lg-2">Jane Doe</div>
+                  </div>
+              </div>
+              <div class="card-list-item">
+                  <div class="row">
+                    <div class="table-list col-lg-3">John Doe</div>
+                    <div class="table-list col-lg-3">Consultancy</div>
+                    <div class="table-list col-lg-1">12,000</div>
+                    <div class="table-list col-lg-1">1</div>
+                    <div class="table-list col-lg-1">Transfer</div>
+                    <div class="table-list col-lg-1">12-Mar-2018</div>
+                    <div class="table-list col-lg-2">Jane Doe</div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    
+  </section>
+  <h2 class="title">
+      <i class="fa fa-star fa-fw star"></i> Today's Invoice Summary
+  </h2>
+  <div class="tabs row">
+    <div class="col-lg-3 tab active">
+      HMO
+    </div>
+    <div class="col-lg-3 tab">
+      SELF
+    </div>
+    <div class="col-lg-3 tab">
+      Company
+    </div>
+    <div class="col-lg-3 tab">
+      Family
+    </div>
+  </div>
+  <section class="row">
+    <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="table-head col-lg-3">Patient</div>
+              <div class="table-head col-lg-2">Service</div>
+              <div class="table-head col-lg-2">HMO</div>
+              <div class="table-head col-lg-1">Amount</div>
+              <div class="table-head col-lg-2">Authorization Code</div>
+              <div class="table-head col-lg-2">Date</div>
+            </div>
+          </div>
+          <div class="card-content">
+              <div class="card-list-item">
+                  <div class="row">
+                    <div class="table-list col-lg-3">John Doe</div>
+                    <div class="table-list col-lg-2">Consultancy</div>
+                    <div class="table-list col-lg-2">Avon Health</div>
+                    <div class="table-list col-lg-1">12,000</div>
+                    <div class="table-list col-lg-2">CS-ER23</div>
+                    <div class="table-list col-lg-2">12-Mar-2018</div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    
+  </section>
+</div>

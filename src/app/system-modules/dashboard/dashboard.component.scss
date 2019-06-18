@@ -1,0 +1,119 @@
+// @import "../../../../globals/variables.scss";
+@import "../../../globals/variables.scss";
+
+.db-wrap {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.db-item-wrap{
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    cursor: pointer;
+    outline: none;
+}
+.db-item-wrap:hover{
+    .db-item{
+        background: #0288D1;
+        color: #fff;
+    }
+    .dbItem-label{
+        background: #000;
+    }
+}
+.db-item {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid #eee;
+    border-top: 2px solid #eee;
+    border-bottom: 2px solid #eee;
+    border-right: 5px solid #eee;
+    color: #000;
+    border-radius: 100%;
+    cursor: pointer;
+    overflow: hidden;
+}
+.dbItem-insider{
+    width: 100%;
+}
+.db-item i{
+    font-size: 3.5rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.dbItem-label {
+    background: #03A9F4;
+    font-size: 1.8rem;
+    font-family: $font-titles;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 1.5px;
+    padding: 2px;
+    box-sizing: border-box;
+}
+.stats-wrap{
+    min-height: 100px;
+    max-height: 130px;
+    max-width: 150px;
+    overflow: hidden;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+.stat {
+    font-family: $font-titles;
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+.stat-val {
+    font-size: 1.4rem;
+    color: #0288D1;
+    margin-right: 5px;
+}
+.stat-label {
+    font-size: 1.2rem;
+    color: #8e8e8e;
+}
+.img-wrap {
+    border-radius: 100%;
+    border: 3px solid #fff;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+.img-wrap img{
+    width: 100%;
+}
+.facility-name-wrap{
+    margin-top: 20px;
+    text-align: center;
+}
+.txt1 {
+    font-size: 2.6rem;
+}
+.txt2 {
+    font-size: 1.2rem;
+}
+
+// Loading 
+
+.loading_screen{
+    background:rgba(0,0,0,0.8);
+    position: absolute;
+    top: 0; 
+    z-index: 999999999999;
+}

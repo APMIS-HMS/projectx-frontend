@@ -1,0 +1,195 @@
+// @import '../../system-modules/../../clinic/check-in-patient/check-in-patient.component.scss';
+.container-width {
+    //width: 100%;
+    //border: 1px solid gray;
+    padding: 20px;
+    margin: 10px 0; //border-radius: 10px;
+}
+
+.btn-create {
+    background-color: #519dde;
+    color: #fff;
+}
+
+.inPatient-activityTimeline {
+    width: 400px;
+    height: unset;
+}
+
+.text-head h3 {
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.text-head {
+    border-bottom: 1px solid #0288d1;
+    margin: 10px 0;
+}
+
+.border-div {
+    border: 1px soild #0288d1;
+}
+
+.survery .checkbox {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.active {
+    color: green;
+}
+
+.inactive {
+    color: red;
+}
+
+.modal-baseWrap {
+    position: relative;
+    width: 600px;
+    min-width: 400px;
+    height: auto;
+    background: #fff;
+    overflow: unset;
+    padding: 20px 50px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.modal_title {
+    padding-bottom: 8px;
+    padding-top: 4px;
+}
+
+.form-group {
+    //margin-left: 11px;
+    //display: inline-flex;
+}
+
+.enline {
+    display: inline-flex; //padding-right: 25px;
+    min-width: fit-content;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.card {
+    //box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center; //border-left: 1px solid #cccccc;
+    // border-right: 1px solid #cccc;
+    //border-bottom: 1px solid #cccc;
+}
+
+.line {
+    border: 1px solid #cccccc;
+    padding: 0;
+}
+
+.card-header {
+    background: #519dde; // #337ab7;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 10px;
+    vertical-align: middle; //line-height: 30px;
+    //border-bottom: solid 1px #fff;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 600;
+    height: 15%;
+}
+
+.card-content {
+    font-size: 1.6rem;
+}
+
+.card-header-box {
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    border: none;
+    font-size: 1.2rem !important;
+    padding: 10px !important;
+    width: 100%;
+    height: 30px !important;
+    box-sizing: border-box;
+}
+
+.card-list-item:hover {
+    background: #eee;
+}
+
+.card-list-item:last-of-type {
+    border: none
+}
+
+.card-list-item {
+    padding: 10px;
+    border-bottom: solid #cccccc 1px; //padding-top: 20px;
+    //padding-bottom: 20px;
+    font-size: 1.2rem; //-webkit-transition: 0.2s;
+    margin: 0 auto;
+}
+
+.fit {
+    display: inline-flex; //justify-content: space-between;
+}
+
+.searchInput {
+    width: auto;
+    border-radius: 3px;
+    background-color: #FAFAFA;
+    padding-left: 17px;
+    text-align: center;
+    margin-top: 0;
+}
+
+.searchInput:focus {
+    border-radius: 5px;
+}
+
+.scrollable {
+    max-height: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    box-sizing: border-box;
+}
+
+.text-blue {
+    color: #337ab7 !important;
+    text-align: center;
+}
+
+.tooltip {
+    font-size: 1.3em !important;
+    &:after {
+        font-family: Arial, Helvetica, sans-serif;
+        opacity: 0;
+        transition: all 0.4s;
+        font-size: 1.2rem !important;
+        position: absolute;
+        margin-left: -80px;
+        display: block;
+        padding: 10px;
+        content: attr(data-tooltip);
+        background: rgba(0, 0, 0, 0.74);
+        border-radius: 5px;
+        color: #fff;
+        min-width: 80px;
+        text-align: center;
+    }
+    &:hover {
+        cursor: pointer;
+        &:after {
+            opacity: 1;
+            margin-left: -100px;
+        }
+    }
+}
+
+.badge {
+    padding: 10px;
+    border-radius: 25px;
+    background: #519dde;
+    box-shadow: 0px 3px 10px #dddddd;
+    display: inline-block;
+}

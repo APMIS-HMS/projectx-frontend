@@ -1,0 +1,264 @@
+<div class="">
+    <div class="row">
+        <div class="page-title">Schedule Appointment</div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="topmenuwrap">
+                <li [routerLink]="['/dashboard/clinic/appointment']">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <span>Appointments</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 clinic-running-days-wrap">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            <div class="sect-title">Clinic Running Days <span *ngIf="loadIndicatorVisible" class="fa fa-spinner fa-spin"></span></div>
+            <div class="runningDays">
+                <div class="runningDay-wrap" *ngFor="let schedule of schedules">
+                    <div class="running-day">{{schedule.day}} | {{schedule.location.name}}</div>
+                    <div class="running-time">{{schedule.startTime | date:'shortTime'}} to {{schedule.endTime | date:'shortTime'}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row appointment-category">
+                <div class="col-xs-12">
+                    <h2>Appointment Type</h2>
+                </div>
+                <div class="col-xs-12">
+                    <form [formGroup]="appointmentTypeForm">
+                        <mat-radio-group formControlName="category">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <mat-radio-button class="cat-radio-btn" (click)="onClickRadioBtn('physicianAppointment');" value="physicianAppointment">Physician Appointment</mat-radio-button>
+                                </div>
+                                <div class="col-xs-3">
+                                        <!-- <mat-radio-button class="cat-radio-btn" (click)="onClickRadioBtn('immunizationAppointment');" value="immunizationAppointment">Immunization Appointment</mat-radio-button> -->
+                                    <mat-radio-button class="cat-radio-btn" (click)="onClickRadioBtn('immunizationAppointment');" value="immunizationAppointment">Batch Appointment</mat-radio-button>
+                                </div>
+                                <!-- <div class="col-xs-3">
+<mat-radio-button class="cat-radio-btn" (click)="onClickRadioBtn('radiologyAppointment');" value="radiologyAppointment">Radiology Appointment</mat-radio-button>
+                                </div>
+                                <div class="col-xs-3">
+<mat-radio-button class="cat-radio-btn" (click)="onClickRadioBtn('theatreAppointment');" value="theatreAppointment">Theatre Appointment</mat-radio-button>
+                                </div> -->
+                            </div>
+                        </mat-radio-group>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" *ngIf="physicianAppointment">
+            <app-schedule-frm [selectedPatient]="selectedPatient"></app-schedule-frm>
+        </div>
+        <div class="col-xs-12" *ngIf="immunizationAppointment">
+            <app-immunization-appointment [selectedPatient]="selectedPatient" [selectedAppointment]="selectedAppointment"></app-immunization-appointment>
+        </div>
+        <!-- <div class="col-xs-12" *ngIf=" radiologyAppointment ">
+            Radiology
+        </div>
+        <div class="col-xs-12" *ngIf="theatreAppointment">
+            Theatre
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-xs-12 dr-wrap">
+            <app-date-range [dateRange]="dateRange" (dateRangeChange)="setReturnValue($event)"></app-date-range>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table cellpadding="0" cellspacing="0" border="0.5">
+                <thead>
+                    <tr>
+                        <th>
+                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                            <span style="padding-left: 3px;">Patient</span>
+                        </th>
+                        <th>
+                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                            <span style="padding-left: 3px;">Date</span>
+                        </th>
+                        <th>
+                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                            <span style="padding-left: 3px;">Time</span>
+                        </th>
+                        <th>
+                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                            <span style="padding-left: 3px;">Clinic</span>
+                        </th>
+                        <th>
+                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                            <span style="padding-left: 3px;">Provider</span>
+                        </th>
+                        <th>
+                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                            <span style="padding-left: 3px;">Status</span>
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td colspan="7">
+                            <div class="tbl-actionRow">
+                                <div class="row">
+                                    <div class="col-xs-6 col-md-2">
+                                        <mat-input-container>
+                                            <input matInput placeholder="Clinic" [matAutocomplete]="ClinicAuto" [formControl]="clinicCtrl">
+                                        </mat-input-container>
+                                        <mat-autocomplete #ClinicAuto="matAutocomplete" [displayWith]="displayFn">
+                                            <mat-option *ngFor="let clinic of filteredClinics | async " [value]="clinic">
+                                                {{ clinic.clinicName }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </div>
+                                    <div class="col-xs-6 col-md-2">
+                                        <mat-input-container>
+                                            <input matInput placeholder="Provider" [matAutocomplete]="providerAuto" [formControl]="providerCtrl">
+                                        </mat-input-container>
+                                        <span style="margin-left: -15px;" *ngIf="loadingProviders" class="fa fa-spinner fa-spin"></span>
+                                        <mat-autocomplete #providerAuto="matAutocomplete" [displayWith]="providerDisplayFn">
+                                            <mat-option *ngFor="let provider of filteredProviders | async" [value]="provider">
+                                                {{ provider.employeeDetails.lastName }} {{ provider.employeeDetails.firstName }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </div>
+                                    <div class="col-xs-6 col-md-2">
+                                        <mat-input-container>
+                                            <input matInput placeholder="Type" [matAutocomplete]="autoType" [formControl]="typeCtrl">
+                                        </mat-input-container>
+                                        <mat-autocomplete #autoType="matAutocomplete" [displayWith]="appointmentTypeDisplayFn">
+                                            <mat-option *ngFor="let type of filteredAppointmentTypes | async" [value]="type">
+                                                {{ type.name }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </div>
+                                    <div class="col-xs-6 col-md-2">
+                                        <mat-input-container>
+                                            <input matInput placeholder="Status" [matAutocomplete]="auto" [formControl]="statusCtrl">
+                                        </mat-input-container>
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let state of filteredStates | async" [value]="state">
+                                                {{ state }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </div>
+                                    <div class="col-xs-6 col-md-2">
+                                        <mat-input-container>
+                                            <input matInput placeholder="Day Count" [matAutocomplete]="auto" [formControl]="todayCtrl">
+                                        </mat-input-container>
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let state of filteredStates | async" [value]="state">
+                                                {{ state }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </div>
+                                    <div class="col-xs-6 col-md-2">
+                                        <div class="searchInputWrap">
+                                            <input [formControl]="searchControl" type="search" autofocus class="searchInput" placeholder="search">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="appointments.length == 0" class="text-center">
+                        <td colspan="9" style="text-align:center;"> No data available in table</td>
+                    </tr>
+                    <tr *ngFor="let appointment of appointments">
+                        <td>
+                            <div class="empWrap">
+                                <div class="list-img">
+                                    <img *ngIf="appointment.patientDetails?.personDetails?.profileImageObject !== undefined" [src]="facilityService.transform(appointment.patientId.personDetails?.profileImageObject?.thumbnail)">
+                                    <img *ngIf="appointment.patientDetails?.personDetails?.profileImageObject === undefined" src="assets/images/users/default.png">
+                                </div>
+                                <div>{{appointment.patientDetails.personDetails.title}} {{appointment.patientDetails.personDetails.lastName}} {{appointment.patientDetails.personDetails.firstName}}</div>
+                            </div>
+                        </td>
+                        <td>{{appointment.startDate | date:'shortDate'}}</td>
+                        <td> {{appointment.startDate | date:'shortTime'}}</td>
+                        <td>{{appointment.clinicId}}</td>
+                        <td>
+                            <div class="empWrap">
+                                <div class="list-img">
+                                    <img *ngIf="appointment.doctorId !== undefined && appointment.providerDetails?.personDetails?.profileImageObject !== undefined" [src]="facilityService.transform(appointment.doctorId?.employeeDetails?.profileImageObject?.thumbnail)">
+                                    <img *ngIf="appointment.providerDetails?.personDetails?.profileImageObject === undefined" src="assets/images/users/default.png">
+                                </div>
+                                <div>{{appointment.providerDetails?.personDetails.title}} {{appointment.providerDetails?.personDetails.lastName}} {{appointment.providerDetails?.personDetails.firstName}}</div>
+                            </div>
+                        </td>
+                        <td *ngIf="appointment.attendance === undefined">{{appointment?.orderStatusId}}</td>
+                        <td *ngIf="appointment.attendance !== undefined">Checked In</td>
+                        <td>
+                            <div class="tbl-actions-wrap">
+                                <div *ngIf="appointment.attendance !== undefined" class="tr-act-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Check Out</div>
+                                <div *ngIf="appointment.attendance === undefined" class="tr-act-btn" (click)="editAppointment(appointment)"><i class="fa fa-edit" aria-hidden="true"></i> Edit</div>
+                                <div *ngIf="appointment.attendance === undefined && appointment.orderStatusId != 'Cancelled'" class="tr-act-btn" (click)="cancelAppointment(appointment)"><i class="fa fa-times" aria-hidden="true"></i> Cancel</div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-12">
+            <div class="sect-title2">Patient Appointment History</div>
+            <table style="margin-bottom:240px;" cellpadding="0" cellspacing="0" border="0.5">
+                <thead>
+                    <tr>
+                        <th>
+                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                            <span style="padding-left: 3px;">Date/Time</span>
+                        </th>
+                        <th>
+                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                            <span style="padding-left: 3px;">Clinic</span>
+                        </th>
+                        <th>
+                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                            <span style="padding-left: 3px;">Provider</span>
+                        </th>
+                        <th>
+                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                            <span style="padding-left: 3px;">Status</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngIf="pastAppointments.length == 0">
+                        <td colspan="9" style="text-align:center;"> No data available in table</td>
+                    </tr>
+
+                    <tr *ngFor="let appointment of pastAppointments">
+                        <td>{{appointment.startDate | date}}</td>
+                        <td>{{appointment.clinicId}}</td>
+                        <td>
+                            <div *ngIf="appointment?.doctorId !== undefined" class="empWrap">
+                                <div class="list-img">
+                                    <!-- <img *ngIf="appointment.doctorId?.employeeDetails?.profileImageObject !== undefined" [src]="facilityService.transform(appointment.doctorId?.employeeDetails?.profileImageObject?.thumbnail)">
+                                    <img *ngIf="appointment.doctorId?.employeeDetails?.profileImageObject === undefined" src="assets/images/users/default.png"> -->
+                                    <img *ngIf="appointment.providerDetails?.personDetails?.profileImageObject !== undefined && appointment.doctorId !== null" [src]="facilityService.transform(appointment.doctorId?.employeeDetails?.profileImageObject?.thumbnail)">
+                                    <img *ngIf="appointment.providerDetails?.personDetails?.profileImageObject === undefined" src="assets/images/users/default.png">
+                                </div>
+                                <div>{{appointment?.providerDetails?.personDetails?.title}} {{appointment?.providerDetails?.personDetails?.lastName}} {{appointment?.providerDetails?.personDetails?.firstName}}</div>
+                            </div>
+                        </td>
+                        <td *ngIf="appointment.attendance === undefined">{{appointment?.orderStatusId}}</td>
+                        <td *ngIf="appointment.attendance !== undefined">Checked In</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,287 @@
+<div class="container">
+    <div class="row" style="margin-bottom: 100px;">
+        <!-- <div class="col-sm-4">
+            <div class="card">
+                <div>
+                    <h2 style="padding-top:10px; text-align: center">
+                        Pending Bills
+                    </h2>
+                </div>
+                <div class="search-box">
+                    <i class="fa fa-2x fa-search"></i>
+                    <input type="text" placeholder="Search first name, Apmis ID" [formControl]="searchPendingBill">
+                </div>
+                <div class="card-list">
+                    <div class="card-list-item" *ngFor="let pendingBill of pendingBills; let i = index;" (click)="onClickPatientPendingBill(pendingBill)">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <div class="list-img">
+
+                                </div>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="list-text">
+                                    <span class="title">{{ pendingBill?.principalObject?.personDetails?.firstName }} {{ pendingBill?.principalObject?.personDetails?.lastName}}</span>
+                                    <span class="sub">{{ pendingBill?.updatedAt | date:'medium' }} | Total Amount Due:
+                                                <b>{{pendingBill?.grandTotalExcludeInvoice|numberThr }}</b>
+                                            </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="badge">
+                                    {{ pendingBill?.billItems.length }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="loadingPendingBills" class="card-list-item">
+                        <div class="text-center">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    <div *ngIf="pendingBills.length === 0 && !loadingPendingBills" class="card-list-item">
+                        <div>No data available in table</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <h2 style="padding-top:10px; text-align: center">
+                        Invoices
+                    </h2>
+                </div>
+                <div class="search-box">
+                    <i class="fa fa-2x fa-search"></i>
+                    <input type="text" placeholder="Search Invoices, Apmis ID" [formControl]="searchPendingInvoices">
+                </div>
+                <div class="card-list">
+                    <div class="card-list-item" *ngFor="let invoice of invoiceGroups" (click)="onSelectedInvoice(invoice)">
+                        <div class="list-img">
+
+                        </div>
+                        <div class="list-text">
+                            <span class="title">{{invoice?.invoiceNo}}</span>
+                            <span class="sub">{{invoice?.patientObject?.personDetails?.firstName}} {{invoice?.patientObject?.personDetails?.lastName}}
+                                    | {{invoice?.updatedAt|date:'medium'}} </span>
+                        </div>
+                        <div style="float:right">
+                            <h2>{{invoice?.balance|numberThr}}</h2>
+                        </div>
+                    </div>
+                    <div *ngIf="isLoadingInvoice" class="card-list-item">
+                        <div class="text-center">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div *ngIf="invoiceGroups.length === 0 && !isLoadingInvoice" class="card-list-item">
+                        <div>No data available in table</div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="col-sm-12">
+            <div class="card" *ngIf="selectedPatient._id !== undefined">
+                <div class="card-list">
+                    <div class="card-list-item">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="big-img">
+
+                                </div>
+                                <div class="list-text">
+                                    <span class="title">{{selectedPatient?.personDetails?.lastName}}
+                                        {{selectedPatient?.personDetails?.firstName}}</span>
+                                    <span class="sub">{{selectedPatient?.personDetails?.email}}</span>
+                                    <span class="sub">{{selectedPatient?.personDetails?.homeAddress?.street}},
+                                        {{selectedPatient?.personDetails.homeAddress?.city}},
+                                        {{selectedPatient?.personDetails.homeAddress?.lga}}.
+                                        {{selectedPatient?.personDetails.homeAddress?.state}},
+                                        {{selectedPatient?.personDetails.homeAddress?.country}}
+                                    </span>
+                                    <span class="sub">
+                                        <br> </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6" style="padding: 20px; text-align: right">
+                                Current Balance:
+                                <b>{{selectedPatient?.personDetails?.wallet?.balance|number:'1.2-2'}}</b>
+                                <br>
+                                <br>
+                                <button class="btn btn-blue" (click)="fundWallet_pop()">Fund Wallet</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <hr>
+                <div style="overflow-y: visible; overflow-x:hidden; max-height: 1000px" class="card-list">
+                    <div class="card-list-item accord">
+                        <div class="row">
+                            <div style="text-align:right" class="col-sm-12">
+                                <button class="btn btn-blue" (click)="addItem_show()">
+                                    Add item
+                                </button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row invoice-table-head">
+                            <div class="col-sm-1">
+                                <input (change)="selectAll_change($event)" type="checkbox" [attr.checked]="selectAll" [formControl]="txtSelectAll">
+                            </div>
+                            <div class="col-sm-2">
+                                DATE
+                            </div>
+                            <div class="col-sm-2">
+                                ITEM
+                            </div>
+                            <div class="col-sm-2">
+                                UNIT PRICE
+                            </div>
+                            <div class="col-sm-1">
+                                QUANTITY
+                            </div>
+                            <div class="col-sm-2">
+                                TOTAL PRICE
+                            </div>
+                            <div class="col-sm-2">
+                                ACTIONS
+                            </div>
+                        </div>
+                        <div class="row" *ngFor="let group of billGroups">
+                            <div class="col-sm-12">
+                                <div class="row invoice-table-list invoice-sub-header">
+                                    <div class="col-sm-1">
+                                        <input type="checkbox" (change)="checkGroup($event,group)" [checked]="group.isChecked" [formControl]="select1">
+                                    </div>
+                                    <div class="col-sm-8" (click)="toggleCurrentCategory(group)">
+                                        {{group.category}}
+                                    </div>
+                                    <div class="col-sm-3" (click)="toggleCurrentCategory(group)">
+                                        {{group.total | currency:'NGN':true:'4.2-2'}}
+                                    </div>
+                                </div>
+                                <div *ngIf="isCurrentCategory(group)">
+                                    <div class="invoice-table-list row" *ngFor="let bill of group.bills">
+                                        <div class="col-sm-1">
+                                            <input type="checkbox" (change)="checkBill($event,bill, group)" [checked]="bill.isChecked" [formControl]="select1">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {{bill.billObject?.updatedAt|date:'medium'}}
+                                        </div>
+                                        <div class="col-sm-2" (click)="itemDetail(bill)">
+                                            {{bill.itemName}}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {{bill.unitPrice | number:'1.2-2'}}
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <span [hidden]="isCurrentBill(bill, group)"> {{bill.qty}}</span>
+                                            <input *ngIf="isCurrentBill(bill, group)" min="0" class="edit-control" type="number" [value]="bill.qty" [formControl]="itemQtyEdit">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {{bill.amount | number:'1.2-2'}}
+                                        </div>
+                                        <div class="col-sm-2 icons">
+                                            <span>
+                                                <i [hidden]="itemEditShow && (selectedBillItem._id ===bill._id)"
+                                                    (click)="itemEditToggle(bill)" class="fa fa-edit fa-2x fa-fw"
+                                                    aria-hidden="true"></i>
+                                                <i *ngIf="itemEditShow && (selectedBillItem._id ===bill._id)" (click)="itemEditToggle(bill)"
+                                                    class="fa fa-check" aria-hidden="true"></i>
+                                                <i (click)="onRemoveBill(bill,group)" class="fa fa-trash fa-2x fa-fw"
+                                                    aria-hidden="true"></i>
+                                                <i (click)="lineModifier_show(bill)" class="fa fa-plus fa-2x fa-fw">
+                                                </i>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:10px;" class="row">
+                            <div class="col-sm-6">
+                                <div *ngIf="total > 0" (click)="addModefier()" class="btn btn-blue">
+                                    Add Discount
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6" style="font-size: 12px; text-align: right">
+                                <b>Sub-total</b> {{subTotal | currency:'NGN':true:'1.2-2' }}
+                                <br>
+                                <b>Discount</b> {{discount | currency:'NGN':true:'1.2-2'}}<br>
+                                <div class="btn"><i (click)="onRemoveDiscount()" class="fa fa-trash" aria-hidden="true"></i> Remove
+                                </div>
+                            </div>
+
+                            <hr class="col-sm-12">
+                            <div style="font-size: 12px" class="col-sm-12">
+                                Grand Total
+                                <b style="float:right">{{total | currency:'NGN':true:'1.2-2'}}</b>
+                            </div>
+                        </div>
+                        <div *ngIf="total > 0" class="row" style="text-align:center; margin-top: 10px">
+                           <!-- <button style="margin: 10px" class="btn btn-blue" (click)="makePayment_onclick()">Make
+                                Payment</button>-->
+                            <button style="margin: 10px" class="btn" [disabled]="isProcessing" (click)="onGenerateInvoice()">
+                                <span>
+                                    <div [hidden]="isProcessing">
+                                        Generate Invoice
+                                    </div>
+                                    <div [hidden]="!isProcessing">
+                                        Processing...
+                                        <i class='fa fa-spinner fa-spin'></i>
+                                    </div>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contentCol emptySet" *ngIf="selectedPatient._id === undefined">
+                <span>Kindly select a patient from the lookup below</span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div *ngIf="makePayment_modal" class="modal-overlay">
+        <div class="animated pulse">
+            <div class="modal-header-wrap">
+                <div (click)="close_onClick($event)" class="modal-close-ico" aria-hidden="true">X</div>
+                <legend class="modal_title">Fund Wallet</legend>
+                <div class="modal_mini_title">All Purpose Medical Information System</div>
+            </div>
+            <app-fund-wallet [patient]="selectedPatient" (closeModal)="close_onClick($event)"></app-fund-wallet>
+        </div>
+    </div>
+
+    <div *ngIf="addItem" class="modal-overlay">
+        <app-add-item (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-item>
+    </div>
+
+    <!-- <div *ngIf="makePayment" class="modal-overlay">
+        <app-make-payment (closeModal)="close_onClick($event)" (personValueChanged)="onPersonValueUpdated($event)" [isInvoicePage]="false" [selectedPatient]="selectedPatient" [checkBillitems]="checkBillitems" [billGroups]="billGroups" [listedBillItems]="listedBillItems"
+            [cost]="total" [subTotal]="subTotal" [discount]="discount" id="form-modal" class="form-modal center-center"></app-make-payment>
+    </div>
+
+    <div *ngIf="addModefierPopup" class="modal-overlay">
+        <app-add-modefier (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-modefier>
+    </div> -->
+
+    <div *ngIf="addLineModefierPopup" class="modal-overlay">
+        <app-add-line-modifier [selectedServiceBill]="selectedServiceBill" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-line-modifier>
+    </div>
+
+    <!-- <div *ngIf="priceItemDetailPopup" class="modal-overlay">
+        <app-item-detail [selectedBillItem]="selectedServiceBill" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-item-detail>
+    </div>   -->
+</div>

@@ -1,0 +1,133 @@
+<div class="col-xs-12 schedule-wrap">
+    <div class="row">
+        <div class="col-xs-4">
+            <mat-input-container>
+                <input matInput placeholder="Clinic" [matAutocomplete]="ClinicAuto" [formControl]="clinic">
+            </mat-input-container>
+
+            <mat-autocomplete #ClinicAuto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let clinic of clinics" [value]="clinic">
+                    {{ clinic.clinicName }}
+                </mat-option>
+            </mat-autocomplete>
+        </div>
+        <div class="col-xs-4">
+            <apmis-lookup [formControl]="patient" [(ngModel)]="apmisLookupText" [url]="apmisLookupUrl" [query]="apmisLookupQuery" placeholder="Search for Patient" [isSocket]="true" [displayKey]="apmisLookupDisplayKey" [displayImage]="true" [imgObj]="apmisLookupImgKey"
+                [multipleKeys]="true" [otherKeys]="apmisLookupOtherKeys" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+        </div>
+        <div class="col-xs-4">
+            <apmis-lookup [formControl]="provider" [(ngModel)]="apmisProviderLookupText" [url]="apmisProviderLookupUrl" [query]="apmisProviderLookupQuery" placeholder="Search for Provider" [isSocket]="true" [displayKey]="apmisProviderLookupDisplayKey" [displayImage]="true"
+                [imgObj]="apmisProviderLookupImgKey" [multipleKeys]="true" [otherKeys]="apmisProviderLookupOtherKeys" (selectedItem)="apmisProviderLookupHandleSelectedItem($event)"></apmis-lookup>
+        </div>
+        <div class="col-xs-4">
+            <mat-input-container>
+                <input matInput placeholder="Status" [matAutocomplete]="autoStatus" [formControl]="status">
+            </mat-input-container>
+            <mat-autocomplete #autoStatus="matAutocomplete" [displayWith]="orderStatusDisplayFn">
+                <mat-option *ngFor="let order of orderStatuses" [value]="order">
+                    {{ order.name }}
+                </mat-option>
+            </mat-autocomplete>
+        </div>
+        <div class="col-xs-4">
+            <mat-input-container>
+                <input [formControl]="dateCtrl" [hourTime]="'12'" matInput [value]="date | date: 'dd/MM/yyyy HH:mm a'" dateTimePicker />
+                <mat-error *ngIf="dateCtrl.hasError('noValue')">
+                    <span *ngIf="!isEarlierDate">{{clinicErrorMsg}}</span>
+                    <span *ngIf="isEarlierDate">{{clinicErrorEalierDateMsg}}</span>
+                </mat-error>
+            </mat-input-container>
+        </div>
+        <div class="col-xs-4">
+            <mat-input-container>
+                <input matInput placeholder="Appointment Category" [matAutocomplete]="categoryAuto" [formControl]="category">
+            </mat-input-container>
+            <mat-autocomplete #categoryAuto="matAutocomplete" [displayWith]="categoryServiceDisplayFn">
+                <mat-option *ngFor="let category of categoryServices" [value]="category">
+                    {{ category.name }}
+                </mat-option>
+            </mat-autocomplete>
+        </div>
+        <div class="col-xs-4">
+            <mat-input-container>
+                <input matInput placeholder="AppointmentType" [matAutocomplete]="autoType" [formControl]="type">
+            </mat-input-container>
+            <mat-autocomplete #autoType="matAutocomplete" [displayWith]="appointmentTypeDisplayFn">
+                <mat-option *ngFor="let type of appointmentTypes" [value]="type">
+                    {{ type.name }}
+                </mat-option>
+            </mat-autocomplete>
+        </div>
+        <div class="col-xs-4">
+            <mat-input-container class="example-full-width">
+                <input matInput [formControl]="reason" placeholder="Reason">
+            </mat-input-container>
+        </div>
+        <div class="col-xs-4" style="padding: 20px 10px;">
+            <mat-checkbox [formControl]="checkIn">Check In</mat-checkbox>
+        </div>
+        <div class="col-xs-4" *ngIf="showTimeZone">
+            <mat-input-container>
+                <input matInput placeholder="Select Timezone" [matAutocomplete]="timezoneAuto" [formControl]="timezone">
+            </mat-input-container>
+            <mat-autocomplete #timezoneAuto="matAutocomplete" [displayWith]="timezoneDisplayFn">
+                <mat-option *ngFor="let timezone of timezones" [value]="timezone">
+                    {{ timezone.name }}
+                </mat-option>
+            </mat-autocomplete>
+        </div>
+        <div class="col-xs-12 immune-box">
+            <div class="row box">
+                <div class="col-xs-4 immune-search-box">
+                    <div class="col-xs-12 search-box">
+                        <mat-input-container class="example-full-width">
+                            <!-- <input matInput placeholder="Immunization Schedule"> -->
+                            <input matInput placeholder="Batch Schedule">
+                        </mat-input-container>
+                    </div>
+                    <div class="col-xs-12 immune-search-result">
+                        <div *ngFor="let schedule of immunizationSchedules" class="immune-group-item" [class.active]="schedule._id== selectedSchedule?._id">
+                            <mat-radio-button [checked]="schedule._id===immunizationScheduleId" (change)="changeSelection(schedule)">{{schedule.name}} (&#8358;{{schedule.serviceObject.price | number:'1.2-2'}})</mat-radio-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-8 immune-result-right">
+                    <div class="box">
+                        <div class="col-xs-12 header">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <!-- <h3>Selected Vaccines</h3> -->
+                                    <h3>Selected Batches</h3>
+                                </div>
+                                <div class="col-xs-6 pull right" style="text-align:right;margin-top: 5px;">
+                                    <mat-checkbox style="line-height:18px;font-size:12px;" [disabled]="selectedSchedule?.vaccines?.length < 2" (change)="checkAllChanged($event)" [checked]="checkAll">
+                                        Check All
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 content">
+                            <div *ngFor="let vaccine of vaccines" class="immune-content-group-item">
+                                <mat-checkbox (change)="checkVaccine($event, vaccine)" [checked]="vaccine.checked">
+                                    <b>{{vaccine.vaccineObject.code}}</b> &#8358;{{vaccine.vaccineObject.serviceObject.price | number:'1.2-2'}}
+                                    <br /> {{vaccine.vaccineObject.name}}
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 btn-box">
+            <button [disabled]="disableBtn || !dateCtrl.valid || !patient.valid || !type.valid || !category.valid || !clinic.valid || !isAnyVaccineChecked()" (click)="scheduleAppointment()" [ngClass]="{'cta-1':!disableBtn && dateCtrl.valid && patient.valid && type.valid && category.valid && clinic.valid && isAnyVaccineChecked(), 'cta-1-disable':disableBtn || !dateCtrl.valid || !patient.valid || !type.valid || !category.valid || !clinic.valid || !isAnyVaccineChecked()}">
+            <span *ngIf="updateAppointment">Update Appointment</span>
+            <span *ngIf="saveAppointment">Schedule Appointment</span>
+            <span *ngIf="savingAppointment">Scheduling Appointment...
+              <i class="fa fa-spinner fa-spin"></i>
+            </span>
+          </button>
+        </div>
+    </div>
+</div>

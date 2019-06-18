@@ -1,0 +1,93 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Add Supplier</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap" (click)="hideSuggestions()">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <form [formGroup]="frm_newSupplier" autocomplete="off" novalidate>
+
+            <div class="mainfrmwrap">
+                <div class="sec-full">
+                    <div class="frm-item-wrap">
+                        <mat-input-container class="example-full-width">
+                            <input matInput mat-error placeholder="Name" formControlName="name" autocomplete="off">
+                        </mat-input-container>
+
+                        <ul class="suggestions nice-scroll" *ngIf="showSearchResult">
+                            <li *ngIf="suppliers?.length === 0">No data available</li>
+                            <li class="suggestion" *ngFor="let supplier of suppliers" (click)="fillingFormWithSearchInfo(supplier)">
+                                <div class="listing-img">
+                                    <img src="assets/images/users/default.png">
+                                </div>
+                                <div class="listing-label">{{supplier.supplier.name}}</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <ng4geo-autocomplete [userSettings]="userSettings" (componentCallback)="autoCompleteCallback($event)"></ng4geo-autocomplete>
+                    <div class="frm-item-wrap">
+                        <div class="frm-item-x2">
+                            <mat-input-container class="example-full-width">
+                                <input matInput mat-error placeholder="Street Address" formControlName="frmStreet">
+                            </mat-input-container>
+                            <mat-input-container class="example-full-width">
+                                <input matInput mat-error placeholder="City" formControlName="frmCity">
+                            </mat-input-container>
+                        </div>
+                    </div>
+                    <div class="frm-item-wrap">
+                        <div class="frm-item-x2">
+                            <mat-form-field class="example-full-width">
+                                <mat-select placeholder="Country" formControlName="frmCountry" [compareWith]="compareCountry">
+                                    <mat-option [value]="country.name" *ngFor="let country of countries">{{country.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <mat-select placeholder="State" formControlName="frmState" [compareWith]="compareState">
+                                    <mat-option [value]="state.name" *ngFor="let state of states">{{state.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="frm-item-wrap">
+                        <mat-input-container>
+                            <input type="tel" matInput mat-error placeholder="Contact Number" formControlName="frmContact">
+                        </mat-input-container>
+                    </div>
+                    <div class="frm-item-wrap">
+                        <mat-input-container>
+                            <input type="email" matInput mat-error placeholder="Email Address" formControlName="email">
+                        </mat-input-container>
+                    </div>
+                    <div class="frm-item-wrap">
+                        <mat-input-container>
+                            <input type="text" matInput mat-error placeholder="C.A.C" formControlName="cac">
+                        </mat-input-container>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        <div class="text-center">
+            <button class="cta-1" mat-raised-button [disabled]="!frm_newSupplier.valid || disableAddBtn" *ngIf="addBtn || addingBtn" (click)="create(frm_newSupplier.valid, frm_newSupplier.value);">
+                <span *ngIf="!addingBtn">
+                    <i class="fa fa-plus "></i>&nbsp; Add Supplier</span>
+                    
+                <span *ngIf="addingBtn ">Adding Supplier...
+                    <i class="fa fa-spin fa-spinner "></i>
+                </span>
+            </button>
+            <button class="cta-1" mat-raised-button [disabled]="!frm_newSupplier.valid || disableAddBtn" (click)="update(frm_newSupplier.valid, frm_newSupplier.value);" *ngIf="updateBtn ">
+                <span *ngIf="!updatingBtn">
+                    <i class="fa fa-plus "></i> Add Supplier</span>
+                <span *ngIf="updatingBtn">Adding Supplier...
+                    <i class="fa fa-spin fa-spinner "></i>
+                </span>
+            </button>
+            <!-- <div (click)="create(frm_newSupplier.valid, frm_newSupplier.value) " class="cta-1 "> {{btnLabel}} </div> -->
+        </div>
+    </div>
+</div>

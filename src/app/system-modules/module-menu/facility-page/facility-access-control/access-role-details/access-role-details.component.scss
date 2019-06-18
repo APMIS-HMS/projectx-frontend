@@ -1,0 +1,39 @@
+
+@import "../../employees/employeemanager-detailpage/generate-user/generate-user.component.scss";
+@import "../create-access/create-access.component.scss";
+@import "../../facilitypage-workspace/facilitypage-workspace.component.scss";
+
+.mainWrap{
+    position: relative;
+    margin-top: -15px; 
+    margin-right: 50px;
+    margin-left: 50px;
+    padding: 10px;
+}
+
+.spanWrap{ 
+        //display:block;
+        width:500px;
+        word-wrap:break-word;
+        text-align: center;
+}
+
+.table{
+    width: 100%;
+}
+
+.table-header{
+    background: #337de6;
+    color: #fff;
+    height: 50px !important;
+}
+
+.table-content{
+    min-height: 40px;
+    line-height: 40px;
+}
+
+.pp-card{
+    padding: 20px !important;
+    box-sizing: border-box;
+}

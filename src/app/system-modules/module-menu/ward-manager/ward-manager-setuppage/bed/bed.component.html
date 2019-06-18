@@ -1,0 +1,93 @@
+<div class="c-page-header">
+    <h3 class="c-page-title">List of Beds in {{wardRoom.name}}</h3>
+    <div class="pull-right btn-box">
+        <div class="add-action-box">
+            <button mat-raised-button (click)="addBedModal()" class="btn pull-right"><i class="fa fa-plus-square"
+                    aria-hidden="true "></i> Add Bed</button>
+        </div>
+        <div class="back-btn">
+            <span routerLink="/dashboard/ward-manager/setup/ward/{{wardId}}"><i class="fa fa-arrow-circle-o-left"></i>
+                Back to Room Setup</span>
+        </div>
+    </div>
+</div>
+
+
+<section class="c-page-body">
+    <div class="InPatients">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="table-head col-xs-1">
+                        S/N
+                    </div>
+                    <div class="table-head col-xs-2">
+                        Bed
+                    </div>
+                    <div class="table-head col-xs-3">
+                        Occupant
+                    </div>
+                    <div class="table-head col-xs-2">
+                        Status
+                    </div>
+                    <div class="table-head col-xs-3">
+                        State
+                    </div>
+                    <div class="table-head col-xs-1">
+                        Actions
+                    </div>
+                </div>
+            </div>
+            <div class="card-content">
+                <div *ngIf="beds.length === 0 && !loading" class="row">
+                    <div class="card-list-item col-xs-12 table-list">
+                        No data available in table
+                    </div>
+                </div>
+
+                <div *ngIf="beds.length === 0 && loading" class="row">
+                    <div class="card-list-item col-xs-12 table-list">
+                        <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue"></i>
+                    </div>
+                </div>
+                <div class="card-list-item" *ngFor="let bed of beds;let i = index">
+                    <div class="row">
+                        <div class="table-list col-xs-1">{{i+1}}</div>
+                        <div class="table-list col-xs-2">{{bed.name}}</div>
+                        <div class="table-list col-xs-3">
+                            <div *ngIf="bed.occupant === undefined"> No Occupant</div>
+                            <div *ngIf="!!bed.occupant">
+                                <div class="empWrapp" style="text-align: center;">
+                                    <div class="list-img">
+                                        <div *ngIf="bed?.occupant?.personDetails?.profileImageObject?.thumbnail == undefined"><img
+                                                src="assets/images/users/default.png"></div>
+                                        <div *ngIf="bed?.occupant?.personDetails?.profileImageObject?.thumbnail != undefined"><img
+                                                [src]="bed?.occupant?.personDetails?.profileImageObject?.thumbnail"></div>
+                                    </div>
+                                    <div>
+                                        <b>{{bed.occupant?.personDetails?.personFullName}}</b><br>
+                                        <small>{{bed.occupant?.personDetails?.gender?.name}}, </small>
+                                        <small>{{bed.occupant?.personDetails?.age}} year(s) old, </small>
+                                        <small>{{bed.occupant?.personDetails?.phoneNumber}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-list col-xs-2">
+                            <div *ngIf="bed?.isAvailable" style="color: green"> Available</div>
+                            <div *ngIf="!bed?.isAvailable" style="color: blue"> Occupied</div>
+                        </div>
+                        <div class="table-list col-xs-3">{{bed?.state}}</div>
+                        <div class="table-list col-xs-1">
+                            <i (click)="bedNameEdit(i, bed)" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <i (click)="confirmBedDelete(bed)" class="fa fa-trash" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="addbed" class="modal-overlay">
+            <app-add-bed (closeModal)="close_onClick($event)" [selectedBed]="selectedBed" id="form-modal" class="form-modal center-center"></app-add-bed>
+        </div>
+    </div>
+</section>

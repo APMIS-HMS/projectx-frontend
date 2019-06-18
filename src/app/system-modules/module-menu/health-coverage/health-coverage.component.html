@@ -1,0 +1,25 @@
+<ul class="pg-menuWrap">
+    <li (click)="hmoCover_show()" [class.pg-menuActive]="hmoCover"><i class="fa fa-braille" aria-hidden="true"></i> Health Insurance</li>
+    <li (click)="companyCover_show()" [class.pg-menuActive]="companyCover"><i class="fa fa-building" aria-hidden="true"></i>Company Retainership</li>
+    <li (click)="familyCover_show()" [class.pg-menuActive]="familyCover"><i class="fa fa-map-marker" aria-hidden="true"></i> Family Cover</li>
+    <!-- <li (click)="payment_show()" [class.pg-menuActive]="payment"><i class="fa fa-superpowers" aria-hidden="true"></i> Payment</li>
+    <li (click)="recievePayment_show()" [class.pg-menuActive]="makePayment"><i class="fa fa-filter" aria-hidden="true"></i> Recieve Payment</li> -->
+    <li (click)="healthCover_show()" [class.pg-menuActive]="hmoContentArea"><i class="fa fa-plus-square" aria-hidden="true"></i> Health Cover</li>
+</ul>
+   <!-- <div class="inner-menu1-wrap responsive_nav-group">
+        <i id="contentSecMenuToggle" (click)="contentSecMenuToggle()" [class.content-sec-icoActive]="contentSecMenuShow" class=" content-sec-ico fa fa-ellipsis-v" aria-hidden="true"></i>
+        <ul id="innerMenu-ul" *ngIf="contentSecMenuShow" class="innerMenu-ul shadow">
+            <li (click)="hmoCover_show()"><i class="fa fa-home" aria-hidden="true"></i>Health Insurance</li>
+            <li (click)="companyCover_show()"><i class="fa fa-braille" aria-hidden="true"></i> Company Retainership</li>
+            <li (click)="familyCover_show()"><i class="fa fa-building" aria-hidden="true"></i> Family Cover</li>
+            <li (click)="payment_show()"><i class="fa fa-money" aria-hidden="true"></i> Payment</li>
+            <li (click)="payment_show()"><i class="fa fa-money" aria-hidden="true"></i>Recieve Payment</li>
+        </ul>
+    </div> -->
+<div class="inner-wrap-b body-wrap">
+    <div class="facility-title">{{pageInView}}</div>
+    <div class="rhs inner-page-contentArea c-page-wrapper">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="clear"></div>
+</div>

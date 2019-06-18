@@ -1,0 +1,342 @@
+<!--<div class="c-page-header">
+</div>-->
+<section class="c-page-wraper">
+    <mat-tab-group>
+        <mat-tab label="New Admission">
+            <div class="card">
+                <div class="card-header">
+                    <div class="table-head col-md-1">
+                        S/N
+                    </div>
+                    <div class="table-head col-md-2">
+                        Patient
+                    </div>
+                    <div class="table-head col-md-2">
+                        Sent by
+                    </div>
+                    <div class="table-head col-md-2">
+                        Clinic
+                    </div>
+                    <div class="table-head col-md-2">
+                        Proposed Ward
+                    </div>
+                    <div class="table-head col-md-1">
+                        Date
+                    </div>
+                    <div class="table-head col-md-2">
+                        Actions
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-list-item" *ngIf="listPatientAdmissionWaiting.length === 0 && !newAdmissionLoading">
+                        <div class="table-list col-xs-12">
+                            No data available in table
+                        </div>
+                    </div>
+                    <div class="card-list-item" *ngIf="listPatientAdmissionWaiting.length === 0 && newAdmissionLoading">
+                        <div class="table-list col-xs-12">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="card-list-item" *ngFor="let inPatientWaitingItem of listPatientAdmissionWaiting; let i = index;">
+                        <div class="row">
+                            <div class="table-list col-md-1">{{i+1}}</div>
+                            <div class="table-list col-md-2">
+                                <div class="empWrapp">
+                                    <div class="list-img">
+                                        <div *ngIf="inPatientWaitingItem?.personDetails?.profileImageObject?.thumbnail == undefined"><img
+                                                src="assets/images/users/default.png"></div>
+                                        <div *ngIf="inPatientWaitingItem?.personDetails?.profileImageObject?.thumbnail != undefined"><img
+                                                [src]="inPatientWaitingItem?.personDetails.profileImageObject?.thumbnail"></div>
+                                    </div>
+                                    <div>
+                                        <b>{{inPatientWaitingItem?.personDetails?.firstName}}
+                                            {{inPatientWaitingItem?.personDetails?.lastName}}</b><br>
+                                        <small>{{inPatientWaitingItem?.personDetails?.gender}}, </small>
+                                        <small>{{inPatientWaitingItem?.personDetails?.age}} old, </small>
+                                        <small>{{inPatientWaitingItem?.personDetails?.phoneNumber}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-list col-md-2" (click)="navEpDetail(item)">
+                                <div class="empWrapp">
+                                    <div class="list-img">
+                                        <div *ngIf="inPatientWaitingItem?.employeeDetails.profileImageObject?.thumbnail == undefined"><img
+                                                src="assets/images/users/default.png"></div>
+                                        <div *ngIf="inPatientWaitingItem?.employeeDetails.profileImageObject?.thumbnail != undefined"><img
+                                                [src]="inPatientWaitingItem?.employeeDetails.profileImageObject?.thumbnail"></div>
+                                    </div>
+                                    <div>
+                                        <b>{{inPatientWaitingItem?.employeeDetails?.firstName}}
+                                            {{inPatientWaitingItem?.employeeDetails?.lastName}}</b><br>
+                                        <small>{{inPatientWaitingItem?.employeeDetails?.phoneNumber}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-list col-md-2">{{inPatientWaitingItem?.clinicId}}</div>
+                            <div class="table-list col-md-2">{{inPatientWaitingItem?.minorLocation?.name}}</div>
+                            <div class="table-list col-md-1">
+                                <b>{{inPatientWaitingItem.createdAt | date }}</b><br>
+                                <small>{{inPatientWaitingItem.createdAt | amTimeAgo }}</small>
+                            </div>
+                            <div class="table-list col-md-2"><button mat-raised-button [disabled]="disableAdmitBtn"
+                                    (click)="admitPatient_onClick(inPatientWaitingItem, typeChecker)" style="color: #fff;height: 30px;line-height: 1.5;"
+                                    [innerHtml]="admitBtnText"> </button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Transfer In">
+            <div class="card">
+                <div class="card-header">
+                    <div class="table-head col-md-1">
+                        S/N
+                    </div>
+                    <div class="table-head col-md-3">
+                        Patient
+                    </div>
+                    <div class="table-head col-md-2">
+                        From Ward
+                    </div>
+                    <div class="table-head col-md-3">
+                        Sent By
+                    </div>
+                    <div class="table-head col-md-2">
+                        To Ward
+                    </div>
+                    <!--<div class="table-head col-md-1">
+                      Date
+                  </div>-->
+                    <div class="table-head col-md-1">
+                        Actions
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-list-item" *ngIf="listPatientTransferWaiting.length === 0 && !transferInLoading">
+                        <div class="table-list col-xs-12">
+                            No data available in table
+                        </div>
+                    </div>
+                    <div class="card-list-item" *ngIf="listPatientTransferWaiting.length === 0 && transferInLoading">
+                        <div class="table-list col-xs-12">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="card-list-item" *ngFor="let inPatientWaitingItem of listPatientTransferWaiting; let i = index;">
+                        <div class="row">
+                            <div class="table-list col-xs-1">{{i+1}}</div>
+                            <div class="table-list col-xs-3">
+                                <div class="empWrapp">
+                                    <div class="list-img">
+                                        <div *ngIf="inPatientWaitingItem?.patient?.personDetails?.profileImageObject?.thumbnail == undefined"><img
+                                                src="assets/images/users/default.png"></div>
+                                        <div *ngIf="inPatientWaitingItem?.patient?.personDetails?.profileImageObject?.thumbnail != undefined"><img
+                                                [src]="inPatientWaitingItem?.patient?.personDetails?.profileImageObject?.thumbnail"></div>
+                                    </div>
+                                    <div>
+                                        <b>{{inPatientWaitingItem?.patient?.personDetails?.firstName}}
+                                            {{inPatientWaitingItem?.patient?.personDetails?.lastName}}</b><br>
+                                        <small>{{inPatientWaitingItem?.patient?.personDetails?.gender}}, </small>
+                                        <small>{{inPatientWaitingItem?.patient?.personDetails?.age}} old, </small>
+                                        <small>{{inPatientWaitingItem?.patient?.personDetails?.phoneNumber}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-list col-xs-2"> {{ inPatientWaitingItem?.currentWardObj?.name }}</div>
+
+                            <div class="table-list col-xs-3">
+                                <div class="empWrap">
+                                    <div class="list-img">
+                                        <div *ngIf="inPatientWaitingItem?.transferred?.profileImageObject?.thumbnail == undefined"><img
+                                                src="assets/images/users/default.png"></div>
+                                        <div *ngIf="inPatientWaitingItem?.transferred?.profileImageObject?.thumbnail != undefined"><img
+                                                [src]="inPatientWaitingItem?.transferred?.profileImageObject?.thumbnail"></div>
+                                    </div>
+                                    <div>
+                                        <b>{{inPatientWaitingItem?.transferred?.firstName}}
+                                            {{inPatientWaitingItem?.transferred?.lastName}}</b><br>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-list col-xs-2">{{ inPatientWaitingItem?.proposedWardObj?.name }}</div>
+                            <!--<div class="table-list col-xs-1">
+                              <b>{{inPatientWaitingItem.createdAt | date }}</b><br>
+                              <small>{{inPatientWaitingItem.createdAt | amTimeAgo }}</small>
+                          </div>-->
+                            <div class="table-list col-xs-1">
+                                <div (click)="transferAdmitPatient_onClick(inPatientWaitingItem)" class="tr-act-btn"><i
+                                        class="fa fa-bed" aria-hidden="true"></i>Accept</div>
+                                <div (click)="onClickDeclineTransfer(inPatientWaitingItem)" class="tr-act-btn"><i class="fa fa-bed"
+                                        aria-hidden="true"></i>Decline</div>
+                                <!--<button mat-raised-button [disabled]="disableAdmitBtn" (click)="admitPatient_onClick(inPatientWaitingItem, typeChecker)" style="color: #fff;height: 30px;line-height: 1.5;" [innerHtml]="admitBtnText"> </button>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Transfer Out">
+            <div class="card">
+                <div class="card-header">
+                    <div class="table-head col-md-1">
+                        S/N
+                    </div>
+                    <div class="table-head col-md-3">
+                        Patient
+                    </div>
+                    <div class="table-head col-md-2">
+                        Transferred From
+                    </div>
+                    <div class="table-head col-md-3">
+                        Sent By
+                    </div>
+                    <div class="table-head col-md-2">
+                        Transferred To
+                    </div>
+                    <div class="table-head col-md-1">
+                        Actions
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-list-item" *ngIf="listPatientTransferOutWaiting.length === 0 && !transferOutLoading">
+                        <div class="table-list col-xs-12">
+                            No data available in table
+                        </div>
+                    </div>
+                    <div class="card-list-item" *ngIf="listPatientTransferOutWaiting.length === 0 && transferOutLoading">
+                        <div class="table-list col-xs-12">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="card-list-item" *ngFor="let inPatientWaitingItem of listPatientTransferOutWaiting; let i = index;">
+                        <div class="row">
+                            <div class="table-list col-xs-1">{{i+1}}</div>
+                            <div class="table-list col-xs-3">
+                                <div class="empWrapp">
+                                    <div class="list-img">
+                                        <div *ngIf="inPatientWaitingItem?.patient?.personDetails?.profileImageObject?.thumbnail == undefined"><img
+                                                src="assets/images/users/default.png"></div>
+                                        <div *ngIf="inPatientWaitingItem?.patient?.personDetails?.profileImageObject?.thumbnail != undefined"><img
+                                                [src]="inPatientWaitingItem?.patient?.personDetails?.profileImageObject?.thumbnail"></div>
+                                    </div>
+                                    <div>
+                                        <b>{{inPatientWaitingItem?.patient?.personDetails?.firstName}}
+                                            {{inPatientWaitingItem?.patient?.personDetails?.lastName}}</b><br>
+                                        <small>{{inPatientWaitingItem?.patient?.personDetails?.gender }}, </small>
+                                        <small>{{inPatientWaitingItem?.patient?.personDetails?.age}} old, </small>
+                                        <small>{{inPatientWaitingItem?.patient?.personDetails?.phoneNumber}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-list col-xs-2"> {{ inPatientWaitingItem?.currentWardObj?.name }}</div>
+
+                            <div class="table-list col-xs-3">
+                                <div class="empWrapp">
+                                    <div class="list-img">
+                                        <div *ngIf="inPatientWaitingItem?.transferred?.profileImageObject?.thumbnail == undefined"><img
+                                                src="assets/images/users/default.png"></div>
+                                        <div *ngIf="inPatientWaitingItem?.transferred?.profileImageObject?.thumbnail != undefined"><img
+                                                [src]="inPatientWaitingItem?.transferred?.profileImageObject?.thumbnail"></div>
+                                    </div>
+                                    <div>
+                                        <b>{{inPatientWaitingItem?.transferred?.firstName}}
+                                            {{inPatientWaitingItem?.transferred?.lastName}}</b><br>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-list col-xs-2">{{ inPatientWaitingItem?.proposedWardObj?.name }}</div>
+                            <div class="table-list col-xs-1">
+                                <!-- <div (click)="transferAdmitPatient_onClick(inPatientWaitingItem, typeChecker)" class="tr-act-btn"><i class="fa fa-bed" aria-hidden="true"></i>Accept</div> -->
+                                <div (click)="onClickDeclineTransfer(inPatientWaitingItem)" class="tr-act-btn"><i class="fa fa-bed"
+                                        aria-hidden="true"></i>Decline</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Discharge">
+            <div class="card">
+                <div class="card-header">
+                    <div class="table-head col-md-1">
+                        S/N
+                    </div>
+                    <div class="table-head col-md-3">
+                        Patient
+                    </div>
+                    <div class="table-head col-md-2">
+                        Ward
+                    </div>
+                    <div class="table-head col-md-2">
+                        Admitted Date
+                    </div>
+                    <div class="table-head col-md-2">
+                        Discharge Date
+                    </div>
+                    <div class="table-head col-md-2">
+                        Discharged By
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-list-item" *ngIf="listPatientDischarge.length === 0 && !dischargeLoading">
+                        <div class="table-list col-xs-12">
+                            No data available in table
+                        </div>
+                    </div>
+                    <div class="card-list-item" *ngIf="listPatientDischarge.length === 0 && dischargeLoading">
+                        <div class="table-list col-xs-12">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="card-list-item" *ngFor="let dischargePatientList of listPatientDischarge; let i=index;">
+                        <div class="row">
+                            <div class="table-list col-md-1">{{i+1}}</div>
+                            <div class="table-list col-md-3">
+                                <div class="empWrapp">
+                                    <div class="list-img">
+                                        <div *ngIf="dischargePatientList?.patient?.personDetails?.profileImageObject?.thumbnail == undefined"><img
+                                                src="assets/images/users/default.png"></div>
+                                        <div *ngIf="dischargePatientList?.patient?.personDetails?.profileImageObject?.thumbnail != undefined"><img
+                                                [src]="dischargePatientList?.patient?.personDetails?.profileImageObject?.thumbnail"></div>
+                                    </div>
+                                    <div>
+                                        <b>{{ dischargePatientList?.patient?.personDetails?.firstName}}
+                                            {{dischargePatientList?.patient?.personDetails?.lastName }}</b><br>
+                                        <small>{{dischargePatientList?.patient?.personDetails?.gender}}, </small>
+                                        <small>{{dischargePatientList?.patient?.personDetails?.age}} old, </small>
+                                        <small>{{dischargePatientList?.patient?.personDetails?.phoneNumber}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-list col-md-2">{{dischargePatientList?.currentWardObj?.name}}</div>
+                            <div class="table-list col-md-2">{{dischargePatientList?.transfers[dischargePatientList.transfers.length
+                                -1].checkInDate | date:'medium'}}</div>
+                            <div class="table-list col-md-2">{{dischargePatientList?.transfers[dischargePatientList.transfers.length
+                                -1].checkOutDate | date:'medium' }} </div>
+                            <div class="table-list col-md-2">
+                                <div class="empWrapp">
+                                    <div class="list-img">
+                                        <div *ngIf="dischargePatientList?.dischargedByObj?.profileImageObject?.thumbnail == undefined"><img
+                                                src="assets/images/users/default.png"></div>
+                                        <div *ngIf="dischargePatientList?.dischargedByObj?.profileImageObject?.thumbnail != undefined"><img
+                                                [src]="dischargePatientList?.dischargedByObj?.profileImageObject?.thumbnail"></div>
+                                    </div>
+                                    <div>
+                                        <b>{{dischargePatientList?.dischargedByObj?.firstName}}
+                                            {{dischargePatientList?.dischargedByObj?.lastName}}</b><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</section>
+<div *ngIf="admitPatient" class="modal-overlay">
+    <app-admit-patient (closeModal)="close_onClick($event)" [inPatientItem]="selectInpatient" id="form-modal" class="form-modal center-center"></app-admit-patient>
+</div>

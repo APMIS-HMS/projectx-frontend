@@ -1,0 +1,101 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title" *ngIf="selectedHMO?._id">{{ selectedHMO?.name }}</legend>
+    <div class="modal_mini_title">Generate Report</div>
+    <div class="modal_mini_title" *ngIf="dateRange?.from"> From: {{ dateRange?.from | date }}, To: {{ dateRange?.to |
+      date }}</div>
+  </div>
+  <div class="modal-baseWrap">
+    <div class="top-sect">
+      <div class="filters" [formGroup]="hmoFormGroup">
+        <div style="width: 249px; padding: 5px;margin-right: 10px;">
+          <apmis-lookup style='width:100%' formControlName="name" [(ngModel)]="apmisLookupText" [url]="apmisLookupUrl"
+            [query]="apmisLookupQuery" placeholder="Select HMO" [isSocket]="true" [displayKey]="apmisLookupDisplayKey"
+            (selectedItem)="apmisLookupHandleSelectedItem($event)" [multipleKeys]="true" [otherKeys]="apmisLookupOtherKeys"></apmis-lookup>
+
+        </div>
+        <div>
+          <div class="dr-wrap survery">
+            <app-date-range [dateRange]="dateRange" (dateRangeChange)="setReturnValue($event)"></app-date-range>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" [disabled]="disableSearchBtn" (click)="onClickFindBillHistory();" style="height: 20px;">
+        <span *ngIf="searchBtn">Search</span>
+        <span *ngIf="searchingBtn">Searching <i class="fa fa-spin fa-spinner"></i></span>
+      </button>
+      <i (click)="onClickPrintDocument()" class="fa fa-print print-ico"></i>
+    </div>
+
+    <div id="print-section">
+      <div class="print-header">
+        <div class="main-fac">
+          <div class="img-wrap">
+            <img src="../../../../../../assets/images/logos/default.png">
+          </div>
+          <div class="img-label">
+            <div class="fac">{{ selectedHMO?.name }}</div>
+            <div class="fac-type">HMO</div>
+          </div>
+        </div>
+        <div class="main-fac">
+          <div class="img-wrap">
+            <app-image-viewer [imageSrc]="selectedFacility?.logoObject?.thumbnail"></app-image-viewer>
+          </div>
+          <div class="img-label">
+            <div class="fac">{{ selectedFacility?.name }}</div>
+            <div class="fac-type">Hospital</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-title">
+        <legend class="modal_title">{{ selectedHMO?.name }}</legend>
+        <div class="modal_mini_title">HMO Report</div>
+        <div class="modal_mini_title"> From: {{ dateRange?.from | date }}, To: {{ dateRange?.to | date }}</div>
+      </div>
+
+      <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+        <thead>
+          <tr>
+            <th><span style="padding-left: 3px;">S/N</span></th>
+            <th style="min-width:20%"><span style="padding-left: 3px;">Date</span></th>
+            <th style="min-width:30%;"><span style="padding-left: 3px;">Patient</span></th>
+            <th style="min-width:20%;"><span style="padding-left: 3px;">Service</span></th>
+            <th style="min-width:15%;"><span style="padding-left: 3px;">Amount</span></th>
+            <th><span style="padding-left: 3px;">Type</span></th>
+            <th>File Id</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="hmoBillHistory.length === 0 && !loading">
+            <td colspan="7" style="text-align:center;padding: 20px;">
+              No data available in table
+            </td>
+          </tr>
+          <tr *ngIf="hmoBillHistory.length === 0 && loading">
+            <td colspan="7" style="text-align:center; padding:20px;">
+              <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+            </td>
+          </tr>
+          <tr *ngFor="let item of hmoBillHistory; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ item.date|date:'MMM d, yyyy' }} </td>
+            <td>{{ item?.patient?.title }} {{ item?.patient?.firstName }} {{ item?.patient?.lastName }}</td>
+            <td>{{ item?.service }}</td>
+            <td>&#x20a6;{{ item?.amount|number:'1.2-2'}}</td>
+            <td>{{ item?.coverType }}</td>
+            <td>{{ item?.fileId }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="4" class="text-right">Grand Total</td>
+          <td colspan="3"  style="font-weight: bold; background-color: #ececf7"> &#8358; {{grandTotal | number:'1.2-2'}}</td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

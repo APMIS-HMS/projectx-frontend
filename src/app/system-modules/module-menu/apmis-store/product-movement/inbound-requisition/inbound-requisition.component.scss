@@ -1,0 +1,51 @@
+@import '../product-movement.component.scss';
+
+.tbl-header-rhs{
+    width: 100% !important;
+    justify-content: space-between !important;
+}
+.tbl-sect-wrap{
+    margin-bottom: 100px;
+}
+.ob-btn-wrap{
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+}
+.ob-btn{
+    width: 176px;
+    outline: 0;
+    border: 0;
+    height: 31px;
+    background: #337AB7;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    &::after{
+        content: ' ';
+        clear: right;
+    }
+}
+.tbl-status{
+    padding: 3px 10px;
+    font-size: 14px;
+}
+.status-blue{
+    color: #0288D1;
+    border: 1px solid #0288D1;
+}
+.tbl-list li{
+    display: block;
+    margin-bottom: 120px;
+}
+.filterTop{
+    margin-bottom: 20px;
+}
+.tbl-header-rhs .val{
+    font-size: 14px !important;
+}

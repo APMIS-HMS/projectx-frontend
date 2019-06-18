@@ -1,0 +1,142 @@
+<div class="head">
+    <div class="top-sect-wrap">
+        <div class="frm-item-wrap">
+            <div class="label">Patient's Insurance Covers</div>
+            <mat-form-field>
+                <mat-select [formControl]="selectHmo">
+                    <mat-option>Asa Mansard</mat-option>
+                    <mat-option>Light Vile</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="hmo-name">ASa Mansard</div>
+    <div class="top-summary-wrap">
+        <div class="wrap-inner">
+            <div class="id parentItem">ASA-2100-BE</div>
+            <div class="plan parentItem">PLATINUM</div>
+        </div>
+        <div class="wrap-inner">
+            <div class="status parentItem">CONFIRMED</div>
+            <div class="isprincipal parentItem">
+                <div (click)="childOpener_toggle()" class="isprincipal-nameWrap">
+                    <span>PRINCIPAL</span>
+                    <i *ngIf="!childOpener" class="fa fa-chevron-down" aria-hidden="true"></i>
+                    <i *ngIf="childOpener" class="fa fa-chevron-up" aria-hidden="true"></i>
+                </div>
+                <div *ngIf="childOpener" class="isprincipal-children shadow-RB">
+                    <div class="isprincipal-child">
+                        <div class="empWrap">
+                            <div class="list-img">
+                                <img src="assets/images/users/default.png">
+                            </div>
+                            <div>
+                                <div>Johnson Wade</div>
+                                <div class="id">ASA-2100-BE</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="isprincipal-child">
+                        <div class="empWrap">
+                            <div class="list-img">
+                                <img src="assets/images/users/default.png">
+                            </div>
+                            <div>
+                                <div>Johnson Wade</div>
+                                <div class="id">ASA-2100-BE</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tbl-header">
+    <div class="pg-subtitle">Account Statement</div>
+    <div class="frm-item-wrap">
+        <mat-input-container>
+            <input type="text" matInput placeholder="search activities" [formControl]="search">
+        </mat-input-container>
+    </div>
+</div>
+<div class="tbl-resp-wrap">
+    <table cellpadding="0" cellspacing="0" border="0.5">
+        <thead>
+            <tr>
+                <th>
+                    <span style="padding-left: 3px;">Date</span>
+                </th>
+                <th>
+                    <span style="padding-left: 3px;">Description</span>
+                </th>
+                <th>
+                    <span style="padding-left: 3px; text-align:center;">Ref Code</span>
+                </th>
+                <th>
+                    <span style="padding-left: 3px; text-align:center;">Amount</span>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <!-- <tr>
+                <td colspan="8">
+                    <div class="tbl-actionRow">
+                        <div class="frm-item-wrap">
+                            <apmis-lookup [(ngModel)]="apmisLookupText" url="apmisLookupUrl" query="apmisLookupQuery" placeholder="search for patient" isSocket="false"
+                                displayKey="apmisLookupDisplayKey" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                        </div>
+
+                        <div class="frm-item-wrap">
+                            <apmis-lookup [(ngModel)]="apmisLookupText" url="apmisLookupUrl" query="apmisLookupQuery" placeholder="search for nvestigation" isSocket="false"
+                                displayKey="apmisLookupDisplayKey" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                        </div>
+                    </div>
+                </td>
+            </tr> -->
+
+            <tr>
+                <td>10th Jan, 2017. 10:00am</td>
+                <td>Bank transfer Johnson Jude, Diamond Bank Ketu branch.</td>
+                <td>22100</td>
+                <td><span>&#x20a6;</span>30,00</td>
+            </tr>
+
+            <tr>
+                <td>11th Jan, 2017. 10:00am</td>
+                <td>patient registeration fee</td>
+                <td>23100</td>
+                <td><span>&#x20a6;</span>2500</td>
+            </tr>
+
+            <tr>
+                <td>11th Jan, 2017. 10:00am</td>
+                <td>patient registeration fee</td>
+                <td>23100</td>
+                <td><span>&#x20a6;</span>2500</td>
+            </tr>
+
+            <tr>
+                <td>11th Jan, 2017. 10:00am</td>
+                <td>patient registeration fee</td>
+                <td>23100</td>
+                <td><span>&#x20a6;</span>2,500</td>
+            </tr>
+
+            <tr>
+                <td>11th Jan, 2017. 10:00am</td>
+                <td>patient registeration fee</td>
+                <td>23100</td>
+                <td><span>&#x20a6;</span>2500</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

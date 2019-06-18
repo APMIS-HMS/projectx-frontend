@@ -1,0 +1,42 @@
+@import '../inventory-manager.component.scss';
+
+table{
+    margin-top: 40px;
+}
+.td-ico{
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+input, select{
+    width: 100%; 
+}
+.suggestions{
+    position: absolute;
+    top: 33px;
+    max-height: 195px;
+    overflow-y: auto;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #777;
+    z-index: 3;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.suggestion{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+    width: 100%;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.suggestion:hover{
+    background: #eee;
+}
+.wrapa{
+    position: relative;
+}
+.card-content{
+    min-height: 400px;
+}

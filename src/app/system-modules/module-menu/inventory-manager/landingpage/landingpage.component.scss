@@ -1,0 +1,259 @@
+@import '../../product-manager/product-manager-landingpage/product-manager-landingpage.component.scss';
+
+/*begin overlay overlay content adjust stock */
+
+.adjust-overlay {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.overlay-content {
+    position: relative;
+    top: 5%;
+    width: 100%;
+    margin-top: 30px;
+}
+
+#container-width {
+    width: 60%;
+    background: #fff;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+
+
+.margin-top-28px {
+    margin-top: 28px;
+}
+
+#container-width a {
+    background: red;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    color: #fff;
+    font-size: 3.6rem;
+    line-height: 16px;
+    border-radius: 5px;
+}
+
+.h2-margin-top {
+    margin-top: 4px
+}
+
+textarea {
+    resize: none;
+}
+
+.adjust-btn {
+    background-color: #153d70;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#153d70), to(#4bb8ef));
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px 20px;
+    border-color: transparent;
+    box-shadow: none;
+    border: 0;
+}
+
+
+/*end overlay overlay content adjust stock */
+
+.margin-bottom {
+    margin: 0 0 10px 0;
+}
+
+.product-parentWrap {
+    width: 100%;
+}
+
+.prodParent-header {
+    background: #4bb8ef;
+    font-weight: bold;
+}
+
+.prodParent-content .prod-row {
+    border: 1px solid #eee;
+}
+
+.prod-row {
+    height: 45px;
+    width: 100%;
+}
+
+.prod-row,
+.prodBatch-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.prodBatch-wrap {
+    background: #eee;
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.prodBatch-row {
+    padding: 5px;
+    border: 1px solid #eee;
+    cursor: pointer;
+}
+
+.prodBatch-row:hover {
+    border: 1px solid #ccc;
+}
+
+.prodParent-header .prod-rowItem {
+    border-right: 1px solid #018cd2;
+}
+
+.prodParent-content .prod-rowItem {
+    border-right: 1px solid #eee;
+}
+
+.prod-rowItem {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 5px;
+}
+
+.prod-rowItem.item1 {
+    width: 60%;
+    cursor: pointer;
+}
+
+.prod-rowItem.item2 {
+    width: 20%;
+    position: relative;
+    cursor: pointer;
+}
+
+.prod-rowItem.item3 {
+    width: 20%;
+}
+
+// .prod-rowItem.item4 {
+//     width: 10%;
+//     cursor: pointer;
+// }
+.batchHeader {
+    background: #ccc;
+    font-weight: bold;
+}
+
+.prodBatch-item {
+    text-align: left;
+}
+
+.batchItem1 {
+    width: 55%;
+}
+
+.batchItem2 {
+    width: 15%;
+}
+
+.batchItem3,
+.batchItem4 {
+    width: 10%;
+}
+
+.batchItem5 {
+    width: 10%;
+}
+
+.btn-liner {
+    border: 1px solid #0288D1;
+    color: #0288D1;
+    padding: 3px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    background: transparent;
+    margin: 0 auto;
+}
+
+.btn-liner:hover {
+    background: #0288D1;
+    color: #fff;
+}
+
+.inPatient-activityTimeline {
+    text-align: center;
+}
+
+.top-tab-search {
+    border: 1px solid #9e9e9e;
+    width: 245px;
+}
+
+
+.workspace-count {
+    padding: 0 0 20px 0;
+    margin-top: 15px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+        .workspace-listWrap {
+            display: block;
+        }
+    }
+}
+
+.item2 {
+    &:hover {
+        .workspace-listWrap {
+            display: block;
+        }
+    }
+}
+
+.workspace-listWrap {
+    right: -15px;
+    bottom: 80%;
+    width: auto;
+    min-width: 170px;
+    display: none;
+    .pointer-wrap {
+        margin-left: -49px;
+    }
+}
+
+.container-box {
+        width: 50%;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 350px;
+    max-height: 600px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.closebtn {
+    top: 8px;
+    right: 8px;
+    background-color: #ff2500;
+    color: #fff !important;
+    padding: 3px 7px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}

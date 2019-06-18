@@ -1,0 +1,216 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Daily OPD Data Entry (2)</legend>
+    <div class="modal_mini_title">Continental Hospital</div>
+  </div>
+
+  <div class="modal-content-overlay">
+    <form class="frm-down" [formGroup]="frm_OPDPgCourse" novalidate>
+      <mat-tab-group>
+        <mat-tab label="HIV Counseling and Testing">
+          <div class="container modal_padding">
+            <div class="row">
+              <div class="col-sm section_width">
+                <div>
+                  <h2>Male</h2>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h4>HIV Counsel, Test & Result</h4>
+                        <form class="form_entry">
+                          <mat-form-field class="mat_form_entry"><input style="font-size:6px !important;" matInput type="number"
+                              placeholder="&lt; 2 years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"> <input matInput type="number" placeholder="2 -14 years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="15 - 19years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="20 - 25years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="26 -49years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="50 years +"></mat-form-field>
+                        </form>
+                      </div>
+                      <div class="col-sm-3">
+                        <h4>HIV Test Result: Positive</h4>
+                        <form class="form_entry">
+                          <mat-form-field class="mat_form_entry"><input style="font-size:6px !important;" matInput type="number"
+                              placeholder="&lt; 2 years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"> <input matInput type="number" placeholder="2 -14 years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="15 - 19years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="20 - 25years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="26 -49years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="50 years +"></mat-form-field>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm section_border section_width">
+                <div>
+                  <h2>Female (Non-Pregnant)</h2>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h4>HIV Counsel, Test & Result</h4>
+                        <form class="form_entry">
+                          <mat-form-field class="mat_form_entry"><input style="font-size:6px !important;" matInput type="number"
+                              placeholder="&lt; 2 years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"> <input matInput type="number" placeholder="2 -14 years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="15 - 19years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="20 - 25years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="26 -49years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="50 years +"></mat-form-field>
+                        </form>
+                      </div>
+                      <div class="col-sm-3">
+                        <h4>HIV Test Result: Positive</h4>
+                        <form class="form_entry">
+                          <mat-form-field class="mat_form_entry"><input style="font-size:6px !important;" matInput type="number"
+                              placeholder="&lt; 2 years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"> <input matInput type="number" placeholder="2 -14 years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="15 - 19years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="20 - 25years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="26 -49years"></mat-form-field>
+                          <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="50 years +"></mat-form-field>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h3>Couple Counselling & Testing</h3>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div class="col-sm-3">
+                  <h3>Couple Sero-discordant Test</h3>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </mat-tab>
+        <mat-tab label="HIV Clinical Care & Treatment">
+          <div class="container modal_padding">
+            <div class="row">
+              <div class="col-sm section_width">
+                <div>
+                  <h2>HIV Positive and Receiving CTX</h2>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h3>Male</h3>
+                        <form class="form_entry">
+                          <mat-form-field><input matInput type="number" placeholder="&lt; 15Years"></mat-form-field>
+                          <mat-form-field> <input matInput type="number" placeholder="&ge; 15Years"></mat-form-field>
+                        </form>
+                      </div>
+                      <div class="col-sm-3">
+                        <h3>Female</h3>
+                        <form class="form_entry">
+                          <mat-form-field><input matInput type="number" placeholder="&lt; 15Years"></mat-form-field>
+                          <mat-form-field> <input matInput type="number" placeholder="&ge; 15Years"></mat-form-field>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm section_border section_width">
+                <div>
+                  <h2>Receiving ARV Refill</h2>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h3>Male</h3>
+                        <form class="form_entry">
+                          <mat-form-field><input matInput type="number" placeholder="&lt; 15Years"></mat-form-field>
+                          <mat-form-field> <input matInput type="number" placeholder="&ge; 15Years"></mat-form-field>
+                        </form>
+                      </div>
+                      <div class="col-sm-3">
+                        <h3>Female</h3>
+                        <form class="form_entry">
+                          <mat-form-field><input matInput type="number" placeholder="&lt; 15Years"></mat-form-field>
+                          <mat-form-field> <input matInput type="number" placeholder="&ge; 15Years"></mat-form-field>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </mat-tab>
+        <mat-tab label="SRH/HIV Integration">
+          <div class="modal_padding">
+            <div>
+              <h3>HCT Clients Provided with SRH/HIV Integrated Services</h3>
+              <mat-form-field>
+                <input matInput placeholder="Male">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Female">
+              </mat-form-field>
+            </div>
+            <div>
+              <h3>HCT Client Referred for FP Method</h3>
+              <mat-form-field>
+                <input matInput placeholder="Male">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Female">
+              </mat-form-field>
+            </div>
+            <div>
+              <h3>HCT Clients Screened for STIs</h3>
+              <mat-form-field>
+                <input matInput placeholder="Male">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Female">
+              </mat-form-field>
+            </div>
+            <div>
+              <h3>HCT Clients Treated for STIs</h3>
+              <mat-form-field>
+                <input matInput placeholder="Male">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Female">
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="TB/HIV">
+          <mat-form-field>
+              <input matInput placeholder="Clinically Screened for TB">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="TB Clinical Screening Score (Enter 0 or +1)">
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="HIV Positive Recieving ART and TB Treatment">
+                </mat-form-field>
+        </mat-tab>
+      </mat-tab-group>
+      <div class="col-xs-12 text-center">
+        <div style="padding: 20px 10px;">
+          <button mat-raised-button type="submit" (click)="next_onClick()" class="mat-lg-btn">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>

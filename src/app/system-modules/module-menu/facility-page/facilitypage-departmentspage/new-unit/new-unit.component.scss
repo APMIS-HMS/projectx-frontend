@@ -1,0 +1,68 @@
+@import "../new-department/new-department.component.scss";
+.frm-item-wrap {
+    padding-bottom: 10px;
+}
+
+.frm-item-wrap small,
+.frm-singleItem-wrap small {
+    bottom: -3px;
+}
+.btn-2 {
+    width: 100px;
+    margin: 10px auto;
+}
+
+.valSpan {
+    display: block;
+    width: 100%;
+}
+
+.frmArrayclinicWrap {
+    width: 100%;
+    padding: 3px;
+    margin-bottom: 12px;
+}
+.arr-grp-wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #eee;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+input,
+select {
+    border: none;
+}
+
+.mainErr {
+    width: 97%;
+}
+
+.trash {
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.trash:hover {
+    color: #ff2500;
+}
+
+.mat-raised-button {
+    max-width: 200px;
+    text-align: center;
+    background: #0288D1;
+    color: #fff;
+}
+
+#example-full-width {
+    text-align: center;
+}
+
+// .modal-baseWrap {
+//     max-height: 500px;
+//     overflow-y: auto;
+// }
+   

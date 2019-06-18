@@ -1,0 +1,137 @@
+<div class="pg-subtitle"> MODALITIES </div>
+<div>
+    <div class="doc-mainWrap">
+        <div class="doc-contentArea">
+            <div class="clinicalNoteWrap">
+                <div class="actSect">
+                    <div (click)="workbench_show()" class="act-wrap">
+                        <i *ngIf="workbench_view" class="fa fa-minus" aria-hidden="true"></i>
+                        <i [hidden]="workbench_view" class="fa fa-plus" aria-hidden="true"></i>
+                        <span>New Modality</span>
+                    </div>
+                    <form *ngIf="workbench_view" [formGroup]="frmNewWorkbench" novalidate>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="frm-item-wrap">
+                                    <mat-input-container>
+                                        <input matInput placeholder="Mechine Name" formControlName="mechineName">
+                                    </mat-input-container>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="frm-item-wrap">
+                                    <div>
+                                        <mat-input-container>
+                                            <input matInput placeholder="Location" [matAutocomplete]="autoMinorLocation" formControlName="minorLocation">
+                                        </mat-input-container>
+                                        <mat-autocomplete #autoMinorLocation="matAutocomplete" [displayWith]="minorLocationDisplayFn">
+                                            <mat-option *ngFor="let minor of minorLocations" [value]="minor">
+                                                {{ minor.name }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="frm-item-wrap">
+                                    <mat-input-container>
+                                        <input matInput placeholder="AE Title" formControlName="aeTitle">
+                                    </mat-input-container>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="frm-item-wrap">
+                                    <div>
+                                        <mat-input-container>
+                                            <input matInput placeholder="Modality" [matAutocomplete]="autoMinorLocation" formControlName="modality">
+                                        </mat-input-container>
+                                        <mat-autocomplete #autoMinorLocation="matAutocomplete" [displayWith]="minorLocationDisplayFn">
+                                            <mat-option *ngFor="let minor of minorLocations" [value]="minor">
+                                                {{ minor.name }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="frm-item-wrap">
+                                    <mat-input-container>
+                                        <input matInput placeholder="Mechine IP Address" formControlName="ipAddress">
+                                    </mat-input-container>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="frm-item-wrap">
+                                    <mat-input-container>
+                                        <input matInput placeholder="Mechine Port" formControlName="port">
+                                    </mat-input-container>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="pretty p-default">
+                                    <input type="checkbox" />
+                                    <div class="state">
+                                        <label>Activate</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <button mat-raised-button [disabled]="!frmNewWorkbench.valid || disableBtn" (click)="createWorkbench(frmNewWorkbench.valid, frmNewWorkbench.value)" class="btn">
+                              <span *ngIf="createWorkbenchBtn"><i class="fa fa-plus"></i> Create Workbench</span>
+                              <span *ngIf="creatingWorkbenchBtn">Creating Workbench <i class="fa fa-spin fa-spinner"></i> </span>
+                              <span *ngIf="editWorkbenchBtn"><i class="fa fa-plus"></i> Update Workbench</span>
+                              <span *ngIf="editingWorkbenchBtn">Updating Workbench <i class="fa fa-spin fa-spinner"></i> </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="tbl-resp-wrap">
+                    <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>Modality</th>
+                                <th>Mechine Name</th>
+                                <th>Location</th>
+                                <th>AE Title</th>
+                                <th>Mechine IP</th>
+                                <th>Mechine Port</th>
+                                <th>Status</th>
+                                <th>Date Created</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            <tr>
+                                <td>X-Ray</td>
+                                <td>Travasty Classic</td>
+                                <td>Imaging</td>
+                                <td></td>
+                                <td>129.22.22.1</td>
+                                <td>5000</td>
+                                <td>Active</td>
+                                <td>11th Oct 2018</td>
+                                <td><i class="fa fa-times i-action red-txt"></i> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="reqDetail_view" class="modal-overlay">
+    <app-request-detail (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-request-detail>
+</div>
+<div *ngIf="personAcc_view" class="modal-overlay">
+    <app-person-account (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-person-account>
+</div>

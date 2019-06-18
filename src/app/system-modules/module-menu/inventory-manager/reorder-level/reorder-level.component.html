@@ -1,0 +1,89 @@
+<form class="card" [formGroup]="productTableForm">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-xs-4 table-head">
+        Product
+      </div>
+      <div class="col-xs-4 table-head">
+        Pack Type
+      </div>
+      <div class="col-xs-3 table-head">
+        Re Order Level
+      </div>
+      <div class="col-xs-1 table-head">
+        <i class="fa fa-search"></i>
+      </div>
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="card-list-item" *ngIf="productTableForm.controls['productTableArray'].value.length  == 0">
+      <div class="col-xs-12" style="text-align:center">
+        No Reorder Level for Products
+      </div>
+    </div>
+    <div *ngIf="productTableForm.controls['productTableArray'].value.length > 0">
+      <div formArrayName="productTableArray">
+        <div class="card-list-item" *ngFor="let schedule of productTableForm.controls['productTableArray'].controls; let i = index;">
+          <div class="row" formGroupName="{{i}}">
+            <div class="col-xs-4 table-list" style="text-align:center">
+              <span>{{schedule.value.product?.name}}</span>
+            </div>
+            <div class="col-xs-4 table-list" style="text-align:center">
+              <span [hidden]="schedule.value.isEdit === true">{{schedule.value.productItemConfigObject?.name}}</span>
+              <!-- <select *ngIf="schedule.value.isEdit === true" [ngModel]="schedule.value.productItemConfigObject" formControlName="packType">
+                <option *ngFor="let config of schedule.value.packType" [selected]="schedule.value.productItemConfigObject.name ===config.name"
+                  [value]="config._id">{{config.name}}</option>
+              </select> -->
+              <mat-form-field *ngIf="schedule.value.isEdit === true">
+                  <mat-select placeholder="Pack sizes" formControlName="packTypeId" [compareWith]="comparePack">
+                      <mat-option [value]="config._id" *ngFor="let config of schedule.value.product.productConfigObject">{{config.name}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-xs-3 table-list" style="text-align:center">
+              <span [hidden]="schedule.value.isEdit === true">{{schedule.value.reOrderLevel}}</span>
+              <input *ngIf="schedule.value.isEdit === true" [value]="schedule.value.reOrderLevel" formControlName="reOrderLevel">
+            </div>
+            <div class="col-xs-1 table-list" style="text-align:center">
+              <i [hidden]="schedule.value.isEdit === true" (click)="onEdit_click(schedule)" class="fa fa-pencil td-ico"></i>
+              <i *ngIf="schedule.value.isEdit === true" (click)="onSaveEdit_click(schedule)" class="fa fa-check td-ico"></i>
+              <i *ngIf="schedule.value.isEdit === true" (click)="onEdit_click(schedule)" class="fa fa-close td-ico"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!showNewForm" class="card-list-item">
+      <div class="col-xs-12" style="text-align:center; cursor: pointer;">
+        <a (click)="toggleNewForm()" style="color:cornflowerblue">
+          <i class="fa fa-fw fa-plus"></i> Create one</a>
+      </div>
+    </div>
+
+    <div *ngIf="showNewForm" class="card-list-item row">
+      <div class="col-xs-4" style="text-align:center;position:relative;">
+        <input type="text" [formControl]="newProduct" autocomplete="off" placeholder="select a product">
+        <ul class="suggestions nice-scroll" *ngIf="collapseProductContainer && products.length > 0">
+          <li class="suggestion" *ngFor="let item of products" (click)="onSelectProduct(item)">
+            <div class="listing-label">{{item.productObject.name}}</div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-xs-4" style="text-align:center">
+        <select [formControl]="newPackType">
+          <option selected >select pack type</option>
+          <option *ngFor="let config of selectedProduct.productConfigObject" [value]="config._id">{{config.name}}</option>
+        </select>
+      </div>
+      <div class="col-xs-3" style="text-align:center">
+        <input type="number" placeholder="reorder level" [formControl]="newReorderLevel">
+      </div>
+      <div class="col-xs-1" *ngIf="addBtnDisable">
+        <i *ngIf="!disableCreateBtn && newPackType.valid && newProduct.valid" (click)="setLevel_click()" class="fa fa-check td-ico"></i>
+        <i (click)="toggleNewForm()" class="fa fa-close td-ico"></i>
+      </div>
+    </div>
+
+  </div>
+</form>

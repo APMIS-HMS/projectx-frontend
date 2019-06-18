@@ -1,0 +1,16 @@
+@import "./../clinic-management-report/clinic-attendance/clinic-attendance.component.scss";
+@import "./../laboratory-report/laboratory-report.component.scss";
+
+.group{
+    display: contents;
+}
+
+.group-content{
+    display: contents;
+    padding: 10px;
+}
+
+.group-item{
+    padding-left: 10px;
+    width: 20% !important;
+}

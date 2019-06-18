@@ -1,0 +1,32 @@
+<div (click)="close_onClick($event)" class="inner-wrap-b body-wrap">
+    <div class="facility-title">{{pageInView}}</div>
+    <div class="inner-menu1-wrap responsive_nav-group">
+      <i id="contentSecMenuToggle" (click)="contentSecMenuToggle()" [class.content-sec-icoActive]="contentSecMenuShow" class=" content-sec-ico fa fa-ellipsis-v"
+        aria-hidden="true"></i>
+      <ul id="innerMenu-ul" *ngIf="contentSecMenuShow" class="innerMenu-ul shadow">
+        <li (click)="navFpHome()"><i class="fa fa-home" aria-hidden="true"></i> Home</li>
+        <li (click)="navFpModules()"><i class="fa fa-braille" aria-hidden="true"></i> Modules</li>
+        <li (click)="navFpDepartments()"><i class="fa fa-building" aria-hidden="true"></i> Departments</li>
+        <li (click)="navFpLocations()"><i class="fa fa-map-marker" aria-hidden="true"></i> Locations</li>
+      </ul>
+    </div>
+    <div class="inner-page-wrap">
+
+        <div class="lhs inner-page-menuTab">
+            <ul class="nav-group">
+                <li [class.navActive]="homeContentArea" (click)="navFpHome()">Home</li>
+                <li [class.navActive]="modulesContentArea" (click)="navFpModules()">Modules</li>
+                <li [class.navActive]="departmentsContentArea" (click)="navFpDepartments()">Departments</li>
+                <li [class.navActive]="locationsContentArea" (click)="navFpLocations()">Locations</li>
+                <li [class.navActive]="optionsContentArea" (click)="navFpOptions()">Options</li>
+            </ul>
+        </div>
+
+        <app-facilitypage-homepage (pageInView)="pageInViewLoader($event)" *ngIf="homeContentArea" class="rhs inner-page-contentArea"></app-facilitypage-homepage>
+        <app-facilitypage-modulespage (pageInView)="pageInViewLoader($event)" *ngIf="modulesContentArea" class="rhs inner-page-contentArea"></app-facilitypage-modulespage>
+        <app-facilitypage-departmentspage (pageInView)="pageInViewLoader($event)" *ngIf="departmentsContentArea" class="rhs inner-page-contentArea"></app-facilitypage-departmentspage>
+        <app-facilitypage-locationspage (pageInView)="pageInViewLoader($event)" *ngIf="locationsContentArea" class="rhs inner-page-contentArea"></app-facilitypage-locationspage>
+        <app-facility-options (pageInView)="pageInViewLoader($event)" *ngIf="optionsContentArea" class="rhs inner-page-contentArea"></app-facility-options>
+        <div class="clear"></div>
+    </div> 
+</div>

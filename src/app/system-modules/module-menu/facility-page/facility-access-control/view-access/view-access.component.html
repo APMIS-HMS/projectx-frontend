@@ -1,0 +1,57 @@
+<div (click)="innerMenuHide($event)" class="inner-wrap-b body-wrap">
+    <div class="facility-title">User Access Manager</div>
+    
+    <div class="second-menu">
+        <a [routerLink]="['/dashboard/access-manager/access-manager']" class="btning"> Users</a>
+        <a [routerLink]="['/dashboard/access-manager/access']" class="btning btn-defination"> Access Definations</a>
+        <a [routerLink]="['/dashboard/access-manager/new-access']" class="btning"> Create Access</a>
+    </div>
+    
+    <!--
+    <div class="inner-menu1-wrap">
+        <i id="submenu_ico" (click)="innerMenuToggle()" class="innerMenu-icon fa fa-bars" aria-hidden="true"></i>
+        <ul *ngIf="innerMenuShow" class="innerMenu-ul shadow">
+            <li [routerLink]="['/dashboard/access-manager/access-manager']"><i class="fa fa-users" aria-hidden="true"></i> Users</li>
+            <li [routerLink]="['/dashboard/access-manager/access']"><i class="fa fa-eye" aria-hidden="true"></i> Access Definations</li>
+            <li [routerLink]="['/dashboard/access-manager/new-access']"><i class="fa fa-plus" aria-hidden="true"></i> Create Access</li>
+        </ul>
+    </div>-->
+
+    <div class="inner-page-wrap">
+        <div>
+            <div class="modal-head-wrap">
+                <div>
+                    <legend class="modal_title">Group Roles</legend>
+                </div>
+            </div>
+
+            <div style="border: 1px solid #bdbdbd; margin-top: 20px; padding: 10px;">
+                <div class="accessLhsWrap lhs">
+                    <!--<input class="top-tab-search" type="search" placeholder="Search for aceess" [formControl]="searchAccess">-->
+                    <mat-input-container class="top-tab-search">
+                        <input type="search" matInput mat-error placeholder="Search for aceess" [formControl]="searchAccess">
+                    </mat-input-container>
+                    <legend class="title-label">Access Definitions</legend>
+                    <ul class="accessDefWrap">
+                        <li [ngClass]="{'activeAccess': isSelected(item)}" *ngFor="let item of accessControlList" (click)="show(item)">{{item.name}}</li>
+                    </ul>
+                </div>
+                <div class="accessDetailWrap rhs">
+                    <div style="width: 100%;">
+                        <div class="tbl-bodyTab tbl-row color1" *ngFor="let item of selectedAccessControl.featureList">
+                            <div style="width: 550px;">
+                                <div class="tbl-item">{{item.name}}</div>
+                                <span class="roleSrcModule">{{item.Module.name}}</span>
+                            </div>
+                            <div class="tbl-item actionWrap">
+                                <i class="fa fa-times" aria-hidden="true"></i> Remove Feature
+                            </div>
+                        </div>
+                    </div>
+                    <div [routerLink]="['/dashboard/access-manager/new-access', selectedAccessControl._id]" class="btn-1 btn-blue"><i class="fa fa-edit" aria-hidden="true"></i> Edit</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>

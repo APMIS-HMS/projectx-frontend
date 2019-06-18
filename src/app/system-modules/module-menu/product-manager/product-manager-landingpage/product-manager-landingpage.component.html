@@ -1,0 +1,136 @@
+<div class="">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-xs-3 table-head">Product</div>
+                <div class="col-xs-2 table-head">Type</div>
+                <div class="table-head col-xs-3">Presentation</div>
+                <div class="table-head col-xs-3">Generic Name</div>
+                <div class="table-head col-xs-1">
+                    <i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i>
+                </div>
+            </div>
+            <div class="row" *ngIf="searchOpen">
+                <div class="col-md-4">
+                    <input [formControl]="searchControl" class="table-header-input" type="text" placeholder="Search for Products">
+                </div>
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-1 table-head">
+                    <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="card-list-item" *ngIf="products?.length == 0 && !loading">
+                <div class="col-xs-12" style="text-align:center">
+                    No data available......
+                </div>
+            </div>
+            <div class="card-list-item" *ngIf="products?.length === 0 && loading">
+                <div class="col-xs-12" style="text-align:center">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="card-list-item" *ngFor="let product of products; let i=index;">
+                <div class="row">
+                    <div class="table-list col-xs-3">
+                        {{product.name}}
+                    </div>
+                    <div class="table-list col-xs-2">
+                        {{product.productTypeObject?.name}}
+                    </div>
+                    <div class="table-list col-xs-3">
+                        {{product.presentation}}
+                    </div>
+                    <div class="table-list col-xs-3">
+                        {{product.genericName}}
+                    </div>
+                    <div class="table-list col-xs-1 td-iconCta-wrap pointer">
+                        <i (click)="slideProductDetailsToggle(product, {})" class="fa fa-eye"></i>
+                        <i (click)="onSelectProduct(product)" class="fa fa-pencil"></i>
+                        <!-- <i class="fa fa-trash"></i> -->
+                    </div>
+                </div>
+            </div>
+            <div class="btn-center">
+                <button (click)="loadMore()" class="apmis-blue" style="color: white" mat-raised-button *ngIf="showLoadMore">Load More</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="col-md-12">
+    <div (click)="addProductModal()" class="col-md-12">
+        <a id="floating-button">
+            <p class="plus">+</p>
+        </a>
+    </div>
+</div>
+<!-- float button -->
+
+<!--end float button -->
+<div *ngIf="addProduct" class="modal-overlay">
+    <app-new-product [selectedProduct]="selectedProduct" (refreshProductList)="onRefreshProductList($event)" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-product>
+</div>
+
+<div *ngIf="slideProductDetails" class="inPatient-activityTimeline shadow-RB animated slideInRight">
+    <div (click)="slideProductDetailsToggle(appointment, $event)" class="hide-actionWrap">
+        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+    </div>
+
+    <div class="timeline-headwrap">
+        <select name="" id="">
+            <option value="0">Select a product</option>
+        </select>
+    </div>
+    <div class="timeline-active">
+        <span *ngIf="selectedProduct?.isActive==true" class="text-green pull-right">Active</span>
+        <span *ngIf="selectedProduct?.isActive!=true" class="text-red pull-right">InActive</span>
+    </div>
+    <h4 class="title">{{selectedProduct?.name}}</h4>
+
+    <div class="product-details">
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Product Name(brand)</td>
+                        <td>{{selectedProduct?.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <td>{{selectedProduct?.productTypeObject?.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Generic Name</td>
+                        <td>{{selectedProduct?.genericName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Pack Size</td>
+                        <td>{{selectedProduct?.packSize}}</td>
+                    </tr>
+                    <tr>
+                        <td>Presentation</td>
+                        <td>{{selectedProduct?.presentation}}</td>
+                    </tr>
+                    <tr>
+                        <td>Manufacturer</td>
+                        <td>{{selectedProduct?.manufacturer}}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        <div class="btn-container">
+            <button (click)="onEdit()" class="btn btn-primary">Edit</button>
+            <button (click)="onDeactivate(selectedProduct)" class="btn btn-primary">{{deactivateButton}}</button>
+            <button class="btn btn-primary">Delete</button>
+        </div>
+    </div>
+</div>

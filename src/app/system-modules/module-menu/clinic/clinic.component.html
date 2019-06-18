@@ -1,0 +1,20 @@
+<ul class="pg-menuWrap">
+    <li (click)="navItemClick('home')" [class.pg-menuActive]="clinicHome" [routerLink]="['/dashboard/clinic/home']">Home</li>
+    <li (click)="navItemClick('appointment')" [class.pg-menuActive]="clinicApppointment" [routerLink]="['/dashboard/clinic/appointment']">Appointment</li>
+    <li (click)="navItemClick('checkin')" [class.pg-menuActive]="clinicCheckin" [routerLink]="['/dashboard/clinic/check-in']">Checked In Patients</li>
+    <li (click)="navItemClick('schedule')" [class.pg-menuActive]="clinicSchedule" [routerLink]="['/dashboard/clinic/clinic-schedule']">Clinic Schedule</li>
+    <li (click)="navItemClick('room')" [class.pg-menuActive]="clinicConsulting" [routerLink]="['/dashboard/clinic/consulting-room']">Consulting Room</li>
+    <li *ngIf="isDoctor==true" (click)="changeRoom('change')" [class.pg-menuActive]="clinicRoom">Change Consulting Room</li>
+</ul>
+<div class="inner-wrap-b">
+    <div class="facility-title">{{pageInView}}</div>
+    <div class="inner-page-wrap">
+
+        <div class="inner-page-contentArea">
+            <router-outlet class="menuContent"></router-outlet>
+        </div>
+        <div *ngIf="modal_on" class="modal-overlay">
+            <app-consulting-room-checkin (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-consulting-room-checkin>
+        </div>
+    </div>
+</div>

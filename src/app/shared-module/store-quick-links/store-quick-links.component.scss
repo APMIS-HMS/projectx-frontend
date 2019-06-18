@@ -1,0 +1,46 @@
+.quicklinks-wrap {
+    position: relative;
+    width: 300px;
+    background: #03A9F4;
+    min-height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.ql-title {
+    width: 100%;
+    text-align: center;
+    color: #000;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.ql-sect {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.ql-sect-title {
+    color: #194985;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.ql-links {
+    margin-bottom: 20px;
+    width: 100%;
+    color: #fff;
+    font-size: 1.4rem;
+}
+
+.ql-link {
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    padding: 5px 0;
+    width: 100%;
+}
+
+.ql-link:hover {
+    border-bottom: 1px solid #fff;
+}

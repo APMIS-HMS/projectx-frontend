@@ -1,0 +1,72 @@
+<div class="pp-card shadow-grey">
+    <div class="card-title">Department(s)</div>
+
+    <ul class="dept-wrap">
+        <li class="dept-li">
+            <div *ngFor="let dept of getActiveDepartments()">
+                <div class="dept-item">
+                    <div class="dept-name">{{dept.name}}</div>
+                    <div class="action-icons">
+                        <i [hidden]="showUnit_selectedDepartmentUnit(dept)" (click)="showUnit_click(dept)" class="fa fa-fw fa-2x fa-expand orange tooltip" data-tooltip="Expand" aria-hidden="true"></i>
+                        <i *ngIf="showUnit_selectedDepartmentUnit(dept)" (click)="showUnit_hide(dept)" class="fa fa-fw fa-2x fa-compress orange tooltip" data-tooltip="Compress" aria-hidden="true"></i>
+                        <i (click)="newUnit_onClick(dept)" class="fa fa-fw fa-2x fa-plus orange tooltip" data-tooltip="Add" aria-hidden="true"></i>
+                        <i (click)="editDept_onClick(dept)" class="fa fa-fw fa-2x fa-pencil-square-o orange tooltip" data-tooltip="Edit" aria-hidden="true"></i>
+                        <i (click)="removeDeptDepartmentFacade(dept)" class="fa fa-fw fa-2x fa-trash-o orange tooltip" data-tooltip="Delete" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div *ngIf="showUnit_selectedDepartmentUnit(dept)" class="dept-units">
+                    <div class="tbl-resp-wrap">
+                        <table cellpadding="0" cellspacing="0" border="0.5">
+                            <thead>
+                                <tr *ngIf="dept.units.length > 0">
+                                    <th>
+                                        <span style="padding-left: 3px;">Unit</span>
+                                    </th>
+                                    <th>
+                                        <span style="padding-left: 3px;">Short Name</span>
+                                    </th>
+                                    <th>
+                                        <span style="padding-left: 3px;">Clinics</span>                                        
+                                    </th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody *ngIf="dept.units.length > 0">
+                                <tr *ngFor="let unit of getActiveUnits(dept.units)">
+                                    <td class=""> {{unit.name}}</td>
+                                    <td>{{unit.shortName}}</td>
+                                    <td><span *ngFor="let clinics of unit.clinics">
+                                        {{clinics.clinicName}}
+                                    </span></td>
+                                    <td class="action-icons">
+                                        <i (click)="editUnit_onClick(dept, unit)" class="fa fa-fw fa-2x fa-pencil-square-o orange tooltip" data-tooltip="Edit" aria-hidden="true"></i>
+                                        <i (click)="removeUnitFacade(dept, unit)" class="fa fa-fw fa-2x fa-trash-o orange tooltip" data-tooltip="Delete" aria-hidden="true"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="dept.units.length == 0">
+                                <tr>
+                                    <td class="table-content" colspan="6" style="text-align: center "> No data available in table</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+    </ul>
+
+    <span (click)="newDept_onClick()" id="floating-button">
+        <p class="plus">+</p>
+    </span>
+</div>
+
+<div *ngIf="newDept" class="modal-overlay">
+    <app-new-department [selectedDepartment]="selectedDepartment" (closeModal)="close_onClick($event)" (onRefresh)="getFacility($event)" id="form-modal" class="form-modal center-center"></app-new-department>
+</div>
+<div *ngIf="newUnit" class="modal-overlay">
+    <app-new-unit [department]="selectedDepartment" (closeModal)="close_onClick($event)" [unit]="selectedUnit" id="form-modal" class="form-modal center-center"></app-new-unit>
+</div>

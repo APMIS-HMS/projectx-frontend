@@ -1,0 +1,200 @@
+<div class="modal-overlay">
+    <div class="container">
+        <div class="modal-header-wrap">
+            <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+            <!-- <legend class="modal_title">New Immunization Schedule</legend> -->
+            <legend class="modal_title">New Batch Schedule</legend>
+            <div class="modal_mini_title">All Purpose Medical Information System</div>
+        </div>
+        <div class="modal-content-wrap">
+            <div class="row">
+                <div class="col-xs-12">
+                    <form [formGroup]="immunizationScheduleForm" novalidate>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-8">
+                                <mat-form-field style="width:100%;">
+                                    <input matInput formControlName="name" placeholder="Name">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <mat-form-field>
+                                    <input matInput type="number" formControlName="price" placeholder="Price of Administration">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h1>Schedule</h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-blue pull-right" (click)="onClickAddVaccine('');">
+                    <i class="fa fa-fw fa-plus"></i> ADD VACCINE</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 vaccine" formArrayName="vaccinesArray">
+                                <div class="card" *ngFor="let vaccine of immunizationScheduleForm.controls['vaccinesArray']['controls']; let i=index;">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="close" *ngIf="immunizationScheduleForm.controls['vaccinesArray'].controls.length > 1" (click)="removeVaccine(i)">
+                                                <i class="fa fa-close fa-2x fa-fw"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-content" [formGroupName]="i">
+                                        <div class="card-list-item">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <h2> Vaccine </h2>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <!-- <apmis-lookup formControlName="name" [(ngModel)]="apmisLookupText" [url]="apmisLookupUrl" [query]="apmisLookupQuery" [isSocket]="true" [displayImage]="false" [multipleKeys]="false" [displayKey]="apmisLookupDisplayKey" placeholder="Name" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup> -->
+                                                    <div class="frm-item-wrap">
+                                                        <div class="cu-search-box">
+                                                            <mat-form-field>
+                                                                <input matInput formControlName="name" class="cu-search" placeholder="Search Item" (focus)="focusSearch(i)" (focusout)="focusOutSearch(i)" autocomplete="off">
+                                                            </mat-form-field>
+                                                            <div class="cu-popup-wrapper" *ngIf="showCuDropdown && (drugIndex === i)">
+                                                                <div class="cu-popover-arrow"></div>
+                                                                <div class="cu-header">
+                                                                    <p></p>
+                                                                </div>
+                                                                <ul class="cu-dropdown">
+                                                                    <li>
+                                                                        <a class="header">Select Item</a>
+                                                                    </li>
+                                                                    <li *ngIf="results.length === 0 && !cuDropdownLoading" class="text-center">
+                                                                        <a>Result is empty</a>
+                                                                    </li>
+                                                                    <li *ngIf="results.length === 0 && cuDropdownLoading" class="text-center">
+                                                                        <a>
+                                                                            <i class="fa fa-spinner fa-spin"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li *ngFor="let item of results" (click)="apmisLookupHandleSelectedItem(i, item, vaccine);" class="lookupListing">
+                                                                        <div>
+                                                                            <a>{{ item.name }}</a>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                                <div class="cu-footer">
+                                                                    <button class="btn btn-default">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="nameCode" formControlName="nameCode" hidden>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <mat-form-field>
+                                                        <input matInput formControlName="dosage" placeholder="Dosage e.g 0.5ml">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <mat-form-field>
+                                                        <input matInput formControlName="code" placeholder="Code Name e.g HBV">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <mat-form-field>
+                                                        <input matInput formControlName="vaccinationSite" placeholder="Site of Administration">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <mat-form-field>
+                                                        <input matInput type="number" formControlName="price" placeholder="Price of Administration">
+                                                    </mat-form-field>
+                                                    <input type="number" hidden formControlName="numberOfDosage" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                </div>
+                                            </div>
+                                            <div class="row" formArrayName="intervals">
+                                                <div class="col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h3>Time Schedule</h3>
+                                                        </div>
+                                                        <div class="col-sm-6 pull-right">
+                                                            <div class="row">
+                                                                <div class="col-xs-6">
+                                                                </div>
+                                                                <div class="col-xs-6 pull-right">
+                                                                    <div class="col-xs-6" style="float:right">
+                                                                        <button class="btn btn-blue" (click)="onClickAddInterval(i, vaccine, 'add');">
+                                        <i class="fa fa-fw fa-plus"></i>
+                                      </button>
+                                                                    </div>
+                                                                    <div class="col-xs-6" style="float:right">
+                                                                        <button class="btn btn-red" *ngIf="immunizationScheduleForm.controls['vaccinesArray'].controls[i].controls['intervals'].controls.length > 1" (click)="onClickAddInterval(i, vaccine, 'remove');">
+                                        <i class="fa fa-fw fa-minus"></i>
+                                      </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6" *ngFor="let interval of immunizationScheduleForm.controls['vaccinesArray'].controls[i].controls['intervals'].controls; let j=index;">
+                                                    <div class="row">
+                                                        <div class="col-xs-10" [formGroupName]="j">
+                                                            <div class="col-md-4" style="padding-right:0;padding-left:0;float:left;">
+                                                                <div class="col-xs-4" style="padding-right:0;padding-left:0;float:left;margin-top:25px;">
+                                                                    <span>{{ immunizationScheduleForm.controls['vaccinesArray'].controls[i].controls['code'].value }}-</span>
+                                                                </div>
+                                                                <div class="col-xs-8" style="float:left">
+                                                                    <mat-form-field style="width: 100%">
+                                                                        <input matInput type="number" formControlName="sequence" placeholder="Sequence">
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4" style="padding-right:0;padding-left:0;float:left;">
+                                                                <mat-form-field style="width: 100%">
+                                                                    <input matInput type="number" formControlName="duration" placeholder="Duration">
+                                                                </mat-form-field>
+                                                            </div>
+                                                            <div class="col-md-4" style="padding-right:0;padding-left:0;float:left;">
+                                                                <mat-form-field style="width: 100%">
+                                                                    <mat-select formControlName="unit" placeholder="Unit">
+                                                                        <mat-option *ngFor="let unit of durationUnits" [(value)]="unit.name">
+                                                                            {{ unit.name }}
+                                                                        </mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-2" *ngIf="immunizationScheduleForm.controls['vaccinesArray'].controls[i].controls['intervals'].controls.length > (immunizationScheduleForm.controls['vaccinesArray'].controls[i].controls['intervals'].controls.length - 1)" style="text-align:center;margin-top:19px;">
+                                                            <img style="padding: 10px;" src="../../../../assets/images/timeline.svg">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-12 text-center">
+                    <div style="padding: 20px 10px;">
+                        <button mat-raised-button [disabled]="!immunizationScheduleForm.valid || disableBtn" (click)="onClickSaveSchedule(immunizationScheduleForm.valid, immunizationScheduleForm.value);" type="submit" class="mat-lg-btn">
+                <span *ngIf="saveScheduleBtn">
+                  <i class="fa fa-check"></i> Save Schedule</span>
+                <span *ngIf="savingScheduleBtn">Saving Schedule...
+                  <i class="fa fa-spin fa-spinner"></i>
+                </span>
+                <span *ngIf="updateScheduleBtn">
+                  <i class="fa fa-check"></i> Update Schedule</span>
+                <span *ngIf="updatingScheduleBtn">Update Schedule...
+                  <i class="fa fa-spin fa-spinner"></i>
+                </span>
+              </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

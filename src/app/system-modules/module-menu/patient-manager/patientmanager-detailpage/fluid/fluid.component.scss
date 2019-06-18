@@ -1,0 +1,124 @@
+@import "../documentation/documentation.component.scss";
+
+.docCard-body{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.card2-exo{
+    display: flex;
+    justify-content: space-between;
+}
+.doc-card2{
+    width: 49.5%;
+    margin-top: 0;
+    margin-right: 3px;
+    min-height: 94px;
+}
+.doc-cardWrap{
+    position: relative;
+    margin-top: 0;
+}
+.fluid-btn{
+    margin-bottom: 10px;
+    color: #fff;
+}
+.body-divide{
+    width: 47%;
+}
+.modal_title{
+    position: relative;
+}
+.modal_title i{
+    position: absolute;
+    right: 12px;
+    cursor: pointer;
+}
+.modal_title i:hover{
+    color: #0288D1;
+}
+.doc-contentArea{
+    width: 100%;
+    position: relative;
+}
+.cta-1{
+    height: 26px;
+    width: 68px;
+}
+.frm-item-wrap{
+    width: 90%;
+    margin: 0 auto;
+}
+.mat-form-field {
+    width: 100%;
+}
+.card-tbl .mat-form-field {
+    width: 120px !important;
+}
+.card-tbl{
+    position: relative;
+    padding: 5px;
+    background: #fff;
+    box-sizing: border-box;
+    width: 49.5%;
+    overflow-y: auto;
+}
+.card-tbl-full {
+    padding: 5px;
+    background: #fff;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 20px;
+}
+td{
+    border: 0px solid transparent;
+}
+th{
+    font-size: 1.5rem;
+    text-align: left;
+    font-weight: normal;
+    color: #194985;
+    border-bottom: 1px solid #194985;
+}
+.summary-figs {
+    background: #f8f8f8;
+    margin: 20px auto;
+}
+.fig-item {
+    display: flex;
+}
+.fig-label{
+    font-size: 1.2rem;
+    color: rgb(148, 148, 148);
+    width: 130px;
+}
+.fig-val {
+    color: rgb(121, 121, 121);
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+.intr-tag {
+    font-size: 1.2rem;
+    background: #194985;
+    color: #fff;
+    padding: 5px;
+}
+.intr-wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.card-tbl table{
+    min-width: 500px;
+}
+
+@media only screen and (max-width: 600px){
+    .card2-exo{
+        display: block;
+    }
+    .doc-card2, .card-tbl{
+        width: 100%;
+        box-sizing: border-box;
+        margin: 20px 0;
+    }
+}

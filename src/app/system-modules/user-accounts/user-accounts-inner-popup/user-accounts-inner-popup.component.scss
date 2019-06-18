@@ -1,0 +1,87 @@
+// @import "../user-accounts.component.scss";
+.modal-baseWrap {
+    margin-left: 0;
+    width: 420px;
+    padding: 20px;
+}
+
+.userAccs-listingWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.listing-title {
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.userAccs-listing {
+    //width: 90%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.acc-listing {
+    text-align: center;
+    width: 160px;
+    height: 160px;
+    border: 0;
+    margin: 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.acc-listing:hover {
+    background: #eee;
+}
+
+.listing-imgWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background: rgba(221, 221, 221, 0.6);
+    margin: 0 auto;
+}
+
+.listing-imgWrap img {
+    width: 80%;
+}
+
+.listing-imgWrap i {
+    font-size: 3.2rem;
+}
+
+.listing-name {
+    font-size: 1.2rem;
+    padding-top: 20px;
+    color: #444;
+}
+
+.listing-type {
+    font-size: 1.2rem;
+    color: #eee000;
+    margin-top: 5px;
+}
+
+@media only screen and (max-width: 530px) {
+    .modal-baseWrap {
+        width: 250px;
+    }
+    .listing-name {
+        max-width: 200px;
+    }
+    .listing-type {
+        font-size: 1.2rem;
+        color: #eee000;
+        margin-top: 5px;
+    }
+}

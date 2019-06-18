@@ -1,0 +1,344 @@
+<!-- <div class="modal-baseWrap animated pulse">
+
+    <div (click)="close_onClick()" class="modal-close-ico">X</div>
+
+    <div class="frmOuter-wrap">
+        <div class="frmInner-wrap1">
+            <div class="modal_title">Add Diagnosis</div>
+
+            <div class="pop-tabs">
+                <div (click)="tabAll_click()" [class.popTab-active]="tab_all" class="pop-tab">All</div>
+                <div (click)="tabFavourite_click()" [class.popTab-active]="tab_favourite" class="pop-tab">Favourites</div>
+                <div (click)="tabPatient_click()" [class.popTab-active]="tab_patient" class="pop-tab">Patient</div>
+                <div (click)="tabRecent_click()" [class.popTab-active]="tab_recent" class="pop-tab">Recently Used</div>
+            </div>
+
+            <div *ngIf="tab_all" class="popTab-item animated slideInRight">
+                <form [formGroup]="addDiagnosisForm" novalidate>
+                    <div>
+                        <div class="frm-item-wrap">
+                            <mat-form-field>
+                                <mat-select placeholder="Type" formControlName="type">
+                                    <mat-option *ngFor="let type of types" [value]="type.value">{{type.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="frm-item-wrap">
+                            <apmis-lookup [(ngModel)]="apmisLookupText" formControlName="diagnosis" [url]="apmisLookupUrl" [query]="apmisLookupQuery"
+                                [isSocket]="true" [displayImage]="false" [multipleKeys]="false" [displayKey]="apmisLookupDisplayKey"
+                                placeholder="Select Diagnosis" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                        </div>
+                    </div>
+
+                    <button [disabled]="!addDiagnosisForm.valid" class="addDrugBtn" (click)="add_onClick()">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <span>ADD DIAGNOSIS</span>
+                    </button>
+                </form>
+            </div>
+
+            <div *ngIf="tab_favourite" class="popTab-item animated slideInRight">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="frm-item-wrap">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Type" [formControl]="favorite_type">
+                                            <mat-option [value]="1">Principal</mat-option>
+                                            <mat-option [value]="1">Associated</mat-option>
+                                            <mat-option [value]="1">Complication</mat-option>
+                                            <mat-option [value]="1">Working</mat-option>
+                                            <mat-option [value]="1">Rule Out</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="typeCat">
+                                    <li>High Temprature</li>
+                                    <li>Fever</li>
+                                </ul>
+                            </td>
+                            <td>1220A</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div *ngIf="tab_patient" class="popTab-item animated slideInRight">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Principal</td>
+                            <td>
+                                <ul class="typeCat">
+                                    <li>High Temprature</li>
+                                    <li>Fever</li>
+                                </ul>
+                            </td>
+                            <td>1220A</td>
+                        </tr>
+                        <tr>
+                            <td>Associated</td>
+                            <td>
+                                <ul>
+                                    <li>High Temprature</li>
+                                    <li>Fever</li>
+                                </ul>
+                            </td>
+                            <td>1220A</td>
+                        </tr>
+                        <tr>
+                            <td>Complication</td>
+                            <td>
+                                <ul>
+                                    <li>High Temprature</li>
+                                    <li>Fever</li>
+                                </ul>
+                            </td>
+                            <td>1220A</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div *ngIf="tab_recent" class="popTab-item animated slideInRight">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="frm-item-wrap">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Type" [formControl]="recently_type">
+                                            <mat-option [value]="1">Principal</mat-option>
+                                            <mat-option [value]="1">Associated</mat-option>
+                                            <mat-option [value]="1">Complication</mat-option>
+                                            <mat-option [value]="1">Working</mat-option>
+                                            <mat-option [value]="1">Rule Out</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="typeCat">
+                                    <li>High Temprature</li>
+                                    <li>Fever</li>
+                                </ul>
+                            </td>
+                            <td>1220A</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="frmInner-wrap2" style="padding-left:0;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="diagnoses.length === 0">
+                    <tr>
+                        <td colspan="3" style="text-align: center"> No data available in table</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="diagnoses.length > 0">
+                    <tr *ngFor="let diagnosis of diagnoses">
+                        <td>
+                            <ul class="typeCat">
+                                <li>{{diagnosis.name}}</li>
+                            </ul>
+                        </td>
+                        <td>{{diagnosis.code}}</td>
+                        <td (click)="deleteDiagonis(diagnosis)" class="delItem">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button (click)="done()" *ngIf="diagnoses.length > 0" class="cta-1">DONE</button>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="animated pulse" style="min-width: height 500px;">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Add Diagnosis</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="row">
+            <div class="col-md-6">
+
+                <!-- <div class="pop-tabs">
+                    <div (click)="tabAll_click()" [class.popTab-active]="tab_all" class="pop-tab">All</div>
+                    <div (click)="tabFavourite_click()" [class.popTab-active]="tab_favourite" class="pop-tab">Favourites</div>
+                    <div (click)="tabPatient_click()" [class.popTab-active]="tab_patient" class="pop-tab">Patient</div>
+                    <div (click)="tabRecent_click()" [class.popTab-active]="tab_recent" class="pop-tab">Recently Used</div>
+                </div> -->
+
+                <div *ngIf="tab_all" class="popTab-item animated slideInRight">
+                    <form [formGroup]="addDiagnosisForm" novalidate style="padding-top: .8em">
+                        <div>
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Type" formControlName="type">
+                                        <mat-option *ngFor="let type of types" [value]="type.value">{{type.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <apmis-lookup [(ngModel)]="apmisLookupText" formControlName="diagnosis" [url]="apmisLookupUrl" [query]="apmisLookupQuery"
+                                    [isSocket]="true" [displayImage]="false" [multipleKeys]="false" [displayKey]="apmisLookupDisplayKey"
+                                    placeholder="Select Diagnosis" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                            </div>
+                        </div>
+
+                        <button [disabled]="!addDiagnosisForm.valid" class="addDrugBtn" (click)="add_onClick()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <span>ADD DIAGNOSIS</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div *ngIf="tab_favourite" class="popTab-item animated slideInRight">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="frm-item-wrap">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Type" [formControl]="favorite_type">
+                                                <mat-option [value]="1">Principal</mat-option>
+                                                <mat-option [value]="1">Associated</mat-option>
+                                                <mat-option [value]="1">Complication</mat-option>
+                                                <mat-option [value]="1">Working</mat-option>
+                                                <mat-option [value]="1">Rule Out</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="typeCat">
+                                        <li>High Temprature</li>
+                                        <li>Fever</li>
+                                    </ul>
+                                </td>
+                                <td>1220A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div *ngIf="tab_patient" class="popTab-item animated slideInRight">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Principal</td>
+                                <td>
+                                    <ul class="typeCat">
+                                        <li>High Temprature</li>
+                                        <li>Fever</li>
+                                    </ul>
+                                </td>
+                                <td>1220A</td>
+                            </tr>
+                            <tr>
+                                <td>Associated</td>
+                                <td>
+                                    <ul>
+                                        <li>High Temprature</li>
+                                        <li>Fever</li>
+                                    </ul>
+                                </td>
+                                <td>1220A</td>
+                            </tr>
+                            <tr>
+                                <td>Complication</td>
+                                <td>
+                                    <ul>
+                                        <li>High Temprature</li>
+                                        <li>Fever</li>
+                                    </ul>
+                                </td>
+                                <td>1220A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div *ngIf="tab_recent" class="popTab-item animated slideInRight">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="frm-item-wrap">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Type" [formControl]="recently_type">
+                                                <mat-option [value]="1">Principal</mat-option>
+                                                <mat-option [value]="1">Associated</mat-option>
+                                                <mat-option [value]="1">Complication</mat-option>
+                                                <mat-option [value]="1">Working</mat-option>
+                                                <mat-option [value]="1">Rule Out</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="typeCat">
+                                        <li>High Temprature</li>
+                                        <li>Fever</li>
+                                    </ul>
+                                </td>
+                                <td>1220A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="diagnoses.length === 0">
+                        <tr>
+                            <td colspan="3" style="text-align: center"> No data available in table</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="diagnoses.length > 0">
+                        <tr *ngFor="let diagnosis of diagnoses">
+                            <td>
+                                <ul class="typeCat">
+                                    <li>{{diagnosis.name}}</li>
+                                </ul>
+                            </td>
+                            <td>{{diagnosis.code}}</td>
+                            <td (click)="deleteDiagonis(diagnosis)" class="delItem">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button (click)="done()" *ngIf="diagnoses.length > 0" class="cta-1 docDiagBtn">DONE</button>
+                
+            </div>
+        </div>
+    </div>
+</div>

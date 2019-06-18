@@ -1,0 +1,60 @@
+@import '../../health-coverage/hmo-cover/hmo-cover.component.scss';
+.docFrmArea {
+    width: 100%;
+}
+.text-center {
+    text-align: center;
+}
+
+.template-sect {
+    width: 100%;
+    border: 1px solid #777;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.chk-item {
+    border: 1px solid #eee;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.template-sect .frm-title {
+    margin-bottom: 20px;
+}
+
+.frm-x3 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.frm-x3 .frm-item-wrap {
+    width: 30%;
+    font-size: 1.2rem;
+}
+
+.service-wrap {
+    background: #f8f8f8;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.cta-1 {
+    margin: 25px auto;
+}
+
+.frmNoteWrap {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.tblWrapa {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.mat-select {
+    height: 0px;
+}

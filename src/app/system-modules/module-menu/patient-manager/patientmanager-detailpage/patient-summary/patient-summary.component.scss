@@ -1,0 +1,111 @@
+@import "../documentation/documentation.component.scss";
+.blue-gradient {
+    background: #457fca;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #5691c8, #457fca);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #5691c8, #457fca);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff !important;
+}
+
+.docCard-body {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.doc-card2 {
+    margin-top: 0;
+    width: 97%;
+}
+
+.doc-cardWrap {
+    margin-top: 0;
+}
+
+.body-divide {
+    width: 47%;
+}
+
+.subsect-itemWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.subsect-val {
+    width: 58%;
+    white-space: pre-wrap;
+    /* CSS3 */
+    white-space: -moz-pre-wrap;
+    /* Firefox */
+    white-space: -pre-wrap;
+    /* Opera <7 */
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    word-wrap: break-word;
+    /* IE */
+}
+
+.subsect-label {
+    margin-right: 10px;
+    width: 38%;
+    color: #777;
+    font-size: 1rem;
+    text-decoration: underline;
+}
+
+.list-label[_ngcontent-c9] {
+    color: #ff2500;
+}
+
+.val-tag[_ngcontent-c9] {
+    color: #000;
+}
+
+.nok-wrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 5px;
+    background: #f8f8f8;
+    padding: 10px;
+}
+
+.isNOK {
+    font-size: 1.2rem;
+    color: #fff;
+    background: #ff2500;
+    padding: 2px;
+    text-align: center;
+}
+
+.modal_title {
+    position: relative;
+}
+
+.modal_title i {
+    position: absolute;
+    right: 12px;
+    cursor: pointer;
+}
+
+.modal_title i:hover {
+    color: #0288D1;
+}
+
+.badge {
+    text-align: center;
+    min-width: 60px;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 400;
+    border-radius: 10px;
+    background-color: #eee;
+    display: inline-block;
+    margin: 2px 5px;
+    cursor: default;
+}

@@ -1,0 +1,27 @@
+.InputGroup{
+    width: 100% !important;
+} 
+.apmis-search-wrap{
+    position: relative;
+    font-size: 16px;
+    background-color: #fff;
+    .apmis-search-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    } 
+    .plus-ico {
+        cursor: pointer;
+    }
+}
+.apmis-search-selected-list{
+    margin-top: 30px;
+    display: flex;
+    li{
+        margin-left: 10px;
+    }
+    .ft-btn{
+        color: #000 !important;
+        font-size: 16px !important;
+    }
+}

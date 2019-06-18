@@ -1,0 +1,134 @@
+<!-- <div class="head">
+
+  <div class="head-others">
+     <ul class="topmenuwrap">
+        <li (click)="fundWallet()">
+            <i class="fa fa-credit-card" aria-hidden="true"></i>
+            <span>Fund Wallet</span>
+        </li>
+    </ul> 
+  </div>
+</div> -->
+
+<div>
+  <div class="top-summary-wrap">
+    <div class="wrap-inner">
+      <div class="isprincipal parentItem">
+        <div class="isprincipal-nameWrap">
+          <span>PRINCIPAL</span>
+        </div>
+        <div class="isprincipal-children shadow-RB">
+          <div class="isprincipal-child">
+            <div class="empWrap">
+                <div class="list-img">
+                    <img src="assets/images/users/default.png">
+                </div>
+                <div>
+                  <div>Johnson Wade</div>
+                  <div class="id">ASA-2100-BE</div>
+                  <div class="dept">Dependant</div>
+                </div>
+            </div>
+          </div>
+
+          <div class="isprincipal-child">
+            <div class="empWrap">
+                <div class="list-img">
+                    <img src="assets/images/users/default.png">
+                </div>
+                <div>
+                  <div>Johnson Wade</div>
+                  <div class="id">ASA-2100-BE</div>
+                  <div class="dept">Dependant</div>
+                </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tbl-header">
+    <div class="pg-subtitle">Account Statement</div>
+    <div class="frm-item-wrap">
+        <mat-input-container>
+            <input type="text" matInput placeholder="search activities" [formControl]="search">
+        </mat-input-container>
+    </div> 
+</div>
+<div class="tbl-resp-wrap">
+    <table cellpadding="0" cellspacing="0" border="0.5">
+        <thead>
+            <tr>
+              <th>
+                  <span style="padding-left: 3px;">Date</span>
+              </th>  
+              <th>
+                  <span style="padding-left: 3px;">Description</span>
+              </th>
+              <th>
+                  <span style="padding-left: 3px; text-align:center;">Ref Code</span>
+              </th>
+              <th>
+                  <span style="padding-left: 3px; text-align:center;">Amount</span>
+              </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <!-- <tr>
+                <td colspan="8">
+                    <div class="tbl-actionRow">
+                        <div class="frm-item-wrap">
+                            <apmis-lookup [(ngModel)]="apmisLookupText" url="apmisLookupUrl" query="apmisLookupQuery" placeholder="search for patient" isSocket="false"
+                                displayKey="apmisLookupDisplayKey" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                        </div>
+
+                        <div class="frm-item-wrap">
+                            <apmis-lookup [(ngModel)]="apmisLookupText" url="apmisLookupUrl" query="apmisLookupQuery" placeholder="search for nvestigation" isSocket="false"
+                                displayKey="apmisLookupDisplayKey" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                        </div>
+                    </div>
+                </td>
+            </tr> -->
+
+            <tr>
+                <td>10th Jan, 2017. 10:00am</td>
+                <td>Bank transfer Johnson Jude, Diamond Bank Ketu branch.</td>
+                <td>22100</td>
+                <td><span>&#x20a6;</span>30,00</td>
+            </tr>
+
+            <tr>
+                <td>11th Jan, 2017. 10:00am</td>
+                <td>patient registeration fee</td>
+                <td>23100</td>
+                <td><span>&#x20a6;</span>2500</td>
+            </tr>
+
+            <tr>
+                <td>11th Jan, 2017. 10:00am</td>
+                <td>patient registeration fee</td>
+                <td>23100</td>
+                <td><span>&#x20a6;</span>2500</td>
+            </tr>
+
+            <tr>
+                <td>11th Jan, 2017. 10:00am</td>
+                <td>patient registeration fee</td>
+                <td>23100</td>
+                <td><span>&#x20a6;</span>2,500</td>
+            </tr>
+              
+            <tr>
+                <td>11th Jan, 2017. 10:00am</td>
+                <td>patient registeration fee</td>
+                <td>23100</td>
+                <td><span>&#x20a6;</span>2500</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

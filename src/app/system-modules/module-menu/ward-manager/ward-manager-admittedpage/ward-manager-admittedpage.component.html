@@ -1,0 +1,114 @@
+<section class="c-page-body">   
+    <div class="tab-body">
+        <div label="InPatients">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row" *ngIf="!wsearchOpen">
+                        <div class="table-head col-xs-1">
+                            S/N
+                        </div>
+                        <div class="table-head col-xs-4">
+                            Patient
+                        </div>
+                        <div class="table-head col-xs-2">
+                            Ward
+                        </div>
+                        <div class="table-head col-xs-2">
+                            Admitted Date
+                        </div>
+                        <div class="table-head col-xs-2">
+                            Actions
+                        </div>
+                        <div class="table-head col-xs-1">
+                            <i class="fa fa-search fa-fw" (click)="openSearch()"></i>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="wsearchOpen">
+                        <div class="col-xs-3">
+                            <input class="table-header-input" [formControl]="searchControl" type="text" placeholder="Search Employee">
+                        </div>
+                        <div class="col-xs-4">
+                            <select class="table-header-select" [formControl]="roomVal" placeholder="Select Room" (change)="onRoomChange($event.target.value)">
+                                <option value="" disabled selected>Select room</option>
+                                <option *ngFor="let room of wardRoomLocationItems" value="{{room._id}}">{{room.name}}</option>
+                            
+                            </select>
+                        </div>
+                        <div class="col-xs-4">
+                            <select class="table-header-select" name="" id="" [formControl]="wardVal" (change)="onWardChange($event.target.value)" placeholder="Select Ward">
+                                <option  value="" disabled selected>Select Ward</option>
+                                <option *ngFor="let ward of wardLocationItems" value="{{ward._id}}">{{ward.name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-1 table-head">
+                            <i class="fa fa-close fa-fw" (click)="closeSearch()"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div *ngIf="admittedPatient.length === 0 && !loading" class="card-list-item">
+                        <div class="row">
+                            <div class="table-list col-xs-12">
+                                No data available in table
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="admittedPatient.length === 0 && loading" class="card-list-item">
+                        <div class="row">
+                            <div class="table-list col-xs-12">
+                                <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-list-item" *ngFor="let admittedPatientItem of admittedPatient; let i = index;">
+                        <div class="row">
+                            <div class="table-list col-xs-1" routerLink="/dashboard/ward-manager/admitted/{{admittedPatientItem._id}}">{{ i+1 }}</div>
+                            <div class="table-list col-xs-4" routerLink="/dashboard/ward-manager/admitted/{{admittedPatientItem._id}}">
+                                <div class="empWrapp">
+                                    <div class="list-img">
+                                        <div *ngIf="admittedPatientItem?.patient?.personDetails?.profileImageObject?.thumbnail == undefined">
+                                            <img src="assets/images/users/default.png">
+                                        </div>
+                                        <div *ngIf="admittedPatientItem?.patient?.personDetails?.profileImageObject?.thumbnail != undefined">
+                                            <img [src]="_inPatientService.transform(admittedPatientItem?.patient?.personDetails?.profileImageObject?.thumbnail)">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <b>{{admittedPatientItem?.patient?.personDetails?.firstName}} {{admittedPatientItem?.patient?.personDetails?.lastName}}</b><br>
+                                        <small>{{admittedPatientItem?.patient?.personDetails?.gender}}, </small>
+                                        <small>{{admittedPatientItem?.patient?.personDetails?.age}} old, </small>
+                                        <small>{{admittedPatientItem?.patient?.personDetails?.phoneNumber}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-list col-xs-2" routerLink="/dashboard/ward-manager/admitted/{{admittedPatientItem._id}}">
+                                <b>{{admittedPatientItem?.minorLocation?.name}}</b><br>
+                                <small><b>Room: </b>{{admittedPatientItem?.transfers[admittedPatientItem?.transfers.length -1]?.room?.name}}, </small><br>
+                                <small><b>Bed: </b>{{admittedPatientItem?.transfers[admittedPatientItem?.transfers.length -1]?.bed?.name}} </small>
+                            </div>
+                            <div class="table-list col-xs-2" routerLink="/dashboard/ward-manager/admitted/{{admittedPatientItem._id}}">
+                                <b>{{admittedPatientItem?.admissionDate | date }}</b><br>
+                                <small>{{admittedPatientItem?.admissionDate | amTimeAgo }}</small>
+                            </div>
+                            <div class="table-list col-xs-3" routerLink="/dashboard/ward-manager/admitted/{{admittedPatientItem._id}}">
+                                <div class="tr-act-btn" routerLink="/dashboard/ward-manager/admitted/{{admittedPatientItem._id}}">
+                                    <i class="fa fa-bed" aria-hidden="true"></i>View Details
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="dischargePatient" class="modal-overlay">
+                <app-discharge-patient (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-discharge-patient>
+            </div>
+        </div>
+    </div>
+    <apmis-data-pager [show-next-prev]="true" color="blue"
+    (onPageClick)="gotoPage($event)"
+    [in-progress]="loading"
+    [show-progress]="true"
+    next-prev-color="orange"
+    [pager-source]="paginationObj"></apmis-data-pager>
+</section>

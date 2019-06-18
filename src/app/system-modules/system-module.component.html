@@ -1,0 +1,62 @@
+<div class="primary-tab">
+    <div class="inner-wrap inner-wrap-pri">
+        <div class="brand">
+            <div class="logo-wrap">
+                <img src={{platformLogo}}>
+            </div>
+            <div class="apmis">{{platform}}</div>
+        </div>
+
+        <div class="top-right">
+            <div class="search-wrap">
+                <input class="top-tab-search" type="search" placeholder="Search here..." [formControl]="searchControl">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <!-- <div class="x">x</div> -->
+            </div>
+
+            <div class="top-icons-wrap">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                <i (click)="goHome()" class="fa fa-home" aria-hidden="true"></i>
+                <i class="fa fa-cog" aria-hidden="true"></i>
+                <i class="fa fa-bell-o" aria-hidden="true">{{notification_length}}</i>
+                
+                
+                <span (click)="logOut()" class="logout">LOGOUT</span>
+            </div>
+
+            <div (click)="userOpt_toggle()" class="logged-in-as">
+                <div class="user-label">
+                    <div [class.offline]="!isOnline">{{selectedPerson?.lastName}} {{selectedPerson?.firstName}}</div>
+                    <div *ngIf="checkedInObject?.typeObject?.minorLocationObject !== undefined && checkedInObject?.typeObject !== undefined && checkedInObject?.type==='clinic'"
+                        class="user-loc">{{checkedInObject?.typeObject?.minorLocationObject?.name}} -
+                        {{checkedInObject?.typeObject?.roomObject?.name}}</div>
+                    <div *ngIf="checkedInObject?.typeObject?.minorLocationObject !== undefined && checkedInObject?.typeObject !== undefined && checkedInObject?.type==='store'"
+                        class="user-loc">{{checkedInObject?.typeObject?.minorLocationObject?.name}} -
+                        {{checkedInObject?.typeObject?.storeObject?.name}}</div>
+                    <div *ngIf="checkedInObject?.typeObject?.minorLocationObject !== undefined && checkedInObject?.typeObject !== undefined && checkedInObject?.type==='workbench'"
+                        class="user-loc">{{checkedInObject?.typeObject?.minorLocationObject?.name}} -
+                        {{checkedInObject?.typeObject?.workbenchObject?.name}}</div>
+                </div>
+
+                <div class="user-imgWrap">
+                    <img *ngIf="selectedPerson?.profileImageObject !== undefined" [src]="selectedPerson?.profileImageObject?.thumbnail">
+                    <img *ngIf="selectedPerson?.profileImageObject === undefined" src="assets/images/users/default.png">
+                </div>
+
+                <ul *ngIf="userOpt" class="user-opts shadow-B">
+                    <li (click)="goHome()"><i class="fa fa-user" aria-hidden="true"></i> User Profile</li>
+                    <li (click)="onSwitchAccount()"><i class="fa fa-arrows-h" aria-hidden="true"></i> Switch Account</li>
+                    <li (click)="changePass()"><i class="fa fa-unlock" aria-hidden="true"></i> Change Password</li>
+                    <li (click)="logOut()"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="logoutConfirm_on" class="modal-overlay">
+    <app-logout-confirm (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-logout-confirm>
+</div>
+
+<div *ngIf="changePassword" class="modal-overlay">
+    <app-change-password (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-change-password>
+</div>

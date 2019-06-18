@@ -1,0 +1,65 @@
+@import "./../../../reports.component.scss";
+@import "./../../../../patient-manager/patientmanager-detailpage/treatement-plan/treatement-plan.component.scss";
+@import "./../../../../payment/invoice/invoice.component.scss";
+
+
+.invoiceWrap{
+    margin: 20px 100px 20px 100px;
+    padding: 10px;
+}
+
+.selectWrap{
+    max-width: 200px;
+    padding-bottom: 10px;
+    flex: 1;
+    margin-left: 50px;
+}
+.searchinvoice{
+    flex: 2;
+    margin-left: 30px;
+}
+
+.txt-wrap{
+    display:inline-block;
+}
+.invoiceListWrap{    
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px #888;
+    padding: 5px;
+    margin: 10px;
+    overflow: auto;
+}
+
+.inovice-item-details{
+    padding:10px;
+}
+.invoice-item-details-header{
+    text-align: center;
+}
+.invoice-sub-header {
+    border: solid 0.5px rgba(0,0,0,.12);
+    color: #01579B;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    background: #F5F6FA;
+    width: auto;
+    height: 50px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px
+ 
+}
+
+.invoice-header-text{
+    padding-left: 20px;
+    padding-right: 20px;
+    align-self: center;
+    text-align: left;
+}
+
+.invoicePrice{
+    float: right;
+    align-self: center;
+    position: absolute;
+    right: 150px;
+}

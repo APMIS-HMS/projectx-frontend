@@ -1,0 +1,75 @@
+@import '../med-records.component.scss';
+
+.card-x2{
+    flex-direction: row;
+}
+.card-long ul{
+    max-height: fit-content;
+}
+.rhs .card-title{
+    text-align: left;
+}
+.pp-card{
+    border: 0;
+}
+.rhs .pp-card{
+    margin-bottom: 20px;
+    min-height: fit-content;
+}
+.feed-card{
+    display: block;
+    border: 1px solid #f1f1f1;
+    background: #f1f1f1;
+    margin-bottom: 10px;
+}
+.list-img{
+    border: 2px solid #fff;
+    margin-bottom: 10px;
+}
+.fx-rhs{
+    display: flex;
+    justify-content: flex-end;
+}
+.rec-content {
+    margin: 10px 0;
+}
+.rec-title {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.rec-data {
+    max-height: 150px;
+    overflow-y: auto;
+    background: #fff;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.rec-date{
+    position: absolute;
+    right: 0;
+    color: #ff2500;
+}
+.attach-wrap{
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.ico-label{
+    font-size: 1.4rem;
+    max-width: 85px;
+}
+.atch-ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+}
+.atch-ul:hover{
+    border: 1px solid #777;
+}

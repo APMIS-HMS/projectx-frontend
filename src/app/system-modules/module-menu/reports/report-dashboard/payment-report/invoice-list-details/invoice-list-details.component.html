@@ -1,0 +1,95 @@
+<div class="invoiceWrap">
+
+    <div style="display: flex; flex:0;">
+        <div class="filterWrap">
+            <div class="row">
+                <div class="dr-wrap survery">
+                    <app-date-range
+                            [dateRange]="{from : reportOptions.startDate, to: reportOptions.endDate}"
+                            (dateRangeChange)="assignDate($event)"></app-date-range>
+                </div>
+            </div>
+        </div>
+        <div class="selectWrap">
+            <mat-form-field>
+                <mat-select placeholder="Select Cashier">
+                    <mat-option>Mr Aladeluwa</mat-option>
+                    <mat-option>Mrs Eniola</mat-option>
+                    <mat-option>Mr Omolere</mat-option>
+                    <mat-option>Mr Dele Adeola</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <apmis-data-pager
+            [display-summary]="true"
+            [pager-source]="pagerSource"
+
+    ></apmis-data-pager>
+    <div class="invoiceListWrap">
+        <p *ngIf="loading" style="text-align: center padding:5px;"><span class="fa-fa-3x fa-spin fa-refresh"></span></p>
+        <div style="margin: 10px;">
+            <div class="row">
+
+                <!-- Please group this according to the list of invoices coming from the backend -->
+                <!-- Invoice A -->
+                <div class="col-sm-12 sheet-column" *ngFor="let pay of apiResponse.data" (click)="toggleExpandFor(pay)">
+                    <div class="row sheet-table-list invoice-sub-header">
+                        <i class="fa fa-sort-desc fa-2x" *ngIf="!pay.isExpanded"
+                           style="align-self: center; padding-left: 20px; margin-bottom: 10px;"
+                           aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc fa-2x" *ngIf="pay.isExpanded"
+                           style="align-self: center; padding-left: 20px; margin-bottom: 10px;"
+                           aria-hidden="true"></i>
+                        <div class="col-6 invoice-header-text">
+                            {{pay.person}}
+                        </div>
+                        <div class="col-6 invoice-header-text">
+                            {{pay.invoiceNo}}
+                        </div>
+
+                        <div class="col-6 invoice-header-text">
+                            Payment Status : {{pay.paymentCompleted ? 'Complete' : 'Incomplete'}}
+                        </div>
+                        <div class="col-6 invoice-header-text">
+                            Employee : [Mr Dele Adeola]
+                        </div>
+                        <div class="col-6 invoicePrice">
+                            Total Cost:
+                            <naira-currency></naira-currency>
+                            {{pay.totalPrice | number}}
+                        </div>
+                    </div>
+                    <div *ngIf="pay.isExpanded">
+                        <app-invoice-item [invoiceItems]="pay.payments"></app-invoice-item>
+                    </div>
+                </div>
+
+                <br>
+
+            </div>
+        </div>
+        <!-- <div class="billSummarySect">
+          <table class="rhs">
+            <div class="summaryItems">
+              <tr class="summaryItem">
+                <td class="label">Invoices Grand Total </td>
+                <td class="data">
+                  <span>&#x20a6;</span>150,000,000</td>
+                <td></td>
+              </tr>
+            </div>
+          </table>
+        </div> -->
+        <!-- <mat-paginator [length]="100" [pageSize]="30" [pageSizeOptions]="[5, 10, 25, 100]">
+         </mat-paginator>-->
+
+        <div>
+            <apmis-data-pager [show-progress]="true" [show-total-record]="false" [in-progress]="loading"
+                             (onPageClick)="gotoPage($event)"
+                             [pager-source]="pagerSource"
+
+            ></apmis-data-pager>
+        </div>
+    </div>
+</div>

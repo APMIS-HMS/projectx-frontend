@@ -1,0 +1,97 @@
+@import '../../store-manager/landing-page/landing-page.component.scss';
+@import '../../purchase-manager/purchase-order/new-purchase-order/new-purchase-order.component.scss';
+
+.searchStock {
+    width: 200px;
+
+}
+.txt-link{
+    margin-top: 0;
+
+}
+td{
+    padding: 2px;
+}
+.product-sect{
+    padding: 5px;
+    margin-top: 10px;
+}
+.survery table {
+    color: #000;
+}
+
+.survery .table > tbody > tr > td {
+    text-align: center !important;
+    padding: 7px;
+}
+
+#inputsearch {
+    width:261px;
+    margin:0 auto
+}
+.searchcontrol {
+    width: 270px !important;
+}
+.inputsearch {
+    width: 257px;
+    max-width: 100%;
+}
+
+.slideWidget {
+    position: fixed;
+    right:0;
+    bottom:0;
+    background-color: white;
+    filter: alpha(opacity=100);
+    opacity: 1;
+    -webkit-transition: opacity 0.25s ease-out;
+    -moz-transition: opacity 0.25s ease-out;
+    transition: opacity 0.25s ease-out;
+    width: 300px;
+    padding:10px;
+    border: 1px solid #ccc;
+    z-index: 9999;
+}
+.sec-a{
+    border: 0px;
+
+}
+.CTAs-wrap {
+    width: 400px;
+    margin: 0 auto;
+}
+.cta-1{
+    font-size: 1.2rem;
+}
+.tblWrap{
+    margin-top: 10px;
+}
+.dx-date-box {
+    width: 250px !important;
+}
+.tile-body li:hover {
+    background-color: #dbe0e2;
+}
+.survery .table > tbody > tr > td {
+    text-align: left !important;
+    padding: 5px 5px;
+}
+
+
+/* no product callout*/
+.callout.callout-info {
+    background-color: #00c0ef !important;
+}
+.callout.callout-info {
+    border-color: #0097bc;
+}
+.callout {
+    border-radius: 3px;
+    margin: 0 0 20px 0;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #eee;
+    color: #fff;
+    max-width: 500px;
+    margin: 0 auto;
+}
+/* end product callout */

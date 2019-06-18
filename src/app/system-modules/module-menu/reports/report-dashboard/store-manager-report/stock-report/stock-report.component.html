@@ -1,0 +1,90 @@
+<div class="inner-wrap-b body-wrap">
+    <div class="divider">
+    </div>
+
+    <div class="filter">
+        <div class="row" style="padding: 10px 40px 10px 40px;">
+            <div class="dr-wrap survery">
+                <app-date-range></app-date-range>
+            </div>
+            <div class="searchInputWrap col-sm row">
+                <div class="col-sm group">
+                    <h3 style="padding-left: 20px; padding-bottom: 12px; text-decoration: underline;">Filter by Group :</h3>
+                    <div class="group-content">
+                        <mat-form-field class="group-item" style="width:20% !important;">
+                            <mat-select [formControl]="searchCriteria" placeholder="Group By ">
+                                <mat-option value="select Date Range">Date Range</mat-option>
+                                <mat-option value="Enter Name">Supplier</mat-option>
+                                <mat-option value="Enter Product Name">Product</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div class="group-item" style="padding-top: 1em; margin-left: 5px;">
+                            <div class="row">
+                                <div class="col-xs-7">
+                                    <input [formControl]="searchControl" type="search" autofocus class="searchInput " placeholder=" {{searchCriteria.value}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <mat-tab-group (selectedIndexChange)="onTabClick($event)">-->
+    <mat-tab-group>
+        <mat-tab label="• Purchase History">
+            <div class="tbl-resp-wrap" style="padding-bottom: 20px !important;">
+                <table class="card" style="color:black; margin-top: 10px !important;" cellpadding="0" cellspacing="0" border="0.5">
+                    <thead>
+                        <tr class="th-r1 th-xxx">
+                            <th>Product ID</th>
+                            <th> Supplier </th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Unit Cost</th>
+                            <th>Total Amount</th>
+                        </tr>
+                    </thead>
+
+                    <tbody style="text-align:center;">
+                        <tr class="th-xxx">
+                            <td class="td-x">Batch Number: 12346B</td>
+                            <td class="td-x">Sidmach Tecgnologies</td>
+                            <td class="td-x">Injections</td>
+                            <td class="td-x">500Packets</td>
+                            <td class="td-x">250 per item</td>
+                            <td class="td-x">NGN5,000</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="th-xxx">
+                            <td class="td-x">Batch Number: 12346B</td>
+                            <td class="td-x">Sidmach Tecgnologies</td>
+                            <td class="td-x">Injections</td>
+                            <td class="td-x">500Packets</td>
+                            <td class="td-x">250 per item</td>
+                            <td class="td-x">NGN5,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <mat-paginator [length]="100" [pageSize]="30" [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
+            </div>
+            <div class="billSummarySect">
+                <table class="rhs">
+                    <div class="summaryItems">
+                        <tr class="summaryItem">
+                            <td class="label" style="width:auto !important;">Total Purchase: </td>
+                            <td class="data">
+                                <span>#120,000.00</span></td>
+                            <td></td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
+
+        </mat-tab>
+    </mat-tab-group>
+</div>

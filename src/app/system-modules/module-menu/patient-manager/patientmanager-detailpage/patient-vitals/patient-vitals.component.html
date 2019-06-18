@@ -1,0 +1,65 @@
+<div class="pg-subtitle">PATIENT PAGE - VITALS</div>
+
+<div class="doc-mainWrap">
+  <div class="doc-contentArea">
+    <div class="doc-cardWrap">
+      <div class="doc-card2">
+        <div class="modal_title">Vital Signs <!-- <i (click)="addVitals_show($event)" class="fa fa-plus-circle" aria-hidden="true"></i> --></div>
+        <div style="display: block;">
+          <canvas baseChart [hidden]="addVitals_view" style="width:100%;" height="300" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="doc-cardWrap">
+      <div class="doc-card2" style="min-height:517px;">
+        <div class="card-tbl-full tbl-resp-wrap">
+          <div class="modal_title">Summary Table</div>
+
+          <div class="dr-wrap survery">
+              <app-date-range [dateRange]="dateRange" (dateRangeChange)="setReturnValue($event)"></app-date-range> <span *ngIf="loadIndicatorVisible" class="fa fa-spinner fa-spin"></span>
+          </div>
+          <table cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>T</th>
+                <th>PR</th>
+                <th>RR</th>
+                <th>BP</th>
+                <th>Wt</th>
+                <th>Ht</th>
+                <th>BMI</th>
+              </tr>
+            </thead>
+        
+            <tbody>
+              <tr *ngFor="let item of tableChartData">
+                <td>{{item.updatedAt|date:'medium'}}</td>
+                <td>{{item.temperature}}</td>
+                <td>{{item.pulseRate.pulseRateValue}}</td>
+                <td>{{item.respiratoryRate}}</td>
+                <td>S: {{item.bloodPressure.systolic}} D: {{item.bloodPressure.diastolic}}</td>
+                <td>{{item.bodyMass.weight}}</td>
+                <td>{{item.bodyMass.height}}</td>
+                <td>{{item.bodyMass.bmi}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Float Button -->
+<div class="">
+  <div (click)="addVitals_show($event)" class="col-md-12">
+      <a id="floating-button">
+          <p class="plus">+</p>
+      </a>
+  </div>
+</div>
+<!-- float button -->
+<div *ngIf="addVitals_view" class="modal-overlay">
+    <app-add-vitals (closeModal)="close_onClick($event)" id="form-modal" [patient]="patient" (refreshVitalsChanged)="refreshVitalsChanged($event)" class="form-modal center-center"></app-add-vitals>
+</div>

@@ -1,0 +1,80 @@
+
+<div class="sec-title">Patient</div>
+<div class="inner-search-wrap">
+  <input type="text" [formControl]="searchPatient" class="search-person-input" placeholder="search for patient..." />
+</div>
+<ul>
+  <div class="list-group">
+    <div (click)="gp_click(1)" class="groupy">
+      <div>11th August, 2018.</div>
+      <i *ngIf="gp1" class="fa fa-angle-down"></i>
+      <i *ngIf="!gp1" class="fa fa-angle-up"></i>
+    </div>
+    <div class="group-list" *ngIf="gp1">
+      <li (click)="modality_click(1)" [class.modality-item-active]="mod1" class="modality-item">
+        <div class="selected-patient">
+          <div class="suggested-wrap">
+            <div class="suggested-img-wrap">
+              <img src="../../../../../../assets/images/users/default.png" >
+            </div>
+            <div class="suggested-label">Sydney James</div>
+          </div>
+          <div class="req-count">5 Requests</div>
+        </div>
+      </li>
+      <li (click)="modality_click(2)" [class.modality-item-active]="mod2" class="modality-item">
+          <div class="selected-patient">
+            <div class="suggested-wrap">
+              <div class="suggested-img-wrap">
+                <img src="../../../../../../assets/images/users/default.png" >
+              </div>
+              <div class="suggested-label">Sydney James</div>
+            </div>
+            <div class="req-count">5 Requests</div>
+          </div>
+      </li>
+    </div>
+  </div>
+  <div class="list-group">
+    <div (click)="gp_click(2)" class="groupy">
+      <div>5th July, 2018.</div>
+      <i *ngIf="gp2" class="fa fa-angle-down"></i>
+      <i *ngIf="!gp2" class="fa fa-angle-up"></i>
+    </div>
+    <div class="group-list" *ngIf="gp2">
+      <li (click)="modality_click(3)" [class.modality-item-active]="mod3" class="modality-item">
+        <div class="selected-patient">
+          <div class="suggested-wrap">
+            <div class="suggested-img-wrap">
+              <img src="../../../../../../assets/images/users/default.png" >
+            </div>
+            <div class="suggested-label">Sydney James</div>
+          </div>
+          <div class="req-count">5 Requests</div>
+        </div>
+      </li>
+      <li (click)="modality_click(4)" [class.modality-item-active]="mod4" class="modality-item">
+        <div class="selected-patient">
+          <div class="suggested-wrap">
+            <div class="suggested-img-wrap">
+              <img src="../../../../../../assets/images/users/default.png" >
+            </div>
+            <div class="suggested-label">Sydney James</div>
+          </div>
+          <div class="req-count">5 Requests</div>
+        </div>
+      </li>
+      <li (click)="modality_click(5)" [class.modality-item-active]="mod5" class="modality-item">
+        <div class="selected-patient">
+          <div class="suggested-wrap">
+            <div class="suggested-img-wrap">
+              <img src="../../../../../../assets/images/users/default.png" >
+            </div>
+            <div class="suggested-label">Sydney James</div>
+          </div>
+          <div class="req-count">5 Requests</div>
+        </div>
+      </li>
+    </div>
+  </div>
+</ul>

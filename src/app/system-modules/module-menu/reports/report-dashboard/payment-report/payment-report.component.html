@@ -1,0 +1,10 @@
+<div class="rpt-wrap">
+    <div class="facility-title">{{pageInView}}</div>
+    <ul class="top-links">
+        <i class="fa fa-home fa-2x blue nav" (click)="back_dashboard()" [class.top-links-active]="dashBoard" aria-hidden="true">Dashboard</i>
+        <li (click)="call_paymentSummary()" [class.top-links-active]="paymentSummary">Payment Summary</li>
+        <li (click)="call_invoiceReport()" [class.top-links-active]="invoiceReport">Payment Invoice Report</li>
+    </ul>
+</div>
+
+<router-outlet></router-outlet>)

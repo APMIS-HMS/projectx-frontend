@@ -1,0 +1,53 @@
+@import '../../../globals/button.scss';
+
+.con-pass-inwrap{
+    width: 500px;
+}
+.cp-logo-wrap{
+    width: 50px;
+    margin: 0 auto;
+}
+.cp-logo-wrap img{
+    width: 100%;
+}
+.img-label {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 2rem;
+    color: #555;
+}
+.frm-conpass{
+    width: 70%;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #a6a6a6;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.mat-form-field{
+    width: 100%;
+}
+.forgetPword {
+    color: #ff2500;
+    font-style: italic;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    display: inline-block;
+    margin-top: -20px;
+    cursor: pointer;
+}
+.back-btn-box {
+    text-align: center;
+}
+.forgetPword:hover {
+    text-decoration: underline
+}
+button{
+    color: #fff;
+}
+.small-btn{
+    width: auto !important;
+}

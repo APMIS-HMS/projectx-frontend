@@ -1,0 +1,49 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <div class="modal_mini_title">Make Payment</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+        <form [formGroup]="frm_supplierPayment" novalidate>
+            <div class="mainfrmwrap">
+                <div class="sec-1">
+                    <div class="frm-item-wrap">
+                        <mat-input-container class="example-full-width">
+                            <input matInput formControlName="amount" type="number" autocomplete="off" placeholder="Amount">
+                        </mat-input-container>
+                    </div>
+                    <div class="frm-item-wrap">
+                        <mat-form-field>
+                            <mat-select placeholder="Payment Mode" formControlName="payment_type">
+                                <mat-option *ngFor="let channel of payMethod" [value]="channel.name">
+                                    {{channel.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="sec-2">
+                    <div class="frm-item-wrap">
+                        <mat-input-container class="example-full-width">
+                            <input matInput formControlName="cheque_number" placeholder="Cheque Number">
+                        </mat-input-container>
+                    </div>
+                    <div class="frm-item-wrap">
+                        <mat-input-container class="example-full-width">
+                            <input matInput formControlName="transfer_number" placeholder="Transfer Number">
+                        </mat-input-container>
+                    </div>
+
+                    <div (click)="login(frm_supplierPayment.valid)" class="cta-1">
+                        Make Payment
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div *ngIf="loadIndicatorVisible" class="div_loading">
+        <!--<dx-load-indicator id="large-indicator" height="60" width="60"></dx-load-indicator>-->
+    </div>
+</div>

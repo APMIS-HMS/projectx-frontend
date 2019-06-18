@@ -1,0 +1,227 @@
+@import "../../../globals/variables.scss";
+
+.primary-tab{
+    position: relative;
+    background: #0288D1;
+    width: 100%;
+}
+.inner-wrap-pri{
+    height: 30px;
+}
+.secondary-tab {
+    z-index: 1500;
+}
+.inner-wrap-sec{
+    height: 45px;
+    z-index: 2;
+}
+.inner-wrap-sec ul{
+    margin: 0;
+    padding: 0;
+}
+.inner-wrap-sec ul li:first-child {
+    margin-left: 0;
+    padding-left: 0;
+}
+.inner-menu1-wrap {
+    width: auto;
+    position: absolute;
+    right: 20px;
+    top: auto;
+    z-index: 1;
+}
+.innerMenu-icon{
+    width: 100%;
+    text-align: right;
+    color: #fff;
+    font-size: 2.2rem;
+    cursor: pointer;
+}
+.logo-wrap{
+    padding-top: 5px;
+    margin-left: 20px;
+}
+.logo-wrap img{
+    width: 25px;
+}
+.top-right{
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+.top-tab-search{
+    background-color: #F5F5F5;
+    border-radius: 7px;
+    border: 0;
+    margin-right: 10px;
+    padding: 7px 10px;
+    font-size: 1.2rem;
+}
+.profile-pic{
+    width: 30px;
+    border-radius: 100%;
+}
+.innerMenu-ul{
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    top: 119px;
+    right: 0;
+    font-family: $font-titles;
+    box-sizing: border-box;
+    padding: 30px;
+    background: rgba(0,0,0, 0.85);
+    color: #fff;
+    font-size: 1.4rem;
+    width: 100%;
+    border-radius: 0;
+    z-index: 1499;
+}
+.menuGroup{
+    margin: 20px;
+    padding: 20px 30px;
+    background: rgba(0,0,0,0.75);
+}
+.menuGroup-inner{
+    margin-right: 30px;
+}
+.menuGroup li{
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    cursor: pointer;
+    outline: none;
+}
+.menuGroup-inner li{
+    outline: none;
+}
+.menuGroup li:hover{
+    span{
+        text-decoration: underline;
+    }
+    i{
+        color: #0288D1;
+        text-decoration: none;
+    }
+}
+.menuGroup li i{
+    font-size: 2.2rem;
+    padding-right: 10px;
+    color: #9E9E9E;
+}
+.menu-title{
+    font-size: 2rem;
+    color: #0288D1;
+    margin-bottom: 20px; 
+    border-bottom: 0.5px solid #0288D1;
+    border:0;
+    cursor:default;
+}
+.modal-close-ico{
+    top: 20px;
+    right: 20px;
+}
+.facility-global-icons{
+    position: relative;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 auto;
+}
+.notification-wrap {
+    position: relative;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 3px;
+}
+.notification-wrap i{
+    border-radius: 100%;
+}
+.notification-wrap:hover{
+    color: #0288D1;
+}
+.notification-count{
+    position: absolute;
+    font-size: 0.8rem;
+    background: #ff2500;
+    color: #fff;
+    border-radius: 100%;
+    padding: 4px;
+    width: 5px;
+    height: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+}
+.slideContentWrapper{
+    position: relative;
+    width: 100%;
+    z-index: 4000;
+}
+.notification-sect{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 250px;
+    min-height: 100px;
+    height: 400px;
+    overflow-y: scroll;
+    background: #eee;
+    border: 1px solid #fff;
+    padding: 10px;
+}
+.notification-contentWrap{
+    position: relative;
+}
+.notification-actor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin: 0 3px;
+}
+.notification-actor img{
+    width: 100%;
+    overflow: hidden;
+}
+.notification-item {
+    margin-top: 10px;
+}
+.notification-item span {
+    font-size: 1.1rem;
+    display: inline;
+}
+.backIco {
+    font-size: 2rem;
+    color: #aaa;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.backIco:hover{
+    color: #ff2500;
+}  
+.sect-title{
+    font-family: $font-titles;
+    color: #0288D1;
+    border-bottom: 1px solid #aaa;
+}  
+.person-link{
+    color: #0288D1;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.person-pop{
+    display: none;
+    position: absolute;
+}
+.person-link:hover{
+    .person-pop{
+        display: block;
+    }
+}
+

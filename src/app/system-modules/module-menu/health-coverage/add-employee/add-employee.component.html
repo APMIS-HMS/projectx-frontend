@@ -1,0 +1,65 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Add employee to health cover</legend>
+    <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+  <div class="modal-baseWrap">
+    <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+    <div class="f_sg1">
+
+      <form [formGroup]="frmNewEmp" novalidate>
+
+        <div class="frm-item-wrap">
+          <small class="alert-label" [hidden]="frmNewEmp.controls.empName.valid || frmNewEmp.controls.empName.pristine">
+            this is a required field (minimum 3 and max of 50 characters).
+          </small>
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <!--<input type="text" formControlName="empName" placeholder="Employee Name or APMIS ID" autocomplete="off">-->
+          <mat-input-container class="example-full-width">
+                <input matInput formControlName="empName" placeholder="Employee Name or APMIS ID" autocomplete="off">
+          </mat-input-container>
+          <div class="suggestionFeeds">
+            <div (click)="onSelectPerson(person)" *ngFor="let person of people" class="suggestedItem">
+              <img *ngIf="person.profileImageObject == undefined" src="assets/images/users/default.png">
+              <img *ngIf="person.profileImageObject != undefined" [src]="facilityService.transform(person.profileImageObject?.thumbnail)">
+              <div class="suggetedName">{{person.lastName}} {{person.firstName}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frm-item-wrap">
+          <small class="alert-label" [hidden]="frmNewEmp.controls.empDept.valid || frmNewEmp.controls.empDept.pristine">
+            this field is required.
+          </small>
+          <i class="fa fa-building-o" aria-hidden="true"></i>
+          <!--<select formControlName="empDept">
+              <option  value="" disabled selected>Department</option>
+              <option *ngFor="let item of departments"  [ngValue]="item">{{item.name}}</option>
+          </select>-->
+          <mat-select placeholder="Department"  formControlName="empDept">
+            <mat-option  value="" disabled selected>Department</mat-option>
+            <mat-option *ngFor="let item of departments" [value]="item">{{ item.name }}</mat-option>
+          </mat-select>
+        </div>
+
+        <div class="frm-item-wrap">
+          <i class="fa fa-object-group" aria-hidden="true"></i>
+          <mat-input-container class="example-full-width">
+                <input matInput type="text" formControlName="empId" placeholder="Employee ID" autocomplete="off">
+          </mat-input-container>
+        </div>
+
+        <!--<button (click)="newUnit(frmNewEmp.value, frmNewEmp.valid)" class="cta-1">
+          ADD EMPLOYEE
+        </button>-->
+        <div class="example-full-width" id="example-full-width">
+            <button (click)="newUnit(frmNewEmp.value, frmNewEmp.valid)" class="apmis-blue" mat-raised-button>ADD EMPLOYEE</button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>

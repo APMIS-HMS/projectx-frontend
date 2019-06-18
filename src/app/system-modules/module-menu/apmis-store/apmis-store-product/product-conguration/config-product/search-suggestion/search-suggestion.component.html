@@ -1,0 +1,4 @@
+
+<ul class="search-sugestions" *ngIf="showList">
+    <li class="search-sugestion" *ngFor="let item of searchedList; let i = index" (click)="setSelectedItem(item)">{{item.name}}</li>
+</ul>

@@ -1,0 +1,92 @@
+<ul class="tbl-list">
+  <li *ngFor="let item of existingStockTransfers;let i = index">
+    <div class="filterTop">
+      <div class="tbl-header-rhs">
+        <div class="items">
+          <label class="label">From:</label>
+          <div class="val">{{item?.storeObject?.name}}</div>
+        </div>
+        <div class="items">
+          <label class="label">Date:</label>
+          <div class="val">{{item?.updatedAt|date:'medium'}}</div>
+        </div>
+        <div class="items">
+          <label class="label">Location:</label>
+          <div class="val">{{item?.storeObject?.minorLocationObject?.name}}</div>
+        </div>
+        <div class="items">
+          <label class="label">Total Items Requested</label>
+          <div class="val">{{item?.totalQties}}</div>
+        </div>
+        <div class="items">
+          <label class="label">Total Items Value</label>
+          <div class="val">#{{item?.totalCost}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="store-table">
+      <div class="store-thead">
+        <div class="store-tr">
+          <div class="store-th store-td-actions">
+            <input type="checkbox" [formControl]="check" (change)="onCheckAll($event,i)"/>
+          </div>
+          <div class="store-tr-in">
+            <div class="store-th">Product</div>
+            <div class="store-th">Qty Available</div>
+            <div class="store-th">Qty On Hold</div>
+            <div class="store-th">Qty To Send</div>
+            <div class="store-th">Unit Price</div>
+            <div class="store-th">Amount</div>
+            <div class="store-th">Action</div>
+          </div>
+          <div class="store-th store-td-actions"></div>
+        </div>
+      </div>
+
+      <div class="store-tbody">
+        <div class="store-pre-tr">
+          <div class="store-tr" *ngFor="let stock of item.inventoryTransferTransactions;let j = index">
+            <div class="store-td store-td-actions">
+              <input type="checkbox" [formControl]="check" [checked]="stock?.isSelected" (change)="onCheckItem($event,i,j)"/>
+            </div>
+            <div class="store-tr-in">
+              <div class="store-td">{{stock?.productObject?.name}}</div>
+              <div class="store-td">{{stock?.availableQuantity}} {{stock?.productObject?.baseItem?.name}}</div>
+              <div class="store-td">{{stock?.availableOnHold}} {{stock?.productObject.baseItem.name}}</div>
+              <div class="store-td" *ngIf="!stock?.isEdit">{{stock?.quantity}} {{stock?.productObject?.baseItem?.name}}</div>
+              <div class="store-td" *ngIf="stock?.isEdit"><input (focusout)="onFocusChangeExistingItemValue($event,i,j)">
+                {{stock?.productObject?.baseItem?.name}}</div>
+              <div class="store-td">#{{stock?.costPrice}}/{{stock?.productObject?.baseItem?.name}}</div>
+              <div class="store-td">#{{stock?.lineCostPrice}} </div>
+              <div class="store-td">
+                <select name="dropDown-container" id="dropDown-container" (ngModel)="status['0']" (ngModelChange)="onChangeStatue($event,i,j)">
+                  <option *ngFor="let item of status" [ngValue]="item">{{item.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="store-td store-td-actions">
+              <div class="table-list col-xs-1 action-placeholder">
+                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                <div class="action-container shadow-RB">
+                  <!-- <div class="action-item" *ngIf="stock?.transferStatusObject?.name !=='Completed'" (click)="onEditExistingItem(i, j)">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <span>Edit</span>
+                  </div>
+                  <div class="action-item" *ngIf="stock?.transferStatusObject?.name !=='Completed'" (click)="onRemoveExistingItem(i, j)">
+                    <i class="fa fa-tags" aria-hidden="true"></i>
+                    <span>Remove</span>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <app-apmis-pagination></app-apmis-pagination> -->
+    </div>
+    <div class="ob-btn-wrap">
+      <button [hidden]="isButtonDisabled" (click)="onAcceptItem(i)" class="ob-btn">Accept Items</button>
+    </div>
+  </li>
+</ul>

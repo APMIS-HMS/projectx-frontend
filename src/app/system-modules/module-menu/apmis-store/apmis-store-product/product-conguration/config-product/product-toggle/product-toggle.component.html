@@ -1,0 +1,14 @@
+<div class="toggle-base-wrap">
+  <div [className]="selectedToggleIndex === i ?
+   'toggle-wrap ft-btn-selected' : 'toggle-wrap'" *ngFor="let item of data; let i = index"
+    (click)="onToggle(i)"> 
+    <span> {{item.name}}</span>
+  </div>
+</div>
+<!-- drug entry section-->
+<app-drug-entry  *ngIf="drugSearchEntry"></app-drug-entry>
+<!-- drug entry section-->
+
+<!-- consumable entry section-->
+<app-consumable-entry *ngIf="consumableEntry"></app-consumable-entry>
+<!-- consumable entry section-->

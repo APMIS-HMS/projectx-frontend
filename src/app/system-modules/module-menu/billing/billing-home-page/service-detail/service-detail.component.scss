@@ -1,0 +1,45 @@
+@import "../../../../../../globals/variables.scss";
+@import "../../../../../../globals/normalize.scss";
+@import "../billing-home-page.component.scss";
+
+.headWrap {
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: $font-titles;
+    background: #BDBDBD;
+    padding: 10px;
+    border-radius: 7px;
+}
+.service-amount {
+    color: #ff2500;
+    font-weight: bold;
+    text-align: right;
+}
+.service-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+.service-cat{
+    font-size: 1.2rem;
+}
+.tags {
+    border: 1px solid #BDBDBD;
+    padding: 10px;
+}
+.tag{
+    position: relative;
+    border: 0px;
+    background: #BDBDBD;
+    padding: 10px 20px;
+    font-size: 10px
+}
+.closeTag {
+    position: absolute;
+    top: -1px;
+    right: 4px;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    color: #ff2500;
+    padding: 1px 2px;
+    cursor: pointer;
+}

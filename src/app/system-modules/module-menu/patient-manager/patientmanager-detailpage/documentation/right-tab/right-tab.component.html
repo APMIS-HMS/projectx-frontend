@@ -1,0 +1,565 @@
+<div [dragula]='"first-bag"'>
+
+    <div class="rArea-card">
+        <div class="rAreaCard-header">
+            <span class="header-label">Tags</span>
+            <i class="header-cta fa fa-plus" (click)="addTags_show()" aria-hidden="true"></i>
+        </div>
+
+        <ul class="rAreaCard-body">
+            <li class="rAreaCard-item" *ngFor="let tag of patient?.tags">
+                <div class="rAreaCard-content">{{tag.name}}</div>
+                <i *ngIf="tag.tagType === 'identification'" class="fa fa-info tooltip" data-toggle="Identification"
+                    data-placement="bottom"></i>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <div class="rArea-card">
+        <div class="rAreaCard-header">
+            <span class="header-label">Allergies
+                <span *ngIf="allergiesLoading" class="fa fa-spinner fa-spin"></span>
+            </span>
+            <i (click)="addAllergy_show()" class="header-cta fa fa-plus" aria-hidden="true"></i>
+        </div>
+
+        <ul class="rAreaCard-body">
+            <li class="rAreaCard-item" *ngFor="let allergy of allergies">
+                <div class="rAreaCard-content">{{allergy.allergy}}</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">Allergy</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Reaction</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Severity</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Note</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>{{allergy.allergy}}</td>
+                                <td>{{allergy.reaction}}</td>
+                                <td>{{allergy.severity.name}}</td>
+                                <td>{{allergy.note}}</td>
+                            </tr>
+                            <!-- <tr *ngIf="patients.length === 0 && !loading">
+                        <td class="table-content" colspan="9" style="text-align: center !important; padding: 10px !important;"> No data available in table</td>
+                    </tr>
+                    <tr *ngIf="patients.length === 0 && loading">
+                        <td class="table-content" colspan="9" style="text-align: center !important; padding: 10px !important;">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </td>
+                    </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="rArea-card">
+        <div class="rAreaCard-header">
+            <span class="header-label">Problems
+                <span *ngIf="problemLoading" class="fa fa-spinner fa-spin"></span>
+            </span>
+            <i (click)="addProblem_show()" class="header-cta fa fa-plus" aria-hidden="true"></i>
+        </div>
+
+        <ul class="rAreaCard-body">
+            <li class="rAreaCard-item" *ngFor="let problem of problems">
+                <div class="rAreaCard-status rAreaCard-active">{{problem?.status?.name}}</div>
+                <div class="rAreaCard-content">{{problem?.problem}}</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">Problem</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Date Diagnosed</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Status</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Note</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;"></span>
+                                </th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>{{problem?.problem}}</td>
+                                <td>July 12, 2017. 12:02pm</td>
+                                <td>{{problem?.status?.name}}</td>
+                                <td>
+                                    <p>{{problem?.note}}</p>
+                                </td>
+                                <td>
+                                    <button (click)="tooltip_show(problem)" type="button" class="btn btn-danger">Deactivate
+                                        <i class="fa fa-exclamation-circle red"></i> 
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="tooltip_view">
+                        <app-right-tab-tooltip [selectedProblem]="selectedProblem"></app-right-tab-tooltip>
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="rArea-card">
+        <div class="rAreaCard-header">
+            <span class="header-label">Medication History</span>
+            <!-- <i class="header-cta fa fa-plus" aria-hidden="true"></i> -->
+        </div>
+
+        <ul class="rAreaCard-body">
+            <!-- <li class="rAreaCard-item">
+                <div class="rAreaCard-content">Trinobatin Nicotin TriBact</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">Medication</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Refills</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Instruction</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Date</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Penicillin</td>
+                                <td>2</td>
+                                <td>Take 1 a day</td>
+                                <td>11th Oct, 2016.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <li class="rAreaCard-item">
+                <div class="rAreaCard-content">Diclofenac</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">Medication</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Refills</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Instruction</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Date</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Diclofenac</td>
+                                <td>2</td>
+                                <td>Take 1 a day</td>
+                                <td>11th Oct, 2016.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li> -->
+        </ul>
+    </div>
+
+    <div class="rArea-card">
+        <div class="rAreaCard-header">
+            <span class="header-label">Active Medication</span>
+            <!-- <i class="header-cta fa fa-plus" aria-hidden="true"></i> -->
+        </div>
+
+        <ul class="rAreaCard-body">
+            <!-- <li class="rAreaCard-item">
+                <div class="rAreaCard-content">Trinobatin Nicotin TriBact</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">Allergy</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Reaction</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Note</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Penicillin</td>
+                                <td>Hives</td>
+                                <td>Was allergic since a child</td>
+                            </tr>
+                            <tr *ngIf="patients.length === 0 && !loading">
+                        <td class="table-content" colspan="9" style="text-align: center !important; padding: 10px !important;"> No data available in table</td>
+                    </tr>
+                    <tr *ngIf="patients.length === 0 && loading">
+                        <td class="table-content" colspan="9" style="text-align: center !important; padding: 10px !important;">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li> -->
+            <!-- <li class="rAreaCard-item">
+                <div class="rAreaCard-content">Diclofenac</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">Allergy</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Reaction</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Note</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Penicillin</td>
+                                <td>Hives</td>
+                                <td>Was allergic since a child</td>
+                            </tr>
+                            <tr *ngIf="patients.length === 0 && !loading">
+                                <td class="table-content" colspan="9" style="text-align: center !important; padding: 10px !important;">
+                                    No data available in table</td>
+                            </tr>
+                            <tr *ngIf="patients.length === 0 && loading">
+                                <td class="table-content" colspan="9" style="text-align: center !important; padding: 10px !important;">
+                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li> -->
+        </ul>
+    </div>
+    <!-- 
+    <div class="rArea-card">
+        <div class="rAreaCard-header">
+            <span class="header-label">Family History</span>
+            <i (click)="addHistory_show()" class="header-cta fa fa-plus" aria-hidden="true"></i>
+        </div>
+
+        <ul class="rAreaCard-body">
+            <li class="rAreaCard-item">
+                <div class="rAreaCard-content">Diabetes</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">History</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Diabetes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <li class="rAreaCard-item">
+                <div class="rAreaCard-content">Cancer</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">History</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Cancer</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div> -->
+
+    <div class="rArea-card">
+        <div class="rAreaCard-header">
+            <span class="header-label">Investigation
+                <span *ngIf="laboratoryLoading" class="fa fa-spinner fa-spin"></span>
+            </span>
+            <!-- <i class="header-cta fa fa-plus" aria-hidden="true"></i> -->
+        </div>
+
+        <ul class="rAreaCard-body">
+            <li class="rAreaCard-item" *ngFor="let request of labRequests">
+                <div *ngIf="request.report !== undefined" class="rAreaCard-status rAreaCard-active">Available</div>
+                <div *ngIf="request.report === undefined" class="rAreaCard-status rAreaCard-inactive">Not Available</div>
+                <div class="rAreaCard-content">{{request.createdAt|date:'short'}}</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">Investigation</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Result</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Date</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let request of request.investigations">
+                                <td>{{request.investigation?.name}}</td>
+                                <td>{{request.investigation?.specimen?.name}}</td>
+                                <td>11th October, 2016.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <!-- <li class="rAreaCard-item">
+                <div class="rAreaCard-status rAreaCard-inactive">Not Available</div>
+                <div class="rAreaCard-content">HIV Test</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">Investigation</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Result</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Date</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let inv of investigations">
+                                <td>{{inv.investigation?.name}}</td>
+                                <td>{{inv.investigation?.specimen?.name}}</td>
+                                <td>11th October, 2016.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li> -->
+        </ul>
+    </div>
+
+    <div class="rArea-card">
+        <div class="rAreaCard-header">
+            <span class="header-label">Vitals</span>
+            <i (click)="addVitals_show()" class="header-cta fa fa-plus" aria-hidden="true"></i>
+        </div>
+
+        <ul class="rAreaCard-body">
+            <!-- <li class="rAreaCard-item">
+                <div class="rAreaCard-content">EMT Clinic - Continental Hospital</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">Vitals</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Facility</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Date</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li> -->
+        </ul>
+    </div>
+
+    <div class="rArea-card">
+        <div class="rAreaCard-header">
+            <span class="header-label">Past Appointments</span>
+            <!-- <i class="header-cta fa fa-plus" aria-hidden="true"></i> -->
+        </div>
+
+        <ul class="rAreaCard-body">
+            <li class="rAreaCard-item" *ngFor="let appointment of pastAppointments">
+                <div class="rAreaCard-status rAreaCard-active">Active</div>
+                <div class="rAreaCard-content">{{appointment.startDate | date:'short'}}</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">Date/Time</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Practitioner</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Reason</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>{{appointment.startDate | date:'short'}}</td>
+                                <td>
+                                    <div class="empWrap">
+                                        <div class="list-img" *ngIf="appointment?.providerDetails !== null && appointment?.providerDetails !== undefined">
+                                            <img *ngIf="appointment?.providerDetails?.personDetails?.profileImageObject === undefined"
+                                                src="assets/images/users/default.png">
+                                            <div *ngIf="appointment?.providerDetails?.personDetails?.profileImageObject !== undefined">
+                                                <img class="shadow" [src]="facilityService.transform(appointment?.providerDetails?.personDetails?.profileImageObject?.thumbnail)">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="list-label">{{appointment.providerDetails?.personDetails.lastName}}
+                                                {{appointment.providerDetails?.personDetails.firstName}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{appointment.appointmentReason}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="rArea-card">
+        <div class="rAreaCard-header">
+            <span class="header-label">Future Appointments</span>
+            <!-- <i class="header-cta fa fa-plus" aria-hidden="true"></i> -->
+        </div>
+
+        <ul class="rAreaCard-body">
+            <li class="rAreaCard-item" *ngFor="let appointment of futureAppointments">
+                <div class="rAreaCard-status rAreaCard-active">Active</div>
+                <div class="rAreaCard-content">{{appointment.startDate | date:'short'}}</div>
+
+                <div class="rAreaCard-detailWrap shadow-RB" style="min-width:500px;">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="padding-left: 3px;">Date/Time</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Practitioner</span>
+                                </th>
+                                <th>
+                                    <span style="padding-left: 3px;">Reason</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>{{appointment.startDate | date:'short'}}</td>
+                                <td>
+                                    <div class="empWrap">
+                                        <div class="list-img" *ngIf="appointment?.providerDetails !== null">
+                                            <img *ngIf="appointment?.providerDetails?.personDetails?.profileImageObject === undefined"
+                                                src="assets/images/users/default.png">
+                                            <div *ngIf="appointment?.providerDetails?.personDetails?.profileImageObject !== undefined">
+                                                <img class="shadow" [src]="facilityService.transform(appointment?.providerDetails?.personDetails?.profileImageObject?.thumbnail)">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="list-label">{{appointment.providerDetails?.personDetails.personFullName}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{appointment.appointmentReason}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

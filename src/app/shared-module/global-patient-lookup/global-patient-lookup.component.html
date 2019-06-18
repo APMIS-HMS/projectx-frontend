@@ -1,0 +1,24 @@
+<div class="patientLookupWrap">
+  <div class="lookupControl">
+    <i (click)="toggleLookup()" *ngIf="maximize" class="fa fa-minus" aria-hidden="true"></i>
+    <i (click)="toggleLookup()" [hidden]="maximize" class="fa fa-plus" aria-hidden="true"></i>
+  </div>
+  <div (click)="toggleLookup()" class="title">Patient Lookup</div>
+  <div *ngIf="maximize">
+    <ul class="lookupListings">
+      <li *ngFor="let person of people" (click)="onSelectPerson(person)" class="lookupListing">
+        <img *ngIf="person.personDetails.profileImageObject == undefined" src="assets/images/users/default.png">
+        <img *ngIf="person.personDetails.profileImageObject != undefined" [src]="facilityService.transform(person.personDetails.profileImageObject?.thumbnail)">
+        <div>
+          <div class="listingName">{{person.personDetails.lastName}} {{person.personDetails.firstName}}</div>
+          <div class="listingOthers">
+            <div>{{person.personDetails.email}}</div>
+            <div>{{person.personDetails.phoneNumber}}</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <input type="search" autofocus placeholder="Search for patient" [formControl]="txtPatientLookup">
+  </div>
+</div>

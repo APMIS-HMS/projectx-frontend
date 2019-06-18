@@ -1,0 +1,55 @@
+@import "./../../purchase-list/purchase-list.component.scss";
+@import "./../invoice-entry.component.scss";
+
+thead{
+    border: 0;
+    tr{
+        border: 0;
+    }
+} 
+    
+th{
+    text-align: left;
+    border: 0;
+    padding: 10px;
+    height: auto;
+}
+td{
+    padding: 10px;
+}
+.prd-dlv-list{
+    border: 1px solid #c4c4c4;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.prd-dlv-wrap{
+    display:content;
+    span{
+        font-weight: bold;
+    }
+}
+
+.con-inner-wrap{
+    padding: 0px 20px 0px 0px;
+    h4{
+        color: #777777;
+    }
+}
+
+.list-inner-wrap{
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.pay-supp-wrap{
+    display:content;
+}
+
+.pay-action-wrap{
+    display: flex;
+    align-content: center;
+    .action-content{
+        margin-right:10px;
+    }
+}

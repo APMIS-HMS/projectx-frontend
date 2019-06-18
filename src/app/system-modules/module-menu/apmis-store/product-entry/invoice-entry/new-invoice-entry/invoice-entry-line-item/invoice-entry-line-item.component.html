@@ -1,0 +1,49 @@
+<div class="config-tr-in in-tr">
+  <div class="store-td" style="grid-column: span 2">
+    <div class="searchproduct">
+      <div class="InputGroup">
+        <input [myFocus]="isProductFocused" [formControl]="searchProductFormControl" (focus)="onFocus('in')" (focusout)="onFocus('out')"
+          class="customInput" type="text">
+        <ul class="search-sugestions bar" *ngIf="showProduct && productConfigs.length > 0">
+          <li *ngFor="let config of productConfigs" (click)="setSelectedOption(config)" class="search-sugestion">{{config.productObject.name}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="store-td">
+    <div class="InputGroup" style="width:60px;">
+      <input [formControl]="quantityFormControl" (keydown.enter)="onKeydown($event, 5)" [myFocus]="isQuantityFocused"
+        class="customInput" type="number" min="0">
+    </div>
+  </div>
+  <div class="store-td">
+    <div class="InputGroup" style="width:60px;">
+      <input [formControl]="costPriceFormControl" (keydown.enter)="onKeydown($event, 6)" [myFocus]="isCostPriceFocused"
+        class="customInput" type="number" min="0">
+    </div>
+  </div>
+  <div class="store-td">
+    <div class="InputGroup" style="width:60px;">
+      <input [formControl]="marginFormControl" (keydown.enter)="onKeydown($event, 1)" [myFocus]="isMarginFocused" class="customInput"
+        type="number" max="100" min="0">
+    </div>
+  </div>
+  <div class="store-td">
+    <div class="InputGroup" style="width:60px;">
+      <input [formControl]="sellingPriceFormControl" (keydown.enter)="onKeydown($event, 2)" [myFocus]="isSellingPriceFocused"
+        class="customInput" type="number">
+    </div>
+  </div>
+  <div class="store-td">
+    <div class="InputGroup" style="width:60px;">
+      <input [formControl]="batchFormControl" (keydown.enter)="onKeydown($event, 3)" [myFocus]="isBatchFocused" class="customInput"
+        type="text">
+    </div>
+  </div>
+  <div class="store-td">
+    <div class="InputGroup" style="width:100px;">
+      <input [formControl]="expiryDateFormControl" (keydown.enter)="onKeydown($event, 4)" [myFocus]="isExpiryDateFocused"
+        class="customInput" type="date">
+    </div>
+  </div>
+</div>

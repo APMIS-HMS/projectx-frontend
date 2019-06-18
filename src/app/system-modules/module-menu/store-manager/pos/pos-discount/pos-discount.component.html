@@ -1,0 +1,35 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+      <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+      <legend class="modal_title">Discount Amount</legend>
+      <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+  <div class="modal-baseWrap"> 
+      <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+    <div class="f_sg1">
+
+      <form class="mod-frm" [formGroup]="frmAddModifier" novalidate>
+
+        <div class="frm-item-wrap">
+          <mat-input-container>
+            <input matInput mat-error type="number" placeholder="Enter Discount" formControlName="modifier">
+          </mat-input-container>
+        </div>
+
+        <div class="frm-radio-wrap">
+          <mat-radio-group formControlName="valueCheck">
+            <mat-radio-button style="width: 60px;" value="Percentage"> %</mat-radio-button>
+            <mat-radio-button style="width: 60px;" value="Amount"> Naira</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <button (click)="addModifier(frmAddModifier.value, frmAddModifier.valid)" class="cta-1">
+          ADD DISCOUNT
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+</div>

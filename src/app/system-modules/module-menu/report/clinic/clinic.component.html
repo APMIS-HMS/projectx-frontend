@@ -1,0 +1,19 @@
+<div class="container">
+    <h2 class="title">
+        <i class="fa fa-star fa-fw star"></i> Today's Clinic Analysis
+    </h2>
+    <section class="row">
+      <div class="col-lg-12">
+        <div class="card padding">
+            <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </div>
+    </section>
+</div>

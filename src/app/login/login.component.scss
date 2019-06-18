@@ -1,0 +1,68 @@
+@import '../../globals/button.scss';
+.frm-item-wrap {
+    text-align: left;
+}
+
+.modal-baseWrap{
+    width: 60%;
+    padding: 10px 50px;
+}
+
+.forgetPword {
+    color: #ff2500;
+    font-style: italic;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    display: inline-block;
+    margin-top: -20px;
+    cursor: pointer;
+}
+.modal-baseWrap{
+    width: auto;
+}
+
+.back-btn-box {
+    text-align: center;
+}
+
+.forgetPword:hover {
+    text-decoration: underline
+}
+
+.mat-input-container {
+    width: 100%;
+}
+
+@media only screen and (max-width: 430px) {
+    input {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .modal-baseWrap {
+        width: 80%;
+        padding: 20px 10px;
+        box-sizing: border-box;
+    }
+    .modal_mini_title {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+    .frm-item-wrap {
+        padding-bottom: 15px;
+    }
+    .cta-1 {
+        width: 60%;
+        height: 30px;
+        font-size: 1.2rem;
+    }
+    .forgetPword {
+        margin: 0;
+    }
+    .mainErr {
+        width: 95%;
+        margin-bottom: 10px;
+    }
+}

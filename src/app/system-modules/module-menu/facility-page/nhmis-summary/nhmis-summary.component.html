@@ -1,0 +1,54 @@
+<div #contentToConvert class="pp-card shadow-grey" id="contentToConvert">
+    <div class="date-generated">11th July, 2018. 2:02:54 PM</div>
+    <div class="facility-wrap">
+        <div class="facility-img">
+            <img src="../../../../../assets/images/logos/default.png">
+        </div>
+        <div class="lattering-wrap">
+            <div class="facility-name">Continental Hospital</div>
+            <div class="facility-others">No. 22B Falausi Street Mushin, Lagos State.</div>
+            <div class="facility-others">08099009988</div>
+        </div>
+    </div>
+    <div class="card-title">
+        <div>NHMIS Summary (March 2018)</div>
+        <div class="top-btns">
+            <div class="top-btn"><i class="fa fa-upload"></i> Send Summary</div>
+            <div (click)="generatePdf()" class="top-btn"><i class="fa fa-file-pdf"></i> Generate PDF</div>
+        </div>
+    </div>
+    <div class="filters">
+        <div class="filter">
+            <label class="filter-label">Month</label>
+            <select [formControl]="filterMonth">
+        <option>January</option>
+        <option>February</option>
+      </select>
+        </div>
+        <div class="filter">
+            <label class="filter-label">Year</label>
+            <select [formControl]="filterYear">
+        <option>2018</option>
+        <option>2017</option>
+      </select>
+        </div>
+    </div>
+
+    <div class="content-wrap">
+        <div class="tbl-wrap">
+            <div class="tbl-title">Maternal Health (Ante & Post natal Care)</div>
+            <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+                <tbody>
+                    <tr>
+                        <td>Antenatal total attendance</td>
+                        <td>1200</td>
+                    </tr>
+                    <tr>
+                        <td>Antenatal 1st (booking) visit before 20 weeks</td>
+                        <td>2500</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

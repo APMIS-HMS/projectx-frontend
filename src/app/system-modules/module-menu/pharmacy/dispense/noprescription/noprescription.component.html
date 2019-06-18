@@ -1,0 +1,182 @@
+<form [formGroup]="noPrescriptionForm" novalidate>
+    <div class="row padding-10" style="margin-top: 20px;">
+        <div class="col-sm-3">
+            <div class="input-group-btn">
+                <i class="fa fa-caret-right pull-right" style="position: absolute;right: 7px;vertical-align: middle;top: 10px;"></i>
+                <mat-form-field>
+                    <mat-select placeholder="Client" formControlName="client" [(ngModel)]="selectedClient" (change)="onChange($event.value)" class="example-full-width">
+                        <mat-option *ngFor="let client of clients" [value]="client.name">{{ client.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="individual-details">
+        <div class="row">
+            <!-- begin individual -->
+            <div *ngIf="individualShow" class="col-sm-4 col-xs-12">
+                <mat-input-container class="example-full-width">
+                    <input matInput formControlName="phone" placeholder="Phone Number" width="100%">
+                </mat-input-container>
+            </div>
+            <div *ngIf="individualShow" class="col-sm-4  col-xs-12">
+                <mat-input-container class="example-full-width">
+                    <input matInput formControlName="lastName" placeholder="Last Name">
+                </mat-input-container>
+            </div>
+            <div *ngIf="individualShow" class="col-sm-4 col-xs-12">
+                <mat-input-container class="example-full-width">
+                    <input matInput formControlName="firstName" placeholder="First Name">
+                </mat-input-container>
+            </div>
+            <!--end individual-->
+            <!-- begin corporate -->
+
+            <div *ngIf="corporateShow" class="col-sm-3 col-xs-12">
+                <mat-input-container class="example-full-width">
+                    <input matInput formControlName="companyPhone" placeholder="Company Phone">
+                </mat-input-container>
+            </div>
+            <div *ngIf="corporateShow" class="col-sm-3 col-xs-12">
+                <mat-input-container class="example-full-width">
+                    <input matInput formControlName="companyName" placeholder="Company Name">
+                </mat-input-container>
+            </div>
+
+            <!--end corporate-->
+            <!-- begin Internal -->
+            <div *ngIf="internalShow" class="col-xs-12 col-sm-3" style="padding: 10px 0;">
+                <label class="example-margin">Internal Type:</label><br><br>
+                <mat-radio-group [(ngModel)]="internalType" [ngModelOptions]="{standalone: true}" (change)="onChangeInternalType($event.value);">
+                    <mat-radio-button class="example-margin" value="Department">Department/Unit</mat-radio-button>
+                    <mat-radio-button class="example-margin" value="Location">Location</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="col-sm-3 col-mat-2 col-xs-12" *ngIf="deptLocationShow && internalShow">
+                <mat-form-field>
+                    <mat-select placeholder="Department" formControlName="dept" (change)="onChangeDepartment($event);" class="example-full-width">
+                        <mat-option *ngFor="let dept of departments" [value]="dept">{{ dept.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-3 col-mat-2 col-xs-12" *ngIf="deptLocationShow && internalShow">
+                <mat-form-field>
+                    <mat-select placeholder="Unit" formControlName="unit" class="example-full-width">
+                        <mat-option *ngFor="let unit of units" [value]="unit">{{ unit.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-3 col-mat-4 col-xs-12" *ngIf="!deptLocationShow && internalShow">
+                <mat-form-field>
+                    <mat-select placeholder="Minor Location" formControlName="minorLocation" class="example-full-width">
+                        <mat-option *ngFor="let location of minorLocations" [value]="location">{{ location.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <!--end Internal-->
+            <div class="col-sm-4 col-mat-4 col-xs-12" style="margin-top: 20px;">
+                <div class="cu-search-box">
+                    <mat-input-container>
+                        <input matInput formControlName="product" [attr.data-selected-p-id]="selectedProductId" class="cu-search" (keydown)="keyupSearch();" (focus)="focusSearch();" (focusout)="focusOutSearch();" placeholder="Product" autocomplete="off">
+                    </mat-input-container>
+                    <div class="cu-popup-wrapper" *ngIf="showCuDropdown">
+                        <div class="cu-popover-arrow"></div>
+                        <div class="cu-header">
+                            <p></p>
+                        </div>
+                        <ul class="cu-dropdown">
+                            <li><a class="header">Select item</a></li>
+                            <li *ngIf="products.length === 0 && !cuDropdownLoading" class="text-center"><a>Result is empty</a></li>
+                            <li *ngIf="products.length === 0 && cuDropdownLoading" class="text-center"><a><i class="fa fa-spinner fa-spin"></i></a></li>
+                            <li *ngFor="let product of products" (click)="onClickCustomSearchItem($event, product)"><a>{{ product?.productObject?.name }}</a></li>
+                            <!-- <li *ngFor="let product of products" #productId [attr.data-p-id]="product.productId" [attr.data-p-iid]="product._id" [attr.data-p-fsid]="product.facilityServiceId" [attr.data-p-sid]="product.serviceId" [attr.data-p-cid]="product.categoryId" (click)="onClickCustomSearchItem($event, product)"><a>{{ product?.productObject?.name }}</a></li> -->
+                        </ul>
+                        <div class="cu-footer">
+                            <button class="btn btn-default">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 col-mat-3 col-xs-12" style="margin-top:2px;">
+                <mat-form-field>
+                    <mat-select placeholder="Batch Number" formControlName="batchNumber" class="example-full-width">
+                        <mat-option *ngFor="let batch of batches" [value]="batch" (click)="onClickBatchSelect($event, batch)">{{ batch.batchNumber }} ({{batch.quantity}}) <small>{{batch.expiryDate | date }}</small></mat-option>
+                        <!-- <mat-option *ngFor="let batch of batches" [(value)]="batch._id" #batchId [attr.data-p-price]="batch.costPrice" [attr.data-p-batch]="batch.batchNumber" [attr.data-p-qty]="batch.quantity" (click)="onClickBatchSelect($event, batchId)">{{ batch.batchNumber }} ({{batch.quantity}}) <small>{{batch.expiryDate | date }}</small>
+                        </mat-option> -->
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-3 col-mat-2 col-xs-12">
+                <mat-input-container class="example-full-width">
+                    <input matInput type="number" formControlName="qty" placeholder="Quantity">
+                </mat-input-container>
+            </div>
+            <div class="col-sm-2 col-mat-3 col-xs-12" style="margin-top: 20px;">
+                <input type="hidden" formControlName="cost">
+                <span style="margin-top: 40px;">
+                    <h6><b>Unit price: &#x20A6;{{ price }}</b></h6>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row margin-top-bottom">
+    <div class="col-sm-12 col-mat-12 text-center">
+        <button mat-raised-button class="mat-lg-btn" (click)="onClickSaveNoPrescription(noPrescriptionForm.value, noPrescriptionForm.valid);"> Save </button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="table-head col-xs-1"> No </div>
+            <div class="table-head col-xs-2"> Drugs </div>
+            <div class="table-head col-xs-1"> Qty </div>
+            <div class="table-head col-xs-2"> Batch </div>
+            <div class="table-head col-xs-2"> Unit Price </div>
+            <div class="table-head col-xs-2"> Cost </div>
+            <div class="table-head col-xs-2"> Action </div>
+        </div>
+    </div>
+    <div class="card-content">
+        <div class="card-list-item" *ngIf="prescriptions.length===0 && !loading">
+            <div class="table-list col-xs-12">
+                No data available in table
+            </div>
+        </div>
+        <div class="card-list-item" *ngIf="prescriptions.length===0 && loading">
+            <div class="table-list col-xs-12">
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            </div>
+        </div>
+        <div class="card-list-item" *ngFor="let prescription of prescriptions; let i=index;">
+            <div class="row">
+                <div class="table-list col-xs-1">{{i+1}}</div>
+                <div class="table-list col-xs-2">{{prescription?.productName}}</div>
+                <div class="table-list col-xs-1">{{prescription?.qty}}</div>
+                <div class="table-list col-xs-2">{{prescription?.batchNumber?.batchNumber}}</div>
+                <div class="table-list col-xs-2">{{prescription?.unitPrice}}</div>
+                <div class="table-list col-xs-2">{{prescription?.qty * prescription?.unitPrice}}</div>
+                <div class="table-list col-xs-2">
+                    <i class="fa fa-edit fa-fw"></i>
+                    <i class="fa fa-trash fa-fw"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row" style="padding-right: 20px;">
+    <h6 class="pull-right" style="width: 100%; text-align: right;padding-right:10px;"> <b>Total Quantity: {{ totalQuantity }}</b></h6>
+    <h5 class="pull-right" style="width: 100%; text-align: right;padding-right:10px;"> <b>Total Cost: &#x20A6;{{ totalPrice }}</b></h5>
+</div>
+<div class="row margin-top-15" style="margin-bottom: 20px;">
+    <div class="col-sm-12 col-mat-12 text-center">
+        <button class="mat-lg-btn" [disabled]="disableDispenseBtn" (click)="onClickDispense();" mat-raised-button>
+          <span *ngIf="dispenseBtn"><i class="fa fa-check-circle"></i> Dispense</span>
+          <span *ngIf="dispensingBtn">Dispensing... <i class="fa fa-spinner fa-spin"></i></span>
+        </button>
+    </div>
+</div>

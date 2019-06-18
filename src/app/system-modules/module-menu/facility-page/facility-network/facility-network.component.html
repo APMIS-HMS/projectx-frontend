@@ -1,0 +1,71 @@
+<div class="pp-card shadow-grey">
+  <div class="card-title">Network</div>
+  <div class="net-inwrap">
+    <div class="net-itemA">
+      <div (click)="addMember_click()" class="fa fa-fw fa-2x fa-plus orange tooltip" data-tooltip="AddNetwork"></div>
+      <div class="card-title">Network Members</div>
+      <div class="tbl-resp-wrap">
+        <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">  
+            <tbody *ngIf="members.length > 0">
+                <tr *ngFor="let networkMembers of members">
+                    <td>
+                        <div class="empWrap">
+                            <div class="list-img">
+                                <img src="../../../../../assets/images/logos/default.png">
+                            </div>
+                            <div>{{networkMembers.name}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-ctaWrap">
+                            <i (click)="removeMember(networkMembers._id)" class="fa fa-fw fa-2x fa-trash orange tooltip" data-tooltip="Delete" aria-hidden="true"> Remove</i>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="members.length == 0">
+                <tr>
+                    <td class="table-content" colspan="6" border="0.5" style="text-align: center "> No data available in table</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="net-itemB">
+      <div (click)="addOther_click()" class="fa fa-fw fa-2x fa-plus orange tooltip" data-tooltip="Join"></div>
+      <div class="card-title">Other Networks</div>
+      <div class="tbl-resp-wrap">
+        <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+            <tbody *ngIf="others.length > 0">
+                <tr *ngFor="let networkJoined of others">
+                    <td>
+                        <div class="empWrap">
+                            <div class="list-img">
+                                <img src="../../../../../assets/images/logos/default.png">
+                            </div>
+                            <div>{{networkJoined.name}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-ctaWrap">
+                            <i (click)="leaveNetwork(networkJoined._id)" class="fa fa-fw fa-2x fa-trash orange tooltip" data-tooltip="Delete" aria-hidden="true"> Leave</i> 
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="others.length == 0">
+                <tr>
+                    <td class="table-content" colspan="6" style="text-align: center "> No data available in table</td>
+                </tr>
+            </tbody>
+        </table>
+      </div> 
+    </div>
+  </div>
+</div>
+<div *ngIf="addMember" class="modal-overlay">
+    <app-add-member (closeModal)="close_onClick($event)" (memberAdded)="memberAdded($event)" id="form-modal" class="form-modal center-center"></app-add-member>
+</div>
+<div *ngIf="addOther" class="modal-overlay">
+    <app-add-other (closeModal)="close_onClick($event)" (networkJoined)="networkJoined($event)" id="form-modal" class="form-modal center-center"></app-add-other>
+</div>

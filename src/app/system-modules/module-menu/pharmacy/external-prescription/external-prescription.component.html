@@ -1,0 +1,77 @@
+<section id="presc-list">
+    <div class="card">
+        <div class="card-header">
+            <div class="row" *ngIf="!psearchOpen">
+                <div class="table-head col-xs-2">
+                    Date
+                </div>
+                <div class="table-head col-xs-2">
+                    Patient
+                </div>
+                <div class="table-head col-xs-2">
+                    Location
+                </div>
+                <div class="table-head col-xs-2">
+                    Priority
+                </div>
+                <div class="table-head col-xs-2">
+                    Prescriber
+                </div>
+                <div class="table-head col-xs-1">
+                    Status
+                </div>
+                <div class="table-head col-xs-1">
+                    <i class="fa fa-search fa-fw" (click)="openSearch()"></i>
+                </div>
+            </div>
+            <div class="row" *ngIf="psearchOpen">
+                <div class="col-xs-4">
+                    <input class="table-header-input" type="text" placeholder="Search Employee">
+                </div>
+                <div class="col-xs-4">
+                    <select class="table-header-select" formControlName="category" placeholder="Select Category" (change)="onChangeCategory($event);">
+                                <option value="" selected>Select Category</option>
+                                <option value="individual">Individual</option>
+                                <option value="corporate">Corporate</option>
+                                <option value="internal">Internal</option>
+                            </select>
+                </div>
+                <div class="col-xs-3">
+                    <input class="table-header-input" type="date" placeholder="Choose a date">
+                </div>
+                <div class="col-xs-1 table-head">
+                    <i class="fa fa-close fa-fw" (click)="closeSearch()"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="card-list-item">
+                <div *ngIf="extPrescriptions.length===0 && !loading" class="row">
+                    <div class="table-list col-lg-12" style="width: 100%; text-align:center;">
+                        No data available in table
+                    </div>
+                </div>
+                <div *ngIf="extPrescriptions.length===0 && loading" class="row">
+                    <div class="table-list col-lg-12" style="width: 100%; text-align:center;">
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-list-item" *ngFor="let prescription of extPrescriptions " routerLink='/dashboard/pharmacy/external-prescriptions/{{prescription._id}}'>
+                <div class="row">
+                    <div class="table-list col-lg-2">{{prescription?.updatedAt | date}}</div>
+                    <div class="table-list col-lg-2">{{prescription?.patientName}}</div>
+                    <div class="table-list col-lg-2">{{prescription?.clinicDetails?.clinicName}}</div>
+                    <div class="table-list col-lg-2">{{prescription?.priority?.name}}</div>
+                    <div class="table-list col-lg-2">{{prescription?.employeeName}}</div>
+                    <div class="table-list col-lg-2">
+                        <span *ngIf="prescription.status == 'completely'" style="color:forestgreen">Completely<br>Assessed</span>
+                        <span *ngIf="prescription.status == 'partly'" style="color:blue">Partly<br>Assessed</span>
+                        <span *ngIf="prescription.status == 'not'" style="color:crimson">Not<br>Assessed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,36 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <div class="facility-title">Samuel Daniel</div>
+        <div class="modal_mini_title">Add Tag</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <div class="f_sg1">
+
+            <form [formGroup]="frmNewtag" novalidate>
+
+                <div class="frm-item-wrap">
+                    <small class="alert-label" [hidden]="frmNewtag.controls.tagName.valid || frmNewtag.controls.tagName.pristine">
+                         minimum 3 and max of 50 characters
+                    </small>
+                    <!--<input type="text" formControlName="tagName" placeholder="Tag Name" autocomplete="off">-->
+                    <mat-input-container class="example-full-width">
+                        <input matInput formControlName="tagName" placeholder="Tag Name" autocomplete="off">
+                    </mat-input-container>
+                    <div class="suggestionFeeds">
+                        <div class="suggestedItem">
+                            <div class="suggestedName">VIP</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-full-width" id="example-full-width">
+                    <button mat-raised-button>Add Tag</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

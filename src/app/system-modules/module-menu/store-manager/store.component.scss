@@ -1,0 +1,79 @@
+@import "../../../../globals/variables.scss";
+
+.inner-page-contentArea {
+    padding: 0;
+    width: 100%;
+}
+.menuContent{
+    width: 73%;
+}
+.btning-store {
+    border: 1px solid #0288d1;
+}
+ul.nav-group {
+    display: flex;
+    position: absolute;
+    top: 28px;
+    right:14px;
+    color: #0288D1;
+    font-size: 1.2rem;
+    z-index: 15;
+}
+ul.nav-group li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    cursor: pointer;
+    padding: 10px 5px;
+    border: 1px solid #fff;
+}
+ul.nav-group li:hover, .navitemactive{
+    background: #f5f5f5;
+    border: 1px solid rgba(221, 221, 221, 0.6);
+}
+
+.inner-menu1-wrap{
+    top: 10px;
+    right: auto;
+    left: 0px;
+}
+.content-sec-ico{
+    font-size: 2rem;
+    color: #757575;
+    padding: 4px;
+    width: 21px;
+    height: 21px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content-sec-ico:hover, .content-sec-icoActive{
+    background: #F5F5F5;
+    color: #4bb8ef;
+}
+.inner-menu1-wrap {
+    top: 10px;
+    right: 10px;
+    left: auto;
+}
+.inner-menu1-wrap .innerMenu-ul{
+    margin-top: 33px;
+}
+.content-sec-ico{
+    position: absolute;
+    right: 0;
+}
+
+.inner-page-wrap {
+    margin-top: 40px !important;
+}
+
+.navActive {
+    border: 1.5px solid #fff;
+}
+.navActive.active {
+   border: 1.5px solid #fff;  
+}
+

@@ -1,0 +1,58 @@
+@import "../facility-page-home.component.scss";
+
+.net-inwrap{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.net-itemB{
+    position: relative;
+    background: #f1f1f1;
+    width: 40%;
+    min-height: 100px;
+}
+.net-itemA{
+    position: relative;
+    width: 59%;
+    margin-right: 10px;
+    border: 1px solid #f1f1f1;
+}
+.td-ctaWrap i{
+    font-size: 1.2rem;
+}
+.td-ctaWrap i:hover{
+    color: #ff2500;
+}
+.plus{
+    display: flex;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: #194985;
+}
+.tbl-resp-wrap{
+    min-width: 100%;
+    overflow-y: auto; 
+    padding-bottom: 100px;
+}
+.tbl-resp-wrap table{
+    min-width: 500px;
+}
+
+@media only screen and (max-width: 900px) {
+    .net-inwrap{
+        display: block;
+    }
+    .net-itemA{
+        margin-bottom: 10px;
+    }
+    .net-itemA, .net-itemB{
+        width: 100%;
+    }
+}

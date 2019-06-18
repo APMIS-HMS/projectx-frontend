@@ -1,0 +1,39 @@
+<div class="pg-subtitle">PATIENT PAGE - PRESCRIBED DRUGS</div>
+<section class="external-prescription">
+    <div class="survey">
+        <table class="table table-bordered fly-out" id="table">
+            <thead>
+                <tr>
+                    <th class="t-data drug" style="padding: 0 0 0 10px;">Drugs</th>
+                    <th class="t-data" style="padding: 0 0 0 10px;">Status</th>
+                    <th class="t-data" style="padding: 0 0 0 10px;">Dispense</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let prescription of prescriptions">
+                <tr>
+                    <td class="text-center" style="padding: 10px;" colspan="3">{{ prescription.createdAt | date }}</td>
+                </tr>
+                <tr *ngFor="let prescriptionItem of prescription.prescriptionItems" style="text-align: left;">
+                    <td class="t-data drug">
+                        {{ prescriptionItem.genericName }} - {{ prescriptionItem.frequency }} for {{ prescriptionItem.duration }}, {{ prescriptionItem.routeName }}<br>
+                    </td>
+                    <td class="t-data">Started</td>
+                    <td class="t-data">
+                        <span *ngIf="prescriptionItem.isDispense">Dispensed</span>
+                        <span *ngIf="!prescriptionItem.isDispense">Not Dispensed</span>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="custom-tbody" *ngIf="prescriptions.length === 0 && !loading">
+                <tr>
+                    <td class="text-center" style="padding: 10px;" colspan="3"> No data available in table</td>
+                </tr>
+            </tbody>
+            <tbody class="custom-tbody" *ngIf="prescriptions.length === 0 && loading">
+                <tr>
+                    <td class="text-center" style="padding: 10px;" colspan="3"><i class="fa fa-spinner fa-spin fa-2x"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

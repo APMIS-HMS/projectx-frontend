@@ -1,0 +1,22 @@
+.pg-header{
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-lhs, .header-rhs{
+    display: flex;
+}
+.sect-title{
+    font-size: 24px;
+    margin-right: 30px;
+    font-weight: 500;
+}
+.new-btn-link{
+    border: 1px solid #0288D1;
+    color: #0288D1;
+    font-size: 12px;
+    padding: 7px;
+    border-radius: 5px;
+    cursor: pointer;
+}

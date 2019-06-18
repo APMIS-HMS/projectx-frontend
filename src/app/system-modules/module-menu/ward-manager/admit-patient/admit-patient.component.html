@@ -1,0 +1,88 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Admit Patient</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="survery">
+            <div class="row" *ngIf="!loadContent">
+                <div class="col-xs-12 no-padding">
+                    <form [formGroup]="admitFormGroup" novalidate>
+                        <div class="frm-item-wrap">
+                            <mat-form-field>
+                                <mat-select placeholder="Select Ward" formControlName="ward">
+                                    <mat-option *ngFor="let ward of wards" [value]="ward._id">{{ward.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="frm-item-wrap">
+                            <mat-form-field>
+                                <mat-select placeholder="Select Room" formControlName="room">
+                                    <mat-option disabled selected>Select Room</mat-option>
+                                    <mat-option *ngFor="let room of rooms" [value]="room">{{room.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="frm-item-wrap">
+                            <mat-form-field>
+                                <mat-select placeholder="Select Bed" formControlName="bed">
+                                    <mat-option [disabled]="!bed.isAvailable" *ngFor="let bed of beds" [value]="bed">
+                                        {{bed.name}}
+                                        <small *ngIf="bed.isAvailable" class="text-green"><i class="fa fa-check-circle"></i></small>
+                                        <small *ngIf="!bed.isAvailable" class="text-red"><i class="fa fa-times-circle"></i></small>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="frm-item-wrap">
+                            <mat-input-container class="example-full-width">
+                                <textarea matInput formControlName="desc" placeholder="Description"></textarea>
+                            </mat-input-container>
+                            <!--<small class="alert-label" [hidden]="admitFormGroup.controls.desc.valid || admitFormGroup.controls.desc.pristine">
+                                this is a required field (minimum 3 and max of 20 characters).
+                            </small>
+                            <i class="fa fa-building-o" aria-hidden="true"></i>
+                            <textarea class="edit-control lhs modal-textarea" formControlName="desc" placeholder="Description" autocomplete="off" style="width:90%; height:120px;"></textarea>-->
+                        </div>
+                        <div class="btn-box">
+                            <button mat-raised-button [disabled]="!admitFormGroup.valid || disableAdmitBtn" (click)="onAdmit(admitFormGroup.value, admitFormGroup.valid);" class="btn">
+                              <span *ngIf="admitBtn"><i class="fa fa-plus"></i> Admit Patient</span>
+                              <span *ngIf="admittingBtn">Admitting Patient... <i class="fa fa-spin fa-spinner"></i></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- <div class="container-right" *ngIf="loadAvailableBeds && beds.length === 0">
+                    <div class="col-xs-12">
+                        <div class="spinner-box">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="container-right" *ngIf="loadAvailableBeds && beds.length === 0">
+                        <div class="col-xs-12">
+                            <div class="spinner-box">
+                                <mat-spinner class="small-spinner"></mat-spinner>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-right" *ngIf="!loadAvailableBeds && beds.length === 0">
+                        <div class="col-xs-12">
+                            <div class="spinner-box">
+                                <span>No bed has been created for the selected ward or Room</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="row" *ngIf="loadContent">
+            <div class="col-xs-12">
+                <div class="spinner-box">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

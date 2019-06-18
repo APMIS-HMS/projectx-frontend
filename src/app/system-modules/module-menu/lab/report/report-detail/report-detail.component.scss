@@ -1,0 +1,72 @@
+@import '../../lab-requests/request-detail/request-detail.component.scss';
+@import '../report.component.scss';
+.invstn-wrap {
+    margin-bottom: 10px;
+}
+
+.modal-baseWrap {
+    min-width: 1000px;
+}
+
+.act-right-actions {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.act-right-actions .action-item {
+    padding: 4px 0;
+    margin: 10px 0px;
+    border: 0px solid transparent;
+    background: #f8f8f8;
+}
+
+.act-right-actions .action-item:hover {
+    background: #f8f8f8;
+}
+
+.initial-contenet {
+    background: transparent;
+    padding: 0;
+}
+
+.printt {
+    cursor: pointer;
+    font-weight: 1.6rem;
+    color: white;
+    margin-top: 394px;
+    margin-left: 16px;
+    font-size: 3.5rem;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 14px;
+    padding-left: 14px;
+    background: #337ab7;
+    border-radius: 10px;
+    font-family: "Montserrat";
+}
+
+button:hover {
+    color: #0288D1;
+    background: #eee;
+}
+
+//@media screen {
+//  .plint {
+//     display: inline-block;
+// }
+//@media print {
+// .section {
+// display: block;
+// }
+//.patient,
+//.info {
+// width: 100%;
+//}
+//img {
+//  display: none;
+//}
+//h2 {
+// font-weight: unset;
+//}
+//}

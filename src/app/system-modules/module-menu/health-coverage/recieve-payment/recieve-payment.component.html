@@ -1,0 +1,150 @@
+<div>
+    <div class="doc-mainWrap">
+        <div class="doc-contentArea">
+            <div class="clinicalNoteWrap">
+                <div class="actSect">
+                    <div class="actSect-header">
+                        <div (click)="recieve_show()" class="act-wrap">
+                            <i *ngIf="recieve" class="fa fa-minus" aria-hidden="true"></i>
+                            <i [hidden]="recieve" class="fa fa-plus" aria-hidden="true"></i>
+                            <span>Recieve Payment</span>
+                        </div>
+                    </div>
+
+                    <form class="frmNoteWrap" *ngIf="recieve" [formGroup]="frmRecieve" novalidate>
+                        <div class="frm-title">Recieve Payment</div>
+
+                        <div class="frm-x2">
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Payment Mode" formControlName="paytype">
+                                        <mat-option>Wallet</mat-option>
+                                        <mat-option>Paystack</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-input-container>
+                                    <input type="number" matInput placeholder="Amount(&#x20a6;)" formControlName="amount">
+                                </mat-input-container>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Payment For" formControlName="payfor">
+                                        <mat-option>Insurance</mat-option>
+                                        <mat-option>Company Cover</mat-option>
+                                        <mat-option>Family Cover</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-input-container>
+                                    <input matInput placeholder="Invoice No." formControlName="invoiceNo">
+                                </mat-input-container>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-input-container>
+                                    <input matInput placeholder="Comment" formControlName="comment">
+                                </mat-input-container>
+                            </div>
+                        </div>
+
+
+                    </form>
+                    <button *ngIf="recieve" (click)="save(frmRecieve.valid, frmRecieve.value)" class="cta-1">Recieve Payment</button>
+                </div>
+
+                <div class="tblWrapa" class="actSect">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                    <span style="padding-left: 3px;">Date</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                    <span style="padding-left: 3px;">Payment Mode</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                    <span style="padding-left: 3px;">Amount</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                    <span style="padding-left: 3px;">Recieved For</span>
+                                </th>
+                                <th>Invoice No.</th>
+                                <th>Comment</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td colspan="10">
+                                    <div class="tbl-actionRow">
+                                        <!-- <div class="frm-item-wrap">
+                          <apmis-lookup [(ngModel)]="apmisLookupText" 
+                          url="apmisLookupUrl" query="apmisLookupQuery" placeholder="Patient"
+                          isSocket="false" displayKey="apmisLookupDisplayKey" 
+                          (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                        </div>
+
+                        <div class="frm-item-wrap">
+                          <apmis-lookup [(ngModel)]="apmisLookupText" 
+                              url="apmisLookupUrl" query="apmisLookupQuery" placeholder="Practitioner"
+                              isSocket="false" displayKey="apmisLookupDisplayKey" 
+                              (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                        </div>
+
+                        <div class="frm-item-wrap">
+                          <apmis-lookup [(ngModel)]="apmisLookupText" 
+                              url="apmisLookupUrl" query="apmisLookupQuery" placeholder="Location"
+                              isSocket="false" displayKey="apmisLookupDisplayKey" 
+                              (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                        </div> -->
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td (click)="show_beneficiaries()">11th Oct, 2016.</td>
+                                <td>Paystack</td>
+                                <td>&#x20a6; 25,000</td>
+                                <td>Family Cover</td>
+                                <td>AC2001</td>
+                                <td>blah blah blah</td>
+                                <td class="action-placeholder" style="text-align:center;">
+                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                    <div class="action-container shadow-RB">
+                                        <form>
+                                            <div (click)="showImageBrowseDlg()" class="action-item">
+                                                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                                <span>Upload Beneficiary List</span>
+                                                <input accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="display:none;" #fileInput type="file" id="uploadResult" (change)="upload($event)">
+                                            </div>
+                                        </form>
+                                        <div class="action-item">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            <span>Update HMO</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

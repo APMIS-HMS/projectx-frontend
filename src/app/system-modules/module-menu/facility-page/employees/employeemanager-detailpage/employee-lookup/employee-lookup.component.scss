@@ -1,0 +1,33 @@
+@import "../empmanager-detailpage.component.scss";
+
+.empLookup_status{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 1rem;
+}
+.empLookup_active{
+    color: #43A047;
+}
+.empLookup_inactive{
+    color: #ff2500;
+}
+.empLookup_name{
+    color: #0D47A1;
+    font-size: 1.6rem;
+}
+.empLookup_apmisid{
+    font-family: $font-main;
+    color: #ff2500;
+    font-size: 1rem;
+}
+.empLookup_email{
+    font-family: $font-main;
+    color: #757575;
+    font-size: 1rem;
+    text-decoration: underline;
+}
+.empLookup-sec{
+    position: relative;
+    width: 100%;
+}

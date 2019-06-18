@@ -1,0 +1,31 @@
+<div class="modal-baseWrap">
+    <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+    <div class="f_sg1">
+
+        <form [formGroup]="facilityForm1" novalidate>
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Apmis ID" formControlName="apmisId">
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Security Questions" formControlName="securityQuestion">
+                        <mat-option *ngFor="let item of securityQuestions" [value]="item.name">{{item.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Security Question's Answer" formControlName="securityAnswer">
+                </mat-input-container>
+            </div>
+
+            <button [disabled]="!facilityForm1.valid" (click)="facilityInfo_show(facilityForm1.value)" [ngClass]="{'cta-1':facilityForm1.valid, 'cta-1-disable':!facilityForm1.valid}">
+                CONTINUE
+            </button>
+        </form>
+    </div>
+</div>
+
+  

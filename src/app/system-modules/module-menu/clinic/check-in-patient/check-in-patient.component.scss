@@ -1,0 +1,312 @@
+.page-title {
+    text-align: center;
+    position: relative;
+    top: -20px;
+    font-size: 1.2rem;
+    width: 100%;
+    color: #A6ACAF;
+}
+
+.empWrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+}
+
+.loc-timeSpent {
+    font-size: 1rem;
+    color: #ff2500;
+}
+
+span.timeLabel {
+    color: #A6ACAF;
+    font-size: 1rem;
+    padding-right: 5px;
+    font-style: italic;
+}
+
+div.timeLabel {
+    border-top: solid 2px #aaa;
+    padding-top: 10px;
+}
+
+.actionWrap {
+    border: 1px solid #ddd;
+    padding: 2px 5px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.actionWrap:hover {
+    background: #ddd;
+}
+
+.caregiver-room {
+    color: #A6ACAF;
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.tbl-actionRow {
+    justify-content: space-around;
+    padding: 20px 0;
+}
+
+.tbl-actionRow .tbl-title {
+    position: relative;
+    left: auto;
+}
+
+.tbl-actionRow .tbl-search {
+    position: relative;
+    right: auto;
+}
+
+.dx-field-value:not(.dx-switch):not(.dx-checkbox):not(.dx-button),
+.dx-field-value-static {
+    width: 100%;
+}
+
+.searchInput {
+    width: 100%;
+    border-radius: 3px;
+    padding: 9px;
+    background-color: none;
+}
+
+.inPatient-activityTimeline {
+    position: fixed;
+    top: 0;
+    right: 0;
+    font-size: 1.2rem;
+    background: #fff;
+    width: 350px;
+    z-index: 10000;
+    height: 100vh;
+    overflow-y: scroll;
+    // border-radius: 28px;
+    padding: 30px 10px;
+    border: 2px solid #eee;
+}
+
+.activity-listings {
+    margin-top: 40px;
+}
+
+.activity-listing {
+    border-right: 2px solid #0288D1;
+    position: relative;
+    margin: 20px;
+    text-align: right;
+    padding: 10px;
+}
+
+.activity-listing i {
+    position: absolute;
+    top: -15px;
+    right: -6px;
+    color: #0288D1;
+    font-weight: bold;
+}
+
+.activity-time {
+    display: flex;
+    position: absolute;
+    top: -15px;
+    right: 11px;
+    color: #0288D1;
+    text-decoration: underline;
+}
+
+.activity-time .date {
+    margin-right: 10px;
+}
+
+.activity-content .activity {
+    color: #7B7D7D;
+}
+
+.activity-detail div {
+    margin-top: 10px;
+}
+
+.activity-actor {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.activity-actor:hover {
+    color: #0288D1;
+    text-decoration: underline;
+}
+
+.actor-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.activity-actor img {
+    width: 30px;
+}
+
+
+.timelinePatient-imgWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 100%;
+    border: 10px solid #eee;
+    background: #eee;
+}
+
+.list-img {
+    width: 20px;
+    height: 20px;
+    img {
+        width: 100%;
+    }
+}
+
+.timelinePatient-imgWrap img {
+    width: 20px;
+    height: 20px;
+}
+
+.timeline-headwrap {
+    position: relative;
+    width: 100%;
+    background: #eee;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+    color: #7B7D7D;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.timelinehead-contentWrap {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+}
+
+.patientLabelGroup {
+    text-align: center;
+}
+
+.patientLabelGroup .label {
+    color: #B3B6B7;
+    font-size: 1rem;
+}
+
+.modal-overlay {
+    position: fixed;
+    left: 0;
+}
+
+.table-content {
+    padding: 10px;
+}
+
+.card {
+    position: relative;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+    margin-top: 20px;
+    .card-header {
+        background: #337ab7;
+        color: #fff;
+        font-size: 1.2rem;
+        padding: 10px;
+        vertical-align: middle;
+        line-height: 30px;
+        border-bottom: solid 1px #fff;
+        font-weight: 600;
+        .table-head {
+            border-right: solid 1px #fff;
+            text-align: center;
+        }
+        .table-head:last-of-type {
+            border: none;
+        }
+    }
+    .card-content {
+        font-size: 1.2px;
+        .table-list {
+            // border-right: solid 1px #aaa;
+            text-align: center;
+        }
+    }
+    .card-header-box {
+        background: rgba(255, 255, 255, 0.16);
+        color: #fff;
+        border: none;
+        font-size: 1.2rem !important;
+        padding: 10px !important;
+        width: 100%;
+        height: 30px !important;
+        box-sizing: border-box;
+    }
+    .card-list-item {
+        padding: 10px;
+        border-bottom: solid rgb(204, 204, 204) 1px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        font-size: 1.2rem;
+        transition: 0.2s;
+    }
+    .options {
+        font-size: 1.2rem;
+        opacity: 0;
+        cursor: pointer;
+    }
+    .summary-title {
+        display: block;
+        padding: 10px;
+        padding-top: 20px;
+        font-size: 3rem;
+        color: #b3b3b3;
+        margin-bottom: 10px;
+        font-weight: 100;
+    }
+}
+
+.tooltip {
+    &:after {
+        font-family: Arial, Helvetica, sans-serif;
+        opacity: 0;
+        transition: all 0.4s;
+        font-size: 1.2rem !important;
+        // margin-left: -120px;
+        margin-top: 40px;
+        display: block;
+        padding: 10px;
+        content: attr(title);
+        background: rgba(0, 0, 0, 0.74);
+        border-radius: 5px;
+        color: #fff;
+        min-width: 65px;
+        text-align: left;
+        position: absolute;
+        max-width: 200px;
+    }
+    &:hover {
+        &:after {
+            opacity: 1;
+            // margin-left: -100px;
+        }
+    }
+}

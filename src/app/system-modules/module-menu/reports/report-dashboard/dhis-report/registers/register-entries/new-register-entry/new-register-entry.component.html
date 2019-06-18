@@ -1,0 +1,57 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">New Entry</legend>
+        <div class="modal_mini_title">Continental Hospital</div>
+    </div>
+    <div class="modal-baseWrap">
+      <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+  
+      <form class="frm-down" [formGroup]="frm_UpdateCourse" novalidate>
+        <div class="form-group">
+          <label for="session">Register</label>
+          <select formControlName="register">
+            <option>TETANUS TOXOID REGISTER FOR WOMEN OF CHILD BEARING AGE</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="session">Patient</label>
+          <select formControlName="patient">
+            <option>Sam Dede</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="semester">TT</label>
+          <select formControlName="tt">
+            <option>TT1</option>
+            <option>TT2</option>
+            <option>TT3</option>
+            <option>TT4</option>
+            <option>TT5</option>
+          </select>
+        </div>
+        <div class="pretty p-default">
+            <input type="checkbox" />
+            <div class="state">
+                <label>N</label>
+            </div>
+        </div>
+        <div class="pretty p-default">
+            <input type="checkbox" />
+            <div class="state">
+                <label>NP</label>
+            </div>
+        </div>
+        <div class="form-group" style="margin-top: 20px;">
+          <label for="session">Comment</label>
+          <textarea rmControlName="comment">
+          </textarea>
+        </div>
+      
+        <div class="btn-wrap-x2">
+          <button type="submit" (click)="view()" class="btn btn-primary">Done <i class="fa fa-check"></i></button>
+          <button (click)="view()" class="btn btn-danger">Cancel <i class="fa fa-times"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>

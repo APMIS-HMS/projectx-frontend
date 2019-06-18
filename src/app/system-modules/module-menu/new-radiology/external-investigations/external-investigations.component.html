@@ -1,0 +1,143 @@
+<div class="pg-subtitle">
+    EXTERNAL REQUESTS
+</div>
+<div>
+    <section id="presc-list">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-xs-1 table-head">No</div>
+                    <div class="col-xs-2 table-head">Date</div>
+                    <div class="col-xs-4 table-head">Patient</div>
+                    <div class="table-head col-xs-4">Doctor</div>
+                    <!-- <div class="table-head col-xs-2">Status</div> -->
+                    <div class="table-head col-xs-1">
+                        <i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i>
+                    </div>
+                </div>
+                <div class="row" *ngIf="searchOpen">
+                    <div class="col-md-4">
+                        <input [formControl]="patientSearch" class="table-header-input" type="text" placeholder="Search for Patient">
+                    </div>
+                    <div class="col-md-4">
+                        <!-- <select class="table-header-select" formControlName="category" placeholder="Select Category" (change)="onChangeCategory($event);">
+                                        <option value="" selected>Select Category</option>
+                                        <option value="individual">Individual</option>
+                                        <option value="corporate">Corporate</option>
+                                        <option value="internal">Internal</option>
+                                    </select> -->
+                    </div>
+                    <div class="col-md-3">
+                        <!-- <input class="table-header-input" type="date" placeholder="Choose a date"> -->
+                    </div>
+                    <div class="col-md-1 table-head">
+                        <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-list-item" *ngIf="extRequests.length === 0 && !loading">
+                    <div class="col-xs-12" style="text-align:center">
+                        No data available in table
+                    </div>
+                </div>
+                <div class="card-list-item" *ngIf="extRequests.length === 0 && loading">
+                    <div class="col-xs-12" style="text-align:center">
+                        <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="card-list-item" *ngFor="let extRequest of extRequests; let i=index;">
+                    <div class="row">
+                        <div class="table-list col-xs-1"> {{i+1}} </div>
+                        <div class="table-list col-xs-2"> {{extRequest?.updatedAt | date:'medium'}} </div>
+                        <div class="table-list col-xs-4"> {{extRequest?.name }}</div>
+                        <div class="table-list col-xs-4"> {{extRequest?.createdBy}}</div>
+                        <!-- <div class="table-list col-xs-2">
+                            <span *ngIf="extRequest.status == 'completely'" style="color:forestgreen">Completely<br>Assessed</span>
+                            <span *ngIf="extRequest.status == 'partly'" style="color:blue">Partly<br>Assessed</span>
+                            <span *ngIf="extRequest.status == 'not'" style="color:crimson">Not<br>Assessed</span>
+                        </div> -->
+                        <div class="table-list col-xs-1 action-placeholder">
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                            <div class="action-container shadow-RB">
+                                <div (click)="attendToInvestigation(extRequest)" class="action-item">
+                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                    <span>Attend Investigation</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div *ngIf="showBilling">
+        <div class="survery">
+            <div class="">
+                <div class="inPatient-activityTimeline shadow-RB animated slideInRight">
+                    <div (click)="onClickClose($event);" class="hide-actionWrap">
+                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </div>
+                    <div class="purchasedetails">
+                        <div class="container-width">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-xs-12">
+                                    <h5>Patient Name: {{ selectedInvestigation?.name }}</h5>
+                                    <h6>Generate Bill for {{ selectedInvestigation?.investigation?.name }}</h6>
+                                    <div class="border-box" *ngIf="investigations.length > 0 && !billLoading">
+                                        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12 invest-header">List of Locations that does {{ selectedInvestigation?.investigation?.name }} investigation.</div>
+                                            <div class="col-sm-12 col-md-12">
+                                                <div *ngFor="let investigation of investigations" class="list-item investigation">
+                                                    <div class="txt-innerWrap">
+                                                        <!-- <div class="chkbox-wrap">
+                                                    <mat-checkbox (change)="investigationChanged($event, investigation)" [checked]="checked"></mat-checkbox>
+                                                    <div class="list-label">{{investigation.investigation.name}}</div>
+                                                </div> -->
+
+                                                        <div class="inner-radio">
+                                                            <!-- <mat-checkbox (change)="markExternal($event, investigation)" [checked]="investigation.isExternal">External</mat-checkbox> -->
+                                                            <mat-radio-group [value]="location" *ngIf="!investigation.isExternal">
+                                                                <mat-radio-button class="opt" *ngFor="let location of investigation.LaboratoryWorkbenches" (change)="locationChanged($event, investigation, location, investigation.LaboratoryWorkbenches)" [value]="location" [checked]="false">
+                                                                    <div class="opt-inner">
+                                                                        <div>{{location.laboratoryId.name}}</div>
+                                                                        <div class="opt-price">
+                                                                            <span>&#x20a6;</span>{{getPrice(location.workbenches)}}</div>
+                                                                    </div>
+                                                                </mat-radio-button>
+                                                            </mat-radio-group>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12" style="padding:20px;">
+                                                <div class="col-xs-6 no-padding">
+                                                    <button mat-raised-button [disabled]="" (click)="onClickSaveCost();" class="btn btn-default">Save</button>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <button mat-raised-button (click)="onClickClose($event);" class="btn btn-default">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border-box" *ngIf="investigations.length === 0 && !loading">
+                                        <div class="prodBatch-item batchItem1" style="text-align: center; width: 100%;">No investigation to bill from,
+                                            <br> Please add price to the investigation.</div>
+                                    </div>
+                                    <div class="border-box" *ngIf="investigations.length === 0 && loading">
+                                        <div class="prodBatch-item batchItem1" style="text-align: center; width: 100%;">
+                                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,61 @@
+@import "../employees/empmanager-homepage/empmanager-homepage.component.scss";
+
+.btn-1{
+    width: 70px;
+    text-align: center;
+}
+.top-tab-search {
+    border: 1px solid #9e9e9e;
+    padding: 5px;
+    font-size: 1.4rem;
+}
+.fullwidth-topActions{
+    margin-bottom: 10px;
+}
+.fullwidth-topActions .btn-1{
+    width: auto;
+}
+.tbl-headTab .tbl-item{
+    text-align: center;
+}
+.tbl-item{
+    width: 16.7%;
+    text-align: center;
+}
+.tbl-item .edit-ico{
+    right: 10px;
+}
+.inner-menu1-wrap{
+    top: inherit;
+}
+.innerMenu-ul li i{
+    padding-right: 10px;
+}
+.emp-nameRow{
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+.empImageWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+.empImageWrap img{
+    width: 100%;
+}
+.emp-nameRow:hover{
+    text-decoration: underline;
+}
+.tbl-row:hover{
+    cursor: default;
+}
+.search-results{
+    height: 20rem;
+    overflow: scroll;
+ }

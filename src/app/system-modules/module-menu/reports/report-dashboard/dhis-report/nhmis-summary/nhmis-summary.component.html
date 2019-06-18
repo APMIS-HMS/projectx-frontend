@@ -1,0 +1,144 @@
+<div #contentToConvert class="pp-card shadow-grey" id="contentToConvert">
+    <div class="facility-wrap">
+        <div class="facility-img">
+            <img src="../../../../../assets/images/logos/default.png">
+        </div>
+        <div class="lattering-wrap">
+            <div class="facility-name">Continental Hospital</div>
+            <div class="facility-others">No. 22B Falausi Street Mushin, Lagos State.</div>
+            <div class="facility-others">08099009988</div>
+        </div>
+    </div>
+    <div class="date-generated">11th July, 2018. 2:02:54 PM</div>
+    <div class="card-title">
+        <div>NHMIS Summary (March 2018)</div>
+        <div class="top-btns">
+            <div class="top-btn"><i class="fa fa-upload"></i> Send Summary</div>
+            <div (click)="generatePdf()" class="top-btn"><i class="fa fa-file-pdf"></i> Generate PDF</div>
+        </div>
+    </div>
+    <div class="filters">
+        <div class="filter">
+            <label class="filter-label">Month</label>
+            <select>
+                <option>January</option>
+                <option>February</option>
+            </select>
+        </div>
+        <div class="filter">
+            <label class="filter-label">Year</label>
+            <select>
+                <option>2018</option>
+                <option>2017</option>
+            </select> 
+        </div>
+    </div>
+
+    <div class="content-wrap">
+        <div class="tbl-wrap">
+            <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+                <tbody>
+                    <div class="chunk">
+                        <div class="tbl-title">Maternal Health (Ante & Post natal Care)</div>
+                        
+                    </div>
+                    
+                    <tr>
+                        <td>Antenatal total attendance</td>
+                        <td>1200</td>
+                    </tr>
+                    <tr>
+                        <td>Antenatal 1st (booking) visit before 20 weeks</td>
+                        <td>2500</td>
+                    </tr>
+                    <tr>
+                        <td>Antenatal 1st (booking) visit 20 weeks or later </td>
+                        <td>2100</td>
+                    </tr>
+                    <tr>
+                        <td>Pregnant women that attended antenatal clinic for 4th visit during the month </td>
+                        <td>1700</td>
+                    </tr>
+                    <tr>
+                        <td>ANC syphilis test done </td>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <td>ANC syphilis test positive </td>
+                        <td>60</td>
+                    </tr>
+                    <tr>
+                        <td>ANC Syphilis case treated  </td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>Pregnant women who received malaria IPT1  </td>
+                        <td>860</td>
+                    </tr>
+                    <tr>
+                        <td>Pregnant women who received malaria IPT2  </td>
+                        <td>660</td>
+                    </tr>
+                    <tr>
+                        <td>Pregnant women receiving LLIN  </td>
+                        <td>260</td>
+                    </tr>
+                </tbody>
+
+                <tbody>
+                    <div class="tbl-title">Maternal Health(Labour and Delivery)</div>
+                    <tr>
+                        <td>Deliveries - SVD (Spontaneous Vaginal Delivery)</td>
+                        <td>1100</td>
+                    </tr>
+                    <tr>
+                        <td>Deliveries - Assisted </td>
+                        <td>870</td>
+                    </tr>
+                    <tr>
+                        <td>Deliveries - Caesarian Section  </td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>Deliveries - Complications  </td>
+                        <td>900</td>
+                    </tr>
+                    <tr>
+                        <td>Preterm deliveries  </td>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <td>Deliveries - HIV positive women  </td>
+                        <td>60</td>
+                    </tr>
+                    <tr>
+                        <td>Live birth by HIV positive women  </td>
+                        <td>45</td>
+                    </tr>
+                    <tr>
+                        <td>Deliveries - HIV positive women(Booked)  </td>
+                        <td>860</td>
+                    </tr>
+                    <tr>
+                        <td>Deliveries - HIV positive women(Unbooked)  </td>
+                        <td>660</td>
+                    </tr>
+                    <tr>
+                        <td>Deliveries monitored with partograph </td>
+                        <td>260</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <ul class="pagination">
+            <li class="pg-nav"><i class="fa fa-angle-left"></i> </li>
+            <li>23</li>
+            <li>24</li>
+            <li class="pg-active">25</li>
+            <li>26</li>
+            <li>27</li>
+            <li class="pg-nav"><i class="fa fa-angle-right"></i> </li>
+        </ul>
+    </div>
+</div>

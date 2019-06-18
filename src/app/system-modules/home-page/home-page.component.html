@@ -1,0 +1,135 @@
+<div class="portal-wrap">
+
+    <div class="content-sect">
+
+        <div class="side-sect">
+            <div class="pp-card shadow-grey">
+
+                <i (click)="basicDataUpdate_show()" class="fa fa-pencil-square-o card-edit" aria-hidden="true"></i>
+
+                <div class="card-seperator">
+                    <div class="patient-img-wrap">
+                        <img src="../../../../assets/images/users/default.png">
+                    </div>
+
+                    <div class="basic-info-wrap">
+                        <div class="basic-info-name">{{this.selectedPerson?.title}} {{this.selectedPerson?.lastName}} {{this.selectedPerson?.firstName}}</div>
+                        <div class="basic-info-others"><i class="fa fa-envelope-o" aria-hidden="true"></i>{{this.selectedPerson?.email}}</div>
+                        <div class="basic-info-others"><i class="fa fa-phone" aria-hidden="true"></i>{{this.selectedPerson?.primaryContactPhoneNo}}</div>
+                        <div class="basic-info-others">{{this.selectedPerson?.apmisId}}</div>
+                    </div>
+
+                    <div (click)="basicData_show()" class="profile-cta">My Profile</div>
+                </div>
+            </div>
+
+            <!-- <div class="pp-card shadow-grey">
+        <div class="card-title">Health Insurance</div>
+        <ul class="feed-ul">
+          <li class="feed-li">
+            <div class="fac-wrap">
+              <div class="fac-notfc">3</div>
+              <div class="fac-img-wrap">
+                <img src="../../../assets/images/logos/default.png">
+              </div>
+              <div class="fac-data">
+                <div class="fac-name">Asa Mansard</div>
+                <div class="fac-others">
+                  <div>Continental Hospital</div>
+                  <div>Premium Cover</div>
+                  <div>Principal</div>
+                  <div>4 Dependants</div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="feed-li">
+            <div class="fac-wrap">
+              <div class="fac-img-wrap">
+                <img src="../../../assets/images/logos/default.png">
+              </div>
+              <div class="fac-data">
+                <div class="fac-name">Lagoon Hospital</div>
+                <div class="fac-others">
+                  <div>Department</div>
+                  <div>Unit</div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="feed-li">
+            <div class="fac-wrap">
+              <div class="fac-notfc">10</div>  
+              <div class="fac-img-wrap">
+                <img src="../../../assets/images/logos/default.png">
+              </div>
+              <div class="fac-data">
+                <div class="fac-name">Lagos State University Teaching Hospital</div>
+                <div class="fac-others">
+                  <div>Department</div>
+                  <div>Unit</div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>  -->
+
+            <div class="pp-card card-long shadow-grey">
+                <div class="card-title">Notifications</div>
+                <ul class="feed-ul">
+                    <li class="feed-li">
+                        You were scheduled for a blood count test on the 16th dec, 2017, 9:00am at Clinix Diagnostics
+                        <div class="feed-time">16th Dec, 2017. 08:00am</div>
+                    </li>
+                    <li class="feed-li">
+                        &#8358;1500 was debited from your wallet for your blood count test at Clinix Diagnostics
+                        <div class="feed-time">16th Dec, 2017. 08:01am</div>
+                    </li>
+                    <li class="feed-li">
+                        Your blood count test results from Clinix Diagnostics is available
+                        <div class="feed-time">16th Dec, 2017. 08:00am</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mid-sect">
+            <div class="tabs">
+                <div (click)="tab1_click()" class="pg-tab" [class.pg-tab-active]="tab1">Work Space</div>
+                <div (click)="tab2_click()" class="pg-tab" [class.pg-tab-active]="tab2">Healthcare Space</div>
+            </div>
+
+            <div class="pg-inwrap">
+                <div *ngIf="tab1">
+                    <app-person-landing [selectedPerson]="selectedPerson" [listOfEmployees]="listOfEmployees" [listOfFacilities]="listOfFacilities"></app-person-landing>
+                </div>
+                <div *ngIf="tab2">
+                    <!-- <div class="pgMenu-wrapa">
+            <i (click)="pgMenu_click()" class="fa fa-chevron-down pgMenu-ico" aria-hidden="true"></i>
+            <ul *ngIf="pgMenuToggle"  class="pg-menuWrap-mobile">
+              <li (click)="changeRoute('home')" [class.pg-menuActive]="homeContentArea">
+                  <i class="fa fa-home" aria-hidden="true"></i> Home</li>
+              <li (click)="changeRoute('medical-records')" [class.pg-menuActive]="docsContentArea">
+                  <i class="fa fa-folder-open" aria-hidden="true"></i> Medical Records</li>
+              <li (click)="changeRoute('prescription')" [class.pg-menuActive]="prescriptionContentArea">
+                  <i class="fa fa-plus-square" aria-hidden="true"></i> Prescription</li>
+              <li (click)="changeRoute('consultation')" [class.pg-menuActive]="consultationContentArea">
+                  <i class="fa fa-user-md" aria-hidden="true"></i> Consultation</li>
+              <li (click)="changeRoute('payment')" [class.pg-menuActive]="paymentContentArea">
+                  <i class="fa fa-credit-card" aria-hidden="true"></i> Payment</li>
+            </ul>
+          </div> -->
+                    <app-med-records></app-med-records>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="basicData_popup" class="modal-overlay">
+    <app-biodata-popup [selectedPerson]="selectedPerson" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-biodata-popup>
+</div>
+<div *ngIf="basicData_update" class="modal-overlay">
+    <app-biodata-update (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-biodata-update>
+</div>

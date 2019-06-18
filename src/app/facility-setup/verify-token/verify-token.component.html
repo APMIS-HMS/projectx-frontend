@@ -1,0 +1,34 @@
+<!-- <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div> -->
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Verify Token</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <form [formGroup]="frm_numberVerifier" *ngIf="verify_show" novalidate>
+
+            <div class="frm-singleItem-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Supply Token" formControlName="txt_numberVerifier" [(ngModel)]="InputedToken">
+                </mat-input-container>
+            </div>
+
+            <div class="noToken_wrap">
+                <div class="noToken_txt1">...Didn't recieve a token on <span>{{input_facilityphonNo}}</span>?</div>
+                <div (click)="resendToken()" class="noToken_txt2">Resend Token</div>
+            </div>
+
+            <div (click)="back_verifier()" class="backBtn" *ngIf="backBtnVisible"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>Go Back</div>
+
+            <div (click)="numberVerifier(frm_numberVerifier.valid)" class="cta-1">
+                VERIFY
+            </div>
+
+        </form>
+    </div>
+</div>
+<app-contact-info *ngIf="back_verify_show" (closeModal)="close_onClick($event)" [inputFacility]="inputFacility"></app-contact-info>
+<app-add-facility-module *ngIf="sg3_show" (closeModal)="close_onClick($event)" class="f_sg3 animated zoomIn" [inputFacility]="inputFacility"></app-add-facility-module>

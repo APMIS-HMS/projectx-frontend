@@ -1,0 +1,158 @@
+<div class="pp-card shadow-grey">
+  <div class="card-title">
+      <div>DAILY GMP Register</div>
+      <!-- <div class="top-btns">
+          <div (click)="back_registers()" class="top-btn"><i class="fa fa-arrow-left"></i> Registers</div>
+      </div> -->
+  </div>
+  <div class="content-wrap">
+
+    <div class="tbl-resp-wrap">
+      <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+          <thead>
+            <tr>
+              <th colspan="30">
+                <div class="th1-wrap">
+                  <div class="filters">
+                    <div class="filter">
+                        <input class="search" placeholder="search for patient...">
+                    </div>
+                  </div>
+                  <div class="tp-rhs">
+                    <div class="dr-wrap survery">
+                        <app-date-range [dateRange]="dateRange" (dateRangeChange)="setReturnValue($event)"></app-date-range> <span *ngIf="loadIndicatorVisible" class="fa fa-spinner fa-spin"></span>
+                    </div>
+                    <div (click)="newEntry()" class="th1-cta"><i class="fa fa-plus"></i> </div>
+                  </div>
+                </div>
+              </th>
+            </tr>
+            <tr class="th-r1 th-xxx">
+              <th colspan="7"></th>
+              <th colspan="2">Type of Visit</th>
+              <th colspan="3">Breast Feeding</th>
+              <th colspan="3"></th>
+              <th colspan="2">Nutritional Status</th>
+              <th colspan="2">Vitamin A</th>
+              <th colspan="2"></th>
+              <th colspan="21">**Severe Acute Malnutrition(SAM)</th>
+            </tr>
+            <tr class="th-r2 th-xxx">
+              <th colspan="21"></th>
+              <th colspan="3">Eligible for SAM Treatment </th>
+              <th colspan="4">Outcome of Treatment </th>
+            </tr>
+            <tr class="th-r3 th-xxx">
+              <th>S/N</th>
+              <th>Date</th>
+              <th>Name of Client</th>
+              <th>Sex</th>
+              <th>Client Number</th>
+              <th>Date of Birth</th>
+              <th>Age in Month</th>
+              <th>N</th>
+              <th>R</th>
+              <th><div class="vertical-text txtWrap">Exclusive BF (tick for children under 6
+                months)</div></th>
+              <th><div class="vertical-text">BF + Water</div></th>
+              <th><div class="vertical-text">Partial B/F</div></th>
+              <th>
+                <div class="vertical-text txtWrap">Stopped B/F (Indicate age if YES)</div>
+              </th>
+              <th>Height (cm)</th>
+              <th>Weight (kg)</th>
+              <th><div class="vertical-text">(Above the Line )</div></th>
+              <th><div class="vertical-text">(Below the Line )</div></th>
+              <th><div class="vertical-text">6-11 Months</div></th>
+              <th>
+                <div class="vertical-text">12 - 59 Months</div>
+              </th>
+              <th>
+                  <div class="vertical-text txtWrap">Children receive Deworming tablet (12 - 59) months (Yes = given No= Not given)</div>
+              <th>
+                  <div class="vertical-text txtWrap">Child referred / admitted into CMAM programme? (Yes = Admitted No=Not Admitted )</div>
+              </th>
+              <th>
+                  <div class="vertical-text txtWrap">Admitted in HF (OTP)</div>
+              </th>
+              <th>
+                  <div class="vertical-text txtWrap">Refered to other HF (SC) </div>
+              </th>
+              <th>
+                  <div class="vertical-text txtWrap">Not Eligible</div>
+              </th>
+              <th>
+                  <div class="vertical-text">Re</div>
+              </th>    
+              <th>
+                  <div class="vertical-text">Df</div>
+              </th> 
+              <th>
+                  <div class="vertical-text">Dth</div>
+              </th> 
+              <th>
+                  <div class="vertical-text">Nr</div>
+              </th>          
+              <!-- <th colspan="4">Comment</th> -->
+            </tr>
+          </thead>
+
+          <tbody>
+              <tr>
+                <td>1</td>
+                <td>11th Oct 2018</td>
+                <td>
+                  <div class="empWrap">
+                      <div class="list-img">
+                          <img src="assets/images/users/default.png">
+                      </div>
+                      <div>Sam Dede</div>
+                  </div>
+                </td>
+                <td>M</td>
+                <td>08142214995</td>
+                <td>11th Oct 1990</td>
+                <td>336</td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td>
+                    <div class="empWrap">
+                        <i class="fa fa-check green"></i>
+                        <div>16 Months</div>
+                    </div>
+                </td>               
+                <td>10cm </td>
+                <td>40kg </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td>Yes </td>
+                <td>
+                    <div class="empWrap">
+                        <i class="fa fa-times red"></i>
+                        <div>Not Admitted </div>
+                    </div>
+                </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+              </tr>
+            
+           
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showNewEntry" class="modal-overlay">
+    <app-new-gmp-entry (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-gmp-entry>
+</div>

@@ -1,0 +1,47 @@
+<div class="home-main">
+	<ul class="hm-tabs">
+		<li (click)="tab_click('store')" [class.hm-tab-active]='tab_store' class="hm-tab">Stores</li>
+	</ul>
+
+	<div class="tab-content">
+		<div class="filterTop">
+			<div class="tbl-header-lhs">
+				<div class="searchproduct">
+					<mat-form-field>
+						<input matInput placeholder="Search Product">
+					</mat-form-field>
+				</div>
+				<div (click)="changeRoute('new-store')" class="new-btn-blue"><i class="fa fa-plus"></i> Add New Store</div>
+			</div>
+			<div class="tbl-header-rhs">
+				<div>
+					<h3>Show:</h3>
+				</div>
+				<div class="ft-btn ft-btn-selected">
+					<span>All</span>
+				</div>
+
+				<div class="input-group-x2 loc-drp-down">
+					<div class="dropDown-container">
+						<div class="select">
+							<label>Major Location:</label>
+							<select [formControl]="formControlLocation" name="dropDown-container" id="dropDown-container">
+								<option value={{item._id}} *ngFor="let item of locations">{{item.name}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="dropDown-container">
+						<div class="select">
+							<label>Store Name:</label>
+							<select [formControl]="formControlMinorLocation" name="dropDown-container" id="dropDown-container">
+								<option *ngFor="let item of storeLocations" value="{{item._id}}">{{item.name}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<app-store-tab *ngIf="tab_store" [minorLocationId]="loc" [locationId]="formControlLocation.name">
+		</app-store-tab>
+	</div>
+</div>

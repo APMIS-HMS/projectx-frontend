@@ -1,0 +1,61 @@
+<div class="baseWrap">
+
+  <div class="filterWrap">
+    <div>
+      <h3>Filters</h3>
+    </div>
+    <div class="row">
+      <div class="dr-wrap survery">
+        <app-date-range [dateRange]="dateRange" (dateRangeChange)="setDiagnosisByDateRange($event)"></app-date-range>
+      </div>
+      <div class="dropdown-container">
+        <mat-form-field>
+          <mat-select placeholder="Filter By Clinic" (change)="setSearchFilter($event.value)">
+              <mat-option value="All">All</mat-option>
+            <mat-option [value]="item._id" *ngFor="let item of facilityClinics" >{{item.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="tbl-resp-wrap">
+        <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5">
+            <thead >
+                <tr class="th-r1 th-xxx">
+                    <th >S/N</th>
+                    <th >Hospital No.</th>
+                    <th >Sex</th>
+                    <th>Age</th>
+                    <th>Diagnosis Code No.</th>
+                    <th>Clinic</th>
+                </tr>
+            </thead>
+  
+            <tbody *ngIf="!isDiagnosisLoading">
+                <span *ngIf="filteredDiagnosis.length < 1"><i>There are currently no records to show</i></span>
+                <tr class="th-xxx" *ngFor="let item of filteredDiagnosis;let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{item.hospitalNumber}}</td>
+                    <td>{{item.sex}}</td>
+                    <td>{{item.age}}</td>
+                    <td>{{item.diagnosisCode}}</td>
+                    <td>{{item.clinic}}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="isDiagnosisLoading">
+              <tr class="th-xxx">
+                  <td></td><td></td><td></td>
+                  <td><div><i class="fa fa-spinner fa-spin"></i></div></td>
+              </tr>
+          </tbody>
+        </table>
+        <mat-paginator [length]="100" [pageSize]="30" [pageSizeOptions]="[5, 10, 25, 100]">
+          </mat-paginator>
+    </div>
+
+
+ 
+</div>

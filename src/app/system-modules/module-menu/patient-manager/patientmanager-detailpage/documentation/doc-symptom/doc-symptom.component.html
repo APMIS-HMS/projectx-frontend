@@ -1,0 +1,60 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Add Symptom</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+            <form [formGroup]="addSymptomForm" novalidate>
+
+                    <div class="frm-x2">
+                       
+                        <div class="frm-item-wrap">
+                            <apmis-lookup [(ngModel)]="apmisLookupText" formControlName="symptom" [url]="apmisLookupUrl" [query]="apmisLookupQuery" [isSocket]="true"
+                                [displayImage]="false" [multipleKeys]="false" [displayKey]="apmisLookupDisplayKey" placeholder="Select Symptom"
+                                (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                        </div>
+                        <div>
+                            <div>
+                                <mat-input-container class="example-full-width">
+                                    <input matInput mat-error type="number" placeholder="Duration" min="1" formControlName="symptomDuration">
+                                </mat-input-container>
+                            </div>
+                            <div class="sel">
+                                <select formControlName="durationUnit" placeholder="Duration Unit">
+                                    <option value=""  selected>Duration Unit</option>
+                                    <option *ngFor="let unit of durationUnits" [ngValue]="unit.name">{{unit.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="addDrugBtn" (click)="add_onClick()">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <span>ADD SYMPTOM</span>
+                    </div>
+            
+                    <!-- <div class="tbl-wrap">
+                        <table class="table" cellpadding="0" cellspacing="0" border="0.5">
+                            <thead class="thead">
+                                <tr class="tr">
+                                    <th class="th">symptom</th>
+                                    <th class="th">Duration</th>
+                                    <th class="th"></th>
+                                </tr>
+                            </thead>
+                
+                            <tbody class="tbody">
+                                <tr class="tr">
+                                    <td class="td">Rash</td>
+                                    <td class="td">2 Weeks</td>
+                                    <td>
+                                        <i class="fa fa-times"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> -->
+                </form>
+    </div>
+</div>

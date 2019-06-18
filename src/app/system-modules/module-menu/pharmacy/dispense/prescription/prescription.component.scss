@@ -1,0 +1,153 @@
+@import '../dispense.component.scss';
+b,
+strong {
+    font-weight: bolder;
+    font-size: 14px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.refresh-payment {
+    color: #018cd2;
+    cursor: pointer;
+}
+
+.table-head {
+    line-height: 0;
+}
+
+.table-data,
+.table-head-inner-content {
+    width: 10%;
+    padding: 0;
+}
+
+.cost,
+.batch {
+    width: 20%;
+}
+
+.drug {
+    width: 60%;
+}
+
+.table-padding {
+    padding: 5px 10px;
+}
+
+.mat-lg-btn {
+    line-height: 1;
+}
+
+.patient-details {
+    width: 100%;
+    height: 80px;
+    img {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+    }
+}
+
+.product-parentWrap {
+    width: 100%;
+}
+
+.prodParent-header {
+    background: #4bb8ef;
+    font-weight: bold;
+    height: 40px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.prodParent-content .prod-row {
+    border: 1px solid #eee;
+}
+
+.prod-row {
+    height: auto;
+    min-height: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.prod-row,
+.prodBatch-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.prodWrap {
+    border: 1px solid #ccc;
+}
+
+.prodBatch-wrap {
+    background: #eee;
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.prodBatch-row {
+    padding: 5px;
+    border: 1px solid #eee;
+}
+
+.prodBatch-row:hover {
+    border: 1px solid #ccc;
+}
+
+.prodParent-header .prod-rowItem {
+    border-right: 1px solid #018cd2;
+}
+
+.prodParent-content .prod-rowItem {
+    border-right: 1px solid #eee;
+}
+
+.prod-rowItem {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 5px;
+}
+
+.prod-rowItem.item1 {
+    width: 35%;
+    cursor: pointer;
+}
+
+.prod-rowItem.item2,
+.prod-rowItem.item3,
+.prod-rowItem.item4,
+.prod-rowItem.item5,
+.prod-rowItem.item6,
+.prod-rowItem.item7 {
+    width: 10%;
+    cursor: pointer;
+}
+
+.prod-rowItem.item7 {
+    width: 15%;
+}
+
+.batchHeader {
+    background: #ccc;
+    font-weight: bold;
+}
+
+.prodBatch-item {
+    text-align: left;
+}
+
+.mat-input-container {
+    width: 60%;
+}

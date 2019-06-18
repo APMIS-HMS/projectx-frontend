@@ -1,0 +1,13 @@
+@import "./../../reports.component.scss";
+@import "./../dhis-report/registers/registers.component.scss";
+@import "./../dhis-report/nhmis-summary/nhmis-summary.component.scss";
+.back {
+    font-size: 20px;
+    padding-left: 3px;
+    text-decoration: underline;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.fa-2x {
+    font-size: 1.5rem;
+}

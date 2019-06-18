@@ -1,0 +1,92 @@
+<div>
+  <form [formGroup]="addPrescriptionForm" novalidate>
+    <div class="InputGroup" style="width:60%;">
+      <input formControlName="drug" (focus)="onFocus('in')" (focusout)="onFocus('out')" class="customInput" type="text"
+        required>
+      <span class="highlight"></span>
+      <label class="customLabel">Drug</label>
+      <app-drgsrch [products]="products" [commonProducts]="commonProducts" (markProduct)="mark_product($event)"
+        (closeSearch)="close_search($event)" *ngIf="drugSearch"></app-drgsrch>
+    </div>
+  
+    <div class="frm">
+      <div class="col-xs-9 no-padding-right" formArrayName="regimenArray">
+        <div *ngFor="let regimen of addPrescriptionForm.controls['regimenArray']['controls']; let i=index;">
+          <div [formGroupName]="i">
+            <div class="frm-1">
+  
+              <div class="InputGroup">
+                <input formControlName="dosage" class="customInput" type="text" required>
+                <span class="highlight"></span>
+                <label class="customLabel">Dosage</label>
+              </div>
+              <div class="sel">
+                <select formControlName="frequency" placeholder="Frequency">
+                  <option value="" disabled selected>Frequency</option>
+                  <option *ngFor="let fre of frequencies" [ngValue]="fre.name">{{fre.name}}</option>
+                </select>
+              </div>
+              <div class="InputGroup">
+                <input formControlName="duration" class="customInput" type="number" min="0" required>
+                <span class="highlight"></span>
+                <label class="customLabel">Duration</label>
+              </div>
+              <div class="sel">
+                <select formControlName="durationUnit" placeholder="Duration Unit">
+                  <option value="" disabled selected>Duration Unit</option>
+                  <option *ngFor="let unit of durationUnits" [ngValue]="unit.name">{{unit.name}}</option>
+                </select>
+              </div>
+              <div *ngIf="addPrescriptionForm.controls['regimenArray'].controls.length > 1"  class="col-xs-1 no-padding-left no-padding-right" style="margin-top: 20px;">
+                  <i (click)="onClickRemoveRegimen(i);" class="fa fa-minus fa-2x add-regimen-btn"></i>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <h2 (click)="onClickAddRegimen();">+</h2>
+      <div>
+        <div class="frm-2">
+          <div class="InputGroup">
+            <input formControlName="startDate" class="customInput" type="date" required>
+            <span class="highlight"></span>
+            <label class="customLabel">Start Date</label>
+          </div>
+          <!--<div class="InputGroup">
+            <input formControlName="endDate" class="customInput" type="date" required>
+            <span class="highlight"></span>
+            <label class="customLabel">End Date</label>
+          </div>-->
+        </div>
+        <div class="frm-2">
+          <div class="custom-chk">
+            <input formControlName="refill" type="checkbox" id="refillCheck">
+            <label for="refillCheck">Refill</label>
+          </div>
+          <div *ngIf="showRefill" class="InputGroup" style="width: 20%;">
+            <input formControlName="refillCount" min="0" class="customInput" type="number" required>
+            <span class="highlight"></span>
+            <label class="customLabel">Count</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="InputGroup">
+      <textarea formControlName="specialInstruction" class="customTextarea" placeholder="Special Instruction"></textarea>
+      <span class="highlight"></span>
+    </div>
+  
+    <div class="div-space"></div>
+  
+    <div class="btnWrap">
+      <div (click)="add()" class="new-btn-solid-blue" [class.disabled]="addPrescriptionForm.valid !== true">
+        <span>Add Medication</span>
+      </div>
+      <div class="new-btn-solid-blue" (click)="reset()">
+        <span>Reset</span>
+      </div>
+    </div>
+  </form>
+  </div>

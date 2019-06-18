@@ -1,0 +1,125 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Create Group Role</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+
+    <div class="modal-baseWrap">
+        <form novalidate>
+            <div>
+                <div class="filters-wraper">
+                    <mat-input-container>
+                        <input class="textarea" type="text" matInput mat-error placeholder="Enter role name" [formControl]="txtAccessName">
+                    </mat-input-container>
+                    <!-- <div class="btn-box">
+                            <button style="padding: 0px 20px;" mat-raised-button class="mat-sm-btn" [routerLink]="['/dashboard/access-manager/access-role-details']">
+                                <i class="fa fa-arrow-left " aria-hidden="true"></i>Back</button>
+                    </div> -->
+                    <!-- <div class="btn-back">
+                        <i class="fa fa-arrow-left " aria-hidden="true"></i>
+                        <span class="span">back</span>
+                    </div> -->
+                </div>
+                <div class="access-content-sect">
+                    <div class="pp-card shadow-grey">
+                        <div class="cad-head">
+                            <div class="module-label">MODULES</div>
+                        </div>
+                        <ul *ngIf="!loading && modules.length > 0" class="work-places-list checkwrap">
+                            <!-- <li class="work-places-item">
+                                <div class="network-list">
+                                    <div class="tip">subscribe for module</div>
+                                    <div class="wp-name li-disabled">List Item</div>
+                                </div> 
+                            </li> -->
+                            <li (click)="onClickModule(module);" *ngFor="let module of modules" [ngClass]="{'active' : module.name === selectedModule.name}" class="work-places-item">
+                                <div class="network-list">
+                                    <div class="wp-name" class="{{ module.isSubscribed ? ' wp-name': ' wp-name li-disabled'}}">{{ module?.name }}</div>
+                                    <div class="tip" *ngIf="!module.isSubscribed">subscribe for module</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul *ngIf="!loading && modules.length === 0" class="work-places-list">
+                            <li class="work-places-item">
+                                <div style="width: 100%; padding: 10px; text-align:center; font-size: 10px;">No data to display</div>
+                            </li>
+                        </ul>
+                        <ul *ngIf="loading && modules.length === 0" class="work-places-list">
+                            <li class="work-places-item">
+                                <div style="width: 100%; padding: 10px; text-align:center; font-size: 10px;">
+                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pp-card shadow-grey" style="float: right; margin-left:20px; width:70%;">
+                        <div class="as-count-sect card-seperator">
+                            <div class="cad-head">
+                                <div class="module-label">ACCESS</div>
+                            </div>
+                            <div *ngIf="!accessLoading && actions.length > 0" class="checkwrap">
+                                <label *ngFor="let action of actions" class="container">{{ action?.name }}
+                                <input type="checkbox" [checked]="action.isChecked" (change)="onClickCheckInput(action, $event.target.checked);">
+                                <span class="checkmark"></span>
+                            </label>
+                            </div>
+                            <div *ngIf="!accessLoading && actions.length === 0" class="checkwrap">
+                                <div style="width: 100%; padding: 10px; text-align:center; font-size: 10px;">No data to display</div>
+                            </div>
+                            <div *ngIf="accessLoading && actions.length === 0" class="checkwrap">
+                                <div style="width: 100%; padding: 10px; text-align:center; font-size: 10px;">
+                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table cellpadding="0" cellspacing="0" border="0.4 ">
+                    <thead>
+                        <tr class="table-header">
+                            <th>
+                                <i class="fa fa-sort-alpha-asc " aria-hidden="true "></i>
+                                <span>S/N</span>
+                            </th>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc " aria-hidden="true "></i>
+                                <span>Module</span>
+                            </th>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc " aria-hidden="true "></i>
+                                <span>Accessibilities</span>
+                            </th>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc " aria-hidden="true "></i>
+                                <span>Action</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let selectedItem of selectedItems; let i = index;">
+                            <td class="table-content">{{ i+1 }}</td>
+                            <td class="table-content">{{ selectedItem.moduleName }}</td>
+                            <td class="table-content">{{ selectedItem.accessName }}</td>
+                            <td><i class="fa fa-trash fa-icon "></i></td>
+                        </tr>
+                        <tr *ngIf="selectedItems.length === 0">
+                            <td colspan="4">
+                                <div style="width: 100%; padding: 10px; text-align:center; font-size: 10px;">No data to display</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="btn-box">
+                <button mat-raised-button class="mat-sm-btn" (click)="create();" [disabled]="selectedItems.length === 0 || disableBtn" style="padding: 0px 20px !important;">
+                      <span *ngIf="createRole"><i class="fa fa-plus"></i> Create Role</span>
+                      <span *ngIf="creatingRole">Creating Role... <i class="fa fa-spinner fa-spin"></i></span>
+                      <span *ngIf="updateRole"><i class="fa fa-plus"></i> Update Role</span>
+                      <span *ngIf="updatingRole">Updating Role... <i class="fa fa-spinner fa-spin"></i></span>
+                    </button>
+            </div>
+        </form>
+    </div>
+</div>

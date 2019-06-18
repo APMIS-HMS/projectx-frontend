@@ -1,0 +1,24 @@
+.suggestions{
+    position: absolute;
+    top: 67px;
+    max-height: 195px;
+    overflow-y: auto;
+    width: 43%;
+    background: #fff;
+    border: 1px solid #777;
+    z-index: 3;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.suggestion{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    cursor: pointer; 
+}
+.suggestion:hover{
+    background: #eee;
+}

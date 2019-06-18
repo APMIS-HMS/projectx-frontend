@@ -1,0 +1,239 @@
+<div class="pp-card shadow-grey">
+  <div class="card-title">
+      <div>DAILY ANTE NATAL CLINIC (pg1)</div>
+      <!-- <div class="top-btns">
+          <div (click)="back_registers()" class="top-btn"><i class="fa fa-arrow-left"></i> Registers</div>
+      </div> -->
+  </div>
+  <div class="content-wrap">
+
+    <div class="tbl-resp-wrap">
+      <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+          <thead>
+            <tr>
+              <th colspan="23">
+                <div class="th1-wrap">
+                  <!-- <div class="th1-title">DAILY ANTE NATAL CLINIC</div> -->
+                  <div class="filters">
+                    <div class="filter">
+                        <input class="search" placeholder="search for patient...">
+                    </div>
+                  </div>
+                  <div class="tp-rhs">
+                    <div class="dr-wrap survery">
+                        <app-date-range [dateRange]="dateRange" (dateRangeChange)="setReturnValue($event)"></app-date-range> <span *ngIf="loadIndicatorVisible" class="fa fa-spinner fa-spin"></span>
+                    </div>
+                    <div (click)="newEntry()" class="th1-cta"><i class="fa fa-plus"></i> </div>
+                    <div (click)="switcher_onClick()" class="top-btn-outline">Next Page <i class="fa fa-arrow-right"></i></div>
+                  </div>
+                </div>
+              </th>
+            </tr>
+            <tr class="th-r1 th-xxx">
+              <th colspan="15"></th>
+              <th colspan="4">ANC Partners' Testing</th>
+              <th colspan="4"> Syphilis Testing & Treatment</th>
+            </tr>
+            <tr class="th-r2 th-xxx">
+              <th colspan="5"></th>
+              <th colspan="2">Type of Visit</th>
+              <th></th>
+              <th colspan="2">Antenatal clinic attendance</th>
+              <th></th>
+              <th></th>
+              <th colspan="3">ANC HIV counseling & testing </th>
+              <th colspan="2">Partners of HIV pos. pregnant women </th>
+              <th colspan="2">Partners of HIV neg. pregnant women </th>
+              <th colspan="3">Testing </th>
+              <th></th>
+            </tr>
+            <tr class="th-r3 th-xxx">
+              <th>Date</th>
+              <th>Patient</th>
+              <th>Age</th>
+              <th>Tag ID</th>
+              <th><div class="vertical-text">Date of Birth</div></th>
+              <th>ANC</th>
+              <th>PNC</th>
+              <th>Parity</th>
+              <th>N</th>
+              <th>R</th>
+              <th><div class="vertical-text">Age of Pregnancy(in wks)</div></th>
+              <th><div class="vertical-text">No. of antenatal clinic visit(s) to date</div></th>
+              <th>
+                <div class="vertical-text">Previously known HIV</div>
+                <div class="vertical-text">positive status</div>
+              </th>
+              <th>
+                  <div class="vertical-text">ANC HIV counseled tested</div>
+                  <div class="vertical-text">and received result</div>
+              </th>
+              <th>
+                <div class="vertical-text">HIV test result: positive</div>
+              </th>
+              <th>
+                  <div class="vertical-text">tested negative</div>
+              </th>
+              <th>
+                  <div class="vertical-text">tested positve </div>
+              </th>
+              <th>
+                  <div class="vertical-text">tested positive</div>
+              </th>
+              <th>
+                  <div class="vertical-text">tested negative</div>
+              </th>
+              <th>
+                  <div class="vertical-text">Not Done</div>
+              </th>
+              <th>
+                  <div class="vertical-text">Positive</div>
+              </th>
+              <th>
+                  <div class="vertical-text">Negative</div>
+              </th>
+              <th>
+                  <div class="vertical-text">Treated </div>
+              </th>
+              <!-- <th colspan="4">Comment</th> -->
+            </tr>
+          </thead>
+
+          <tbody>
+              <tr>
+                <td>11th Oct 2018</td>
+                <td>
+                  <div class="empWrap">
+                      <div class="list-img">
+                          <img src="assets/images/users/default.png">
+                      </div>
+                      <div>Sam Dede</div>
+                  </div>
+                </td>
+                <td>22yrs</td>
+                <td>AZ2100</td>
+                <td>11th Oct 1995</td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td>18wks</td>
+                <td>5</td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-times green"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+              </tr>
+              <tr>
+                <td>11th Oct 2018</td>
+                <td>
+                  <div class="empWrap">
+                      <div class="list-img">
+                          <img src="assets/images/users/default.png">
+                      </div>
+                      <div>Sam Dede</div>
+                  </div>
+                </td>
+                <td>22yrs</td>
+                <td>AZ2100</td>
+                <td>11th Oct 1995</td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td>18wks</td>
+                <td>5</td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-times green"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+              </tr>
+              <tr>
+                <td>11th Oct 2018</td>
+                <td>
+                  <div class="empWrap">
+                      <div class="list-img">
+                          <img src="assets/images/users/default.png">
+                      </div>
+                      <div>Sam Dede</div>
+                  </div>
+                </td>
+                <td>22yrs</td>
+                <td>AZ2100</td>
+                <td>11th Oct 1995</td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td>18wks</td>
+                <td>5</td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-times green"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+              </tr>
+              <tr>
+                <td>11th Oct 2018</td>
+                <td>
+                  <div class="empWrap">
+                      <div class="list-img">
+                          <img src="assets/images/users/default.png">
+                      </div>
+                      <div>Sam Dede</div>
+                  </div>
+                </td>
+                <td>22yrs</td>
+                <td>AZ2100</td>
+                <td>11th Oct 1995</td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td>18wks</td>
+                <td>5</td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-times green"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-times red"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+                <td><i class="fa fa-check green"></i> </td>
+                <td><i class="fa fa-check red"></i> </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showNewEntry" class="modal-overlay">
+    <app-new-antenatal-entry (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-antenatal-entry>
+</div>

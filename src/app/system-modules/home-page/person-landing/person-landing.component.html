@@ -1,0 +1,189 @@
+<div class="card-x2">
+    <div class="pp-card card-long x2-child">
+        <div class="card-title">Activities Feed</div>
+      <!--  <ul class="feed-ul">
+            <li class="feed-li">
+                You was scheduled for a blood count test on the 16th dec, 2017, 9:00am at Clinix Diagnostics
+                <div class="feed-time">16th Dec, 2017. 08:00am</div>
+            </li>
+            <li class="feed-li">
+                &#8358;1500 was debited from your wallet for your blood count test at Clinix Diagnostics
+                <div class="feed-time">16th Dec, 2017. 08:01am</div>
+            </li>
+            <li class="feed-li">
+                Your blood count test results from Clinix Diagnostics is available
+                <div class="feed-time">16th Dec, 2017. 08:00am</div>
+            </li>
+            <li class="feed-li">
+                You was scheduled for a blood count test on the 16th dec, 2017, 9:00am at Clinix Diagnostics
+                <div class="feed-time">16th Dec, 2017. 08:00am</div>
+            </li>
+            <li class="feed-li">
+                &#8358;1500 was debited from your wallet for your blood count test at Clinix Diagnostics
+                <div class="feed-time">16th Dec, 2017. 08:01am</div>
+            </li>
+            <li class="feed-li">
+                Your blood count test results from Clinix Diagnostics is available
+                <div class="feed-time">16th Dec, 2017. 08:00am</div>
+            </li>
+            <li class="feed-li">
+                You was scheduled for a blood count test on the 16th dec, 2017, 9:00am at Clinix Diagnostics
+                <div class="feed-time">16th Dec, 2017. 08:00am</div>
+            </li>
+            <li class="feed-li">
+                &#8358;1500 was debited from your wallet for your blood count test at Clinix Diagnostics
+                <div class="feed-time">16th Dec, 2017. 08:01am</div>
+            </li>
+            <li class="feed-li">
+                Your blood count test results from Clinix Diagnostics is available
+                <div class="feed-time">16th Dec, 2017. 08:00am</div>
+            </li>
+            <li class="feed-li">
+                You was scheduled for a blood count test on the 16th dec, 2017, 9:00am at Clinix Diagnostics
+                <div class="feed-time">16th Dec, 2017. 08:00am</div>
+            </li>
+            <li class="feed-li">
+                &#8358;1500 was debited from your wallet for your blood count test at Clinix Diagnostics
+                <div class="feed-time">16th Dec, 2017. 08:01am</div>
+            </li>
+            <li class="feed-li">
+                Your blood count test results from Clinix Diagnostics is available
+                <div class="feed-time">16th Dec, 2017. 08:00am</div>
+            </li>
+            <li class="feed-li">
+                You was scheduled for a blood count test on the 16th dec, 2017, 9:00am at Clinix Diagnostics
+                <div class="feed-time">16th Dec, 2017. 08:00am</div>
+            </li>
+            <li class="feed-li">
+                &#8358;1500 was debited from your wallet for your blood count test at Clinix Diagnostics
+                <div class="feed-time">16th Dec, 2017. 08:01am</div>
+            </li>
+            <li class="feed-li">
+                Your blood count test results from Clinix Diagnostics is available
+                <div class="feed-time">16th Dec, 2017. 08:00am</div>
+            </li>
+        </ul> -->
+    </div>
+
+    <div class="card-block x2-child">
+        <div class="pp-card" style="margin-bottom:10px;">
+            <div class="card-title">Unfinished Documents</div>
+            <ul>
+                <li class="feed-li">
+                    <div class="fac-wrap">
+                        <div class="fac-notfc">3</div>
+                        <div class="fac-img-wrap">
+                            <img src="../../../../assets/images/users/default.png">
+                        </div>
+                        <div class="fac-data">
+                            <div class="fac-name">John Dede</div>
+                            <div class="fac-others">
+                                <div>Clinical Documentation</div>
+                                <div><span class="date-label">Started</span>3rd Feb,2018.</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="feed-li">
+                    <div class="fac-wrap">
+                        <div class="fac-notfc">3</div>
+                        <div class="fac-img-wrap">
+                            <img src="../../../../assets/images/users/default.png">
+                        </div>
+                        <div class="fac-data">
+                            <div class="fac-name">John Dede</div>
+                            <div class="fac-others">
+                                <div>Clinical Documentation</div>
+                                <div><span class="date-label">Started</span>3rd Feb,2018.</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="pp-card card-mid">
+            <div class="card-title">My Work Places</div>
+            <ul>
+                <li class="feed-li" *ngFor="let employee of listOfEmployees">
+                    <div class="fac-wrap">
+                        <div class="fac-notfc">3</div>
+                        <div class="fac-img-wrap">
+                            <img src="../../../assets/images/logos/default.png">
+                        </div>
+                        <div class="fac-data">
+                            <div class="fac-name">{{getFacilityName(employee.facilityId)}}</div>
+                            <div class="fac-others">
+                                <div>{{employee.departmentId}}</div>
+                                <div>{{getUnits(employee.units)}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- <li class="feed-li">
+          <div class="fac-wrap">
+            <div class="fac-img-wrap">
+              <img src="../../../assets/images/logos/default.png">
+            </div>
+            <div class="fac-data">
+              <div class="fac-name">Lagoon Hospital</div>
+              <div class="fac-others">
+                <div>Department</div>
+                <div>Unit</div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="feed-li">
+          <div class="fac-wrap">
+            <div class="fac-notfc">10</div>  
+            <div class="fac-img-wrap">
+              <img src="../../../assets/images/logos/default.png">
+            </div>
+            <div class="fac-data">
+              <div class="fac-name">Lagos State University Teaching Hospital</div>
+              <div class="fac-others">
+                <div>Department</div>
+                <div>Unit</div>
+              </div>
+            </div>
+          </div>
+        </li> -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="pp-card shadow-grey">
+    <button (click)="inavailability_click()" class="btn-thead">Set In-Availability</button>
+    <i (click)="set_appointment()" class="fa fa-plus-square card-edit" aria-hidden="true"></i>
+    <div class="card-title">My Appointments</div>
+
+    <table cellpadding="0" cellspacing="0" border="0.5">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Clinic</th>
+                <th>Provider</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let appointment of myAppointments">
+                <td>{{appointment.startDate | date:'dd/MM/yyyy'}}</td>
+                <td>{{appointment.startDate | date:'shortTime'}}</td>
+                <td>{{appointment.clinicId}}</td>
+                <td>{{getFacilityName(appointment.facilityId)}}</td>
+                <td>{{appointment.orderStatusId}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="schedule_appointment" class="modal-overlay">
+    <app-person-schedule-appointment (closeModal)="close_onClick($event)" class="form-modal center-center"></app-person-schedule-appointment>
+</div>
+<div *ngIf="set_inavailability" class="modal-overlay">
+    <app-inavailability (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-inavailability>
+</div>

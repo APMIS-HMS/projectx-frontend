@@ -1,0 +1,123 @@
+<div class="c-page-header">
+    <div class="back-btn pull-left">
+        <span routerLink="/dashboard/ward-manager/admitted"><i class="fa fa-arrow-circle-o-left"></i> Go Back</span>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <img height="100px" *ngIf="selectedPatient?.patient?.personDetails?.profileImageObject !== undefined" [src]="_inPatientService.transform(selectedPatient?.patient?.personDetails?.profileImageObject)">
+            <img height="100px" *ngIf="selectedPatient?.patient?.personDetails?.profileImageObject == undefined" src="assets/images/users/default.png">
+            <h1>
+                {{selectedPatient?.patient?.personDetails?.firstName}} {{selectedPatient?.patient?.personDetails?.lastName}}
+            </h1>
+            <button style="margin-bottom: 10px" (click)="onClickPatientDocumentation(selectedPatient);" class="btn"><i class="fa fa-eye" aria-hidden="true"></i> Patient Documentation</button>
+            <button style="margin-bottom: 10px" *ngIf="!selectedPatient?.isDischarged" class="btn btn-red" (click)="onClickTransferPatient()"><i class="fa fa-share" aria-hidden="true"></i> Transfer</button>
+            <button style="margin-bottom: 10px" *ngIf="!selectedPatient?.isDischarged" class="btn text-white btn-green" (click)="onClickPatientDocumentation(selectedPatient);"><i class="fa fa-share" aria-hidden="true"></i> Vitals</button>
+            <button style="margin-bottom: 10px" *ngIf="!selectedPatient?.isDischarged" class="btn btn-blue" (click)="onClickDischargePatient();"><i class="fa fa-user-times" aria-hidden="true"></i> Discharge</button>
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Personal Details</h2>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="card">
+                                <span style="color:grey">Age</span>
+                                <h3>{{selectedPatient?.patient?.age}} old</h3>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="card">
+                                <span style="color:grey">Gender</span>
+                                <h3>{{selectedPatient?.patient?.personDetails?.gender}}</h3>
+                            </div>
+                        </div>
+                        <div *ngIf="selectedPatient?.patient?.personDetails?.fullAddress !== undefined" class="col-xs-12">
+                            <div class="card">
+                                <span style="color:grey"><Address></Address></span>
+                                <h3>{{selectedPatient?.patient?.personDetails?.fullAddress}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="card">
+                                <span style="color:grey">Contact</span>
+                                <h3>{{selectedPatient?.patient?.personDetails?.primaryContactPhoneNo}}</h3>
+                            </div>
+                        </div>
+                        <div *ngIf="selectedPatient?.patient?.personDetails?.email !== undefined" class="col-xs-4">
+                            <div class="card">
+                                <span style="color:grey">Email</span>
+                                <h3>{{selectedPatient?.patient?.personDetails?.email}}</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-12">
+                    <h2>Medical Details</h2>
+                    <div class="row">
+                        <!-- <div class="col-xs-4">
+                            <div class="card">
+                                <span style="color:grey">Diagnosis</span>
+                                <h3>Headache, Malaria, Typhoid</h3>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="card">
+                                <span style="color:grey">Allergies</span>
+                                <h3>Hot water, Dirt</h3>
+                            </div>
+                        </div> -->
+                        <div class="col-xs-4">
+                            <div class="card">
+                                <span style="color:grey">Admission Date</span>
+                                <h3>{{selectedPatient?.admissionDate | date }}</h3>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="card">
+                                <span style="color:grey">Ward</span>
+                                <h3>{{selectedPatient?.minorLocation?.name}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="card">
+                                <span style="color:grey">Room</span>
+                                <h3>{{selectedPatient?.transfers[selectedPatient?.transfers.length -1]?.room?.name}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="card">
+                                <span style="color:grey">Bed</span>
+                                <h3>{{selectedPatient?.transfers[selectedPatient?.transfers.length -1]?.bed?.name}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="card">
+                                <span style="color:grey">Number of days on admission</span>
+                                <h3>{{selectedPatient?.admissionDate | amTimeAgo}} - 
+                                    <i> ( {{daysAdmitted}}
+                                        <span *ngIf="daysAdmitted > 1">days</span>
+                                        <span *ngIf="daysAdmitted <= 1">day</span> )
+                                    </i>
+                                </h3>
+                                <!-- <h3>{{selectedPatient?.admissionDate | daysInDate: selectedPatient?.admissionDate :selectedPatient?.admissionDate}} days</h3> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="dischargePatient" class="modal-overlay">
+        <app-discharge-patient (closeModal)="close_onClick($event)" [selectedPatient]="selectedPatient" class="form-modal center-center"></app-discharge-patient>
+    </div>
+    <div *ngIf="transferPatient" class="modal-overlay">
+        <app-transfer-patient (closeModal)="close_onClick($event)" [selectedPatient]="selectedPatient" id="form-modal" class="form-modal center-center"></app-transfer-patient>
+    </div>
+    <div *ngIf="addVitals" class="modal-overlay">
+        <app-add-vitals (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-vitals>
+    </div>
+</div>

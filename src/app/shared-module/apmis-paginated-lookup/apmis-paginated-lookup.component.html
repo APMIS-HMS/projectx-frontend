@@ -1,0 +1,45 @@
+<form [formGroup]="form" novalidate>
+    <mat-paginator [pageIndex]="0" [length]="results.length"
+    [pageSize]="pageSize" (page)="pageEvent = $event; onPaginateChange($event)" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+<div class="cu-search-box">
+    <mat-input-container>
+        <input matInput formControlName="searchtext" class="cu-search" placeholder="{{placeholder}}" (focus)="focusSearch()"
+            (focusout)="focusOutSearch()" [value]="valueString" (change)="onChange($event)" (keyup)="onChange($event)"
+            autocomplete="off">
+    </mat-input-container>
+    <div class="cu-popup-wrapper" *ngIf="showCuDropdown">
+        <div class="cu-popover-arrow"></div>
+        <div class="cu-header">
+            <p></p>
+        </div>
+        <ul class="cu-dropdown">
+            <li><a class="header">Select item</a></li>
+            <li *ngIf="results.length === 0 && !cuDropdownLoading" class="text-center"><a>Result is empty</a></li>
+            <li *ngIf="results.length === 0 && cuDropdownLoading" class="text-center"><a><i class="fa fa-spinner fa-spin"></i></a></li>
+            <li *ngIf="isLoadingMore" class="text-center"><a><i class="fa fa-spinner fa-spin"></i></a></li>
+            <li *ngFor="let item of results" (click)="onSelectedItem(item)" class="lookupListing">
+                <img *ngIf="displayImage && getImgUrl(item) == undefined" src="assets/images/users/default.png">
+                <img *ngIf="displayImage && getImgUrl(item) != undefined" [src]="getImgUrl(item)">
+                <!-- <a>{{getName(item,displayKey)}}</a> -->
+                <!-- <a>{{item[displayKey]}}</a> -->
+                <div *ngIf="multipleKeys==true">
+                    <div class="listingName">{{getName(item,displayKey)}}</div>
+                    <div>
+                        <div class="listingOthers" *ngFor="let value of getOtherKeyValues(item)">
+                            <div>{{value}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="multipleKeys==false">
+                    <a>{{getName(item,displayKey)}}</a>
+                    <!-- <a>{{item[displayKey]}}</a> -->
+                </div>
+            </li>
+        </ul>
+        
+        <div class="cu-footer">
+            <button class="btn btn-default">Cancel</button>
+        </div>
+    </div>
+</div>
+</form>

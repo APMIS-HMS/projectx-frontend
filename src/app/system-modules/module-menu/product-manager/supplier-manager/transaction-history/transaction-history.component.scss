@@ -1,0 +1,49 @@
+@import '../../../store-manager/landing-page/landing-page.component.scss';
+.payment-link {
+    padding: 4px;
+    border: 1px solid #0288d1;
+    border-radius: 8px;
+    color: #0288d1 !important;
+    background: transparent;
+    font-size: 1rem;
+}
+
+.subtitleWrap {
+    position: absolute;
+    top: -34px;
+    font-size: 1.2rem;
+    left: 5px;
+    color: #8e8e8e;
+}
+
+.subtitleWrap .pg-subTitle {
+    color: #0288D1;
+    text-decoration: underline;
+}
+
+span {
+    color: #03a9f4 !important;
+}
+
+.survery .form-control {
+    width: 50%;
+}
+
+.survery {
+    margin: 0 5px !important;
+}
+
+.inputFilter {
+    width: 100% !important;
+    margin-top: 10px;
+}
+
+.searchInput {
+    height: 15%;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.table-head {
+    border-right: solid 1px #fff;
+}

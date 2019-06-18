@@ -1,0 +1,12 @@
+<div class="inner-wrap-b body-wrap">
+    <div class="facility-title">{{pageInView}}</div>
+    <div class="rpt-wrap">
+        <ul class="top-links pull-right">
+            <i class="fa fa-home fa-2x blue-nav" (click)="back_dashboard()" aria-hidden="true"><span class="back">Dashboard</span></i>
+            <li class="fa fa-list-ul fa-2x blue-nav" (click)="patientRegistrationReport()" [class.top-links-active]="patientRegistration">Patient Registration List</li>
+            <li class="fa fa-bar-chart fa-2x blue-nav" (click)="patientRegistration_analytics()" [class.top-links-active]="patientRegistrationAnalytics">View Analytics</li>
+        </ul>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

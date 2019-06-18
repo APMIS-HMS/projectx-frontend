@@ -1,0 +1,109 @@
+@import '../../../../pharmacy/prescription-list/prescription-list.component.scss';
+@import './../../../reports.component.scss';
+@import './../../dhis-report/registers/registers.component.scss';
+@import './../../dhis-report/nhmis-summary/nhmis-summary.component.scss';
+@import './../../clinic-management-report/diagnosis/diagnosis.component.scss';
+@import './../../clinic-management-report/clinic-management-report.component.scss';
+.card {
+    margin-top: 60px;
+}
+
+.dr-wrap.survery {
+    display: flex;
+    margin-top: 60px;
+}
+
+.topItems {
+    margin-right: 150px;
+}
+
+.optionGuide {
+    color: #828282;
+}
+
+.reportSummary {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.table-list {
+    color: #292929;
+    font-weight: 2rem;
+    font-size: 1.5rem;
+}
+
+.searchInputWrap {
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    /* padding-top: 10px; */
+    margin-left: 30px;
+}
+
+.mat-form-field-wrapper {
+    position: relative;
+    width: 63%;
+}
+
+.searchInputWrap i {
+    position: absolute;
+    color: #858585;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+.back {
+    font-size: 20px;
+    padding-left: 3px;
+    text-decoration: underline;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.filter {
+    display: block;
+    justify-content: center;
+}
+
+.searchInput {
+    width: 200px;
+}
+
+.secWrap-header {
+    text-align: center;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.select {
+    width: 150px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.inputWrap {
+    display: block;
+    margin: 2px auto;
+    height: 30%;
+    margin-left: 20px;
+}
+
+.summaryItems {
+    border-bottom: none;
+    display: flex;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #292929;
+}
+
+.description {
+    color: #828282;
+}
+
+.secondaryText {
+    color: #858585;
+    font-size: 1.5rem;
+}

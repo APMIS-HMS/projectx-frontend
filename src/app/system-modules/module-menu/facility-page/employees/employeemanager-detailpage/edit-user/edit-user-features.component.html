@@ -1,0 +1,11 @@
+<div class="privi-carousel-childwrap animated fadeIn">
+    <span class="privi-carousel-childlabel">{{selectedFeatureModule?.name}}</span>
+    <span class="roleSrcModule">{{selectedFeatureModule?.name}}</span>
+    <ul class="accessCrudWrap">
+        <!--<li *ngFor="let crud of selectedFeature.feature.crud" class="accessCRUD">{{crud}}</li>-->
+        <li class="accessCRUD" [ngClass]="{'accessCRUD-inactive': canAccess('Create')}">Create</li>
+        <li class="accessCRUD" [ngClass]="{'accessCRUD-inactive': canAccess('Read')}">Read</li>
+        <li class="accessCRUD" [ngClass]="{'accessCRUD-inactive': canAccess('Update')}">Update</li>
+        <li class="accessCRUD" [ngClass]="{'accessCRUD-inactive': canAccess('Delete')}">Delete</li>
+    </ul>
+</div>

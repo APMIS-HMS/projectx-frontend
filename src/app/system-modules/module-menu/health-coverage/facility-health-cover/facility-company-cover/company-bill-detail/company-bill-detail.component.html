@@ -1,0 +1,62 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+      <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+      <legend class="modal_title">Jonathan Nelson</legend>
+      <div class="modal_mini_title">Company Cover Bills Generated</div>
+      <div class="modal_mini_title">11th October 2017</div>
+  </div>
+  <div class="modal-baseWrap">
+    <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+      <thead>
+          <tr>
+              <th>
+                  <span style="padding-left: 3px;">Patient</span>
+              </th>
+              <th>
+                  <span style="padding-left: 3px;">Service</span>
+              </th>
+              <th>
+                  <span style="padding-left: 3px;">Amount</span>
+              </th>
+              <th>
+                  <span style="padding-left: 3px;">Type</span>
+              </th>
+              <th>Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>
+                <div class="empWrap">
+                    <div class="list-img">
+                        <img src="assets/images/users/default.png">
+                    </div>
+                    <div>Sam Rolins</div>
+                </div>
+            </td>
+              <td>Patient Registration</td>
+              <td class="td-worspace">&#8358; 12,200</td>
+              <td>
+                <div class="input-x2-wrap">
+                  <mat-form-field class="sel-rap">
+                    <mat-select [formControl]="hmoTypeControl" placeholder="Cover Type">
+                      <mat-option>Capitation</mat-option>
+                      <mat-option>Fee for service</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field class="sel-rap">
+                    <input matInput  [formControl]="authCodeControl" placeholder="Code">
+                  </mat-form-field>
+                </div>
+              </td> 
+              <td>
+                  <div class="td-ctaWrap">
+                      <i (click)="newWorkspace_onClick(workspace.employee)" class="fa fa-check-circle" aria-hidden="true"></i>
+                      <i (click)="deletion_popup(workspace)" class="fa fa-times-circle" aria-hidden="true"></i>
+                  </div>
+              </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

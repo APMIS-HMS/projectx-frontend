@@ -1,0 +1,112 @@
+<h4 class="tbl-head">{{selectedStore?.name}}</h4>
+<div class="tbl-resp-wrap">
+  <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+    <thead>
+      <tr class="th-r1 th-xxx">
+        <th style="width: 60%;" colspan="2">Drugs/Brands</th>
+        <th style="width: 40%;">Qty Available</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr class="th-xxx" *ngFor="let product of drugs">
+        <td style="width: 5%;">
+          <input (change)="onItemChange(product)" type="radio" name="mode" [value]="product" [(ngModel)]="drugPicked">
+        </td>
+        <td>
+          <div class="prd">
+            <span>{{product?.productObject?.name}}</span>
+            <a class="blue">Unit Cost: {{product?.price?.price|number}}</a>
+          </div>
+        </td>
+        <td>
+          <div class="qty">
+            <span>{{product?.availableQuantity|number}}</span>
+            <div class="frm">
+              <div class="frm-1">
+                <div class="sel" style=" width: 100% !important;">
+                  <select>
+                    <option *ngFor="let config of product?.productObject?.productConfigObject" value="0">{{config.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <!-- <tr class="th-xxx">
+        <td style="width: 5%;">
+          <input type="radio">
+        </td>
+        <td>
+          <div class="prd">
+            <span>EMZOR PARACETAMOL TABLET 500 MG],</span>
+            <a class="blue">Unit Cost: 60</a>
+          </div>
+        </td>
+        <td>
+          <div class="qty">
+            <span>200</span>
+            <div class="frm">
+              <div class="frm-1">
+                <div class="sel" style=" width: 100% !important;">
+                  <select>
+                    <option value="0">Tablets</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr> -->
+    </tbody>
+  </table>
+</div>
+<div class="drg-InStores">
+  <h4>Drugs/brands also available in:</h4>
+  <div class="store-in">
+    <div class="store-in-avail" *ngFor="let store of stores">
+      <span (click)="selectStore(store)">{{store.name}}</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="prd-details">
+  <span>{{drugPicked?.productObject?.name}}</span>
+  <div class="disp-qty">
+    <div class="qty-detail">
+      <span>Quantity to dispense</span>
+      <div class="qty" style="margin-top:-15px">
+        <!-- <span>200</span> -->
+        <input class="customInput" min="0" [formControl]="quantityToDispense" type="number" required>
+        <div class="frm">
+          <div class="frm-1">
+            <div class="sel" style=" width: 100% !important;">
+              <select (change)="itemChanged($event)">
+                <option *ngFor="let config of drugPicked?.productObject?.productConfigObject" [ngValue]="config">{{config.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="qty-detail" style="width: 20%;">
+      <span>Drug Price</span>
+      <div class="InputGroup">
+        <input [attr.disabled]="true" class="customInput disabled" type="number" [(ngModel)]="drugPicked?.price.price"
+          required>
+        <span class="highlight"></span>
+      </div>
+    </div>
+    <div class="qty-detail">
+<div [attr.disabled]="drugPicked === null || drugPicked === undefined ? true : false" [class.disabled]="drugPicked === null || drugPicked === undefined ? true : false"
+  (click)="bill()" class="new-btn-solid-blue">
+        <span>Bill</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>

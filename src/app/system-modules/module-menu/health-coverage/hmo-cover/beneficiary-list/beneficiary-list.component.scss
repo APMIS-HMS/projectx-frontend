@@ -1,0 +1,34 @@
+@import  "../hmo-cover.component.scss";
+
+.tbl-top-actions{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.btn-outline {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #333;
+    margin-right: 10px;
+}
+.btn-outline:hover{
+    background-color: #fff;
+}
+button.btn.btn-danger
+{
+    background-color  : #ff0a14;
+    color:white;
+    
+}
+table tr{
+    -webkit-transition: all linear 500ms;
+    -moz-transition: all linear 500ms;
+    -ms-transition: all linear 500ms;
+    -o-transition: all linear 500ms;
+    transition: all linear 500ms;
+}
+tr.marked
+{
+    background-color: #fff8c1;
+   
+}

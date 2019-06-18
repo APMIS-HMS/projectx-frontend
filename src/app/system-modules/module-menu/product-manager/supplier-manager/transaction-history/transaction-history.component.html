@@ -1,0 +1,151 @@
+<div class="subtitleWrap">
+    <div class="pg-subTitle">{{selected_supplier?.supplier?.name}}</div>
+    <div class="pg-subTitle2">Transaction History</div>
+</div>
+<div class="">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="table-head col-xs-2">Date</div>
+                <div class="table-head col-xs-2">Order ID</div>
+                <div class="table-head col-xs-2">Invoice Amount</div>
+                <div class="table-head col-xs-2">Paid Amount </div>
+                <div class="table-head col-xs-2">Outstanding</div>
+                <div class="table-head col-xs-1">Actions</div>
+                <div class="table-head col-xs-1">
+                    <i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i>
+                </div>
+            </div>
+            <div class="row" *ngIf="searchOpen">
+                <div class="col-md-5">
+                    <select [formControl]="frmFilterSupplier" class="form-control inputFilter">
+                        <option value="" disabled selected>Select by type</option>
+                        <option value={{supplier._id}} *ngFor="let supplier of suppliers">{{supplier?.supplier?.name}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" placeholder="search here" class="searchInput" />
+                </div>
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-1 table-head">
+                    <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="card-list-item" *ngIf="invoices.length === 0 && !loading">
+                <div class="col-xs-12" style="text-align:center">
+                    No data available
+                </div>
+            </div>
+
+            <div class="card-list-item" *ngIf="invoices.length === 0 && loading">
+                <div class="col-xs-12" style="text-align:center">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="card-list-item" *ngFor="let details of invoices.data; let i=index;">
+                <div class="row">
+                    <div class="table-list col-xs-2">{{details.deliveryDate | date:'medium'}} </div>
+                    <div class="table-list col-xs-2">{{details.orderObject?.purchaseOrderNumber}}</div>
+                    <div class="table-list col-xs-2">{{details.invoiceAmount}}</div>
+                    <div class="table-list col-xs-2">
+                        <span *ngIf="details.amountPaid !== undefined">&#8358;{{details.amountPaid}}</span>
+                        <span *ngIf="details.amountPaid === undefined">&#8358;0</span>
+                    </div>
+                    <div class="table-list col-xs-2"> &#8358;{{checkForOutstanding(details)}}</div>
+                    <div class="table-list col-xs-1 td-iconCta-wrap pointer">
+                        <a (click)="newPaymentShow(details)" *ngIf="!details.paymentCompleted" class="payment-link"><span>Make Payment</span></a>
+                        <a (click)="PaymentHistoryShow(details)" class="payment-link"><span>Payment History</span></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-12">
+        <a id="floating-button">
+            <p class="plus">+</p>
+        </a>
+    </div>
+
+    <div *ngIf="newPayment" class="modal-overlay">
+        <app-make-payment (closeModal)="close_onClick($event)" (paymentItem)="onRefreshHistory($event)" [selectedInvoice]="selectedInvoice" id="form-modal" class="form-modal center-center"></app-make-payment>
+    </div>
+    <div *ngIf="paymentHistory">
+        <app-payment-history [selectedInvoice]="selectedInvoice" (closeModal)="closeHistory_onClick($event)"> </app-payment-history>
+    </div>
+
+
+
+
+    <!--<div class="survery">
+    <div class="">
+        <div class="">
+            <table class="table-responsive table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th><i class="fa fa-sort-alpha-asc"></i>No</th>
+                        <th><i class="fa fa-sort-alpha-asc"></i>Datee</th>
+                        <th> <i class="fa fa-sort-alpha-asc"></i>Order ID</th>
+                        <th><i class="fa fa-sort-alpha-asc"></i>Invoice Amount</th>
+                        <th><i class="fa fa-sort-alpha-asc"></i>Paid Amount</th>
+                        <th><i class="fa fa-sort-alpha-asc"></i>Outstanding</th>
+                        <th><i class="fa fa-sort-alpha-asc"></i>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7" class="td-col-span-6">
+                            <div class="col-md-8 left">
+                                <select [formControl]="frmFilterSupplier" class="form-control inputFilter">
+                                    <option value="" disabled selected>Select by type</option>
+                                    <option value={{supplier._id}} *ngFor="let supplier of suppliers">{{supplier?.supplier?.name}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 pull-right">
+                                <input type="text" placeholder="search here" class="searchInput" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="invoices.length === 0 && !loading">
+                        <td class="table-content" colspan="7" style="text-align: center !important; padding: 10px !important;"> No data available in table</td>
+                    </tr>
+                    <tr *ngIf="invoices.length === 0 && loading">
+                        <td class="table-content" colspan="7" style="text-align: center !important; padding: 10px !important;">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let details of invoices.data; let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{details.deliveryDate | date:'medium'}}</td>
+                        <td>{{details.orderObject?.purchaseOrderNumber}}</td>
+                        <td>{{details.invoiceAmount}}</td>
+                        <td>
+                            <span *ngIf="details.amountPaid !== undefined">&#8358;{{details.amountPaid}}</span>
+                            <span *ngIf="details.amountPaid === undefined">&#8358;0</span>
+                        </td>
+                        <td>&#8358;{{checkForOutstanding(details)}}</td>
+                        <td>
+                            <a (click)="newPaymentShow(details)" *ngIf="!details.paymentCompleted" class="payment-link"><span>Make Payment</span></a>
+                            <a (click)="PaymentHistoryShow(details)" class="payment-link"><span>Payment History</span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="col-md-12">
+                <a id="floating-button">
+                    <p class="plus">+</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="newPayment" class="modal-overlay">
+        <app-make-payment (closeModal)="close_onClick($event)" (paymentItem)="onRefreshHistory($event)" [selectedInvoice]="selectedInvoice" id="form-modal" class="form-modal center-center"></app-make-payment>
+    </div>
+    <div *ngIf="paymentHistory">
+        <app-payment-history [selectedInvoice]="selectedInvoice" (closeModal)="closeHistory_onClick($event)"> </app-payment-history>
+    </div>-->

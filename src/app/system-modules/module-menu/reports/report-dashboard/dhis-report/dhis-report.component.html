@@ -1,0 +1,14 @@
+<div class="inner-wrap-b body-wrap">
+  <div class="facility-title">{{pageInView}}</div>
+  <div class="rpt-wrap">
+    <ul class="top-links">
+      <i class="fa fa-home fa-2x blue-nav" (click)="back_dashboard()" aria-hidden="true"></i>
+      <li (click)="call_nhmis()" [class.top-links-active]="nhmis">NHMIS Report Summary</li>
+      <li (click)="call_registers()" [class.top-links-active]="registers">Registers</li>
+    </ul>
+    <!-- 
+<app-registers></app-registers> -->
+    <router-outlet></router-outlet>
+    <!-- <app-nhmis-summary></app-nhmis-summary> -->
+  </div>
+</div>

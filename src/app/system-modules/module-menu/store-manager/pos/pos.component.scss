@@ -1,0 +1,80 @@
+.pg-main-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.pos, .sales-history{
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.sales-history{
+    background: #eee;
+    min-height: 90vh;
+}
+.search-prod{
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    margin: 20px 0;
+}
+.pos-title{
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+.sales-history .pos-title{
+    margin-bottom: 20px;
+}
+.search-wrap{
+    position: relative;
+}
+.input-sugestions{
+    position: absolute;
+    top: 105%;
+    width: 100%;
+    min-height: 50px;
+    max-height: 280px;
+    background: #fff;
+    border: 1px solid #eee;
+    z-index: 2;
+}
+.input-sugestion{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.input-sugestion:hover{
+    background: #eee;
+}
+.summary-wrap{
+    margin: 20px 0;
+}
+.summary-item{
+    display: flex;
+    justify-content: space-between;
+}
+.summary-item-label{
+    font-size: 1.4rem; 
+}
+.summary-item-val{
+    font-size: 1.4rem;
+    padding: 5px;
+}
+.summary-item-val-total{
+    font-weight: bold;
+    font-size: 1.8rem;
+    border-top: 2px solid royalblue;
+    border-bottom: 2px solid royalblue;
+    padding: 5px;
+    color: royalblue;
+}
+.fa-times{
+    color: #ff2500;
+    cursor: pointer;
+}
+.cta-1{
+    width: 140px;
+    height: 38px;
+    border-radius: 7px;
+}

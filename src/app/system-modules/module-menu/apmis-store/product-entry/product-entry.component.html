@@ -1,0 +1,28 @@
+<div class="home-main" style="margin-top: 30px;">
+  <ul class="hm-tabs">
+    <li (click)="tab_click('initializeStore')" [class.hm-tab-active]='tab_initialize_store' class="hm-tab">Initialize
+      Store</li>
+    <li (click)="tab_click('purchaseList')" [class.hm-tab-active]='tab_purchase_list' class="hm-tab">Purchase List</li>
+    <li (click)="tab_click('purchaseOrder')" [class.hm-tab-active]='tab_purchase_order' class="hm-tab">Purchase Order</li>
+    <li (click)="tab_click('invoiceEntry')" [class.hm-tab-active]='tab_invoice_entry' class="hm-tab">Invoice Entry</li>
+    <li (click)="tab_click('suppliers')" [class.hm-tab-active]='tab_supplier' class="hm-tab">Suppliers</li>
+  </ul>
+
+
+
+  <div class="tab-content"  *ngIf="tab_initialize_store">
+    <app-initialize-store></app-initialize-store>
+  </div>
+  <div class="tab-content" *ngIf="tab_invoice_entry">
+      <app-invoice-entry></app-invoice-entry>
+  </div>
+  <div class="tab-content" *ngIf="tab_purchase_list">
+      <app-purchase-list></app-purchase-list>
+  </div>
+  <div class="tab-content"  *ngIf="tab_purchase_order">
+      <app-purchase-order></app-purchase-order>
+  </div>
+  <div class="tab-content"  *ngIf="tab_supplier">
+    <app-suppliers></app-suppliers>
+  </div>
+</div>

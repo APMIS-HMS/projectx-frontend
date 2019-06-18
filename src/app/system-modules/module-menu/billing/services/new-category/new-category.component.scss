@@ -1,0 +1,75 @@
+.frm-item-wrap {
+    text-align: center;
+}
+
+.facility-title {
+    margin-bottom: 20px;
+}
+
+.cta-1 {
+    font-size: 1.4rem;
+}
+
+.modal-baseWrap {
+    width: 340px;
+}
+
+.suggestionFeeds {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mat-lg-btn {
+    padding: 0 10px !important;
+    color: #fff;
+}
+
+.suggestedItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 185px;
+    background: #BDBDBD;
+    border-radius: 20px;
+    padding: 3px;
+    border: 0.5px solid #9E9E9E;
+    margin-top: 5px;
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+.suggestedItem:hover {
+    background: #9E9E9E;
+}
+
+.suggestedItem img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.suggetedName {
+    font-size: 1.2rem;
+}
+
+.apmis-blue {
+    color: #fff;
+    background: #043d72;
+    display: flex;
+}
+
+.text-center {
+    display: flex;
+    justify-content: center;
+}
+
+.text-center button {
+    color: #fff;
+    background-color: #0288D1 !important;
+    display: flex;
+    font-size: 1.4rem !important;
+}
+
+.input {
+    color: #000000;
+}

@@ -1,0 +1,288 @@
+@import '../../store-manager/landing-page/landing-page.component.scss';
+@import '../../clinic/check-in-patient/check-in-patient.component.scss';
+.card {
+    position: relative;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+    margin-top: 20px;
+    padding-bottom: 12px;
+    .card-header {
+        background: #337ab7;
+        color: #fff;
+        font-size: 1.2rem;
+        padding: 10px;
+        vertical-align: middle;
+        line-height: 30px;
+        border-bottom: solid 1px #fff;
+        font-weight: 600;
+        .table-head {
+            border-right: solid 1px #fff;
+            text-align: center;
+            .search-box {
+                margin-top: 10px;
+            }
+        }
+        .table-header-input {
+            background: rgba(255, 255, 255, 0.233);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+            font-size: 1.2rem !important;
+            height: 30px;
+        }
+        .table-header-select {
+            background: rgba(255, 255, 255, 0.233);
+            color: #dddddd;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+            height: 30px;
+            font-size: 1.2rem !important;
+        }
+        .table-head:last-of-type {
+            border: none;
+        }
+    }
+    .card-content {
+        font-size: 1.2px;
+        .table-list {
+            // border-right: solid 1px #aaa;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+    .card-header-box {
+        background: rgba(255, 255, 255, 0.16);
+        color: #fff;
+        border: none;
+        font-size: 1.2rem !important;
+        padding: 10px !important;
+        width: 100%;
+        height: 30px !important;
+        box-sizing: border-box;
+    }
+    .card-list-item {
+        padding: 10px;
+        border-bottom: solid rgb(204, 204, 204) 1px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        font-size: 1.2rem;
+        transition: 0.2s;
+    }
+    .options {
+        font-size: 1.2rem;
+        opacity: 0;
+        cursor: pointer;
+    }
+    .summary-title {
+        display: block;
+        padding: 10px;
+        padding-top: 20px;
+        font-size: 3rem;
+        color: #b3b3b3;
+        margin-bottom: 10px;
+        font-weight: 100;
+    }
+    .summary-footer {
+        width: 100%;
+        background: #33A6FF;
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    .chart-side {
+        padding-top: 110px !important;
+    }
+    .chart-title {
+        font-weight: 100;
+        font-size: 4rem;
+        color: #b3b3b3;
+        display: block;
+    }
+    .chart-subtitle {
+        font-weight: 900;
+        font-size: 1.2rem;
+        color: #b3b3b3;
+        display: block;
+    }
+}
+
+.searchInput {
+    margin-top: 0;
+    width: auto;
+    min-width: auto;
+}
+
+.action-btn {
+    padding: 0px;
+}
+
+.inPatient-activityTimeline {
+    .title {
+        text-align: center;
+    }
+    .timeline-headwrap {
+        padding: 10px 10px;
+        margin-bottom: 10px;
+    }
+    .timeline-active {
+        padding: 0 20px;
+        width: 100%;
+        height: 10px;
+    }
+    .product-details {
+        padding: 10px 0 10px 0;
+        table {
+            border: none;
+            tr {
+                background-color: #fff;
+                td {
+                    padding: 10px;
+                    border: none;
+                    &:first-child {
+                        color: #ccc;
+                    }
+                }
+            }
+        }
+    }
+    .btn-container {
+        padding: 30px;
+    }
+}
+
+
+/*new*/
+
+#presentation {
+    width: 480px;
+    height: 120px;
+    padding: 20px;
+    margin: auto;
+    background: #FFF;
+    margin-top: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    transition: all 0.3s;
+    border-radius: 3px;
+}
+
+#presentation:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    transition: all 0.3s;
+    transform: translateZ(10px);
+}
+
+#floating-button {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 69px;
+    right: -6px;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px #666;
+}
+
+.plus {
+    color: white;
+    position: absolute;
+    top: 0;
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    line-height: 47px;
+    font-size: 3.8rem;
+    font-weight: 300;
+    animation: plus-out 0.3s;
+    transition: all 0.3s;
+}
+
+#container-floating {
+    position: fixed;
+    width: 70px;
+    height: 70px;
+    bottom: 69px;
+    right: -6px;
+    z-index: 50px;
+}
+
+#container-floating:hover {
+    height: 400px;
+    width: 90px;
+    padding: 30px;
+}
+
+#container-floating:hover .plus {
+    animation: plus-in 0.15s linear;
+    animation-fill-mode: forwards;
+}
+
+.edit {
+    position: absolute;
+    top: 0;
+    display: block;
+    bottom: 0;
+    left: 0;
+    display: block;
+    right: 0;
+    padding: 0;
+    opacity: 0;
+    margin: auto;
+    line-height: 47px;
+    transform: rotateZ(-70deg);
+    transition: all 0.3s;
+    animation: edit-out 0.3s;
+}
+
+.nds {
+    width: 110px;
+    height: 40px;
+    border-radius: 50px;
+    position: fixed;
+    z-index: 300;
+    transform: scale(0);
+    cursor: pointer;
+}
+
+.survery input[type="checkbox"] {
+    margin: 3px 0 0;
+}
+
+.inPatient-activityTimeline .product-details table tr td:first-child {
+    color: #777;
+}
+
+.table-container {
+    /*display: flex;
+    justify-content: space-around;
+    align-items: center;*/
+    margin-right: auto;
+    margin-left: auto;
+    // position: absolute;
+    // top: -60px;
+    display: block;
+    width: 100%;
+    margin: 0;
+}
+
+td {
+    // padding: 5px;
+    // font-size: 1rem;
+    line-height: 2;
+}
+
+.mat-select {
+    height: auto;
+}

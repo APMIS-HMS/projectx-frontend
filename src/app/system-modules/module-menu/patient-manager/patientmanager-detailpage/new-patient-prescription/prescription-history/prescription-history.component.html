@@ -1,0 +1,52 @@
+<div class="div-space"></div>
+
+<div class="filterTop">
+  <h3>Patient Prescription History</h3>
+  <div class="tbl-header-rhs">
+
+    <div class="filters">
+      <h3>filter:</h3>
+    </div>
+    <div class="filter-btn">
+      <span>All</span>
+    </div>
+    <div class="filter-btn">
+      <select>
+        <option value="0">Clinic</option>
+      </select>
+    </div>
+    <div class="filter-btn">
+      <select>
+        <option value="0">Physician</option>
+      </select>
+    </div>
+    <div class="filter-btn">
+      <input type="date">
+    </div>
+  </div>
+</div>
+
+<div class="tbl-resp-wrap">
+  <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+    <thead>
+      <tr class="th-r1 th-xxx">
+        <th style="width: 5%;">S/N</th>
+        <th style="width: 75%;">Prescription</th>
+        <th style="width: 15%;">Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr class="th-xxx" *ngFor="let item of patientPrescriptions; let i =index">
+        <td>{{i+1}}</td>
+        <td>{{item.genericName}}
+          <span *ngFor="let reg of item?.regimen">
+            {{reg?.dosage }} - {{reg?.frequency }} for {{ reg?.duration }} {{ reg?.durationUnit }}
+          </span>
+        </td>
+        <td colspan="2">{{item.createdAt|date:'medium'}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

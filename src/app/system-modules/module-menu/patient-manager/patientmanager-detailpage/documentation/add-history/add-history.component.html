@@ -1,0 +1,20 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Add Family History</legend>
+    <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+  <div class="modal-baseWrap">
+      <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+      <div>
+          <div>
+            <mat-input-container>
+              <textarea matInput placeholder="Family History" [formControl]="historyFormCtrl"></textarea>
+            </mat-input-container>
+          </div>
+
+          <div class="cta-1">SAVE</div>
+      </div>
+  </div>
+</div>

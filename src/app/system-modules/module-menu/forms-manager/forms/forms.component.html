@@ -1,0 +1,58 @@
+<div class="pg-wrap">
+    <div class="survery">
+        <!-- <div class="pg-title">Form Generator</div> -->
+        <div class="container">
+            <div id="cover-select">
+                <mat-form-field>
+                    <mat-select class="select-width" placeholder="Forms" [formControl]="txtForm">
+                        <mat-option *ngFor="let item of forms" [value]="item._id">{{item.title}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span class="on-create-btn" (click)="onCreate()"><i class="fa fa-plus"></i></span>
+            </div>
+
+            <div class="formWrap">
+                <form [formGroup]="frm_document" novalidate>
+                    <div class="form-innerSect">
+                        <div class="dx-fieldset">
+                            <div class="dx-field" style="width:406px;">
+                                <mat-input-container class="example-full-width">
+                                    <input matInput mat-error placeholder="Form Name" formControlName="formName">
+                                </mat-input-container>
+                            </div>
+                            <div class="dx-field">
+                                <mat-form-field>
+                                    <mat-select placeholder="Scope Level" formControlName="scopeLevel">
+                                        <mat-option *ngFor="let item of scopeLevels" [value]="item._id">{{item.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="dx-field">
+                                <mat-form-field>
+                                    <mat-select placeholder="Document Type" formControlName="documentType">
+                                        <mat-option *ngFor="let item of documentTypes" [value]="item._id">{{item.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form [formGroup]="frm_checkboxGroup" novalidate>
+                    <div class="form-innerSect">
+                        <div class="checkbox-wrap">
+                            <div *ngFor="let control of frm_checkboxGroup['controls'].myValues['controls']; let i=index" class="checkbox-itemWrap">
+                                <div class="dx-field">
+                                    <div class="checkbox-label"></div>
+                                    <mat-checkbox (change)="onValueChanged($event,modules[i])" [value]="modules[i].checked" [formControl]="control">{{modules[i].name | titlecase}}</mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br><br>
+        <survey-editor [defaultStrings]="defaultStrings" [editorOptions]="editorOptions"></survey-editor>
+    </div>
+
+</div>

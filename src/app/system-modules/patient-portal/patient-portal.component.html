@@ -1,0 +1,37 @@
+<div class="portal-wrap">
+
+    <div class="menubar-wrap">
+        <div class="pg-title">Patient Portal</div>
+        <i (click)="innerMenuToggle()" class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+
+    <div class="content-sect">
+        <div class="menu-content-wrap">
+            <div class="mc-wrap">
+                <div *ngIf="innerMenuShow" class="nice-scroll mainmenu-content animated slideInLeft">
+
+                    <ul id="innerMenu-ul" class="innerMenu-ul">
+
+                        <li (click)="facilitySubmenuShow()" [routerLink]="['facility']"><i class="fa fa-home" aria-hidden="true"></i> <span>Home</span></li>
+                        <li (click)="employeeSubmenuShow()" [routerLink]="['employee-manager']"><i class="fa fa-calendar" aria-hidden="true"></i> <span>My Appointments</span></li>
+                        <li (click)="patientSubmenuShow()" [routerLink]="['patient-manager']"><i class="fa fa-medkit" aria-hidden="true"></i> <span>Medications</span></li>
+                        <li (click)="patientSubmenuShow()" [routerLink]="['ward-manager']"><i class="fa fa-heartbeat" aria-hidden="true"></i> <span>Investigations</span></li>
+                        <li (click)="patientSubmenuShow()" [routerLink]="['payment']"><i class="fa fa-stethoscope" aria-hidden="true"></i> <span>Vitals</span></li>
+                        <li (click)="patientSubmenuShow()" [routerLink]="['wallet']"><i class="fa fa-houzz" aria-hidden="true"></i> <span>Diagnosis/Symptoms</span></li>
+                        <li (click)="userSubmenuShow()" [routerLink]="['access-manager']"><i class="fa fa-file-text" aria-hidden="true"></i> <span>Problem History</span></li>
+
+                        <li (click)="facilitySubmenuShow()" [routerLink]="['clinic']"><i class="fa fa-medkit" aria-hidden="true"></i> <span>Allergies</span></li>
+                        <li (click)="employeeSubmenuShow()" [routerLink]="['employee-manager']"><i class="fa fa-file-text" aria-hidden="true"></i> <span>Home Medication</span></li>
+                        <li (click)="patientSubmenuShow()" [routerLink]="['store']"><i class="fa fa-plus-square" aria-hidden="true"></i> <span>Family History</span></li>
+                        <li (click)="patientSubmenuShow()" [routerLink]="['pharmacy']"><i class="fa fa-plus-square" aria-hidden="true"></i> <span>Social History</span></li>
+                        <li (click)="userSubmenuShow()" [routerLink]="['access-manager']"><i class="fa fa-file-text" aria-hidden="true"></i> <span>Resources</span></li>
+
+                        <li (click)="laboratorySubmenuShow()" [routerLink]="['laboratory']"><i class="fa fa-flask" aria-hidden="true"></i> <span>Questioniar</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <app-pp-home class="content-wrap"></app-pp-home>
+    </div>
+</div>

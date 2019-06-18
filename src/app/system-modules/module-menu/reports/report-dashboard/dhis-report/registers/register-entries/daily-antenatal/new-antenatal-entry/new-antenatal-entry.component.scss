@@ -1,0 +1,49 @@
+.form-group {
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+.form-group label{
+    display: block;
+    font-size: 1.4rem;
+}
+.form-group select, .form-group input{
+    padding: 5px;
+    width: 90%;
+}
+.form-group textarea{
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+.btn-wrap-x2{
+    margin-top: 20px;
+}
+.pretty label{
+    font-size: 1.4rem;
+}
+.check-group{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.check-group .form-group{
+    border: 1px solid #eee;
+    padding: 5px 10px;
+    background: #fafafa;
+}
+.sel-wrap{
+    margin-top: 10px;
+}
+.check-group-label{
+    color: #b6606e;
+}
+.label-nada{
+    color: transparent;
+}
+.frm-x2{
+    justify-content: flex-start;
+    margin-right: 10px !important;
+}
+.label-b{
+    color: rgb(0, 190, 127);
+}

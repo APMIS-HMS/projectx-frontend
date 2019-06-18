@@ -1,0 +1,68 @@
+<div class="quicklinks-wrap">
+    <div class="ql-title">Quick Links</div>
+
+    <div class="ql-sect">
+        <div class="ql-sect-title">Home</div>
+        <ul class="ql-links">
+            <li class="ql-link" routerLink="/dashboard/store">Home</li>
+        </ul>
+    </div>
+
+    <div class="ql-sect">
+        <div class="ql-sect-title">Inventory</div>
+        <ul class="ql-links">
+            <li class="ql-link" routerLink="/dashboard/inventory-manager/inventory">My Inventory</li>
+            <li class="ql-link" routerLink="/dashboard/inventory-manager/stock-transfer">Transfer Stock</li>
+            <li class="ql-link" routerLink="/dashboard/inventory-manager/stock-history">Transfer History</li>
+            <li class="ql-link" routerLink="/dashboard/inventory-manager/receive-stock">Recieve Stock</li>
+            <li class="ql-link" routerLink="/dashboard/inventory-manager/requisition">Requisition</li>
+            <li class="ql-link" routerLink="/dashboard/inventory-manager/reorder-level">Re-order Level</li>
+            <li class="ql-link" routerLink="/dashboard/inventory-manager/initialize-store">Initialize Store</li>
+            <!-- <li class="ql-link">Audit</li> -->
+        </ul>
+    </div>
+
+    <div class="ql-sect">
+        <div class="ql-sect-title">Purchase</div>
+        <ul class="ql-links">
+            <li class="ql-link" routerLink="/dashboard/purchase-manager/orders">Purchase Order</li>
+            <li class="ql-link" routerLink="/dashboard/purchase-manager/invoices">Invoices</li>
+            <li class="ql-link" routerLink="/dashboard/product-manager/suppliers">Suppliers</li>
+        </ul>
+    </div>
+
+    <div class="ql-sect">
+        <div class="ql-sect-title">Store</div>
+        <ul class="ql-links">
+            <li class="ql-link" routerLink="/dashboard/store/list">View Stores</li>
+            <li class="ql-link" (click)="onClickShowStoreProductType();">Store Product Category</li>
+        </ul>
+    </div>
+
+    <div class="ql-sect">
+        <div class="ql-sect-title">Product</div>
+        <ul class="ql-links">
+            <!-- <li class="ql-link" routerLink="/dashboard/product-manager/products">Product List</li> -->
+            <li class="ql-link" routerLink="/dashboard/inventory-manager/product-config">Product Configuration</li>
+            <!--<li class="ql-link" (click)="productCatPopShow()">Product Category</li>
+            <li class="ql-link" (click)="genericSlide()">Generics</li>
+            <li class="ql-link" (click)="manufacturerSlide()">Manufacturers</li>
+            <li class="ql-link" (click)="presentationSlide()">Presentation</li>
+            <li class="ql-link" (click)="routeSlide()">Route</li>
+            <li class="ql-link" (click)="strengthSlide()">Strength</li>-->
+        </ul>
+    </div>
+
+    <!-- <div class="ql-sect">
+        <div class="ql-sect-title">Config</div>
+        <ul class="ql-links">
+            <li class="ql-link" routerLink="/dashboard/store/list">Create Store</li>
+            <li class="ql-link" routerLink="/dashboard/product-manager/products">Create Product</li>
+            <li class="ql-link" routerLink="/dashboard/inventory-manager/initialize-store">Initialize Store</li>
+        </ul>
+    </div> -->
+</div>
+
+<div *ngIf="showStoreProductType" class="modal-overlay">
+    <app-store-product-type (closeModal)="closeOnClick($event)" class="form-modal center-center"></app-store-product-type>
+</div>

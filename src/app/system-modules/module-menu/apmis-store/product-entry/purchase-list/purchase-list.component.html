@@ -1,0 +1,73 @@
+<div class="tbl-btn-action" style="padding:none !important; cursor: pointer;" *ngIf="back_to_purchaseList">
+  <div class="action-pad">
+    <div (click)="backPurchaseList()">
+      <i style="color:  #0288D1; font-weight: bold;">Back to Purchase List</i>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="purchaseList">
+  <div class="tbl-btn-action">
+    <div class="action-pad">
+      <div (click)="showNewPurchaseList()" class="new-btn-blue">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <span>Add New Purchase List</span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="list-wrap" *ngFor="let purchaseList of purchaseListCollection">
+    <div class="action-lft">
+      <div>
+        <div class="list-con-wrap">
+          <div class="con-wrap">
+            <span>Date Generated</span>
+            <h3>{{purchaseList.createdAt| date:'fullDate'}}</h3>
+          </div>
+          <div class="con-wrap">
+            <span>Status</span>
+            <h3 *ngIf="purchaseList.isDraft===true">Pending</h3>
+            <h3 *ngIf="!purchaseList.isDraft===true">Pending</h3>
+          </div>
+          <div class="con-wrap">
+            <span>Action</span>
+            <div (click)="showPurchaseListDetail(purchaseList)" class="ft-btn">
+              <span>View Purchase List Items</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="list-con-wrap">
+          <div class="con-wrap">
+            <span>Supplier(s)</span>
+            <div class="sup-list">
+              <div class="sup-list-items" data-toggle="tooltip" data-placement="top" title="Click to make purchase"
+                *ngFor="let supplier of  purchaseList.suppliersId">
+                <h3 style="margin-block-end: 0em !important; margin-block-start: 0em !important;">{{supplier.name}}</h3>
+                <span>{{supplier.primaryContactPhoneNo}} | {{supplier.email}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class=" table-list col-xs-1 action-placeholder-hr">
+        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+        <div class="action-container shadow-RB">
+          <div class="action-item">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            <span>Edit List</span>
+          </div>
+          <div class="action-item" (click)="deleteSelectedPurchaseList(purchaseList)">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            <span>Delete List</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-new-purchase-list *ngIf="newPurcaseList"></app-new-purchase-list>
+<app-purchase-list-details [selectedPurchaseList]="selectedPurchaseList" *ngIf="purchaseListDetails"></app-purchase-list-details>

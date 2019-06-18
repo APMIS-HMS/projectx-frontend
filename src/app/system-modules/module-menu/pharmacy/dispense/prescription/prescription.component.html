@@ -1,0 +1,198 @@
+<div class="survey">
+    <div class="row patient-details">
+        <div class="col-xs-12" style="padding: 10px;width: 100%;">
+            <div class="col-xs-3" style="width:7%; float: left;">
+                <div *ngIf="prescriptionItems?.personDetails?.profileImageObject === undefined || prescriptionItems === null"><img src="assets/images/users/default.png"></div>
+                <img *ngIf="prescriptionItems?.personDetails?.profileImageObject !== undefined && prescriptionItems !== null" class="shadow" [src]="_facilityService.transform(prescriptionItems?.personDetails?.profileImageObject?.detailthumbnail)">
+                <!-- <img class="img-responsive" src="http://placeholder.pics/svg/30" /> -->
+            </div>
+            <div class="col-xs-9" style="width:93%; float: left;font-size: 16px;">
+                <div class="col-xs-6" style="float: left;">
+                    <small>APMIS ID: <b>{{ prescriptionItems?.personDetails?.apmisId }}</b></small><br>
+                    <small>Patient Name: <b>{{ prescriptionItems?.personDetails?.firstName }} {{ prescriptionItems?.personDetails?.lastName }}</b></small><br>
+                    <div *ngIf="!!prescriptionItems?.personDetails?.age">
+                        <small>Age: <b>{{ prescriptionItems?.personDetails?.age }}</b></small><br>
+                    </div>
+                </div>
+                <div class="col-xs-6" style="float: left;">
+                    <small>Gender: <b>{{ prescriptionItems?.personDetails?.gender }}</b></small><br>
+                    <div *ngIf="!!prescriptionItems?.clinicDetails">
+                        <small>Clinic: <b>{{ prescriptionItems?.clinicDetails?.clinicName}}</b></small><br>
+                    </div>
+                    <small>Prescription Priotity: <b>{{ prescriptionItems?.priority?.name}}</b></small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 5px; padding-left: 10px; text-align:center;">
+        <b>Prescribed by {{ prescriptionItems?.employeeName }}</b>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <app-add-prescription style="width:100%" [prescriptionItems]="prescriptionItems"></app-add-prescription>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 55px; margin-bottom: 20px;">
+        <div class="col-sm-12 col-md-12 text-center">
+            <button mat-raised-button class="mat-lg-btn" (click)="onClickSavePrescription();" [disabled]="disableSaveBtn">
+                <span *ngIf="saveBtn"><i class="fa fa-check"></i> Save</span>
+                <span *ngIf="savingBtn">Saving... <i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </div>
+    <div *ngIf="prescriptions.length > 0" class="row" style="margin-top: 55px; margin-bottom: 20px;">
+        <div class="col-sm-12 col-md-12" style="float: right; margin-top: -12px;">
+            <button class="refresh-payment btn btn-default" (click)="onClickRefreshPaymentStatus();" [disabled]="disablePaymentBtn">
+                <span *ngIf="paymentStatusText"><i class="fa fa-refresh"></i> Refresh Payment Status</span>
+                <span *ngIf="paymentStatusTexting">Getting Payment Status... <i class="fa fa-spinner fa-spin"></i></span>
+            </button>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px; margin-bottom: 5px; padding-left: 10px; text-align:center;">
+        <b>Prescribed items to dispense</b>
+    </div>
+    <div class="sec-border">
+        <div class="prod-row prodParent-header">
+            <div class="prod-rowItem item1">
+                <span style="padding-left: 3px;">Drugs</span>
+            </div>
+            <div class="prod-rowItem item2">
+                <span style="padding-left: 3px;">&nbsp;&nbsp;Qty<br>Billed</span>
+            </div>
+            <div class="prod-rowItem item3">
+                <span style="padding-left: 3px;">&nbsp;&nbsp; Qty<br>Dispensed</span>
+            </div>
+            <div class="prod-rowItem item4">
+                <span style="padding-left: 3px;">Balance</span>
+            </div>
+            <div class="prod-rowItem item5">
+                <span style="padding-left: 3px;">Unit Price</span>
+            </div>
+            <div class="prod-rowItem item6">
+                <span style="padding-left: 3px;">Payment</span>
+            </div>
+            <div class="prod-rowItem item7">
+                <span style="padding-left: 3px;">Status</span>
+            </div>
+        </div>
+        <div class="prodParent-content">
+            <div class="prodWrap" *ngFor="let prescription of prescriptions; let i = index;">
+                <div class="prod-row" (click)="onClickEachPrescription(i, prescription);">
+                    <div class="prod-rowItem item1">
+                        <span *ngIf="!prescription.isBilled">
+                            {{ prescription.genericName }} - {{ prescription.frequency }} for {{ prescription.duration }}<br>
+                        </span>
+                        <span *ngIf="prescription.isBilled">
+                            Drug: <b>{{ prescription?.productName?.name }}</b>, Cost: <b>{{ prescription.totalCost }}</b>
+                        </span>
+                    </div>
+                    <div class="prod-rowItem item2" style="text-align: right; display: block;">{{ prescription?.quantity }}</div>
+                    <div class="prod-rowItem item3" style="text-align: right; display: block;">{{ prescription?.quantityDispensed }}</div>
+                    <div class="prod-rowItem item4" style="text-align: right; display: block;">{{ prescription?.quantity - prescription?.quantityDispensed }}</div>
+                    <div class="prod-rowItem item5" style="text-align: right; display: block;">&#x20A6;{{ prescription?.cost }}</div>
+                    <div class="prod-rowItem item6">
+                        <div *ngIf="prescription.isExternal">
+                            <span style="width:100%;">External</span>
+                        </div>
+                        <div *ngIf="!prescription.isExternal">
+                            <span *ngIf="prescription.paymentCompleted" style="width:100%; color:#2e7d32">Paid</span>
+                            <span *ngIf="!prescription.paymentCompleted" style="width:100%; color:red">Not paid</span>
+                        </div>
+                    </div>
+                    <div class="prod-rowItem item7">
+                        <div *ngIf="prescription.isExternal">
+                            <span style="width:100%;">External</span>
+                        </div>
+                        <div *ngIf="!prescription.isExternal">
+                            <span *ngIf="prescription.quantity - prescription.quantityDispensed === 0 && prescription.isBilled" style="width: 100%; color:#2e7d32">Dispensed</span>
+                            <span *ngIf="(prescription.quantityDispensed >= 1) && (prescription.quantity - prescription.quantityDispensed !== 0)" style="width: 100%; color:mediumblue">Partly Dispensed</span>
+                            <span *ngIf="prescription.quantityDispensed === 0" style="width: 100%; color:red">Not Dispensed</span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="prescription.isOpen===true && (selectedPrescription._id === prescription._id)" class="prodBatch-wrap animated flipInX">
+                    <form #form="ngForm">
+                        <table>
+                            <thead>
+                                <tr class="" style="color: #000;">
+                                    <th>
+                                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                        <span style="padding-left: 3px;">Batch No</span>
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                        <span style="padding-left: 3px;">Expiry Date</span>
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                        <span style="padding-left: 3px;">&nbsp;&nbsp;Qty<br> in Store</span>
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                        <span style="padding-left: 3px;">Qty</span>
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                        <span style="padding-left: 3px;">Action</span>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let transaction of viewTransactions; let j = index;">
+                                    <td class="table-content">{{transaction?.batchNumber}}</td>
+                                    <td class="table-content">{{transaction?.expiryDate | date:'shortDate'}}</td>
+                                    <td class="table-content">{{transaction?.quantity}}</td>
+                                    <td class="table-content">
+                                        <mat-input-container class="example-full-width">
+                                            <input matInput type="number" placeholder="Quantity" name="{{j}}" ngModel>
+                                        </mat-input-container>
+                                    </td>
+                                    <td class="table-content">
+                                        <button mat-raised-button [disabled]="(prescription.quantity === prescription.quantityDispensed) || disableDispenseBtn" style="color:#000!important; background:#ccc!important;" (click)="onClickBillProduct(i, j, transaction, form.value)">
+                                            <span *ngIf="qtyDispenseBtn"><i class="fa fa-check"></i> Dispense</span>
+                                            <span *ngIf="qtyDispensingBtn">Dispensing... <i class="fa fa-spinner fa-spin"></i></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="viewTransactions.length === 0 && !batchLoading">
+                                    <td class="table-content" colspan="5" style="text-align: center"> No batch available, please bring items into store</td>
+                                </tr>
+                                <tr *ngIf="viewTransactions.length === 0 && batchLoading">
+                                    <td class="table-content" colspan="5" style="text-align: center">
+                                        <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="prodWrap text-center" *ngIf="prescriptions.length === 0 && !loading">
+                <div style="width: 100%; padding: 10px; font-size: 1.3rem;">No data to display in table</div>
+            </div>
+            <div class="prodWrap text-center" *ngIf="prescriptions.length === 0 && loading">
+                <div style="width: 100%; padding: 10px; font-size: 1.3rem;">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12" style="padding-top: 10px; padding-right:30px;">
+            <p class="pull-right" style="width: 100%; text-align: right;font-size: 20px;"><strong>Total Quantity:</strong> <span> {{totalQuantity }}</span></p>
+            <p class="pull-right" style="width: 100%; text-align: right;margin-top: -10px;font-size: 20px;"><strong>Total Bill:</strong> <span>&#x20A6; {{totalCost }}</span></p>
+        </div>
+    </div>
+    <div class="row margin-top-15" style="margin-bottom: 40px;">
+        <div class="col-sm-12 col-md-12 text-center">
+            <button mat-raised-button class="mat-lg-btn" (click)="onClickDispense();" [disabled]="disableDispenseAllBtn" style="padding: 15px 30px !important;">
+                <span *ngIf="dispenseAllBtnText"><i class="fa fa-check"></i> Dispense</span>
+                <span *ngIf="dispensingAllBtnText">Dispensing... <i class="fa fa-spinner fa-spin"></i></span>
+            </button>
+        </div>
+    </div>
+</div>

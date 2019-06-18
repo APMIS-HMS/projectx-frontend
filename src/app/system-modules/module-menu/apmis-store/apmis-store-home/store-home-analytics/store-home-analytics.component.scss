@@ -1,0 +1,39 @@
+.analytics{
+    display: flex;
+    flex-wrap: wrap;
+    .analytic{
+        display: flex;
+        padding: 0 5px;
+        justify-content: space-between;
+        align-items: center;
+        width: 288px;
+        height: 94px;
+        border-radius: 2px;
+        border: 1px solid #DDDDDD;
+        background: #F8F8F8;
+        color: #292929;
+        font-size: 14px;
+        line-height: 16px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        .analytic-lhs{
+            background: #fff;
+            width: 40%;
+            height: 79px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            line-height: 21px;
+        }
+        .analytic-rhs{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60%;
+            font-style: italic;
+        }
+    }
+}

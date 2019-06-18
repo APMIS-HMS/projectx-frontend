@@ -1,0 +1,91 @@
+@import '../../../pharmacy/prescription-list/prescription-list.component.scss';
+@import './../../reports.component.scss';
+@import './../dhis-report/registers/registers.component.scss';
+@import './../dhis-report/nhmis-summary/nhmis-summary.component.scss';
+@import './../clinic-management-report/diagnosis/diagnosis.component.scss';
+.card {
+    margin-top: 60px;
+}
+
+.optionGuide {
+    color: #828282;
+}
+
+.print {
+    color: #337ab7;
+    font-size: 2.5rem;
+    cursor: pointer;
+    margin-top: -105px;
+     :hover {
+        color: #828282;
+    }
+    padding-right: 10px;
+}
+
+.reportSummary {
+    font-size: 1.5rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.table-list {
+    color: #292929;
+    font-weight: 2rem;
+    font-size: 1.5rem;
+}
+
+.searchInputWrap {
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    /* padding-top: 10px; */
+    margin-left: 30px;
+}
+
+.mat-form-field-wrapper {
+    position: relative;
+    width: 63%;
+}
+
+.searchInputWrap i {
+    position: absolute;
+    color: #858585;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+.back {
+    font-size: 12px;
+    padding-left: 3px;
+    text-decoration: underline;
+}
+
+.filter {
+    display: block;
+    justify-content: center;
+}
+
+.secWrap-header {
+    text-align: center;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.select {
+    width: 150px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.inputWrap {
+    display: block;
+    margin: 2px auto;
+}
+
+//td
+//{
+//text-align : left;
+//}

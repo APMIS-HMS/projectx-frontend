@@ -1,0 +1,120 @@
+<div class="pp-card shadow-grey">
+  <div class="card-title">
+    <div>CHILD Immunization Register</div>
+    <!-- <div class="top-btns">
+      <div (click)="back_registers()" class="top-btn"><i class="fa fa-arrow-left"></i> Registers</div>
+    </div> -->
+  </div>
+
+  <div class="content-wrap">
+
+    <div class="tbl-resp-wrap">
+      <table class="workspace-tbl table" cellpadding="0" cellspacing="0" border="0.5">
+        <thead class="thead-light">
+          <tr>
+            <th colspan="32">
+              <div class="th1-wrap">
+                <div class="filters">
+                  <div class="filter">
+                    <input class="search" placeholder="search for patient...">
+                  </div>
+                </div>
+                <div class="tp-rhs">
+                  <div class="dr-wrap survery">
+                    <app-date-range [dateRange]="dateRange" (dateRangeChange)="setReturnValue($event)"></app-date-range>
+                    <span *ngIf="loadIndicatorVisible" class="fa fa-spinner fa-spin"></span>
+                  </div>
+                  <div (click)="newEntry()" class="th1-cta"><i class="fa fa-plus"></i> </div>
+                </div>
+              </div>
+            </th>
+          </tr>
+          <tr class="th-r1">
+            <th rowspan="2">S/N</th>
+            <th rowspan="2">Date of Child's Visit</th>
+            <th rowspan="2">Child's Name</th>
+            <th rowspan="2">Child's Card No.</th>
+            <th rowspan="2">Sex</th>
+            <th rowspan="2">Child's Follow-Up Address</th>
+            <th rowspan="2">Phone Number</th>
+            <th rowspan="2">DOB</th>
+            <th rowspan="2" class="table-col">OPV 0</th>
+            <th rowspan="2" class="table-col">Hep.B 0</th>
+            <th rowspan="2" class="table-col">BCG</th>
+            <th rowspan="2" class="table-col">OPV 1</th>
+            <th rowspan="2" class="table-col">PENTA 1</th>
+            <th rowspan="2" class="table-col">PCV 1</th>
+            <th rowspan="2" class="table-col">OPV 2</th>
+            <th rowspan="2" class="table-col">PENTA 2</th>
+            <th rowspan="2" class="table-col">PCV 2</th>
+            <th rowspan="2" class="table-col">OPV 3</th>
+            <th rowspan="2" class="table-col">PENTA 3</th>
+            <th rowspan="2" class="table-col">PCV 3</th>
+            <th colspan="2">Vitamin A</th>
+            <th rowspan="2">MEASCLES 1</th>
+            <th rowspan="2">YELLOW FEVER</th>
+            <th rowspan="2">MEASCLES 2</th>
+            <th rowspan="2">CONJUGATE A CSM</th>
+            <th rowspan="2" class="table-col">DPT 1</th>
+            <th rowspan="2" class="table-col">DPT 2</th>
+            <th rowspan="2" class="table-col">DPT 3</th>
+            <th rowspan="2" class="table-col">Hep.B 1</th>
+            <th rowspan="2" class="table-col">Hep.B 2</th>
+            <th rowspan="2">COMMENTS (if any)</th>
+
+          </tr>
+          <tr class="th-r2">
+            <th class="table-col">6 - 11</th>
+            <th class="table-col">11 - 23</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+              <td>1</td>
+            <td>11th Oct 2018</td>
+            <td>
+              <div class="empWrap">
+                <div class="list-img">
+                  <img src="assets/images/users/default.png">
+                </div>
+                <div>Okoro Sam Dede</div>
+              </div>
+            </td>
+            <td>BDJ/00023</td>
+            <td>Male</td>
+            <td>6, Aremu Olowokere, Mushin Lagos</td>
+            <td>08099009978</td>
+            <td>22/04/2017</td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-times red"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-times red"></i> </td>
+            <td><i class="fa fa-times red"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-times red"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-times red"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-times red"></i> </td>
+            <td><i class="fa fa-times red"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-times red"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-check green"></i> </td>
+            <td><i class="fa fa-times red"></i> </td>
+            <td><p class="comtBox">Child in perfect condition and good health</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="showNewEntry" class="modal-overlay">
+        <app-new-child-entry (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-child-entry>
+    </div>

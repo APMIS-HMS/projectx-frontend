@@ -1,0 +1,284 @@
+<div>
+    <div class="doc-mainWrap">
+        <div class="doc-contentArea">
+            <div class="clinicalNoteWrap">
+                <div class="actSect">
+                    <div class="actSect-header">
+                        <div (click)="newFamily_show()" class="act-wrap">
+                            <i *ngIf="newFamily" class="fa fa-minus" aria-hidden="true"></i>
+                            <i [hidden]="newFamily" class="fa fa-plus" aria-hidden="true"></i>
+                            <span>New Family</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="newFamily">
+                        <form class="frmNoteWrap" [formGroup]="frmNewBeneficiary" novalidate>
+                            <div class="frm-title">NEW Family</div>
+
+                            <div class="frm-x2">
+                                <div class="frm-item-wrap">
+                                    <mat-input-container>
+                                        <input matInput placeholder="Principal Surname" formControlName="surname">
+                                    </mat-input-container>
+                                </div>
+
+                                <div class="frm-item-wrap">
+                                    <mat-input-container>
+                                        <input matInput placeholder="Principal Othernames" formControlName="othernames">
+                                    </mat-input-container>
+                                </div>
+
+                                <div class="frm-item-wrap">
+                                    <mat-input-container>
+                                        <input matInput placeholder="Principal ID" formControlName="filNo">
+                                    </mat-input-container>
+                                </div>
+
+                                <div class="frm-item-wrap">
+                                    <mat-input-container>
+                                        <input matInput placeholder="Address" formControlName="address">
+                                    </mat-input-container>
+                                </div>
+
+                                <div class="frm-item-wrap">
+                                    <mat-input-container class="example-full-width">
+                                        <input type="email" matInput mat-error placeholder="Email"
+                                               formControlName="email">
+                                    </mat-input-container>
+                                </div>
+
+                                <div class="frm-item-wrap">
+                                    <mat-input-container class="example-full-width">
+                                        <input type="tel" matInput mat-error placeholder="Phone Number"
+                                               formControlName="phone">
+                                    </mat-input-container>
+                                </div>
+                                <div class="frm-item-wrap">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Gender" formControlName="gender">
+                                            <mat-option *ngFor="let gender of genders" [value]="gender._id">
+                                                {{gender.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="frm-item-wrap">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Status" formControlName="status">
+                                            <mat-option *ngFor="let status of statuses" [value]="status._id">
+                                                {{status.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+
+                        </form>
+
+                        <form [formGroup]="frmDependant">
+                            <div formArrayName="dependantArray" class="frmArrayWrap">
+                                <div class="frmArray"
+                                     *ngFor="let dependant of frmDependant.controls['dependantArray'].controls; let i = index;">
+                                    <div *ngIf="!dependant.value.readOnly" (click)="closeDependant(dependant, i)"
+                                         class="closeIcon"><i class="fa fa-times-circle-o" aria-hidden="true"></i></div>
+                                    <div formGroupName="{{i}}">
+                                        <div class="frmNoteWrap">
+                                            <div class="">Dependant Record</div>
+                                            <div>
+                                                <div class="dv-wrap">
+                                                    <div class="frm-x2 frmArray">
+                                                        <div class="frm-item-wrap">
+                                                            <mat-input-container>
+                                                                <input matInput placeholder="Surname"
+                                                                       formControlName="surname">
+                                                            </mat-input-container>
+                                                        </div>
+                                                        <div class="frm-item-wrap">
+                                                            <mat-input-container>
+                                                                <input matInput placeholder="Othernames"
+                                                                       formControlName="othernames">
+                                                            </mat-input-container>
+                                                        </div>
+
+                                                        <div class="frm-item-wrap">
+                                                            <mat-input-container class="example-full-width">
+                                                                <input type="email" matInput mat-error
+                                                                       placeholder="Email" formControlName="email">
+                                                            </mat-input-container>
+                                                        </div>
+
+                                                        <div class="frm-item-wrap">
+                                                            <mat-input-container class="example-full-width">
+                                                                <input type="tel" matInput mat-error
+                                                                       placeholder="Phone Number"
+                                                                       formControlName="phone">
+                                                            </mat-input-container>
+                                                        </div>
+
+                                                        <div class="frm-item-wrap">
+                                                            <mat-form-field>
+                                                                <mat-select placeholder="Gender"
+                                                                            formControlName="gender">
+                                                                    <mat-option *ngFor="let gender of genders"
+                                                                                [value]="gender._id">{{gender.name}}
+                                                                    </mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="frm-item-wrap">
+                                                            <mat-form-field>
+                                                                <mat-select placeholder="Status"
+                                                                            formControlName="status">
+                                                                    <mat-option *ngFor="let status of statuses"
+                                                                                [value]="status._id">{{status.name}}
+                                                                    </mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="frm-item-wrap">
+                                                                <mat-input-container>
+                                                                    <input matInput placeholder="Address" formControlName="address">
+                                                                </mat-input-container>
+                                                            </div>
+                                                    </div>
+                                                    <!--If this a new entry, simply remove the dependent record from the list
+                                                    otherwise we have to ask for confirmation before removing the depedant from the
+                                                    backend. this show be tracked with a variable-->
+                                                    <div (click)="closeDependant(dependant, i)" class="frmArrayBtn"><i
+                                                            class="fa fa-minus" aria-hidden="true"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                        <div style="padding: 10px;" >
+                            <button class="btn btn-primary" (click)="pushNewDependant()" >Add Dependent</button>
+                        </div>
+                        <div class="flex-button">
+                            <button [disabled]="!frmNewBeneficiary.valid || loading"
+                                    (click)="save(frmNewBeneficiary.valid, frmNewBeneficiary.value, frmDependant.valid, frmDependant)"
+                                    class="cta-1" [innerHTML]="updatePatientBtnText"></button>
+                            <button (click)="cancel()" class="cta-1">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- <div class="pg-subtitle">HMO List</div>  -->
+                <div class="tblWrapa" class="actSect">
+                    <mat-paginator [pageIndex]="0" [length]="beneficiaries.length" [pageSize]="pageSize"
+                                   (page)="pageEvent = $event; onPaginateChange($event)"
+                                   [pageSizeOptions]="pageSizeOptions">
+                    </mat-paginator>
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                        <tr>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                <span style="padding-left: 3px;">Principal</span>
+                            </th>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                <span style="padding-left: 3px;">Gender</span>
+                            </th>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                <span style="padding-left: 3px;">Client ID</span>
+                            </th>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                <span style="padding-left: 3px;">Role</span>
+                            </th>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                <span style="padding-left: 3px;">Address</span>
+                            </th>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                <span style="padding-left: 3px;">Email</span>
+                            </th>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                <span style="padding-left: 3px;">Phone</span>
+                            </th>
+                            <th></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        <tr>
+                            <td colspan="10">
+                                <div class="tbl-actionRow">
+                                    <!-- <div class="frm-item-wrap">
+                      <apmis-lookup [(ngModel)]="apmisLookupText"
+                      url="apmisLookupUrl" query="apmisLookupQuery" placeholder="Patient"
+                      isSocket="false" displayKey="apmisLookupDisplayKey"
+                      (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                    </div>
+
+                    <div class="frm-item-wrap">
+                      <apmis-lookup [(ngModel)]="apmisLookupText"
+                          url="apmisLookupUrl" query="apmisLookupQuery" placeholder="Practitioner"
+                          isSocket="false" displayKey="apmisLookupDisplayKey"
+                          (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                    </div>
+
+                    <div class="frm-item-wrap">
+                      <apmis-lookup [(ngModel)]="apmisLookupText"
+                          url="apmisLookupUrl" query="apmisLookupQuery" placeholder="Location"
+                          isSocket="false" displayKey="apmisLookupDisplayKey"
+                          (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                    </div> -->
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr *ngFor="let beneficiary of beneficiaries" (click)="show_beneficiaries()">
+                            <td>{{beneficiary.surname}} {{beneficiary.othernames}}</td>
+                            <td>{{beneficiary.gender}}</td>
+                            <td> {{beneficiary.filNo}}</td>
+                            <td>
+                                <div class="role">{{getRole(beneficiary)}}</div>
+                            </td>
+                            <td>{{beneficiary.address}}.</td>
+                            <td>{{beneficiary.email}}</td>
+                            <td>{{beneficiary.phone}}</td>
+                            <td class="action-placeholder" style="text-align:center;">
+                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                <div class="action-container shadow-RB">
+                                    <div (click)="addDependant(beneficiary)" class="action-item">
+                                        <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                        <span>Add Dependant</span>
+                                    </div>
+
+                                    <div (click)="showEdit(beneficiary)" class="action-item">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        <span>Edit Family</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <mat-paginator [pageIndex]="0" [length]="beneficiaries.length" [pageSize]="pageSize"
+                                   (page)="pageEvent = $event; onPaginateChange($event)"
+                                   [pageSizeOptions]="pageSizeOptions"> 
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

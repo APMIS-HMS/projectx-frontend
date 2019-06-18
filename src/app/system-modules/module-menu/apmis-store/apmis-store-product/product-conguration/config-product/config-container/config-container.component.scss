@@ -1,0 +1,68 @@
+.fa{
+    padding-right: 15px !important;
+    cursor: pointer;
+}
+.showi{
+    border: 5px solid green;
+}
+.disabled {
+    pointer-events: none;
+    background: gray;
+  }
+
+.modal-wraper{
+    width: auto;
+    height: auto;
+}
+
+.config-container{
+    display: flex;    
+    flex-wrap: wrap;
+}
+.config-layout{
+    display: block;
+    padding-top: 30px;
+    padding-right: 100px;
+}
+.config-wrap{
+	display: flex;
+	i{
+        margin: 15px;
+        padding-left: 200px;
+        align-self: flex-end;
+    }
+}
+.config-tags-wrap-x2{
+    display: flex;
+    align-items: center;    
+    justify-content: space-between;
+    padding-right: 45px;
+    span{
+        color: black;
+        font-weight: bold;
+    }
+    .fnt{
+        font-size: large;
+    }
+}
+
+.la{
+    padding-left: 40px;
+    justify-content: space-between;
+}
+
+.apmisSearch-wrap{
+    width: 30% !important; 
+    position: absolute;
+}
+
+.new-supp-base{
+   display: flex;
+    justify-content: space-between; 
+    margin-top: 40px;
+    .ot-cons{
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+    }
+}

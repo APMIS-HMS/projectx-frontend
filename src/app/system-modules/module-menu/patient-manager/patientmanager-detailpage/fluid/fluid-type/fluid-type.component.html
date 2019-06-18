@@ -1,0 +1,49 @@
+<div class="animated pulse"> 
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Fluid Type</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <div>
+            <form [formGroup]="frm_addfluid" novalidate>
+                <div class="frm-item-wrap">
+                    <mat-input-container>
+                        <input matInput mat-error placeholder="Fluid" formControlName="fluidname">
+                    </mat-input-container>
+                </div>
+                <div class="frm-item-wrap">
+                    <mat-input-container>
+                        <mat-select placeholder="Type" formControlName="fluidType">
+                            <mat-option [value]="'intake'">Intake</mat-option>
+                            <mat-option [value]="'output'">output</mat-option>
+                        </mat-select>
+                    </mat-input-container>
+                </div>
+                <div class="act-btn-wrap">
+                    <button class="small-btn" mat-raised-button (click)="addFluids()">Add Fluid</button>
+                </div>
+            </form>
+        </div>
+
+        <table cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+                <tr>
+                    <th>Fluid</th>
+                    <th>Type</th>
+                    <th style="text-align:center;">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let list of fluidsList">
+                    <td>{{list.name}}</td>
+                    <td>{{list.type}}</td>
+                    <td><div class="tbl-action"><i class="fa fa-trash" aria-hidden="true" (click)="deleteFluid(list._id)"></i></div></td>
+                </tr>
+            </tbody>
+      </table>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+.mainWrap{
+    position: relative;
+    width: 700px;
+    min-height: 300px;
+    border: 1px solid #eee;
+    margin: 40px 10px;
+}
+.pg-header{
+    text-align: center;
+    margin: 20px 0;
+}
+.pg-header img{
+    width: 85px;
+}
+.facility{
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+.listedFacilityDesc{
+    font-size: 1.2rem;
+}
+.searchInputWrap{
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+.searchInputWrap i{
+    position: absolute;
+    color: #939393;
+    margin-left: 10px;
+}
+.searchInput{
+    border: 1px solid #eee;
+    background: #FAFAFA;
+    border-radius: 7px;
+    padding: 7px;
+    padding-left: 30px;
+    text-align: center;
+    width: 100%;
+}
+.coveredEmployees{
+    margin-bottom: 20px;
+}
+.coveredEmployee{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+.coveredEmployee:hover{
+    background: #E0E0E0;
+}
+.coveredEmployee img{
+    width: 30px;
+    margin-right: 10px;
+}
+.nameImgWrap{
+    display: flex;
+    align-items: center;
+}
+.sectTitle {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    color: #535353;
+}
+.modal-overlay {
+    position: fixed;
+    top: 0px;
+    left: 0;
+}
+.btn-1{
+    width: 111px;
+    margin-bottom: 5px;
+}

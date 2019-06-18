@@ -1,0 +1,20 @@
+@import "../documentation/documentation.component.scss";
+
+td{
+    padding: 10px 0;
+    position: relative;
+}
+th{
+    color: #194985;
+    border-bottom: 1px solid #000;
+}
+.doc-cardWrap{
+    position: relative;
+    overflow: auto;
+}
+.doc-card2{
+    width: 100%;
+}
+.doc-cardWrap{
+    margin-top: 0;
+}

@@ -1,0 +1,141 @@
+@import "../../../../../globals/variables.scss";
+@import "../../../../../globals/normalize.scss";
+.pg-wrap {
+    margin: 20px 0;
+}
+
+.pg-title {
+    font-family: $font-titles;
+    width: 100%;
+    text-align: center;
+    font-size: 2.2rem;
+    color: #424242;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.1;
+    color: #3d4d5d;
+}
+
+.formWrap {
+    /*display: flex;*/
+    justify-content: space-around;
+    display: flex;
+}
+
+.form-innerSect {
+    border: 1px solid #eee;
+    padding: 5px;
+    width: 100%;
+    max-width: 572px;
+    height: 190px;
+    margin-bottom: 2px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.checkbox-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    height: 90%;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.checkbox-itemWrap .dx-field-value:not(.dx-switch):not(.dx-checkbox):not(.dx-button),
+.checkbox-itemWrap.dx-field-value-static {
+    width: 30%;
+    text-align: left;
+}
+
+.checkbox-itemWrap .dx-field-label {
+    width: 69%;
+    text-align: left;
+}
+
+.checkbox-itemWrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-right: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.dx-field {
+    width: 100%;
+    margin: 0 0 10px 0;
+    width: 200px;
+    display: inline-block;
+}
+
+// .add-form-container {
+//     width: 100%; 
+// }
+.dx-field-full {
+    width: 100%;
+    padding: 0 50px 0 80px;
+    dx-select-box {
+        width: 90%;
+        float: left;
+    }
+}
+
+.on-create-btn {
+    background-color: transparent;
+    border: none;
+    padding: 7px;
+    margin-left: 10px;
+    // float: right;
+    // position: absolute;
+    // top: 237px;
+}
+
+#cover-select {
+    max-width: 100%;
+}
+
+
+/*
+#cover-select {
+    width: 96.9%;
+    display: table;
+}
+.survery .container {
+    padding:0;
+}
+*/
+
+@media only screen and (max-width:768px) {
+    /*.survery .container {
+       padding-left: 0;
+       width: 1179px;
+   }
+   #cover-select {
+    width: 40%;
+    display: block;
+   }*/
+    #cover-select {
+        max-width: 50%;
+    }
+    .formWrap {
+        display: block;
+    }
+}

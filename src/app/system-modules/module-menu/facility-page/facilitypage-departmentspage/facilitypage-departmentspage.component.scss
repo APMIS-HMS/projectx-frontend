@@ -1,0 +1,246 @@
+@import "../facility-page.component.scss";
+@import "../facility-page-home.component.scss";
+
+td{
+    padding: 10px 0;
+}
+.headers{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.headers1{
+    margin-bottom: 10px;
+}
+.headers2{
+    border-bottom: 1px solid #f5f5f5;
+    margin-top: 20px;
+}
+.block-title{
+    font-weight: bold;
+    font-size: 2rem;
+    color: #757575;
+    margin-left: 10px;
+}
+.block-title2{
+    font-weight: normal;
+    font-size: 1.8rem;
+    color: #757575;
+    background: #f5f5f5;
+    padding: 10px;
+}
+.block-title-bar{
+    width: 100%;
+    text-align: center;
+    background: #0288D1;
+    padding: 5px;
+    border-radius: 7px;
+    color: #fff;
+    font-size: 1.4rem;
+}
+.block1{
+    border: 1px solid #f5f5f5;
+}
+.block2{
+    position: relative;
+    margin: 40px 0px;
+}
+.unit-ico-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.module-menu{
+    margin: 10px 0;
+    color: #0288D1;
+    font-size: 1.2rem;
+}
+.module-menu span:hover{
+    border-bottom: 1px solid #0288D1;
+}
+.unit-ico-wrap .del{
+    color: #ff2500;
+    font-size: 2rem;
+}
+
+.lhs {
+    padding: 0;
+}
+.flex-display {
+    display: flex;
+    align-items: center;
+}
+.fa-done {
+    top:30px;
+}
+.done-ico {
+    top: 30px;
+}
+.goback-btn {
+    font-size: 1.6rem;
+    font-family: "Josefin Sans", sans-serif;
+    color: #BDBDBD;
+    margin: 0;
+    position: absolute;
+    right: 179px;
+    top: -22px;
+    cursor: pointer;
+}
+.inner-menu1-wrap{
+    top: -22px;
+}
+.edit-ico, .done-ico, .del-ico {
+    position: relative;
+    right: auto;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1.8rem;
+}
+
+
+
+.second-menu-c {
+    position: absolute; text-align: right; top: -24px; right: 15px;
+}
+
+.btning {
+    padding: 5px 5px;
+}
+
+.empWrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+ul.topmenuwrap { 
+    position: absolute;
+    top: -25px;
+    right: 22px;
+    font-size: 1.2rem;
+    color: #0288D1;
+}
+.apmis-blue {
+     color: #fff;
+    background: #0288D1;
+}
+
+ul.topmenuwrap li {
+    border: 1px solid #0288D1;
+    padding: 3px 5px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+ul.topmenuwrap li:hover {
+    border: 1px solid #0288D1;
+    background: #0288D1;
+    color: #000;
+}
+
+td {
+    position: relative;
+}
+
+.workspace-listWrap {
+    position: absolute;
+    bottom: 100%;
+    display: none;
+    padding: 2px;
+    background: #ddd;
+    z-index: 200;
+    border: 1px solid #989898;
+    border-radius: 7px;
+    font-size: 1.2rem;
+}
+
+.td-worspace:hover {
+    .workspace-listWrap { 
+        display: block;
+    }
+}
+
+.workspace-listWrap:hover {
+    display: block;
+}
+
+.workspace-listItem {
+    padding: 5px 10px;
+}
+
+.workspace-listItem:hover {
+    background: #D0D3D4;
+}
+
+.workspace-listItem span {
+    padding-right: 2px;
+}
+
+.workspace-listItem i {
+    cursor: pointer;
+}
+
+.workspace-listItem i:hover {
+    color: #ff2500;
+}
+
+.list-img {
+    margin: 0 15px;
+}
+
+.pointer-wrap {
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.pointer-wrap i {
+    position: absolute;
+    font-size: 3.5rem;
+    color: #989898;
+    top: -10px;
+    right: 20px;
+    z-index: 1;
+}
+
+.td-ctaWrap {
+    position: relative;
+}
+
+.del-confirmBox {
+    position: absolute;
+    bottom: 100%;
+    display: block;
+    padding: 2px;
+    background: #ddd;
+    z-index: 200;
+    border: 1px solid #989898;
+    border-radius: 7px;
+    font-size: 1.2rem;
+}
+
+.confirm-options {
+    position: absolute;
+    top: -26px;
+    right: 0;
+    font-size: 1.2rem;
+    color: #0288D1;
+}
+
+.confirm-options .option {
+    border: 1px solid #0288D1;
+    padding: 3px 5px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.confirm-options .option:hover {
+    border: 1px solid #0288D1;
+    background: #0288D1;
+    color: #000;
+}
+.page-title {
+    text-align: left;
+    position: absolute;
+}
+

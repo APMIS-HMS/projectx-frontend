@@ -1,0 +1,18 @@
+.body-wrap{
+    display: flex;
+    justify-content: space-between;
+}
+.list-wrap{
+    width: 300px;
+}
+.entry-detail{
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+.list-wrap{
+    background: #eee !important;
+}
+.card-title{
+    font-size: 1.6rem !important;
+}

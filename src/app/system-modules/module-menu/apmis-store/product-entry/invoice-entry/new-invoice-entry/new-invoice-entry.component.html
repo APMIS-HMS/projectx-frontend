@@ -1,0 +1,59 @@
+<h3>Inventory Entry</h3>
+<span>Add invoices to store with or without purchase order, select the option that best fits</span>
+
+<div class="dual-btn-wrap">
+  <div (click)="switcher1_click()" [class.dual-active]="switchView" class="dual-btn">Fom Purchase Order</div>
+  <div (click)="switcher2_click()" [class.dual-active]="!switchView" class="dual-btn">No Purchase Order</div>
+</div>
+
+<div class="div-space"></div>
+<app-from-purchase-order (invoiceAmountEvent)="receiveInvoiceAmount($event)" *ngIf="switchView"></app-from-purchase-order>
+<app-no-purchase-order (invoiceAmountEvent)="receiveInvoiceAmount($event)" *ngIf="!switchView"></app-no-purchase-order>
+
+<div class="div-space"></div>
+
+<hr>
+<div>
+  <div class="input-group-x2">
+    <div class="InputGroup" style="margin-left:30px;">
+      <input [formControl]="invoiceNo" class="customInput" type="text" required>
+      <span class="highlight"></span>
+      <label class="customLabel">Invoice No:</label>
+    </div>
+    <div class="InputGroup" style="margin-left:30px;">
+      <input [formControl]="invoiceAmount" class="customInput" type="text" required>
+      <span class="highlight"></span>
+      <label class="customLabel">Amount:</label>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="input-group-x2">
+    <div class="InputGroup" style="margin-left:30px;">
+      <input [formControl]="discount" class="customInput" type="text" required>
+      <span class="highlight"></span>
+      <label class="customLabel">Discount:</label>
+    </div>
+    <div class="InputGroup" style="margin-left:30px;">
+      <input [formControl]="vat" class="customInput" type="text" required>
+      <span class="highlight"></span>
+      <label class="customLabel">VAT:</label>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="InputGroup" style="margin-left:30px;">
+    <textarea [formControl]="remark" class="customInput"></textarea>
+    <span class="highlight"></span>
+    <label class="customLabel">Remark</label>
+  </div>
+</div>
+<div class="div-space"></div>
+
+<hr>
+<div class="sv-btn-container">
+  <h3 class="sel-txt">Enter invoice with 200 items</h3>
+  <div [class.disabled]="validate()" (click)="submit()" class="new-btn-solid-blue">
+    <span>Enter Invoice</span>
+  </div>
+</div>

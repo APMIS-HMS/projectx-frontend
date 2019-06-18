@@ -1,0 +1,267 @@
+<div>
+    <div class="doc-mainWrap">
+        <div class="doc-contentArea">
+            <div class="clinicalNoteWrap">
+                <div class="actSect">
+                    <div class="actSect-header">
+                        <div (click)="newTemplate_show(true)" class="act-wrap">
+                            <i *ngIf="newTemplate" class="fa fa-minus" aria-hidden="true"></i>
+                            <i [hidden]="newTemplate" class="fa fa-plus" aria-hidden="true"></i>
+                            <span>New Template</span>
+                        </div>
+                    </div>
+
+                    <form class="frmNoteWrap" *ngIf="newTemplate" [formGroup]="frmnewTemplate" novalidate>
+                        <div class="frm-title">New Template</div>
+                        <div class="frm-x2">
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Type" formControlName="type">
+                                        <mat-option value="Documentation" selected>Documentation</mat-option>
+                                        <mat-option value="Order Set">Order Set</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <input matInput placeholder="Template Name" formControlName="name">
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="isOrderSet" class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Select Diagnosis" formControlName="diagnosis">
+                                        <mat-option value="Malaria">Malaria</mat-option>
+                                        <mat-option value="Yellow Fever">Yellow Fever</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Set Visibility" formControlName="visibility">
+                                        <mat-option *ngFor="let item of scopeLevels" [value]="item.name">{{item.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="frm-item-wrap chk-item" style="color:#777;font-size:12px;">
+                                <mat-checkbox formControlName="isEditable">Editable By Others</mat-checkbox>
+                            </div>
+                        </div>
+
+                        <div *ngIf="isDocumentation" class="template-sect animated fadeIn">
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Select Form" formControlName="docFrmList">
+                                        <mat-option *ngFor="let item of forms" [value]="item">{{item.title}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="docFrmArea">
+                                <div class="jsonFrnWrap" *ngIf="showDocument">
+                                    <survey #surveyjs [isTemplate]="isTemplate" [json]="json"></survey>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="isOrderSet" class="template-sect animated fadeIn">
+                            <div class="frm-title">Category</div>
+                            <mat-radio-group formControlName="category">
+                                <div class="frm-x3">
+                                    <div class="frm-item-wrap chk-item">
+                                        <mat-radio-button (click)="onClickRadioBtn('medication');" value="medication">Medication</mat-radio-button>
+                                    </div>
+                                    <div class="frm-item-wrap chk-item">
+                                        <mat-radio-button (click)="onClickRadioBtn('laboratory');" value="laboratory">Laboratory Investigation</mat-radio-button>
+                                    </div>
+                                    <div class="frm-item-wrap chk-item">
+                                        <mat-radio-button (click)="onClickRadioBtn('procedure');" value="prodecure">Procedure</mat-radio-button>
+                                    </div>
+                                    <div class="frm-item-wrap chk-item">
+                                        <mat-radio-button (click)="onClickRadioBtn('nursingCare');" value="nursingCare">Nursing Care</mat-radio-button>
+                                    </div>
+                                    <div class="frm-item-wrap chk-item">
+                                        <mat-radio-button (click)="onClickRadioBtn('physicianOrder');" value="physicianOrder">Physician Order</mat-radio-button>
+                                    </div>
+                                </div>
+                            </mat-radio-group>
+
+                            <div *ngIf="showMedService" class="service-wrap">
+                                <div class="frm-title">Medication</div>
+                                <!--<app-template-medication></app-template-medication>-->
+                                <app-template-drug></app-template-drug>
+                            </div>
+
+                            <div *ngIf="showProcedureService" class="service-wrap">
+                                <div class="frm-title">Procedure</div>
+                                <app-template-procedure></app-template-procedure>
+                            </div>
+
+                            <div *ngIf="showPhysicianOrderService" class="service-wrap">
+                                <div class="frm-title">Physician Order</div>
+                                <app-template-physician-order></app-template-physician-order>
+                            </div>
+
+                            <div *ngIf="showLabService" class="service-wrap">
+                                <div class="frm-title">Laboratory Investigation</div>
+                                <app-template-lab></app-template-lab>
+                            </div>
+
+                            <div *ngIf="showNursingCareService" class="service-wrap">
+                                <div class="frm-title">Nursing Care</div>
+                                <app-template-nursing-care></app-template-nursing-care>
+                            </div>
+                            <div class="tblWrapa actSect">
+                                <table cellpadding="0" cellspacing="0" border="0.5">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                                <span style="padding-left: 3px;">Service</span>
+                                            </th>
+                                            <th>
+                                                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                                <span style="padding-left: 3px;">Item</span>
+                                            </th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="getCondition();">
+                                            <td class="text-center" colspan="3"> No data available in table</td>
+                                        </tr>
+                                        <tr *ngFor="let medication of orderSet.medications; let i=index;">
+                                            <td>Medication</td>
+                                            <td>{{ medication.genericName }}<br>
+                                                <span *ngFor="let reg of medication?.regimen">
+                                                  {{reg?.dosage }} - {{reg?.frequency }} for {{ reg?.duration }} {{ reg?.durationUnit }},
+                                                </span>
+                                                {{ medication?.patientInstruction }}
+                                                </td>
+                                            <td (click)="deleteOrderSetItem(i, medication, 'medication');" class=" action-placeholder " style="text-align:center; ">
+                                                <i class="fa fa-times" aria-hidden="true "></i>
+                                            </td>
+                                        </tr>
+                                        <tr *ngFor="let investigation of orderSet.investigations; let i=index;">
+                                            <td>Investigation</td>
+                                            <td>{{ investigation.name }}</td>
+                                            <td (click)="deleteOrderSetItem(i, investigation, 'investigation');" class=" action-placeholder " style="text-align:center; ">
+                                                <i class="fa fa-times" aria-hidden="true "></i>
+                                            </td>
+                                        </tr>
+                                        <tr *ngFor="let procedure of orderSet.procedures; let i=index;">
+                                            <td>procedure</td>
+                                            <td>{{ procedure.name }}</td>
+                                            <td (click)="deleteOrderSetItem(i, procedure, 'procedure');" class=" action-placeholder " style="text-align:center; ">
+                                                <i class="fa fa-times" aria-hidden="true "></i>
+                                            </td>
+                                        </tr>
+                                        <tr *ngFor="let physicianOrder of orderSet.physicianOrders; let i=index;">
+                                            <td>Physician Order</td>
+                                            <td>{{ physicianOrder.name }}</td>
+                                            <td (click)="deleteOrderSetItem(i, physicianOrder, 'physicianOrder');" class=" action-placeholder " style="text-align:center; ">
+                                                <i class="fa fa-times" aria-hidden="true "></i>
+                                            </td>
+                                        </tr>
+                                        <tr *ngFor="let nursingCare of orderSet.nursingCares; let i=index;">
+                                            <td>Nursing Care</td>
+                                            <td>{{ nursingCare.name }}</td>
+                                            <td (click)="deleteOrderSetItem(i, nursingCare, 'nursingCare');" class=" action-placeholder " style="text-align:center; ">
+                                                <i class="fa fa-times" aria-hidden="true "></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="frmNoteWrap" *ngIf="newTemplate && isOrderSet" style="padding-top:10px;margin-top:-10px;text-align: center;">
+                        <button mat-raised-button [disabled]="!frmnewTemplate.valid || disableSaveBtn" (click)="save(frmnewTemplate.valid, frmnewTemplate.value);">
+                        <span *ngIf="saveTemplateText">Save Template</span>
+                        <span *ngIf="savingTemplateText">Saving Template... <i class="fa fa-spinner fa-spin"></i></span>
+                        <span *ngIf="editTemplateText">Edit Template</span>
+                        <span *ngIf="editingTemplateText">Editing Template... <i class="fa fa-spinner fa-spin"></i></span>
+                      </button>
+                    </div>
+                </div>
+
+                <div *ngIf="isDocumentation" class="tblWrapa actSect ">
+                    <table cellpadding="0 " cellspacing="0 " border="0.5 ">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc " aria-hidden="true "></i>
+                                    <span style="padding-left: 3px; ">Date Created</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc " aria-hidden="true "></i>
+                                    <span style="padding-left: 3px; ">Template Title</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc " aria-hidden="true "></i>
+                                    <span style="padding-left: 3px; ">Documentation Form</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc " aria-hidden="true "></i>
+                                    <span style="padding-left: 3px; ">Visibility</span>
+                                </th>
+                                <th>Editable By Others</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="10 ">
+                                    <div class="tbl-actionRow ">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let template of templates">
+                                <td (click)="editTemplate(template) ">{{template.createdAt | date:'shortDate'}}</td>
+                                <td>{{template.name}}</td>
+                                <td>{{template.formDetails}}</td>
+                                <td>{{template.visibility}}</td>
+                                <td>{{getIsEditable(template.isEditable)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="isOrderSet" class="tblWrapa actSect ">
+                    <table cellpadding="0 " cellspacing="0 " border="0.5 ">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc " aria-hidden="true "></i>
+                                    <span style="padding-left: 3px; ">Date Created</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc " aria-hidden="true "></i>
+                                    <span style="padding-left: 3px; ">Template Title</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc " aria-hidden="true "></i>
+                                    <span style="padding-left: 3px; ">Visibility</span>
+                                </th>
+                                <th>Editable By Others</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="10 ">
+                                    <div class="tbl-actionRow ">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let template of templates">
+                                <td (click)="editTemplate(template) ">{{template.createdAt | date:'shortDate'}}</td>
+                                <td>{{template.name}}</td>
+                                <td>{{template.visibility}}</td>
+                                <td>{{getIsEditable(template.isEditable)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

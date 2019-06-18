@@ -1,0 +1,63 @@
+<div class="mainWrap">
+
+  <div class="pg-header">
+    <img src="assets/images/logos/default.jpg">
+    <div class="txtWrap">
+      <div class="facility">Continental Hospital</div>
+      <div class="listedFacilityDesc">500 Employees Covered</div>
+    </div>
+  </div>
+
+  <div class="searchInputWrap">
+    <input type="search" autofocus class="searchInput" placeholder="search organizations">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </div>
+
+  <div class="coveredEmployees">
+    <div class="sectTitle">Covered Employee List</div>
+    <div (click)="addEmpShow()" class="btn-1 btn-blue"><i class="fa fa-plus-square" aria-hidden="true"></i> Add Employee</div>
+
+    <div (click)="dependants_popup()" class="coveredEmployee color1">
+      <div class="nameImgWrap">
+        <img src="assets/images/users/default.png">
+        <div class="coveredEmployeeName">Samuel Davids</div>
+      </div>
+      <div class="coveredEmployeeDependantCount">08032323434</div>
+      <div class="coveredEmployeeDependantCount">5 Dependants</div>
+    </div>
+
+    <div class="coveredEmployee color2">
+      <div class="nameImgWrap">
+        <img src="assets/images/users/default.png">
+        <div class="coveredEmployeeName">Samuel Davids</div>
+      </div>
+      <div class="coveredEmployeeDependantCount">08032323434</div>
+      <div class="coveredEmployeeDependantCount">5 Dependants</div>
+    </div>
+
+    <div class="coveredEmployee color1">
+      <div class="nameImgWrap">
+        <img src="assets/images/users/default.png">
+        <div class="coveredEmployeeName">Samuel Davids</div>
+      </div>
+      <div class="coveredEmployeeDependantCount">08032323434</div>
+      <div class="coveredEmployeeDependantCount">5 Dependants</div>
+    </div>
+
+    <div class="coveredEmployee color2">
+      <div class="nameImgWrap">
+        <img src="assets/images/users/default.png">
+        <div class="coveredEmployeeName">Samuel Davids</div>
+      </div>
+      <div class="coveredEmployeeDependantCount">08032323434</div>
+      <div class="coveredEmployeeDependantCount">5 Dependants</div>
+    </div>
+  </div>
+
+  <div *ngIf="personDependants" class="modal-overlay">
+    <app-person-dependants (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-person-dependants>
+  </div>
+  <div *ngIf="addEmployee" class="modal-overlay">
+    <app-add-employee (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-employee>
+  </div>
+</div>

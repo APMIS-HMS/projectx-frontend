@@ -1,0 +1,46 @@
+<div class="pp-card shadow-grey">
+
+    <div class="card-title" style="background:#eee;padding:5px 0;">HMO List</div>
+
+    <ul class="pg-menuWrap">
+        <li (click)="tab1_click()" [class.pg-menuActive]="tab1">
+            <i class="fa fa-pause" aria-hidden="true"></i> Pending Bills</li>
+        <li (click)="tab2_click()" [class.pg-menuActive]="tab2">
+            <i class="fa fa-history" aria-hidden="true"></i>Billing History</li>
+    </ul>
+    <div *ngIf="tab1">
+        <div class="card-title">Pending Bills</div>
+        <div *ngIf="loading" style="text-align: center;  padding:10px; min-height: 40px;">
+            <apmis-spinner></apmis-spinner>
+        </div>
+        <hmo-billing-grouping [newData]="newDataPending" (itemSelected)="billDetail($event)"></hmo-billing-grouping>
+       
+        
+    </div>
+    <div *ngIf="tab2">
+
+        <div class="x2">
+            <div class="card-title">Billing History</div>
+            <button class="btn-norm" (click)="hmo_report()"><i class="fa fa-file"></i> &nbsp; Generate Report</button>
+        </div>
+        <div *ngIf="loading" style=" text-align: center; padding:10px; min-height: 40px;">
+            <apmis-spinner></apmis-spinner>
+        </div>
+        <hmo-billing-grouping [newData]="newData" (itemSelected)="billHistoryDetail($event)"></hmo-billing-grouping>
+        <div style="padding:4px 10px; background-color: #d5e4f9;">
+            <h4 style="font-size: 16px;">Grand Total: <span style="float:right"><naira-currency></naira-currency> {{grandTotal | number}}</span>    </h4>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="billDetail_show" class="modal-overlay">
+    <app-hmo-bill-detail (closeModal)="close_onClick($event)" (refreshBills)="onRefreshBills($event)" [selectedBill]="selectedBill"
+        id="form-modalaa" class="form-modal center-center"></app-hmo-bill-detail>
+</div>
+<div *ngIf="billHistoryDetail_show" class="modal-overlay">
+    <app-hmo-bill-history-detail (closeModal)="close_onClick($event)" [selectedBill]="selectedBill" id="form-modalee"
+        class="form-modal center-center"></app-hmo-bill-history-detail>
+</div>
+<div *ngIf="hmoReport_show" class="modal-overlay">
+    <app-hmo-report (closeModal)="close_onClick($event)" [selectedBill]="selectedBill" id="form-modaldd" class="form-modal center-center"></app-hmo-report>
+</div>

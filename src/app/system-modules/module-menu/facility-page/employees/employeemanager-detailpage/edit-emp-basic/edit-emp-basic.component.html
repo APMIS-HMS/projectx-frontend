@@ -1,0 +1,162 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick($event)" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Facility Setup</legend>
+        <div class="modal_mini_title">Edit Employee's Info</div>
+    </div>
+
+    <div class="modal-baseWrap" *ngIf="departmentBool">
+
+        <!-- <div class="infoAlert"><i class="fa fa-info-circle" aria-hidden="true"></i>Note that a verification token will be sent to the number supplied
+        below</div> -->
+
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+        <div class="menuBar-facilityName">
+            <div class="menubar_facilityLogo orgLogo-wrap">
+                <img src="../../../../../../assets/images/users/default.png">
+            </div>
+            <div class="basic-info-wrap">
+                <div class="basic-info-name">{{selectedPerson.lastName}} {{selectedPerson.firstName}}</div>
+                <div class="basic-info-others">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>{{selectedPerson.email}}</div>
+                <div class="basic-info-others">
+                    <i class="fa fa-phone" aria-hidden="true"></i>{{selectedPerson.primaryContactPhoneNo}}</div>
+            </div>
+            <!-- <div class="upload-btn-wrapper">
+                <button class="upload-btn">Change Image</button>
+                <input type="file" name="myfile" />
+            </div> -->
+        </div>
+        <form [formGroup]="facilityForm1" novalidate (submit)="saveDepartment()">
+
+            <mat-form-field>
+                <mat-select placeholder="Department" formControlName="dept" [compareWith]="compareDepartments">
+                    <mat-option *ngFor="let department of departments" [value]="department.name">{{department.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button class="cta-1" (click)="saveDepartment()" [disabled]="!facilityForm1.valid || loading">
+                <span *ngIf="!loading">UPDATE</span>
+                <span *ngIf="loading">Loading...</span>
+            </button>
+
+        </form>
+    </div>
+    <div class="modal-baseWrap" *ngIf="!departmentBool">
+
+        <!-- <div class="infoAlert"><i class="fa fa-info-circle" aria-hidden="true"></i>Note that a verification token will be sent to the number supplied below
+        </div>-->
+
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+        <div class="menuBar-facilityName">
+            <div class="menubar_facilityLogo orgLogo-wrap">
+                <img src="../../../../../../assets/images/users/default.png">
+            </div>
+            <div class="upload-btn-wrapper">
+                <button class="upload-btn">Change Image</button>
+                <input type="file" name="myfile" />
+            </div>
+        </div>
+        <form [formGroup]="facilityForm2" novalidate>
+
+            <mat-form-field>
+                <mat-select placeholder="Title" formControlName="title">
+                    <mat-option *ngFor="let title of titles" [value]="title.name">{{title.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="frm-item-wrap" class="col-xlg-6">
+                <div class="frm-item-x2">
+                    <mat-input-container>
+                        <input matInput mat-error placeholder="First Name" formControlName="firstname">
+                    </mat-input-container>
+                    <mat-input-container class="example-full-width" class="col-lg-6">
+                        <input matInput mat-error placeholder="Last Name" formControlName="lastname">
+                    </mat-input-container>
+                </div>
+            </div>
+            <div class="frm-item-wrap" class="col-xlg-6">
+                <div class="frm-item-x2">
+                    <mat-input-container>
+                        <input matInput mat-error placeholder="Other Names" formControlName="mothermaidenname">
+                    </mat-input-container>
+                    <mat-input-container class="example-full-width" class="col-lg-6">
+                        <input matInput mat-error placeholder="Mother's Maiden Name" formControlName="mothermaidenname">
+                    </mat-input-container>
+                </div>
+            </div>
+            <div class="frm-item-wrap" class="col-xlg-6">
+                <div class="frm-item-x2">
+                    <mat-form-field>
+                        <mat-select placeholder="Gender" formControlName="gender" [compareWith]="compare">
+                            <mat-option *ngFor="let gender of genders" [value]="gender.name">{{gender.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" class="col-lg-6">
+                        <mat-select placeholder="Marital-Status" formControlName="maritalStatus" [compareWith]="compare">
+                            <mat-option *ngFor="let maritalStatus of maritalStatuses" [value]="maritalStatus.name">{{maritalStatus.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input type="date" matInput mat-error placeholder="Date of Birth" formControlName="date" [value]="selectedPerson?.dateOfBirth | date:'yyyy-MM-dd'">
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap" class="col-xlg-6">
+                <div class="frm-item-x2">
+                    <mat-form-field>
+                        <mat-select placeholder="Nationality" formControlName="nationality" [compareWith]="compare">
+                            <mat-option *ngFor="let cntry of countries" [value]="cntry.name">{{cntry.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" class="col-lg-6">
+                        <mat-select placeholder="State of Origin" formControlName="stateofOrigin" [compareWith]="compare">
+                            <mat-option *ngFor="let state of statesOfOrigin" [value]="state.name">{{state.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-form-field>
+                <mat-select placeholder="LGA" formControlName="localgovtarea" [compareWith]="compare">
+                    <mat-option *ngFor="let item of lgasOfOrigin" [value]="item.name">{{item.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="frm-item-wrap">
+                <mat-input-container>
+                    <input type="address" matInput mat-error placeholder="Home Address" formControlName="homeaddress">
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap" class="col-xlg-6">
+                <div class="frm-item-x2">
+                    <mat-form-field>
+                        <mat-select placeholder="State-of-Residence" formControlName="stateofresidence" [compareWith]="compare">
+                            <mat-option *ngFor="let state of states" [value]="state.name">{{state.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" class="col-lg-6">
+                        <mat-select placeholder="LGA-Of-Residence" formControlName="lgaofresidence" [compareWith]="compare">
+                            <mat-option *ngFor="let item of lgas" [value]="item.name">{{item.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="frm-item-wrap" class="col-xlg-6">
+                <div class="frm-item-x2">
+                    <mat-input-container>
+                        <input type="tel" matInput mat-error placeholder="Contact Details" formControlName="phoneno">
+                    </mat-input-container>
+                    <mat-input-container class="example-full-width" class="col-lg-6">
+                        <input type="email" matInput mat-error placeholder="Emaill Address" formControlName="email">
+                    </mat-input-container>
+                </div>
+            </div>
+            <button class="cta-1" (click)="savePerson()" [disabled]="loading">
+                <span *ngIf="!loading">UPDATE</span>
+                <span *ngIf="loading">Loading...</span>
+            </button>
+
+        </form>
+
+    </div>
+</div>

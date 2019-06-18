@@ -1,0 +1,40 @@
+<div class="home-main" style="margin-top: 30px;">
+  <ul class="hm-tabs">
+    <li (click)="tab_click('products')" [class.hm-tab-active]='tab_all_products' class="hm-tab">All Products</li>
+    <li (click)="tab_click('productConfig')" [class.hm-tab-active]='tab_product_config' class="hm-tab">
+      Product Configuration </li>
+    <!-- <div class="btnContainer">
+      <div class="new-btn-blue">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <span>Add New Store</span>
+      </div>
+    </div> -->
+  </ul>
+
+  <div class="tab-content" *ngIf="tab_all_products">
+    <div class="filterTop">
+      <div class="searchproduct">
+        <div class="InputGroup">
+          <input class="customInput" type="text" required>
+          <span class="highlight"></span>
+          <label class="customLabel"><i class="fa fa-search" aria-hidden="true"></i>Search...</label>
+        </div>
+      </div>
+      <div class="tbl-header-rhs">
+        <div>
+          <h3>Show:</h3>
+        </div>
+        <div [className]="selectedFilterIndex === i ? 'ft-btn ft-btn-selected' : 'ft-btn'" *ngFor="let filter of storeFilters; let i = index"
+          (click)="setSelectedFilter(i,filter)">
+          <span>{{filter}}</span>
+        </div>
+      </div>
+    </div>
+    <app-all-products> </app-all-products>
+  </div>
+
+
+  <div class="tab-content" *ngIf="tab_product_config">
+    <app-product-conguration > </app-product-conguration>
+  </div>
+</div>

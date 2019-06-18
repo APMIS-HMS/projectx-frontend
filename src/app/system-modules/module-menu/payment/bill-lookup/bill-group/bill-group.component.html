@@ -1,0 +1,370 @@
+<div class="inner-wrap-b body-wrap">
+  <div class="facility-title">Patient Bills</div>
+  <div class="inner-page-wrap">
+    <div class="megaPgWrap">
+      <div class="feedsWrap leftCol">
+        <div class="feedbox"></div>
+        <div class="feedbox"></div>
+        <div class="feedbox"></div>
+      </div>
+
+      <div class="contentCol">
+        <div class="billTopSect">
+          <div class="topsecInnerWrap">
+            <div>
+              <div class="clientName">Sam Dede</div>
+              <div class="clientAddress">
+                <div>24B Panda Avenue, Alausa, Ikeja, Lagos Nigeria.</div>
+                <div>sam.dede@gmail.com</div>
+                <div>08078763244</div>
+              </div>
+            </div>
+            <div class="patientImgWrap">
+              <img src="assets/images/users/default.png">
+            </div>
+          </div>
+        </div>
+
+        <div class="billBody">
+          <div class="billContentSect">
+            <div (click)="addItem_show()" class="cta-1 btn-addItem">
+              Add Item
+            </div>
+            <table class="tblBg">
+              <thead>
+                <tr>
+                  <th class="selectTD"><input (change)="selectAll_change($event)" type="checkbox" [attr.checked]="selectAll" [formControl]="txtSelectAll" style="margin-bottom: 10px;">Select All</th>
+                  <th>Item</th>
+                  <th>Unit Price</th>
+                  <th>Quantity</th>
+                  <th>Total Price</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr (click)="toggleCat1()" class="tdCategories">
+                  <td colspan="6">Category 1</td>
+                </tr>
+
+                <tr *ngIf="cat1" class="color1">
+                  <td>
+                    <input type="checkbox" [checked]="selectAll" [formControl]="select1">
+                  </td>
+                  <td (click)="itemDetail()">
+                    <div class="itemName">Patient Registration</div>
+                  </td>
+                  <td>
+                    <div class="topTotal" [hidden]="itemEditShow"><span>&#8358;</span> 2,000</div>
+                    <input currencyMask [options]="{ prefix: '&#8358; '}" *ngIf="itemEditShow" class="edit-control" value="2000" [formControl]="itemEdit">
+                  </td>
+                  <td>
+                    <span [hidden]="itemEditShow">2</span>
+                    <input *ngIf="itemEditShow" class="edit-control" type="number" value="2" [formControl]="itemQtyEdit">
+                  </td>
+                  <td>
+                    <div class="topTotal"><span>&#8358;</span> 2,000</div>
+                  </td>
+                  <td>
+                    <i [hidden]="itemEditShow" (click)="itemEditToggle()" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i *ngIf="itemEditShow" (click)="itemEditToggle()" class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <div (click)="lineModifier_show()" class="cta-1 btn-addItem">
+                      Add Modifier
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="cat1" class="color2">
+                  <td>
+                    <input type="checkbox" [checked]="selectAll" [formControl]="select2">
+                  </td>
+                  <td (click)="itemDetail()">
+                    <div class="itemName">Patient Registration</div>
+                  </td>
+                  <td>
+                    <div class="topTotal" [hidden]="itemEditShow"><span>&#8358;</span> 2,000</div>
+                    <input currencyMask [options]="{ prefix: '&#8358; '}" *ngIf="itemEditShow" class="edit-control" value="2000" [formControl]="itemEdit">
+                  </td>
+                  <td>
+                    <span [hidden]="itemEditShow">2</span>
+                    <input *ngIf="itemEditShow" class="edit-control" type="number" value="2" [formControl]="itemQtyEdit">
+                  </td>
+                  <td>
+                    <div class="topTotal"><span>&#8358;</span> 2,000</div>
+                  </td>
+                  <td>
+                    <i [hidden]="itemEditShow" (click)="itemEditToggle()" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i *ngIf="itemEditShow" (click)="itemEditToggle()" class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <div (click)="lineModifier_show()" class="cta-1 btn-addItem">
+                      Add Modifier
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="cat1" class="color1">
+                  <td>
+                    <input type="checkbox" [checked]="selectAll" [formControl]="select3">
+                  </td>
+                  <td (click)="itemDetail()">
+                    <div class="itemName">Patient Registration</div>
+                  </td>
+                  <td>
+                    <div class="topTotal" [hidden]="itemEditShow"><span>&#8358;</span> 2,000</div>
+                    <input currencyMask [options]="{ prefix: '&#8358; '}" *ngIf="itemEditShow" class="edit-control" value="2000" [formControl]="itemEdit">
+                  </td>
+                  <td>
+                    <span [hidden]="itemEditShow">2</span>
+                    <input *ngIf="itemEditShow" class="edit-control" type="number" value="2" [formControl]="itemQtyEdit">
+                  </td>
+                  <td>
+                    <div class="topTotal"><span>&#8358;</span> 2,000</div>
+                  </td>
+                  <td>
+                    <i [hidden]="itemEditShow" (click)="itemEditToggle()" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i *ngIf="itemEditShow" (click)="itemEditToggle()" class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <div (click)="lineModifier_show()" class="cta-1 btn-addItem">
+                      Add Modifier
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+
+              <tbody>
+                <tr (click)="toggleCat2()" class="tdCategories">
+                  <td colspan="6">Category 2</td>
+                </tr>
+
+                <tr *ngIf="cat2" class="color1">
+                  <td>
+                    <input type="checkbox" [checked]="selectAll" [formControl]="select1">
+                  </td>
+                  <td (click)="itemDetail()">
+                    <div class="itemName">Patient Registration</div>
+                  </td>
+                  <td>
+                    <div class="topTotal" [hidden]="itemEditShow"><span>&#8358;</span> 2,000</div>
+                    <input currencyMask [options]="{ prefix: '&#8358; '}" *ngIf="itemEditShow" class="edit-control" value="2000" [formControl]="itemEdit">
+                  </td>
+                  <td>
+                    <span [hidden]="itemEditShow">2</span>
+                    <input *ngIf="itemEditShow" class="edit-control" type="number" value="2" [formControl]="itemQtyEdit">
+                  </td>
+                  <td>
+                    <div class="topTotal"><span>&#8358;</span> 2,000</div>
+                  </td>
+                  <td>
+                    <i [hidden]="itemEditShow" (click)="itemEditToggle()" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i *ngIf="itemEditShow" (click)="itemEditToggle()" class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <div (click)="lineModifier_show()" class="cta-1 btn-addItem">
+                      Add Modifier
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="cat2" class="color2">
+                  <td>
+                    <input type="checkbox" [checked]="selectAll" [formControl]="select2">
+                  </td>
+                  <td (click)="itemDetail()">
+                    <div class="itemName">Patient Registration</div>
+                  </td>
+                  <td>
+                    <div class="topTotal" [hidden]="itemEditShow"><span>&#8358;</span> 2,000</div>
+                    <input currencyMask [options]="{ prefix: '&#8358; '}" *ngIf="itemEditShow" class="edit-control" value="2000" [formControl]="itemEdit">
+                  </td>
+                  <td>
+                    <span [hidden]="itemEditShow">2</span>
+                    <input *ngIf="itemEditShow" class="edit-control" type="number" value="2" [formControl]="itemQtyEdit">
+                  </td>
+                  <td>
+                    <div class="topTotal"><span>&#8358;</span> 2,000</div>
+                  </td>
+                  <td>
+                    <i [hidden]="itemEditShow" (click)="itemEditToggle()" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i *ngIf="itemEditShow" (click)="itemEditToggle()" class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <div (click)="lineModifier_show()" class="cta-1 btn-addItem">
+                      Add Modifier
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="cat2" class="color1">
+                  <td>
+                    <input type="checkbox" [checked]="selectAll" [formControl]="select3">
+                  </td>
+                  <td (click)="itemDetail()">
+                    <div class="itemName">Patient Registration</div>
+                  </td>
+                  <td>
+                    <div class="topTotal" [hidden]="itemEditShow"><span>&#8358;</span> 2,000</div>
+                    <input currencyMask [options]="{ prefix: '&#8358; '}" *ngIf="itemEditShow" class="edit-control" value="2000" [formControl]="itemEdit">
+                  </td>
+                  <td>
+                    <span [hidden]="itemEditShow">2</span>
+                    <input *ngIf="itemEditShow" class="edit-control" type="number" value="2" [formControl]="itemQtyEdit">
+                  </td>
+                  <td>
+                    <div class="topTotal"><span>&#8358;</span> 2,000</div>
+                  </td>
+                  <td>
+                    <i [hidden]="itemEditShow" (click)="itemEditToggle()" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i *ngIf="itemEditShow" (click)="itemEditToggle()" class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <div (click)="lineModifier_show()" class="cta-1 btn-addItem">
+                      Add Modifier
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+
+              <tbody>
+                <tr (click)="toggleCat3()" class="tdCategories">
+                  <td colspan="6">Category 3</td>
+                </tr>
+
+                <tr *ngIf="cat3" class="color1">
+                  <td>
+                    <input type="checkbox" [checked]="selectAll" [formControl]="select1">
+                  </td>
+                  <td (click)="itemDetail()">
+                    <div class="itemName">Patient Registration</div>
+                  </td>
+                  <td>
+                    <div class="topTotal" [hidden]="itemEditShow"><span>&#8358;</span> 2,000</div>
+                    <input currencyMask [options]="{ prefix: '&#8358; '}" *ngIf="itemEditShow" class="edit-control" value="2000" [formControl]="itemEdit">
+                  </td>
+                  <td>
+                    <span [hidden]="itemEditShow">2</span>
+                    <input *ngIf="itemEditShow" class="edit-control" type="number" value="2" [formControl]="itemQtyEdit">
+                  </td>
+                  <td>
+                    <div class="topTotal"><span>&#8358;</span> 2,000</div>
+                  </td>
+                  <td>
+                    <i [hidden]="itemEditShow" (click)="itemEditToggle()" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i *ngIf="itemEditShow" (click)="itemEditToggle()" class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <div (click)="lineModifier_show()" class="cta-1 btn-addItem">
+                      Add Modifier
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="cat3" class="color2">
+                  <td>
+                    <input type="checkbox" [checked]="selectAll" [formControl]="select2">
+                  </td>
+                  <td (click)="itemDetail()">
+                    <div class="itemName">Patient Registration</div>
+                  </td>
+                  <td>
+                    <div class="topTotal" [hidden]="itemEditShow"><span>&#8358;</span> 2,000</div>
+                    <input currencyMask [options]="{ prefix: '&#8358; '}" *ngIf="itemEditShow" class="edit-control" value="2000" [formControl]="itemEdit">
+                  </td>
+                  <td>
+                    <span [hidden]="itemEditShow">2</span>
+                    <input *ngIf="itemEditShow" class="edit-control" type="number" value="2" [formControl]="itemQtyEdit">
+                  </td>
+                  <td>
+                    <div class="topTotal"><span>&#8358;</span> 2,000</div>
+                  </td>
+                  <td>
+                    <i [hidden]="itemEditShow" (click)="itemEditToggle()" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i *ngIf="itemEditShow" (click)="itemEditToggle()" class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <div (click)="lineModifier_show()" class="cta-1 btn-addItem">
+                      Add Modifier
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="cat3" class="color1">
+                  <td>
+                    <input type="checkbox" [checked]="selectAll" [formControl]="select3">
+                  </td>
+                  <td (click)="itemDetail()">
+                    <div class="itemName">Patient Registration</div>
+                  </td>
+                  <td>
+                    <div class="topTotal" [hidden]="itemEditShow"><span>&#8358;</span> 2,000</div>
+                    <input currencyMask [options]="{ prefix: '&#8358; '}" *ngIf="itemEditShow" class="edit-control" value="2000" [formControl]="itemEdit">
+                  </td>
+                  <td>
+                    <span [hidden]="itemEditShow">2</span>
+                    <input *ngIf="itemEditShow" class="edit-control" type="number" value="2" [formControl]="itemQtyEdit">
+                  </td>
+                  <td>
+                    <div class="topTotal"><span>&#8358;</span> 2,000</div>
+                  </td>
+                  <td>
+                    <i [hidden]="itemEditShow" (click)="itemEditToggle()" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i *ngIf="itemEditShow" (click)="itemEditToggle()" class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <div (click)="lineModifier_show()" class="cta-1 btn-addItem">
+                      Add Modifier
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="billSummarySect">
+            <div class="lhs">
+              <div (click)="addModefier()" class="cta-1">
+                Add Discount
+              </div>
+            </div>
+            <table class="rhs">
+              <div class="summaryItems">
+                <tr class="summaryItem">
+                  <td class="label">Sub Total</td>
+                  <td class="data"><span>&#8358;</span> 20,000</td>
+                  <td></td>
+                </tr>
+                <tr class="summaryItem">
+                  <td class="label">Discount</td>
+                  <td class="data"><span>&#8358;</span> 5,000</td>
+                  <td><i class="fa fa-trash" aria-hidden="true"></i> Remove</td>
+                </tr>
+              </div>
+              <tr class="grandTotalWrap">
+                <td class="label">GRAND TOTAL</td>
+                <td class="data"><span>&#8358;</span> 45,000</td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+          <div class="generateInvoiceWrap">
+            <div  [routerLink]="['/dashboard/payment/invoice']" class="btn-1 btn-red">
+              Generate Invoice
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feedsWrap rightCol">
+        <div class="feedbox"></div>
+        <div class="feedbox"></div>
+        <div class="feedbox"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-global-patient-lookup></app-global-patient-lookup>
+
+<div *ngIf="addItem" class="modal-overlay">
+  <app-add-item (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-item>
+</div>
+
+<div *ngIf="addModefierPopup" class="modal-overlay">
+  <app-add-modefier (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-modefier>
+</div>
+
+<div *ngIf="addLineModefierPopup" class="modal-overlay">
+  <app-add-line-modifier (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-line-modifier>
+</div>
+
+<div *ngIf="priceItemDetailPopup" class="modal-overlay">
+  <app-item-detail [selectedBillItem]="selectedBillItem" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-item-detail>
+</div>

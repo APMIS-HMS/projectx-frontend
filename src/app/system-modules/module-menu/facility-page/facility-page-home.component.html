@@ -1,0 +1,64 @@
+<ul class="pg-menuWrap">
+    <li (click)="changeRoute('locations')" [class.pg-menuActive]="locationsContentArea">
+        <i class="fa fa-map-marker" aria-hidden="true"></i> Locations</li>
+    <li (click)="changeRoute('departments')" [class.pg-menuActive]="departmentsContentArea">
+        <i class="fa fa-building" aria-hidden="true"></i> Departments</li>
+    <li (click)="changeRoute('employees')" [class.pg-menuActive]="empContentArea">
+        <i class="fa fa-users" aria-hidden="true"></i> Employees</li>
+    <li (click)="changeRoute('workspaces')" [class.pg-menuActive]="workspaceContentArea">
+        <i class="fa fa-home" aria-hidden="true"></i> Workspace</li>
+    <li (click)="changeRoute('access')" [class.pg-menuActive]="accessContentArea">
+        <i class="fa fa-lock" aria-hidden="true"></i> Access Control</li>
+    <li (click)="changeRoute('subsribtion')" [class.pg-menuActive]="modulesContentArea">
+        <i class="fa fa-clone" aria-hidden="true"></i> Subscription</li>
+    <li (click)="changeRoute('network')" [class.pg-menuActive]="networkContentArea">
+        <i class="fa fa-th-large" aria-hidden="true"></i> Network</li>
+    <li (click)="changeRoute('patient-bulk-upload')" [class.pg-menuActive]="patientBulkUploadContentArea">
+        <i class="fa fa-upload" aria-hidden="true"></i> Patient Bulk Upload</li>
+    <!-- <li (click)="changeRoute('nhmis-summary')" [class.pg-menuActive]="nhmisContentArea">
+        <i class="fa fa-angle-double-up" aria-hidden="true"></i> NHMIS Summary</li> -->
+</ul>
+<div class="pgMenu-wrapa">
+    <i (click)="pgMenu_click()" class="fa fa-chevron-down pgMenu-ico" aria-hidden="true"></i>
+    <ul *ngIf="pgMenuToggle" class="pg-menuWrap-mobile">
+        <li (click)="changeRoute('locations')" [class.pg-menuActive]="locationsContentArea">
+            <i class="fa fa-map-marker" aria-hidden="true"></i> Locations</li>
+        <li (click)="changeRoute('departments')" [class.pg-menuActive]="departmentsContentArea">
+            <i class="fa fa-building" aria-hidden="true"></i> Departments</li>
+        <li (click)="changeRoute('employees')" [class.pg-menuActive]="empContentArea">
+            <i class="fa fa-users" aria-hidden="true"></i> Employees</li>
+        <li (click)="changeRoute('workspaces')" [class.pg-menuActive]="workspaceContentArea">
+            <i class="fa fa-home" aria-hidden="true"></i> Workspace</li>
+        <li (click)="changeRoute('access')" [class.pg-menuActive]="accessContentArea">
+            <i class="fa fa-lock" aria-hidden="true"></i> Access Control</li>
+        <li (click)="changeRoute('subsribtion')" [class.pg-menuActive]="modulesContentArea">
+                <i class="fa fa-clone" aria-hidden="true"></i> Subscription</li>
+        <li (click)="changeRoute('modules')" [class.pg-menuActive]="modulesContentArea">
+            <i class="fa fa-clone" aria-hidden="true"></i> Modules</li>
+        <li (click)="changeRoute('network')" [class.pg-menuActive]="networkContentArea">
+            <i class="fa fa-th-large" aria-hidden="true"></i> Network</li>
+        <li (click)="changeRoute('patient-bulk-upload')" [class.pg-menuActive]="patientBulkUploadContentArea">
+                <i class="fa fa-th-large" aria-hidden="true"></i> Patient Bulk Upload</li>
+    </ul>
+</div>
+<div class="portal-wrap">
+    <div class="content-sect">
+        <app-facilitypage-sidesect [selectedFacility]="selectedFacility" class="side-sect"></app-facilitypage-sidesect>
+        <div class="mid-sect">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+<!-- <div *ngIf="newDept" class="modal-overlay">
+    <app-new-department (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-department>
+</div>
+<div *ngIf="newUnit" class="modal-overlay">
+    <app-new-unit [department]="selectedDepartment" (closeModal)="close_onClick($event)" [unit]="selectedUnit" id="form-modal" class="form-modal center-center"></app-new-unit>
+</div> -->
+<!-- <div *ngIf="newSubLocModal_on" class="modal-overlay">
+    <app-new-sub-location [locations]="locationsObj" [location]="locationObj" [subLocation]="subLocation" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-sub-location>
+</div> -->
+<!-- <div *ngIf="createWorkspace" class="modal-overlay">
+    <app-create-workspace (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-create-workspace>
+</div> -->

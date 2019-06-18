@@ -1,0 +1,27 @@
+<div class="animated box pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Transfer Patient</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <!-- <b class="text-center">Transfer {{ selectedPatient?.patient?.personDetails?.firstName }} {{ selectedPatient?.patient?.personDetails?.lastName }}</b> -->
+        <!-- <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div> -->
+        <div class="padding"></div>
+        <form [formGroup]="transferFormGroup" novalidate>
+            <div class="frm-item-wrap">
+                <mat-form-field>
+                    <mat-select placeholder="Select Ward" formControlName="ward">
+                        <mat-option [disabled]="selectedPatient?.currentWard === ward?._id" *ngFor="let ward of wards" [value]="ward">{{ward.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="btn-box">
+                <button mat-raised-button [disabled]="!transferFormGroup.valid || disableTransferBtn" class="btn" (click)="onClickTransfer(transferFormGroup.value, transferFormGroup.valid)">
+              <span *ngIf="transferBtn"><i class="fa fa-share" aria-hidden="true"></i> Transfer Patient</span>
+              <span *ngIf="transferingBtn"> Transfering Patient... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
+            </button>
+            </div>
+        </form>
+    </div>
+</div>

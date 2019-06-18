@@ -1,0 +1,62 @@
+.spc-lft {
+    padding-right: 20px;
+}
+
+.batches {
+    display: flex;
+    font-size: 12px;
+
+    .batch {
+        margin-right: 10px;
+        border: 1px solid #C4C4C4;
+        width: 257px;
+        padding: 20px 10px;
+
+        .btc-top {
+            display: flex;
+            justify-content: space-between;
+
+            .val-wrap {
+                display: flex;
+
+                .val-label {
+                    color: #5A5D5A;
+                    padding-right: 5px;
+                }
+
+                .val-val {
+                    color: #292929;
+                    font-weight: bold;
+                }
+            }
+
+            .red-label {
+                color: #FF3838;
+            }
+        }
+
+        .btc-body {
+            display: flex;
+
+            .btc-body-item {
+                margin-right: 10px;
+                margin-top: 20px;
+
+                .val-label {
+                    color: #5A5D5A;
+                    padding-right: 10px;
+                }
+
+                .val-val {
+                    color: #292929;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}

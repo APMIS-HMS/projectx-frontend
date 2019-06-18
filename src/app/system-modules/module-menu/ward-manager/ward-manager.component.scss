@@ -1,0 +1,82 @@
+@import "../../../../globals/variables.scss";
+
+.inner-page-wrap {
+    margin-top: 0;
+    padding: 0 15px;
+}
+
+.page-title {
+    text-align: left;
+    position: absolute;
+}
+
+.inner-page-contentArea {
+    padding: 0;
+}
+
+.inner-menu1-wrap {
+    top: 0;
+    text-align: right;
+}
+
+.inner-menu1-wrap .innerMenu-ul {
+    text-align: left;
+}
+
+.responsive_nav-group {
+    display: none;
+}
+
+.content-sec-ico:hover,
+.content-sec-icoActive {
+    background: #F5F5F5;
+    color: #4bb8ef;
+}
+
+.inner-page-menuTab {
+    display: block;
+    text-align: left;
+    padding: 20px 0;
+}
+
+.lTab-title {
+    background: #0288D1;
+    padding: 5px 20px;
+    font-size: 1.2rem;
+    font-family: "Josefin Sans", sans-serif;
+    color: #000;
+}
+
+.inner-page-menuTab ul {
+    padding: 0 10px;
+    text-align: left;
+}
+
+.inner-page-menuTab ul li {
+    padding: 5px;
+}
+
+.title2 {
+    width: 100%;
+    text-align: center;
+    color: #777;
+    font-size: 1.2rem;
+    text-decoration: underline;
+}
+
+.body-wrap {
+    min-height: 0;
+    margin-bottom: 30px;
+}
+
+.top-button-box {
+    position: relative;
+    z-index: 1;
+    .topmenuwrap {
+        position: absolute;
+        top: -25px;
+        right: 0;
+        font-size: 1.2rem;
+        color: #0288D1;
+    }
+}

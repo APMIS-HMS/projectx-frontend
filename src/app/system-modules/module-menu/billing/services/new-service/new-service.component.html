@@ -1,0 +1,159 @@
+<div class="animated pulse" class="container">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <div class="facility-title">New Service</div>
+        <legend class="modal_mini_title">All Purpose Medical Information System</legend>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <form [formGroup]="frmNewservice" novalidate>
+            <div class="mainfrmwrap">
+                <div class="sec-1">
+                    <div class="frm-checkBox-wrap">
+                        <mat-checkbox name="newPanel" formControlName="isPanel" value="Panel">Panel</mat-checkbox>
+                    </div>
+                    <div class="frm-item-wrap">
+                        <mat-input-container class="example-full-width">
+                            <input type="text" matInput mat-error placeholder="Service Name(min. of 3 characters)*" formControlName="serviceName" class="input">
+                        </mat-input-container>
+                        <div class="suggestionFeeds">
+                            <div *ngFor="let dic of dictionaries" class="suggestedItem">
+                                <div (click)="onSelectDictionary(dic)" class="suggetedName">{{dic.word}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="frm-item-wrap">
+                        <mat-form-field>
+                            <mat-select class="example-full-width" placeholder="Service Category*" formControlName="serviceCat" [compareWith]="compareCategory">
+                                <mat-option selected>Select Category</mat-option>
+                                <mat-option *ngFor="let category of categories" [value]="category._id">{{category.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="frm-item-wrap">
+                        <mat-input-container class="example-full-width">
+                            <input type="text" matInput mat-error placeholder="Supply Service Code" autocomplete="off" formControlName="serviceCode" class="input">
+                        </mat-input-container>
+                    </div>
+                    <div class="frm-item-wrap">
+                        <mat-input-container class="example-full-width">
+                            <input type="number" matInput mat-error placeholder="Service Charge(Base Price)" formControlName="servicePrice" class="input">
+                        </mat-input-container>
+                    </div>
+                </div>
+
+                <div *ngIf="showPanel" class="sec-2">
+                    <div class="search-wrap">
+                        <form [formGroup]="addPanelFormGroup">
+                            <div class="frm-item-wrap ">
+                                <!--<div class="menuBar-facilityName">
+                                  <mat-input-container class="example-full-width">-->
+                                <input type="search" mat-error placeholder="Search Service Here..." [formControl]="panelSearchControl" autocomplete="off">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <!--<div *ngIf="showServiceDropdown" *ngIf="allServiceItems.length>0">-->
+                                <div class="service-popup-wrapper" *ngIf="allServiceItems.length>0">
+                                    <ul class="service-dropdown">
+                                        <!--<div>
+                                        <li><a>Laboratory</a></li>
+                                          <span> <i class="fa fa-plus pull-right">
+                                        </i></span>
+                                        </div>-->
+                                        <li *ngIf="allServiceItems.length === 0" class="text-center"><a>Result is empty</a></li>
+                                        <li *ngIf="allServiceItems.length === 0 && serviceDropdownLoading" class="text-center"><a><i class="fa fa-spinner fa-spin"></i></a></li>
+                                        <!-- <li *ngFor="let item of results">-->
+                                        <li *ngFor="let item of allServiceItems; let i=index;" (click)="onServiceSelected(item)">
+                                            <a *ngIf="!item.checked">
+                                                <div class="cat-name">{{item.category}}</div>
+                                                <div class="service-name"><strong> {{item.service}} </strong></div>
+                                                <div class="price" *ngFor="let p of item.price"><em>{{p.price| number:'1.2-2'}} </em></div>
+                                                <!--<i *ngIf="!item.checked" class="fa fa-plus" (click)="onServiceSelected(item);"></i>-->
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5" *ngIf="allServiceItems.length>0">
+                                                                      <tbody>
+                                                                          <tr *ngFor="let item of allServiceItems">
+                                                                              <td>
+                                                                                  <div class="empWrap">
+                                                                                      <div>{{item.category}}</div>
+                                                                                  </div>
+                                                                              </td>
+                                                                              <td>
+                                                                                  <div class="empWrap">
+                                                                                      <div>{{item.service}}</div>
+                                                                                  </div>
+                                                                              </td>
+                                                                              <td>
+                                                                                  <div class="empWrap">
+                                                                                      <ul *ngFor="let p of item.price">
+                                                                                          <li>{{p.price| number:'1.2-2'}}</li>
+                                                                                      </ul>
+                                                                                  </div>
+                                                                              </td>
+                                                                              <td *ngIf="!item.checked">
+                                                                                  <div class="empWrap">
+                                                                                      <i class="fa fa-plus tblActions" (click)="onServiceSelected(item)"></i>
+                                                                                  </div>
+                                                                              </td>
+                                                                          </tr>
+                                                                      </tbody>
+                                                                  </table>-->
+                    </div>
+
+
+
+                    <div class="wrapper wrap">
+                        <table class="text">
+                            <thead class="tableHeader">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Category</th>
+                                    <th>Service</th>
+                                    <th>Price</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody class="listItem">
+                                <tr *ngFor="let item of selectedServiceItems; let i=index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{item.category}}</td>
+                                    <td>{{item.service}}</td>
+                                    <td>
+                                        <ul *ngFor="let p of item.price">
+                                            <li>
+                                                {{p.price| number:'1.2-2'}} </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-trash tblActions" (click)="onRemoveServiceItem(item,i)"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row oda-prices" *ngIf="selectedService.name !== undefined">
+                    <h5 style="color:black">Other Prices</h5>
+                    <div class="input-wrap col" *ngFor="let p of selectedService.price; let i=index">
+                        <div *ngIf="p.isBase===false">
+                            <span style="color:blue">{{p.name}}({{p.modifierType}}):</span>
+                            <input [formControl]="editPriceControl" (input)="onEditPrice($event,i)" min="0" value="{{p.modifierValue}}" type="number">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" *ngIf="showServelLayout">
+                <button mat-raised-button [hidden]="isDisableBtn" (click)="newService(frmNewservice.value, frmNewservice.valid)">
+                  {{btnTitle}}
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+</div>

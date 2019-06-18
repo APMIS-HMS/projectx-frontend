@@ -1,0 +1,31 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick($event)" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">User Accounts</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap" *ngIf="hasReturned && isEmployeeInFacility()">
+        <legend class="modal_title">{{selectedFacility.name}}</legend>
+
+        <div class="userAccs-listing">
+            <div class="userAccs-listingWrap">
+
+                <div *ngIf="hasReturned && isPatientInFacility()" class="acc-listing" (click)="loadPatientRecord()">
+                    <div class="listing-imgWrap">
+                        <i class="fa fa-bed" aria-hidden="true"></i>
+                    </div>
+                    <div class="listing-name">Patient (Personal) Module</div>
+                </div>
+
+                <div *ngIf="isEmployeeInFacility() && hasReturned" class="acc-listing" (click)="loadEmployeeRecord()">
+                    <div class="listing-imgWrap">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </div>
+                    <div class="listing-name">Employee Module</div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

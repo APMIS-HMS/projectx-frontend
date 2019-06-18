@@ -1,0 +1,62 @@
+.survery .well span{
+	font-size: 1.3rem;
+    color: #676a6c;
+}
+.survery h1, .survery h2,.survery h3,.survery h4,.survery h5, .survery h6,
+.survery .h1,.survery .h2,.survery .h3,.survery .h4,
+.survery .h5, .survery .h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+.survery table {
+	color: #676a6c;
+    font-weight: 600;
+}
+.survery td {
+	font-weight: normal;
+}
+.survery td {
+	text-align: left;
+}
+.survery .btn-primary {
+    color: #fff;
+    background-color: #03a9f4;
+    border-color: #03a9f4;
+}
+.survery a {
+    color: #03a9f4;
+}
+
+.survery .svd_question_menu span{
+    color: #fff;
+}
+.survery input, .survery select {
+    /*width: inherit;*/
+}
+.survery .modal-title {
+    margin: 0;
+    line-height: 1.42857143;
+    color: #676a6c;
+} 
+.survery label {
+    font-size: 1.3rem;
+    color: #676a6c;
+}
+.survery .modal-body span {
+    font-size: 1.3rem;
+    color: #676a6c;
+}
+.survery .btn-group {
+    width: auto;
+}
+.survery .panel-footer input, .survery .panel-footer select {
+    cursor: pointer;
+    padding: inherit;
+    outline: 0px;
+    border:2px solid rgba(0, 0, 0, 0.3);
+    background: #ccc;
+    border-radius: 7px;
+}

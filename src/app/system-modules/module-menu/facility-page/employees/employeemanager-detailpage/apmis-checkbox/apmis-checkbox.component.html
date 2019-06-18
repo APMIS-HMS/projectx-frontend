@@ -1,0 +1,14 @@
+<div class="check-group-wide">
+  <div class="check-item">
+    <label class="control control--checkbox checkLabelColor">{{selectedAccessControl.name}}
+      <!--<input type="checkbox"  (change)="checkedMain($event)" [(ngModel)]="selectedAccessControl.isChecked" />-->
+      <mat-checkbox (change)="checkedMain($event)" [(ngModel)]="selectedAccessControl.isChecked"></mat-checkbox>
+      <div class="control__indicator"></div>
+    </label>
+    <div class="check-group-wrapper" *ngIf="expandMain">
+      <div *ngFor="let selectedFeature of selectedAccessControl.featureList">
+        <app-apmis-checkbox-feature [selectedFeature]="selectedFeature"></app-apmis-checkbox-feature>
+      </div>
+    </div>
+  </div>
+</div>

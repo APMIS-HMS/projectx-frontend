@@ -1,0 +1,115 @@
+.card {
+    -webkit-box-shadow: 0px 2px 25px -3px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 2px 25px -3px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 2px 25px -3px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.card-list-item {
+    border-bottom: solid rgb(204, 204, 204) 1px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.card-list-item:last-of-type {
+    border: none
+}
+
+.blue-gradient {
+    background: #457fca;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #5691c8, #457fca);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #5691c8, #457fca);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+}
+
+.transparent-icon {
+    opacity: 0.5;
+}
+
+.box-outline {
+    border: solid 1px #ddd;
+    padding: 0px 20px 0px 20px;
+}
+
+.box{
+    margin-bottom: 20px
+}
+
+.padding{
+    padding: 10px;
+}
+.mat-form-field {
+    width: 100%;
+}
+
+hr.white {
+    border: none;
+    border-top: solid white 1px;
+}
+
+.center {
+    text-align: center;
+}
+
+.big-text {
+    font-size: 2.4rem
+}
+
+.small-text {
+    font-size: 1.2rem;
+}
+
+.thick-text {
+    font-weight: 900;
+}
+
+.thin-text {
+    font-weight: 100;
+}
+
+.button {
+    border: none;
+    padding: 10px;
+    min-width: 60px;
+    border-radius: 5px;
+}
+
+.blue-text {
+    color: #5691c8
+}
+
+.green-text {
+    color: #00F260
+}
+
+.red-text {
+    color: #ff0000
+}
+
+.input {
+    border: none;
+    border-bottom: solid 1px #5691c8;
+    width: 50%;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.container {
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 50px;
+    padding-left: 5%;
+    padding-right: 5%;
+    box-sizing: border-box; 
+}
+
+.divider {
+    position: relative;
+    height: 50px;
+    width: 100%;
+}

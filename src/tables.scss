@@ -1,0 +1,371 @@
+@import"globals/variables.scss";
+
+table {
+    width: 100%;
+    position: relative;
+    border-collapse: collapse;
+    font-size: 1.2rem;
+}
+
+table,
+td {
+    border: 0.5px solid $td-border;
+}
+
+th {
+    height: 50px;
+    background: transparent;
+    border: 0.5px solid $td-border;
+}
+
+td {
+    vertical-align: center;
+    text-align: left;
+    padding: 5px;
+}
+
+tr:hover {
+    background-color: $tr-hover
+}
+
+tr:nth-child(even) {
+    background-color: $tr-stripe
+}
+
+.searchInputWrap {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.searchInputWrap i {
+    position: absolute;
+    color: #939393;
+    margin-left: 10px;
+}
+
+.searchInput {
+    border: 1px solid #eee;
+    background: #FAFAFA;
+    border-radius: 7px;
+    padding: 7px;
+    padding-left: 30px;
+    text-align: center;
+    width: 250px;
+}
+
+.tbl-actionRow {
+    position: relative;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+// .tbl-actionRow .tbl-title{
+//     position: absolute; 
+//     left: 10px;
+//     font-size: 1.4rem;
+//     color: #0288D1;
+// }
+// .tbl-actionRow .tbl-search{
+//     position: absolute; 
+//     right: 10px;
+// }
+.td-ctaWrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.td-ctaWrap i {
+    cursor: pointer;
+}
+
+.td-ctaWrap i:hover,
+th i:hover {
+    color: #0288D1;
+}
+
+th i {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+td .empWrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+td .empWrap .list-img {
+    margin: 5px;
+}
+
+.th-xxx th {
+    line-height: 1.4 !important;
+    font-size: 1.4rem !important;
+    padding: 5px 2px !important;
+}
+
+.th-r1 th {
+    background: #f0f8ff !important;
+}
+
+.th-r2 th {
+    background: #fffacd !important;
+}
+
+.th-r3 th {
+    background: #f4e6fd !important;
+}
+
+/*************ANOTHER TABLE DEF*****************/
+.store-table {
+    width: 100%;
+    position: relative;
+    font-size: 1.4rem;
+    -webkit-box-shadow: 0 8px 16px #C4C4C4;
+    -moz-box-shadow: 0 8px 16px #C4C4C4;
+    box-shadow: 0 8px 16px #C4C4C4;
+    border: 1px solid #C4C4C4;
+    //   border-radius: 10px;
+}
+
+.store-thead .store-tr {
+    color: #0288D1;
+    font-weight: bold;
+    border-bottom: ridge;
+}
+
+.store-tbody .store-tr {
+    color: #292929;
+}
+
+.store-tbody {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.store-pre-tr {
+    border-bottom: 1px solid #C4C4C4;
+}
+
+.store-tr {
+    display: grid;
+    grid-template-columns: 30px 1fr 30px;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: auto;
+    grid-auto-flow: column;
+    padding: 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #C4C4C4;
+}
+
+.store-tr-in {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-auto-columns: 1fr;
+    grid-gap: 20px;
+    align-items: center;
+    grid-auto-rows: auto;
+    grid-auto-flow: column;
+}
+
+.store-th {
+    background: transparent;
+    font-weight: bold;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+.store-td {
+    display: flex;
+    align-items: center;
+    vertical-align: center;
+    text-align: left;
+    min-height: 3.5rem;
+    color: var(--text-primary);
+}
+
+.store-td-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px !important;
+}
+
+.store-td-actions img {
+    cursor: pointer;
+}
+
+.store-td-user {
+    display: flex;
+    align-items: center;
+}
+
+.store-td-user .store-td-img-wrap {
+    margin-right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: var(--bg-grey-medium);
+    overflow: hidden;
+}
+
+.store-td-user .store-td-img-wrap img {
+    width: 100%;
+}
+
+.store-tr:hover {
+    background-color: var(--table-row-hover);
+}
+
+.exp-tr {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.store-tr-content {
+    padding: 5px 50px;
+}
+
+.store-tfooter {
+    padding: 15px;
+    font-size: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    background: #fcfcfc;
+}
+
+.tbl-cont-cta {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #0288D1;
+    margin-top: 20px;
+    width: 166px;
+
+    i {
+        padding-right: 10px;
+    }
+}
+
+.tbl-cont-cta:hover {
+    border-bottom: 1px solid #0288D1;
+}
+
+// table Filter
+
+.mat-button-toggle-checked {
+    background-color: #0288D1 !important;
+    color: #f5f5f5 !important;
+}
+
+.filterBtn {
+    display: grid;
+    grid-column-gap: 10px;
+    grid-row-gap: 5px;
+    grid-template-columns: repeat(7, auto);
+    align-self: center;
+    text-align: center;
+}
+
+.ft-btn {
+    width: fit-content;
+    /* position: relative; */
+    padding: 8px;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #3535ff;
+    font-weight: bold;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    background: rgba(2, 136, 209, 0.07);
+    cursor: pointer;
+    /* border: 1px solid #3535ff; */
+    border-radius: 4px;
+    align-self: center;
+    font-weight: 12px;
+}
+
+.tag-btn-wrap {
+    display: flex;
+    padding: 5px;
+}
+
+.tag-btn {
+    width: fit-content;
+    padding: 8px;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #0288D1;
+    justify-content: space-around;
+    background: #bfd7eb;
+    cursor: pointer;
+    align-self: center;
+    margin-right: 10px;
+    height: 10px;
+}
+
+.ft-btn-selected {
+    color: white;
+    background: #0288D1;
+}
+
+.filterTop {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tbl-header-lhs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tbl-header-rhs {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .ft-btn {
+        margin-left: 10px;
+    }
+}
+
+.tbl-config-wrap {
+    margin-top: 20px
+}
+
+.config-tr-in {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-auto-columns: 1fr;
+    grid-gap: 20px;
+    align-items: left;
+    grid-auto-rows: auto;
+    grid-auto-flow: column;
+}
+
+.invoice-tr-in {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr) repeat(3, 3fr);
+    grid-auto-columns: 1fr;
+    grid-gap: 20px;
+    align-items: left;
+    grid-auto-rows: auto;
+    grid-auto-flow: column;
+}
+
+.config-tags-wrap {
+    display: flex;
+    align-items: center;
+}

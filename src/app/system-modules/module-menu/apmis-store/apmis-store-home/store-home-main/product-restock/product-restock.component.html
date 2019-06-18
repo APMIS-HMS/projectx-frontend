@@ -1,0 +1,71 @@
+<div class="store-table">
+  <div class="store-thead">
+    <div class="store-tr">
+      <div class="store-th store-td-actions"></div>
+      <div class="store-tr-in">
+        <div class="store-th">Product</div>
+        <div class="store-th">Available Quantity</div>
+        <div class="store-th">Re-Order Level</div>
+        <!-- <div class="store-th">Cost/Unit</div>
+        <div class="store-th">Total Cost Price</div> -->
+        <div class="store-th">Unit Selling Price</div>
+      </div>
+      <div class="store-th store-td-actions"></div>
+    </div>
+  </div>
+
+  <div class="store-tbody">
+    <div *ngFor="let product of products; let i = index" class="store-pre-tr">
+      <div class="store-tr">
+        <div class="store-td store-td-actions">
+          <i *ngIf="item_to_show(i)" (click)="toggle_tr(i, 'down')" class="exp-tr fa fa-angle-down"></i>
+          <i *ngIf="!item_to_show(i)" (click)="toggle_tr(i, 'right')" class="exp-tr fa fa-angle-right"></i>
+        </div>
+        <div class="store-tr-in">
+          <div class="store-td">{{product.productName}}</div>
+          <div class="store-td">
+            <span class="spc-lft">{{product.availableQuantity | number}}</span>
+            <select>
+              <option selected>Sachets</option>
+            </select>
+          </div>
+          <div class="store-td">{{product.reOrderLevel}} Sachets</div>
+          <!-- <div class="store-td">#5/Sachet</div>
+          <div class="store-td">#300,000</div> -->
+          <div class="store-td">&#8358;{{product.price}}/Sachet</div>
+        </div>
+        <div class="store-td store-td-actions">
+          <i class="fa fa-ellipsis-v"></i>
+        </div>
+      </div>
+
+      <div *ngIf="item_to_show(i)" class="store-tr-content">
+        <ul class="batches">
+          <li class="batch" *ngFor="let transaction of product.transactions">
+            <div class="btc-top">
+              <div class="val-wrap">
+                <div class="val-label">Batch:</div>
+                <div class="val-val">{{transaction.batchNumber}}</div>
+              </div>
+              <div class="orange-label">Out of Stock</div>
+            </div>
+            <div class="btc-body">
+              <div class="btc-body-item">
+                <div class="val-label">Batch Quantity:</div>
+                <div class="val-val">{{transaction.quantity}} Tablets</div>
+              </div>
+              <div class="btc-body-item">
+                <div class="val-label">Batch Expiring Date:</div>
+                <div class="val-val">{{transaction.expiryDate | date:'dd/MM/yyyy'}}</div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="tbl-cont-cta"><i class="fa fa-plus"></i> Add Another Item</div>
+      </div>
+    </div>
+  </div>
+
+  <app-apmis-pagination (emitCurrentPage)="loadCurrentPage($event)" [total]="total"></app-apmis-pagination>
+</div>

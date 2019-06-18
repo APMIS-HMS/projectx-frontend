@@ -1,0 +1,25 @@
+.pg-wrap{
+    width: 100%;
+}
+.tabs{
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px solid #777;
+}
+.tab {
+    cursor: pointer;
+    padding: 10px;
+    background: #fff;
+}
+.tab:hover{
+    background: #eee;
+}
+.tab-active{
+    border-top: 1px solid #777;
+    border-left: 1px solid #777;
+    border-right: 1px solid #777;
+    margin-bottom: -1.5px;
+}
+.tab-content{
+    padding-top: 10px;
+}

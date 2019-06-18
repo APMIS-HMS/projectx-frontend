@@ -1,0 +1,156 @@
+@import "./../../product-entry/purchase-list/purchase-list.component.scss";
+@import "./../../product-entry/purchase-list/new-purchase-list/new-purchase-list.component.scss";
+
+.list-wrap {
+  padding: 20px;
+  display: flex;
+  border: 1px solid #dddddd;
+  margin-bottom: 10px;
+  align-items: center;
+  border: none !important;
+  margin-bottom: 0;
+}
+
+.searchpriscription {
+    width: 28%;
+    position: relative;
+    margin-left: 80px !important;
+}
+
+.con-wrap {
+  span {
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-weight: bolder;
+  }
+}
+
+.in-tr {
+  grid-template-columns: 4fr 1fr 1fr 1fr !important;
+}
+
+.btnWrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cus-details {
+  display: flex;
+  justify-content: space-between;
+
+  .detail-cont {
+    display: flex;
+    font-size: 12px;
+    margin-right: 20px;
+
+    span {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+  }
+}
+
+.tp-act {
+  display: flex;
+  //justify-content: space-around;
+  margin: 0 0 20px;
+  align-items: center;
+
+  div,
+  h3 {
+    margin-right: 10px;
+  }
+}
+
+.search-sugestion {
+  font-size: 10px;
+}
+
+.input-space {
+  .customInput {
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+
+  select {
+    outline: none;
+    inline-size: none;
+    border: none;
+    font-size: 10px !important;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+
+}
+
+.amt-summ {
+  display: block;
+  align-content: right;
+  justify-content: right;
+  text-align: right;
+
+  .summ {
+    display: flex;
+    justify-content: flex-end;
+    margin: 5px;
+    align-items: center;
+
+    a,
+    span {
+      color: #337AB7;
+      margin-right: 40px;
+      font-size: 12px;
+    }
+
+    span {
+      text-align: right;
+    }
+
+    a {
+      text-align: left;
+      font-weight: bold;
+    }
+
+  }
+}
+
+.btm-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  align-items: center;
+}
+
+.btnBlue {
+  border: 1px solid #0288D1;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  height: 0;
+  cursor: pointer;
+
+  i {
+    margin-right: 5px;
+  }
+
+  i,
+  span {
+    color: #0288D1;
+    font-size: 12px;
+  }
+}
+
+.dwnld {
+  display: flex;
+  align-items: center;
+  margin-right: 60px;
+
+  h4 {
+    margin-right: 20px;
+  }
+}

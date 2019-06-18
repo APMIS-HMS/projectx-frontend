@@ -1,0 +1,22 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <div class="facility-title">Add Departmet</div>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+        <div class="f_sg1">
+            <form [formGroup]="frmNewDept" novalidate>
+                <div class="frm-item-wrap">
+                    <small class="alert-label" [hidden]="frmNewDept.controls.deptName.valid || frmNewDept.controls.deptName.pristine">
+                        this is a required field (minimum 3 and max of 50 characters).
+                    </small>
+                    <i class="fa fa-building" aria-hidden="true"></i>
+                    <input type="text" formControlName="deptName" placeholder="Department" autocomplete="off">
+                </div>
+                <div (click)="newDept(frmNewDept.valid, frmNewDept.value)" class="cta-1">ADD DEPARTMENT</div>
+            </form>
+        </div>
+    </div>
+</div>

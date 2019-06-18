@@ -1,0 +1,17 @@
+<div class="">
+  <div class="src-content">
+    <div class="src-item src-input-wrap">
+      <img class="src-ico" src="assets/images/report_icons/search-small.svg" />
+      <input class="src-input" type="text">
+    </div>
+    <ul>
+      <li (click)="setSelectedIndex(i, supplier)" class="src-item" [class.selected-li]="selectedIndex === i" *ngFor="let supplier of suppliers; let i = index">
+        <h3>{{supplier.supplier.name}} </h3>
+        <span>{{supplier.supplier.primaryContactPhoneNo}} | {{supplier.supplier.email}}</span>
+      </li>
+      <div (click)="setSelectedIndex(-1)" class="ul-action" [class.selected-li]="selectedIndex === -1">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <span>Add Supplier</span>
+      </div>
+    </ul>
+  </div>

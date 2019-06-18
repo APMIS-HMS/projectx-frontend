@@ -1,0 +1,24 @@
+@import '../insurance/insurance.component.scss';
+
+.isprincipal-children{
+    position: static;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+.isprincipal-nameWrap{
+    border-bottom: 0px solid transparent;
+    justify-content: flex-end;
+    width: 100%;
+    color: #ff2500;
+}
+.wrap-inner{
+    width: 100%;
+}
+.isprincipal-child{
+    margin-bottom: 0px;
+    margin: 10px;
+}
+.dept{
+    color: #0288D1;
+}

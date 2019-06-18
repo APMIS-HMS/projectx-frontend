@@ -1,0 +1,65 @@
+
+<div class="tbl-resp-wrap">
+    <table cellpadding="0" cellspacing="0" border="0.5">
+        <thead>
+            <tr>
+                <th>
+                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                    <span style="padding-left: 3px;">Employee</span>
+                </th>
+                <th>
+                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                    <span style="padding-left: 3px;">Apmis ID</span>
+                </th>
+                <th>
+                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                    <span style="padding-left: 3px;">Department</span>
+                </th>
+                <th>
+                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                    <span style="padding-left: 3px;">Status</span>
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody *ngIf="employees.length > 0">
+            <tr *ngFor="let item of employees">
+                <td class="pointer" (click)="navEpDetail(item)">
+                    <div class="empWrap">
+                        <div class="list-img">
+                            <div *ngIf="item?.personDetails?.profileImageObject == undefined"><img src="assets/images/users/default.png"></div>
+                            <div *ngIf="item?.personDetails?.profileImageObject != undefined"><img [src]="item?.personDetails?.profileImageObject?.thumbnail">
+                            </div>
+                        </div>
+                        <div>{{item.personDetails?.lastName}} {{item.personDetails?.firstName}}</div>
+                    </div>
+                </td>
+                <td class="pointer" (click)="navEpDetail(item)">{{item.personDetails?.apmisId}}</td>
+                <td class="pointer" (click)="navEpDetail(item)">{{item.departmentId}}</td>
+                <td class="pointer" (click)="navEpDetail(item)">
+                    <span *ngIf="!item.isActive" style="color:#E53935;">Inactive</span>
+                    <span [hidden]="!item.isActive" style="color: #43A047;">Active</span>
+                </td>
+                <td>
+                    <div *ngIf="!item.isActive" class="tr-act-btn"><i class="fa fa-sign-out" aria-hidden="true"></i>Activate
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="employees.length == 0">
+            <tr>
+                <td class="table-content" colspan="6" style="text-align: center "> No data available in table</td>
+            </tr>
+        </tbody>
+    </table>
+    <apmis-data-pager [in-progress]="loadIndicatorVisible" [show-progress]="true" [pager-source]="paginationObj"
+    next-prev-color="orange" (onPageClick)="gotoPage($event)"></apmis-data-pager>
+    <!-- <div class="btn-center">
+        <button (click)="loadMore()" class="apmis-blue" mat-raised-button *ngIf="showLoadMore">Load More</button>
+    </div> -->
+</div>

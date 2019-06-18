@@ -1,0 +1,23 @@
+<div class="apmis-search-content">
+   <div class="new-modal-close-ico" (click)="onCloseFilterDialog()"><i class="fa fa-times-circle" aria-hidden="true"></i></div>
+  <div class="apmis-search-item input-wrap">
+    <img class="search-ico" src="assets/images/report_icons/search-small.svg" />
+    <input class="input" [formControl]="apmisSearchResult" type="text">
+  </div>
+  <div *ngIf="bindableData.length>0">
+    <ul>
+      <li class="apmis-search-item asi-list" *ngFor="let item of bindableData;let i=index" (click)="onToggleItem(item)">
+        <div class="item-payload">
+          <div class="item-img" *ngIf="item.isSelected">
+            <img class="ico" src="assets/images/report_icons/check.svg" />
+          </div>
+          <div class="item-val">{{item.label}}</div>
+        </div>
+        <img class="ico" *ngIf="item.isSelected" src="assets/images/report_icons/times.svg" />
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="bindableData.length===0">
+    <div class="asi-create-item" (click)="onCreateNewItem()">Create New Item</div>
+  </div>
+</div>

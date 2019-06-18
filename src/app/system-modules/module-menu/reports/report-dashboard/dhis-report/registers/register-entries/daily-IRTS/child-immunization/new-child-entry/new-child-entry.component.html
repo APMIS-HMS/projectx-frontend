@@ -1,0 +1,250 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Child Immunization Register Entry</legend>
+    <div class="modal_mini_title">Continental Hospital</div>
+  </div>
+
+  <div class="modal-content-overlay">
+    <form class="frm-down" [formGroup]="frm_UpdateCIR" novalidate>
+      <mat-tab-group>
+        <mat-tab label="Tab 1">
+          <div class="container" style="padding-top:10px; padding-left:35px;">
+            <div class="row">
+              <div class="col-sm">
+                <div>
+                  <mat-form-field>
+                    <input matInput placeholder="Date of Visit" type="date">
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field>
+                    <input matInput placeholder="Child's Name">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <input matInput placeholder="Child's Card No.">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <mat-select placeholder="Sex">
+                      <mat-option>None</mat-option>
+                      <mat-option value="option1">Male</mat-option>
+                      <mat-option value="option3">Female</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <textarea matInput placeholder="Child's FollowUp Address"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div>
+                  <mat-form-field>
+                    <input matInput type="tel" placeholder="Phone Number">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <input matInput type="date" placeholder="DOB">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <h4>OPV 0</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>Hep.B 0</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>BCG</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div>
+                  <h4>OPV 1</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>PENTA 1</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>PCV 1</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>OPV 2</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>PENTA 2</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+
+
+
+        <mat-tab label="Tab 2">
+          <div class="container" style="padding-top:10px; padding-left:35px;">
+            <div class="row">
+              <div class="col-sm">
+                <div>
+                  <h4>PCV 2</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>OPV 3</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>PENTA 3</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>PCV 3</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>MEASCLES 2</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div>
+                  <h3>Vitamin A</h3>
+                  <p>6 - 11:</p>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                  <br>
+                  <p>12 - 23:</p>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>MEASCLES 1</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>YELLOW FEVER</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>CONJUGATE A CSM</h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div>
+                  <h4>DPT 1 </h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>DPT 2 </h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>DPT 3 </h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>Hep.B 1 </h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <h4>Hep.B 2 </h4>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+
+
+      </mat-tab-group>
+
+      <div class="col-xs-12 text-center">
+        <div style="padding: 20px 10px;">
+          <button mat-raised-button type="submit" class="mat-lg-btn">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

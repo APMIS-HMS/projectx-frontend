@@ -1,0 +1,214 @@
+<div class="supplierBase">
+  <div class="suppSearch">
+    <app-apmis-store-supplier-search (emitCurrentPage)="loadCurrentPage($event)"></app-apmis-store-supplier-search>
+  </div>
+
+  <div *ngIf="main_content" class="contentLeftGrid">
+    <div class="tbl-btn-action">
+      <div class="action-pad">
+        <div class="new-btn-blue" (click)="onShowNewSupplier()">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>Add New Supplier</span>
+        </div>
+      </div>
+    </div>
+    <div class="lst-inner-wrap">
+      <div class="con-inner-wrap">
+        <h4>Supplier</h4>
+        <h2>{{selectedSupplier?.supplier.name}}</h2>
+      </div>
+      <div class="con-inner">
+        <div class="fa-icon">
+          <i class="fa fa-pencil-square-o fa-2x"></i>
+          <span>Edit</span>
+        </div>
+        <div>
+          <i class="fa fa-trash fa-2x"></i>
+          <span>Delete</span>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="lst-inner-wrap x2">
+      <div class="con-inner-wrap">
+        <h4>Contacts</h4>
+        <h2>{{selectedSupplier?.supplier.contactPerson}}</h2>
+      </div>
+      <div class="con-inner-wrap">
+        <h4>Phone </h4>
+        <h2>{{selectedSupplier?.supplier.primaryContactPhoneNo}}</h2>
+      </div>
+      <div class="con-inner-wrap">
+        <h4>Email</h4>
+        <h2>{{selectedSupplier?.supplier.email}}</h2>
+      </div>
+    </div>
+    <div class="lst-inner-wrap">
+      <div class="con-inner-wrap">
+        <h4>Contact Address</h4>
+        <h2>{{selectedSupplier?.supplier.address}}</h2>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="filterTop x2">
+      <div class="tbl-header-lhs">
+        <h2>Invoices</h2>
+      </div>
+      <div class="tbl-header-rhs">
+        <div>
+          <h3>Show from:</h3>
+        </div>
+        <div class="InputGroup input-space" style="width: 125px !important;">
+          <input [formControl]="fromDate" class="customInput" type="date" required>
+          <span class="highlight"></span>
+        </div>
+        <div>
+          <span>--</span>
+        </div>
+        <div class="InputGroup input-space" style="width: 125px !important;">
+          <input [formControl]="toDate" class="customInput" type="date" required>
+          <span class="highlight"></span>
+        </div>
+      </div>
+      <div class="tbl-header-rhs">
+        <div>
+          <h3>Show:</h3>
+        </div>
+        <div class="ft-btn ft-btn-selected">
+          <span>All</span>
+        </div>
+        <div class="ft-btn">
+          <span>Unpaid</span>
+        </div>
+        <div class="ft-btn">
+          <span>Partial payment</span>
+        </div>
+        <div class="ft-btn">
+          <span>Paid</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="store-table">
+      <div class="store-thead">
+        <div class="store-tr">
+          <div class="store-th store-td-actions">
+            <input type="checkbox">
+          </div>
+          <div class="invoice-tr-in">
+            <div class="store-th">Invoices</div>
+            <div class="store-th">Invoice Date</div>
+            <div class="store-th">Status</div>
+            <div class="store-th">Amount</div>
+            <div class="store-th">Action</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="store-tbody">
+        <div class="store-pre-tr">
+          <div class="store-tr" *ngFor="let invoice of invoices">
+            <div class="store-td store-td-actions">
+              <input type="checkbox">
+            </div>
+            <div class="invoice-tr-in">
+              <div class="store-td">{{invoice.invoiceNumber}}</div>
+              <div class="store-td">{{invoice.createdAt|date:'shortDate'}}</div>
+              <div class="store-td red-lbl">
+                <span *ngIf="invoice.amountPaid >= invoice.invoiceAmount" [class.green-lbl]="invoice.amountPaid>= invoice.invoiceAmount">Paid></span>
+                <span *ngIf="invoice.amountPaid === 0" [class.red-lbl]="invoice.amountPaid === 0">Unpaid</span>
+                <span *ngIf="invoice.amountPaid > 0 && invoice.amountPaid < invoice.invoiceAmount" [class.orange-lbl]="invoice.amountPaid > 0 && invoice.amountPaid < invoice.invoiceAmount">Partial
+                  Payment</span>
+              </div>
+              <div class="store-td">
+                <app-apmis-naira></app-apmis-naira>{{invoice.invoiceAmount|number}}
+              </div>
+              <div class="store-td">
+                <div class="inv-action">
+                  <div (click)="viewInvoice(invoice)" class="ft-btn btn-act-margin">
+                    <span>View Invoice</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-apmis-pagination (emitCurrentPage)="loadCurrentPage($event)" [total]="total"></app-apmis-pagination>
+    </div>
+
+    <div class="div-space"></div>
+
+    <div class="filterTop x2">
+      <div class="tbl-header-lhs">
+        <h2>Pending Orders</h2>
+      </div>
+      <div class="tbl-header-rhs">
+        <div>
+          <h3>Show from:</h3>
+        </div>
+        <div class="InputGroup input-space" style="width: 125px !important;">
+          <input [formControl]="pendingFromDate" class="customInput" type="date" required>
+          <span class="highlight"></span>
+        </div>
+        <div>
+          <span>--</span>
+        </div>
+        <div class="InputGroup input-space" style="width: 125px !important;">
+          <input [formControl]="pendingToDate" class="customInput" type="date" required>
+          <span class="highlight"></span>
+        </div>
+      </div>
+      <div class="tbl-header-rhs">
+        <div>
+          <h3>Show:</h3>
+        </div>
+        <div class="ft-btn ft-btn-selected">
+          <span>All</span>
+        </div>
+        <div class="ft-btn">
+          <span>Unpaid</span>
+        </div>
+        <div class="ft-btn">
+          <span>Partial payment</span>
+        </div>
+        <div class="ft-btn">
+          <span>Paid</span>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="pur-wrap" *ngFor="let order of orders">
+      <div class="pur-con-wrap">
+        <span>Date Generated</span>
+        <h3>{{order.createdAt| date:'fullDate'}}</h3>
+      </div>
+      <div class="pur-con-wrap">
+        <span>Status</span>
+        <h3>
+          <span *ngIf="!order.isSupplied">Pending</span>
+          <span *ngIf="order.isSupplied">Supplied</span>
+        </h3>
+      </div>
+      <div class="pur-con-wrap">
+        <span>Action</span>
+        <div class="ft-btn">
+          <span>View Purchase Items</span>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="showNewSupplier">
+    <app-new-supplier></app-new-supplier>
+  </div>
+
+
+  <div *ngIf="showViewInvoice" class="modal-overlay">
+    <app-view-invoice [loginEmployeeId]="loginEmployee._id" [selectedInvoice]="selectedInvoice" [invoiceProduct]="invoiceProduct"
+      (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-view-invoice>
+  </div>

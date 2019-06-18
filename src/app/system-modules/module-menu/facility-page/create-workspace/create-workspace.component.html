@@ -1,0 +1,125 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Assign Workspace</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <form [formGroup]="frmNewEmp1" novalidate>
+            <div class="mainfrmwrap">
+                <div class="sec-1">
+                    <div class="frm-item-wrap">
+                        <mat-form-field>
+                            <mat-select formControlName="dept" placeholder="Department">
+                                <mat-option [disabled]="disableDepartment" *ngFor="let department of departments" [value]="department.name">
+                                    {{department.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="frm-item-wrap">
+                        <mat-form-field>
+                            <mat-select formControlName="unit" placeholder="Unit">
+                                <mat-option *ngFor="let unit of units" [value]="unit.name">
+                                    {{unit.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="sec-2">
+                    <div class="frm-item-wrap">
+                        <mat-form-field>
+                            <mat-select formControlName="majorLoc" placeholder="Major Location">
+                                <mat-option *ngFor="let major of majorLocations" [value]="major">
+                                    {{major.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="frm-item-wrap">
+                        <mat-form-field>
+                            <mat-select formControlName="minorLoc" placeholder="Minor Location">
+                                <mat-option *ngFor="let minor of minorLocations" [value]="minor">
+                                    {{minor.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>  
+
+                <div class="tbl-resp-wrap">
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th class="sel-all">
+                                    <mat-checkbox class="example-margin" [formControl]="checkAll">Check All</mat-checkbox>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    <span style="padding-left: 3px;">Employee</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    <span style="padding-left: 3px;">Telephone</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    <span style="padding-left: 3px;">Email</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td colspan="6">
+                                    <div class="tbl-actionRow">
+                                        <div class="tbl-title"></div>
+                                        <div class="tbl-search">
+                                            <div class="searchInputWrap">
+                                                <mat-input-container class="example-full-width">
+                                                    <input matInput [formControl]="searchControl" autofocus placeholder="search organizations">
+                                                </mat-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr *ngFor="let employee of filteredEmployees">
+                                <td class="sel-all">
+                                    <div class="dx-field">
+                                        <div class="dx-field-value">
+                                            <mat-checkbox (change)="onValueChanged($event,employee)" [checked]="employee.isChecked"></mat-checkbox>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="empWrap">
+                                        <div class="list-img">
+                                            <div *ngIf="employee?.personDetails?.profileImageObject === undefined"><img src="assets/images/users/default.png"></div>
+                                            <img *ngIf="employee?.personDetails?.profileImageObject !== undefined" [src]="facilityService.transform(employee?.personDetails?.profileImageObject?.thumbnail)">
+                                        </div>
+                                        <div>{{employee.personDetails.lastName}} {{employee?.personDetails.firstName}}</div>
+                                    </div>
+                                </td>
+                                <td>{{employee.personDetails.primaryContactPhoneNo}}</td>
+                                <td>{{employee?.personDetails.email}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="example-full-width" id="example-full-width">
+                <button [disabled]="disable()" (click)="setWorkspace(frmNewEmp1.valid, frmNewEmp1.value)" [ngClass]="{'cta-1':enable(), 'cta-1-disable':disable()}"> Assign Workspace</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

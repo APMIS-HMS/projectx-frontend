@@ -1,0 +1,81 @@
+<div class="container">
+    <h2 class="title">
+        <i class="fa fa-star fa-fw star"></i> Today's Investigation List
+    </h2>
+    <section class="row">
+        <div class="col-lg-3">
+            <div class="card">
+                <canvas baseChart [data]="paymentChartData" [labels]="paymentChartLabels" [chartType]="paymentChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                <div class="pie-number summary-title">
+                    20
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="table-head col-lg-2">Request</div>
+                        <div class="table-head col-lg-2">Patient</div>
+                        <div class="table-head col-lg-2">APMIS ID</div>
+                        <div class="table-head col-lg-2">Doctor</div>
+                        <div class="table-head col-lg-1">Clinic</div>
+                        <div class="table-head col-lg-1">Location</div>
+                        <div class="table-head col-lg-1">Bench</div>
+                        <div class="table-head col-lg-1">Status</div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-list-item">
+                        <div class="row">
+                            <div class="table-list col-lg-2">Blood Test</div>
+                            <div class="table-list col-lg-2">John Doe</div>
+                            <div class="table-list col-lg-2">YK-39594</div>
+                            <div class="table-list col-lg-2">Dr. Jane Soe</div>
+                            <div class="table-list col-lg-1">A&amp;E</div>
+                            <div class="table-list col-lg-1">Lab</div>
+                            <div class="table-list col-lg-1">Unit C</div>
+                            <div class="table-list col-lg-1">Sample Taken</div>
+                        </div>
+                    </div>
+                    <div class="card-list-item">
+                        <div class="row">
+                            <div class="table-list col-lg-2">Blood Test</div>
+                            <div class="table-list col-lg-2">John Doe</div>
+                            <div class="table-list col-lg-2">YK-39594</div>
+                            <div class="table-list col-lg-2">Dr. Jane Soe</div>
+                            <div class="table-list col-lg-1">A&amp;E</div>
+                            <div class="table-list col-lg-1">Lab</div>
+                            <div class="table-list col-lg-1">Unit C</div>
+                            <div class="table-list col-lg-1">Sample Taken</div>
+                        </div>
+                    </div>
+                    <div class="card-list-item">
+                        <div class="row">
+                            <div class="table-list col-lg-2">Blood Test</div>
+                            <div class="table-list col-lg-2">John Doe</div>
+                            <div class="table-list col-lg-2">YK-39594</div>
+                            <div class="table-list col-lg-2">Dr. Jane Soe</div>
+                            <div class="table-list col-lg-1">A&amp;E</div>
+                            <div class="table-list col-lg-1">Lab</div>
+                            <div class="table-list col-lg-1">Unit C</div>
+                            <div class="table-list col-lg-1">Sample Taken</div>
+                        </div>
+                    </div>
+                    <div class="card-list-item">
+                        <div class="row">
+                            <div class="table-list col-lg-2">Blood Test</div>
+                            <div class="table-list col-lg-2">John Doe</div>
+                            <div class="table-list col-lg-2">YK-39594</div>
+                            <div class="table-list col-lg-2">Dr. Jane Soe</div>
+                            <div class="table-list col-lg-1">A&amp;E</div>
+                            <div class="table-list col-lg-1">Lab</div>
+                            <div class="table-list col-lg-1">Unit C</div>
+                            <div class="table-list col-lg-1">Sample Taken</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

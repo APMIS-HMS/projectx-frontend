@@ -1,0 +1,63 @@
+@import "../documentation.component.scss";
+// .modal-baseWrap {
+//     position: relative;
+//     width: 80%;
+//     height: 90%;
+//     box-sizing: border-box;
+//     background: #fff;
+//     overflow: hidden;
+//     padding: 50px;
+//     border-radius: 7px;
+// }
+.modal-baseWrap {
+    width: 590px;
+    padding: 10px 40px;
+    // max-height: 50vh;
+}
+
+
+
+
+.modal_title {
+    text-align: center;
+    border: 0;
+    width: 500px;
+    color: #fff;
+}
+
+.cont-wrap {
+    width: 100%;
+    height: auto;
+    max-height: 95%;
+    overflow-y: auto;
+}
+
+.docCard-header {
+    margin: 20px 0;
+    margin-top: 3px;
+}
+
+.docCard-ctaWrap {
+    top: -13px;
+    bottom: auto;
+}
+
+.form-cont {
+    width: 98%;
+    margin-top: 12px;
+    box-shadow: 20px 20px 50px 10px rgba(255, 192, 203, 0.034);
+}
+
+.but-style {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-radius: 25px;
+    padding: 13px 35px;
+    border-color: none !important;
+}

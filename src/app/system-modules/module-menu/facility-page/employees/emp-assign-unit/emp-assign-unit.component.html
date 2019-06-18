@@ -1,0 +1,106 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Assign Employee Unit</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+        <form [formGroup]="frmNewEmp1" novalidate>
+            <div class="frm-item-wrap">
+                <mat-form-field>
+                    <mat-select placeholder="Department" formControlName="dept">
+                        <mat-option [disabled]="disableDepartment" *ngFor="let department of departments" [value]="department.name">{{department.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="frm-item-wrap">
+                <mat-form-field>
+                    <mat-select placeholder="Unit" formControlName="unit">
+                        <mat-option *ngFor="let unit of units" [value]="unit">{{unit.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="emp-wrap">
+                <table cellpadding="0" cellspacing="0" border="0.5">
+                    <thead>
+                        <tr>
+                            <th class="sel-all">
+                                <div class="dx-field">
+                                    <div class="dx-field-value">
+                                        <mat-checkbox [formControl]="checkAll"></mat-checkbox>
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                <span style="padding-left: 3px;">Employee</span>
+                            </th>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                <span style="padding-left: 3px;">Telephone</span>
+                            </th>
+                            <th>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                <span style="padding-left: 3px;">Email</span>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td colspan="6">
+                                <div class="tbl-actionRow">
+                                    <div class="tbl-title"></div>
+                                    <div class="tbl-search">
+                                        <div class="searchInputWrap">
+                                            <mat-input-container class="example-full-width">
+                                                <input matInput [formControl]="searchControl" class="searchInput" type="search" autofocus>
+                                            </mat-input-container>
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr *ngFor="let employee of filteredEmployees">
+                            <td class="sel-all">
+                                <div class="dx-field">
+                                    <div class="dx-field-value">
+                                        <mat-checkbox [checked]="employee.isChecked" (change)="onValueChanged($event,employee)" [value]="employee.isChecked"></mat-checkbox>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="empWrap">
+                                    <div class="list-img">
+                                        <div *ngIf="employee?.personDetails?.profileImageObject === undefined">
+                                            <img src="assets/images/users/default.png">
+                                        </div>
+                                        <img *ngIf="employee?.personDetails?.profileImageObject !== undefined" [src]="facilityService.transform(employee?.personDetails?.profileImageObject?.thumbnail)">
+                                    </div>
+                                    <div>{{employee.personDetails.lastName}} {{employee.personDetails.firstName}}</div>
+                                </div>
+                            </td>
+                            <td>{{employee.personDetails.primaryContactPhoneNo}}</td>
+                            <td>{{employee.personDetails.email}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <button [disabled]="(!frmNewEmp1.valid && !isSaving) || !hasMinimumChecked() || isSaving" (click)="assignUnit(frmNewEmp1.valid, frmNewEmp1.value)" [ngClass]="{'cta-1':frmNewEmp1.valid && hasMinimumChecked(), 'cta-1-disable':(!frmNewEmp1.valid || !hasMinimumChecked())}">
+                Assign Unit
+            </button>
+        </form>
+
+    </div>
+</div>

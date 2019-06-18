@@ -1,0 +1,17 @@
+<div class="home-main">
+	<ul class="hm-tabs">
+		<li (click)="tab_click('products')" [class.hm-tab-active]='tab_all_products' class="hm-tab">All Products</li>
+		<li (click)="tab_click('expiring')" [class.hm-tab-active]='tab_expiring' class="hm-tab">Expiring this Month</li>
+		<li (click)="tab_click('expired')" [class.hm-tab-active]='tab_expired' class="hm-tab">Expired Products</li>
+		<li (click)="tab_click('requisition')" [class.hm-tab-active]='tab_requisition' class="hm-tab">Requisition Status</li>
+		<li (click)="tab_click('restock')" [class.hm-tab-active]='tab_restock_level' class="hm-tab">Below Re-Sock Level</li>
+	</ul>
+
+	<div class="tab-content">
+		<app-all-products *ngIf="tab_all_products"> </app-all-products>
+		<app-expiring-products *ngIf="tab_expiring"> </app-expiring-products>
+		<app-expired-products *ngIf="tab_expired"> </app-expired-products>
+		<app-product-requisition *ngIf="tab_requisition"> </app-product-requisition>
+		<app-product-restock *ngIf="tab_restock_level"> </app-product-restock>
+	</div>
+</div>

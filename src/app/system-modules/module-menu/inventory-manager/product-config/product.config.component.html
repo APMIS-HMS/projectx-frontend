@@ -1,0 +1,135 @@
+<div class="wrap">
+    <div class="tabs">
+        <div (click)="tab1()" [class.tab-active]="content1" class="tab">Configured Products</div>
+        <div (click)="tab2()" [class.tab-active]="content2" class="tab">New Configuration</div>
+    </div>
+
+    <div class="tab-content" *ngIf="content1">
+        <!-- <app-configured-products></app-configured-products> -->
+        <div class="pp-card shadow-grey" >
+            <div class="tbl-top-items">
+                <div class="card-title">List Of Configured Products</div>
+                <div class="searchInputWrap">
+                    <input [formControl]="searchControl" type="search" autofocus class="searchInput" placeholder="search">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="tbl-resp-wrap">
+                  <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+                      <thead>
+                          <tr>
+                              <th>
+                                  <span style="padding-left: 3px;">Product Name</span>
+                              </th>
+                              <th>
+                                  <span style="padding-left: 3px;">Product Configuration</span>
+                              </th>
+                              <th>
+                                  <span style="padding-left: 3px;">Date</span>
+                              </th>
+                              <th>Actions</th>
+                          </tr>
+                      </thead>
+          
+                      <tbody>
+                          <tr *ngFor="let item of productConfigList">
+                              <td>{{item?.productObject?.name}}</td>
+                              <td>
+                                <ul class="config-ul" *ngFor="let size of item.packSizes">
+                                  <li>{{size.size}} {{size.name}}</li>
+                                </ul>
+                              </td>
+                              <td>{{item.createdAt|date:'short'}}</td>
+                              <td>
+                                <i class="fa fa-edit" (click)="onEditConfig(item)"></i>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          
+    </div>
+
+    <div class="tab-content" *ngIf="content2">
+        <div class="row in-wrap">
+            <div class="col-sm-4">
+                <h2> Select a Product </h2>
+                <app-apmis-paginated-lookup [formControl]="searchProdductControl" [(ngModel)]="apmisLookupText" [url]="apmisLookupUrl"
+                    [query]="apmisInvestigationLookupQuery" placeholder="Search Product" [isSocket]="true" [displayKey]="apmisLookupDisplayKey"
+                    (selectedItem)="apmisLookupHandleSelectedItem($event)"></app-apmis-paginated-lookup>
+                <br>
+                <br>
+
+                <div *ngIf="selectedProduct.name !== undefined">
+                    <h2> Select a Pack Type </h2>
+                    <div class="row card">
+                        <mat-paginator [pageIndex]="0" [length]="packages.length" [pageSize]="pageSize" (page)="pageEvent = $event; onPaginateChange($event)"
+                            [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+                        <ul style="width:100%;" *ngFor="let item of filteredPackages;let i=index">
+                            <li>
+                                <div class="checkwrap">
+                                    <label class="container">
+                                        {{item.name}}
+                                        <input type="checkbox" [checked]="item.checked" (change)="addPackage($event,item,i)">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                        <mat-paginator [pageIndex]="0" [length]="packages.length" [pageSize]="pageSize" (page)="pageEvent = $event; onPaginateChange($event)"
+                            [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <h2>
+                    {{selectedProduct.name}}
+                </h2>
+                <form [formGroup]="packageForm" novalidate>
+                    <div formArrayName="package">
+                        <div class="row card pack-item animated bounceInRight" *ngFor="let item of packageForm['controls'].package['controls']; let i=index;"
+                            formGroupName="{{i}}">
+                            <div class="col-xs-4">
+                                <h2 style="line-height: 60px">
+                                    <span *ngIf="i>0">1&nbsp;</span> {{item._value.name}}
+                                </h2>
+                            </div>
+                            <mat-input-container class="col-xs-3" *ngIf="i>0">
+                                <input matInput type="number" placeholder="No. of {{packageForm.controls.package.controls[0].controls.name.value}}"
+                                    formControlName="size">
+                            </mat-input-container>
+                            <div class="col-xs-3" *ngIf="i==0">
+                                &nbsp;
+                            </div>
+                            <div class="col-xs-2 pack-label">
+                                <h2 *ngIf="i>0" style="line-height:60px">{{packageForm.controls.package.controls[0].controls.name.value}}</h2>
+                            </div>
+                            <div class="col-xs-3">
+                                <h2 class="action-icon">
+                                    <i class="fa fa-close fa-fw" style="color : red" (click)="removePack(i,item)"></i>
+                                    <i class="fa fa-angle-down fa-2x fa-fw" (click)="onMoveDown(i,item)"></i>
+                                    <i class="fa fa-angle-up fa-2x fa-fw" (click)="onMoveUp(i,item)"></i>
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row card" *ngIf="packageForm['controls'].package['controls'].length === 0">
+                            <div class="col-xs-12">
+                                <h2 style="line-height: 60px; text-align: center;">
+                                    You don't have any pack type yet.
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button class="button" (click)="save()" [disabled]="!btnShowStatus"> SAVE </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<!-- [formControl]="btnSave" -->

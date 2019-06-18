@@ -1,0 +1,79 @@
+<div class="store-table">
+  <div class="store-thead">
+    <div class="store-tr">
+      <div class="store-th store-td-actions"></div>
+      <div class="store-tr-in">
+        <div class="store-th">Store Name</div>
+        <div class="store-th">Major Location</div>
+        <div class="store-th">Minor Location</div>
+        <div *ngIf="enableEdit" class="store-th"></div>
+        <div class="store-th">Product Types</div>
+      </div>
+      <div class="store-th store-td-actions"></div>
+    </div>
+  </div>
+
+  <div class="store-tbody">
+    <div *ngFor="let store of stores; let i = index" class="store-pre-tr">
+      <div class="store-tr">
+        <div class="store-td store-td-actions"></div>
+        <div class="store-tr-in">
+          <div class="store-td">
+            <div *ngIf="editDone">{{store.name}}</div>
+            <div class="InputGroup input-space" *ngIf="enableEdit" >
+              <input min="0" class="customInput" placeholder="Store Name" type="text" required>
+              <span class="highlight"></span>
+            </div>
+          </div>
+          <div class="store-td">
+            <div *ngIf="editDone">{{store.location.majorLocation.name}}</div>
+            <div *ngIf="enableEdit" class="InputGroup input-space">
+              <select>
+                <option value="0">--Major Location--</option>
+              </select>
+            </div>
+          </div>
+          <div class="store-td">
+            <div *ngIf="editDone">{{store.location.minorLocation.name}}</div>
+            <div *ngIf="enableEdit" class="InputGroup input-space">
+              <select>
+                <option value="0">--Minor Location--</option>
+              </select>
+            </div>
+          </div>
+          <div *ngIf="enableEdit" class="store-td"><i style="cursor: pointer;" (click)="onDoneEdit()" class="fa fa-check" aria-hidden="true"></i></div>
+          <div class="store-td" style="flex-wrap: wrap;  max-width: 350px;">
+            <div *ngFor="let item of store.productTypes">
+              <span>{{item.name}},</span>
+            </div>
+          </div>
+          <!-- <div class="store-td">
+            <div class="ft-btn">Open Store</div>
+          </div> -->
+        </div>
+        <div class="store-td store-td-actions">
+          <div class="table-list col-xs-1 action-placeholder">
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            <div class="action-container shadow-RB">
+              <div class="action-item" (click)="onEdit()">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                <span>Edit Details</span>
+              </div>
+              <div class="action-item" (click)="onShowProductConfiguration()">
+                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                <span>Edit Configuration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-apmis-pagination (emitCurrentPage)="loadCurrentPage($event)" [total]="total"></app-apmis-pagination>
+</div>
+
+<div *ngIf="showProductConfiguration" class="modal-overlay">
+    <app-product-config-popup (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-product-config-popup>
+  </div>
+
+

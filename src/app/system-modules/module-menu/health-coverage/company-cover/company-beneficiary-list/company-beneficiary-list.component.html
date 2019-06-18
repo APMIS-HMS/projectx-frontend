@@ -1,0 +1,241 @@
+<div class="pgSubtitle">
+    {{selectedCompanyCover?.name}}
+</div>
+<div>
+    <div class="doc-mainWrap">
+        <div class="doc-contentArea">
+            <div class="clinicalNoteWrap">
+
+                <div class="actSect">
+                    <div class="actSect-header">
+                        <div (click)="newBeneficiary_show()" class="act-wrap">
+                            <i *ngIf="newBeneficiary" class="fa fa-minus" aria-hidden="true"></i>
+                            <i [hidden]="newBeneficiary" class="fa fa-plus" aria-hidden="true"></i>
+                            <span>Add Beneficiary</span>
+                        </div>
+                    </div>
+
+                    <form class="frmNoteWrap" *ngIf="newBeneficiary" [formGroup]="frmNewBeneficiary" novalidate>
+                        <div class="frm-title">ADD BENEFICIARY</div>
+
+                        <div class="frm-x2">
+                            <div class="frm-item-wrap">
+                                <mat-input-container>
+                                    <input matInput placeholder="Principal Surname" formControlName="surname">
+                                </mat-input-container>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-input-container>
+                                    <input matInput placeholder="Principal Othernames" formControlName="othernames">
+                                </mat-input-container>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-input-container>
+                                    <input matInput placeholder="Address" formControlName="address">
+                                </mat-input-container>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-input-container class="example-full-width">
+                                    <input type="email" matInput mat-error placeholder="Email" formControlName="email">
+                                </mat-input-container>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-input-container class="example-full-width">
+                                    <input type="tel" matInput mat-error placeholder="Phone Number" formControlName="phone">
+                                </mat-input-container>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Gender" formControlName="principalGender">
+                                        <mat-option *ngFor="let gender of genders" [value]="gender._id">{{gender.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-input-container>
+                                    <input matInput placeholder="Employee ID" formControlName="principalEmpID">
+                                </mat-input-container>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Status" formControlName="principalstatus">
+                                        <mat-option *ngFor="let status of statuses" [value]="status._id">{{status.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                    <form *ngIf="frmNewBeneficiary.valid" [formGroup]="frmDependant">
+                        <div formArrayName="dependantArray" class="frmArrayWrap">
+                            <div class="frmArray" *ngFor="let dependant of frmDependant.controls['dependantArray'].controls; let i = index;">
+                                <div *ngIf="!dependant.value.readOnly" (click)="closeDependant(dependant, i)" class="closeIcon"><i class="fa fa-times-circle-o" aria-hidden="true"></i></div>
+                                <div formGroupName="{{i}}">
+                                    <div class="frmNoteWrap">
+                                        <div class="">Add Dependant</div>
+                                        <div>
+                                            <div class="dv-wrap">
+                                                <div class="frm-x2 frmArray">
+                                                    <div class="frm-item-wrap">
+                                                        <mat-input-container>
+                                                            <input matInput placeholder="Surname" formControlName="dependantSurname">
+                                                        </mat-input-container>
+                                                    </div>
+                                                    <div class="frm-item-wrap">
+                                                        <mat-input-container>
+                                                            <input matInput placeholder="Othernames" formControlName="dependantOthernames">
+                                                        </mat-input-container>
+                                                    </div>
+                                                    <div class="frm-item-wrap">
+                                                        <mat-input-container class="example-full-width">
+                                                            <input type="email" matInput mat-error placeholder="Email" formControlName="dependantEmail">
+                                                        </mat-input-container>
+                                                    </div>
+
+                                                    <div class="frm-item-wrap">
+                                                        <mat-input-container class="example-full-width">
+                                                            <input type="tel" matInput mat-error placeholder="Phone Number" formControlName="dependantPhone">
+                                                        </mat-input-container>
+                                                    </div>
+
+                                                    <div class="frm-item-wrap">
+                                                        <mat-form-field>
+                                                            <mat-select placeholder="Gender" formControlName="dependantGender">
+                                                                <mat-option *ngFor="let gender of genders" [value]="gender._id">{{gender.name}}</mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+
+                                                    <div class="frm-item-wrap">
+                                                        <mat-form-field>
+                                                            <mat-select placeholder="Status" formControlName="dependantStatus">
+                                                                <mat-option *ngFor="let status of statuses" [value]="status._id">{{status.name}}</mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="!dependant.value.readOnly" (click)="pushNewDependant(dependant, i)" class="frmArrayBtn"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="flex-button">
+                        <button [disabled]="!frmNewBeneficiary.valid" *ngIf="newBeneficiary" (click)="save(frmNewBeneficiary.valid, frmNewBeneficiary.value, frmDependant.valid, frmDependant)" class="cta-1">Add Beneficiary</button>
+                        <button *ngIf="newBeneficiary" (click)="cancel()" class="cta-1">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="tblWrapa" class="actSect">
+                    <mat-paginator [pageIndex]="0" [length]="beneficiaries.length" [pageSize]="pageSize" (page)="pageEvent = $event; onPaginateChange($event)" [pageSizeOptions]="pageSizeOptions">
+                    </mat-paginator>
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                    <span style="padding-left: 3px;">Name</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                    <span style="padding-left: 3px;">Gender</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                    <span style="padding-left: 3px;">Employee ID</span>
+                                </th>
+                                <th>
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                                    <span style="padding-left: 3px;">Role</span>
+                                </th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <!-- <th>Plan</th> -->
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td colspan="10">
+                                    <div class="tbl-actionRow">
+                                        <!-- <div class="frm-item-wrap">
+                          <apmis-lookup [(ngModel)]="apmisLookupText" 
+                          url="apmisLookupUrl" query="apmisLookupQuery" placeholder="Patient"
+                          isSocket="false" displayKey="apmisLookupDisplayKey" 
+                          (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                        </div>
+
+                        <div class="frm-item-wrap">
+                          <apmis-lookup [(ngModel)]="apmisLookupText" 
+                              url="apmisLookupUrl" query="apmisLookupQuery" placeholder="Practitioner"
+                              isSocket="false" displayKey="apmisLookupDisplayKey" 
+                              (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                        </div>
+
+                        <div class="frm-item-wrap">
+                          <apmis-lookup [(ngModel)]="apmisLookupText" 
+                              url="apmisLookupUrl" query="apmisLookupQuery" placeholder="Location"
+                              isSocket="false" displayKey="apmisLookupDisplayKey" 
+                              (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                        </div> -->
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr *ngFor="let beneficiary of filteredBeneficiaries">
+                                <td>{{beneficiary?.surname}} {{beneficiary?.firstName}}</td>
+                                <td>{{beneficiary?.gender}}</td>
+                                <td>{{beneficiary?.filNo}}</td>
+                                <td>
+                                    <div class="role">{{getRole(beneficiary)}}</div>
+                                </td>
+                                <td>{{beneficiary?.phoneNo}}</td>
+                                <td>{{beneficiary?.email}}</td>
+                                <!-- <td>Bronze</td> -->
+                                <td>Active</td>
+                                <td>{{beneficiary?.date | date:'shortDate'}}</td>
+                                <td class="action-placeholder" style="text-align:center;">
+                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                    <div class="action-container shadow-RB">
+                                        <div (click)="showEdit(beneficiary)" class="action-item">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            <span>Edit</span>
+                                        </div>
+
+                                        <div class="action-item">
+                                            <i class="fa fa-ban" aria-hidden="true"></i>
+                                            <span>Deactivate</span>
+                                            <!-- <i class="fa fa-check-o" aria-hidden="true"></i>
+                                            <span>Activate</span> -->
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <mat-paginator [pageIndex]="0" [length]="beneficiaries.length" [pageSize]="pageSize" (page)="pageEvent = $event; onPaginateChange($event)" [pageSizeOptions]="pageSizeOptions">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

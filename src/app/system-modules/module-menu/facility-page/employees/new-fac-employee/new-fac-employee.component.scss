@@ -1,0 +1,79 @@
+@import "../../../../../../globals/variables.scss";
+
+.newEmp-idWrap input{
+    border: 1px solid #727272;
+    border-radius: 10px;
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+}
+.gen_idWrap{
+    width: 100%;
+    text-align: center;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #424242;
+}
+.gen_idWrap strong{
+    font-style: normal;
+    color: #000;
+}
+.gen_idWrap span{
+    font-style: normal;
+    color: #C62828;
+    padding-left: 6px;
+    cursor: pointer;
+}
+.gen_idWrap span:hover{
+    text-decoration: underline;
+}
+.btn-1{
+    width: 120px;
+    margin: 20px auto;
+}
+
+.modal_mini_title{
+    margin-bottom: 0;
+}
+
+.modal-baseWrap{
+    width: 590px;
+    padding: 10px 50px;
+}
+.dx-texteditor{
+    border: 0;
+    border-bottom: 0.5px solid #37474F;
+    font-size: 1.4rem;
+    color: #37474F;
+    width: 245px;
+    border-radius: 0;
+}
+.modal-baseWrap .mat-input-container {
+    width: 100%;
+}
+.frm-x2 .frm-item-wrap{
+    width: 49% !important;
+}
+
+@media only screen and (max-width: 700px) {
+    .modal-baseWrap {
+        padding: 10px 20px;
+        min-width: 100%;
+        width: 100%;
+    }
+    .modal-header-wrap {
+        min-width: 100%;
+        width: 100%;
+    }
+    .pulse {
+        width: 90%;
+    }
+    .frm-x2 .frm-item-wrap {
+        width: 100% !important;
+    }
+    .frm-x2{
+        padding-bottom: 15px;
+        display: block;
+        width: 100%;
+    }
+}

@@ -1,0 +1,14 @@
+<div class="store-summary-container">
+    <ng-template ngFor [ngForOf]="[1,2,3,4,5,6]" let-p>
+        <store-summary-item  *ngIf ='data.length ===0'>
+
+        </store-summary-item>
+    </ng-template>
+
+
+    <store-summary-item [ngClass]="{'flex-2' : i === 0 && data.length<=5}"
+                        (onDetailClick)="onItemClickHandler(s)"
+                        [item]="s" *ngFor="let s of data ; let i = index">
+    </store-summary-item>
+
+</div>

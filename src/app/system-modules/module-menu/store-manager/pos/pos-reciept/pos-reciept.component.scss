@@ -1,0 +1,36 @@
+@import '../pos.component.scss';
+
+.r-main-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.reciept-wrap{
+    width: 400px;
+}
+.r-header{
+    text-align: center;
+}
+.r-facility{
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+.r-others{
+    font-size: 1.4rem;
+}
+.r-mid-sect{
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.r-lhs{
+    text-align: left;
+}
+.r-rhs{
+    text-align: right;
+}
+.r-footers{
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+}

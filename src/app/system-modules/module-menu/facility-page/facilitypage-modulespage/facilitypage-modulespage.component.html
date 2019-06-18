@@ -1,0 +1,119 @@
+<!-- <div>
+    <ul class="moduleNav">
+        <li (click)="allModuleTab()" [class.moduleNav-active]="allModulesShow">All Modules</li>
+        <li (click)="integratedModuleTab()" [class.moduleNav-active]="integratedModulesShow">Integrated Modules</li>
+        <li (click)="unintegratedModuleTab()" [class.moduleNav-active]="unintegratedModulesShow">Unintegrated Modules</li>
+    </ul>
+
+    <div *ngIf="allModulesShow" class="mod-sect-wrap">
+        <ul>
+            <li *ngFor="let systemModule of systemModules; let i = even; let k = odd">
+                <div class="dataMix-wrap" [class.color1]="i" [class.color2]="k">
+                    <div class="lhs">{{systemModule.name}}</div>
+                    <div class="rhs">
+                        <div style="color: #ff2500; text-align: right;" *ngIf="!isIntegrated(systemModule._id)"><i class="fa fa-ban" aria-hidden="true"></i> Disable</div>
+                        <div style="color: #4CAF50; text-align: right;" [hidden]="!isIntegrated(systemModule._id)"><i class="fa fa-check" aria-hidden="true"></i> Integrate</div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="integratedModulesShow" class="mod-sect-wrap">
+        <ul>
+            <li *ngFor="let systemModule of facilityModules; let i = even; let k = odd">
+                <div *ngIf="!isIntegrated(systemModule._id)" class="dataMix-wrap" [class.color1]="i" [class.color2]="k">
+                    <div class="lhs">{{systemModule.name}}</div>
+                    <div class="rhs">
+                        <div style="color: #ff2500; text-align: right;" *ngIf="!isIntegrated(systemModule._id)"><i class="fa fa-ban" aria-hidden="true"></i> Disable</div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="unintegratedModulesShow" class="mod-sect-wrap">
+        <ul>
+            <li *ngFor="let systemModule of systemModules; let i = even; let k = odd">
+                <div [hidden]="!isIntegrated(systemModule._id)" class="dataMix-wrap" [class.color1]="i" [class.color2]="k">
+                    <div class="lhs">{{systemModule.name}}</div>
+                    <div class="rhs">
+                        <div style="color: #ff2500; text-align: right;" *ngIf="!isIntegrated(systemModule._id)"><i class="fa fa-ban" aria-hidden="true"></i> Disable</div>
+                        <div style="color: #4CAF50; text-align: right;" [hidden]="!isIntegrated(systemModule._id)"><i class="fa fa-check" aria-hidden="true"></i> Integrate</div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div> -->
+
+<div style="border-top:2px solid #fff;">
+    <div class="card-title">Application Modules</div>
+
+    <div class="card-tbl shadow-grey tbl-active">
+        <div class="card-title">Active Plan</div>
+
+        <div class="top-wrap">
+            <div class="plan-title">One Off Payment</div>
+            <button (click)="subscribe_onClick()" class="btn btn-blue" ><i class="fa fa-edit" aria-hidden="true"></i> Update Subscription</button>
+        </div> 
+        
+        <table cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+                <tr>
+                    <th>Modules</th>
+                    <th style="text-align:center;"></th>
+                </tr>
+            </thead>
+
+            <tbody *ngIf="facilityModules > 0">
+                <tr *ngFor="let module of facilityModules">
+                    <td>{{module?.name}}</td>
+                    <td class="th-act">
+                        <button class="tbl-btn-red" *ngIf="module.canDisable==true" (click)="onDeactive(module)"><i class="fa fa-ban" aria-hidden="true"></i> Disable</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="facilityModules == 0">
+                <tr>
+                    <td class="table-content" colspan="6" style="text-align: center "> No data available in table</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card-tbl shadow-grey tbl-inactive">
+        <div class="card-title">Available Modules</div>
+        <table cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+                <tr>
+                    <th>Modules</th>
+                    <th style="text-align:center;"></th>
+                </tr>
+            </thead>
+
+            <tbody *ngIf="systemModules.length > 0">
+                <tr *ngFor="let module of systemModules">
+                    <td>
+                        {{module.name | uppercase}}
+                    </td>
+                    <td>
+                        <div class="tbl-btn-green" (click)="onActive(module)"><i class="fa fa-check" aria-hidden="true"></i> Subscribe</div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="systemModules.length == 0">
+                <tr>
+                    <td class="table-content" colspan="6" style="text-align: center "> No data available in table</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="subscribe" class="modal-overlay">
+    <app-subscribtion (closeModal)="en($event)" id="form-modal" class="form-modal center-center"></app-subscribtion>
+</div>

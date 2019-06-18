@@ -1,0 +1,180 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title" style="color:white;">Electronic Case Note</legend>
+    </div>
+    <div class="modal-print-baseWrap ">
+        <div class="baseGrid">
+
+            <!-- These is the filter part, commented out because it is not needed now -->
+            <!--  <div class="filter-doc">
+                <mat-card>
+                    <h3 class="filter-margin">Filter</h3>
+                    <mat-radio-group>
+                        <mat-radio-button class="filter-margin" value="byFacility">
+                            By Facility
+                        </mat-radio-button>
+                        <mat-radio-button class="filter-margin" value="viewAll">
+                            View All Documentation
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </mat-card>
+            </div> -->
+
+            <div class="docPreview" id="printDoc-Section">
+                <div class="top-bio">
+                    <h1 class="txt-wrap">{{patient.personDetails.lastName}} {{patient.personDetails.otherName}}
+                        {{patient.personDetails.firstName}}</h1>
+                    <div class="txt-wrap">
+                        <span class="val-tag">Apmis ID : </span>
+                        <span class="list-label">{{patient.personDetails.apmisId}}</span>
+                    </div>
+                    <div class="txt-wrap">
+                        <span class="val-tag">Gender : </span>
+                        <span class="list-label">{{patient.personDetails.gender}}</span>
+                    </div>
+                    <div class="txt-wrap">
+                        <span class="val-tag">Age : </span>
+                        <span class="list-label">{{patient.age}}</span>
+                    </div>
+                    <div>
+                        <span class="val-tag">Date of Birth : </span>
+                        <span class="list-label">{{patient.personDetails.dateOfBirth}}</span>
+                    </div>
+
+                    <div>
+                        <span class="val-tag">Mobile : </span>
+                        <span class="list-label">{{patient.personDetails.primaryContactPhoneNo}}</span>
+                    </div>
+                    <div>
+                        <span class="val-tag">Email : </span>
+                        <span class="list-label">{{patient.personDetails.email}}</span>
+                    </div>
+                    <div>
+                        <span class="val-tag">Address : </span>
+                        <span *ngIf="patient.personDetails.homeAddress" class="list-label">{{patient.personDetails.homeAddress?.street}},
+                            {{patient.personDetails.homeAddress?.city}},
+                            {{patient.personDetails.homeAddress?.state}}
+                            {{patient.personDetails?.homeAddress?.country}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="doc-content" *ngFor="let group of patientDocumentation.documentations">
+                    <div class="control-group">
+                        <!-- header -->
+                        <div class="control-group-header">
+                            <div class="secWrap-header">
+                                <div class="val-tag">Hospital</div>
+                                <div class="list-label">{{group.facilityName}}</div>
+                            </div>
+                            <div class="secWrap-header">
+                                <div class="val-tag">Practitioner</div>
+                                <div class="list-label">{{group.createdBy}}</div>
+                            </div>
+                            <div class="secWrap-header">
+                                <div class="val-tag">Documentation Type</div>
+                                <div class="list-label">{{group.document?.documentType?.title}}</div>
+                            </div>
+                            <div class="secWrap-header">
+                                <div class="val-tag">Date/Time</div>
+                                <div class="list-label">{{group.createdAt | date:'shortDate'}}<span class="time">{{group.createdAt
+                                        |
+                                        date:'shortTime'}}</span></div>
+                            </div>
+                        </div>
+
+                        <!-- vital signs -->
+                        <div class="doc-con" *ngIf="group?.document?.body?.vitals !== undefined && group?.document?.body?.vitals.length > 0">
+                            <table cellpadding="0" cellspacing="0" border="0.5" class="workspace-tbl">
+                                <thead>
+                                    <tr class="th-r1 col-width">
+                                        <th>Temperature</th>
+                                        <th>Pulse Rate</th>
+                                        <th>Respiratory Rate</th>
+                                        <th>Blood Pressure</th>
+                                        <th>Weight</th>
+                                        <th>Height</th>
+                                        <th>BMI</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr *ngFor="let item of group?.document?.body?.vitals">
+                                        <td>{{item.temperature}}</td>
+                                        <td>{{item.pulseRate.pulseRateValue}}</td>
+                                        <td>{{item.respiratoryRate}}</td>
+                                        <td>S: {{item.bloodPressure.systolic}} D:
+                                            {{item.bloodPressure.diastolic}}</td>
+                                        <td>{{item.bodyMass.weight}}</td>
+                                        <td>{{item.bodyMass.height}}</td>
+                                        <td>{{item.bodyMass.bmi}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="doc-con" *ngIf="(group?.document?.documentType?.isSide===false || group?.document?.documentType?.isSide===undefined) && group.docUrl === undefined ">
+                            <div *ngFor="let key of group?.document?.body | keys ">
+                                <div *ngIf="group?.document?.body !==undefined " class="doc-span">{{key}}:</div>
+                                <div *ngIf="group?.document?.body !==undefined " class="doc-p">
+                                    <span *ngIf="checkType(group?.document?.body[key])">{{group?.document?.body[key]}}</span>
+                                    <span *ngIf="!checkType(group?.document?.body[key])">
+                                        <div *ngFor="let key2 of group?.document?.body[key] | keys ">
+                                            <div class="doc-span">{{key2}}:</div>
+                                            <div class="doc-p">
+                                                {{group?.document?.body[key][key2] | json}}
+                                            </div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Problem and Allergy -->
+                        <div class="doc-con" *ngIf="group?.document?.documentType?.isSide===true ">
+                            <div *ngFor="let key of group?.document?.body | keys ">
+                                <div *ngIf="group?.document?.body !==undefined " class="doc-span">{{key}}:</div>
+                                <div *ngFor="let key2 of group?.document?.body.problems | keys let k=index ">
+                                    <div *ngIf="group?.document?.body !==undefined " class="doc-p">
+                                        {{k+1}}:
+                                        <span class="doc-span ">{{group?.document?.body.problems[key2].problem}}</span>
+                                        ({{group?.document?.body.problems[key2]?.status?.name}})
+                                        {{group?.document?.body.problems[key2].note}}
+                                    </div>
+                                </div>
+                                <div *ngFor="let key2 of group?.document?.body.allergies | keys let k=index ">
+                                    <div *ngIf="group?.document?.body !==undefined " class="doc-p">
+                                        {{k+1}}:
+                                        <span class="doc-span">{{group?.document?.body.allergies[key2].allergy}}</span>
+                                        ({{group?.document?.body.allergies[key2].severity.name}})
+                                        {{group?.document?.body.allergies[key2].reaction}}
+                                        || {{group?.document?.body.allergies[key2].note}}
+                                    </div>
+                                </div>
+
+                                <div *ngIf="group?.document?.addendum !== undefined">
+                                    <span class="sect-key">Addendum:</span> <span>{{group?.document?.addendum.text}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Uploaded Documents -->
+                        <div class="doc-con" *ngIf="group.docUrl !== undefined && !loading">
+                            <app-doc-upload-view class="pdf-wrap" [selectedDocument]="group"></app-doc-upload-view>>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="float">
+            <span (click)="onClickPrintDocument()">
+                <i class="fa fa-print print-ico fa-3x" style="padding: 10px;"></i>
+            </span>
+        </div>
+    </div>
+
+</div>

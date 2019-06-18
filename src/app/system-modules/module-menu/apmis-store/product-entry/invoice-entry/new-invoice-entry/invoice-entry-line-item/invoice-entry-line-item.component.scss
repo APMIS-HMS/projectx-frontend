@@ -1,0 +1,18 @@
+@import '../new-invoice-entry.component.scss';
+
+.searchproduct {
+    width: 100%;
+}
+
+.store-tr {
+    .searchproduct {
+        width: 100% !important;
+        margin-bottom: 0px !important;
+        margin-right: 0px !important;
+    }
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}

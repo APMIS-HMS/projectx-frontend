@@ -1,0 +1,189 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+      <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+      <legend class="modal_title">Individual Account</legend>
+      <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+  <div class="modal-baseWrap">
+    <ul class="pg-menuWrap">
+        <li (click)="tab1_click()" [class.pg-menuActive]="tab1">Bio Data</li>
+        <li (click)="tab2_click()" [class.pg-menuActive]="tab2">Next Of Kin</li>
+        <li (click)="tab3_click()" [class.pg-menuActive]="tab3">Security Questions</li>
+    </ul>
+
+    <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+    <form *ngIf="tab1" [formGroup]="frmPerson" novalidate>
+        <div class="card-title">Basic Data</div>
+        
+        <div class="frm-x2">
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="First Name" formControlName="firstname">
+                    <mat-error *ngIf="frmPerson.controls.firstname.hasError('pattern')">
+                        Only alphabets are allowed
+                    </mat-error>
+                </mat-input-container>
+            </div>
+
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Last Name" formControlName="lastname">
+                </mat-input-container>
+            </div>
+        </div>
+
+        <div class="frm-x2">
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Other Names" formControlName="otherNames">
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Mother's Maiden Name" formControlName="motherMaidenName">
+                </mat-input-container>
+            </div>
+        </div>
+
+        <div class="frm-x2">
+            <div class="frm-item-wrap">
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Title" formControlName="persontitle">
+                        <mat-option [value]="title.name" *ngFor="let title of titles">{{title.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div> 
+            <div class="frm-item-wrap">
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Gender" formControlName="gender">
+                        <mat-option *ngFor="let item of genders" [value]="item.name">{{item.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="frm-x2">
+            <div class="frm-item-wrap">
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input type="tel" matInput mat-error placeholder="Phone Number" formControlName="phone">
+                    <mat-error *ngIf="frmPerson.controls.phone.hasError('pattern')">
+                        Only numbers are allowed
+                    </mat-error>
+                    <mat-error *ngIf="frmPerson.controls.phone.hasError('required')">
+                        Telephone number is required
+                    </mat-error>
+                    <mat-error *ngIf="frmPerson.controls.phone.hasError('minlength')">
+                        This field required minimum of 10 characters.
+                    </mat-error>
+                </mat-input-container>
+            </div>
+        </div>
+
+        <!-- <ng4geo-autocomplete [userSettings]="userSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+        <div class="frm-item-wrap">
+            <div class="frm-item-x2">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Street Address" formControlName="addressStreet">
+                </mat-input-container>
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="City" formControlName="addressCity">
+                </mat-input-container>
+            </div>
+        </div>
+        <div class="frm-item-wrap">
+            <div class="frm-item-x2">
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Country" formControlName="addressCountry">
+                        <mat-option  [value]="country.name" *ngFor="let country of countries">{{country.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="State" formControlName="AddressState" [compareWith]="compareState">
+                        <mat-option [value]="state.name" *ngFor="let state of states">{{state.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div> -->
+    </form>
+
+    <form *ngIf="tab2" [formGroup]="frmPersonNok" novalidate>
+        <div class="card-title">Next Of Kin</div>
+        
+        <div class="frm-x2">
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="First Name" formControlName="nok_firstname">
+                    <mat-error *ngIf="frmPersonNok.controls.nok_firstname.hasError('pattern')">
+                        Only alphabets are allowed
+                    </mat-error>
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Last Name" formControlName="nok_lastname">
+                </mat-input-container>
+            </div>
+        </div>
+    
+        <div class="frm-x2">
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Other Names" formControlName="nok_otherNames">
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Gender" formControlName="nok_gender">
+                        <mat-option *ngFor="let item of genders" [value]="item.name">{{item.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="frm-item-wrap">
+            <mat-input-container class="example-full-width">
+                <input type="tel" matInput mat-error placeholder="Phone Number" formControlName="nok_phone">
+                <mat-error *ngIf="frmPersonNok.controls.nok_phone.hasError('pattern')">
+                    Only numbers are allowed
+                </mat-error>
+                <mat-error *ngIf="frmPersonNok.controls.nok_phone.hasError('required')">
+                    Telephone number is required
+                </mat-error>
+                <mat-error *ngIf="frmPersonNok.controls.nok_phone.hasError('minlength')">
+                    This field required minimum of 10 characters.
+                </mat-error>
+            </mat-input-container>
+        </div>
+        <div class="right-wrap">
+            <button class="btn-1 btn-green">Add Another</button>
+        </div>
+    </form>
+
+    <form *ngIf="tab3" [formGroup]="frmPersonSecQst" novalidate>
+        <div class="card-title">Security Question</div>
+
+        <div class="frm-item-wrap">
+            <mat-form-field class="example-full-width">
+                <mat-select placeholder="Security Questions" formControlName="securityQuestion">
+                    <mat-option *ngFor="let item of securityQuestions" [value]="item.name">{{item.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="frm-item-wrap">
+            <mat-input-container class="example-full-width">
+                <input matInput mat-error placeholder="Security Question's Answer" formControlName="securityAnswer">
+            </mat-input-container>
+        </div>
+    </form>
+
+    <button class="cta-1">Register</button>
+  </div>
+</div>

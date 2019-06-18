@@ -1,0 +1,9 @@
+<div class="ext-tabs">
+    <div (click)="hmo_tab()" [class.ext-tab-active]="hmo" class="ext-tab">HMO</div>
+    <div (click)="company_tab()" [class.ext-tab-active]="company" class="ext-tab">Company Cover</div>
+    <div (click)="family_tab()" [class.ext-tab-active]="family" class="ext-tab">Family Cover</div>
+</div>
+<div>
+    <router-outlet></router-outlet>
+</div>
+ 

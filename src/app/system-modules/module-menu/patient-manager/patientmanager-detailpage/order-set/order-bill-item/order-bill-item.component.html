@@ -1,0 +1,153 @@
+<!-- <div class="billitem-wrap">
+  <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+  <legend class="modal_title">Bill Item</legend>
+  <div class="sel-item">Paracetamol</div>
+
+  <form [formGroup]="frm_billitem" novalidate>
+    <div class="ext-wrap">
+        <mat-checkbox>External</mat-checkbox>
+    </div>
+    <div class="frmArrWrap">
+
+      <div class="frm-item-wrap">
+        <apmis-lookup formControlName="drug" [url]="apmisLookupUrl" [query]="apmisLookupQuery" [isSocket]="false" [displayImage]="false" [multipleKeys]="false" [displayKey]="apmisLookupDisplayKey" placeholder="Drug" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+      </div>
+
+      <div class="frm-x2">
+        <div class="frm-item-wrap">
+          <mat-input-container>
+              <input type="number" matInput formControlName="qty" placeholder="Quantity">
+          </mat-input-container>
+        </div>
+        <div class="frm-item-wrap">
+          <div class="price-label-wrap">
+            <div class="price-label">Unit Price</div>
+            <div class="price-val"><span>&#x20a6;</span>13,000</div>
+          </div>
+          <div class="price-label-wrap">
+            <div class="price-label">Unit Price</div>
+            <div class="price-val"><span>&#x20a6;</span>13,000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-wrap">
+      <div (click)="close_onClick()" class="addDrugBtn btn-bill">
+          <i [hidden]="newTemplate" class="fa fa-money" aria-hidden="true"></i>
+          <span>BILL ITEM</span>
+      </div>
+      <div (click)="close_onClick()" class="addDrugBtn btn-cancel">
+          <i [hidden]="newTemplate" class="fa fa-times" aria-hidden="true"></i>
+          <span>CANCEL</span>
+      </div>
+    </div>
+
+  </form>
+
+  <i class="fa fa-caret-down billbox-pointer" aria-hidden="true"></i>
+</div> -->
+
+<div class="survery">
+    <div class="">
+        <!-- purchase order details-->
+        <div class="inPatient-activityTimeline shadow-RB animated slideInRight">
+            <div (click)="onClickClose($event);" class="hide-actionWrap">
+                <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+            </div>
+            <div class="purchasedetails" style="overflow: hidden;">
+                <div class="container-width">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-xs-12">
+                            <h5>Generate Bill for</h5>
+                            <h6>{{ title }}</h6>
+                            <div class="border-box" *ngIf="drugs.length > 0">
+                                <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+                                <form [formGroup]="addBillForm" novalidate>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12" style="margin-top: 20px">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Drug" formControlName="drug" class="example-full-width">
+                                                        <mat-option *ngFor="let drug of drugs" [value]="drug">{{
+                                                            drug?.productObject?.name }}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-sm-12" style="margin-top: 20px; padding: 0;">
+                                                <div class="col-sm-4">
+                                                    <mat-input-container class="example-full-width">
+                                                        <input matInput type="number" formControlName="qty" placeholder="Quantity">
+                                                    </mat-input-container>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12" style="margin-top: 20px; padding: 0;">
+                                                <div class="col-xs-6" style="margin-top: -5px;">
+                                                    <div class="pri-wrap">
+                                                        <p>Price: <b>&#x20A6; {{ cost }}</b></p>
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEditPrice()"
+                                                            style="padding-left: 10px;"></i>
+                                                    </div>
+                                                    <div *ngIf="editPrice">
+                                                        <mat-form-field>
+                                                            <input matInput [formControl]="costForm" placeholder="Enter Price"
+                                                                type="number">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <p>
+                                                        <span *ngIf="!editPrice">
+                                                            Total: <b>&#x20A6; {{ totalCost }}</b>
+                                                        </span>
+                                                        <span *ngIf="editPrice">
+                                                            Total: <b>&#x20A6; {{getAdjustedTotalPrice() }}</b>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12" style="margin-top: 20px; padding: 0;">
+                                        <div style="position:relative;" class="col-xs-12 td-worspace">
+                                            <div class="workspace-count"> Qty Available in {{ stores.length }}
+                                                Store(s) <span class="badge">{{getTotalQtyInStores(stores)}}</span></div>
+                                            <ul class="shadow-RB workspace-listWrap animated zoomIn">
+                                                <li *ngFor="let store of stores" class="workspace-listItem">
+                                                    <ng-container>
+                                                        <span>{{store?.name}}, Qty: {{store?.qty}}</span>
+                                                    </ng-container>
+                                                </li>
+                                                <div class="pointer-wrap"><i class="fa fa-caret-down" aria-hidden="true"></i></div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-xs-6 no-padding">
+                                            <button mat-raised-button [disabled]="!addBillForm.valid" (click)="onClickSaveCost(addBillForm.valid, addBillForm.value);"
+                                                class="btn btn-default">Save</button>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <button mat-raised-button (click)="onClickClose($event);" class="btn btn-default">Cancel</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="border-box" *ngIf="drugs.length === 0 && !loading">
+                                <div class="prodBatch-item batchItem1" style="text-align: center; width: 100%;">No
+                                    product to bill from,<br> Please add product to your inventory.</div>
+                            </div>
+                            <div class="border-box" *ngIf="drugs.length === 0 && loading">
+                                <div class="prodBatch-item batchItem1" style="text-align: center; width: 100%;">
+                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>

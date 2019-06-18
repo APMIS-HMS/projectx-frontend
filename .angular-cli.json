@@ -1,0 +1,66 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "project": {
+        "name": "apmis4"
+    },
+    "apps": [{
+        "root": "src",
+        "outDir": "dist",
+        "assets": [
+            "assets",
+            "favicon.ico"
+        ],
+        "index": "index.html",
+        "main": "main.ts",
+        "polyfills": "polyfills.ts",
+        "test": "test.ts",
+        "tsconfig": "tsconfig.app.json",
+        "testTsconfig": "tsconfig.spec.json",
+        "prefix": "app",
+        "styles": [
+            "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
+            "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+            "../node_modules/@ngx-loading-bar/core/loading-bar.css",
+            "assets/libs/flexboxgrid.min.css",
+            "styles.scss",
+            "tables.scss"
+        ],
+        "scripts": [
+            "../node_modules/lodash/lodash.js",
+            "../node_modules/ng2-toastr/bundles/ng2-toastr.min.js",
+            "../node_modules/jquery/dist/jquery.min.js",
+            "../node_modules/crypto-js/crypto-js.js"
+        ],
+        "environmentSource": "environments/environment.ts",
+        "environments": {
+            "dev": "environments/environment.dev.ts",
+            "prod.apmis": "environments/environment.prod.apmis.ts",
+            "prod.tertiary": "environments/environment.prod.tertiary.ts",
+            "prod.navlagos": "environments/environment.prod.navlagos.ts"
+        }
+    }],
+    "e2e": {
+        "protractor": {
+            "config": "./protractor.conf.js"
+        }
+    },
+    "lint": [{
+            "project": "src/tsconfig.app.json"
+        },
+        {
+            "project": "src/tsconfig.spec.json"
+        },
+        {
+            "project": "e2e/tsconfig.e2e.json"
+        }
+    ],
+    "test": {
+        "karma": {
+            "config": "./karma.conf.js"
+        }
+    },
+    "defaults": {
+        "styleExt": "scss",
+        "component": {}
+    }
+}

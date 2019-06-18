@@ -1,0 +1,76 @@
+<div class="survery">
+    <div class="">
+        <div class="inPatient-activityTimeline shadow-RB animated slideInRight">
+            <div (click)="onClickClose($event);" class="hide-actionWrap">
+                <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+            </div>
+            <div class="purchasedetails">
+                <div class="container-width">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-xs-12">
+                            <h5>Generate Bill for</h5>
+                            <h6>{{ title }}</h6>
+                            <div class="border-box" *ngIf="investigations.length > 0 && !loading">
+                                <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 invest-header">List of Locations that does {{ title
+                                        }} investigation.</div>
+                                    <div class="col-sm-12 col-md-12">
+                                        <div *ngFor="let investigation of investigations;let i = index" class="list-item investigation">
+                                            <div class="txt-innerWrap">
+                                                <!-- <div class="chkbox-wrap">
+                                                    <mat-checkbox (change)="investigationChanged($event, investigation)" [checked]="checked"></mat-checkbox>
+                                                    <div class="list-label">{{investigation.investigation.name}}</div>
+                                                </div> -->
+
+                                                <div class="inner-radio">
+                                                    <!-- <mat-checkbox (change)="markExternal($event, investigation)" [checked]="investigation.isExternal">External</mat-checkbox> -->
+                                                    <mat-radio-group [value]="location" *ngIf="!investigation.isExternal">
+                                                        <mat-radio-button class="opt" *ngFor="let location of investigation.LaboratoryWorkbenches"
+                                                            (change)="locationChanged($event, investigation, location, investigation.LaboratoryWorkbenches)"
+                                                            [value]="location" [checked]="false">
+                                                            <div class="opt-inner">
+                                                                <div>{{location.laboratoryId.name}}</div>
+                                                                <div class="opt-price" *ngIf="!editPrice"><span>&#x20a6;</span>{{getPrice(location.workbenches)}}</div>
+                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"
+                                                                    (click)="onEditPrice()">edit price</i>
+                                                                <div *ngIf="editPrice">
+                                                                    <mat-form-field >
+                                                                        <input matInput type="number" placeholder="Enter New Price" [formControl]="costForm"
+                                                                            (change)="onChangePrice(i)" >
+                                                                    </mat-form-field>
+                                                                </div>
+
+                                                            </div>
+                                                        </mat-radio-button>
+                                                    </mat-radio-group>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12" style="padding:20px;">
+                                        <div class="col-xs-6 no-padding">
+                                            <button mat-raised-button [disabled]="" (click)="onClickSaveCost();" class="btn btn-default">Save</button>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <button mat-raised-button (click)="onClickClose($event);" class="btn btn-default">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-box" *ngIf="investigations.length === 0 && !loading">
+                                <div class="prodBatch-item batchItem1" style="text-align: center; width: 100%;">No
+                                    investigation to bill from,<br> Please add price to the investigation.</div>
+                            </div>
+                            <div class="border-box" *ngIf="investigations.length === 0 && loading">
+                                <div class="prodBatch-item batchItem1" style="text-align: center; width: 100%;">
+                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<input class="top-tab-search" type="search" placeholder="Search for employee" [formControl]="searchControl">
+
+<div class="empLookup-sec">
+    <span *ngIf="loadIndicatorVisible" class="fa fa-spinner fa-spin"></span>
+    <div *ngFor="let item of employees" (click)="navEpDetail(item)" class="tbl-bodyTab tbl-row color1">
+        <div class="tbl-item emp-nameRow">
+            <div *ngIf="item.isActive" class="empLookup_status empLookup_active">Active</div>
+            <div [hidden]="item.isActive" class="empLookup_status empLookup_inactive">Deactivated</div>
+            <div class="empImageWrap">
+                <div *ngIf="item?.employeeDetails?.profileImageObject === undefined"><img src="assets/images/users/default.png"></div>
+                <img *ngIf="item?.employeeDetails?.profileImageObject !== undefined" class="shadow" [src]="facilityService.transform(item?.employeeDetails?.profileImageObject?.thumbnail)">
+            </div>
+            <div class="lookupTextWrap">
+                <div class="empLookup_name">{{item.employeeDetails.lastName}} {{item.employeeDetails.firstName}}</div>
+                <div class="empLookup_apmisid">{{item.employeeDetails.apmisId}}</div>
+                <div class="empLookup_email">{{item.employeeDetails.email}}</div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="loadIndicatorVisible" class="div_loading">
+        <!-- <mat-spinner id="large-indicator" height="60" width="60"></mat-spinner> -->
+    </div>
+</div>

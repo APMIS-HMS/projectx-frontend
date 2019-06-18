@@ -1,0 +1,26 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick($event)" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Add Bed</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <form [formGroup]="addBedFormGroup" novalidate>
+            <div class="frm-item-wrap">
+                <mat-form-field>
+                    <input matInput placeholder="Enter Room Name" formControlName="bed">
+                </mat-form-field>
+            </div>
+            <div class="btn-box">
+                <button mat-raised-button [disabled]="!addBedFormGroup.valid || disableAddBtn" (click)="addbed(addBedFormGroup.value, addBedFormGroup.valid)" class="btn">
+                  <span *ngIf="addBed"><i class="fa fa-plus"></i> Add Bed</span>
+                  <span *ngIf="addingBed">Adding Bed... <i class="fa fa-spin fa-spinner"></i></span>
+                  <span *ngIf="editBed"><i class="fa fa-plus"></i> Edit Bed</span>
+                  <span *ngIf="editingBed">Editing Bed... <i class="fa fa-spin fa-spinner"></i></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,126 @@
+<div class="animated pulse clear-baseline">
+    <div class="modal-header-wrap">
+        <div *ngIf="showClose" (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Facility Setup</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+
+    <div class="modal-baseWrap">
+
+        <!-- <div class="infoAlert"><i class="fa fa-info-circle" aria-hidden="true"></i>Note that a verification token will be sent to the number supplied
+        below</div> -->
+
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+        <div class="menuBar-facilityName">
+            <div class="menubar_facilityLogo orgLogo-wrap">
+                <app-image-viewer [imageSrc]="selectedFacility?.logoObject?.thumbnail"></app-image-viewer>
+                <!-- <img src="https://apmisstorageaccount.blob.core.windows.net/personfolder/RJ-6019/5a4c57b448eaa74a00040987/5bb4d170ed781023fca6e261.png"> -->
+            </div>
+            <div class="upload-btn-wrapper">
+                <div *ngIf="!hasChangedImage">
+                    <button class="upload-btn">Change Logo</button>
+                    <input type="file" name="myfile" (change)="onClickChangeImage($event.target.name, $event.target.files);" accept="image/*" />
+                </div>
+                <div *ngIf="hasChangedImage">
+                    <button class="upload-btn" (click)="onClickCancel();">Cancel</button>
+                    <button class="upload-btn" [disabled]="disableImageBtn" (click)="onClickUploadLogo();">
+                        <span *ngIf="saveImageBtn">Save</span>
+                        <span *ngIf="savingImageBtn">Saving... <i class="fa fa-spinner fa-spin"></i></span>
+                    </button>
+                </div>
+            </div>
+            <form [formGroup]="facilityForm1" novalidate (submit)="save(facilityForm1.value)">
+
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <input matInput mat-error placeholder="Facility Name" formControlName="facilityname">
+                    </mat-input-container>
+                </div>
+                <ng4geo-autocomplete [userSettings]="userSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+                <div class="frm-item-wrap">
+                    <div class="frm-item-x2">
+                        <mat-input-container class="example-full-width">
+                            <input matInput mat-error placeholder="Street Address" formControlName="facilitystreet">
+                        </mat-input-container>
+                        <mat-input-container class="example-full-width">
+                            <input matInput mat-error placeholder="City" formControlName="facilitycity">
+                        </mat-input-container>
+                    </div>
+                </div>
+                <div class="frm-item-wrap">
+                    <div class="frm-item-x2">
+                        <mat-form-field class="example-full-width">
+                            <mat-select placeholder="Country" formControlName="facilitycountry">
+                                <mat-option *ngFor="let country of countries" [value]="country.name">{{country.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-select placeholder="State" formControlName="facilitystate" [compareWith]="compareState">
+                                <mat-option [value]="state.name" *ngFor="let state of states">{{state.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="frm-item-wrap">
+                    <div class="frm-item-x2">
+                        <mat-form-field class="example-full-width" *ngIf="selectedFacility.isHDO">
+                            <mat-select placeholder="Facility Type" formControlName="facilityTypeId">
+                                <mat-option [value]="facilityType.name" *ngFor="let facilityType of facilityTypes">{{facilityType.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width" *ngIf="selectedFacility.isHDO">
+                            <mat-select placeholder="Facility Class" formControlName="facilityClassId" [compareWith]="compareState">
+                                <mat-option [value]="facilityClass.name" *ngFor="let facilityClass of facilityClasses">{{facilityClass.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="frm-item-wrap">
+                    <div class="frm-item-x2">
+                        <mat-form-field class="example-full-width">
+                            <mat-select placeholder="Facility Ownership" formControlName="facilityOwnershipId">
+                                <mat-option [value]="facilityOwnership.name" *ngFor="let facilityOwnership of facilityOwnerships">{{facilityOwnership.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-input-container class="example-full-width">
+                            <input matInput mat-error placeholder="Short Name" formControlName="facilityShortName">
+                        </mat-input-container>
+                    </div>
+
+
+                </div>
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <input type="email" matInput mat-error placeholder="Email Address" formControlName="facilityemail">
+                    </mat-input-container>
+                </div>
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <input matInput mat-error placeholder="CAC Reg No" formControlName="cac">
+                    </mat-input-container>
+                </div>
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <input type="url" matInput mat-error placeholder="Official Website" formControlName="facilitywebsite">
+                    </mat-input-container>
+                </div>
+                <div class="frm-item-x2">
+                    <div class="frm-item-wrap example-full-width">
+                        <mat-input-container>
+                            <input type="tel" matInput mat-error placeholder="Contact Number" formControlName="facilityphonNo">
+                        </mat-input-container>
+                    </div>
+                    <label class="control control--checkbox">Host Facility (Network)
+                    <input type="checkbox"  formControlName="network" />
+                    <div class="control__indicator"></div>
+                </label>
+                </div>
+
+                <button [disabled]="!facilityForm1.valid" [ngClass]="{'cta-1':facilityForm1.valid, 'cta-1-disable':!facilityForm1.valid}">
+                UPDATE
+            </button>
+
+            </form>
+
+        </div>
+    </div>

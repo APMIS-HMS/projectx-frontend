@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 style="text-align: center">
+                    Payment History Detail
+                </h2>
+                <div class="top-labels">
+                    <div class="name-label">{{invoiceDetails?.patientObject?.personDetails?.firstName}} {{invoiceDetails?.patientObject?.personDetails?.lastName}}</div>
+                    <div class="oda-label">Invoice No:
+                        <span>{{invoiceDetails?.invoiceNo}}</span>
+                    </div>
+                    <div class="oda-label">Bill Total
+                        <span>&#x20a6;{{invoiceDetails?.totalPrice| number : '1.2-2'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="card-header-item col-xs-2">Item</div>
+                        <div class="card-header-item col-xs-1">Quantity</div>
+                        <div class="card-header-item col-xs-2">Category</div>
+                        <div class="card-header-item col-xs-1">Unit Price</div>
+                        <div class="card-header-item col-xs-1">Billed By</div>
+                        <div class="card-header-item col-xs-1">Status</div>
+                        <div class="card-header-item col-xs-1">Date</div>
+                        <div class="card-header-item col-xs-1">Total Price</div>
+                    </div>
+                </div>
+                <div class="card-list">
+                    <div class="invoice-table-list row" *ngFor="let item of invoiceDetails?.payments">
+                        <div class="col-xs-2">{{item?.facilityServiceObject?.service}}</div>
+                        <div class="col-xs-1">{{item?.qty}}</div>
+                        <div class="col-xs-2">{{item?.facilityServiceObject?.category}}</div>
+                        <div class="col-xs-1">&#x20a6;{{getUnitPrice(item?.facilityServiceObject?.serviceId)}}</div>
+                        <div class="col-xs-1">{{item?.cashier?.personDetails?.firstName}} {{item?.cashier?.personDetails?.lastName}}</div>
+                        <div class="col-xs-1">
+                            <span class="text-green" *ngIf="item.isPaymentCompleted">Completed</span>
+                            <span class="text-red" *ngIf="!item.isPaymentCompleted">UnCompleted</span>
+                        </div>
+                        <div class="col-xs-1">{{item?.paymentDate|date:'medium'}}</div>
+                        <div class="col-xs-1">&#x20a6;{{item.amountPaid|number : '1.2-2'}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

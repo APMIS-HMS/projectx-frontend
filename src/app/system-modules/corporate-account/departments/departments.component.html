@@ -1,0 +1,34 @@
+<div class="mainWrap">
+
+    <div class="coveredEmployees">
+        <div class="sectTitle">Departments</div>
+
+        <div class="inner-menu1-wrap">
+            <i id="contentSecMenuToggle" (click)="contentSecMenuToggle()" [class.content-sec-icoActive]="contentSecMenuShow" class=" content-sec-ico fa fa-ellipsis-v" aria-hidden="true"></i>
+            <ul id="innerMenu-ul" *ngIf="contentSecMenuShow" class="innerMenu-ul shadow">
+                <li routerLink="/dashboard/corporate/home"><i class="fa fa-home" aria-hidden="true"></i> Home</li>
+                <li routerLink="/dashboard/corporate/departments"><i class="fa fa-building-o" aria-hidden="true"></i> Departments</li>
+                <li (click)="logOutShow()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</li>
+            </ul>
+        </div>
+
+        <div (click)="addEmpShow()" class="btn-1 btn-blue"><i class="fa fa-plus-square" aria-hidden="true"></i> Create Department</div>
+
+        <div *ngFor="let department of selectedFacility.departments; let count = index; let i = even; let k = odd" class="coveredEmployee color1">
+            <div class="nameImgWrap">
+                <div class="coveredEmployeeName">{{department.name}}</div>
+            </div>
+            <div class="ctas">
+                <i style="color: #0288D1;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                <i style="color: #ff2500;" class="fa fa-trash" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="personDependants" class="modal-overlay">
+        <app-person-dependants (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-person-dependants>
+    </div>
+    <div *ngIf="addDepartment" class="modal-overlay">
+        <app-add-department (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-department>
+    </div>
+</div>

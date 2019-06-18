@@ -1,0 +1,140 @@
+.popupWrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.pd-popupHeader{
+    position: relative;
+    text-align: center;
+    width: 200px;
+    margin-right: 3px;
+    padding: 5px 2px;
+    background: #BDBDBD;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+	   -moz-box-shadow: 0 8px 6px -6px black;
+	        box-shadow: 0 8px 6px -6px black;
+}
+.pd-popupHeader .cta-1 {
+    font-size: 0.9rem;
+    width: 104px;
+    height: 26px;
+    margin-bottom: 0;
+}
+.headerContent{
+    cursor: pointer;
+}
+.pd-popupDependant:hover{
+    background: #BDBDBD;
+}
+.pd-principalImg{
+    width: 100px;
+}
+.pd-principalName{
+    width: 100%;
+    text-align: center;
+    color: #827717;
+    font-size: 2.2rem;
+}
+.pd-principalPhone{
+    width: 100%;
+    text-align: center;
+    color: #757575;
+    font-size: 1.4rem;
+}
+.pd-popupDependants{
+    position: relative;
+}
+.pd-popupDependant{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-bottom: 0.5px solid #eee;
+    cursor: pointer;
+}
+.popTitle{
+    position: absolute;
+    top: -10px;
+    text-decoration: underline;
+    right: 0;
+    color: #ff2500;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.pd-dependantImg{
+    width: 40px;
+    margin-right: 10px;
+    border-radius: 100%;
+    border: 3px solid #fff;
+}
+.pd-popupDependants {
+    width: 360px;
+    border-left: 2px solid #535353;
+    border-radius: 11px;
+    padding: 10px;
+}
+.ctas {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+    background: #9E9E9E;
+}
+.addDependant, .rmvEmp{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 1.2rem;
+}
+.addDependant span:hover, .rmvEmp span:hover{
+    text-decoration: underline;
+}
+.addDependant i{
+    color: #0288D1;
+    text-decoration: none;
+    font-size: 1.8rem;
+    padding-right: 5px;
+}
+.rmvEmp i{
+    color: #ff2500;
+    text-decoration: none;
+    font-size: 1.8rem;
+    padding-right: 5px;
+}
+.frmDependantWrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #E0E0E0;
+    box-sizing: border-box;
+}
+.frmDependantWrap form{
+    width: 100%;
+}
+.frmDependantWrap input{
+    width: 90%;
+}
+.frmDependantWrap select{
+    width: 97%;
+}
+.frmDependantWrap input, .frmDependantWrap select{
+    border: 1px solid #616161;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    color: #212121;
+}
+.frm-item-wrap {
+    padding-bottom: 1px;
+}
+.mainErr{
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}

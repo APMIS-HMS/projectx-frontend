@@ -1,0 +1,80 @@
+<div class="pp-card shadow-grey">
+    <div class="card-title">Workspaces</div>
+    <div class="searchInputWrap">
+        <input [formControl]="searchControl" type="search" autofocus class="searchInput" placeholder="search">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </div>
+    <div class="tbl-resp-wrap">
+        <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+                <tr>
+                    <th>
+                        <span style="padding-left: 3px;">Employee</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Department</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Workspace</span>
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody *ngIf="employees.length > 0">
+                <tr *ngFor="let emp of employees">
+                    <td>
+                        <div class="empWrap">
+                            <div class="list-img">
+                                <img src="assets/images/users/default.png">
+                            </div>
+                            <div>{{emp.employee?.personDetails?.lastName}} {{emp.employee?.personDetails?.firstName}}</div>
+                        </div>
+                    </td>
+                    <td>{{emp.employee?.departmentId}}</td>
+                    <td class="td-worspace">
+                        <div *ngFor="let workspace of emp.workspaces"></div>
+                        <div class="workspace-count">{{getActiveWorkSpaceLength(emp.workspaces)}} workspace(s)</div>
+                        <ul class="shadow-RB workspace-listWrap animated zoomIn" *ngIf="getActiveWorkSpaceLength(emp.workspaces) > 0">
+                            <li class="workspace-listItem" *ngFor="let workspace of emp.workspaces">
+                                <ng-container *ngFor="let location of workspace.locations">
+                                    <span>{{location?.majorLocation?.name}}</span>
+                                    <i (click)="deleteLocation_popup(location._id, workspace)" class="fa fa-fw fa-2x fa-trash orange tooltip" data-tooltip='Delete'
+                                        aria-hidden="true"></i>
+                                </ng-container>
+                            </li>
+                            <div class="pointer-wrap">
+                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                            </div>
+                        </ul>
+                    </td>
+                    <td>
+                        <div class="td-ctaWrap">
+                            <i (click)="newWorkspace_onClick(workspace.employee)" class="fa fa-fw fa-2x fa-pencil-square-o orange tooltip" data-tooltip='Edit'
+                                aria-hidden="true"></i>
+                            <i (click)="deletion_popup(workspace)" class="fa fa-fw fa-2x fa-trash orange tooltip" data-tooltip='Delete' aria-hidden="true"></i>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="employees.length == 0">
+                <tr>
+                    <td class="table-content" colspan="6" border="0.5" style="text-align: center "> No data available in table</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <span (click)="newWorkspace_onClick()" id="floating-button">
+        <p class="plus">+</p>
+    </span>
+</div>
+
+<div *ngIf="createWorkspace" class="modal-overlay">
+    <app-create-workspace [selectedEmployee]="employee" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-create-workspace>
+</div>
+
+<div *ngIf="globalDialog">
+    <app-global-dialog (deleteRecord)="delete_onClick($event)" [gdTitle]="gdTitle" [gdItem]="gdItem" [gdComponent]="gdComponent"
+        (closeModal)="close_onClick($event)"></app-global-dialog>
+</div>

@@ -1,0 +1,108 @@
+<div class="pgSubtitle">
+  {{selectedHMO?.name}}
+</div>
+<div>
+  <div class="doc-mainWrap">
+    <div class="doc-contentArea">
+      <div class="clinicalNoteWrap">
+        <div class="tblWrapa" class="actSect">
+          <div class="tbl-top-actions">
+            <div (click)="newBeneficiary_click()" class="btn-outline"><i class="fa fa-plus"></i> New Beneficiary</div>
+            <mat-paginator [pageIndex]="0" [length]="beneficiaries.length" [pageSize]="pageSize" (page)="pageEvent = $event; onPaginateChange($event)"
+              [pageSizeOptions]="pageSizeOptions">
+            </mat-paginator>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <mat-checkbox #matChkBox [disabled]="filteredBeneficiaries.length ===0 || loading" [checked]="false"
+                    (change)="manageCheckBoxesState($event.checked)"></mat-checkbox>
+                </th>
+                <th>
+                  <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                  <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                  <span style="padding-left: 3px;">Name</span>
+                </th>
+                <th>
+                  <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                  <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                  <span style="padding-left: 3px;">Gender</span>
+                </th>
+                <th>
+                  <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                  <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                  <span style="padding-left: 3px;">Insurance ID</span>
+                </th>
+                <th>
+                  <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                  <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                  <span style="padding-left: 3px;">Role</span>
+                </th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="loading">
+              <tr>
+                <td class="table-content" colspan="10" style="text-align: center !important; padding: 10px !important;">
+                  <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                  <br>
+                  <span class="text-muted">{{loadingStatusText }}</span>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="beneficiaries.length > 0">
+              <!-- <tr>
+                <td colspan="6" >
+                  <div class="tbl-actionRow">
+
+                    <input type="search" [formControl]="searchBeneficiary" class="table-header-input" placeholder="Search for Beneficiary">
+                  </div>
+                </td>
+                <td colspan="4" *ngIf="markForDelList.length>0">
+              <span style="color:red; font-weight:bold;"> You've mark {{markForDelList.length}} items.</span>
+                  <button (click)="confirmDeletion()" [disabled]="loading" class="btn btn-danger">Delete Items</button>
+                </td>
+              </tr> -->
+
+              <tr *ngFor="let beneficiary of filteredBeneficiaries;let i=index" [class]="beneficiary.markForDelete ? 'marked' : ''">
+                <td>
+                  <mat-checkbox [disabled]="loading" [checked]="beneficiary.markForDelete" (change)="logSelected($event, i)"></mat-checkbox>
+                </td>
+                <td>{{beneficiary?.surname}} {{beneficiary?.firstname}}</td>
+                <td>{{beneficiary?.gender}}</td>
+                <td>{{beneficiary?.filNo}}</td>
+                <td>
+                  <div class="role">{{getRole(beneficiary)}}</div>
+                </td>
+                <td>
+
+                  <span *ngIf="beneficiary.status===true||beneficiary.status==='active'">Active</span>
+                  <span *ngIf="beneficiary.status===false||beneficiary.status==='inactive'">Inactive</span></td>
+                <td>{{beneficiary?.date | date:'shortDate'}}</td>
+                <td>
+                  <i (click)="edit_show(beneficiary,i)" class="fa fa-pencil-square-o card-edit" aria-hidden="true"></i>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="beneficiaries.length == 0 && !loading">
+              <tr>
+                <td class="table-content" colspan="6" style="text-align: center"> No data available in table</td>
+              </tr>
+            </tbody>
+          </table>
+          <mat-paginator [pageIndex]="0" [length]="beneficiaries.length" [pageSize]="pageSize" (page)="pageEvent = $event; onPaginateChange($event)"
+            [pageSizeOptions]="pageSizeOptions">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="newBeneficiary" class="modal-overlay">
+  <app-new-beneficiary (closeModal)="close_onClick($event)" (beneficiaryValueChanged)="onBeneficiaryValueChange($event)"
+    [selectedBeneficiary]="selectedBeneficiary" id="form-modal" class="form-modal center-center"></app-new-beneficiary>
+</div>

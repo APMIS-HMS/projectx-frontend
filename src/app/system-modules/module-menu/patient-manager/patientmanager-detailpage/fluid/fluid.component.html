@@ -1,0 +1,266 @@
+<div class="pg-subtitle">PATIENT PAGE - FLUID MANAGEMENT</div>
+
+<div class="doc-mainWrap">
+    <div class="doc-contentArea">
+        <div class="doc-cardWrap">
+            <button (click)="fluidType_show()" class="small-btn fluid-btn" mat-raised-button>Fluid Type</button>
+            <div class="card2-exo">
+                <div class="doc-card2">
+                    <div class="modal_title">Fluid Intake</div>
+
+                    <div class="docCard-body">
+                        <form [formGroup]="frmIntake" novalidate>
+
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Fluid" formControlName="infusion">
+                                        <mat-option *ngFor="let intake of intakeFluidList" [value]="intake">{{intake.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-input-container>
+                                    <input matInput mat-error placeholder="Volume" formControlName="infusion_volume">
+                                </mat-input-container>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Unit" formControlName="infusion_quantity">
+                                        <mat-option [value]="'ml'">ml</mat-option>
+                                        <mat-option [value]="'cl'">cl</mat-option>
+                                        <mat-option [value]="'l'">l</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <button class="cta-1" (click)="addPatientFluid('intake')" [disabled]="!frmIntake.valid || loading">
+                                <span *ngIf="loading">
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                </span>
+                                <span *ngIf="!loading">Add</span>
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="doc-card2">
+                    <div class="modal_title">Fluid Output</div>
+
+                    <div class="docCard-body">
+                        <form [formGroup]="frmOutput" novalidate>
+
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Fluid" formControlName="fluid">
+                                        <mat-option *ngFor="let output of outputFluidList" [value]="output">{{output.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-input-container>
+                                    <input matInput mat-error placeholder="Volume" formControlName="output_volume">
+                                </mat-input-container>
+                            </div>
+
+                            <div class="frm-item-wrap">
+                                <mat-form-field>
+                                    <mat-select placeholder="Unit" formControlName="output_quantity">
+                                        <mat-option [value]="'ml'">ml</mat-option>
+                                        <mat-option [value]="'cl'">cl</mat-option>
+                                        <mat-option [value]="'l'">l</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <button class="cta-1" (click)="addPatientFluid('output')" [disabled]="!frmOutput.valid || loading">
+                                <span *ngIf="loading">
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                </span>
+                                <span *ngIf="!loading">Add</span>
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card2-exo">
+                <div class="card-tbl">
+                    <div class="modal_title">Fluid Intake</div>
+                    <div class="intr-wrap">
+                        <mat-form-field>
+                            <mat-select placeholder="Time Interval" [formControl]="inInterval" #intakeInterval (change)="filterByTime('intake', intakeInterval.value)">
+                                <mat-option [value]="0">All</mat-option>
+                                <mat-option [value]="48">Last 48 Hours</mat-option>
+                                <mat-option [value]="24">Last 24 Hours</mat-option>
+                                <mat-option [value]="18">Last 18 Hours</mat-option>
+                                <mat-option [value]="12">Last 12 Hours</mat-option>
+                                <mat-option [value]="6">Last 6 Hours</mat-option>
+                                <mat-option [value]="4">Last 4 Hours</mat-option>
+                                <mat-option [value]="2">Last 2 Hours</mat-option>
+                                <mat-option [value]="1">Last Hour</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div class="intr-tag">Showing for {{intakeFilterTime}}</div>
+                    </div>
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>Fluid</th>
+                                <th>Volume</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let intakeList of patientIntakeFluidList">
+                                <td>{{intakeList.fluid.name}}</td>
+                                <td>{{intakeList.volume}}{{intakeList.measurement}}</td>
+                                <td>{{intakeList.createdAt | date: 'medium'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card-tbl">
+                    <div class="modal_title">Fluid Output</div>
+                    <div class="intr-wrap">
+                        <mat-form-field>
+                            <mat-select placeholder="Time Interval" [formControl]="outInterval" #outputInterval (change)="filterByTime('output', outputInterval.value)">
+                                <mat-option [value]="0">All</mat-option>
+                                <mat-option [value]="48">Last 48 Hours</mat-option>
+                                <mat-option [value]="24">Last 24 Hours</mat-option>
+                                <mat-option [value]="18">Last 18 Hours</mat-option>
+                                <mat-option [value]="12">Last 12 Hours</mat-option>
+                                <mat-option [value]="6">Last 6 Hours</mat-option>
+                                <mat-option [value]="4">Last 4 Hours</mat-option>
+                                <mat-option [value]="2">Last 2 Hours</mat-option>
+                                <mat-option [value]="1">Last Hour</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div class="intr-tag">Showing for {{outputFilterTime}}</div>
+                    </div>
+                    <table cellpadding="0" cellspacing="0" border="0.5">
+                        <thead>
+                            <tr>
+                                <th>Fluid</th>
+                                <th>Volume</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let outputList of patientOutputFluidList">
+                                <td>{{outputList.fluid.name}}</td>
+                                <td>{{outputList.volume}}{{outputList.measurement}}</td>
+                                <td>{{outputList.createdAt | date: 'medium'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="summary-figs">
+                <div class="card2-exo">
+                    <div class="fig-item">
+                        <div class="fig-label">Total Input Volume</div>
+                        <div class="fig-val">{{totalPatientIntakeFluid}} ml
+                            <span>({{rateOfIntakeFluid}} ml/hr)</span>
+                        </div>
+                    </div>
+                    <!-- <div class="fig-item">
+                    <div class="fig-label">Balance</div>
+                    <div class="fig-val">{{totalPatientIntakeFluid - totalPatientOutputFluid}} ml</div>
+                </div> -->
+                    <!-- <div class="fig-item">
+                    <div class="fig-label">Rate</div>
+                    <div class="fig-val">{{rateOfIntakeFluid}} ml/hr</div>
+                </div> -->
+                </div>
+
+                <!--                                                                -->
+
+                <div class="summary-figs">
+                    <div class="fig-item">
+                        <div class="fig-label">Total Output Volume</div>
+                        <div class="fig-val">{{totalPatientOutputFluid}} ml
+                            <span>({{rateOfOutputFluid}} ml/hr)</span>
+                        </div>
+                    </div>
+                    <!-- <div class="fig-item">
+                    <div class="fig-label">Rate</div>
+                    <div class="fig-val">{{rateOfOutputFluid}} ml/hr</div>
+                </div> -->
+                </div>
+                <div class="fig-item">
+                    <div class="fig-label">Balance</div>
+                    <div class="fig-val">{{totalPatientIntakeFluid - totalPatientOutputFluid}} ml
+                        <span>({{rateOfOutputFluid}} ml/hr)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-tbl-full">
+                <div class="modal_title">Summary Table</div>
+                <table cellpadding="0" cellspacing="0" border="0.5">
+                    <thead>
+                        <tr>
+                            <th>Fluid</th>
+                            <th>Total Volume In</th>
+                            <th>Total Volume Out</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let summary of patientFluidSummary">
+                            <td>{{summary.name}}</td>
+                            <td>{{summary.sum}} {{summary.measurement}}</td>
+                            <td>30ml</td>
+                            <td>10ml</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- balance over fluid -->
+            <div class="col-md-6">
+                <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+                    [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="doc-rArea">
+    <app-right-tab [patient]="patient"
+        (addProblem)="addProblem_show($event)"
+        (addAllergy)="addAllergy_show($event)"
+        (addHistory)="addHistory_show($event)"
+        (addVitals)="addVitals_show($event)"
+        ></app-right-tab>
+  </div>
+
+  <div *ngIf="addProblem_view" class="modal-overlay">
+    <app-add-patient-problem [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-patient-problem>
+  </div>
+
+  <div *ngIf="addAllergy_view" class="modal-overlay">
+    <app-add-allergy [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-allergy>
+  </div>
+
+  <div *ngIf="addHistory_view" class="modal-overlay">
+    <app-add-history (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-history>
+  </div>
+
+  <div *ngIf="addVitals_view" class="modal-overlay">
+    <app-add-vitals (closeModal)="close_onClick($event)" id="form-modal" [patient]="patient" class="form-modal center-center"></app-add-vitals>
+  </div> -->
+</div>
+<div *ngIf="fluidType_pop" class="modal-overlay">
+    <app-fluid-type (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-fluid-type>
+</div>

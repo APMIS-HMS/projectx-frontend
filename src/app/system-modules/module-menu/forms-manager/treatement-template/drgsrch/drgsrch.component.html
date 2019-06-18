@@ -1,0 +1,30 @@
+<div class="searchWrap">
+  <div class="search-sugestions" style="position: relative !important;">
+    <div class="con-list-wrap">
+      <h3 *ngIf="commonProducts.length > 0">Commonly Prescribed</h3>
+      <div (click)="selectProduct($event, common)" *ngFor="let common of commonProducts" class="list green">{{common.name}}
+        <div class="custom-chk">
+          <input type="checkbox" disabled checked id="markCommon">
+          <label for="markCommon">Commonly prescribed</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="con-list-wrap">
+      <h3 *ngIf="products.length > 0">All</h3>
+      <div (click)="selectProduct($event, product)" *ngFor="let product of products" class="list" [class.green]="product.marked">{{product.name}}
+        <div class="custom-chk">
+          <input [checked]="product.marked" (change)="setMarked($event, product)" type="checkbox" id="markCommon">
+          <label for="markCommon"><span *ngIf="!product.marked===true">Mark as commonly prescribed</span><span *ngIf="product.marked===true">Commonly
+              prescribed</span></label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div (click)="close()" class="btm">
+    <div class="cls-btn">
+      <span>Close</span>
+    </div>
+  </div>
+</div>

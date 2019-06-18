@@ -1,0 +1,63 @@
+<div class="pg-rap">
+    <div class="analytics-cards">
+        <div class="analytic-card shadow-B">
+            <div class="sect-top">3000</div>
+            <div class="sect-bottom">number of assessments performed</div>
+        </div>
+        <div class="analytic-card shadow-B">
+            <div class="sect-top">
+                <div>50</div>
+                <div>Minutes</div>
+            </div>
+            <div class="sect-bottom">turnaround time for reporting of test results</div>
+        </div>
+        <div class="analytic-card shadow-B">
+            <div class="sect-top">
+                <div>1</div>
+                <div>Hour</div>
+            </div>
+            <div class="sect-bottom">time from diagnosis to treatment</div>
+        </div>
+        <div class="analytic-card shadow-B">
+            <div class="sect-top">Excellent</div>
+            <div class="sect-bottom">quality of data entry</div>
+        </div>
+    </div>
+    <div class="analytics-cards">
+        <div class="analytic-card shadow-B">
+            <div class="sect-top">Good</div>
+            <div class="sect-bottom">adherence to unit and national protocols</div>
+        </div>
+        <div class="analytic-card shadow-B">
+            <div class="sect-top">50%</div>
+            <div class="sect-bottom">testing undertaken at suitably equipped centres</div>
+        </div>
+        <div class="analytic-card shadow-B">
+            <div class="sect-top">60%</div>
+            <div class="sect-bottom">testing by appropriately qualified staff</div>
+        </div>
+        <div class="analytic-card shadow-B">
+            <div class="sect-top">80%</div>
+            <div class="sect-bottom">reporting by suitably qualified staff</div>
+        </div>
+    </div>
+</div>
+
+<div class="pg-wrap">
+    <div class="chart-item">
+        <div>
+            <div style="display: block">
+                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
+        <div class="chart-label">Table of registered patients</div>
+    </div>
+    <div class="chart-item">
+        <div>
+            <div style="display: block">
+                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
+        <div class="chart-label">Table of appointments against checked in patients</div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="apmis-search-wrap">
+  <div class="apmis-search-header">
+    <div class="apmis-search-label">{{placeholder}}</div> 
+    <img (click)="toggler_click()" class="plus-ico" src="assets/images/report_icons/plus.svg" /> 
+  </div>
+  
+ <div *ngIf="showSearch">
+   <app-apmis-search-result [data]="data" (onSelectedItems)="onSearchSelectedItems($event)" (onCreateItem)="onCreateNewItem($event)" (onCloseEvent)="onClickClose($event)"></app-apmis-search-result>
+ </div>
+ 
+ <ul class="apmis-search-selected-list">
+    <li class="ft-btn" *ngFor="let item of selectedItems">{{item.label}}</li>
+  </ul>
+</div>

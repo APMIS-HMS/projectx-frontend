@@ -1,0 +1,35 @@
+<div class="pg-subtitle">PATIENT PAGE - IMMUNIZATION</div>
+<div class="doc-mainWrap">
+    <div class="doc-contentArea">
+        <div class="page-tabs">
+            <div (click)="administer_click()" [class.page-tab-active]="administer" class="page-tab">Administer</div>
+            <div (click)="doc_click()" [class.page-tab-active]="documentation" class="page-tab">Documentation</div>
+        </div>
+
+        <app-vaccine-administration [patient]="patient" *ngIf="administer"></app-vaccine-administration>
+        <app-vaccine-documentation [patient]="patient" *ngIf="documentation"></app-vaccine-documentation>
+    </div>
+    <div class="doc-rArea">
+        <app-right-tab [patient]="patient" (addProblem)="addProblem_show($event)" (addAllergy)="addAllergy_show($event)" (addHistory)="addHistory_show($event)" (addVitals)="addVitals_show($event)"></app-right-tab>
+    </div>
+
+    <div *ngIf="docDetail_view" class="modal-overlay">
+        <app-documentation-detail [document]="selectedDocument" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-documentation-detail>
+    </div>
+
+    <div *ngIf="addProblem_view" class="modal-overlay">
+        <app-add-patient-problem [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-patient-problem>
+    </div>
+
+    <div *ngIf="addAllergy_view" class="modal-overlay">
+        <app-add-allergy [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-allergy>
+    </div>
+
+    <div *ngIf="addHistory_view" class="modal-overlay">
+        <app-add-history (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-history>
+    </div>
+
+    <div *ngIf="addVitals_view" class="modal-overlay">
+        <app-add-vitals [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-vitals>
+    </div>
+</div>

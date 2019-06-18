@@ -1,0 +1,258 @@
+<!-- <ul class="pg-menuWrap">
+    <li (click)="changeRoute('')">Home</li>
+    <li (click)="changeRoute('list')" [class.pg-menuActive]="homeContentArea">Manage Store</li>
+    <li (click)="changeRoute('products')" [class.pg-menuActive]="productsContentArea">Manage Product</li>
+    <li (click)="changeRoute('orders')" [class.pg-menuActive]="ordersContentArea" [routerLink]="['/dashboard/purchase-manager/orders']">Manage Purchase</li>
+    <li (click)="changeRoute('inventory')" [class.pg-menuActive]="inventoryContentArea" [routerLink]="['/dashboard/inventory-manager/inventory']">Manage Inventory</li>
+</ul> -->
+<!-- <div (click)="closeActivate($event)" class="inner-wrap-b body-wrap">
+    <div class="facility-title">{{pageInView}}</div>
+    <div class="">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="table-head col-xs-3">Name</div>
+                    <div class="table-head col-xs-1">Location</div>
+                    <div class="table-head col-xs-2">Description</div>
+                    <div class="table-head col-xs-2">Types</div>
+                    <div class="table-head col-xs-1">Dispense</div>
+                    <div class="table-head col-xs-1">Transfer</div>
+                    <div class="table-head col-xs-1">Actions</div>
+                    <div class="table-head col-xs-1">
+                        <i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i>
+                    </div>
+                </div>
+                <div class="row" *ngIf="searchOpen">
+                    <div class="col-md-3" style="padding-top: 8px;">
+                        <select placeholder="Select Location" [formControl]="selMinorLocation" class="table-header-select">
+                            <option value="Select by location" disabled selected>Select by location</option>
+                            <option *ngFor="let minorLocation of minorLocations" value={{minorLocation._id}}>{{minorLocation.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3" style="padding-top: 8px;">
+                        <select [formControl]="selProductType" placeholder="Select Product type" class="table-header-select">
+                            <option value="Select by product type" disabled selected>Select by product type</option>
+                            <option *ngFor="let productType of productTypes" value="{{productType._id}}">{{productType.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3" style="padding-top: 8px;">
+                        <input type="text" [formControl]="searchControl" class="table-header-input" placeholder="search store here.." #inputsearch/>
+                    </div>
+                    <div class="col-md-2" style="padding-top: 8px;">
+                        <button mat-raised-button (click)="refresh()" data-toggle="tooltip" title="Refresh" data-placement="bottom"><i class="fa fa-refresh"></i></button>
+                    </div>
+                    <div class="col-md-1 table-head" style="padding-top: 8px;">
+                        <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="card-list-item" *ngIf="stores.length === 0 && !loading">
+                    <div class="col-xs-12" style="text-align:center">
+                        No data available.....
+                    </div>
+                </div>
+
+
+                <div class="card-list-item" *ngIf="stores.length === 0 && loading">
+                    <div class="col-xs-12" style="text-align:center">
+                        <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="card-list-item" *ngFor="let store of stores; let i=index;">
+                    <div class="row">
+                        <div class="table-list col-xs-3">
+                            {{store.name}}
+                        </div>
+                        <div class="table-list col-xs-1">
+                            {{store?.minorLocation?.name}}
+                        </div>
+                        <div class="table-list col-xs-2">
+                            {{store.description}}
+                        </div>
+                        <div class="table-list col-xs-2">
+                            <div class="workspace-count"> {{store.productTypeId.length}} Product Type(s)</div>
+                            <ul *ngIf="store.productTypeId.length > 0" class="shadow-RB workspace-listWrap animated zoomIn">
+                                <li *ngFor="let storeType of store.productTypeId" class="workspace-listItem">
+                                    <ng-container>
+                                        <span>{{storeType?.details?.name}}</span>
+                                        <i (click)="removeLocation(location, workSpace, i)" class="fa fa-trash" aria-hidden="true"></i>
+                                    </ng-container>
+                                </li>
+                                <div class="pointer-wrap"><i class="fa fa-caret-down" aria-hidden="true"></i></div>
+                            </ul>
+                        </div>
+                        <div class="table-list col-xs-1">
+                            <span [hidden]="store.canDespense===false">Yes</span>
+                            <span [hidden]="store.canDespense===true">No</span>
+                        </div>
+                        <div class="table-list col-xs-1">
+                            <span [hidden]="store.canTransfer===false">Yes</span>
+                            <span [hidden]="store.canTransfer===true">No</span>
+                        </div>
+                        <div class="table-list col-xs-1 td-iconCta-wrap pointer">
+                            <a (click)="onEditStore(store)" class="pull-right"><i class="fa fa-pencil"></i></a>
+                            <a class="pull-right"><i class="fa  fa-trash"></i></a>
+                        </div>
+                        <div class="table-list col-xs-1">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <span (click)="newStoreShow()" id="floating-button">
+            <p class="plus">+</p></span>
+        </div>
+    </div>
+    <div *ngIf="newStore" class="modal-overlay">
+        <app-new-store [selectedStore]="selectedStore" (refreshStore)="refreshStore($event)" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-store>
+    </div>
+</div> -->
+
+
+<div class="main-wrapper">
+    <div class="content-sect">
+        <div class="bar-1">
+            <div class="active-store"></div>
+            <div class="post-ql-open">
+                <div class="ql-tip">Quick Links</div>
+                <i (click)="toggleQl()" class="fa fa-link ql-open rotating"></i>
+            </div>
+        </div>
+
+        <div class="active-store"> {{ checkingStore?.storeObject?.name }}</div>
+        <div class="pg-labels-wrap">
+            <div class="main-title">{{pageInView}}</div>
+            <div class="labels-right">
+                <div class="label-right" routerLink="/dashboard/store/pos">Point of Sale</div>
+                <div class="label-right" (click)="onChangeCheckedIn()">Switch Store</div>
+            </div>
+        </div>
+        <div class="inner-page-contentArea c-page-wrapper">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="table-head col-xs-3">Name</div>
+                                <div class="table-head col-xs-1">Location</div>
+                                <div class="table-head col-xs-2">Description</div>
+                                <div class="table-head col-xs-2">Types</div>
+                                <div class="table-head col-xs-1">Dispense</div>
+                                <div class="table-head col-xs-1">Transfer</div>
+                                <div class="table-head col-xs-1">Actions</div>
+                                <div class="table-head col-xs-1">
+                                    <i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="searchOpen">
+                                <div class="col-md-3" style="padding-top: 8px;">
+                                    <select placeholder="Select Location" [formControl]="selMinorLocation" class="table-header-select">
+                            <option value="Select by location" disabled selected>Select by location</option>
+                            <option *ngFor="let minorLocation of minorLocations" value={{minorLocation._id}}>{{minorLocation.name}}</option>
+                        </select>
+                                </div>
+                                <div class="col-md-3" style="padding-top: 8px;">
+                                    <select [formControl]="selProductType" placeholder="Select Product type" class="table-header-select">
+                            <option value="Select by product type" disabled selected>Select by product type</option>
+                            <option *ngFor="let productType of productTypes" value="{{productType._id}}">{{productType.name}}</option>
+                        </select>
+                                </div>
+                                <div class="col-md-3" style="padding-top: 8px;">
+                                    <input type="text" [formControl]="searchControl" class="table-header-input" placeholder="search store here.." #inputsearch/>
+                                </div>
+                                <div class="col-md-2" style="padding-top: 8px;">
+                                    <button mat-raised-button (click)="refresh()" data-toggle="tooltip" title="Refresh" data-placement="bottom">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                                </div>
+                                <div class="col-md-1 table-head" style="padding-top: 8px;">
+                                    <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-content">
+                            <div class="card-list-item" *ngIf="stores.length === 0 && !loading">
+                                <div class="col-xs-12" style="text-align:center">
+                                    No data available.....
+                                </div>
+                            </div>
+
+
+                            <div class="card-list-item" *ngIf="stores.length === 0 && loading">
+                                <div class="col-xs-12" style="text-align:center">
+                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card-list-item" *ngFor="let store of stores; let i=index;">
+                                <div class="row">
+                                    <div class="table-list col-xs-3">
+                                        {{store.name}}
+                                    </div>
+                                    <div class="table-list col-xs-1">
+                                        {{store?.minorLocation?.name}}
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        {{store.description}}
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        <div class="workspace-count"> {{store.productTypeId.length}} Product Type(s)</div>
+                                        <ul *ngIf="store.productTypeId.length > 0" class="shadow-RB workspace-listWrap animated zoomIn">
+                                            <li *ngFor="let storeType of store.productTypeId" class="workspace-listItem">
+                                                <ng-container>
+                                                    <span>{{storeType?.details?.name}}</span>
+                                                    <i (click)="removeLocation(location, workSpace, i)" class="fa fa-trash" aria-hidden="true"></i>
+                                                </ng-container>
+                                            </li>
+                                            <div class="pointer-wrap">
+                                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="table-list col-xs-1">
+                                        <span [hidden]="store.canDespense===false">Yes</span>
+                                        <span [hidden]="store.canDespense===true">No</span>
+                                    </div>
+                                    <div class="table-list col-xs-1">
+                                        <span [hidden]="store.canTransfer===false">Yes</span>
+                                        <span [hidden]="store.canTransfer===true">No</span>
+                                    </div>
+                                    <div class="table-list col-xs-1 td-iconCta-wrap pointer">
+                                        <a (click)="onEditStore(store)" class="pull-right">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a class="pull-right">
+                                            <i class="fa  fa-trash"></i>
+                                        </a>
+                                    </div>
+                                    <div class="table-list col-xs-1">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <span (click)="newStoreShow()" id="floating-button">
+                        <p class="plus">+</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="store-quick-link-box">
+        <app-store-quick-links *ngIf="Ql_toggle" (toggleQl)="toggleQl()"></app-store-quick-links>
+    </div>
+</div>
+<div *ngIf="modal_on" class="modal-overlay">
+    <app-store-check-in [workSpace]="workSpace" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-store-check-in>
+</div>
+<div *ngIf="newStore" class="modal-overlay">
+    <app-new-store [selectedStore]="selectedStore" (refreshStore)="refreshStore($event)" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-store>
+</div>

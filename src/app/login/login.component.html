@@ -1,0 +1,34 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">System Login</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <div class="f_sg_1">
+            <form [formGroup]="frm_login" novalidate>
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <input matInput mat-error placeholder="Apmis ID or Email" formControlName="username" [(ngModel)]="input_username">
+                    </mat-input-container>
+                </div>
+                <div class="frm-item-wrap" style="margin-bottom: 15px;">
+                    <mat-input-container class="example-full-width">
+                        <i *ngIf="show" (click)="toggleShow($event)" class="fa fa-lock toggle-pass" aria-hidden="true"></i>
+                        <input type="password" matInput mat-error formControlName="password" #showhideinput [(ngModel)]="input_password" placeholder="Password">
+                        <a [hidden]="show" (click)="toggleShow($event)" class="toggle-pass"><i class="fa fa-eye"></i></a>
+                    </mat-input-container>
+                </div>
+                <div class="back-btn-box">
+                    <span (click)="reset()" class="forgetPword">forgot password?</span>
+                </div>
+                <div class="example-full-width" id="example-full-width">
+                    <button class="small-btn" [disabled]="!frm_login.valid || inProgress" (click)="login(frm_login.valid)" mat-raised-button>Login</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

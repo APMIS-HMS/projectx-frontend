@@ -1,0 +1,53 @@
+<div class="userAcc-mainWrap">
+
+    <div class="loggedinUserWrap">
+        <div class="loggedinUser_user">
+            <!--<img *ngIf="selectedPerson.profileImageObject?.thumbnail==undefined" src="assets/images/aiykvatar.jpg">-->
+            <div *ngIf="selectedPerson?.profileImageObject === undefined"><img src="assets/images/users/default.png"></div>
+            <img *ngIf="selectedPerson?.profileImageObject !== undefined" class="shadow" [src]="selectedPerson?.profileImageObject?.thumbnail">
+            <div class="loggedinUsername">{{authData?.email}}</div>
+        </div>
+        <div (click)="logoutConfirm_show()" class="logoutLink">Logout</div>
+    </div>
+
+    <div class="userAccs-pgHeader">
+        <img src="assets/images/app_logo/apmis_vector.svg">
+        <div class="userAccs-pgTitle">All Purpose Medical Information System</div>
+    </div>
+
+    <div *ngIf="listOfFacilities.length > 1" class="userAccs-listing">
+        <div class="listing-title">User Accounts</div>
+        <div class="userAccs-listingWrap">
+
+            <div *ngFor="let item of listOfFacilities" (click)="popListing(item)" class="acc-listing">
+                <div class="listing-imgWrap">
+                    <img *ngIf="item.logoObject != undefined" [src]="item?.logoObject?.thumbnail">
+                </div>
+                <div class="listing-name">{{item.name}}</div>
+                <div class="listing-type">{{item.facilityTypeId}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="popup_listing" class="modal-overlay">
+    <app-user-accounts-inner-popup [loginEmployee]="loginEmployee" [selectedFacility]="selectedFacility" (closeModal)="close_onClick($event)"
+        id="form-modal" class="form-modal center-center"></app-user-accounts-inner-popup>
+</div>
+<div *ngIf="popup_verifyToken" class="modal-overlay">
+    <!-- <div (click)="close_modal_onClick()" class="modal-close-ico" aria-hidden="true">X</div> -->
+    <!-- <div class="outer">
+        <div class="middle">
+            <div class="inner"> -->
+    <app-verify-token (closeModal)="close_onClick2($event)" class="f_sg2 form-modal center-center" [backBtnVisible]="false"
+        [inputFacility]="selectedFacility"></app-verify-token>
+    <!-- </div>
+        </div> -->
+    <!-- </div> -->
+</div>
+
+<!--<h1 *ngIf="popup_verifyToken">Testing</h1>-->
+
+<div *ngIf="logoutConfirm_on" class="modal-overlay">
+    <app-logout-confirm (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-logout-confirm>
+</div>

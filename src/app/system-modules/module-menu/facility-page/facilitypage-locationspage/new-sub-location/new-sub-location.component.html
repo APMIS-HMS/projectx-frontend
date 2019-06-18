@@ -1,0 +1,43 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">{{facility.name}}</legend>
+        <div class="modal_mini_title">Create Child Location</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <div class="f_sg1">
+
+            <form [formGroup]="frmNewSubLoc" novalidate>
+                <div class="frm-item-wrap">
+                    <mat-form-field>
+                        <mat-select formControlName="sublocParent">
+                            <mat-option value="" disabled selected>Parent Location</mat-option>
+                            <mat-option *ngFor="let item of locations" [value]="item?._id">
+                                {{item?.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <input matInput formControlName="sublocName" placeholder="Location Name" autocomplete="off">
+                    </mat-input-container>
+                </div>
+                <div class="frm-item-wrap">
+                    <mat-form-field class="example-full-width">
+                        <textarea matInput placeholder="Description" formControlName="desc"></textarea>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="example-full-width" id="example-full-width">
+                    <button [disabled]="!frmNewSubLoc?.valid && disableNewMinorLoc" (click)="newSubLocation(frmNewSubLoc.valid, frmNewSubLoc.value)" mat-raised-button [innerHtml]="ActionButton"></button>
+                </div> -->
+                <button [disabled]="(!frmNewSubLoc.valid && disableNewMinorLoc) || disableNewMinorLoc" (click)="newSubLocation(frmNewSubLoc.valid, frmNewSubLoc.value)" class="cta-1" [ngClass]="{'cta-1':(frmNewSubLoc.valid && !disableNewMinorLoc), 'cta-1-disable':(!frmNewSubLoc.valid && !disableNewMinorLoc) || disableNewMinorLoc}"> 
+                    {{ActionButton}}
+                    </button>
+            </form>
+        </div>
+
+    </div>
+</div>

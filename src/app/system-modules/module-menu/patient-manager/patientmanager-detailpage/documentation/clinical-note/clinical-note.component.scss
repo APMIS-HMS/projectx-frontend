@@ -1,0 +1,91 @@
+@import "../documentation-detail/documentation-detail.component.scss";
+@import "../../../../../../../globals/variables.scss";
+.frmNoteWrap {
+    position: relative;
+    background: #fff;
+    width: 90%;
+    margin: 0 auto;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+// .modal_title {
+//     padding-top: 10px;
+//     font-size: 1.6rem;
+//     margin: 0;
+//     margin-top: 10px;
+//     margin-bottom: 20px;
+//     color: white;
+// }
+.modal-baseWrap{
+    width: 100%;
+}
+
+.jsonFrnWrap {
+    position: relative;
+}
+
+.actWrappers-jsonFrm {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+}
+
+.actWrappers-jsonFrm-view {
+    bottom: 35px;
+    position: absolute;
+    right: 10px;
+    display: flex;
+    .atch-orderSet {
+        color: green;
+    }
+}
+
+.atch-orderSet {
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #0288D1;
+    margin-right: 10px;
+}
+
+.atch-orderSet:hover,
+.links-ul li:hover {
+    text-decoration: underline;
+}
+
+.links-ul {
+    position: absolute;
+    top: 105px;
+    right: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #0288D1;
+    z-index: 100; //1000
+}
+
+.tags {
+    border: 1px solid #0288D1;
+    padding: 3px 5px;
+    cursor: pointer;
+    border-radius: 7px;
+    margin: 5px;
+    color: #0288D1;
+    background: #fff;
+    font-size: 1rem;
+}
+
+.diagnosis-view {
+    padding: 250px;
+}
+
+.order-set {
+    padding: 100px;
+    .tbl-listWrap {
+        .sect-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 5px;
+        }
+    }
+}

@@ -1,0 +1,132 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <div class="modal_mini_title">
+            <h2>Laboratory Report</h2>
+            All Purpose Medical Information System
+        </div>
+    </div>
+    <div class="modal-baseWrap">
+
+        <div class="pre-sects">
+            <div class="status">
+                <div *ngIf="selectedInvestigationData.isUploaded" style="color: green">Published</div>
+                <div *ngIf="!selectedInvestigationData.isUploaded" style="color:blue">Saved to Draft</div>
+            </div>
+            <div class="payment">Paid</div>
+            <div class="date">{{ selectedInvestigationData.updatedAt | date }}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div>
+                            <div>
+                                <img style="height: 40px; width: 40px;" *ngIf="selectedInvestigationData?.patient?.profileImageObject == undefined" src="assets/images/users/default.png">
+                                <img style="height: 40px; width: 40px;" class="shadow" *ngIf="selectedInvestigationData?.patient?.profileImageObject != undefined" [src]="facilityService.transform(selectedInvestigationData?.patient?.profileImageObject?.thumbnail)">
+                            </div>
+                            <h2 class="sel-patient-name">{{ selectedInvestigationData?.patient?.firstName }} {{ selectedInvestigationData?.patient?.lastName }}
+                            </h2>
+                            <h3 class="sel-patient-detaills">
+                                {{ selectedInvestigationData?.patient?.apmisId }} <span style="color:#0288D1; font-size: 1.4rem">|</span> {{ selectedInvestigationData?.patient?.dateOfBirth | date: 'shortDate' }} <span style="color:#0288D1; font-size: 1.4rem">|</span>                                {{ selectedInvestigationData?.patient?.gender }}
+                            </h3>
+                        </div>
+                        <div class="act-right-actions">
+                            <div (click)="showImageBrowseDlg()" class="action-item" style="color:#FF9800;">
+                                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                <span>Upload</span>
+                            </div>
+                            <div (click)="showImageBrowseDlg()" class="action-item" style="color:#0288D1;">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                <span>Edit</span>
+                            </div>
+                        </div>
+                        <h3>Uploaded Files</h3>
+                        <div class="upload-wrap">
+                            <div class="uploadeds">
+                                <span>No File uploaded yet.</span>
+                            </div>
+                            <ul class="card hover">
+                                <li class="row">
+                                    <div class="col-xs-2" style="text-align : center">
+                                        <h3 class="fa fa-file-pdf-o" style="font-size : 1.2rem"></h3>
+                                    </div>
+                                    <div class="col-xs-8" style="text-align : center">
+                                        <h3 style="line-height : 1.2rem">File Name | XX-XX-XXXX
+                                        </h3>
+                                    </div>
+                                    <div class="col-xs-2" style="text-align : center">
+                                        <h3 class="fa fa-ellipsis-v" style="line-height : 1.2rem"></h3>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <button class="printt"><i class="fa fa-print">Print</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1"> &nbsp;</div>
+            <div class="col-xs-7">
+                <div>
+                    <div class="initial-contenet invstn-val">
+                        <div class="report-title">Clinical Information</div>
+                        <div class="initial-val">
+                            {{ selectedInvestigationData?.clinicalInformation }}
+                        </div>
+                    </div>
+                    <div class="initial-contenet invstn-val">
+                        <div class="report-title">Diagnosis</div>
+                        <div class="initial-val">
+                            {{ selectedInvestigationData?.diagnosis }}
+                        </div>
+                    </div>
+                </div>
+                <div class="resultSect-title">Investigation Result</div>
+                <div class="invstn-wrap">
+                    <div class="lettering-wrap">
+                        <div class="report-title">{{ selectedInvestigationData?.name }}</div>
+                        <div class="invstn-vals">
+                            <div class="invstn-val">
+                                <div class="val-label">Reference:</div>
+                                <div class="val-val" *ngIf="selectedInvestigationData.reportType.name == 'Text'">{{ selectedInvestigationData?.reportType.ref }}</div>
+                                <div class="val-val" *ngIf="selectedInvestigationData.reportType.name == 'Numeric'">{{ selectedInvestigationData?.reportType.ref.min }} - {{ selectedInvestigationData?.reportType.ref.min }}({{ selectedInvestigationData?.unit }})</div>
+                            </div>
+                            <div class="invstn-val">
+                                <div class="val-label">Sample NO:</div>
+                                <div class="val-val">1220</div>
+                            </div>
+                            <div class="invstn-val">
+                                <div class="val-label">Test Result:</div>
+                                <div class="val-val" *ngIf="selectedInvestigationData.reportType.name == 'Text'">
+                                    <ul>
+                                        <li *ngFor="let result of selectedInvestigationData.report.result">{{result.result}}</li>
+                                    </ul>
+                                </div>
+                                <div class="val-val" *ngIf="selectedInvestigationData.reportType.name == 'Numeric'">
+                                    <ul>
+                                        <li *ngFor="let result of selectedInvestigationData.report.result">{{result.result}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="initial-contenet invstn-val">
+                    <div class="report-title">Conclusion</div>
+                    <div class="initial-val">
+                        {{ selectedInvestigationData?.report?.conclusion }}
+                    </div>
+                </div>
+                <div class="initial-contenet invstn-val">
+                    <div class="report-title">Recommendation</div>
+                    <div class="initial-val">
+                        {{ selectedInvestigationData?.report?.recommendation }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

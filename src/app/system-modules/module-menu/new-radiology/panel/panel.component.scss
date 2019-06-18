@@ -1,0 +1,70 @@
+@import '../radiology-requests/radiology-requests.component.scss';
+
+td{
+    padding: 5px;
+}
+.listWrap {
+    background: #f8f8f8;
+    padding: 10px;
+    height: 187px;
+    overflow-y: auto;
+}
+.list-title {
+    font-size: 1.2rem;
+    margin: 14px 0;
+}
+.list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+.list-label{
+    width: 80%;
+    text-align: left;
+    color: #000;
+}
+td{
+    padding: 5px;
+}
+.investigation{
+    background: #fff;
+    border: 1px solid transparent;
+    margin-bottom: 10px;
+}
+.investigation:hover{
+    border: 1px solid #eee;
+}
+.panel-wrap{
+    margin-bottom: 10px;
+    background: #fff;
+    padding: 2px;
+}
+.panel-wrap:hover{
+    .child-list{
+        display: block;
+    }
+}
+.panel{
+    background: #eee;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.panel:hover{
+    border: 1px solid #fff;
+}
+.child-list{
+    display: none;
+}
+.child-item {
+    font-size: 1.2rem;
+    margin: 5px;
+    margin-left: 15px;
+    color: #777;
+}
+.lone-input{
+    background: #f8f8f8;
+    padding: 0px 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+}

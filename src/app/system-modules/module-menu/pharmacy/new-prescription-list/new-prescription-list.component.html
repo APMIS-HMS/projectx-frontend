@@ -1,0 +1,99 @@
+<section id="presc-list">
+  <div class="filterTop">
+    <div class="searchproduct">
+      <div class="InputGroup">
+        <input class="customInput" type="text" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="customLabel" style="font-size: 12px !important;"><i class="fa fa-search" aria-hidden="true"></i>Search
+          prescription with name or
+          apmis
+          id</label>
+      </div>
+    </div>
+    <div class="tbl-header-rhs">
+      <div class="filters">
+        <h3>filter:</h3>
+      </div>
+      <div class="filter-btn">
+        <span>All</span>
+      </div>
+      <div class="filter-btn">
+        <select>
+          <option value="0">--Location--</option>
+        </select>
+      </div>
+      <div class="filter-btn">
+        <select>
+          <option value="0">--Clinic--</option>
+        </select>
+      </div>
+      <div class="filter-btn">
+        <select>
+          <option value="0">--Physician--</option>
+        </select>
+      </div>
+      <div class="filter-btn">
+        <select>
+          <option value="0">--Status--</option>
+          <option value="1">Fulfilled</option>
+          <option value="2">Partially Fulfilled </option>
+          <option value="3">Pending</option>
+        </select>
+      </div>
+      <div class="filter-btn">
+        <input type="date">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="tbl-resp-wrap">
+    <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+      <thead>
+        <tr class="th-r1 th-xx">
+          <th style="width: 5%;">S/N</th>
+          <th >Patient ID</th>
+          <th >Patient Name</th>
+          <th >Facility and Location</th>
+          <th >Physician </th>
+          <th >Time - Date</th>
+          <th >Status </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <div class="card-list-item" *ngIf="prescriptionLists.length===0 && !loading">
+            <div class="row">
+              <div class="table-list text-center col-xs-12">
+                No data available in table
+              </div>
+            </div>
+          </div>
+          <div class="card-list-item" *ngIf="prescriptionLists.length===0 && loading">
+            <div class="row">
+              <div class="table-list text-center col-xs-12">
+                <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </tr>
+        <tr class="th-xx" *ngFor="let prescription of prescriptionLists; let i = index;" routerLink='/dashboard/pharmacy/prescriptions/{{prescription._id}}'>
+          <td>{{ i+1 }}</td>
+          <td>{{prescription?.personDetails.apmisId}}</td>
+          <td>{{prescription?.personDetails.firstName }} {{prescription?.personDetails.lastName }} </td>
+          <td>{{prescription?.clinicId }}</td>
+          <td>{{prescription?.employeeDetails.firstName }}
+            {{prescription?.employeeDetails.lastName }}</td>
+          <td>{{prescription?.updatedAt | date}}</td>
+          <td>
+            <span *ngIf="prescription.status == 'Completely'" style="color:forestgreen">Fulfilled</span>
+            <span *ngIf="prescription.status == 'Partly'" style="color:blue">Partly Fulfilled</span>
+            <span *ngIf="prescription.status == 'Not'" style="color:orange">Pending</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

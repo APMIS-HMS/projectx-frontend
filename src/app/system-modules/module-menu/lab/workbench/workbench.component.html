@@ -1,0 +1,116 @@
+<div class="pg-subtitle"> WORKBENCH </div>
+<div>
+    <div class="doc-mainWrap">
+        <div class="doc-contentArea">
+            <div class="clinicalNoteWrap">
+                <div class="actSect">
+                    <div (click)="workbench_show()" class="act-wrap">
+                        <i *ngIf="workbench_view" class="fa fa-minus" aria-hidden="true"></i>
+                        <i [hidden]="workbench_view" class="fa fa-plus" aria-hidden="true"></i>
+                        <span>New Workbench</span>
+                    </div>
+                    <form *ngIf="workbench_view" [formGroup]="frmNewWorkbench" novalidate>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="frm-item-wrap">
+                                    <div>
+                                        <mat-input-container>
+                                            <input matInput placeholder="Select Laboratory Location" [matAutocomplete]="autoMinorLocation" formControlName="minorLocation">
+                                        </mat-input-container>
+                                        <mat-autocomplete #autoMinorLocation="matAutocomplete" [displayWith]="minorLocationDisplayFn">
+                                            <mat-option *ngFor="let minor of minorLocations" [value]="minor">
+                                                {{ minor.name }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="frm-item-wrap">
+                                    <mat-input-container>
+                                        <input matInput placeholder="Bench Name" formControlName="benchName">
+                                    </mat-input-container>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <button mat-raised-button [disabled]="!frmNewWorkbench.valid || disableBtn" (click)="createWorkbench(frmNewWorkbench.valid, frmNewWorkbench.value)" class="btn">
+                              <span *ngIf="createWorkbenchBtn"><i class="fa fa-plus"></i> Create Workbench</span>
+                              <span *ngIf="creatingWorkbenchBtn">Creating Workbench <i class="fa fa-spin fa-spinner"></i> </span>
+                              <span *ngIf="editWorkbenchBtn"><i class="fa fa-plus"></i> Update Workbench</span>
+                              <span *ngIf="editingWorkbenchBtn">Updating Workbench <i class="fa fa-spin fa-spinner"></i> </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="tblWrapa" class="actSect">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="table-head col-xs-1">No</div>
+                                <div class="table-head col-xs-3">Laboratory</div>
+                                <div class="table-head col-xs-3">Bench Name</div>
+                                <div class="table-head col-xs-2">Status</div>
+                                <div class="table-head col-xs-2">Date Created</div>
+                                <div class="table-head col-xs-1"><i class="fa fa-search fa-fw pointer"></i></div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-list-item" *ngIf="workbenches.length === 0 && !loading">
+                                <div class="col-xs-12" style="text-align:center">
+                                    No data available in table
+                                </div>
+                            </div>
+                            <div class="card-list-item" *ngIf="workbenches.length === 0 && loading">
+                                <div class="col-xs-12" style="text-align:center">
+                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card-list-item" *ngFor="let bench of workbenches; let i=index;">
+                                <div class="row">
+                                    <div class="table-list col-xs-1">
+                                        {{ i+1 }}
+                                    </div>
+                                    <div class="table-list col-xs-3">
+                                        {{bench.minorLocationName}}
+                                    </div>
+                                    <div class="table-list col-xs-3">
+                                        {{bench.name}}
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        <span *ngIf="bench.isActive" class="text-green">Active</span>
+                                        <span *ngIf="!bench.isActive" class="text-red">Disabled</span>
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        {{bench.createdAt|date:'short'}}
+                                    </div>
+                                    <div class="table-list col-xs-1 action-placeholder">
+                                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                        <div class="action-container shadow-RB">
+                                            <div (click)="editWorkBench(bench)" class="action-item">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                                <span>Edit</span>
+                                            </div>
+                                            <div class="action-item" (click)="toggleActivate(bench)">
+                                                <i class="fa fa-ban" aria-hidden="true"></i>
+                                                <span *ngIf="bench.isActive" class="text-red">Deactivate</span>
+                                                <span *ngIf="!bench.isActive" class="text-green">Activate</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="reqDetail_view" class="modal-overlay">
+    <app-request-detail (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-request-detail>
+</div>
+<div *ngIf="personAcc_view" class="modal-overlay">
+    <app-person-account (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-person-account>
+</div>

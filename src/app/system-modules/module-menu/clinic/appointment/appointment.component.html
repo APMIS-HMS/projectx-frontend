@@ -1,0 +1,115 @@
+<div class="preTbl-topItems-wrap">
+    <div class="dr-wrap survery">
+        <app-date-range  [dateRange]="dateRange" (dateRangeChange)="setReturnValue($event)"></app-date-range>
+        <span *ngIf="loadIndicatorVisible" class="fa fa-spinner fa-spin"></span>
+    </div>
+
+    <ul class="topmenuwrap">
+        <li [routerLink]="['/dashboard/clinic/schedule-appointment']">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            <span>Schedule Appointment</span>
+        </li>
+    </ul>
+</div>
+
+<div *ngIf="isCheckoutPatient" class="modal-overlay">
+    <app-checkout-patient [patientDetails]="patientDetails" [selectedAppointment]="selectedAppointment"
+                          (closeModal)="close_onClick($event)" id="form-modal"
+                          class="form-modal center-center"></app-checkout-patient>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="table-head col-xs-2">
+                Patient
+            </div>
+            <div class="table-head col-xs-2">
+                Date
+            </div>
+            <div class="table-head col-xs-1">
+                Time
+            </div>
+            <div class="table-head col-xs-2">
+                Clinic
+            </div>
+            <div class="table-head col-xs-2">
+                Provider
+            </div>
+            <div class="table-head col-xs-1">
+                Status
+            </div>
+            <div class="table-head col-xs-2">
+                <i class="fa fa-search fa-fw"></i>
+            </div>
+        </div>
+    </div>
+    <div class="card-content">
+        <div *ngIf="filteredAppointments.length === 0 && !loading" class="row">
+            <div class="card-list-item col-xs-12 table-list">
+                No data available in table
+            </div>
+        </div>
+
+        <div *ngIf="filteredAppointments.length === 0 && loading" class="row">
+            <div class="card-list-item col-xs-12 table-list">
+                <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue"></i>
+            </div>
+        </div>
+        <div class="card-list-item" *ngFor="let appointment of filteredAppointments; let i = index">
+            <div class="row">
+                <div title="Reason for Vist: {{appointment.appointmentReason == null ? 'None' : appointment.appointmentReason }}"
+                     class="table-list col-xs-2">
+                    {{appointment.patientDetails.personDetails.lastName}}
+                    {{appointment.patientDetails.personDetails.firstName}}
+                </div>
+                <div class="table-list col-xs-2">
+                    {{appointment.startDate | date:'shortDate'}}
+                </div>
+                <div class="table-list col-xs-1">{{appointment.startDate | date:'shortTime'}}</div>
+                <div class="table-list col-xs-2">{{appointment.clinicId}}</div>
+                <div class="table-list col-xs-2">{{appointment.providerDetails?.personDetails.firstName}}
+                    {{appointment.providerDetails?.personDetails.lastName}}
+                </div>
+                <div class="table-list col-xs-1">
+                    <span *ngIf="appointment.orderStatusId !== undefined">{{appointment?.orderStatusId}}</span>
+                    <span *ngIf="appointment.orderStatusId === undefined">{{appointment?.orderStatusId}}</span>
+                </div>
+
+                <div class="table-list col-xs-2">
+                    <div class="tbl-actions-wrap">
+                        <div *ngIf="appointment.attendance !== undefined && !appointment.isCheckedOut"
+                             (click)="checkOutToWard(appointment)" class="tr-act-btn"><i class="fa fa-sign-out"
+                                                                                         aria-hidden="true"></i> Check
+                            Out
+                        </div>
+                        <div *ngIf="appointment.isCheckedOut" class="tr-act-btn"><i class="" aria-hidden="true"></i>
+                            Checked Out
+                        </div>
+                        <div *ngIf="appointment.attendance === undefined" class="tr-act-btn"
+                             (click)="editAppointment(appointment)"><i class="fa fa-edit" aria-hidden="true"></i> Edit
+                        </div>
+                        <div *ngIf="appointment.attendance === undefined && appointment.orderStatusId != 'Cancelled'"
+                             class="tr-act-btn" (click)="confirmCancelAppointment(appointment)"><i class="fa fa-times"
+                                                                                                   aria-hidden="true"></i>
+                            Cancel
+                        </div>
+                        <div *ngIf="appointment.zoom !== undefined && appointment.attendance === undefined"
+                             (click)="onNavigate(appointment, $event)" class="actionWrap">
+                            <i class="fa fa-stethoscope" aria-hidden="true"></i>
+                            <span>TeleMedicine</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<apmis-data-pager color="blue"
+                 (onPageClick)="pageClickedEvent($event)"
+                 [in-progress]="loading"
+                 [show-progress]="true"
+                 next-prev-color="orange"
+                 [pager-source]="paginationObj"></apmis-data-pager>

@@ -1,0 +1,159 @@
+<!-- <div class="page-title">Supplier</div> -->
+<div class="">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="table-head col-xs-1">S/N </div>
+                <div class="table-head col-xs-2">Supplier Name</div>
+                <div class="table-head col-xs-2">Contact</div>
+                <div class="table-head col-xs-2">Email</div>
+                <div class="table-head col-xs-1">CAC </div>
+                <div class="table-head col-xs-2">Address</div>
+                <div class="table-head col-xs-1">Actions</div>
+                <div class="table-head col-xs-1">
+                    <i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i>
+                </div>
+            </div>
+            <div class="row" *ngIf="searchOpen">
+                <div class="col-md-6">
+                    <input matInput [formControl]="searchControl" class="table-header-input" placeholder="Search Supplier here">
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-1 table-head">
+                    <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="card-list-item" *ngIf="suppliers.length === 0 && !loading">
+                <div class="col-xs-12" style="text-align:center">
+                    No data available
+                </div>
+            </div>
+
+            <div class="card-list-item" *ngIf="suppliers.length === 0 && loading">
+                <div class="col-xs-12" style="text-align:center">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="card-list-item" *ngFor="let supplier of suppliers; let i=index;">
+                <div class="row">
+                    <div class="table-list col-xs-1">{{i+1}}</div>
+                    <div class="table-list col-xs-2">{{supplier?.supplier?.name}}</div>
+                    <div class="table-list col-xs-2">{{supplier?.supplier?.primaryContactPhoneNo}}</div>
+                    <div class="table-list col-xs-2">{{supplier?.supplier?.email}}</div>
+                    <div class="table-list col-xs-1">{{supplier?.supplier?.cacNo}}</div>
+                    <div class="table-list col-xs-2">{{supplier?.supplier?.street}}</div>
+                    <div class="table-list col-xs-1 td-iconCta-wrap pointer">
+                        <!-- <span><a (click)="onEdit(supplier)" class=""><i class="fa fa-pencil"></i></a></span> -->
+                        <span><a class=""><i class="fa  fa-trash" (click)="onDelete(supplier)"></i></a></span>
+                        <span><a (click)="onSelect(supplier)" class=""><i class="fa fa-eye"></i></a></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="col-md-12">
+    <a (click)="newSupplyShow()" id="floating-button">
+        <p class="plus">+</p>
+    </a>
+</div>
+<!-- float button -->
+
+<!--end float button -->
+<div *ngIf="newSupply" class="modal-overlay">
+    <app-new-supplier [selectedSupplier]="selectedSupplier" (refreshSupplier)="onRefreshSupplier($event)" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-supplier>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--<div class="survery">
+    <div class="">
+        <div class="">
+            <div class="table-container">
+                <div class="row">
+                    <div class="col-md-4 pull-right">
+                        <mat-input-container>
+                            <input matInput [formControl]="searchControl" placeholder="Search here">
+                        </mat-input-container>
+                    </div>
+                </div>
+            </div>
+            <table class="table-responsive table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th><i class="fa fa-sort-alpha-asc"></i>No</th>
+                        <th><i class="fa fa-sort-alpha-asc"></i>Name</th>
+                        <th> <i class="fa fa-sort-alpha-asc"></i>Phone Number</th>
+                        <th><i class="fa fa-sort-alpha-asc"></i>Email</th>
+                        <th><i class="fa fa-sort-alpha-asc"></i>CAC No</th>
+                        <th><i class="fa fa-sort-alpha-asc"></i>Address</th>
+                        <th style="width:150px"><i class="fa fa-sort-alpha-asc"></i>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7" class="td-col-span-6">
+                            <div class="col-md-8 left">
+                                <input type="text" placeholder="Search Supplier">
+                            </div>
+                            <div class="col-md-4 pull-right">
+                                <input type="text" placeholder="search here" class="searchInput" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="suppliers.length === 0 && !loading">
+                        <td class="table-content" colspan="7" style="text-align: center !important; padding: 10px !important;">
+                            No data available in table
+                        </td>
+                    </tr>
+                    <tr *ngIf="suppliers.length === 0 && loading">
+                        <td class="table-content" colspan="7" style="text-align: center !important; padding: 10px !important;">
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let supplier of suppliers; let i=index;">
+                        <td>{{ i+1 }}</td>
+                        <td>{{supplier?.supplier?.name}}</td>
+                        <td>{{supplier?.supplier?.primaryContactPhoneNo}}</td>
+                        <td>{{supplier?.supplier?.email}}</td>
+                        <td>{{supplier?.supplier?.cacNo}}</td>
+                        <td>{{supplier?.supplier?.street}}</td>
+                        <td class="last-td-action">
+                            <span><a class=""><i class="fa  fa-trash" (click)="onDelete(supplier)"></i></a></span>
+                            <span><a (click)="onSelect(supplier)" class=""><i class="fa fa-eye"></i></a></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="col-md-12">
+                <a (click)="newSupplyShow()" id="floating-button">
+                    <p class="plus">+</p>
+                </a>
+            </div>
+        </div>
+
+
+        <div *ngIf="newSupply" class="modal-overlay">
+            <app-new-supplier [selectedSupplier]="selectedSupplier" (refreshSupplier)="onRefreshSupplier($event)" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-supplier>
+        </div>
+
+    </div>-->

@@ -1,0 +1,24 @@
+<div class="inner-wrap-b body-wrap">
+  <!-- <div class="side-sec lhs">
+    <app-employee-lookup (selectedEmployee)="navEpDetail($event)"></app-employee-lookup>
+  </div> -->
+
+  <div class="content-sec rhs">
+
+    <div class="modal-head-wrap" *ngIf="selectedPerson !== undefined && selectedPerson._id !== undefined && selectedPerson !== null">
+      <!-- <img style="cursor:pointer;" (click)="person_onClick()" [src]="facilityService.transform(selectedPerson?.profileImageObject?.thumbnail)"> -->
+    <div>
+    <legend class="modal_title">User Privileges</legend>
+    <div class="modal_mini_title">Showing <span class="clickableText" (click)="person_onClick()"> {{selectedPerson?.lastName}} {{selectedPerson?.firstName}}</span>'s
+      user privileges
+    </div>
+  </div>
+
+  <div class="clear"></div>
+</div>
+
+<div (click)="goToEdit()" class="btn-1 btn-blue"><i class="fa fa-sign-in" aria-hidden="true"></i> Edit Privilege</div>
+
+<div class="user-privilege-wrap" *ngFor="let access of accessControlList">
+  <app-edit-user-access-control [selectedUser]="selectedUser" [selectedAccessControl]="access" ></app-edit-user-access-control>
+</div>

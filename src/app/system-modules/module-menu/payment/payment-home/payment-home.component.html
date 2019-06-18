@@ -1,0 +1,7 @@
+<ul class="pg-menuWrap">
+    <li [class.pg-menuActive]="paymentOverview" (click)="onClickMenu('payment');">Overview</li>
+    <li [class.pg-menuActive]="paymentHistory" (click)="onClickMenu('history');">History</li>
+</ul>
+<div class="col-xs-12" style="margin-top: 10px;">
+    <router-outlet></router-outlet>
+</div>

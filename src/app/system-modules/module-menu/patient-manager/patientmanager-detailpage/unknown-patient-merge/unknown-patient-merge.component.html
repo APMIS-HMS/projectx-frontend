@@ -1,0 +1,20 @@
+<div class="animated pulse" style="width: 500px;">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Merge Patient</legend>
+    <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+  <div class="modal-baseWrap  modal-grid">
+    <div class="patientSearch">
+      <apmis-lookup [formControl]="formPatientSearch" [(ngModel)]="apmisLookupText" [url]="apmisLookupUrl" [query]="apmisLookupQuery" placeholder="Search for Patient"
+        [isSocket]="true" [displayKey]="apmisLookupDisplayKey" [displayImage]="true" [imgObj]="apmisLookupImgKey"
+        [multipleKeys]="true" [otherKeys]="apmisLookupOtherKeys" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+    </div>
+
+    <div class="btnGroup">
+      <button class="act-wrap" (click)="onMergePatient()">
+        <i class="fa fa-code-fork" aria-hidden="true"></i>
+        <span>Merge Patient</span>
+      </button>
+    </div>
+  </div>

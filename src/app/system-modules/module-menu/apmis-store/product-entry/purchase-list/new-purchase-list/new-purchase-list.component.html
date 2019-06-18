@@ -1,0 +1,194 @@
+<h2>General Store</h2>
+<h3>Create purchase list</h3>
+<span>Select products you will like to add to the purchase list below this table, Click Add items to purchase list when
+  done</span>
+
+
+<div class="div-space"></div>
+
+
+<div class="filterTop">
+  <div class="searchproduct">
+    <div class="InputGroup">
+      <input class="customInput" [formControl]="productConfigSearch" (focus)="onFocus('in')" (focusout)="onFocus('out')"
+        type="text" required>
+      <span class="highlight"></span>
+      <label class="customLabel"><i class="fa fa-search" aria-hidden="true"></i>Search...</label>
+      <!-- <ul class="search-sugestions" *ngIf="(showProduct && productConfigs.length > 0)">
+        <li *ngFor="let config of productConfigs" (click)="setSelectedOption(config)" class="search-sugestion">{{config.productName}}</li>
+      </ul> -->
+    </div>
+  </div>
+  <div class="tbl-header-rhs">
+    <div>
+      <h3>Show:</h3>
+    </div>
+    <div [className]="selectedFilterIndex === i ? 'ft-btn ft-btn-selected' : 'ft-btn'" *ngFor="let filter of storeFilters; let i = index"
+      (click)="setSelectedFilter(i,filter)">
+      <span>{{filter}}</span>
+    </div>
+  </div>
+</div>
+
+<div class="store-table">
+  <div class="store-thead">
+    <div class="store-tr">
+      <div class="store-th store-td-actions">
+        <input type="checkbox">
+      </div>
+      <div class="config-tr-in in-tr">
+        <div class="store-th">Products</div>
+        <div class="store-th">Available Quantity</div>
+        <div class="store-th">Re-Order Level</div>
+        <div class="store-th">Cost/Unit</div>
+        <div class="store-th">Total Cost Price</div>
+        <div class="store-th">Unit Selling Price</div>
+      </div>
+      <div class="store-th store-td-actions"></div>
+    </div>
+  </div>
+
+  <div class="store-tbody">
+    <div class="store-pre-tr">
+      <div class="store-tr" *ngFor="let picked of productConfigs">
+        <div class="store-td store-td-actions">
+          <input type="checkbox" [checked]="picked.isChecked" (change)="setSelectedOption($event, picked)">
+        </div>
+        <div class="config-tr-in in-tr">
+          <div class="store-td">{{picked.productName}}</div>
+          <div class="store-td">{{picked.availableQuantity | number}} {{picked.productConfiguration.name}}</div>
+          <div class="store-td">{{picked.reOrderLevel}} {{picked.productConfiguration.name}}</div>
+          <div class="store-td">
+            <app-apmis-naira></app-apmis-naira>{{picked.costPrice}}/{{picked.productConfiguration.name}}
+          </div>
+          <div class="store-td">
+            <app-apmis-naira></app-apmis-naira>{{picked.availableQuantity*picked.costPrice | number}}
+          </div>
+          <div class="store-td">
+            <app-apmis-naira></app-apmis-naira>{{picked.price}}/{{picked.productConfiguration.name}}
+          </div>
+        </div>
+        <div class="store-td store-td-actions">
+          <div class="table-list col-xs-1 action-placeholder">
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            <div class="action-container shadow-RB">
+              <div class="action-item">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                <span>Edit</span>
+              </div>
+              <div class="action-item">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <span>Delete</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-apmis-pagination (emitCurrentPage)="loadCurrentPage($event)" [total]="total"></app-apmis-pagination>
+</div>
+
+<div class="div-space"></div>
+<h3 class="sel-txt">{{selectedProducts.length}} Items selected and added to purchase list</h3>
+<div class="div-space"></div>
+
+<div class="store-table">
+  <div class="store-thead">
+    <div class="store-tr">
+      <div class="store-th store-td-actions">
+        <input type="checkbox">
+      </div>
+      <div class="config-tr-in in-tr">
+        <div class="store-th">Products</div>
+        <div class="store-th">Unit</div>
+        <div class="store-th">Quantity Required</div>
+        <div class="store-th">Cost/Unit</div>
+        <div class="store-th">Total Cost Price</div>
+        <div class="store-th">Actions</div>
+      </div>
+      <div class="store-th store-td-actions"></div>
+    </div>
+  </div>
+
+  <div class="store-tbody">
+    <div class="store-pre-tr">
+      <div class="store-tr" *ngFor="let picked of selectedProducts">
+        <div class="store-td store-td-actions">
+          <input type="checkbox">
+        </div>
+        <div class="config-tr-in in-tr">
+          <div class="store-td">{{picked.productName}}</div>
+          <div class="store-td">{{picked.productConfiguration.name}}</div>
+          <div class="store-td">
+            <div class="InputGroup input-space">
+              <input min="0" [(ngModel)]="picked.quantityRequired" class="customInput" type="number" required>
+              <span class="highlight"></span>
+            </div>
+            <span>{{picked.productConfiguration.name}}</span>
+          </div>
+          <div class="store-td">
+            <app-apmis-naira></app-apmis-naira>{{picked.costPrice}}/{{picked.productConfiguration.name}}
+          </div>
+          <div class="store-td">
+            <app-apmis-naira></app-apmis-naira>{{picked.costPrice* picked.quantityRequired}}
+          </div>
+          <div class="store-td">
+            <div class="btc-body-item item-action">
+              <i class="fa fa-2x fa-pencil-square" aria-hidden="true"></i>
+              <i class="fa fa-2x fa-times-circle" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div-space"></div>
+
+<div class="sel-sup">
+  <h3>Add Suppliers to send purchase list to:</h3>
+  <div class="multi-sup-list-wrap">
+    <div class="dropDown-container" style="margin-right:40px; min-width: 300px !important;">
+      <div class="select">
+        <select name="dropDown-container" (click)="onshowSup_search()" id="dropDown-container">
+        </select>
+      </div>
+    </div>
+    <div *ngIf="sup_search" class="multi-sup-list">
+      <app-apmis-search-result [data]="supplierSearchResult" (onSelectedItems)="onSearchSelectedItems($event)"
+        (onCreateItem)="onCreateNewItem($event)"></app-apmis-search-result>
+    </div>
+  </div>
+</div>
+
+
+<div class="supplier-list-wrap">
+  <div class="supplier-wrap" *ngFor="let supplier of selectedSuppliers">
+    <div class="sup-name-wrap">
+      <h3>{{supplier.supplier.name}}</h3>
+      <div (click)="removeSupplier(supplier)" class="cls-ico"><i class="fa fa-2x fa-times-circle" aria-hidden="true"></i></div>
+    </div>
+    <span>{{supplier.supplier.primaryContactPhoneNo}} | {{supplier.supplier.email}}</span>
+  </div>
+</div>
+
+
+<div class="div-space"></div>
+
+<hr>
+<div class="sv-btn-container">
+  <h3 class="sel-txt">Send purchase list with {{selectedProducts.length}} items to
+    {{selectedLocalStorageSuppliers.length}} suppliers ? </h3>
+  <div (click)="submit()" [class.disabled]="selectedProducts.length === 0 || selectedSuppliers.length === 0" class="new-btn-solid-blue">
+    <div class="dropDown-container">
+      <div class="select">
+        <select style="color: white !important; cursor: pointer;" name="dropDown-container" id="dropDown-container">
+          <option style="color: black !important;">Save as Draft</option>
+          <option style="color: black !important;">Save Completely</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

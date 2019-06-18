@@ -1,0 +1,20 @@
+<ul class="pg-menuWrap">
+    <li (click)="home()" [class.pg-menuActive]="homeContentArea">
+        <i class="fa fa-home" aria-hidden="true"></i> Home</li>
+    <li (click)="doc()" [class.pg-menuActive]="docsContentArea">
+        <i class="fa fa-folder-open" aria-hidden="true"></i> Medical Records</li>
+    <li (click)="prescription()" [class.pg-menuActive]="prescriptionContentArea">
+        <i class="fa fa-plus-square" aria-hidden="true"></i> Prescription</li>
+    <li (click)="diagnostics()" [class.pg-menuActive]="diagnosticsContentArea">
+        <i class="fa fa-ambulance" aria-hidden="true"></i> Diagnostic Reports</li>
+    <!-- <li (click)="consultation()" [class.pg-menuActive]="consultationContentArea">
+      <i class="fa fa-user-md" aria-hidden="true"></i> Consultation</li> -->
+    <li (click)="payment()" [class.pg-menuActive]="paymentContentArea">
+        <i class="fa fa-credit-card" aria-hidden="true"></i> Payment</li>
+</ul>
+
+<app-med-record-home *ngIf="homeContentArea"></app-med-record-home>
+<app-med-record-documentation *ngIf="docsContentArea"></app-med-record-documentation>
+<app-med-record-prescription *ngIf="prescriptionContentArea"></app-med-record-prescription>
+<app-med-record-diagnostics *ngIf="diagnosticsContentArea"></app-med-record-diagnostics>
+<app-med-record-payment *ngIf="paymentContentArea"></app-med-record-payment>

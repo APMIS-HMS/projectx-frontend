@@ -1,0 +1,37 @@
+@import '../../../clinic/check-in-patient/check-in-patient.component.scss';
+
+
+table, th, td,tr,  thead
+ {
+    background: transparent;
+    border: none;
+}
+
+.border-box {
+    padding: 10px;
+    border: 1px solid gray;
+    margin: 20px 7px;
+    width: 220px;
+}
+
+.border-box li {
+    padding: 10px 0;
+}
+ul {
+    margin: 0 !important;
+}
+
+select {
+    width: 300px;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    border-radius: 7px;
+    margin: 10px 0;
+}
+.inPatient-activityTimeline {
+    overflow-x: hidden;
+}
+
+#border-bottom-tr {
+    border-bottom: 1px solid #c1c1c1;
+}

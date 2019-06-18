@@ -1,0 +1,647 @@
+.mat-select {
+    margin-top: 0;
+}
+
+.frmArrWrap {
+    position: relative;
+    background: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.addDrugBtn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #777;
+    width: 170px;
+    margin: 20px auto;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #777;
+}
+
+.addDrugBtn:hover {
+    background: #fff;
+    color: #009ADF;
+}
+
+.frm-item-wrap {
+    width: 100%;
+    max-width: 400px;
+}
+
+.modal-baseWrap {
+    width: 600px;
+    padding: 20px 20px;
+    min-height: 250px;
+}
+
+@import "../../../../patient-manager/patientmanager-detailpage/documentation/documentation.component.scss";
+// @import "../investigation-service/investigation-service.component.scss";
+.table-content {
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    position: relative;
+    border-collapse: collapse;
+    font-size: 1.2rem;
+    background: #fff;
+}
+
+table,
+td {
+    border: 0.5px solid $td-border;
+}
+
+th {
+    height: 50px;
+    background: $th-background;
+    border: 0.5px solid $th-border;
+}
+
+td {
+    vertical-align: center;
+    text-align: left;
+    padding: 2px;
+}
+
+tr:hover {
+    background-color: $tr-hover
+}
+
+tr:nth-child(even) {
+    background-color: $tr-stripe
+}
+
+.searchInputWrap {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.searchInputWrap i {
+    position: absolute;
+    color: #939393;
+    margin-left: 10px;
+}
+
+.searchInput {
+    border: 1px solid #eee;
+    background: #FAFAFA;
+    border-radius: 7px;
+    padding: 7px;
+    padding-left: 30px;
+    text-align: center;
+    width: 250px;
+}
+
+.tbl-actionRow {
+    position: relative;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    margin: 7px;
+    padding: 2px;
+}
+
+// .tbl-actionRow .tbl-title{
+//     position: absolute;
+//     left: 10px;
+//     font-size: 1.4rem;
+//     color: #0288D1;
+// }
+// .tbl-actionRow .tbl-search{
+//     position: absolute;
+//     right: 10px;
+// }
+.td-ctaWrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.td-ctaWrap i {
+    cursor: pointer;
+}
+
+.td-ctaWrap i:hover,
+th i:hover {
+    color: #0288D1;
+}
+
+th i {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+td .empWrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+td .empWrap .list-img {
+    margin: 5px;
+}
+
+.list-img img {
+    width: 100%;
+}
+
+.list-img {
+    width: 30px;
+    height: 30px;
+}
+
+.page-title {
+    text-align: left;
+    position: absolute;
+}
+
+.pg-subtitle {
+    margin-top: -18px;
+}
+
+// .clinicalNoteWrap {
+//     position: absolute;
+//     right: 9px;
+//     top: -33px;
+// }
+// .actSect{
+//     width: 90%;
+//     margin: 0 auto;
+// }
+.act-wrap {
+    width: 150px;
+    position: relative;
+    padding: 8px;
+    // font-size: 1.2rem;
+    text-align: center;
+    color: #bebebe;
+    display: flex;
+    justify-content: space-around;
+    background: #fff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    margin-bottom: 10px;
+}
+
+.act-wrap:hover {
+    border: 1px solid #bebebe;
+}
+
+.actSect {
+    width: 99%;
+}
+
+.benchWrap {
+    position: relative;
+    width: 100%;
+}
+
+.frm-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.frm-l,
+.frm-r {
+    width: 48%;
+}
+
+.frm-l {
+    margin-top: 5px;
+}
+
+.doc-contentArea {
+    width: 100%;
+    padding: 0;
+}
+
+.doc-mainWrap {
+    margin-top: 0px;
+}
+
+.frmNoteWrap {
+    position: relative;
+    background: #fff;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.btn-box {
+    padding: 10px 0;
+    text-align: center;
+    .btn {
+        color: #fff;
+    }
+}
+
+.cta-1 {
+    width: 139px;
+    height: 33px;
+    font-size: 1.2rem;
+    background: #fff;
+    color: #0288D1;
+    border: 1px solid #0288D1;
+    border-right: 1px solid #0288D1;
+}
+
+.cta-1:hover {
+    background: #0288D1;
+    color: #fff;
+}
+
+.mat-input-container {
+    width: 100%;
+}
+
+.mat-select {
+    width: 100%;
+    height: 40px;
+}
+
+.doc-mainWrap {
+    min-height: auto;
+}
+
+.labBtn-wrap {
+    width: 175px;
+    position: relative;
+    margin-top: 20px;
+    float: right;
+}
+
+.lab-btn {
+    font-size: 1.2rem;
+    border: 1px solid #03A9F4;
+    text-align: center;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.lab-btn:hover {
+    background: #03A9F4;
+    color: #000;
+}
+
+.lab-btn i {
+    color: #333;
+    padding-right: 10px;
+}
+
+.clear-r {
+    clear: right;
+}
+
+select,
+input {
+    width: 100%;
+}
+
+.txt-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin-top: 10px;
+}
+
+.selected-list .txt-innerWrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-item .txt-innerWrap {
+    display: block;
+}
+
+.selected-list .list-item .txt-innerWrap {
+    display: flex;
+}
+
+.panel-wrap .list-item .txt-innerWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chkbox-wrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.txt-label {
+    font-size: 1.4rem;
+    font-family: "Josefin Sans", sans-serif;
+    color: #8e8e8e;
+    width: 30%;
+}
+
+.ext-list {
+    width: 167px;
+    position: absolute;
+    top: 9px;
+    right: 14px;
+}
+
+.txt-val {
+    font-size: 1.6rem;
+    color: #333;
+    width: 69%;
+}
+
+.isSample {
+    color: #4CAF50;
+}
+
+.notSample {
+    color: #ff2500;
+}
+
+.isDraft {
+    color: #FFEB3B;
+}
+
+.status-wrap {
+    text-align: left;
+    font-size: 1rem;
+    padding: 0 5px;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.status-val {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+.investigation-sect {
+    border: 2px solid #f8f8f8;
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.investigation-list {
+    width: 59.5%;
+    float: left;
+    background: #f8f8f8;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.selected-list {
+    position: relative;
+    width: 39.5%;
+    float: left;
+    background: #f8f8f8;
+    padding: 10px;
+    box-sizing: border-box;
+    .list-item {
+        width: 100%;
+    }
+    .investigation {
+        padding-right: 20px;
+        position: relative;
+        &:hover {
+            border: 1px solid #eee;
+        }
+    }
+}
+
+.sect-listItem {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    color: #777;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    align-items: center;
+    .invstn {
+        color: #0288D1;
+    }
+    .panel {
+        color: #FB8C00;
+    }
+}
+
+.sect-listLabel {
+    margin-left: 10px;
+}
+
+.listItem-tag {
+    position: absolute;
+    top: -12px;
+    right: 0;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.list-label {
+    width: 90%;
+    text-align: left;
+    color: #000;
+    padding-left: 1px;
+}
+
+.investigation {
+    background: #fff;
+    border: 1px solid transparent;
+    margin-bottom: 10px;
+}
+
+.panel-wrap {
+    margin-bottom: 10px;
+    background: #fff;
+    padding: 2px;
+}
+
+.panel-wrap:hover {
+    .child-list {
+        display: block;
+    }
+}
+
+.panel {
+    background: #eee;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding-right: 20px;
+    position: relative;
+}
+
+.panel:hover {
+    border: 1px solid #fff;
+}
+
+.child-list {
+    display: block;
+    margin-left: 20px;
+}
+
+.selected-list .child-list {
+    display: block;
+    margin-left: 20px;
+    padding-right: 20px;
+}
+
+.chkbox-wrap .child-item {
+    color: #000;
+}
+
+.child-item {
+    font-size: 1.2rem;
+    margin: 5px;
+    margin-left: 15px;
+    color: #777;
+    width: 80%;
+    text-align: left;
+}
+
+.sel-list-title {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.panel-inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-bi-sect {
+    width: 50%;
+}
+
+.panel-inner .txt-innerWrap,
+.investigation .txt-innerWrap {
+    justify-content: space-around;
+    align-items: center;
+}
+
+.panel-inner .txt-wrap,
+.selected-list .txt-wrap {
+    padding: 0;
+    margin-top: 0;
+}
+
+.panel-inner .txt-val,
+.selected-list .txt-val {
+    width: auto;
+}
+
+.actions-wrapa .txt-label {
+    font-size: 1.2rem;
+}
+
+.selected-list,
+.investigation-list {
+    max-height: 345px;
+    overflow-y: auto;
+}
+
+.inner-radio {
+    margin-left: 40px;
+    font-size: 1.2rem;
+}
+
+.opt {
+    margin: 10px;
+}
+
+.opt-price {
+    color: #ff2500;
+    margin-top: 5px;
+}
+
+.panel-loc {
+    background: #f8f8f8;
+}
+
+.child-list .opt-inner {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center
+}
+
+.child-list .opt-price {
+    margin-top: 0;
+    margin-left: 10px;
+}
+
+.close {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    color: #777;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.sel-total {
+    width: 100%;
+    text-align: right;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #ff2500;
+}
+
+.ext-list {
+    width: 350px;
+    position: absolute;
+    z-index: 1;
+    background: #fff;
+    padding: 20px;
+    max-height: 245px;
+    overflow-y: auto;
+}
+
+.x {
+    position: absolute;
+    top: 1px;
+    right: 9px;
+    cursor: pointer;
+    color: #777;
+}
+
+.ext-listBtn {
+    position: absolute;
+    top: 9px;
+    right: 14px;
+    color: #03A9F4;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-decoration: underline;
+}

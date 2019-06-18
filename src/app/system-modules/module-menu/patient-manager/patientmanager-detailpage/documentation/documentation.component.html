@@ -1,0 +1,221 @@
+<div class="pg-subtitle">PATIENT PAGE - DOCUMENTATION</div>
+<div *ngIf="showDoc" class="doc-mainWrap">
+    <div class="doc-contentArea">
+        <div class="clinicalNoteWrap">
+            <div class="actSect">
+                <div (click)="showPrintPopClick()" data-placement="bottom" data-toggle="Print all documents in Patient Casenote"
+                    class="act-wrap inner-it">
+                    <i class="fa fa-print" aria-hidden="true"></i>
+                    <span>Print Case Note</span>
+                </div>
+                <div (click)="clinicalNote_show()" class="act-wrap">
+                    <i *ngIf="clinicalNote_view" class="fa fa-minus" aria-hidden="true"></i>
+                    <i [hidden]="clinicalNote_view" class="fa fa-plus" aria-hidden="true"></i>
+                    <span>Add Clinical Note</span>
+                </div>
+            </div>
+            <app-clinical-note (showOrderset)="showOrderset_onClick($event)" [patient]="patient" *ngIf="clinicalNote_view"></app-clinical-note>
+        </div>
+        <ul class="tree-ul">
+            <li class="tree-li" *ngFor="let group of documents">
+                <div class="tree-node">
+                    <div class="node-ico node-ico-parent">
+                        <i (click)="node_toggle(group[0])" *ngIf="group[0] === currentDocument" class="fa fa-minus"
+                            aria-hidden="true"></i>
+                        <i (click)="node_toggle(group[0])" *ngIf="group[0] !== currentDocument" class="fa fa-plus"
+                            aria-hidden="true"></i>
+                    </div>
+
+                    <div class="node-label-wrap">
+                        <div (click)="node_toggle(group[0])" class="node-date">{{group[0]}} </div>
+
+                        <div class="doc-count">{{group[1].length}} Documentation(s)</div>
+                    </div>
+                    <div class="table-list action-placeholder" style="margin-left: 15px;">
+                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                        <div class="action-container shadow-RB">
+                            <div (click)="docDetail_Print()" class=" action-item">
+                                <i class="edit-ico-color fa fa-print " aria-hidden="true "></i>
+                                <span>Print Document</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="node-content animated fadeInDown" id="printDoc" *ngIf="should_show(group[0]) && group[0]===currentDocument ">
+                    <div *ngFor="let document of group[1] ">
+                        <div class="tree-child ">
+                            <div class="node-child-title ">{{document?.document?.documentType?.title}}</div>
+                        </div>
+
+                        <div class="node-child-content ">
+                            <div class="docCard-header ">
+                                <div class="empWrap ">
+                                    <div class="list-img ">
+                                    </div>
+                                    <div (click)="edit(document)">
+                                        <div class="val-tag ">Practitioner</div>
+                                        <div class="list-label ">{{document?.createdBy}}</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="val-tag ">Status</div>
+                                    <div class="list-label ">{{document?.documentationStatus}}</div>
+                                </div>
+                                <div>
+                                    <div class="val-tag ">Date/Time</div>
+                                    <div class="list-label ">{{document.createdAt | date:'shortDate'}}.
+                                        <span class="time ">{{document.createdAt | date:'shortTime'}}</span>
+                                    </div>
+                                </div>
+
+                                <ul class="topmenuwrap ">
+                                    <li (click)="docDetail_show(document, false) ">
+                                        <i class="fa fa-ellipsis-h " aria-hidden="true "></i>
+                                        <span>View</span>
+                                    </li>
+                                </ul>
+                                <div style="font-size: 1.6rem; " class=" ">
+                                    <i class="edit-ico-color fa fa-clipboard tooltip " aria-hidden="true " data-toggle="Add addendum "
+                                        (click)="docDetail_show(document, true) "></i>
+                                </div>
+                            </div>
+
+                            <div class="docCard-body ">
+                                <div class="cardSect-wrap ">
+                                    <div class="card-sect ">
+                                        <div class="docCard-sectContent ">
+                                            <div class="doc-list-wrap" *ngIf="document?.document?.documentType?.isSide===false || document?.document?.documentType?.isSide===undefined ">
+                                                <div *ngFor="let key of document?.document?.body | keys ">
+                                                    <div *ngIf="document?.document?.body !==undefined " class="sect-key ">{{key}}:</div>
+                                                    <div *ngIf="document?.document?.body !==undefined " class="sect-value ">
+                                                        <span *ngIf="checkType(document?.document?.body[key])">{{document?.document?.body[key]}}</span>
+                                                        <span *ngIf="!checkType(document?.document?.body[key])">
+                                                            <div *ngFor="let key2 of document?.document?.body[key] | keys ">
+                                                                <div class="sect-key ">{{key2}}:</div>
+                                                                <div class="sect-value ">
+                                                                    {{document?.document?.body[key][key2] | json}}
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="document?.document?.addendum !==undefined ">
+                                                    <span class="sect-key ">Addendum:</span> <span>{{document?.document?.addendum.text}}</span>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="document?.document?.documentType?.isSide===true ">
+                                                <div *ngFor="let key of document?.document?.body | keys ">
+                                                    <div *ngIf="document?.document?.body !==undefined " class="sect-key">{{key}}:</div>
+                                                    <div *ngFor="let key2 of document?.document?.body.problems | keys let k=index ">
+                                                        <div *ngIf="document?.document?.body !==undefined " class="sect-value ">
+                                                            {{k+1}}:
+                                                            <span class="sect-key ">{{document?.document?.body.problems[key2].problem}}</span>
+                                                            ({{document?.document?.body.problems[key2]?.status?.name}})
+                                                            {{document?.document?.body.problems[key2].note}}
+                                                        </div>
+                                                    </div>
+                                                    <div *ngFor="let key2 of document?.document?.body.allergies | keys let k=index ">
+                                                        <div *ngIf="document?.document?.body !==undefined " class="sect-value ">
+                                                            {{k+1}}:
+                                                            <span class="sect-key ">{{document?.document?.body.allergies[key2].allergy}}</span>
+                                                            ({{document?.document?.body.allergies[key2].severity.name}})
+                                                            {{document?.document?.body.allergies[key2].reaction}}
+                                                            || {{document?.document?.body.allergies[key2].note}}
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="document?.document?.body.vitals !==undefined && document?.document?.body.vitals.length> 0">
+                                                        <div *ngIf="document?.document?.body !== undefined" class="sect-value">
+                                                            <table cellpadding="0" cellspacing="0" border="0.5">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Date</th>
+                                                                        <th>T</th>
+                                                                        <th>PR</th>
+                                                                        <th>RR</th>
+                                                                        <th>BP</th>
+                                                                        <th>Wt</th>
+                                                                        <th>Ht</th>
+                                                                        <th>BMI</th>
+                                                                    </tr>
+                                                                </thead>
+
+                                                                <tbody>
+                                                                    <tr *ngFor="let item of document?.document?.body.vitals">
+                                                                        <td>{{item.updatedAt|date:'medium'}}</td>
+                                                                        <td>{{item.temperature}}</td>
+                                                                        <td>{{item.pulseRate.pulseRateValue}}</td>
+                                                                        <td>{{item.respiratoryRate}}</td>
+                                                                        <td>S: {{item.bloodPressure.systolic}} D:
+                                                                            {{item.bloodPressure.diastolic}}</td>
+                                                                        <td>{{item.bodyMass.weight}}</td>
+                                                                        <td>{{item.bodyMass.height}}</td>
+                                                                        <td>{{item.bodyMass.bmi}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                    <div *ngIf="document?.document?.addendum !== undefined">
+                                                        <span class="sect-key">Addendum:</span> <span>{{document?.document?.addendum.text}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="doc-con" *ngIf="document?.document?.documentType===undefined && document?.document?.docUrl !== undefined">
+                                                <!-- <pdf-viewer [src]="getCurrentDocument(document?.document)"
+                                                    (after-load-complete)="onComplete($event)" (error)="onError($event)"
+                                                    (on-progress)="onProgress($event)"></pdf-viewer> -->
+
+                                                <app-doc-upload-view [selectedDocument]="document?.document"
+                                                    (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-doc-upload-view>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+
+
+    </div>
+    <div class="doc-rArea">
+        <app-right-tab [patient]="patient" (addProblem)="addProblem_show($event)" (addAllergy)="addAllergy_show($event)"
+            (addHistory)="addHistory_show($event)" (addVitals)="addVitals_show($event)"></app-right-tab>
+    </div>
+
+    <div *ngIf="docDetail_view" class="modal-overlay">
+        <app-documentation-detail [patientDocumentationId]="patientDocumentation._id" [document]="selectedDocument"
+            [isDocumentEdit]="isDocumentEdit" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-documentation-detail>
+    </div>
+
+    <div *ngIf="addProblem_view" class="modal-overlay">
+        <app-add-patient-problem [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-patient-problem>
+    </div>
+
+    <div *ngIf="addAllergy_view" class="modal-overlay">
+        <app-add-allergy [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-allergy>
+    </div>
+
+    <div *ngIf="addHistory_view" class="modal-overlay">
+        <app-add-history (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-history>
+    </div>
+
+    <div *ngIf="addVitals_view" class="modal-overlay">
+        <app-add-vitals (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-vitals>
+    </div>
+</div>
+
+<div *ngIf="showOrderSet" class="modal-overlay">
+    <app-order-set [selectedPatient]="patient" (showDoc)="showDoc_onClick($event)" id="form-modal" class="form-modal center-center"></app-order-set>
+</div>
+
+<div *ngIf="showPrintPop" class="modal-overlay">
+    <app-print-documentation [patientDocumentation]="patientDocumentation" [patient]="patient" (closeModal)="close_onClick($event)"
+        id="form-modal" class="form-modal center-center"></app-print-documentation>
+</div>

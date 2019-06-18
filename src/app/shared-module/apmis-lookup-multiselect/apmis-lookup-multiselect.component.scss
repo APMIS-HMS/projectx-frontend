@@ -1,0 +1,10 @@
+@import '../apmis-lookup/apmis-lookup.component.scss';
+
+.txt-val, .txt-label{
+    display: inline-block;
+}
+.txt-label{
+    margin-left: 5px;
+    margin-top: 3px;
+    font-size: 1.2rem;
+}

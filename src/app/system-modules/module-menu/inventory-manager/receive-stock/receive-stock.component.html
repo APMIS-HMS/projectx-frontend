@@ -1,0 +1,194 @@
+<div class="survery">
+    <div class="">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-xs-2 table-head">From</div>
+                    <div class="col-xs-2 table-head">Value</div>
+                    <div class="table-head col-xs-2">Date</div>
+                    <div class="table-head col-xs-3">Transfer By</div>
+                    <div class="table-head col-xs-2">Status</div>
+                    <div class="table-head col-xs-1">
+                        <i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i>
+                    </div>
+                </div>
+                <div class="row" *ngIf="searchOpen">
+                    <div class="col-md-4">
+                        <input [formControl]="searchControl" class="table-header-input" type="text" placeholder="Search...">
+                    </div>
+                    <div class="col-md-4">
+                        <!-- <select class="table-header-select" formControlName="category" placeholder="Select Category" (change)="onChangeCategory($event);">
+                            <option value="" selected>Select Category</option>
+                            <option value="individual">Individual</option>
+                            <option value="corporate">Corporate</option>
+                            <option value="internal">Internal</option>
+                        </select> -->
+                    </div>
+                    <div class="col-md-3">
+                        <!-- <input class="table-header-input" type="date" placeholder="Choose a date"> -->
+                    </div>
+                    <div class="col-md-1 table-head">
+                        <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-list-item" *ngIf="receivedTransfers.length === 0 && !loading">
+                    <div class="col-xs-12" style="text-align:center">
+                        No data available......
+                    </div>
+                </div>
+                <div class="card-list-item" *ngIf="receivedTransfers.length === 0 && loading">
+                    <div class="col-xs-12" style="text-align:center">
+                        <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div class="card-list-item" *ngFor="let received of receivedTransfers">
+                    <div class="row">
+
+                        <div class="table-list col-xs-2">
+                            {{received.storeObject?.name}}
+                        </div>
+                        <div class="table-list col-xs-2">
+                            {{received.totalCostPrice|number:'1.2-2'}}
+                        </div>
+                        <div class="table-list col-xs-2">
+                            {{received.createdAt|date:'short'}}
+                        </div>
+                        <div class="table-list col-xs-3">
+                                {{received?.employeeObject?.personDetails?.firstName}} {{received.employeeObject?.personDetails?.lastName}}
+                        </div>
+                        <div class="table-list col-xs-2">
+                            {{getStatus(received)}}
+                        </div>
+                        <div class="table-list col-xs-1 hover">
+                            <span (click)="slideDetailsShow(received)"><i class="fa fa-eye"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- details -->
+    <div id="slideDetails" *ngIf="slideDetails">
+        <div class="container" style="width:100%">
+            <div class="row">
+                <a (click)="clicked()"><span><i class="fa fa-arrow-circle-right"></i></span></a>
+                <div class="col-sm-12 col-md-12 col-xs-12 text-center">
+                    <h4 class="apmis-brown">Stock Transfer</h4>
+                    <p class="apmis-blue">112250AA</p>
+                    <p class="pull-right pending">{{getStatus(selectedInventoryTransfer)}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="date-box">
+                    <div class="col-sm-2 col-md-2">
+                        <p>From</p>
+                    </div>
+                    <div class="col-sm-1 col-md-1 padding-left-0">
+                        <span>-</span>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-xs-12 ">
+                        <p>{{selectedInventoryTransfer?.storeObject?.name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="date-box">
+                    <div class="col-sm-2 col-md-2">
+                        <p>To</p>
+                    </div>
+                    <div class="col-sm-1 col-md-1 padding-left-0">
+                        <span>-</span>
+                    </div>
+                    <div class="col-sm-3 col-md-3">
+                        <p>{{selectedInventoryTransfer?.destinationStoreObject?.name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="date-value">
+                    <div class="col-sm-4 col-md-4">
+                        <p>Date Transfer</p>
+                    </div>
+                    <div class="col-sm-1 col-md-1 padding-left-0">
+                        <span>-</span>
+                    </div>
+                    <div class="col-sm-5 col-md-5">
+                        <p>{{selectedInventoryTransfer.updatedAt|date:'short'}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="date-value">
+                    <div class="col-sm-4 col-md-4">
+                        <p>Date</p>
+                    </div>
+                    <div class="col-sm-1 col-md-1 padding-left-0">
+                        <span>-</span>
+                    </div>
+                    <div class="col-sm-5 col-md-5">
+                        <p>{{selectedInventoryTransfer.updatedAt|date:'short'}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="date-value red">
+                    <div class="col-sm-4 col-md-4">
+                        <p>Stock Value</p>
+                    </div>
+                    <div class="col-sm-1 col-md-1 padding-left-0">
+                        <span>-</span>
+                    </div>
+                    <div class="col-sm-5 col-md-5">
+                        <p>&#8358; {{selectedInventoryTransfer.totalCostPrice|number:'1.2-2'}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <div class="print pull-right">
+                        <a><span class="fa fa-paperclip"></span></a>
+                        <a><span class="fa fa-file-pdf-o"></span></a>
+                        <a><span class="fa fa-print"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class=" box-border">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                        <h4> Products </h4>
+                    </div>
+                    <div class="col-sm-3 col-md-3">
+                        <h4> Value (N) </h4>
+                    </div>
+                    <div class="col-sm-3 col-md-3">
+                        <h4> Quantity </h4>
+                    </div>
+                </div>
+                <div class="row" *ngFor="let transaction of selectedInventoryTransfer?.inventoryTransferTransactions">
+                    <div class="col-sm-6 col-md-6">
+                        <mat-checkbox [disabled]="shouldDisabled(transaction)" (change)="onValueChanged($event,transaction)" class="control__indicator" [value]="transaction.checked">{{transaction?.productObject?.data?.name}}</mat-checkbox>
+                    </div>
+                    <div class="col-sm-3 col-md-3">
+                        <p> {{transaction.lineCostPrice|number:'1.2-2'}}</p>
+                    </div>
+                    <div class="col-sm-3 col-md-3">
+                        <p> {{transaction.quantity}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-xs-12 text-center margin-top-15px">
+                        <button (click)="accept()" class="btn btn-success btn-accept"> Accept </button>
+                        <button (click)="reject()" class="btn btn-danger btn-reject"> Reject </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end details  -->
+
+
+</div>

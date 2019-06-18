@@ -1,0 +1,89 @@
+
+    <div class="store-tr" [ngClass]="{'marked':isSelected , 'focused' : isEditMode}">
+        <div class="store-td store-td-actions">
+                <apmis-pager-button 
+                    background-color="red"
+                    [is-oval]="true"
+                    size="small"
+                    *ngIf="isEditMode"
+                    (onClick)="removeItem(data)"><i class="fa fa-trash" ></i></apmis-pager-button>
+            <input type="checkbox" *ngIf="!isEditMode || !showStatus"  
+                   [checked]="isSelected" (click)="toggleSelect()"  />
+        </div>
+        <div class="store-tr-in"  >
+            <div class="store-td">
+               <span *ngIf="!isEditMode">{{data?.productName}}</span> 
+                <span *ngIf="isEditMode" style="position : relative;">
+                    <input type="text" [formControl]="productName" 
+                           (focus)="inputHasFocus=true"
+                           (blur)="inputHasFocus=false"
+                           [value]="data?.productName" class="form-control"
+                           #txtProductNameRef
+                    >
+                    <div class="product-suggestion-popup" 
+                         (mouseover)="makePopupVisible = true"
+                         (mouseout)="makePopupVisible = false"
+                         *ngIf="(searching  || searchedProducts.length >0) && (inputHasFocus || makePopupVisible)">
+                       <div style="text-align: center;" *ngIf="searching">
+                           <apmis-spinner></apmis-spinner>
+                       </div> 
+                        <div *ngFor="let p of searchedProducts" class="item"
+                             (click)="itemClicked(p)">
+                            <p>{{p.productName}}</p>
+                        </div> 
+                    </div>
+                </span>
+            </div>
+            <div class="store-td">
+                {{data?.availableQuantity|number}} {{data?.unitOfMeasure || data?.productConfiguration?.name}}</div>
+            <div class="store-td">{{data?.qtyOnHold|number}} {{data?.unitOfMeasure || data?.productConfiguration?.name}}</div>
+            <div class="store-td">
+               <span *ngIf="!isEditMode">{{data?.qtyToSend}} {{data?.unitOfMeasure}}</span>
+                <span *ngIf="isEditMode"><input [formControl]="qtyToSend"
+                                                type="number" maxlength="7"  
+                                                [style.width.px]="50"  
+                                                (keyup.enter)="resetEditMode()"
+                                                [value]="data?.qtyToSend || 1" 
+                                                class="form-control">{{data?.unitOfMeasure}}</span>
+            </div>
+            <div class="store-td"><naira-currency></naira-currency>{{(data?.price ) |number}}/{{data?.unitOfMeasure || data?.productConfiguration?.name}}</div>
+            <div class="store-td"><naira-currency></naira-currency>{{(data.price * (data.qtyToSend || 1.0)) |  number}} </div>
+            <div class="store-td" *ngIf="showStatus && !isEditMode">
+                <div class="tbl-status " [ngClass]="{'status-green' : data.isAccepted,'status-red' : !data.isAccepted}">
+                    {{(data.isAccepted ? 'Accepted' : 'Rejected')}}
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!isEditMode" class="store-td store-td-actions">
+            <div class="table-list col-xs-1 action-placeholder">
+                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                <div class="action-container shadow-RB">
+                    <div class="action-item">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <span>Adjust Stock</span>
+                    </div>
+                    <div class="action-item" (click)="makeEditable()">
+                        <i class="fa fa-tags" aria-hidden="true"></i>
+                        <span>Edit Details</span>
+                    </div>
+                    <div class="action-item">
+                        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                        <span>Edit Configuration</span>
+                    </div>
+                    <div class="action-item" (click)="removeItem(data)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <span>Remove Item</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isEditMode" class="store-td store-td-actions">
+            <apmis-pager-button [is-oval]="true" background-color="blue" (onClick)="resetEditMode()">
+                <i class="fa fa-check"></i>
+            </apmis-pager-button>
+         <!--   <apmis-pager-button [is-oval]="true" color="red" (onClick)="removeItem(data)">
+                <i class="fa fa-trash" ></i>
+            </apmis-pager-button>-->
+        </div>
+    </div>
+   

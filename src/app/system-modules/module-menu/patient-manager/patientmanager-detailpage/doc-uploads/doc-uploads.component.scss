@@ -1,0 +1,44 @@
+@import "../documentation/documentation.component.scss";
+
+.upload-ul{
+    width: 90%;
+    margin: 0 auto;
+}
+.upload-li{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: #fff;
+    border: 3px solid #f8f8f8;
+    padding: 5px;
+    width: 100%;
+    margin: 5px 0;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.upload-li:hover{
+    background: #f8f8f8;
+    border: 3px solid #fff;
+}
+.upload-file-desc {
+    font-size: 1.2rem;
+}
+.topWrap{
+    display: flex;
+    justify-content: space-between;
+}
+.uploaded-img i{
+    font-size: 4rem;
+    color: #aaa;
+    padding-right: 10px;
+}
+.upload-file-name {
+    color: #ff2500;
+    text-align: right;
+    font-size: 1.2rem;
+    margin-top: 5px;
+}
+.upload_type {
+    font-size: 1.4rem;
+    color: #0288D1;
+}

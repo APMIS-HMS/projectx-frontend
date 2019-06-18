@@ -1,0 +1,73 @@
+<div class="survey">
+    <div class="row patient-details">
+        <div class="col-xs-12" style="padding: 10px;width: 100%;">
+            <div class="col-xs-12" style="width:93%; float: left;" *ngIf="prescription?.nonPrescription?.client?.clientType === 'Corporate' || prescription?.nonPrescription?.client?.clientType === 'Individual'">
+                <small>Client Type: <b>{{ prescription?.nonPrescription?.client?.clientType }}</b></small><br>
+                <small>Clent: <b>{{ prescription?.nonPrescription?.client?.name }}</b></small><br>
+                <small>Phone number: <b>{{ prescription?.nonPrescription?.client?.phone }}</b></small><br>
+            </div>
+            <div class="col-xs-12" style="width:93%; float: left;" *ngIf="prescription?.nonPrescription?.client?.clientType === 'Internal'">
+                <div *ngIf="prescription.nonPrescription.client.internalType === 'department'">
+                    <small>Client Type: <b>{{ prescription?.nonPrescription?.client?.clientType }}</b></small><br>
+                    <small>Internal Type: <b>{{ prescription?.nonPrescription?.client?.internalType }}</b></small><br>
+                    <small>Department: <b>{{ prescription?.nonPrescription?.client?.department.name }}</b></small><br>
+                    <small>Unit: <b>{{ prescription?.nonPrescription?.client?.unit.name }}</b></small><br>
+                </div>
+                <div *ngIf="prescription.nonPrescription.client.internalType === 'location'">
+                    <small>Client Type: <b>{{ prescription?.nonPrescription?.client?.clientType }}</b></small><br>
+                    <small>Internal Type: <b>{{ prescription?.nonPrescription?.client?.internalType }}</b></small><br>
+                    <small>Location: <b>{{ prescription?.nonPrescription?.client?.location.name }}</b></small><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px; margin-bottom: 5px; padding-left: 10px; text-align:center;">
+        <b>Dispensed by {{ prescription?.nonPrescription?.employee.name }}</b>
+    </div>
+
+    <div class="sec-border">
+        <div class="prod-row prodParent-header">
+            <div class="prod-rowItem item1">
+                <span style="padding-left: 3px;">Drugs</span>
+            </div>
+            <div class="prod-rowItem item2">
+                <span style="padding-left: 3px;">Batch</span>
+            </div>
+            <div class="prod-rowItem item3">
+                <span style="padding-left: 3px;">Qty</span>
+            </div>
+            <div class="prod-rowItem item4">
+                <span style="padding-left: 3px;">Price</span>
+            </div>
+            <div class="prod-rowItem item5">
+                <span style="padding-left: 3px;">Total</span>
+            </div>
+        </div>
+        <div class="prodParent-content">
+            <div class="prodWrap" *ngFor="let prescription of prescriptions; let i = index;">
+                <div class="prod-row">
+                    <div class="prod-rowItem item1"><b> {{ prescription.product.name }}</b></div>
+                    <div class="prod-rowItem item2" style="display: block;">{{ prescription.batchNumber }}</div>
+                    <div class="prod-rowItem item3" style="text-align: right; display: block;">{{ prescription.quantity }}</div>
+                    <div class="prod-rowItem item4" style="text-align: right; display: block;">&#x20A6;{{ prescription.cost }}</div>
+                    <div class="prod-rowItem item5">&#x20A6;{{ prescription.cost * prescription.quantity }}</div>
+                </div>
+            </div>
+            <div class="prodWrap text-center" *ngIf="prescriptions.length === 0 && !loading">
+                <div style="width: 100%; padding: 10px; font-size: 1.3rem;">No data to display in table</div>
+            </div>
+            <div class="prodWrap text-center" *ngIf="prescriptions.length === 0 && loading">
+                <div style="width: 100%; padding: 10px; font-size: 1.3rem;">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12" style="padding-top: 10px; padding-right:5px;height: 70px;">
+            <p class="pull-right" style="width: 100%; text-align: right;"><strong>Total Quantity:</strong> <span> {{ prescription?.nonPrescription?.totalQuantity }}</span></p>
+            <p class="pull-right" style="width: 100%; text-align: right;margin-top: -10px;"><strong>Total Bill:</strong> <span>&#x20A6; {{ prescription?.nonPrescription?.totalCost }}</span></p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="pg-header">
+	<div class="header-lhs">
+		<legend class="sect-title">{{checkingStore?.storeObject?.name}}</legend>
+		<div class="new-btn-link" (click)="onSwitchStore()">Switch Store</div>
+	</div>
+	<div class="header-rhs">
+
+		<div (click)="changeRoute('new-store')" class="new-btn-link">
+			<i class="fa fa-plus-circle" style="margin-right: 7px;" aria-hidden="true"></i>
+			<span>New Store</span>
+		</div>
+	</div>
+</div>
+
+<app-store-home-analytics></app-store-home-analytics>
+
+<app-store-home-main></app-store-home-main>
+<div *ngIf="modal_on" class="modal-overlay">
+	<app-store-check-in (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-store-check-in>
+</div>

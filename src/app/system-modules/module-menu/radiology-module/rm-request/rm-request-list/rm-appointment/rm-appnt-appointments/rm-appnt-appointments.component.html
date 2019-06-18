@@ -1,0 +1,128 @@
+<div class="sec-title">Appointments</div>
+
+<div class="appt-sect-wrap">
+  <div class="appt-item">
+    <div style="display:flex;justify-content:space-between;">
+      <div class="checkin-status">Checked In</div> 
+      <div class="appt-item-group"> 
+        <div class="appt-group-label">Date:</div>
+        <div class="appt-group-val">11th Oct, 2018.</div>
+      </div>
+    </div>
+    <div class="appt-item-group">
+      <div class="appt-group-label">Department:</div>
+      <div class="appt-group-val">X-Ray Department</div>
+    </div>
+    <div class="appt-item-group">
+      <div class="appt-group-label">Investigations</div>
+      <div class="appt-group-val">
+        <div (click)="valGroup_click()" class="group-val-clickable">10 Investigations</div>
+        <ul *ngIf="valGroup" class="val-group-list shadow-RB">
+          <div class="x-wrap">
+            <i (click)="valGroup_click()" class="fa fa-times"></i>
+          </div>
+          <div class="vg-header">
+            <div class="suggested-wrap">
+              <div class="suggested-img-wrap">
+                <img src="../../../../../../assets/images/users/default.png" >
+              </div>
+              <div class="suggested-label">Sydney James</div>
+            </div>
+            <div class="head-label">X-Ray Department</div>
+            <div class="head-label">11th October 2018</div>
+          </div>
+          
+          <div class="li-wrap">
+            <li><span class="count">1.</span> of the right arm</li>
+            <li><span class="count">2.</span>X-Ray of the chest</li>
+            <li><span class="count">3.</span>X-Ray of the right arm</li>
+            <li><span class="count">4.</span>X-Ray of the chest</li>
+            <li><span class="count">5.</span>X-Ray of the right arm</li>
+            <li><span class="count">6.</span>X-Ray of the chest</li>
+            <li><span class="count">7.</span>X-Ray of the right arm</li>
+            <li><span class="count">8.</span>X-Ray of the chest</li>
+            <li><span class="count">9.</span>X-Ray of the right arm</li>
+            <li><span class="count">10.</span>X-Ray of the chest</li>
+            <li><span class="count">1.</span> of the right arm</li>
+            <li><span class="count">2.</span>X-Ray of the chest</li>
+            <li><span class="count">3.</span>X-Ray of the right arm</li>
+            <li><span class="count">4.</span>X-Ray of the chest</li>
+            <li><span class="count">5.</span>X-Ray of the right arm</li>
+            <li><span class="count">6.</span>X-Ray of the chest</li>
+            <li><span class="count">7.</span>X-Ray of the right arm</li>
+            <li><span class="count">8.</span>X-Ray of the chest</li>
+            <li><span class="count">9.</span>X-Ray of the right arm</li>
+            <li><span class="count">10.</span>X-Ray of the chest</li>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <div class="appt-actions">
+      <div class="list-cta"><i class="fa fa-sign-in"></i> Check in</div>
+      <div class="list-cta"><i class="fa fa-undo"></i> Re-schedule</div>
+      <div class="list-cta"><i class="fa fa-times"></i> Cancel</div>
+    </div>
+  </div>
+  <div class="appt-item">
+    <div style="display:flex;justify-content:space-between;">
+      <div class="checkin-status">Not Checked In</div> 
+      <div class="appt-item-group"> 
+        <div class="appt-group-label">Date:</div>
+        <div class="appt-group-val">11th Oct, 2018.</div>
+      </div>
+    </div>
+    <div class="appt-item-group">
+      <div class="appt-group-label">Department:</div>
+      <div class="appt-group-val">X-Ray Department</div>
+    </div>
+    <div class="appt-item-group">
+      <div class="appt-group-label">Investigations</div>
+      <div class="appt-group-val">
+        <div (click)="valGroup_click()" class="group-val-clickable">10 Investigations</div>
+        <ul *ngIf="valGroup" class="val-group-list shadow-RB">
+          <div class="x-wrap">
+            <i (click)="valGroup_click()" class="fa fa-times"></i>
+          </div>
+          <div class="vg-header">
+            <div class="suggested-wrap">
+              <div class="suggested-img-wrap">
+                <img src="../../../../../../assets/images/users/default.png" >
+              </div>
+              <div class="suggested-label">Sydney James</div>
+            </div>
+            <div class="head-label">X-Ray Department</div>
+            <div class="head-label">11th October 2018</div>
+          </div>
+          
+          <div class="li-wrap">
+            <li><span class="count">1.</span> of the right arm</li>
+            <li><span class="count">2.</span>X-Ray of the chest</li>
+            <li><span class="count">3.</span>X-Ray of the right arm</li>
+            <li><span class="count">4.</span>X-Ray of the chest</li>
+            <li><span class="count">5.</span>X-Ray of the right arm</li>
+            <li><span class="count">6.</span>X-Ray of the chest</li>
+            <li><span class="count">7.</span>X-Ray of the right arm</li>
+            <li><span class="count">8.</span>X-Ray of the chest</li>
+            <li><span class="count">9.</span>X-Ray of the right arm</li>
+            <li><span class="count">10.</span>X-Ray of the chest</li>
+            <li><span class="count">1.</span> of the right arm</li>
+            <li><span class="count">2.</span>X-Ray of the chest</li>
+            <li><span class="count">3.</span>X-Ray of the right arm</li>
+            <li><span class="count">4.</span>X-Ray of the chest</li>
+            <li><span class="count">5.</span>X-Ray of the right arm</li>
+            <li><span class="count">6.</span>X-Ray of the chest</li>
+            <li><span class="count">7.</span>X-Ray of the right arm</li>
+            <li><span class="count">8.</span>X-Ray of the chest</li>
+            <li><span class="count">9.</span>X-Ray of the right arm</li>
+            <li><span class="count">10.</span>X-Ray of the chest</li>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <div class="appt-actions">
+      <div class="list-cta"><i class="fa fa-sign-in"></i> Check in</div>
+      <div class="list-cta"><i class="fa fa-undo"></i> Re-schedule</div>
+      <div class="list-cta"><i class="fa fa-times"></i> Cancel</div>
+    </div>
+  </div>
+</div>

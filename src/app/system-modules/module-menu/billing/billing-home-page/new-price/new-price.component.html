@@ -1,0 +1,60 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <div class="facility-title">Add Price To List</div>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <div class="f_sg1">
+            <form [formGroup]="frmNewprice" novalidate>
+                <div class="frm-item-wrap">
+                    <mat-form-field>
+                        <mat-select class="example-full-width" placeholder="Service Category" formControlName="serviceCat">
+                            <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <form [formGroup]="frmNewprice2" class="form-horizontal list-div">
+                    <div formArrayName="priceArray" class="frmArrayWrap">
+                        <!-- <div class="frmArray" *ngFor="let dependant of frmDependants['controls'].dependantArray['controls']; let i = index;"> -->
+                        <div class="frmArray" *ngFor="let schedule of frmNewprice2['controls'].priceArray['controls']; let i = index;">
+                            <div formGroupName="{{i}}">
+                                <div style="display:flex" class="col-sm-12">
+                                    <div style="width:100%" class="col-sm-9">
+                                        <mat-list>
+                                            <mat-list-item>{{schedule.value.item.name}}</mat-list-item>
+                                        </mat-list>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <mat-input-container>
+                                            <input #price currencyMask [options]="{ prefix: 'N ', thousands: ',', decimal: '.', precision:2 }" type="text" matInput mat-error
+                                                placeholder="" formControlName="amount">
+                                        </mat-input-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <div class="col-sm-12 text-center" style="margin-top:20px; color: #fff;">
+                    <button mat-raised-button (click)="newPrice(frmNewprice.value, frmNewprice.valid)">
+                        Add price to list
+                    </button>
+                    <span *ngIf="loadingIndicator" style="color: #000;">
+                        <span class="fa fa-spinner fa-spin"></span> {{msg}}!</span>
+                </div>
+            </form>
+            <!-- <div class="col-sm-12 text-center" style="margin-top:20px; color: #fff;">
+                <button mat-raised-button (click)="newPrice(frmNewprice.value, frmNewprice.valid)">
+                    Add price to list
+                </button>
+                <span *ngIf="loadingIndicator" style="color: #000;">
+                    <span class="fa fa-spinner fa-spin"></span> {{msg}}!</span>
+            </div> -->
+        </div>
+    </div>
+
+</div>

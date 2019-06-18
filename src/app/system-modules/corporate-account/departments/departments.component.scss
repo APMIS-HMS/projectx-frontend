@@ -1,0 +1,23 @@
+@import "../corporate-account.component.scss";
+@import "../covering-facility/covering-facility.component.scss";
+.mainWrap {
+    margin-top: 0;
+}
+
+.sectTitle {
+    margin: 20px 0;
+}
+
+.ctas i {
+    font-size: 1.6rem;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.coveredEmployee {
+    cursor: default;
+}
+
+.innerMenu-ul {
+    min-width: 210px;
+}

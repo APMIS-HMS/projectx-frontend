@@ -1,0 +1,47 @@
+@import "../documentation.component.scss";
+@import "./right-tab-tooltip/right-tab-tooltip.component.scss";
+
+.rAreaCard-body {
+    margin: 0;
+}
+
+th{
+    max-width: 300px;
+}
+
+td{
+    max-width: 300px;
+}
+
+.red{
+    color: red;
+}
+
+.green{
+    color: green;
+}
+
+.tooltip {
+    &:after {
+        font-family: Arial, Helvetica, sans-serif;
+        opacity: 0;
+        transition: all 0.4s;
+        font-size: 1.2rem !important;
+        position: absolute;
+        margin-left: -120px;
+        display: block;
+        padding: 10px;
+        content: attr(data-toggle);
+        background: rgba(0, 0, 0, 0.74);
+        border-radius: 5px;
+        color: #fff;
+        min-width: 80px;
+        text-align: center;
+    }
+    &:hover {
+        &:after {
+            opacity: 1;
+            margin-left: -100px;
+        }
+    }
+}

@@ -1,0 +1,85 @@
+@import "../../../../../globals/variables.scss";
+@import "../../patient-manager/patientmanager-homepage/patientmanager-homepage.component.scss";
+@import "../../clinic/appointment/appointment.component.scss";
+.inner-page-contentArea {
+    padding: 10px;
+}
+
+.top-button-box {
+    position: absolute;
+    right: 130px;
+    top: -25px;
+}
+
+.inPatients {
+    border: none;
+    .patient-sex {
+        text-align: left;
+    }
+    .filter-select {
+        border: 1px solid #eee;
+        border-radius: 10px;
+        display: block;
+        padding: 4px;
+        width: 150px;
+        margin: 5px;
+    }
+    .tr-header-group {
+        background-color: #0288D1;
+        color: #fff;
+        td {
+            text-align: center;
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .table-content {
+        padding: 10px;
+        text-align: center;
+    }
+    .table-content-action {
+        padding: 5px;
+        .fa {
+            font-size: 1.6rem;
+            padding: 5px;
+            margin: 2px;
+            cursor: pointer;
+        }
+    }
+    // table {
+    //     thead {
+    //         background-color: #AED6F1;
+    //     }
+    //     tbody {
+    //         border: 1px solid #ddd !important;
+    //         tr {
+    //             td {
+    //                 padding: 8px;
+    //                 line-height: 1.42857143;
+    //             }
+    //         }
+    //         .tr-header-group {
+    //             background-color: #0288D1;
+    //             color: #fff;
+    //             text-align: left;
+    //             &:hover {
+    //                 cursor: pointer;
+    //             }
+    //         }
+    //     }
+    // }
+}
+
+.topFilters {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.filter-title {
+    position: absolute;
+    left: 0;
+    top: -14px;
+    color: #8e8e8e;
+    font-size: 1rem;
+}

@@ -1,0 +1,41 @@
+<div (click)="close_onClick($event)">
+    <ul class="pg-menuWrap">
+        <li (click)="servicesShow()" [class.pg-menuActive]="">
+            <i class="fa fa-home" aria-hidden="true"></i> Services</li>
+        <!--<li (click)="pricelistShow()" [class.pg-menuActive]="">
+            <i class="fa fa-file-text-o" aria-hidden="true"></i> Price List</li>
+        <li [routerLink]="['/dashboard/payment/bill']"><i class="fa fa-money" aria-hidden="true"></i> Payment</li>-->
+    </ul>
+    <div class="pgMenu-wrapa">
+        <i (click)="pgMenu_click()" class="fa fa-chevron-down pgMenu-ico" aria-hidden="true"></i>
+        <ul *ngIf="pgMenuToggle" class="pg-menuWrap-mobile">
+            <li (click)="servicesShow()" [class.pg-menuActive]="">
+                <i class="fa fa-home" aria-hidden="true"></i> Services</li>
+            <!--<li (click)="pricelistShow()" [class.pg-menuActive]="">
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> Price List</li>
+            <li [routerLink]="['/dashboard/payment/bill']"><i class="fa fa-money" aria-hidden="true"></i> Payment</li>-->
+        </ul>
+    </div>
+    <div class="facility-title">{{pageInView}}</div>
+    <!--
+    <div class="second-menu">
+          <a (click)="servicesShow()" [class.menuActive]="serviceStyle" class="btning"> Services</a>
+          <a (click)="pricelistShow()" [class.menuActive]="pricelistStyle" class="btning"> Price List</a>
+          <a  [routerLink]="['/dashboard/payment/bill']" class="btning"> Payment</a>
+      </div>-->
+    <!-- <div class="inner-menu1-wrap">
+      <i id="contentSecMenuToggle" (click)="contentSecMenuToggle()" [class.content-sec-icoActive]="contentSecMenuShow" class=" content-sec-ico fa fa-ellipsis-v"
+        aria-hidden="true"></i>
+      <ul id="innerMenu-ul" *ngIf="contentSecMenuShow" class="innerMenu-ul shadow">
+        <li (click)="servicesShow()"><i class="fa fa-home" aria-hidden="true"></i> Services</li>
+        <li (click)="pricelistShow()"><i class="fa fa-file-text-o" aria-hidden="true"></i> Price List</li>
+        <li  [routerLink]="['/dashboard/payment/bill']"><i class="fa fa-money" aria-hidden="true"></i> Payment</li>
+      </ul>
+    </div>-->
+    <div class="inner-page-wrap">
+        <app-services (pageInView)="pageInViewLoader($event)" *ngIf="services" class="inner-page-contentArea"></app-services>
+    </div>
+    <div class="inner-page-wrap">
+        <app-billing-home-page (pageInView)="pageInViewLoader($event)" *ngIf="pricelist" class="inner-page-contentArea"></app-billing-home-page>
+    </div>
+</div>

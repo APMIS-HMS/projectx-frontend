@@ -1,0 +1,155 @@
+<div class="head-sect">
+  <div class="person-info">
+      <span class="p-name">John Doer</span>
+      <span>Male</span>
+      <span>DOB: 11/10/1990 (28)</span>
+      <span>Radiology No: BBA2110</span>
+  </div>
+  <div (click)="close_onClick()" class="close-ico" aria-hidden="true">X</div>
+</div>
+<div class="body-sect">
+  <div class="l-sec">
+      <div class="top-img-wrap">
+          <img src="assets/images/users/default.png">
+      </div>
+      <div class="sect-content">
+          <div class="sect-item">
+              <div class="item-label">Patient Name</div>
+              <div class="item-val">Joel Sanders</div>
+          </div>
+          <div class="sect-item">
+              <div class="item-label">Order(s)</div>
+              <div class="item-val">
+                  <table cellpadding="0" cellspacing="0" border="0.5">
+                      <thead>
+                          <tr>
+                              <th>Date</th>
+                              <th>Name/Number</th>
+                              <th>Status</th>
+                          </tr>
+                      </thead>
+              
+                      <tbody>
+                          <tr>
+                              <td>11/10/2018</td>
+                              <td>Order MRI - Knee(1591)</td>
+                              <td>Result Published</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <div class="sect-item">
+              <div class="item-label">Visit Date</div>
+              <div class="item-val">11/10/2018</div>
+          </div>
+          <div class="iten-x2">
+              <div class="sect-item">
+                  <div class="item-label">Ordering Provider</div>
+                  <div class="item-val">John Doe</div>
+              </div>
+              <div class="sect-item">
+                  <div class="item-label">Facility</div>
+                  <div class="item-val">Continental Hospital</div>
+              </div>
+          </div>
+          <div class="item-x2">
+              <div class="sect-item">
+                  <div class="item-label">Date Recieved</div>
+                  <div class="item-val">11/10/2018</div>
+              </div>
+              <div class="sect-item">
+                  <div class="item-label">Collected Date</div>
+                  <div class="item-val">14/10/2018</div>
+              </div>
+          </div>
+          <div class="item-x2">
+              <div class="sect-item">
+                  <div class="item-label">Performed Date</div>
+                  <div class="item-val">11/10/2018</div>
+              </div>
+              <div class="sect-item">
+                  <div class="item-label">Vendor</div>
+                  <div class="item-val">-</div>
+              </div>
+          </div>
+          <div class="sect-item">
+            <div class="item-label">5 Images Attached</div>
+            <table cellpadding="0" cellspacing="0" border="0.5">        
+                <tbody>
+                    <tr>
+                        <td>Order MRI - Knee(1591)</td>
+                        <td class="item-val"><a href="https://access.ambrahealth.com/viewer/#study/856bbb02-ab4e-4f70-ab3f-ea1ca71fbae8/1.2.840.113619.2.55.1.1762903843.1880.1141902658.220/856bbb02-ab4e-4f70-ab3f-ea1ca71fbae8?sid=4575fd96-ae45-4f5c-89fc-f6231c8d5446" target="_blank">View Images</a></td>
+                    </tr>
+                    <tr>
+                        <td>Order MRI - Knee(1591)</td>
+                        <td class="item-val"><a href="https://access.ambrahealth.com/viewer/#study/856bbb02-ab4e-4f70-ab3f-ea1ca71fbae8/1.2.840.113619.2.55.1.1762903843.1880.1141902658.220/856bbb02-ab4e-4f70-ab3f-ea1ca71fbae8?sid=4575fd96-ae45-4f5c-89fc-f6231c8d5446" target="_blank">View Images</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+              <!-- <div class="item-val">
+                  <button (click)="imgs_show()">View Images</button>
+              </div> -->
+          </div>
+      </div>
+  </div>
+  <div class="r-sec">
+      <div class="sect-item">
+          <div class="item-label">Investigation</div>
+          <div class="item-val-main">Order MRI - Knee(1591)</div> 
+      </div>
+      <div class="sect-item">
+          <div class="item-label">Modality</div>
+          <div class="item-val-main">Order MRI - Knee(1591)</div> 
+      </div>
+      <div class="sect-item">
+          <div class="item-label">Diagnosis</div>
+          <div class="item-val">due to the growth on the lower knee, it is safe to infere that the patient has fever</div>
+      </div>
+      <div class="sect-item">
+          <div class="item-label">Clinical Information</div>
+          <div class="item-val">due to the growth on the lower knee, it is safe to infere that the patient has fever due to the growth on the lower knee, it is safe to infere that the patient has fever</div>
+      </div>
+      <div class="report-wrap">
+          <div class="report-header">
+              <div class="fac-img-wrap">
+                  <img src="assets/images/logos/default.png">
+              </div>
+              <div class="fac-meta">
+                  <div class="fac-name">AFRIGLOBAL MEDICARE LIMITED, LAGOS</div>
+                  <div class="fac-meta-meta">8, Mobolaji Bank Anthony Way, by Unity B/Stop Ikeja, Lagos, Nigeria.</div>
+                  <div class="fac-meta-meta">Tel: 01-6291000, 01-6290998</div>
+              </div>
+          </div>
+
+          <div class="ctas">
+              <button><i class="fa fa-share"></i> Publish</button>
+              <button><i class="fa fa-edit"></i> Update</button>
+              <button><i class="fa fa-save"></i> Save Draft</button>
+              <button><i class="fa fa-trash"></i> Discard</button>
+          </div>
+
+          <div class="form-wrap">
+            <div>
+                <label class="label" for="selectTemplate">Select Template</label>
+                <select class="sel-tem" [formControl]="selectTemplate">
+                    <option>select report template</option>
+                </select>
+            </div>
+
+            <div class="temp-container">
+              <span class="temp-span">LOAD REPORT TEMPLATE HERE</span>
+            </div>
+          </div>
+
+          <div class="ctas" style="justify-content:flex-start;">
+            <button><i class="fa fa-share"></i> Publish</button>
+            <button><i class="fa fa-edit"></i> Update</button>
+            <button><i class="fa fa-save"></i> Save Draft</button>
+            <button><i class="fa fa-trash"></i> Discard</button>
+          </div>
+          
+      </div>
+  </div>
+</div>

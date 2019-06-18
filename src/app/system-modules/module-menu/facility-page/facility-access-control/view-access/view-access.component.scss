@@ -1,0 +1,87 @@
+@import "../../../../../../globals/variables.scss";
+@import "../create-access/create-access.component.scss";
+
+.accessLhsWrap{
+    width: 40%;
+    box-sizing: border-box;
+}
+.accessDefWrap{
+    background-color: #F5F5F5;
+    margin: 0;
+    padding: 10px 0 10px 10px;
+    width: 100%;
+}
+.btn-defination {
+    border: 1px solid #0288d1;
+}
+.accessDefWrap li{
+    padding: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    color: #424242;
+    font-size: 1.4rem;
+    font-family: $font-titles;
+    border-top: 1px solid #F5F5F5;
+    border-bottom: 1px solid #F5F5F5;
+    border-left: 1px solid #F5F5F5;
+}
+.accessDefWrap li:hover{
+    border-top: 1px solid #EEEEEE;
+    border-bottom: 1px solid #EEEEEE;
+    border-left: 1px solid #EEEEEE;
+}
+.activeAccess{
+    background: #E0E0E0;
+}
+.accessDetailWrap{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background: #E0E0E0;
+    min-height: 400px;
+    width: 60%;
+    padding: 20px;
+    padding-bottom: 70px;
+    box-sizing: border-box;
+}
+.top-tab-search{
+    width: 90%;
+    margin: 0 auto;
+    display: block;
+}
+.featureGroup{
+    border: 1px solid #F5F5F5;
+    margin: 20px;
+    padding: 10px;
+}
+.featureGroup li{
+    color: #424242;
+    padding: 10px;
+    font-size: 1.4rem;
+}
+.tbl-row:hover{
+    cursor: default;
+    border: 1px solid #fff;
+}
+.actionWrap{
+    color: #ff2500; 
+    text-align: right;
+    cursor: pointer;
+}
+.actionWrap:hover{
+    text-decoration: underline;
+}
+.btn-1{
+    position: absolute;
+    bottom: 10px;
+}
+.inner-menu1-wrap{
+    right: 20px;
+    left: auto;
+}
+.inner-menu1-wrap i{
+    text-align: right;
+}
+.roleSrcModule{
+    color: #0288D1;
+}

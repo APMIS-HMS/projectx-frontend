@@ -1,0 +1,146 @@
+<div class="survery">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="panel" data-index="0">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="info">
+                  <th>Products</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="col">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search Product" [formControl]="searchControl" />
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngFor="let product of products; let i = index">
+                  <td *ngIf="product?.productObject?.id !== undefined" (click)="addProduct(product)">
+                    {{product?.productObject?.name}}
+                    <div style="float:right">
+                        <span class="list-bdg badge-green" style="height: 10px; width: 10px; border-radius: 10px" *ngIf="!product.isVented">New</span>
+                        <span class="list-bdg badge-red" style="height: 10px; width: 10px; border-radius: 10px" *ngIf="product.isVented">Exist</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="panel lobidisable panel-bd lobipanel lobipanel-sortable" data-inner-id="P3ax1HGUSa" data-index="0">
+
+        <div style="padding-top:100px; text-align:center; color: #42a3d8" *ngIf="myForm['controls'].initproduct['controls'].length == 0">
+          <h5>Select product to initialize</h5>
+        </div>
+
+        <div class="panel-body">
+          <form [formGroup]="myForm" novalidate>
+
+            <div formArrayName="initproduct">
+
+              <div class="form-array" *ngFor="let batch of myForm['controls'].initproduct['controls']; let i=index;">
+                <div [formGroupName]="i">
+                  <div class="headr" [hidden]="i != 0">
+                    <h5 *ngIf="!isEditProductName">{{ selectedProduct?.productObject?.name }}
+                      <!-- <span>
+                        <i style="color: red;cursor: pointer" (click)="onEditProductName()">edit</i>
+                      </span> -->
+                      <br>
+                    </h5>
+                    <!-- <div *ngIf="isEditProductName">
+                      <mat-input-container>
+                        <input type="text" matInput placeholder="Edit Product Name" [formControl]="editProductnameControl">
+                      </mat-input-container>
+                      <span>
+                        <i style="color: green;cursor: pointer" (click)="onEditSaveProductName()">save</i>
+                      </span>
+                    </div> -->
+
+                  </div>
+                  <div class="input-qty">
+                    <div class="qty-label">Total {{getBasePackName(selectedProduct?.packSizes)}}</div>
+                    <input type="number" formControlName="quantity" readonly>
+                  </div>
+                  <div class="col-sm-11">
+                    <div class="row">
+                      <mat-input-container class="col-sm-3">
+                        <input type="text" matInput placeholder="Enter Batch No *" formControlName="batchNumber">
+                      </mat-input-container>
+                      <mat-form-field class="col-sm-3">
+                        <mat-select placeholder="Select Service" [formControl]="productServiceControl" [compareWith]="compareItems">
+                          <mat-option [value]="item._id" *ngFor="let item of categories" (click)="onChangeProductCategory(item)">{{item.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-input-container class="col-sm-3">
+                        <input type="date" matInput placeholder="Expiry Date *" placeholder="Expiry Date" formControlName="expiryDate">
+                      </mat-input-container>
+
+                      <div style="padding: 0 30px;" class="row example-full-width" formArrayName="config">
+                        <div class="row" [formGroupName]="k" *ngFor="let itm of batch.controls.config.controls;let k = index">
+                          <mat-form-field class="col-md-3">
+                            <mat-select placeholder="Select Packsize" formControlName="packItem" [compareWith]="compareItems" (change)="onPackageSize(i,myForm.controls['initproduct'].controls)">
+                              <mat-option disabled="">None</mat-option>
+                              <mat-option [value]="item._id" *ngFor="let item of itm.value.packsizes">
+                                <span>{{item.name}}</span>
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+                          <mat-input-container class="col-md-3">
+                            <input type="number" min="1" [readonly]="itm.value.packItem === null" matInput mat-error formControlName="size" (change)="onPackageSize(i,myForm.controls['initproduct'].controls)">
+                          </mat-input-container>
+
+                          <div class="ico-wrap">
+                            <i *ngIf="itm.value.packsizes.length !== k+1 && batch.controls.config.controls.length===k+1" class="col-md-2 fa fa-fw fa-plus"
+                              (click)="onAddPackSize(itm.value.packsizes,batch)"></i>
+                            <i class="fa fa-close fa-fw" *ngIf="batch.controls.config.controls.length > 1" (click)="onRemovePack(batch,myForm.controls['initproduct'].controls,k,i)"></i>
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </div>
+                <div class="col-sm-1" class="arr-icos">
+                  <a [hidden]="i < myForm.controls.initproduct.controls.length - 1" (click)="addBatch(i)">
+                    <i class="fa fa-plus fa-fw fa-2x"></i>
+                  </a>
+                  <a (click)="removeBatch(i)">
+                    <i style="color:red" class="fa fa-trash fa-fw fa-2x"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 text-center">
+              <div>
+                  <button [disabled]="getValid()" (click)="save(myForm.valid,myForm.value,selectedProduct)">
+                      <span>
+                        <div [hidden]="isProcessing">
+                          Save
+                        </div>
+                        <div [hidden]="!isProcessing">
+                          Processing...
+                          <i class='fa fa-spinner fa-spin'></i>
+                        </div>
+                      </span>
+      
+                    </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>

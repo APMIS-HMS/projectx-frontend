@@ -1,0 +1,15 @@
+<div class="home-main">
+  <ul class="hm-tabs"> 
+    <li (click)="tab_click('outbound_requisition')" [class.hm-tab-active]='tab_outbound_requisition' class="hm-tab">Outbound Requisition</li>
+    <li (click)="tab_click('inbound_requisition')" [class.hm-tab-active]='tab_inbound_requisition' class="hm-tab">Inbound Requisition</li> 
+    <li (click)="tab_click('outbound')" [class.hm-tab-active]='tab_outbound' class="hm-tab">Outbound Transfer</li>
+    <li (click)="tab_click('inbound')" [class.hm-tab-active]='tab_inbound' class="hm-tab">Inbound Transfer</li> 
+  </ul> 
+
+  <div class="tab-content">
+    <app-outbound-transfer *ngIf="tab_outbound"> </app-outbound-transfer>
+    <app-inbound-transfer *ngIf="tab_inbound"> </app-inbound-transfer> 
+    <app-outbound-requisition *ngIf="tab_outbound_requisition"> </app-outbound-requisition>
+    <app-inbound-requisition *ngIf="tab_inbound_requisition"> </app-inbound-requisition> 
+  </div>
+</div>

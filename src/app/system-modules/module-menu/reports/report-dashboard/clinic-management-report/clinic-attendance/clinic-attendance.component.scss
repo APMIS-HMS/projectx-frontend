@@ -1,0 +1,21 @@
+@import "./../diagnosis/diagnosis.component.scss";
+
+@import "./../../../../payment/invoice/invoice.component.scss";
+
+
+.filter-space{
+    padding-left: 10px;
+    padding-top: 15px;
+}
+
+.filter-session{
+    padding-left: 10px;
+}
+
+.mat-input{
+    width: 120px !important;
+}
+
+.status-filter{
+    padding-top: 15px;
+}

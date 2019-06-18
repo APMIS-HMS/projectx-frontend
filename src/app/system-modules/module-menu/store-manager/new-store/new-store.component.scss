@@ -1,0 +1,116 @@
+.frm-label {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    font-size: 1.2rem;
+    color: #515151;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mat-lg-btn {
+    background: #0288D1 !important;
+}
+
+.modal_title {
+    text-align: center;
+    border-bottom: 0px;
+    color: #fff;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.mainfrmwrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sec-1 {
+    width: 40%;
+}
+
+.sec-2 {
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+.checkbox-wrap {
+    display: flex;
+    width: 95%;
+}
+
+.check-item {
+    position: relative;
+    display: flex;
+    width: 140px;
+}
+
+.chk-label {
+    top: -10px;
+    left: 0;
+    font-size: 1.2rem;
+    color: #515151;
+    margin-top: 4px;
+    margin-left: 2px;
+}
+
+.survery legend {
+    text-align: center !important;
+    margin-top: 4px;
+    margin-left: 10px;
+    border-bottom: 0;
+}
+
+.chkwrap {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    padding-right: 0px;
+}
+
+.chk-group-wrap {
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    height: 145px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.chk-group-wrap .checkbox-wrap {
+    flex-wrap: wrap;
+}
+
+.sec-2 .frm-label {
+    top: -20px;
+}
+
+.container {
+    // width: 50%;
+}
+
+.modal-header-wrap {
+    width: 800px;
+    min-width: 440px;
+}
+
+.cta-1 {
+    color: #fff;
+    margin: 10px auto;
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: center;
+    width: 180px;
+    height: 43px;
+    border-radius: 30px;
+}
+
+//.fa-plus:before 
+//{
+// content: "\f067";
+//padding-right: 10px;
+//}

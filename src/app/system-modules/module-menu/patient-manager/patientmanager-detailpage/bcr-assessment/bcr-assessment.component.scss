@@ -1,0 +1,39 @@
+@import "../patientmanager-detailpage.component.scss";
+@import "../patient-prescription/patient-prescription.component.scss";
+@import "../documentation/documentation.component.scss";
+
+
+.txtarea{
+    min-height: 120px;
+    font-size: small !important;
+}
+
+.con-cr{
+    background-color: white;
+    margin-top: 5px !important;
+    height: auto !important;
+}
+.c-body{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+}
+
+.drop-width{
+    max-width:200px;
+}
+
+.p-txt{
+    word-wrap: break-word;
+}
+
+.col-break{
+    padding-left: 50px;
+}
+
+.cd-header{    
+    position: relative;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}

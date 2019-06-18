@@ -1,0 +1,118 @@
+<div>
+  <div class="doc-mainWrap">
+    <div class="doc-contentArea">
+      <div class="clinicalNoteWrap">
+        <div class="actSect">
+          <div class="actSect-header">
+            <div (click)="newHmo_show()" class="act-wrap">
+              <!-- <i *ngIf="newHMO" class="fa fa-minus" aria-hidden="true"></i>
+              <i [hidden]="newHMO" class="fa fa-plus" aria-hidden="true"></i> -->
+              <span>Add HMO</span>
+            </div>
+          </div>
+          <form class="frmNoteWrap" *ngIf="newHmo" [formGroup]="frmNewHmo" novalidate>
+            <div class="frm-title">NEW HMO</div>
+
+            <div class="frm-x2">
+              <div class="frm-item-wrap col-4">
+                <apmis-lookup style='width:80%' formControlName="name" [(ngModel)]="apmisLookupText" [url]="apmisLookupUrl"
+                  [query]="apmisLookupQuery" placeholder="Select HMO" [isSocket]="true" [displayKey]="apmisLookupDisplayKey"
+                  (selectedItem)="apmisLookupHandleSelectedItem($event)" [multipleKeys]="true" [otherKeys]="apmisLookupOtherKeys"></apmis-lookup>
+              </div>
+
+
+              <div class="reg-format">
+                <div>
+                  <textarea type="text" [formControl]="policyIDRegexFormat" placeholder="Policy Format|Option"></textarea>
+                </div>
+              </div>
+            </div>
+
+          </form>
+          <button *ngIf="newHmo" [disabled]="apmisLookupText ===''" (click)="save(frmNewHmo.valid, frmNewHmo.value)"
+            class="cta-1">Add HMO</button>
+        </div>
+
+        <!-- <div class="pg-subtitle">HMO List</div>  -->
+        <div class="tblWrapa" class="actSect">
+          <table cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+              <tr>
+                <th><span style="padding:5px">S/N</span></th>
+                <th>
+                  <div class=" display:flex; margin-top:5px;">
+                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                    <span style="padding-left: 3px;">HMO</span>
+                  </div>
+                  <input type="search" [formControl]="searchHmo" class="table-header-input" placeholder="Search for HMO">
+                </th>
+                <th>
+                  <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                  <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                  <span style="padding-left: 3px;">Address</span>
+                </th>
+                <th>
+                  <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                  <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                  <span style="padding-left: 3px;">Email</span>
+                </th>
+                <th>
+                  <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                  <!--<i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>-->
+                  <span style="padding-left: 3px;">Phone</span>
+                </th>
+                <!-- <th>Plans</th> -->
+                <th>Beneficiaries</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="hmoFacilities.length > 0">
+
+              <tr *ngFor="let hmo of hmoFacilities;let i=index">
+                <td>{{i+1}}</td>
+                <td (click)="show_beneficiaries(hmo)">{{hmo.name}}</td>
+                <td>{{hmo.street}}, {{hmo.city}}, {{hmo.state}}.</td>
+                <td>{{hmo.email}}</td>
+                <td>{{hmo.primaryContactPhoneNo}}</td>
+                <!-- <td>Gold, Silver, Bronze, Copper</td> -->
+                <td>{{getEnrolleeCount(hmo._id)}}</td>
+                <td class="action-placeholder" style="text-align:center;">
+                  <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                  <div class="action-container shadow-RB">
+                    <form>
+                      <div (click)="showImageBrowseDlg(i)" class="action-item">
+                        <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                        <span>Upload Beneficiary List</span>
+                        <input accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                          style="display:none;" #fileInput type="file" id="uploadResult" (change)="submitExcel($event, hmo)">
+                      </div>
+                    </form>
+                    <div class="action-item" (click)="newHmo_show(hmo)">
+                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                      <span>Update HMO</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="hmoFacilities.length === 0 && !loading">
+              <tr>
+                <td class="table-content" colspan="9" style="text-align: center !important; padding: 10px !important;">
+                  No data available in table</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="hmoFacilities.length === 0 && loading">
+              <tr>
+                <td class="table-content" colspan="9" style="text-align: center !important; padding: 10px !important;">
+                  <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

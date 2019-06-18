@@ -1,0 +1,70 @@
+<div class="container">
+    <h2 class="title">
+      <i class="fa fa-star fa-fw star"></i> Today's Summary
+    </h2>
+    <section class="row">
+      <div class="col-lg-3">
+        <div class="card">
+          <div class="summary-title">
+            44
+          </div>
+          <div class="summary-footer">
+            Occupancy
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+          <div class="card">
+            <div class="summary-title">
+              78
+            </div>
+            <div class="summary-footer">
+                Patient Check In
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="card">
+              <div class="summary-title">
+                44
+              </div>
+              <div class="summary-footer">
+                  Patient Check Out
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2">
+              <div class="card">
+                <div class="summary-title">
+                  34
+                </div>
+                <div class="summary-footer">
+                  Patient Wait-list
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card">
+                  <div class="summary-title">
+                    234
+                  </div>
+                  <div class="summary-footer">
+                    Consultation
+                  </div>
+                </div>
+              </div>
+    </section>
+    <h2 class="title">
+        <i class="fa fa-line-chart fa-fw star"></i> This Week Sale Report
+    </h2>
+    <section class="card padding">
+        <canvas baseChart width="100%"
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [chartType]="barChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"></canvas>
+    </section>
+  </div>

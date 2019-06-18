@@ -1,0 +1,157 @@
+<div class="baseWrap">
+    <h1> Clinic Visits Report </h1>
+    <div class="filterWrap">
+        <div class="row">
+            <div class="dr-wrap survery">
+                <app-date-range [dateRange]="dateRange" (dateRangeChange)="setFilterByDateRange($event)"></app-date-range>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <mat-tab-group (selectedIndexChange)="onTabClick($event)">
+        <mat-tab label="• Clinic Attendance Report">
+            <div class="tbl-resp-wrap">
+                <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5">
+                    <thead>
+                        <tr class="th-r1 th-xxx">
+                            <th rowspan="2">S/N</th>
+                            <th rowspan="2">Date</th>
+                            <th rowspan="2">Clinic</th>
+                            <th rowspan="2">Total Checked-In Appointment</th>
+                            <th colspan="2">New Appointments</th>
+                            <th colspan="2">Follow-Up Appointments</th>
+                        </tr>
+                        <tr class="th-r2 th-xxx">
+                            <th>Male</th>
+                            <th>Female</th>
+                            <th>Male</th>
+                            <th>Female</th>
+                        </tr>
+                    </thead>
+
+                    <tbody *ngIf="!isClinicAttendanceLoading">
+                        <span *ngIf="filteredAttendance.length < 1"><i>There are currently no records to show</i></span>
+                        <tr class="th-xxx" *ngFor="let item of filteredAttendance; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.date | date:'shortDate'}}</td>
+                            <td>{{item.clinicName}}</td>
+                            <td> {{item.totalCheckedInPatients}}</td>
+                            <td>{{item.new.totalMale}}</td>
+                            <td>{{item.new.totalFemale}}</td>
+                            <td>{{item.followUp.totalMale}}</td>
+                            <td>{{item.followUp.totalFemale}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="isClinicAttendanceLoading">
+                        <tr class="th-xxx">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div><i class="fa fa-spinner fa-spin"></i></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <mat-paginator [length]="100" [pageSize]="30" [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
+            </div>
+            <div class="billSummarySect">
+                <table class="rhs">
+                    <div class="summaryItems">
+                        <tr class="summaryItem">
+                            <td class="label" style="width:auto !important;">New Appointment Sum Total</td>
+                            <td class="data">
+                                <span>{{totalNewAppointment}} <i>Patient(s)</i></span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="summaryItem">
+                            <td class="label" style="width:auto !important;">Follow-Up Appointment Sum Total</td>
+                            <td class="data">
+                                <span>{{totalFollowUpAppointment}} <i>Patients(s)</i></span></td>
+                            <td></td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
+        </mat-tab>
+        <mat-tab label="• Appointment Report">
+            <div class="filter-session">
+                <div class="row middle-xs">
+                    <div class="middle-xs">
+                        <div class="dropdown-container">
+                            <mat-form-field>
+                                <mat-select [formControl]="searchCriteria" placeholder="select search criteria"
+                                    (change)="setSearchFilter($event.value)">
+                                    <mat-option [value]="criteria" *ngFor="let criteria of searchCriteriaOptions">
+                                        {{ criteria }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="filter-space">
+                        <input [formControl]="searchControl" type="search" autofocus class="searchInput " placeholder=" {{selectedSearchCriteria}}" />
+                    </div>
+
+                    <div class="col-md-4 status-filter">
+                        <div class="middle-xs">
+                            <div>
+                                Status Filter:
+                                <mat-radio-group>
+                                    <mat-radio-button value="auto" *ngFor="let item of appointmentStatus" (change)="onStatusChanged($event.value)"
+                                        [checked]="false" [value]="item">{{item}}</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tbl-resp-wrap">
+                <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5">
+                    <thead>
+                        <tr class="th-r1 th-xxx">
+                            <th>S/N</th>
+                            <th>Provider</th>
+                            <th>Date / Time</th>
+                            <th>Patient Name</th>
+                            <th>APMIS ID</th>
+                            <th>Phone</th>
+                            <th>Appointment Type</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="!isAppointmentLoading">
+                            <span *ngIf="fileteredAppointments.length < 1"><i>There are currently no records to show</i></span>
+                        <tr class="th-xxx" *ngFor="let item of fileteredAppointments; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.provider}}</td>
+                            <td>{{item.time | date:'shortDate'}}</td>
+                            <td> {{item.patientName}} </td>
+                            <td>{{item.apmisId}}</td>
+                            <td>{{item.phone}}</td>
+                            <td>{{item.appointmentType}}</td>
+                            <td>{{item.status}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="isAppointmentLoading">
+                        <tr class="th-xxx">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div><i class="fa fa-spinner fa-spin"></i></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <mat-paginator [length]="100" [pageSize]="30" [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

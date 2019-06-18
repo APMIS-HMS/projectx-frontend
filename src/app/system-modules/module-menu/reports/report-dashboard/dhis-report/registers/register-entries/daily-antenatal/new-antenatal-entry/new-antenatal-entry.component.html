@@ -1,0 +1,366 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+      <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+      <legend class="modal_title">Daily Ante Natal Data Entry</legend>
+      <div class="modal_mini_title">Continental Hospital</div>
+  </div>
+  <div class="modal-baseWrap">
+    <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+    <!-- <app-new-antenatal-pg1 (newpg1)="pg2()" ngIf="newPg1"></app-new-antenatal-pg1>
+    <app-new-antenatal-pg2 (newpg2)="save()" ngIf="newPg2"></app-new-antenatal-pg2> -->
+
+    <form class="frm-down" [formGroup]="frm_UpdateCourse" novalidate>
+      <div>
+        <div class="form-group">
+          <label for="session">Patient</label>
+          <select formControlName="patient">
+            <option>Sam Dede</option>
+          </select>
+        </div>
+        <div class="check-group">
+          <div class="form-group">
+            <label class="check-group-label">Type of Visit</label>
+            <div class="sel-wrap">
+              <div class="pretty p-default p-round">
+                <input type="radio" name="radio1">
+                <div class="state">
+                    <label>ANC</label>
+                </div>
+              </div>
+              <div class="pretty p-default p-round">
+                <input type="radio" name="radio1">
+                <div class="state">
+                    <label>PNC</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="check-group-label">Antenatal Clinic Atendance</label>
+            <div class="sel-wrap">
+              <div class="pretty p-default p-round">
+                <input type="radio" name="attendance">
+                <div class="state">
+                    <label>N</label>
+                </div>
+              </div>
+              <div class="pretty p-default p-round">
+                <input type="radio" name="attendance">
+                <div class="state">
+                    <label>R</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="pregnancyAge">Parity</label>
+            <input type="number" formControlName="parity"> 
+          </div>
+        </div>
+      </div>
+      <div class="frm-x2">
+        <div class="form-group">
+          <label for="pregnancyAge">Age of Pregnancy (in weeks)</label>
+          <input type="number" formControlName="pregnancyAge"> 
+        </div>
+        <div class="form-group">
+          <label for="pregnancyAge">No. of antenatal clinic visit(s) to date</label>
+          <input type="number" formControlName="pregnancyAge"> 
+        </div>
+      </div>
+      <div class="check-group">
+        <div class="form-group">
+          <label class="check-group-label">ANC HIV counseling & testing</label>
+          <div class="sel-wrap">
+            <div class="pretty p-default p-round">
+              <input type="radio" name="anc-counceling">
+              <div class="state">
+                  <label>Previously known HIV positive status</label>
+              </div>
+            </div>
+            <div class="pretty p-default p-round">
+              <input type="radio" name="anc-counceling">
+              <div class="state">
+                  <label>ANC HIV counseled tested and received result</label>
+              </div>
+            </div>
+          </div>
+          <div class="sel-wrap">
+            <div class="pretty p-default p-round">
+              <input type="radio" name="anc-counceling">
+              <div class="state">
+                  <label>ANC HIV counseled tested and received result</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="check-group">
+        <div class="form-group">
+          <label class="check-group-label">
+            <div>ANC Partners' Testing</div>
+            <div class="label-b">Partners of HIV pos. pregnant women</div>
+          </label>
+          <div class="sel-wrap">
+            <div class="pretty p-default p-round">
+              <input type="radio" name="ancPartner">
+              <div class="state">
+                  <label>Tested Negative</label>
+              </div>
+            </div>
+            <div class="pretty p-default p-round">
+              <input type="radio" name="ancPartner">
+              <div class="state">
+                  <label>Tested Posetive</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="check-group-label">
+              <div>ANC Partners' Testing</div>
+              <div class="label-b">Partners of HIV neg. pregnant women</div>
+            </label>
+            <div class="sel-wrap">
+              <div class="pretty p-default p-round">
+                <input type="radio" name="ancPartner2">
+                <div class="state">
+                    <label>Tested Negetive</label>
+                </div>
+              </div>
+              <div class="pretty p-default p-round">
+                <input type="radio" name="ancPartner2">
+                <div class="state">
+                    <label>Tested Posetive</label>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      
+      <div class="check-group">
+        <div class="form-group">
+          <label class="check-group-label">
+            <div>Syphilis Testing & Treatment</div>
+            <div class="label-b">Testing</div>
+          </label>
+          <div class="sel-wrap">
+            <div class="pretty p-default p-round">
+              <input type="radio" name="syphilisTesting">
+              <div class="state">
+                  <label>Not Done</label>
+              </div>
+            </div>
+            <div class="pretty p-default p-round">
+              <input type="radio" name="syphilisTesting">
+              <div class="state">
+                  <label>Posetive</label>
+              </div>
+            </div>
+            <div class="pretty p-default p-round">
+              <input type="radio" name="syphilisTesting">
+              <div class="state">
+                  <label>Negetive</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="check-group-label">
+              <div> Syphilis Testing & Treatment</div>
+              <div class="label-b">Treated</div>
+            </label>
+            <div class="sel-wrap">
+              <div class="pretty p-default p-round">
+                <input type="radio" name="syphilisTesting2">
+                <div class="state">
+                    <label>Tested Negetive</label>
+                </div>
+              </div>
+              <div class="pretty p-default p-round">
+                <input type="radio" name="syphilisTesting2">
+                <div class="state">
+                    <label>Tested Posetive</label>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <hr>
+
+      <div class="frm-x2">
+        <div class="form-group">
+          <label for="pregnancyAge"> HB/PCV</label>
+          <input type="number" formControlName="pregnancyAge"> 
+        </div>
+      </div>
+      <div class="check-group">
+        <div class="form-group frm-x2">
+          <div class="sel-wrap">
+            <label class="check-group-label">
+              <div>Urinalysis</div>
+              <div class="label-b">Sugar</div>
+            </label>
+            <input type="number" formControlName="urinalysisSugar"> 
+          </div>
+          <div class="sel-wrap">
+            <label class="check-group-label">
+              <div class="txt-transparent">.</div>
+              <div class="label-b">Protien</div>
+            </label>
+            <input type="number" formControlName="urinalysisProtien"> 
+          </div>
+        </div>
+      </div>
+      <div class="check-group">
+        <div class="form-group">
+          <label class="check-group-label">
+            <div> Doses of IPT given</div>
+            <div class="txt-transparent">.</div>
+          </label>
+          <div class="sel-wrap">
+            <div class="pretty p-default">
+              <input type="checkbox" />
+              <div class="state">
+                  <label>First</label>
+              </div>
+            </div>
+            <div class="pretty p-default">
+              <input type="checkbox" />
+              <div class="state">
+                  <label>Second</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="check-group-label">
+            <div class="txt-transparent">.</div>
+            <div class="txt-transparent">.</div>
+          </label>
+          <div class="sel-wrap">
+            <div class="pretty p-default">
+              <input type="checkbox" />
+              <div class="state">
+                  <label>LLIN given</label>
+              </div>
+            </div>
+            <div class="pretty p-default">
+              <input type="checkbox" />
+              <div class="state">
+                  <label>Hematinics (IFAS) Given</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="check-group">
+        <div class="form-group">
+          <label class="check-group-label">
+            <div>Select TT</div>
+            <div class="txt-transparent">.</div>
+          </label>
+          <div class="sel-wrap">
+            <select formControlName="sel_tt">
+              <option>T1</option>
+              <option>T2</option>
+              <option>T3</option>
+              <option>T4</option>
+              <option>T5</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="check-group-label">
+            <div>Associated problems</div>
+            <div class="txt-transparent">.</div>
+          </label>
+          <div class="sel-wrap">
+            <input type="text" formControlName="problem"> 
+          </div>
+        </div>
+      </div>
+      <div class="check-group">
+        <div class="form-group" style="width:100%;">
+          <label class="check-group-label">
+            <div>Outcome of visit</div>
+            <div class="txt-transparent">.</div>
+          </label>
+          <div style="width:100%;" class="sel-wrap">
+            <div class="pretty p-default p-round">
+              <input type="radio" name="syphilisTesting">
+              <div class="state">
+                  <label>N</label>
+              </div>
+            </div>
+            <div class="pretty p-default p-round">
+              <input type="radio" name="syphilisTesting">
+              <div class="state">
+                  <label>TT</label>
+              </div>
+            </div>
+            <div class="pretty p-default p-round">
+              <input type="radio" name="syphilisTesting">
+              <div class="state">
+                  <label>A</label>
+              </div>
+            </div>
+            <div class="pretty p-default p-round">
+              <input type="radio" name="syphilisTesting">
+              <div class="state">
+                  <label>RO</label>
+              </div>
+            </div>
+            <input style="margin: 10px;" type="text" placeholder="reason for referal" formControlName="referalReason"> 
+          </div>
+        </div>
+      </div>
+      <div class="check-group">
+        <div class="form-group frm-x2">
+          <div class="sel-wrap">
+            <label class="check-group-label">
+              <div>Postnatal Care</div>
+              <div class="label-b">Mother & Newborn</div>
+              <div class="txt-transparent">.</div>
+            </label>
+            <select formControlName="postnatal1">
+              <option>1 Day</option>
+              <option>3 Days</option>
+              <option>7 Days & After</option>
+            </select>
+          </div>
+          <div class="sel-wrap">
+            <label class="check-group-label">
+              <div class="txt-transparent">.</div>
+              <div class="label-b">Newborn Care</div>
+              <div>Neonatal Complications</div>
+            </label>
+            <select formControlName="postnatal1">
+              <option>Neonatal Sepis</option>
+              <option>Neonatal Tetanus</option>
+              <option>Neonatal Jaundice</option>
+            </select>
+          </div>
+          <div class="sel-wrap">
+            <label class="check-group-label">
+              <div class="txt-transparent">.</div>
+              <div class="label-b">Newborn Care</div>
+              <div>KMC</div>
+            </label>
+            <select formControlName="postnatal1">
+              <option>A</option>
+              <option>DS</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    
+      <div class="btn-wrap-x2">
+        <button type="submit" (click)="next_onClick()" class="btn btn-primary">Next <i class="fa fa-arrow-right"></i></button>
+        <button (click)="view()" class="btn btn-danger">Cancel <i class="fa fa-times"></i></button>
+      </div>
+    </form>
+  </div>
+</div> 

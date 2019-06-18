@@ -1,0 +1,56 @@
+<div class="c-page-header">
+    <div class="top-button-box">
+        <ul class="topmenuwrap pull-right" (click)="goToFacility();">
+            <li tabindex="0">
+                <i class="fa fa-arrow-circle-o-right"></i>
+                <span>Create Ward</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<section class="c-page-body">
+    <div class="InPatients">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="table-head col-xs-1">
+                        S/N
+                    </div>
+                    <div class="table-head col-xs-4">
+                        Ward
+                    </div>
+                    <div class="table-head col-xs-4">
+                        Description
+                    </div>
+                    <div class="table-head col-xs-3">
+                        Number of Rooms
+                    </div>
+                </div>
+            </div>
+            <div class="card-content">
+                <div *ngIf="wards.length === 0 && !loading" class="row">
+                    <div class="card-list-item col-xs-12 table-list">
+                        No data available in table
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="wards.length === 0 && loading">
+                    <div class="card-list-item col-xs-12 table-list">
+                        <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue"></i>
+                    </div>
+                </div>
+                <div class="card-list-item" routerLink="/dashboard/ward-manager/setup/ward/{{ward._id}}" *ngFor="let ward of wards; let i = index">
+                    <div class="row">
+                        <div class="table-list col-xs-1">{{i+1}}</div>
+                        <div class="table-list col-xs-4">{{ward?.name}}</div>
+                        <div class="table-list col-xs-4">{{ward?.description}}</div>
+                        <div class="table-list col-xs-3">
+                            <span *ngIf="ward?.wardSetup === undefined">0</span>
+                            <span *ngIf="ward?.wardSetup !== undefined">{{ward.activeRoom}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

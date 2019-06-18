@@ -1,0 +1,68 @@
+<div class="pg-title">Administer Vaccine</div>
+<ul class="tree-ul">
+    <li class="empty-state" *ngIf="!loading && immunizationRecords.length === 0">There currently is no vaccine for this patient</li>
+    <li class="empty-state" *ngIf="loading && immunizationRecords.length === 0">
+        <div class="row">
+            <div class="table-list text-center col-xs-12">
+                <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+            </div>
+        </div>
+    </li>
+    <li class="tree-li" *ngFor="let immunizationRecord of immunizationRecords; let i = index;">
+        <div class="tree-node">
+            <!-- <div class="node-ico node-ico-parent">
+                <i (click)="node_toggle(immunizationRecord[0])" *ngIf="immunizationRecord[0] === currentDocument" class="fa fa-minus" aria-hidden="true"></i>
+                <i (click)="node_toggle(immunizationRecord[0])" *ngIf="immunizationRecord[0] !== currentDocument" class="fa fa-plus" aria-hidden="true"></i>
+            </div> -->
+
+            <!-- <div (click)="node_toggle(immunizationRecord[0])" class="node-date">{{ immunizationRecord[0] }}</div> -->
+            <div class="node-date">{{ immunizationRecord[0] }}</div>
+        </div>
+
+        <!-- <div class="node-content" *ngIf="should_show(immunizationRecord[0]) && immunizationRecord[0]===currentDocument "> -->
+        <div class="node-content">
+            <form [formGroup]="rescheduleForm" novalidate>
+                <ul class="vaccine-list">
+                    <li class="vaccine-item" *ngFor="let record of immunizationRecord[1]; let i=index;">
+                        <!-- <div *ngFor="let vaccine of rescheduleForm.controls['vaccinesArray'].controls;"> -->
+                        <div class="row-line">
+                            <div class="vac-label">{{ record?.vaccine?.code }} {{ record?.sequence }}</div>
+                            <div class="vac-cta">
+                                <button class="cta-blue" *ngIf="checkIfRecordIsToday(record?.appointmentDate) && !record?.administered" [disabled]="!checkIfRecordIsToday(record?.appointmentDate) || disableAdminister" (click)="onClickAdministerOrSuspendRecord(record);">
+                                    <span *ngIf="onAdminister"><i class="fa fa-check" aria-hidden="true"> </i>Administer</span>
+                                    <span *ngIf="onAdministering">Administering... <i class="fa fa-spinner fa-spin" aria-hidden="true"> </i></span>
+                                </button>
+                                <!-- <button class="cta-blue" (click)="onClickAdministerOrSuspendRecord(record);">
+                                <span><i class="fa fa-check" aria-hidden="true"> </i>Administer</span>
+                            </button> -->
+                                <button class="btn-green" *ngIf="record?.administered">
+                                    <span><i class="fa fa-check" aria-hidden="true"> </i>Administered</span>
+                                </button>
+                                <button class="cta-orange" *ngIf="!record?.administered" (click)="onShowResheduleBtn(record._id);"><i class="fa fa-repeat" aria-hidden="true"> </i>Reschedule</button>
+                            </div>
+                        </div>
+                        <div class="reschedule-box" *ngIf="reschedule && (rescheduleRecordId === record._id)">
+                            <div>
+                                <div class="box-title">
+                                    Reschedule Date
+                                </div>
+                                <div>
+                                    <mat-form-field>
+                                        <input matInput formControlName="appointmentDate" [matDatepicker]="picker" placeholder="Reschedule Date">
+                                        <mat-icon matSuffix>
+                                            <mat-datepicker-toggle mdSuffix [for]="picker"></mat-datepicker-toggle>
+                                        </mat-icon>
+                                    </mat-form-field>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                    <button class="btn-green" [disabled]="!rescheduleForm.valid" (click)="onClickSaveRescheduleBtn(record, rescheduleForm.valid, rescheduleForm.value);">
+                                        <span><i class="fa fa-check" aria-hidden="true"> </i>Save</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </li>
+</ul>

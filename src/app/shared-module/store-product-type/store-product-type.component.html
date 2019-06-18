@@ -1,0 +1,58 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Product Category Manager</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+        <form [formGroup]="categoryGroup">
+            <div class="row">
+                <div class="col-xs-12 enline">
+                    <div class="col-xs-8 form-group">
+                        <mat-input-container class="example-full-width">
+                            <input matInput mat-error placeholder="New Category" formControlName="name">
+                        </mat-input-container>
+                    </div>
+                    <div class="col-xs-2" style="margin-top:15px;">
+                        <button (click)="onClickAdd(categoryGroup.value, categoryGroup.valid)" class="btn btn-default btn-create" type="submit" aria-disabled="true">
+              {{ btnLabel }}
+            </button>
+                    </div>
+                    <div class="col-xs-2" style="margin-top:15px;">
+                        <button (click)="onClickCancel()" class="btn btn-default" type="submit">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-xs-12">
+                <input type="text" class="form-control" [formControl]="searchControl" placeholder="search here......" style=" border:none; border-bottom: solid 2px #519dde;
+                width:100%; padding: 5px 0px;">
+            </div>
+            <div style="padding-left: 5px;">
+                <span style="padding: 10px;
+                    border-radius: 25px;
+                    background: #519dde;
+                    color: #fff;
+                    margin: 3px;
+                    font-size: 1.3rem;
+                    box-shadow: 0px 3px 10px #dddddd;
+                    display: inline-block;" [style.background]="category.isActive ? '#519dde' : '#a35d5d'" *ngFor="let category of categories; let i=index" class="">
+          <i *ngIf="category.isActive" (click)="onClickIsActive(category)" class="fa fa-check fa-fw tooltip" data-tooltip="Active"></i>
+          <i *ngIf="!category.isActive" (click)="onClickIsActive(category)" class="fa fa-fw fa-ban tooltip" data-tooltip="Inactive"></i>
+          &nbsp;&nbsp; {{category.name}} &nbsp;&nbsp;
+          <i (click)="onClickEdit(category)" class="fa fa-pencil fa-fw tooltip" data-tooltip="Edit"></i>
+        </span>
+                <div class="col-xs-12" style="text-align:center; padding: 10px" *ngIf="categories.length == 0 && !loading">
+                    No category available
+                </div>
+                <div class="col-xs-12" style="text-align:center; padding: 10px; margin-top:5px;" *ngIf="categories.length == 0 && loading">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

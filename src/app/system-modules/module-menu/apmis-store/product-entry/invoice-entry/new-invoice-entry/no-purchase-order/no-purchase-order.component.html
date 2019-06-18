@@ -1,0 +1,152 @@
+<div class="sel-sup">
+  <div class="InputGroup" style="margin-left:30px;">
+    <input [formControl]="productConfigSearch" (focus)="onFocus('in')" (focusout)="onFocus('out')" class="customInput"
+      type="text" required>
+    <span class="highlight"></span>
+    <label class="customLabel">Search</label>
+    <ul class="search-sugestions" *ngIf="(showProduct && productConfigs.length > 0)">
+      <li *ngFor="let config of productConfigs" (click)="setSelectedOption(config)" class="search-sugestion">{{config.productObject.name}}</li>
+    </ul>
+  </div>
+  <div class="InputGroup dropDown-container">
+    <div class="select">
+      <select [formControl]="supplierFormControl" name="dropDown-container" id="dropDown-container">
+        <option value="0">Select Supplier</option>
+        <option *ngFor="let supplier of suppliers" [ngValue]="supplier">{{supplier.supplier.name}}</option>
+      </select>
+      <label class="customLabel">Supplier</label>
+    </div>
+  </div>
+  <div class="InputGroup" style="margin-left:30px;">
+    <input [formControl]="invoiceDate" class="customInput" type="date" required>
+    <span class="highlight"></span>
+  </div>
+</div>
+
+<div class="store-table">
+  <div class="store-thead">
+    <div class="store-tr">
+      <div class="store-th store-td-actions"></div>
+      <div class="config-tr-in in-tr">
+        <div class="store-th" style="grid-column: span 2">Products</div>
+        <div class="store-th">Quantity</div>
+        <div class="store-th">Cost/Unit</div>
+        <div class="store-th">Margin</div>
+        <div class="store-th">Selling Price</div>
+        <div class="store-th">Batch</div>
+        <div class="store-th">Expiry Date</div>
+      </div>
+      <div class="store-th store-td-actions"></div>
+    </div>
+  </div>
+
+  <div class="store-tbody">
+    <div class="store-pre-tr">
+      <div class="store-tr" *ngFor="let picked of selectedProducts">
+        <div class="store-td store-td-actions"></div>
+        <div class="config-tr-in in-tr">
+          <div class="store-td" style="grid-column: span 2">{{picked.productName}}</div>
+          <div class="store-td">{{picked.quantity}} packs</div>
+          <div class="store-td">{{picked.costPrice}} packs</div>
+          <div class="store-td">{{picked.margin}}</div>
+          <div class="store-td">#{{picked.sellingPrice}}</div>
+          <div class="store-td">{{picked.batchNumber | uppercase }}</div>
+          <div class="store-td">{{picked.expiryDate | date:'shortDate'}}</div>
+        </div>
+        <div class="store-td store-td-actions">
+          <div class="table-list col-xs-1 action-placeholder">
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            <div class="action-container shadow-RB">
+              <div class="action-item">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                <span>Edit</span>
+              </div>
+              <div class="action-item">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <span>Delete</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="store-pre-tr">
+      <div *ngIf="newOrder!== undefined" class="store-tr">
+        <div class="store-td store-td-actions"></div>
+        <div class="config-tr-in in-tr">
+          <div class="store-td" style="grid-column: span 2">
+            <div class="searchproduct">
+              <div class="InputGroup">
+                <input [myFocus]="inIsProductFocused" [formControl]="inProductConfigSearch" (focus)="inOnFocus('in')"
+                  (focusout)="inOnFocus('out')" class="customInput" type="text">
+                <ul class="search-sugestions bar" *ngIf="inShowProduct && inProductConfigs.length > 0">
+                  <li *ngFor="let config of inProductConfigs" (click)="inSetSelectedOption(config)" class="search-sugestion">{{config.productObject.name}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="store-td">
+            <div class="InputGroup" style="width:60px;">
+              <input [formControl]="quantityFormControl" (keydown.enter)="inOnKeydown($event, 5)" [myFocus]="inIsQuantityFocused"
+                class="customInput" type="number" min="0">
+            </div>
+          </div>
+          <div class="store-td">
+            <div class="InputGroup" style="width:60px;">
+              <input [formControl]="costPriceFormControl" (keydown.enter)="inOnKeydown($event, 6)" [myFocus]="inIsCostPriceFocused"
+                class="customInput" type="number" min="0">
+            </div>
+          </div>
+          <div class="store-td">
+            <div class="InputGroup" style="width:60px;">
+              <input [formControl]="marginFormControl" (keydown.enter)="inOnKeydown($event, 1)" [myFocus]="inIsMarginFocused"
+                class="customInput" type="number" max="100" min="0">
+            </div>
+          </div>
+          <div class="store-td">
+            <div class="InputGroup" style="width:60px;">
+              <input [formControl]="sellingPriceFormControl" (keydown.enter)="inOnKeydown($event, 2)" [myFocus]="inIsSellingPriceFocused"
+                class="customInput" type="number">
+            </div>
+          </div>
+          <div class="store-td">
+            <div class="InputGroup" style="width:60px;">
+              <input [formControl]="batchFormControl" (keydown.enter)="inOnKeydown($event, 3)" [myFocus]="inIsBatchFocused"
+                class="customInput" type="text">
+            </div>
+          </div>
+          <div class="store-td">
+            <div class="InputGroup" style="width:100px;">
+              <input [formControl]="expiryDateFormControl" (keydown.enter)="inOnKeydown($event, 4)" [myFocus]="inIsExpiryDateFocused"
+                class="customInput" type="date">
+            </div>
+          </div>
+        </div>
+        <div class="store-td store-td-actions">
+          <div class="table-list col-xs-1 action-placeholder">
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            <div class="action-container shadow-RB">
+              <div class="action-item">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                <span>Edit</span>
+              </div>
+              <div class="action-item">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <span>Delete</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="store-tr">
+        <div class="store-td"></div>
+        <div class="store-td">
+          <div class="link-cta" (click)="addNewOrder()">
+            <i class="fa fa-plus"></i>
+            <span>Add another item to the purchase order</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

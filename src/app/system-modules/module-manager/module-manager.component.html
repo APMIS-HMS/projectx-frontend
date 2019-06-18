@@ -1,0 +1,45 @@
+<div class="secondary-tab">
+  <div class="inner-wrap inner-wrap-sec">
+
+    <ul class="menu-options">
+      <li>
+        <span [class.submenuActive]="newModuleSubmenuActive">
+          New Module
+          <i *ngIf="newModuleSubmenuActive" class="fa fa-sort-asc" aria-hidden="true"></i>
+        </span>
+      </li>
+      <li>
+        <span [class.submenuActive]="allModulesSubmenuActive">
+          All Modules
+          <i *ngIf="allModulesSubmenuActive" class="fa fa-sort-asc" aria-hidden="true"></i>
+        </span>
+      </li>
+      <li >
+        <span [class.submenuActive]="moduleAnalyticsSubmenuActive">
+          Analytics
+          <i *ngIf="moduleAnalyticsSubmenuActive" class="fa fa-sort-asc" aria-hidden="true"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="inner-wrap-b body-wrap">
+    <div class="facility-title">Page Title</div>
+  
+    <div class="inner-page-wrap">
+
+        <div class="lhs inner-page-menuTab">
+            <ul class="nav-group">
+                <li  (click)="navFpScope()" [routerLink]="['/dashboard/module-manager/scope']">Scope</li>
+                <li  (click)="navFpType()" [routerLink]="['/dashboard/module-manager/type']">Doc Type</li>
+            </ul>
+        </div>
+        
+        <app-option-scope-level  *ngIf="scopeContentArea" class="rhs inner-page-contentArea"></app-option-scope-level>
+        <app-option-document-type  *ngIf="typeContentArea" class="rhs inner-page-contentArea"></app-option-document-type>
+        <div class="clear"></div>
+        
+    </div> 
+</div>
+

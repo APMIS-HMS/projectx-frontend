@@ -1,0 +1,19 @@
+.modal-baseWrap{
+    width:500px;
+}
+.btn-box {
+    display: flex;
+    justify-content: center;
+}
+
+.fileUploadCount {
+    position: relative;
+    float: left;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.fileUploadCount span{
+    font-size: 24px;
+    font-weight: bolder;
+}

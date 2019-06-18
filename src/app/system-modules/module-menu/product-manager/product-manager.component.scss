@@ -1,0 +1,196 @@
+.inner-page-contentArea {
+    padding: 0 !important;
+}
+
+.menuContent {
+    width: 73%;
+}
+
+.inner-menu1-wrap {
+    top: 10px;
+    right: auto;
+    left: 0px;
+    z-index: 2;
+}
+
+.content-sec-ico {
+    font-size: 2rem;
+    color: #757575;
+    padding: 4px;
+    width: 21px;
+    height: 21px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-sec-ico:hover,
+.content-sec-icoActive {
+    background: #F5F5F5;
+    color: #4bb8ef;
+}
+
+.inner-menu1-wrap {
+    top: 10px;
+    right: 10px;
+    left: auto;
+}
+
+.inner-menu1-wrap .innerMenu-ul {
+    margin-top: 33px;
+}
+
+.content-sec-ico {
+    position: absolute;
+    right: 0;
+}
+
+#inner-page-wrap {
+    margin-top: 30px !important;
+}
+
+.navActive {
+    border: 1.5px solid #fff;
+}
+
+navActive.active {
+    border: 1.5px solid #fff;
+}
+
+.btning-product {
+    border: 1px solid #0288d1;
+}
+
+.c-page-wrapper {
+    border: none;
+}
+
+.main-wrapper {
+    width: 100%;
+    display: flex;
+    .content-sect {
+        width: 100%;
+        padding: 20px;
+        .bar-1 {
+            display: flex;
+            justify-content: space-between;
+            .post-ql-open {
+                position: relative;
+                background: #03A9F4;
+                width: 45px;
+                margin-right: -20px;
+                border-top-left-radius: 100%;
+                border-bottom-left-radius: 100%;
+                .ql-tip {
+                    display: block;
+                    position: absolute;
+                    right: 48px;
+                    display: none;
+                    background: rgba(0, 0, 0, 0.5);
+                    color: #fff;
+                    padding: 5px;
+                    font-size: 1.2rem;
+                }
+                &:hover {
+                    .ql-tip {
+                        display: block;
+                    }
+                }
+            }
+        }
+        .active-store {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2866b3;
+        }
+        .pg-labels-wrap {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            .main-title {
+                font-size: 1.8rem;
+                color: #777;
+                font-weight: bold;
+            }
+            .labels-right {
+                display: flex;
+                font-size: 1.4rem;
+                color: #777;
+                font-weight: bold;
+                .label-right {
+                    cursor: pointer;
+                    margin-left: 20px;
+                    border-bottom: 1px solid transparent;
+                    color: #2866b3;
+                    font-size: 1.4rem;
+                    &:hover {
+                        border-bottom: 1px solid #777;
+                    }
+                }
+            }
+        }
+    }
+    .store-quick-link-box {}
+}
+
+.ql-wrap {
+    position: relative;
+}
+
+.ql-open {
+    font-size: 1.6rem;
+    background: #03A9F4;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+@-webkit-keyframes rotating
+/* Safari and Chrome */
+
+{
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotating {
+    from {
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.rotating {
+    -webkit-animation: rotating 2s linear infinite;
+    -moz-animation: rotating 2s linear infinite;
+    -ms-animation: rotating 2s linear infinite;
+    -o-animation: rotating 2s linear infinite;
+    animation: rotating 2s linear infinite;
+}

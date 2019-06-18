@@ -1,0 +1,21 @@
+.card-title {
+    font-size: 1.4rem;
+    color: #194985;
+    text-decoration: underline;
+}
+.tbl-top-items{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0 6px 0;
+    align-items: flex-end;
+}
+.config-ul {
+    display: flex;
+    li{
+        padding: 5px 10px;
+        background: #eee;
+        border: 1px solid #777;
+        border-radius: 10px;
+        margin-right: 5px;
+    }
+}

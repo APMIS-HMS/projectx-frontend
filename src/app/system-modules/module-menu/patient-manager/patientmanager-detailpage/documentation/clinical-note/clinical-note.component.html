@@ -1,0 +1,239 @@
+<div class="frmNoteWrap">
+    <legend class="modal_title">Clinical Note</legend>
+    <div *ngIf="isSavingDraft" class="save-blinker">...saving draft</div>
+
+    <div (click)="docSymptom_show()">
+        <ul *ngIf="showDocument" class="links-ul">
+            <li ><div >
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>Symptoms</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!--  Web Speech Notification -->
+    <div style="float: right; margin-bottom: 4px;">        
+        <mat-card *ngIf="notification" class="notification">{{notification}}</mat-card>         
+    </div>
+       
+
+    <div class="docCard-header">        
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Select Document" [matAutocomplete]="autoForm" [formControl]="selectFormCtrl">
+                <mat-autocomplete #autoForm="matAutocomplete" [displayWith]="formDisplayFn">
+                    <mat-option *ngFor="let form of forms" [value]="form">
+                        {{ form.title }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+
+        <div class="frm-item-wrap">
+            <mat-form-field>
+                <mat-select placeholder="Select Template" [formControl]="templateFormCtrl">
+                    <mat-option *ngFor="let item of templates" [value]="item">{{item.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <div class="val-tag">Status</div>
+            <div class="list-label">Draft</div>
+        </div>
+
+        <!--  Web Speech Microphone -->
+        <div>                   
+            <button mat-mini-fab (click)="startButton($event)">
+                <i class="fa fa-microphone" aria-hidden="true" *ngIf="!recognizing"></i>            
+                <i class="fa fa-stop" aria-hidden="true" *ngIf="recognizing"></i>            
+            </button>         
+        </div>
+
+        <div class="empWrap">
+            <div class="list-img">
+                <img *ngIf="patient?.personDetails?.profileImageObject === undefined" src="assets/images/users/default.png">
+                <div *ngIf="patient?.personDetails?.profileImageObject !== undefined">
+                    <img class="shadow" [src]="(patient?.personDetails?.profileImageObject?.thumbnail)">
+                </div>
+            </div>
+            <div>
+                <div class="val-tag">Patient</div>
+                <div class="list-label">{{patient.personDetails?.personFullName}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cont-wrap">
+        <div class="docCard-body">
+            <div *ngIf="!showDocument" style="width:100%; text-align:center; font-size: 1.2rem; color:#bebebe; margin:20px auto;">No
+                Documentation form loaded</div>
+            <div *ngIf="symptoms.length !== 0">Symptoms
+                <br>
+                <button *ngFor="let symptom of symptoms" class="tags">{{symptom.symptom}}&nbsp;x {{symptom.symptomDuration}}{{symptom.durationUnit}}
+                    <i (click)="deleteSymptom(symptom)" class="fa fa-close"></i>
+                </button>
+            </div>
+            <div *ngIf="diagnoses.length > 0 && viewDiagnosis && showDocument" class="modal-overlay">
+                <div class="diagnosis-view">
+                    <div class="animated pulse">
+                        <div class="modal-header-wrap">
+                            <div (click)="docDiagnosisView()" class="modal-close-ico" aria-hidden="true">X</div>
+                            <legend class="modal_title">DIAGNOSIS</legend>
+                            <div class="modal_mini_title">All Purpose Medical Information System</div>
+                        </div>
+                        <div class="modal-baseWrap">
+                            <button *ngFor="let diagnosis of diagnoses" class="tags">{{diagnosis.name}}&nbsp;
+                                <i (click)="deleteDiagnosis(diagnosis)" class="fa fa-close"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Load form here  -->
+
+            <div class="jsonFrnWrap" *ngIf="showDocument">
+                <survey id="clinicSurvey" #surveyjs [json]="json"></survey>
+
+                <div class="actWrappers-jsonFrm">
+                    <div (click)="docDiagnosis_show()" class="atch-orderSet">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <span>Diagnosis</span>
+                    </div>
+                    <div (click)="showOrderset_onClick()" class="atch-orderSet">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <span>Plan</span>
+                    </div>
+                </div>
+
+                <div *ngIf="diagnoses.length !== 0 || orderSet?.medications!==undefined || orderSet?.investigations!==undefined || orderSet?.nursingCares!==undefined || orderSet?.procedures!==undefined || orderSet?.physicianOrders!==undefined"
+                    class="actWrappers-jsonFrm-view">
+                    <div *ngIf="diagnoses.length !== 0" (click)="docDiagnosisView()" class="atch-orderSet">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        <span> View Diagnosis</span>
+                    </div>
+                    <div (click)="viewOrderset_onClick()" *ngIf="orderSet?.medications!==undefined || orderSet?.investigations!==undefined || orderSet?.nursingCares!==undefined || orderSet?.procedures!==undefined || orderSet?.physicianOrders!==undefined"
+                        class="atch-orderSet">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        <span>View Orders</span>
+                    </div>
+                </div>
+
+                <div *ngIf="viewOrderManagement" class="modal-overlay">
+                    <div *ngIf="orderSet?.medications!==undefined || orderSet?.investigations!==undefined || orderSet?.nursingCares!==undefined || orderSet?.procedures!==undefined || orderSet?.physicianOrders!==undefined">
+                        <div class="order-set">
+                            <div class="animated pulse">
+                                <div class="modal-header-wrap">
+                                    <div (click)="viewOrderset_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+                                    <legend class="modal_title">ORDERS</legend>
+                                    <div class="modal_mini_title">All Purpose Medical Information System</div>
+                                </div>
+                                <div class="modal-baseWrap">
+                                    <div class="tbl-listWrap" *ngIf="orderSet?.medications!==undefined">
+                                        <div class="sect-title">Medications</div>
+                                        <table cellpadding="0" cellspacing="0" border="0.5">
+                                            <tbody>
+                                                <tr *ngIf="orderSet?.medications === undefined || orderSet?.medications.length === 0">
+                                                    <td class="text-center" colspan="3"> No data available in table</td>
+                                                </tr>
+                                                <tr *ngFor="let medication of orderSet?.medications; let i = index;">
+                                                    <td style="text-align:center;width: 30px;"> {{ i+1 }}</td>
+                                                    <td>{{ medication.genericName }} - {{ medication.dosage }} {{
+                                                        medication.dosageUnit }} {{ medication.frequency }} for {{
+                                                        medication.duration }} {{ medication.durationUnit }}</td>
+                                                    <td class="action-placeholder" style="text-align:center;width: 25px;">
+                                                        <i class="fa fa-close" aria-hidden="true"></i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tbl-listWrap" *ngIf="orderSet?.investigations!==undefined">
+                                        <div class="sect-title">Investigations</div>
+                                        <table cellpadding="0" cellspacing="0" border="0.5">
+                                            <tbody>
+                                                <tr *ngIf="orderSet?.investigations === undefined || orderSet?.investigations.length === 0">
+                                                    <td class="text-center" colspan="3"> No data available in table</td>
+                                                </tr>
+                                                <tr *ngFor="let investigation of orderSet?.investigations; let i = index;">
+                                                    <td style="text-align:center;width: 30px;"> {{ i+1 }}</td>
+                                                    <td>{{ investigation.name }}</td>
+                                                    <td class="action-placeholder" style="text-align:center;width: 25px;">
+                                                        <i class="fa fa-close" aria-hidden="true"></i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tbl-listWrap" *ngIf="orderSet?.nursingCares!==undefined">
+                                        <div class="sect-title">Nursing Care</div>
+                                        <table cellpadding="0" cellspacing="0" border="0.5">
+                                            <tbody>
+                                                <tr *ngIf="orderSet?.nursingCares === undefined || orderSet?.nursingCares.length === 0">
+                                                    <td class="text-center" colspan="3"> No data available in table</td>
+                                                </tr>
+                                                <tr *ngFor="let nursingCare of orderSet?.nursingCares;let i = index;">
+                                                    <td style="text-align:center;width: 30px;"> {{ i+1 }}</td>
+                                                    <td> {{ nursingCare.name }} </td>
+                                                    <td class="action-placeholder" style="text-align:center;width: 25px;">
+                                                        <i class="fa fa-close" aria-hidden="true"></i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tbl-listWrap" *ngIf="orderSet?.physicianOrders!==undefined">
+                                        <div class="sect-title">Physician Order</div>
+                                        <table cellpadding="0" cellspacing="0" border="0.5">
+                                            <tbody>
+                                                <tr *ngIf="orderSet?.physicianOrders === undefined || orderSet?.physicianOrders.length === 0">
+                                                    <td class="text-center" colspan="3"> No data available in table</td>
+                                                </tr>
+                                                <tr *ngFor="let physicianOrder of orderSet?.physicianOrders;let i = index;">
+                                                    <td style="text-align:center;width: 30px;"> {{ i+1 }}</td>
+                                                    <td> {{ physicianOrder.name }} </td>
+                                                    <td class="action-placeholder" style="text-align:center;width: 25px;">
+                                                        <i class="fa fa-close" aria-hidden="true"></i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tbl-listWrap" *ngIf="orderSet?.procedures!==undefined">
+                                        <div class="sect-title">Procedure</div>
+                                        <table cellpadding="0" cellspacing="0" border="0.5">
+                                            <tbody>
+                                                <tr *ngIf="orderSet?.procedures === undefined || orderSet?.procedures.length === 0">
+                                                    <td class="text-center" colspan="3"> No data available in table</td>
+                                                </tr>
+                                                <tr *ngFor="let procedure of orderSet?.procedures;let i = index;">
+                                                    <td style="text-align:center;width: 30px;"> {{ i+1 }}</td>
+                                                    <td> {{ procedure.name }} </td>
+                                                    <td class="action-placeholder" style="text-align:center;width: 25px;">
+                                                        <i class="fa fa-close" aria-hidden="true"></i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showOrderSet" class="modal-overlay">
+    <app-order-set (closeModal)="close_onClick($event)" class="form-modal center-center" [treatmentSheetId]="currTreatmentSheet" (currentTreatmentId)="changeTreatmentId($event)"></app-order-set>
+</div>
+<div *ngIf="docSymptom_view" class="modal-overlay">
+    <app-doc-symptom (symptom)="addSymptom($event)" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-doc-symptom>
+</div>
+<div *ngIf="docDiagnosis_view" class="modal-overlay">
+    <app-doc-diagnosis (diagnosis)="addDiagnosis($event)" (removediagnosis)="removeDiagnosis($event)" (closeModal)="close_onClick($event)"
+        id="form-modal" class="form-modal center-center"></app-doc-diagnosis>
+</div>

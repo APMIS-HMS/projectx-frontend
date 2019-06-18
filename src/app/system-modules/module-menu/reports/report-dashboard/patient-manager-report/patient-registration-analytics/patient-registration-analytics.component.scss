@@ -1,0 +1,79 @@
+.pg-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    .chart-item {
+        width: 49%;
+        padding: 10px;
+        border: 1px solid #eee;
+        box-sizing: border-box;
+        margin-top: 15px;
+        .chart-label {
+            margin: 10px 0 30px 0;
+            font-size: 1.4rem;
+            color: #777;
+            font-style: italic;
+            font-weight: bold;
+        }
+    }
+}
+
+.pieSize {
+    width: 440px;
+    height: 440px;
+}
+
+.pg-rap {
+    margin: 40px 0;
+}
+
+.analytics-cards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .analytic-card {
+        //margin-top: 20px !important;
+        background: #f8f8f8;
+        border: 1px solid #ddd;
+        padding: 10px;
+        width: 24%;
+        height: 100px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        .sect-bottom,
+        .sect-top {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .sect-top {
+            width: 35%;
+            background: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ccc;
+        }
+        .sect-bottom {
+            width: 65%;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 1.3rem;
+            font-style: italic;
+            line-height: 1.4;
+        }
+    }
+}
+
+.tbl-resp-wrap {
+    margin-top: 15px;
+    padding: 4px 4px 4px 4px;
+}
+
+.thead {
+    background: #337ab7 !important;
+}

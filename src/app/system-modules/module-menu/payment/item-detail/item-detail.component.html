@@ -1,0 +1,42 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Item Detail</legend>
+    <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+  <div class="modal-baseWrap">
+
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <div class="headWrap">
+      <div class="service-name">{{selectedBillItem.itemName}}</div>
+      <div class="service-cat">{{selectedBillItem.itemDesc}}</div>
+
+      <div class="itemInfoWrap">
+        <div class="infoItem">
+          <div class="infoTitle">Quantity</div>
+          <div class="infoData">{{selectedBillItem.qty}}</div>
+        </div>
+        <div class="infoItem striped">
+          <div class="infoTitle">Unit Price</div>
+          <div class="infoData">{{selectedBillItem.unitPrice | number:'1.2-2'}}</div>
+        </div>
+        <div class="infoItem">
+          <div class="infoTitle">Total Price</div>
+          <div class="infoData">{{selectedBillItem.amount | number:'1.2-2'}}</div>
+        </div>
+        <!--<div class="infoItem striped">
+          <div class="infoTitle">Modified Price</div>
+          <div class="infoData">N2,000</div>
+        </div>-->
+      </div>
+    </div> 
+    <div class="tags">
+      <div class="tagsTtile">Applied Modifiers</div>
+      <div class="tag" *ngFor="let modifier of selectedBillItem.modifiers">
+        <div class="closeTag"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <span>{{modifier.tagDetails.name}}</span>
+        <span>{{modifier.modifierValue}}<i *ngIf="modifier.modifierType=='Percentage'">%</i><i *ngIf="modifier.modifierType!='Percentage'">Naira</i></span>
+      </div>
+    </div>
+  </div>
+</div>

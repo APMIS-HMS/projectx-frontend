@@ -1,0 +1,47 @@
+@import "./../../clinic-management-report/diagnosis/diagnosis.component.scss";
+
+
+
+.baseWrap{
+    display: grid;
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 50px;
+    margin-left: 30px;
+    align-items: center;
+}
+
+.details{
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px #888;
+    height: 200px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+.totalPayment{
+    font-size: 50px;
+    font-weight: bold;
+}
+span{
+    font-size: 10px;
+    font-weight: bold;
+}
+
+i{
+    text-align-last: right;
+    margin-left: 165px;
+    text-decoration: underline;
+}
+i:hover{
+    color: blue;
+    cursor: pointer;
+}
+
+.pieChart{
+    display: block !important;
+    width: 400px !important;
+    height: 400px !important;
+}

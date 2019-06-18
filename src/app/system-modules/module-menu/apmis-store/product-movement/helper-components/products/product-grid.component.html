@@ -1,0 +1,55 @@
+<div   class="store-table" *ngIf="selectedStore && selectedStore !== '' ; else showThis;">
+    <div class="store-thead">
+        <div class="store-tr">
+            <div class="store-th store-td-actions">
+                <input *ngIf="!showStatus" type="checkbox" [formControl]="checkAll" 
+                       />
+            </div>
+            <div class="store-tr-in">
+                <div class="store-th">Product</div>
+                <div class="store-th">Qty Available</div>
+                <div class="store-th">Qty On Hold</div>
+                <div class="store-th">Qty To Send</div>
+                <div class="store-th">Unit Price</div>
+                <div class="store-th">Amount</div>
+                <div class="store-th" *ngIf="showStatus"></div>
+            </div>
+            <div class="store-th store-td-actions"></div>
+        </div>
+    </div>
+
+    <div class="store-tbody" style="min-height: 300px;">
+        <div class="store-pre-tr">
+            <product-grid-item (onRemove)="removeItem($event, item)"
+                               [storeId]="selectedStore" 
+                               [showStatus]="showStatus || false"
+                               (dblclick)="manageEditting(item)" 
+                               #item *ngFor="let p of products" 
+                               [data]="p"></product-grid-item>
+            
+            <div class="store-tr" *ngIf="!showStatus">
+                <div class="tbl-cont-cta" (click)="addNewItem()"><i class="fa fa-plus"></i> Add Another Item</div>
+            </div>
+        </div>
+      
+    </div>
+    <!-- <app-apmis-pagination></app-apmis-pagination> -->
+</div>
+<ng-template #showThis>
+    <div style="" class="store-table" >
+        <div style="min-height: 120px;font-size  : 26px; color : #bdbdc0; 
+        display : flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items:  center;
+       "> 
+            <!--text-shadow: 1px 0px 5px #838383;-->
+            <span *ngIf="!showStatus">
+                You should select a Store First.
+            </span>
+            <span *ngIf="showStatus">
+                No Record to display. Please select a Store location then a Store.
+            </span>
+        </div>
+    </div>  
+</ng-template>

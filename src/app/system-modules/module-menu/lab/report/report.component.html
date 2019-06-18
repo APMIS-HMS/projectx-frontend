@@ -1,0 +1,480 @@
+<div class="pg-subtitle">REPORT</div>
+<div>
+    <div class="doc-mainWrap">
+        <div class="doc-contentArea">
+            <div class="row clinicalNoteWrap">
+                <div class="col-xs-12 actSect">
+                    <div class="act-actions-wrap">
+                        <div (click)="report_show()" class="act-wrap">
+                            <i *ngIf="report_view" class="fa fa-minus" aria-hidden="true"></i>
+                            <i [hidden]="report_view" class="fa fa-plus" aria-hidden="true"></i>
+                            <span>New Report</span>
+                        </div>
+                    </div>
+                    <div *ngIf="report_view">
+                        <div class="col-xs-12">
+                            <div class="frm-l" style="background : white; border: none; border-radius: 0px;" [class.frm-container-l]="!patientSelected">
+                                <!-- <div class="col-xs-6">
+                                    <form [formGroup]="patientFormGroup" novalidate>
+                                        <apmis-lookup formControlName="patient" [(ngModel)]="apmisLookupText" [url]="apmisLookupUrl" [query]="apmisLookupQuery" placeholder="Search for patient" [isSocket]="true" [displayKey]="apmisLookupDisplayKey" [displayImage]="true" [imgObj]="apmisLookupImgKey"
+                                            [multipleKeys]="true" [otherKeys]="apmisLookupOtherKeys" (selectedItem)="apmisLookupHandleSelectedItem($event)"></apmis-lookup>
+                                    </form>
+                                </div> -->
+                                <div class="selected-patient-wrap" *ngIf="patientSelected">
+                                    <div>
+                                        <img style="height: 40px; width: 40px;" *ngIf="selectedPatient?.profileImageObject == undefined" src="assets/images/users/default.png">
+                                        <img style="height: 40px; width: 40px;" class="shadow" *ngIf="selectedPatient?.profileImageObject != undefined" [src]="facilityService.transform(selectedPatient?.profileImageObject?.thumbnail)">
+                                    </div>
+                                    <h2 class="sel-patient-name">{{ selectedPatient?.firstName }} {{ selectedPatient?.lastName }}
+                                    </h2>
+                                    <h3 class="sel-patient-detaills">
+                                        {{ selectedPatient?.apmisId }} <span style="color:#0288D1; font-size: 1.4rem">|</span> {{ selectedPatient?.dateOfBirth | date: 'shortDate' }} <span style="color:#0288D1; font-size: 1.4rem">|</span> {{ selectedPatient?.gender
+                                        }}
+                                    </h3>
+                                </div>
+
+                                <h2 class="col-xs-12" style="text-align: center">Pending Requests</h2>
+                                <div class="row" *ngIf="pendingRequests.length > 0">
+                                    <div class="col-sm-12 col-md-12">
+                                        <button style="float: right;" class="refresh-payment btn btn-primary" (click)="onClickRefreshPaymentStatus();" [disabled]="disablePaymentBtn" [innerHtml]="paymentStatusText"></button>
+                                    </div>
+                                </div>
+                                <div class="pending-req-wrap">
+                                    <div class="card" *ngIf="patientSelected">
+                                        <div class="card-header">
+                                            <div class="row">
+                                                <div class="table-head col-xs-1">No</div>
+                                                <div class="table-head col-xs-3">Investigation</div>
+                                                <div class="col-xs-3 table-head">Date</div>
+                                                <div class="table-head col-xs-4">Status</div>
+                                                <div class="table-head col-xs-1"><i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i></div>
+                                            </div>
+                                            <div class="row" *ngIf="searchOpen">
+                                                <div class="col-xs-10">
+                                                    <input [formControl]="patientSearch" class="table-header-input" type="text" placeholder="Search for Patient">
+                                                </div>
+                                                <div class="col-xs-2 table-head">
+                                                    <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-list-item" *ngIf="pendingRequests.length === 0 && !pendingReLoading">
+                                                <div class="col-xs-12" style="text-align:center">
+                                                    No data available in table
+                                                </div>
+                                            </div>
+                                            <div class="card-list-item" *ngIf="pendingRequests.length === 0 && pendingReLoading">
+                                                <div class="col-xs-12" style="text-align:center">
+                                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                            <div class="card-list-item" [class.active]="activeInvestigationNo == i" *ngFor="let pendingRequest of pendingRequests; let i = index;" [class.active]="activeInvestigationNo == i" (click)="onClickInvestigation(pendingRequest, i);">
+                                                <div class="row">
+                                                    <div class="table-list col-xs-1">
+                                                        {{i+1}}
+                                                    </div>
+                                                    <div class="table-list col-xs-3">
+                                                        {{pendingRequest?.name}}
+                                                    </div>
+                                                    <div class="table-list col-xs-4">
+                                                        {{pendingRequest?.createdAt | date}}
+                                                    </div>
+                                                    <div class="table-list col-xs-4">
+                                                        <div class="status-item">
+                                                            <div class="status-label">Payment Made</div>
+                                                            <i *ngIf="pendingRequest.isPaid" class="fa fa-check isSample" aria-hidden="true"></i>
+                                                            <i *ngIf="!pendingRequest.isPaid" class="fa fa-minus notSample" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div class="status-item">
+                                                            <div class="status-label">Sample Taken</div>
+                                                            <i *ngIf="pendingRequest.sampleTaken" class="fa fa-check isSample" aria-hidden="true"></i>
+                                                            <i *ngIf="!pendingRequest.sampleTaken" class="fa fa-minus notSample" aria-hidden="true"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card" *ngIf="!patientSelected">
+                                        <div class="card-header">
+                                            <div class="row">
+                                                <div class="col-xs-1 table-head">No</div>
+                                                <div class="col-xs-3 table-head">Patient</div>
+                                                <div class="table-head col-xs-2">Investigation</div>
+                                                <div class="table-head col-xs-2">Lab Number</div>
+                                                <div class="col-xs-2 table-head">Date</div>
+                                                <div class="table-head col-xs-1">Status</div>
+                                                <div class="table-head col-xs-1"><i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i></div>
+                                            </div>
+                                            <div class="row" *ngIf="searchOpen">
+                                                <div class="col-md-4">
+                                                    <input [formControl]="patientSearch" class="table-header-input" type="text" placeholder="Search for Patient">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <!-- <select class="table-header-select" formControlName="category" placeholder="Select Category" (change)="onChangeCategory($event);">
+                                        <option value="" selected>Select Category</option>
+                                        <option value="individual">Individual</option>
+                                        <option value="corporate">Corporate</option>
+                                        <option value="internal">Internal</option>
+                                    </select> -->
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <!-- <input class="table-header-input" type="date" placeholder="Choose a date"> -->
+                                                </div>
+                                                <div class="col-md-1 table-head">
+                                                    <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-list-item" *ngIf="pendingRequests.length === 0 && !pendingReLoading">
+                                                <div class="col-xs-12" style="text-align:center">
+                                                    No data available in table
+                                                </div>
+                                            </div>
+                                            <div class="card-list-item" *ngIf="pendingRequests.length === 0 && pendingReLoading">
+                                                <div class="col-xs-12" style="text-align:center">
+                                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                            <div class="card-list-item" *ngFor="let pendingRequest of pendingRequests; let i = index;" (click)="onClickInvestigation(pendingRequest, i);">
+                                                <div class="row">
+                                                    <div class="table-list col-xs-1">
+                                                        {{i+1}}
+                                                    </div>
+                                                    <div class="table-list col-xs-3">
+                                                        <div class="empWrap">
+                                                            <div class="list-img">
+                                                                <img *ngIf="pendingRequest?.patient?.profileImageObject == undefined" src="assets/images/users/default.png">
+                                                                <img class="shadow" *ngIf="pendingRequest?.patient?.profileImageObject != undefined" [src]="facilityService.transform(pendingRequest?.patient?.profileImageObject?.thumbnail)">
+                                                            </div>
+                                                            <div>{{ pendingRequest?.patient?.firstName }} {{ pendingRequest?.patient?.lastName }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="table-list col-xs-2">
+                                                        {{pendingRequest?.name}}
+                                                    </div>
+                                                    <div class="table-list col-xs-2">
+                                                        {{ pendingRequest?.labNumber}}
+                                                    </div>
+                                                    <div class="table-list col-xs-2">
+                                                        {{pendingRequest?.createdAt | date}}
+                                                    </div>
+                                                    <div class="table-list col-xs-2">
+                                                        <div class="status-item">
+                                                            <div class="status-label">Payment Made</div>
+                                                            <i *ngIf="pendingRequest.isPaid" class="fa fa-check isSample" aria-hidden="true"></i>
+                                                            <i *ngIf="!pendingRequest.isPaid" class="fa fa-minus notSample" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div class="status-item">
+                                                            <div class="status-label">Sample Taken</div>
+                                                            <i *ngIf="pendingRequest.sampleTaken" class="fa fa-check isSample" aria-hidden="true"></i>
+                                                            <i *ngIf="!pendingRequest.sampleTaken" class="fa fa-minus notSample" aria-hidden="true"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="frm-r" style="background : white;" [class.frm-container-r]="!patientSelected">
+                                <div *ngIf="!hasRequest" class="text-center" style="min-height: 300px;margin-top: 200px;">
+                                    <div *ngIf="requests.length === 0 && !loading">
+                                        <span class="table-content" colspan="5" style="text-align: center"> No pending request is associated to {{ selectedPatient?.firstName }} {{ selectedPatient?.personDetails?.lastName }}</span>
+                                    </div>
+                                    <div *ngIf="requests.length === 0 && loading">
+                                        <span class="table-content" colspan="5" style="text-align: center">
+                                                <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                            </span>
+                                    </div>
+                                </div>
+                                <div *ngIf="hasRequest">
+                                    <div>
+                                        <div class="initial-contenet invstn-val">
+                                            <div class="report-title">
+                                                Clinincal Documentation
+                                                <span *ngIf="docAction" (click)="showDoc_toggle()" class="action">HIDE</span>
+                                                <span *ngIf="!docAction" (click)="showDoc_toggle()" class="action">SHOW</span>
+                                            </div>
+                                            <div *ngIf="docAction" class="initial-val">{{ selectedInvestigation?.clinicalInformation }}</div>
+                                        </div>
+                                        <div class="initial-contenet invstn-val">
+                                            <div class="report-title">
+                                                Diagnosis
+                                                <span *ngIf="diagnosisAction" (click)="showDiagnosis_toggle()" class="action">HIDE</span>
+                                                <span *ngIf="!diagnosisAction" (click)="showDiagnosis_toggle()" class="action">SHOW</span>
+                                            </div>
+                                            <div *ngIf="diagnosisAction" class="initial-val">{{ selectedInvestigation?.diagnosis }}</div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <form [formGroup]="reportFormGroup" novalidate>
+                                            <div class="resultSect-title">Investigation Result</div>
+                                            <div class="template-box" (click)="onClickImportTemplate(selectedInvestigation);"><i class="fa fa-download"></i> Import template</div>
+                                            <div class="invstn-wrap" *ngIf="!selectedInvestigation.isPanel" formArrayName="results">
+                                                <div *ngFor="let resultForm of reportFormGroup.controls.results.controls; let i=index;">
+                                                    <div *ngIf="numericReport" class="lettering-wrap">
+                                                        <div class="report-title">{{ selectedInvestigation?.name }}</div>
+                                                        <div class="invstn-vals row">
+                                                            <div class="invstn-val col">
+                                                                <h3 class="val-label">Sample NO:</h3>
+                                                                <div class="val-val">{{ selectedInvestigation?.specimenNumber }}</div>
+                                                            </div>
+                                                            <div class="invstn-val col">
+                                                                <h3 class="val-label">Reference:</h3>
+                                                                <span class="val-val">
+                                                                    {{ selectedInvestigation?.reportType?.ref?.min }} - {{ selectedInvestigation?.reportType?.ref?.max }} ({{ selectedInvestigation?.unit }})
+                                                                </span>
+                                                            </div>
+                                                            <div class="frm-item-wrap col-xs-7" [formGroupName]="i">
+                                                                <mat-input-container>
+                                                                    <input type="number" matInput placeholder="Enter Result" formControlName="result">
+                                                                </mat-input-container>
+                                                                <!-- <div style="width: 100%; text-align: right;padding:5px 0;">
+                                                                    <small style="position: relative; bottom: 8px;">{{ referenceValue }}</small>
+                                                                </div> -->
+                                                            </div>
+                                                            <div class="col-xs-1">
+                                                                <span *ngIf="referenceValue[i]?.result > selectedInvestigation?.reportType?.ref?.max" style="color:red">High</span>
+                                                                <span *ngIf="(referenceValue[i]?.result > selectedInvestigation?.reportType?.ref?.min - 1) && (referenceValue[i].result < selectedInvestigation?.reportType?.ref?.max + 1)" style="color:green">Normal</span>
+                                                                <span *ngIf="referenceValue[i]?.result < selectedInvestigation?.reportType?.ref?.min" style="color:yellow">Low</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div *ngIf="textReport" class="lettering-wrap">
+                                                        <div class="report-title">{{ selectedInvestigation?.name }}</div>
+                                                        <div class="invstn-vals row">
+
+                                                            <div class="invstn-val col">
+                                                                <h3 class="val-label">Sample NO:</h3>
+                                                                <div class="val-val">{{ selectedInvestigation?.specimenNumber }}</div>
+                                                            </div>
+                                                            <div class="invstn-val col">
+                                                                <h3 class="val-label">Reference:</h3>
+                                                                <span class="val-val">{{ selectedInvestigation?.reportType?.ref }}</span>
+                                                            </div>
+                                                            <div class="frm-item-wrap col-xs-8" [formGroupName]="i">
+                                                                <mat-input-container>
+                                                                    <textarea formControlName="result" matInput placeholder="Enter Result"></textarea>
+                                                                </mat-input-container>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="invstn-wrap" *ngIf="selectedInvestigation.isPanel" formArrayName="results">
+                                                <div class="report-title">{{ selectedInvestigation?.name }}</div>
+                                                <div class="invstn-vals" *ngFor="let panel of selectedInvestigation.panel; let resultForm of reportFormGroup.controls.results.controls; let i=index;">
+                                                    <div>{{ panel?.investigation?.name }}</div>
+                                                    <div class="row" *ngIf="panel.investigation.reportType.name !== 'Text'">
+
+                                                        <div class="invstn-val col">
+                                                            <h3 class="val-label">Sample NO:</h3>
+                                                            <div class="val-val">{{ panel?.investigation?.specimenNumber }}</div>
+                                                        </div>
+                                                        <div class="invstn-val col">
+                                                            <h3 class="val-label">Reference:</h3>
+                                                            <span class="val-val">
+                                                                {{ panel?.investigation?.reportType?.ref?.min }} - {{ panel?.investigation?.reportType?.ref?.max }} ({{ panel?.investigation?.unit }})
+                                                            </span>
+                                                        </div>
+                                                        <div class="frm-item-wrap col-xs-7" [formGroupName]="i">
+                                                            <mat-input-container>
+                                                                <input type="number" matInput placeholder="Enter Result" formControlName="result">
+                                                            </mat-input-container>
+                                                            <!-- <div style="width: 100%; text-align: right;padding:5px 0;">
+                                                                <small style="position: relative; bottom: 8px;">{{ referenceValue }}</small>
+                                                            </div> -->
+                                                        </div>
+                                                        <div class="col-xs-1">
+                                                            <span *ngIf="referenceValue[i]?.result > panel?.investigation?.reportType?.ref?.max" style="color:red">High</span>
+                                                            <span *ngIf="(referenceValue[i]?.result > panel?.investigation?.reportType?.ref?.min - 1) && (referenceValue[i].result < panel?.investigation?.reportType?.ref?.max + 1)" style="color:green">Normal</span>
+                                                            <span *ngIf="referenceValue[i]?.result < panel?.investigation?.reportType?.ref?.min" style="color:yellow">Low</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" *ngIf="panel.investigation.reportType.name === 'Text'">
+                                                        <div class="col invstn-val">
+                                                            <h3 class="val-label">Sample NO:</h3>
+                                                            <div class="val-val">{{ panel?.investigation?.specimenNumber }}</div>
+                                                        </div>
+                                                        <div class="col invstn-val">
+                                                            <h3 class="val-label">Reference:</h3>
+                                                            <span class="val-val">{{ panel?.investigation?.reportType?.ref }}</span>
+                                                        </div>
+                                                        <div class="col-xs-8 frm-item-wrap" [formGroupName]="i">
+                                                            <mat-input-container>
+                                                                <textarea formControlName="result" matInput placeholder="Enter Result"></textarea>
+                                                            </mat-input-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="frm-item-wrap">
+                                                <mat-form-field>
+                                                    <mat-select formControlName="outcome" placeholder="Investigation Outcome">
+                                                        <mat-option [value]="'Normal'">Normal</mat-option>
+                                                        <mat-option [value]="'Abnormal'">Abnormal</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="frm-item-wrap">
+                                                <mat-input-container>
+                                                    <textarea formControlName="conclusion" matInput placeholder="Conclusion"></textarea>
+                                                </mat-input-container>
+                                            </div>
+                                            <div class="frm-item-wrap">
+                                                <mat-input-container>
+                                                    <textarea formControlName="recommendation" matInput placeholder="Recommendation"></textarea>
+                                                </mat-input-container>
+                                            </div>
+                                            <div class="frm-item-wrap">
+                                                <span style="color:rgba(0,0,0,.38);">Optionally attach a file</span>
+                                                <!-- <div (click)="showImageBrowseDlg()" class="action-item" style="color:#FF9800;">
+                                                    <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                                    <span>Upload File</span>
+                                                    <input type="file" (change)="selectImage($event)" />
+                                                </div> -->
+                                                <div class="upload-btn-wrapper">
+                                                    <button class="upload-btn">Upload</button>
+                                                    <input type="file" name="fileInput" (change)="onFileChange($event)" #fileInput formControlName="fileUpload" />
+                                                    <span style="font-size: 0.79em; color: #aaa; font-weight: 900;">{{fileName}}</span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="btns" *ngIf="hasRequest">
+                                    <button (click)="createReport(reportFormGroup.valid, reportFormGroup.value, 'save')" class="button btn-orange" [innerHtml]="saveToDraftBtnText"></button>
+                                    <button (click)="createReport(reportFormGroup.valid, reportFormGroup.value, 'upload')" class="button btn-blue" [innerHtml]="saveAndUploadBtnText"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 tblWrapa actSect">
+                    <h2 class="col-xs-12" style="text-align: center">Requests Attended</h2>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-xs-1 table-head">No</div>
+                                <div class="col-xs-1 table-head">Date</div>
+                                <div class="col-xs-2 table-head">Patient</div>
+                                <div class="table-head col-xs-2">Investigation</div>
+                                <div class="table-head col-xs-2">Source</div>
+                                <div class="col-xs-2 table-head">Requesting Physician</div>
+                                <div class="table-head col-xs-1">Status</div>
+                                <div class="table-head col-xs-1"><i class="fa fa-search fa-fw pointer" (click)="openSearch2()"></i></div>
+                            </div>
+                            <div class="row" *ngIf="searchOpen2">
+                                <div class="col-md-4">
+                                    <input [formControl]="patientSearch2" class="table-header-input" type="text" placeholder="Search for Patient">
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- <select class="table-header-select" formControlName="category" placeholder="Select Category" (change)="onChangeCategory($event);">
+                                        <option value="" selected>Select Category</option>
+                                        <option value="individual">Individual</option>
+                                        <option value="corporate">Corporate</option>
+                                        <option value="internal">Internal</option>
+                                    </select> -->
+                                </div>
+                                <div class="col-md-3">
+                                    <!-- <input class="table-header-input" type="date" placeholder="Choose a date"> -->
+                                </div>
+                                <div class="col-md-1 table-head">
+                                    <i class="fa fa-close fa-fw" (click)="openSearch2()"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-list-item" *ngIf="reports.length === 0 && !reportLoading">
+                                <div class="col-xs-12" style="text-align:center">
+                                    No data available in table
+                                </div>
+                            </div>
+                            <div class="card-list-item" *ngIf="reports.length === 0 && reportLoading">
+                                <div class="col-xs-12" style="text-align:center">
+                                    <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card-list-item" *ngFor="let report of reports; let i = index;">
+                                <div class="row">
+                                    <div class="table-list col-xs-1">
+                                        {{ i+1 }}
+                                    </div>
+                                    <div class="table-list col-xs-1">
+                                        {{ report?.updatedAt | date }}
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        <div class="empWrap">
+                                            <div class="list-img">
+                                                <img *ngIf="report?.patient?.profileImageObject == undefined" src="assets/images/users/default.png">
+                                                <img class="shadow" *ngIf="report?.patient?.profileImageObject != undefined" [src]="facilityService.transform(report?.patient?.profileImageObject?.thumbnail)">
+                                            </div>
+                                            <div>{{ report?.patient?.firstName }} {{ report?.patient?.lastName }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        {{ report.name }}
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        {{ selectedLab.typeObject.name }}
+                                    </div>
+                                    <div class="table-list col-xs-2">
+                                        <div class="empWrap">
+                                            <div class="list-img">
+                                                <img *ngIf="report?.patient?.profileImageObject == undefined" src="assets/images/users/default.png">
+                                                <img class="shadow" *ngIf="report?.createdBy?.profileImageObject != undefined" [src]="facilityService.transform(report?.createdBy?.profileImageObject?.thumbnail)">
+                                            </div>
+                                            <div>{{ report?.createdBy?.firstName }} {{ report?.createdBy?.lastName}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="table-list col-xs-1">
+                                        <div *ngIf="report.isUploaded" style="color: green">Published</div>
+                                        <div *ngIf="!report.isUploaded" style="color:blue">Saved, Not Published</div>
+                                    </div>
+                                    <div class="table-list action-placeholder col-xs-1">
+                                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                        <div class="action-container shadow-RB">
+                                            <div (click)="repDetail(report)" class="action-item">
+                                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                                <span>View Report</span>
+                                            </div>
+
+                                            <div (click)="showImageBrowseDlg()" class="action-item">
+                                                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                                <span>Upload File</span>
+                                            </div>
+
+                                            <div (click)="showImageBrowseDlg()" class="action-item">
+                                                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                                <span>Upload Report</span>
+                                            </div>
+                                            <input style="display:none;" #fileInput type="file" id="uploadResult" (click)="onChange($event)">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="repDetail_view" class="modal-overlay">
+    <app-report-detail (closeModal)="close_onClick($event)" [selectedInvestigationData]="selectedInvestigationData" id="form-modal" class="form-modal center-center"></app-report-detail>
+</div>
+<div *ngIf="importTemplate" class="modal-overlay">
+    <app-select-template (closeModal)="close_onClick($event)" (template)="onClickTemplate($event);" id="form-modal" class="form-modal center-center"></app-select-template>
+</div>

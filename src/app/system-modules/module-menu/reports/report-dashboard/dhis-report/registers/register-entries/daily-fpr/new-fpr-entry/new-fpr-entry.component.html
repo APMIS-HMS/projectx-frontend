@@ -1,0 +1,244 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Family Planning Daily Register </legend>
+    <div class="modal_mini_title">Continental Hospital</div>
+  </div>
+
+  <div class="modal-content-overlay">
+    <form class="frm-down" [formGroup]="frm_UpdateFPR" novalidate>
+      <mat-tab-group>
+        <mat-tab label="Tab 1">
+          <div class="container" style="padding-top:10px; padding-left:35px;">
+            <div class="row">
+              <div class="col-sm" style="max-width:40%;">
+                <div>
+                  <mat-form-field>
+                    <input matInput placeholder="Date" type="date">
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field>
+                    <input matInput placeholder="Patient Name">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <input matInput placeholder="Client Number">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <textarea matInput placeholder="Address / Tel."></textarea>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <input matInput type="number" placeholder="Age">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <mat-select placeholder="Sex">
+                      <mat-option>None</mat-option>
+                      <mat-option value="option1">Male</mat-option>
+                      <mat-option value="option3">Female</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <mat-select placeholder="Source">
+                      <mat-option>None</mat-option>
+                      <mat-option value="option1">PNC</mat-option>
+                      <mat-option value="option3">HCT</mat-option>
+                      <mat-option value="option1">Self Referral</mat-option>
+                      <mat-option value="option3">STD</mat-option>
+                      <mat-option value="option1">ART Clinic</mat-option>
+                      <mat-option value="option3">PMTCT Clinic</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <input matInput placeholder="Parity">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm section_border" style="max-width:40%;">
+                <div>
+                  <mat-form-field>
+                    <mat-select placeholder="Counselled on FP?">
+                      <mat-option>None</mat-option>
+                      <mat-option value="option1">Yes</mat-option>
+                      <mat-option value="option3">No</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <mat-select placeholder="Counselled on FP?">
+                      <mat-option>None</mat-option>
+                      <mat-option value="option1">Yes</mat-option>
+                      <mat-option value="option3">No</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <h3>ORAL PILLS</h3>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">NA</mat-radio-button>
+                    <mat-radio-button value="2">RV</mat-radio-button>
+                  </mat-radio-group>
+                  <mat-form-field>
+                    <input matInput placeholder="Qty Given">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <h3>INJECTION</h3>
+                  <mat-form-field>
+                    <input matInput placeholder="Name of Injection">
+                  </mat-form-field>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">NA</mat-radio-button>
+                    <mat-radio-button value="2">RV</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <br>
+                <div>
+                  <h3>IUCD</h3>
+                  IN:
+                  <mat-radio-group>
+                    <mat-radio-button value="1">NA</mat-radio-button>
+                    <mat-radio-button value="2">RV</mat-radio-button>
+                  </mat-radio-group>
+                  <mat-radio-button>Out</mat-radio-button>
+                </div>
+              </div>
+              <div class="col-sm section_border" style="max-width:40%;">
+                <div>
+                  <h3>CONDOMS</h3>
+                  <mat-form-field>
+                    <input matInput placeholder="Type of Condom">
+                  </mat-form-field>
+                  <mat-radio-group>
+                    <mat-radio-button value="1">NA</mat-radio-button>
+                    <mat-radio-button value="2">RV</mat-radio-button>
+                  </mat-radio-group>
+                  <mat-form-field>
+                    <input matInput placeholder="Qty Given">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <h3>IMPLANT</h3>
+                  <mat-form-field>
+                    <input matInput placeholder="Type of Implant">
+                  </mat-form-field>
+                  IN:
+                  <mat-radio-group>
+                    <mat-radio-button value="1">NA</mat-radio-button>
+                    <mat-radio-button value="2">RV</mat-radio-button>
+                  </mat-radio-group>
+                  <mat-radio-button>Out</mat-radio-button>
+                  <mat-radio-button>RV</mat-radio-button>
+                </div>
+                <br>
+                <div>
+                  <mat-form-field>
+                    <input matInput placeholder="Sterilization">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <h3>NATURAL METHODS</h3>
+                  <div>
+                    Cycle Beads:
+                    <mat-radio-group>
+                      <mat-radio-button value="1">NA</mat-radio-button>
+                      <mat-radio-button value="2">RV</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div>
+                    Others:
+                    <mat-radio-group>
+                      <mat-radio-button value="1">NA</mat-radio-button>
+                      <mat-radio-button value="2">RV</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab class="mat-body mat-tab-disabled" label="Tab 2">
+          <div class="row mat-tab-body-content">
+            <!--  Male -->
+            <div class="col-sm section_width">
+              <div>
+                <h2>Male</h2>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h4>HIV Counsel, Test & Result</h4>
+                      <form class="form_entry">
+                        <mat-form-field class="mat_form_entry"> <input matInput type="number" placeholder="0-14 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="15-19 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="20-25 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="26-49 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="50 years +"></mat-form-field>
+                      </form>
+                    </div>
+                    <div class="col-sm-3">
+                      <h4>HIV Test Result: Positive</h4>
+                      <form class="form_entry">
+                        <mat-form-field class="mat_form_entry"> <input matInput type="number" placeholder="0-14 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="15-19 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="20-25 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="26-49 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="50 years +"></mat-form-field>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Female -->
+            <div class="col-sm section_width">
+              <div>
+                <h2>Female</h2>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h4>HIV Counsel, Test & Result</h4>
+                      <form class="form_entry">
+                        <mat-form-field class="mat_form_entry"> <input matInput type="number" placeholder="0-14 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="15-19 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="20-25 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="26-49 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="50 years +"></mat-form-field>
+                      </form>
+                    </div>
+                    <div class="col-sm-3">
+                      <h4>HIV Test Result: Positive</h4>
+                      <form class="form_entry">
+                        <mat-form-field class="mat_form_entry"> <input matInput type="number" placeholder="0-14 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="15-19 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="20-25 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="26-49 years"></mat-form-field>
+                        <mat-form-field class="mat_form_entry"><input matInput type="number" placeholder="50 years +"></mat-form-field>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+      <div class="col-xs-12 text-center">
+        <div style="padding: 20px 10px;">
+          <button mat-raised-button type="submit" (click)="next_onClick()" class="mat-lg-btn">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>

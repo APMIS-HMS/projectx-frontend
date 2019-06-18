@@ -1,0 +1,13 @@
+<div class="pg-wrap">
+  <div class="tabs">
+    <div (click)="tab_click(1)" [class.tab-active]="tab1" class="tab">Appointments</div>
+    <div (click)="tab_click(2)" [class.tab-active]="tab2" class="tab">Check Ins</div>
+    <div (click)="tab_click(3)" [class.tab-active]="tab3" class="tab">History</div>
+  </div>
+
+  <div class="tab-content">
+    <app-rm-appnt-appointments *ngIf="tab1"></app-rm-appnt-appointments>
+    <app-rm-appnt-checkins *ngIf="tab2"></app-rm-appnt-checkins>
+    <app-rm-appnt-history *ngIf="tab3"></app-rm-appnt-history>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.workspace-tbl td{
+    padding: 5px !important;
+}
+.td-ctaWrap i {
+    cursor: pointer;
+    font-size: 2rem;
+}
+.modal-baseWrap{
+    min-width: 800px;
+    padding: 10px;
+}
+.sel-rap{
+    width: 150px;
+}
+.print-header{
+    display: none;
+}
+.print-ico{
+    font-size: 3rem;
+    cursor: pointer;
+}
+.top-sect{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: -10px;
+}
+.filters{
+    display: flex;
+    justify-content: flex-start;
+}

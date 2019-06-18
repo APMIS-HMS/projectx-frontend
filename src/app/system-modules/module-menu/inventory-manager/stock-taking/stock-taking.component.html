@@ -1,0 +1,109 @@
+<div class="np-mainwrap">
+
+    <form [formGroup]="frm_purchaseOrder" novalidate>
+        <div (click)="flyout_toggle($event)" class="txt-link" *ngIf="productTableForm.controls['productTableArray'].value.length > 0">Add Product</div>
+        <div *ngIf="flyout" class="flyout animated slideOut">
+            <div class="sec-b">
+                <div (click)="flyout_toggle($event)" class="slideInWrap"><i class="fa fa-arrow-circle-right pull-right" aria-hidden="true"></i></div>
+                <div class="col-a">
+                    <div class="filter-sect">
+                        <div class="frm-item-wrap">
+                            <input [formControl]="searchControl" class="search-input" placeholder="search product here...">
+                        </div>
+
+                        <div class="check-filterWrap">
+                            <div class="frm-item-wrap chkbox-wrap">
+                                <!--<dx-check-box [formControl]="checkAll"></dx-check-box>
+                                <label>All</label>-->
+                            </div>
+                            <div class="frm-item-wrap chkbox-wrap">
+                                <!--<dx-check-box [formControl]="zeroQuantity"></dx-check-box>
+                                <label>Out of stock</label>-->
+                            </div>
+                            <div class="frm-item-wrap chkbox-wrap">
+                                <!--<dx-check-box [formControl]="reOrderLevelQuantity"></dx-check-box>
+                                <label>Re-order Level</label>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-sect">
+                        <div class="control-group" *ngFor="let group of superGroups">
+                            <label *ngFor="let item of group" class="control control--checkbox">{{item.name}}
+                                <div class="control__indicator"> 
+                                    <mat-checkbox (change)="onProductCheckChange($event,item)" [value]="item.checked"></mat-checkbox>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="survery">
+            <div class="tblWrap">
+                <form *ngIf="productTableForm.controls['productTableArray'].value.length > 0" [formGroup]="productTableForm">
+                    <div formArrayName="productTableArray" class="frmArrayWrap">
+                        <div class="frmArray" *ngFor="let schedule of productTableForm.controls['productTableArray'].controls; let i = index;">
+                            <div formGroupName="{{i}}">
+                                <div class="prod-wrap">
+
+                                    <div class="inputWrap-productDetail">
+                                        <div (click)="removeProduct(i, schedule.value)" class="modal-close-ico" aria-hidden="true">X</div>
+
+                                        <div style="width: 59%;" class="frm-item-wrap">
+                                            <mat-input-container class="example-full-width">
+                                                <input matInput mat-error placeholder="Product" formControlName="product">
+                                            </mat-input-container>
+                                        </div>
+
+                                        <div style="width: 20%;" class="frm-item-wrap">
+                                            <mat-input-container class="example-full-width">
+                                                <input matInput mat-error placeholder="System Quantity" type="number" formControlName="systemQuantity">
+                                            </mat-input-container>
+                                        </div>
+
+                                        <div style="width: 20%;" class="frm-item-wrap">
+                                            <mat-input-container class="example-full-width">
+                                                <input matInput mat-error placeholder="Actual Qantity" type="number" formControlName="qty">
+                                            </mat-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+       <!-- <div class="survery" *ngIf="productTableForm.controls['productTableArray'].value.length === 0">
+            <div class="container cotainer-width">
+                <div class="row">
+                    <div class="col-mat-12 col-sm-12 col-xs-12">
+                        <div class="callout callout-info">
+                            <h4>You have no product to transfer</h4>
+                            <p>To transfer product <a (click)="flyout_toggle($event)"> click here.</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+        <div class="sec-a" *ngIf="productTableForm.controls['productTableArray'].value.length > 0">
+            <div class="wrap2">
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <textarea matInput mat-error placeholder="Remark" formControlName="desc"></textarea>
+                    </mat-input-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="CTAs-wrap" *ngIf="productTableForm.controls['productTableArray'].value.length > 0">
+            <div (click)="save()" class="cta-1">Save Progress</div>
+            <div (click)="save()" class="cta-1">Update Stock</div>
+        </div>
+
+    </form>
+</div>

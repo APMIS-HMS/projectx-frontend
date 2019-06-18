@@ -1,0 +1,145 @@
+    // @import "../billing-home-page/billing-home-page.component.scss";
+    .searchInputWrap {
+        margin: 0 auto;
+    }
+    
+    .cat-name {
+        font-size: 14px;
+        font-family: 'Montserrat', sans-serif;
+    }
+    
+    .searchInputWrap {
+        text-align: none !important;
+    }
+    
+    .btn-1 {
+        display: inline-table;
+    }
+    
+    .tblBg {
+        background: #fff;
+    }
+    
+    .tblBg td {
+        color: #337ab7;
+    }
+    
+    .pgWrapper {
+        justify-content: space-between;
+    }
+    
+    .modal-overlay {
+        left: 0;
+    }
+    
+    .container {
+        width: 100vw;
+        box-sizing: border-box;
+        padding-top: 50px;
+        padding-left: 5%;
+        padding-right: 5%;
+        min-height: 90vh;
+    }
+    
+    // .fontSize {
+    //   font-size: 10rem;
+    // }
+    .scrollable {
+        max-height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
+    
+    .red-text {
+        color: #ff0000
+    }
+    
+    .blue-text {
+        color: #337ab7;
+    }
+    
+    .card {
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        width: 100%;
+        .card-header {
+            background: #337ab7;
+            color: #fff;
+            font-size: 1.6rem;
+            padding: 10px;
+            vertical-align: middle;
+            line-height: 30px;
+            border-bottom: solid 1px #fff;
+            .fa {
+                cursor: pointer;
+            }
+        }
+        .card-content {
+            font-size: 1.6rem;
+        }
+        .card-header-box {
+            background: rgba(255, 255, 255, 0.16);
+            color: #fff;
+            border: none;
+            font-size: 1.2rem !important;
+            padding: 10px !important;
+            width: 100%;
+            height: 30px !important;
+            box-sizing: border-box;
+        }
+        .card-list-item {
+            padding: 10px;
+            border-bottom: solid rgb(204, 204, 204) 1px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            font-size: 1.2rem;
+            transition: 0.2s;
+        }
+        .options {
+            font-size: 2rem;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .addService {
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+        .undefined {
+            border-left: solid 3px#337ab7 !important;
+            background: #eee !important;
+        }
+        .card-list-item:hover {
+            background: #eee;
+        }
+        .card-list-item:hover .options {
+            opacity: 1;
+        }
+        .card-list-item:last-of-type {
+            border: none
+        }
+        .label-info1 {
+            padding: 5px 10px;
+            margin-top: 10px;
+            background-color: #337ab7;
+            border-radius: 5px;
+            margin-right: 40px;
+            width: max-content;
+            // width: 5px;
+        }
+        .base {
+            // border-right: 1px solid white;
+            padding-right: 5px;
+            color: #eee;
+            //font-weight: bold;
+            border-radius: 7px;
+        }
+        .prixe {
+            //padding-left: 10px;
+            padding-right: 5px;
+            //background-color: #fff;
+            text-align: center;
+            margin: 0 auto;
+            color: white;
+            font-weight: bold;
+        }
+    }

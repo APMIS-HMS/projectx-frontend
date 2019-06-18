@@ -1,0 +1,147 @@
+<!-- <div class="backBtn" routerLink="/dashboard/store/home">
+    Go To Store
+</div> -->
+
+<section id="presc-list">
+    <mat-tab-group>
+        <mat-tab label="Prescription">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row" *ngIf="!psearchOpen">
+                        <div class="table-head col-md-1"> S/N </div>
+                        <div class="table-head col-md-2"> Date </div>
+                        <div class="table-head col-md-2"> Patient </div>
+                        <div class="table-head col-md-2"> Location </div>
+                        <div class="table-head col-md-1"> Priority </div>
+                        <div class="table-head col-md-2"> Prescriber </div>
+                        <div class="table-head col-md-1"> Status </div>
+                        <div class="table-head col-md-1">
+                            <i class="fa fa-search fa-fw" (click)="popenSearch()"></i>
+                        </div>
+                    </div>
+                    <div class="row search-box" *ngIf="psearchOpen">
+                        <div class="col-md-4">
+                            <input class="table-header-input" type="text" placeholder="Search Patient">
+                        </div>
+                        <div class="col-md-3">
+                            <input class="table-header-input" type="date" placeholder="Choose a date">
+                        </div>
+                        <div class="col-md-1 table-head">
+                            <i class="fa fa-close fa-fw" (click)="pcloseSearch()"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-list-item" *ngIf="prescriptionLists.length===0 && !loading">
+                        <div class="row">
+                            <div class="table-list text-center col-xs-12">
+                                No data available in table
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-list-item" *ngIf="prescriptionLists.length===0 && loading">
+                        <div class="row">
+                            <div class="table-list text-center col-xs-12">
+                                <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-list-item" *ngFor="let prescription of prescriptionLists; let i = index;" routerLink='/dashboard/pharmacy/prescriptions/{{prescription._id}}'>
+                        <div class="row">
+                            <div class="table-list col-md-1">{{ i+1 }}</div>
+                            <div class="table-list col-md-2">{{prescription?.updatedAt | date}}</div>
+                            <div class="table-list col-md-2">{{prescription?.personDetails.firstName }} {{prescription?.personDetails.lastName }}</div>
+                            <div class="table-list col-md-2">{{prescription?.clinicId }}</div>
+                            <div class="table-list col-md-1">{{prescription?.priority?.name}}</div>
+                            <div class="table-list col-md-2">{{prescription?.employeeDetails.firstName }} {{prescription?.employeeDetails.lastName }}</div>
+                            <div class="table-list col-md-2">
+                                <span *ngIf="prescription.status == 'Completely'" style="color:forestgreen">Completely<br>Assessed</span>
+                                <span *ngIf="prescription.status == 'Partly'" style="color:blue">Partly<br>Assessed</span>
+                                <span *ngIf="prescription.status == 'Not'" style="color:crimson">Not<br>Assessed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Walk in">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row" *ngIf="!wsearchOpen">
+                        <div class="table-head col-md-1">
+                            S/N
+                        </div>
+                        <div class="table-head col-md-2">
+                            Date
+                        </div>
+                        <div class="table-head col-md-2">
+                            Client
+                        </div>
+                        <div class="table-head col-md-2">
+                            Prescriber
+                        </div>
+                        <div class="table-head col-md-1">
+                            Qty
+                        </div>
+                        <div class="table-head col-md-2">
+                            Total
+                        </div>
+                        <div class="table-head col-md-1">
+                            Status
+                        </div>
+                        <div class="table-head col-md-1">
+                            <i class="fa fa-search fa-fw" (click)="openSearch()"></i>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="wsearchOpen">
+                        <div class="col-md-4">
+                            <input class="table-header-input" type="text" placeholder="Search Employee">
+                        </div>
+                        <div class="col-md-4">
+                            <select class="table-header-select" formControlName="category" placeholder="Select Category" (change)="onChangeCategory($event);">
+                                        <option value="" selected>Select Category</option>
+                                        <option value="individual">Individual</option>
+                                        <option value="corporate">Corporate</option>
+                                        <option value="internal">Internal</option>
+                                    </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="table-header-input" type="date" placeholder="Choose a date">
+                        </div>
+                        <div class="col-md-1 table-head">
+                            <i class="fa fa-close fa-fw" (click)="closeSearch()"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-list-item">
+                        <div *ngIf="noPrescriptionLists.length===0 && !loading" class="row">
+                            <div class="table-list text-center col-xs-12">
+                                No data available in table
+                            </div>
+                        </div>
+                        <div *ngIf="noPrescriptionLists.length===0 && loading" class="row">
+                            <div class="table-list text-center col-xs-12">
+                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-list-item" *ngFor="let prescription of noPrescriptionLists; let i = index;" routerLink='/dashboard/pharmacy/prescriptions/{{prescription._id}}'>
+                        <div class="row">
+                            <div class="table-list col-lg-1">{{ i+1 }}</div>
+                            <div class="table-list col-lg-2">{{prescription?.updatedAt | date}}</div>
+                            <div class="table-list col-lg-2">{{prescription?.nonPrescription?.client?.clientType}}</div>
+                            <div class="table-list col-lg-2">{{prescription?.nonPrescription?.employee?.name}}</div>
+                            <div class="table-list col-lg-1">{{prescription?.nonPrescription?.totalQuantity}}</div>
+                            <div class="table-list col-lg-2">{{prescription?.nonPrescription?.totalCost}}</div>
+                            <div class="table-list col-lg-2">
+                                <span style="color:forestgreen">Completely Dispensed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </mat-tab>
+    </mat-tab-group>
+</section>

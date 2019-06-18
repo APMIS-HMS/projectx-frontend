@@ -1,0 +1,73 @@
+<div class="c-page-header">
+    <h3 class="c-page-title">List of Rooms in {{wardDetail?.name}}</h3>
+    <div class="pull-right btn-box">
+        <div class="add-action-box">
+            <button mat-raised-button (click)="addRoomModal()" class="btn pull-right"><i class="fa fa-plus-square" aria-hidden="true "></i> Add Room</button>
+        </div>
+        <div class="back-btn">
+            <span routerLink="/dashboard/ward-manager/setup"><i class="fa fa-arrow-circle-o-left"></i> Back to Setup</span>
+        </div>
+    </div>
+</div>
+<section class="c-page-body">
+    <div class="InPatients">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="table-head col-xs-1">
+                        S/N
+                    </div>
+                    <div class="table-head col-xs-2">
+                        Room
+                    </div>
+                    <div class="table-head col-xs-2">
+                        Group
+                    </div>
+                    <div class="table-head col-xs-2">
+                        Service
+                    </div>
+                    <div class="table-head col-xs-2">
+                        Description
+                    </div>
+                    <div class="table-head col-xs-2">
+                        Number of Bed(s)
+                    </div>
+                    <div class="table-head col-xs-1">
+                        Actions
+                    </div>
+                </div>
+            </div>
+            <div class="card-content">
+                <div *ngIf="rooms.length === 0 && !loading" class="row">
+                    <div class="card-list-item col-xs-12 table-list">
+                        No data available in table
+                    </div>
+                </div>
+
+                <div *ngIf="rooms.length === 0 && loading" class="row">
+                    <div class="card-list-item col-xs-12 table-list">
+                        <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue"></i>
+                    </div>
+                </div>
+                <div class="card-list-item" *ngFor="let room of rooms; let i = index">
+                    <div class="row">
+                        <div class="table-list col-xs-1" routerLink="/dashboard/ward-manager/setup/ward/{{wardId}}/room/{{room._id}}">{{i+1}}</div>
+                        <div class="table-list col-xs-2" routerLink="/dashboard/ward-manager/setup/ward/{{wardId}}/room/{{room._id}}">{{room?.name}}</div>
+                        <div class="table-list col-xs-2" routerLink="/dashboard/ward-manager/setup/ward/{{wardId}}/room/{{room._id}}">{{room.group?.name}} </div>
+                        <div class="table-list col-xs-2" routerLink="/dashboard/ward-manager/setup/ward/{{wardId}}/room/{{room._id}}">{{room?.service?.name}}</div>
+                        <div class="table-list col-xs-2" routerLink="/dashboard/ward-manager/setup/ward/{{wardId}}/room/{{room._id}}">{{room?.description}}</div>
+                        <div class="table-list col-xs-2" routerLink="/dashboard/ward-manager/setup/ward/{{wardId}}/room/{{room._id}}">{{room.activeBed}}</div>
+                        <!-- <div class="table-list col-xs-2" routerLink="/dashboard/ward-manager/setup/ward/{{wardId}}/room/{{room._id}}">{{room.beds.filter(x => x.isDeleted)}}</div> -->
+                        <div class="table-list col-xs-1">
+                            <i (click)="editRoom(i, room)" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <i (click)="confirmRoomDelete(room)" class="fa fa-trash" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="addRoom" class="modal-overlay">
+            <app-add-room [selectedRoom]="selectedRoom" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-room>
+        </div>
+    </div>
+</section>

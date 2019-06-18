@@ -1,0 +1,28 @@
+<div class="check-group-wide">
+  <div class="check-item">
+    <label class="control control--checkbox">{{selectedAccessControl.name}}
+      <mat-input-container class="example-full-width">
+        <input matInput type="checkbox" (change)="checkedMain($event)" [(ngModel)]="selectedAccessControl.isChecked">
+      </mat-input-container>
+      <div class="control__indicator"></div>
+    </label>
+    <div *ngIf="expandMain">
+      <div class="check-group" *ngFor="let selectedFeature of selectedAccessControl.featureList">
+        <div (click)="clicMe(selectedFeature)" class="check-item">
+          <label class="control control--checkbox">{{selectedFeature.name}}
+            <mat-input-container class="example-full-width">
+              <input matInput mat-error type="checkbox" (change)="checked($event, selectedFeature)" [(ngModel)]="selectedFeature.checked">
+            </mat-input-container>
+            <div class="control__indicator"></div>
+          </label>
+          <div *ngIf="expand" class="checker-subgroup">
+            <div class="checker-wrap-inner" *ngFor="let crud of selectedFeature.cruds">
+              <app-apmis-checkbox-child [crudItem]="crud"></app-apmis-checkbox-child>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

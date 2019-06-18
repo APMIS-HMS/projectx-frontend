@@ -1,0 +1,21 @@
+<div class="store-tfooter" *ngIf="total > 0">
+  <div>
+    <span>Showing</span>
+    <span class="bold">{{firstNumberPart}}</span>
+    <span *ngIf="defaultPages.length > 0 && (defaultPages[0].id+1) < total">to</span>
+    <span *ngIf="defaultPages.length > 0 && (defaultPages[0].id+1) < total" class="bold">{{secondNumberPart}}</span>
+    <span>of</span>
+    <span class="bold">{{total}}</span>
+  </div>
+
+  <ul class="apmis-pagination">
+    <li [attr.disabled]="currentPage === 0 ? true : null" (click)="movePrevious()" [class.disabled]="currentPage === 0"
+      class="pg-child"><i class="fa fa-angle-left"></i>
+    </li>
+    <li *ngFor="let page of getPages(); let i = index" (click)="selectCurrentPage(i,true)" [class.active-page]="currentPage === page.id"
+      class="pg-child">{{page.id+1}}</li>
+
+    <li (click)="moveNext()" class="pg-child" [class.disabled]="currentPage === (numberOfPages-1)"><i class="fa fa-angle-right"></i>
+    </li>
+  </ul>
+</div>

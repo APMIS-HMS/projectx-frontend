@@ -1,0 +1,15 @@
+@import "../../../payment/bill-lookup/bill-lookup.component.scss";
+
+.contentCol{
+    width: 100%;
+}
+.bck{
+    cursor: pointer;
+    font-size: 2rem;
+    color: #bebebe;
+    position: absolute;
+    top: 52px;
+}
+.bck:hover{
+    color: #03A9F4;
+}

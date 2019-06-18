@@ -1,0 +1,30 @@
+@import '../../../patient-manager/patientmanager-detailpage/patient-prescription/patient-prescription.component.scss';
+.mat-select {
+    margin-top: 2px;
+}
+
+.frmArrWrap {
+    position: relative;
+    background: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.addDrugBtn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #777;
+    width: 170px;
+    margin: 20px auto;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #777;
+}
+
+.addDrugBtn:hover {
+    background: #fff;
+    color: #009ADF;
+}

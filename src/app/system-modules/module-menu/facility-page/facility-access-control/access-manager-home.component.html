@@ -1,0 +1,8 @@
+
+<ul class="pg-menuWrap">
+    <li (click)="createAccess()" [class.pg-menuActive]="createAccessContentArea" [routerLink]="['/dashboard/access-manager/access-role-details']"><i class="fa fa-fw fa-2x fa-unlock orange tooltip" data-tooltip="Unlock" aria-hidden="true"></i>Roles</li>
+    <li (click)="styleUsers()" [class.pg-menuActive]="usersContentArea" [routerLink]="['/dashboard/access-manager/access-manager']"><i class="fa fa-fw fa-2x fa-users orange tooltip" data-tooltip="Users" aria-hidden="true"></i> Users</li>
+    <!-- <li (click)="access()" [class.pg-menuActive]="accessContentArea"><i class="fa fa-lock" aria-hidden="true" [routerLink]="['/dashboard/access-manager/access']"></i> Access Definations</li> -->
+</ul>
+  
+<router-outlet></router-outlet>

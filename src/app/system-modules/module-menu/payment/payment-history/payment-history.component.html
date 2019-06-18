@@ -1,0 +1,126 @@
+<div class="container">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 style="text-align: center">
+                    Payment History
+                </h2>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="card-header-item col-xs-1">S/N</div>
+                        <div class="card-header-item col-xs-2">Person</div>
+                        <div class="card-header-item col-xs-2">Invoice No</div>
+                        <div class="card-header-item col-xs-1">Items</div>
+                        <div class="card-header-item col-xs-2">Amount</div>
+                        <div class="card-header-item col-xs-2">Date</div>
+                        <div class="card-header-item col-xs-1">Payment Status</div>
+                        <div class="card-header-item col-xs-1">
+                            <i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="searchOpen">
+                        <div class="col-md-4">
+                            <input [formControl]="patientSearch" class="table-header-input" type="text" placeholder="Search by Patient">
+                        </div>
+                        <div class="col-md-4">
+                            <input [formControl]="invoiceSearch" class="table-header-input" type="text" placeholder="Search by invoice number">
+                        </div>
+                        <div class="col-md-1 table-head">
+                            <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="invoice-table-list row" (click)="onClickViewDetails(item);" *ngFor="let item of invoiceGroups; let i = index;">
+                        <div class="col-xs-1">{{i+1}}</div>
+                        <div class="col-xs-2">{{item?.patientObject?.personDetails?.firstName}} {{item?.patientObject?.personDetails?.lastName}}</div>
+                        <div class="col-xs-2">{{item?.invoiceNo}}</div>
+                        <div class="col-xs-1">{{item?.payments.length}}</div>
+                        <div class="col-xs-2">{{item?.totalPrice}}</div>
+                        <div class="col-xs-2">{{item?.createdAt|date:'medium'}}</div>
+                        <div class="col-xs-1">
+                            <span *ngIf="item?.paymentCompleted" class="text-green">Completed</span>
+                            <span *ngIf="!item?.paymentCompleted" class="text-red">Not Completed</span>
+                        </div>
+                        <div class="col-xs-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="tblWrapa" class="col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-xs-1 table-head">S/N</div>
+                            <div class="col-xs-2 table-head">Patient</div>
+                            <div class="col-xs-2 table-head">Invoice No</div>
+                            <div class="table-head col-xs-1">Items</div>
+                            <div class="table-head col-xs-2">Amount</div>
+                            <div class="table-head col-xs-2">Date</div>
+                            <div class="table-head col-xs-1">Status</div>
+                            <div class="table-head col-xs-1">
+                                <i class="fa fa-search fa-fw pointer" (click)="openSearch()"></i>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="searchOpen">
+                            <div class="col-md-4">
+                                <input [formControl]="patientSearch" class="table-header-input" type="text" placeholder="Search by patient, invoiceID, APMIS ID">
+                            </div>
+                            <div class="col-md-4">
+                                <app-date-range [dateRange]="dateRange" (dateRangeChange)="setReturnValue($event)"></app-date-range>
+                                <!-- <input [formControl]="invoiceSearch" class="table-header-input" type="text" placeholder="Search by invoice number"> -->
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-primary" [disabled]="disableSearchBtn" (click)="onClickFindBillHistory();" style="height: 34px;">
+                                    <span *ngIf="searchBtn">Search</span>
+                                    <span *ngIf="searchingBtn">Searching <i class="fa fa-spin fa-spinner"></i></span>
+                                </button>
+                            </div>
+                            <div class="col-md-1 table-head">
+                                <i class="fa fa-close fa-fw" (click)="openSearch()"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-list-item" *ngIf="invoiceGroups.length === 0 && !loading">
+                            <div class="col-xs-12" style="text-align:center">
+                                No data available in table
+                            </div>
+                        </div>
+                        <div class="card-list-item" *ngIf="invoiceGroups.length === 0 && loading">
+                            <div class="col-xs-12" style="text-align:center">
+                                <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="card-list-item" *ngFor="let item of invoiceGroups; let i=index;">
+                            <div class="row " (click)="onClickViewDetails(item);">
+                                <div class="table-list col-xs-1"> {{i+1}} </div>
+                                <div class="table-list col-xs-2">{{item?.patientObject?.personDetails?.firstName}} {{item?.patientObject?.personDetails?.lastName}}</div>
+                                <div class="table-list col-xs-2">{{item?.invoiceNo}} </div>
+                                <div class="table-list col-xs-1"> {{item?.payments.length}}</div>
+                                <div class="table-list col-xs-2">{{item?.totalPrice}}</div>
+                                <div class="table-list col-xs-2">{{item?.createdAt|date:'medium'}}</div>
+                                <div class="table-list col-xs-1">
+                                    <span *ngIf="item?.paymentCompleted" class="text-green">Completed</span>
+                                    <span *ngIf="!item?.paymentCompleted" class="text-red">Not Completed</span>
+                                </div>
+                                <div class="table-list col-xs-1 action-placeholder"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <apmis-data-pager color="blue"
+                                     (onPageClick)="gotoPage($event)"
+                                     [in-progress]="loading"
+                                     [show-progress]="true"
+                                     next-prev-color="orange"
+                                     [pager-source]="paginationObj"></apmis-data-pager>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

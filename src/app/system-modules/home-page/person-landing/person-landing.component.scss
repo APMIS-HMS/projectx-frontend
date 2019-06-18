@@ -1,0 +1,23 @@
+@import "../home-page.component.scss";
+@import "../../../../globals/variables.scss";
+
+.pp-card table{
+    margin-top: 10px;
+}
+.date-label{
+    font-style:italic; 
+    margin-right:10px;
+    color:#ff2500;
+}
+.btn-thead {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    cursor: pointer;
+    padding: 4px 10px;
+    background: #194985;
+    outline: 0;
+    border: oldlace;
+    color: #fff;
+    font-size: 1.2rem;
+}

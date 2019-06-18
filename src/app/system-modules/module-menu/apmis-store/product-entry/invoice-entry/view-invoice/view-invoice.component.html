@@ -1,0 +1,68 @@
+<div class="new-modal">
+  <div class="new-modal-wrap">
+    <div class="new-modal_title">Invoice</div>
+    <div (click)="close_onClick()" class="new-modal-close-ico"><i class="fa fa-times-circle" aria-hidden="true"></i></div>
+    <div class="new-modal-baseWrap">
+      <div class="list-inner-wrap">
+        <div class="con-inner-wrap">
+          <span>Supplier</span>
+          <h3>{{selectedInvoice.supplierObject?.supplier.name}}</h3>
+        </div>
+        <div class="con-inner-wrap">
+          <span>Invoice Date</span>
+          <h3>{{selectedInvoice.createdAt | date:'fullDate'}}</h3>
+        </div>
+        <div class="con-inner-wrap">
+          <span>Amount</span>
+          <h3><span *ngIf="selectedInvoice.amountPaid > 0">
+              <app-apmis-naira></app-apmis-naira>{{selectedInvoice.amountPaid|number}} paid out of
+            </span>
+            <app-apmis-naira></app-apmis-naira>{{selectedInvoice.invoiceAmount|number}}
+          </h3>
+        </div>
+        <div class="con-inner-wrap">
+          <span>Status</span>
+          <h3 [class.orange-lbl]="selectedInvoice.amountPaid > 0 && selectedInvoice.amountPaid < selectedInvoice.invoiceAmount"
+            [class.red-lbl]="selectedInvoice.amountPaid === 0" [class.green-lbl]="selectedInvoice.amountPaid >= selectedInvoice.invoiceAmount">Payment
+            Status</h3>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Product Delivered</th>
+            <th>Batch No</th>
+            <th>Quantity Delivered</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of invoiceProduct?.products">
+            <td>{{product.productName}}</td>
+            <td>{{product.batchNo}}</td>
+            <td>{{product.quantity|number}} {{product.productPackType}}</td>
+            <td>
+              <app-apmis-naira></app-apmis-naira>{{product.costPrice}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="pay-supp-wrap">
+        <h3>Pay Supplier</h3>
+        <div class="pay-action-wrap">
+          <h5 class="action-content">Amount</h5>
+          <div class="InputGroup action-content">
+            <input [(ngModel)]="amountToPay" [formControl]="amountToPayFormControl" class="customInput" type="number"
+              required>
+            <span class="highlight"></span>
+          </div>
+          <div [class.disabled]="amountToPay === 0 || !(!!amountToPay)" (click)="makePayment()" class="ft-btn ft-btn-selected action-content">
+            <span>Pay <app-apmis-naira></app-apmis-naira>{{amountToPay| number}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

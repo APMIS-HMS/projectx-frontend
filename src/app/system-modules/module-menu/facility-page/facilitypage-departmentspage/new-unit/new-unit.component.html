@@ -1,0 +1,93 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">Create Unit</legend>
+        <div class="modal_mini_title">{{facilityObj.name}}</div>
+    </div>
+    <div class="modal-baseWrap">
+        <div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+
+        <div class="f_sg1">
+
+            <form [formGroup]="frmNewUnit" novalidate>
+
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <input matInput formControlName="unitName" placeholder="Unit Name" autocomplete="off">
+                    </mat-input-container>
+                </div>
+
+                <div class="frm-item-wrap">
+                    <mat-input-container class="example-full-width">
+                        <input matInput formControlName="unitAlias" placeholder="Short Name" autocomplete="off">
+                    </mat-input-container>
+                </div>
+
+                <div class="frm-item-wrap">
+                    <mat-form-field>
+                        <mat-select formControlName="unitParent">
+                            <mat-option  value="null" disabled selected>Select parent department</mat-option>
+                            <mat-option *ngFor="let item of deptsObj" value = "{{item._id}}">{{item.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="frm-item-wrap">
+                    <mat-checkbox formControlName="isClinic" >Clinic</mat-checkbox>
+                </div>
+                
+                <form [formGroup]="clinicForm" class="form-horizontal clinic-section">
+                    <div formArrayName="clinicArray">
+                        <div class="frmArrayclinicWrap" *ngFor="let clinic of clinicForm['controls'].clinicArray['controls']; let i = index;">
+                            <div formGroupName="{{i}}">
+                                <div class="mainErr animated shake" [hidden]="mainErrClinic || (clinicForm.controls['clinicArray'].value.length !== (i+1))">{{errMsgClinic}}</div>
+                                <div class="valSpan">
+                                    <div *ngIf="isClinic===true" class="arr-grp-wrap">
+                                        <div>
+                                            <div class="frm-item-inner-wrap">
+                                                <mat-input-container class="example-full-width">
+                                                    <input matInput [attr.disabled]="clinic.value.readonly?'':null" formControlName="clinicName" placeholder="Clinic Name" autocomplete="off">
+                                                </mat-input-container>
+                                            </div>
+                                            <div class="frm-item-inner-wrap">
+                                                <mat-input-container class="example-full-width">
+                                                    <input matInput type="number" [attr.disabled]="clinic.value.readonly?'':null" formControlName="clinicCapacity" min="1" placeholder="Daily  Capacity" autocomplete="off">
+                                                </mat-input-container>
+                                            </div> 
+                                        </div>
+                                        <span *ngIf="isClinic" class="trash"><i (click)="onRemoveBill(clinic,i)" class="fa fa-times trash" aria-hidden="true"></i></span>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div *ngIf="isClinic" class="frm-item-wrap frm-item-inner-wrap">
+                                    <div *ngIf="!clinic.value.readonly || frmNewUnit.value._id !== undefined" class="btn-1 btn-blue btn-2" (click)="onAddHobby(clinic, clinicForm.valid)"> Add Clinic</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+
+
+
+
+
+
+
+
+                <!-- <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <textarea matInput formControlName="unitDesc" placeholder="Description" autocomplete="off"></textarea>
+                </mat-input-container>
+                </div> -->
+                <div class="example-full-width" id="example-full-width">
+                <button [disabled]="!frmNewUnit.valid" (click)="newUnit(frmNewUnit.valid, frmNewUnit.value)" [ngClass]="{'cta-1':frmNewUnit.valid, 'cta-1-disable':!frmNewUnit.valid}"> {{btnText}}</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="base-wrap">
+    <div class="logo-wrap" *ngIf="secondaryLogo === ''">
+        <img src="{{platformLogo}}">
+    </div>
+    <div style="width:100%;">
+        <div *ngIf="secondaryLogo!== ''" class="logos-wrap logo-wrap">
+            <div class="home-logoWrap">
+                <img src="{{platformLogo}}">
+            </div>
+
+            <div class="home-logoWrap">
+                <img src="{{secondaryLogo}}">
+            </div>
+        </div>
+
+        <div class="nav-right-content home-wrap">
+            <div class="signin-upWrap">
+
+                <div class="txt1">{{platformName}}</div>
+                <div class="txt2">Connected Healthcare Platform</div>
+                <div class="CTAs-wrap">
+                    <!--<div class="cta-1" (click)="login_show()">Log In</div>-->
+                    <div id="button-cover">
+                        <button (click)="login_show()" class="big-btn" mat-raised-button>Login</button>
+                    </div>
+
+                    <div class="wrapLabel">Don't have an account?
+                        <span [routerLink]="['/signup']" class="txtLink">Sign Up</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="apmis-label">Powered By APMIS</div>
+    </div>
+</div> 
+<div *ngIf="login_on" class="modal-overlay">
+    <app-login (closeModal)="close_onClick($event)" (pwordReset)="pwdReset_show($event)" id="form-modal" class="form-modal center-center"></app-login>
+</div>
+
+<div *ngIf="pwdReset_on" class="modal-overlay">
+    <app-password-reset (closeModal)="close_onClick($event)" (loginEmit)="login_show()" id="form-modal" class="form-modal center-center"></app-password-reset>
+</div>

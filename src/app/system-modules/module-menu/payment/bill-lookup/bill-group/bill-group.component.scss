@@ -1,0 +1,90 @@
+@import "../../payment.component.scss";
+
+.billContentSect{
+    position: relative;
+    min-height: 300px;
+    background: transparent;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+table{
+    color: #9E9E9E;
+}
+td{
+    text-align: center;
+    font-weight: normal;
+}
+td input{
+    width: 80%;
+    margin: 0;
+    padding: 0 5px;
+}
+td i{
+    cursor: pointer;
+    padding: 3px;
+    margin: 3px;
+    text-align: center;
+}
+td i:hover{
+    color: #0288D1;
+}
+td .cta-1{
+    margin: 0;
+    background: transparent;
+    border: 1px solid #0288D1;
+    color: #0288D1;
+    width: auto;
+    height: auto;
+    padding: 3px 5px;
+    font-size: 1rem;
+}
+td .cta-1:hover{
+    color: #fff;
+    background: #0288D1;
+}
+.patientImgWrap{
+    padding: 3px;
+    border-radius: 100%;
+    border: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.patientImgWrap img{
+    width: 150px;
+    border-radius: 100%;
+}
+.topsecInnerWrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #eee;
+    margin: 10px;
+    padding: 5px;
+}
+.generateInvoiceWrap .btn-1{
+    width: 100px;
+    margin: 20px auto;
+    padding: 20px 15px;
+}
+.contentCol{
+    margin-bottom: 40px;
+}
+.topTotal{
+    font-weight: normal;
+}
+.selectTD{
+    width: auto;
+}
+.selectTD input{
+    width: 40px;
+    display: block;
+    margin: 0 auto;
+}
+.tdCategories{
+    cursor: pointer;
+}
+.tdCategories:hover{
+    background: #eee;
+}

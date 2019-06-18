@@ -1,0 +1,58 @@
+<div class="pp-card shadow-grey">
+    <div class="card-title">User Role List</div>
+    <div class="searchInputWrap">
+        <input type="search" autofocus class="searchInput" placeholder="search">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </div>
+    <div class="tbl-resp-wrap">
+                <table class="workspace-tbl" cellpadding="0 " cellspacing="0" border="0.4 ">
+                    <thead class="table-header">
+                       
+                            <th >
+                                <span style="padding-left: 3px;">No</span>
+                            </th>
+                            <th >
+                                <span style="padding-left: 3px;">Role Name</span>
+                            </th>
+                            <th>
+                                <span style="padding-left: 3px;">Accessibilities</span>
+                            </th>
+                            <th >
+                                <span style="padding-left: 3px;">Action</span>
+                            </th>
+                        
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="roles.length===0 && !loading">
+                            <td class="table-content" colspan="4" style="text-align: center "> No data available in table</td>
+                        </tr>
+                        <tr *ngIf="roles.length===0 && loading">
+                            <td class="table-content " colspan="4" style="text-align: center ">
+                                <i class="fa fa-circle-o-notch fa-spin fa-3x text-blue" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let role of roles; let i = index;" class="hover"  >
+                            <td class="table-content">{{ i+1 }}</td>
+                            <td class="table-content">{{ role.name }}</td>
+                            <td class="table-content spanWrap">
+                                <span  *ngFor="let access of role?.features">
+                                    <span >{{ access.name }}</span>,
+                        </span>
+                    </td>
+                    <td>
+                        <i (click)="newAccessrole_onClick(role)" class="fa fa-fw fa-2x fa-edit fa-icon orange tooltip" data-tooltip="Modify"></i>
+                        <i (click)="onClickDelete(role)" class="fa fa-fw fa-2x fa-trash orange tooltip" data-tooltip="Delete"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <span (click)="newAccessrole_onClick()" id="floating-button">
+        <p class="plus">+</p>
+    </span>
+</div>
+
+<div *ngIf="createAccessrole" class="modal-overlay">
+    <app-create-access [selectedRole]="selectedRole" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-create-access>
+</div>

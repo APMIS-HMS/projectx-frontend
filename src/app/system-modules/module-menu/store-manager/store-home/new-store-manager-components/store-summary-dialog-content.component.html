@@ -1,0 +1,16 @@
+<div class="animated pulse dialog-container " (keyup)="watchForEscKeyPress($event)">
+    <div class="modal-header-wrap width-medium">
+        <div (click)="closeDialogClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">{{dialogTitle || 'Dialog Title'}}</legend>
+        <div class="modal_mini_title">All Purpose Medical Information System</div>
+    </div>
+    <div class="modal-baseWrap width-medium">
+        <div class="">
+            <ng-content>
+
+            </ng-content>
+
+        </div>
+
+    </div>
+</div>

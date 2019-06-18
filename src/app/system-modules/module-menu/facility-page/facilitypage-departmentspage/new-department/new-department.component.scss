@@ -1,0 +1,39 @@
+@import "../../../../../../globals/variables.scss";
+
+input, select{
+    border:0;
+    outline: 0;
+}
+.modal-baseWrap {
+    width: 560px;
+    padding: 20px;
+    margin: 0px auto;
+}
+.cta-1 {
+    font-size: 1.2rem;
+}
+.mainErr {
+    margin: 20px 0;
+}
+.facility-title {
+    font-size: 2.5rem;
+}
+.modal_title {
+    font-size: 1.5rem;
+}
+
+.mat-raised-button {
+    max-width: 200px;
+    text-align: center;
+    background: #03A9F4;
+    color: #fff;
+}
+.modal-baseWrap .mat-input-container{
+    width: 100%;
+}
+
+// @media only screen and (max-width: 500px) {
+//     .modal-baseWrap .mat-input-container {
+//         width: 100%;
+//     }
+// }

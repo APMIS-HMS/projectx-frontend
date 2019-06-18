@@ -1,0 +1,55 @@
+<div class="pg-subtitle">PATIENT PAGE - TIMELINE</div>
+
+<div class="doc-mainWrap">
+    <div class="doc-contentArea">
+        <ul *ngIf="timeLineLists.length > 0">
+            <li class="timeline-wrap" *ngFor="let timeLine of timeLineLists">
+                <div class="timeline-liner">
+                    <div class="date-time">
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        <div class="date">{{timeLine.updatedAt|date:'mediumDate'}}</div>
+                        <div class="time">{{timeLine.updatedAt|date:'shortTime'}}</div>
+                    </div>
+                </div>
+                <div class="timeline-content">
+                    <div class="empWrap">
+                        <div class="list-img">
+                            <img *ngIf="timeLine?.employeeId.employeeDetails.profileImageObject != undefined" [src]="facilitiesService.transform(timeLine?.employeeId.employeeDetails.profileImageObject.thumbnail)">
+                            <img *ngIf="timeLine?.employeeId.employeeDetails.profileImageObject == undefined" src="assets/images/logos/default.png">
+                        </div>
+                        <div>
+                            <div class="list-label">{{timeLine?.employeeId.employeeDetails.title.name}} {{timeLine?.employeeId.employeeDetails.firstName}} {{timeLine?.employeeId.employeeDetails.lastName}}</div>
+                        </div>
+                    </div>
+                    <div class="content">{{timeLine.description}}</div>
+                </div>
+            </li>
+        </ul>
+        <ul *ngIf="timeLineLists.length == 0">
+            <li>No data exist in this timeline.</li>
+        </ul>
+    </div>
+    <div class="doc-rArea">
+        <app-right-tab [patient]="patient" (addProblem)="addProblem_show($event)" (addAllergy)="addAllergy_show($event)" (addHistory)="addHistory_show($event)" (addVitals)="addVitals_show($event)"></app-right-tab>
+    </div>
+
+    <div *ngIf="docDetail_view" class="modal-overlay">
+        <app-documentation-detail [document]="selectedDocument" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-documentation-detail>
+    </div>
+
+    <div *ngIf="addProblem_view" class="modal-overlay">
+        <app-add-patient-problem [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-patient-problem>
+    </div>
+
+    <div *ngIf="addAllergy_view" class="modal-overlay">
+        <app-add-allergy [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-allergy>
+    </div>
+
+    <div *ngIf="addHistory_view" class="modal-overlay">
+        <app-add-history (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-history>
+    </div>
+
+    <div *ngIf="addVitals_view" class="modal-overlay">
+        <app-add-vitals [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-vitals>
+    </div>
+</div>

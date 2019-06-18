@@ -1,0 +1,12 @@
+@import '../radiology-requests/radiology-requests.component.scss';
+td {
+    padding: 5px;
+}
+
+.btn-box {
+    padding: 10px;
+    text-align: center;
+    .btn {
+        color: #fff;
+    }
+}

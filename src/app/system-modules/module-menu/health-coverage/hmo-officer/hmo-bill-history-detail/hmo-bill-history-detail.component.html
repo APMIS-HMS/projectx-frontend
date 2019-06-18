@@ -1,0 +1,59 @@
+<div class="animated pulse">
+    <div class="modal-header-wrap">
+        <div (click)="close_onClick()" class="modal-close-ico" aria-hidden="true">X</div>
+        <legend class="modal_title">{{selectedBill.coverFile.id}}</legend>
+        <div class="modal_mini_title">HMO Bills History</div>
+        <div class="modal_mini_title">{{selectedBill.updatedAt|date:'medium'}}</div>
+    </div>
+    <div class="modal-baseWrap">
+        <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+            <thead>
+                <tr>
+                    <th>
+                        <span style="padding-left: 3px;">Patient</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Service</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Amount</span>
+                    </th>
+                    <th>
+                        <span style="padding-left: 3px;">Type</span>
+                    </th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bill of filterBills">
+                    <td>
+                        <div class="empWrap">
+                            <div class="list-img">
+                                <img src="assets/images/users/default.png">
+                            </div>
+                            <div>{{bill?.patientObject?.personDetails?.firstName}} {{bill?.patientObject?.personDetails?.lastName}}</div>
+                        </div>
+                    </td>
+                    <td>{{bill.serviceObject?.name}}</td>
+                    <td class="td-worspace">&#8358; {{bill.totalPrice|number:'1.2-2'}}</td>
+                    <td>
+                        <div *ngIf="bill.covered.authorizationCode !== undefined">
+                            Fee for service
+                        </div>
+                        <div *ngIf="bill.covered.authorizationCode === undefined">
+                            Capitalization
+                        </div>
+                    </td>
+                    <td>
+                        <span class="green-txt" *ngIf="bill.covered.billAccepted">Approved</span>
+                        <span class="red-txt" *ngIf="!bill.covered.billAccepted">Declined</span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr *ngIf="filterBills.length === 0">
+                    <td colspan="4" style="text-align:center;">No verified bill item under this holder</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>

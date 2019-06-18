@@ -1,0 +1,134 @@
+<div class="inner-wrap-b body-wrap">
+    <!-- <div class="facility-title">{{pageInView}}</div>-->
+    <div class="filter" style="width: 65%;">
+        <div class="row" style="padding: 10px 40px 10px 40px;">
+            <div class="dr-wrap survery" style="margin-top: 20px;">
+                <app-date-range [dateRange]="{from : reportOptions.startDate, to : reportOptions.endDate}" 
+                                (dateRangeChange)="assignDate($event)"></app-date-range>
+            </div>
+            <div class="searchInputWrap col-sm ">
+                <mat-form-field>
+                    <mat-select [formControl]="searchCriteria" placeholder="Search">
+                        <mat-option value="all">Any Criteria</mat-option>
+                        <mat-option value="age">By Age Range</mat-option>
+                        <mat-option value="gender">By Gender</mat-option>
+                        <mat-option value="location">By Registration Location</mat-option>
+                        <mat-option value="apmisId">By APMIS ID</mat-option>
+                        <mat-option value="patient">By Patient Name</mat-option>
+                        <mat-option value="tag">By Tag</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="inputWrap">
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <input [formControl]="searchControl" type="search" autofocus class="searchInput " placeholder=" 
+                            {{(searchCriteria.value=='age' ? 'Eg: 20-30' : searchCriteria.value) }}" />
+                        </div>
+                       
+                    </div>
+                    <div class="">
+                        <apmis-search-button (onSearch)="search()" [processing]="loading" ></apmis-search-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <apmis-data-pager
+            [display-summary]="true"
+            [pager-source]="pagerSource"
+
+    ></apmis-data-pager>
+    <ng-template #noAddress >No Contact Address</ng-template>
+    <div class="row">
+        <div class="tbl-resp-wrap">
+            <table class="card" style="color:black;" cellpadding="0" cellspacing="0" border="0.5">
+                <thead>
+              
+                    <tr class="th-r1 th-xxx" >
+                        <th>Patient Name</th>
+                        <th>APMIS ID</th>
+                        <th>Address</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <!--<th>Plan</th>-->
+                        <th>Phone Number</th>
+                        <th>Creation Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                <tr *ngIf="loading">
+                    <td colspan="8" style="text-align: center;color : blue;" >
+                        <apmis-spinner></apmis-spinner>
+                    </td>
+                </tr>
+                <tr *ngIf="data.length === 0">
+                    <td colspan="8" style="text-align: center;font-size : 14px; color : #ff9494;" >
+                        <span *ngIf="loading">No Record Available yet. Fetching data from server...</span>
+                        <span *ngIf="loading==false">No record found matching the specified criteria</span>
+                    </td>
+                </tr>
+                    <tr class="th-xxx" *ngFor="let p of data">
+                        <td>{{p.patientName}}</td>
+                        <td>{{p.apmisId}} </td>
+                        <td>
+                         <div *ngIf="p.address; else noAddress;">
+                             <div>{{p.address?.street}}</div>
+                             <div>{{p.address?.city}}, {{p.address?.state}}</div>
+                            <!-- <div>
+                                 <b>{{p.address?.country}}</b>
+                             </div>-->
+                         </div>
+
+                        </td>
+                        <td>{{p.age}}</td>
+                        <td>{{p.gender}}</td>
+                       <!-- <td>[]</td>-->
+                        <td>{{p.phone}}</td>
+                        <td>{{p.dateCreated | date :'dd-MMM-yyyy'}}</td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+            <div>
+                <apmis-data-pager [show-progress]="true" [show-total-record]="false" [in-progress]="loading"
+                                 (onPageClick)="gotoPage($event)"
+                                 [pager-source]="pagerSource"
+
+                ></apmis-data-pager>
+            </div>
+            <div class="billSummarySect">
+                <table class="rhs">
+                    <div class="summaryItems">
+                        <div class="description">Select options to view Total Registrations</div>
+                        <div class="control-group">
+                            <label class="control control--checkbox">{{allAnalyticSummary?.tag}}
+                              <input type="checkbox" [checked]="" />
+                              <div class="control__indicator"></div>
+                          </label>
+                            <div>{{(allAnalyticSummary.totalPatient || 0) | number}} Registrations</div>
+                            <div class="secondaryText">
+                                <div>{{(allAnalyticSummary.female || 0) | number}} Females</div>
+                                <div>{{(allAnalyticSummary.male || 0) | number}} Males</div>
+                            </div>
+                        </div>
+                        <div class="control-group" *ngFor="let n of analyticData">
+                            <label class="control control--checkbox">{{n?.tag}}
+                              <input type="checkbox" [checked]="checked" />
+                              <div class="control__indicator"></div>
+                          </label>
+                            <div>{{(n.totalPatient || 0) | number}} Registrations</div>
+                            <div class="secondaryText">
+                                <div>{{(n.female || 0) | number}} Females</div>
+                                <div>{{(n.male || 0) | number}} Males</div>
+                            </div>
+                        </div>
+                      
+                    </div>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

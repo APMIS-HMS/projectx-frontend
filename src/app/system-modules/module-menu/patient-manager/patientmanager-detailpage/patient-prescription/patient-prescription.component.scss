@@ -1,0 +1,421 @@
+@import "../patientmanager-detailpage.component.scss";
+.add-sect {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #cacaca;
+    padding: 5px;
+}
+
+.text-center {
+    text-align: center;
+    padding: 10px;
+}
+
+#prescription {
+    width: 100%;
+    margin-top: -22px;
+    font-size: 1.2rem;
+}
+
+.medical-list-btn {
+    float: right;
+    background: #fff;
+    padding: 10px;
+    font-size: 1.2rem;
+    color: #6b6b6b;
+    border: 1px solid #bebebe;
+}
+
+.input-bg {
+    //background: #eeeeee;
+    //padding: 3px;
+    //border-radius: 4px;
+    .input-group {
+        mat-form-field {
+            float: left;
+            width: 50%;
+        }
+        .input-group-btn {
+            float: left;
+            width: 50%;
+            mat-form-field {
+                float: left;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.dropdown-toggle {
+    width: 90px;
+    background: #eee;
+    border: none;
+}
+
+.padding-top-20px {
+    padding-top: 20px;
+}
+
+.after-textarea-btn {
+    padding: 10px 0;
+}
+
+.wrap-th {
+    display: flex;
+    max-width: 100%;
+    height: 31px;
+    background: #d2d6de;
+    border-top: 3px solid #cacaca;
+    border-radius: 5px;
+}
+
+.pres-col {
+    width: 10%;
+    padding: 5px 10px;
+    color: #676a6c;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.wrap-tr {
+    display: flex;
+    max-width: 1000px;
+    background-color: #fff;
+}
+
+.wrap-tr:hover {
+    background-color: #f5f5f5;
+}
+
+.pres-data {
+    width: 15%;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    border-top: 1px solid #f4f4f4;
+}
+
+.survery label {
+    font-size: 1.2rem;
+    color: #676a6c;
+}
+
+.long-text {
+    width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#action {
+    width: 20%;
+}
+
+#long-text:hover {
+    overflow: visible;
+    white-space: normal;
+}
+
+.text-amount {
+    margin-top: 20px;
+}
+
+.text-amount p {
+    color: red;
+}
+
+.inner-container {
+    display: flex;
+    border: 1px solid #cacaca;
+    background-color: #efefef;
+    padding: 10px;
+}
+
+.cacaca {
+    background: #cacaca;
+}
+
+.padding-20px {
+    padding: 20px 0;
+}
+
+.padding-10px {
+    padding: 20px 0;
+}
+
+.cta-1 {
+    display: inline-block;
+    color: #fff;
+}
+
+a:hover {
+    cursor: pointer;
+    color: #6b6b6b
+}
+
+.survery a {
+    padding: 5px 3px;
+    color: #000000;
+    text-decoration: none;
+}
+
+.fa-caret-right {
+    float: right;
+    margin-top: 3px;
+}
+
+.dx-lookup {
+    height: 36px;
+}
+
+.save-btn {
+    border-color: #0288d1;
+    color: #0288d1;
+}
+
+.margin-left-14 {
+    margin-left: -14px;
+}
+
+#action-long {
+    width: 20%;
+}
+
+.fly-out {
+    position: absolute;
+    right: -12px;
+    top: 10px;
+    z-index: 8;
+    background: #f5f5f5;
+}
+
+.textarea,
+.dx-date-box {
+    width: 100%;
+}
+
+thead {
+    background: #cacaca;
+}
+
+#th-color {
+    background: #bebebe;
+}
+
+#tr-color {
+    background: #eee;
+}
+
+
+/*.survery input,
+.survery select {
+    width: 98.6px;
+    border: 1px solid #fff;
+    background: #fff;
+    height: 30px;
+}*/
+
+.survery .input-group-btn {
+    font-size: 1.3rem;
+}
+
+select {
+    /* -webkit-appearance: none;
+    -moz-appearance: none;*/
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+.textarea {
+    padding: 10px;
+    border-color: #ddd;
+    resize: none;
+}
+
+.discontinue {
+    color: red;
+    border: 1px solid red;
+}
+
+.started {
+    color: #0288d1;
+}
+
+.restart,
+.reuse,
+.start {
+    border: 1px solid #0288d1;
+    color: #0288d1;
+}
+
+.survery .form-control {
+    height: 30px !important;
+}
+
+.mat-input-container {
+    width: 100%;
+}
+
+.mat-select {
+    margin-top: 7px;
+}
+
+// md-select,
+// md-input-container input {
+//     border: 1px solid #ccc;
+// }
+.cu-search-box {
+    position: relative;
+    min-width: 100px;
+    width: auto;
+    margin-top: -20px;
+    .cu-search {
+        //background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+        //background-position: 10px 12px;
+        /* Position the search icon */
+        //background-repeat: no-repeat;
+        /* Do not repeat the icon image */
+        width: 100%;
+        /* Full-width */
+        /* Increase font-size */
+        //padding: 12px 11px;
+        /* Add some padding */
+        //border: 1px solid #ddd;
+        /* Add a grey border */
+        //margin-bottom: 12px;
+        /* Add some space below the input */
+    }
+    .cu-popup-wrapper {
+        position: absolute;
+        max-height: 736px;
+        width: 100%;
+        margin-top: 20px;
+        height: auto;
+        z-index: 1501;
+        top: 37px;
+        border: 1px solid #ddd;
+        background: #fff;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        color: #333;
+        font-weight: normal;
+        font-size: 1.4rem;
+        font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Verdana, sans-serif;
+        line-height: 1.35715;
+        .cu-header {
+            padding: 10px 20px;
+        }
+        .cu-dropdown {
+            /* Remove default list styling */
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 240px;
+            overflow-y: auto;
+            li {
+                a {
+                    padding: 8px 16px;
+                    /* Add some padding */
+                    text-decoration: none;
+                    /* Remove default text underline */
+                    font-size: 1.8rem;
+                    /* Increase the font-size */
+                    color: #333;
+                    /* Add a black text color */
+                    display: block;
+                    /* Make it into a block element to fill the whole list */
+                    overflow: hidden;
+                    -ms-text-overflow: ellipsis;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    &.header {
+                        background-color: #e2e2e2;
+                        /* Add a darker background color for headers */
+                        cursor: default;
+                        /* Change cursor style */
+                    }
+                    &:hover:not(.header) {
+                        background-color: #eee;
+                        /* Add a hover effect to all links, except for headers */
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .cu-footer {
+            padding: 20px;
+            overflow: visible;
+            text-align: center;
+            button {
+                padding: 7px 18px 8px;
+            }
+        }
+    }
+}
+
+.survery .input-group {
+    position: relative;
+    display: block;
+}
+
+#input {
+    width: 50%;
+    float: left;
+}
+
+#select {
+    width: 96%;
+    float: right;
+}
+
+#input,
+#select {
+    border: 1px solid #fff;
+    background: #fff;
+    height: 30px;
+}
+
+.padding {
+    padding: 0 !important;
+}
+
+.survery .btn {
+    padding: 2px 12px;
+}
+
+.td-small {
+    width: 10%;
+}
+
+label:hover {
+    cursor: pointer;
+}
+
+.cta-1 {
+    color: #fff !important;
+}
+
+#table {
+    width: 99%;
+    float: right;
+    margin-right: 15px;
+    background: #f5f5f5;
+}
+
+mat-form-field {
+    // margin-top: -18px;
+    margin-top: 0px;
+}
+
+.mat-select {
+    margin-top: -7px;
+}
+
+.fa {
+    margin: 0 6px !important;
+}
+
+.add-regimen-btn {
+    padding: 5px;
+    cursor: pointer;
+}

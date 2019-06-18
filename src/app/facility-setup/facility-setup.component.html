@@ -1,0 +1,10 @@
+<div class="animated pulse">
+  <div class="modal-header-wrap">
+    <div (click)="close_onClick($event)" class="modal-close-ico" aria-hidden="true">X</div>
+    <legend class="modal_title">Facility Setup</legend>
+    <div class="modal_mini_title">All Purpose Medical Information System</div>
+  </div>
+      
+  <app-signup-apmisid *ngIf="apmisID"  (facilityInfo)="facilityInfo_show($event)" (closeModal)="close_onClick($event)"></app-signup-apmisid>
+  <app-facility-info *ngIf="facilityInfo" (closeModal)="close_onClick($event)"></app-facility-info>
+</div>

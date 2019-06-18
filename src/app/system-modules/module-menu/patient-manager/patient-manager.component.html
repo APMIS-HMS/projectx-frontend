@@ -1,0 +1,61 @@
+<div class="inner-wrap-b body-wrap">
+    <div class="facility-title">{{pageInView}}</div>
+
+    <div class="fullwidth-topActions">
+        <ul *ngIf="!homeContentArea" class="moduleNav">
+            <li [class.navActive]="homeContentArea" (click)="HomeContentArea_show()"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>Go Back</li>
+        </ul>
+        <div class="searchInputWrap row">
+            <mat-form-field class="col-xs-4">
+                <mat-select [formControl]="searchCriteria">
+                    <mat-option value="Patient">By Patient</mat-option>
+                    <mat-option value="Tags">By Tags</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="col-xs-8 mr-4">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <input [formControl]="searchControl" type="search" autofocus class="searchInput " placeholder="Search {{searchCriteria.value}}" />
+                    </div>
+                    <div class="col-xs-5">
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- <input [formControl]="searchTagsControl" type="search" autofocus class="searchInput col-xs-4" placeholder="Search Patients using tags"> -->
+
+
+            <!-- <md-input-container class="example-full-width">
+                <input matInput placeholder="Search" [formControl]="searchControl" type="search" autofocus>
+            </md-input-container> -->
+        </div>
+        <!-- <div class="btn-box">
+            <button class="small-btn" (click)="newEmpShow()" md-raised-button> <i class="fa fa-plus-square" aria-hidden="true"></i> New Patient</button>
+        </div> -->
+        <!-- <div (click)="newEmpShow()" class="btn-1 btn-blue"><i class="fa fa-plus-square" aria-hidden="true"></i> New Patient</div> -->
+    </div>
+
+    <div class="col-md-12" style="text-align:right;">
+        <span (click)="newEmpShow()" id="floating-button">
+            <p class="plus">+</p>
+        </span>
+
+        <!-- <span (click)="reset()">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span>Reset</span>
+        </span> -->
+    </div>
+
+    <div class="inner-page-wrap">
+
+        <app-patientmanager-homepage [searchEmpty]="searchEmpty" [searchedPatients]="searchedPatients" [resetData]="resetData" (resetDataNew)="resetDataLoader($event)" (empDetail)="empDetailShow($event)" (pageInView)="pageInViewLoader($event)" *ngIf="homeContentArea"
+            class="fullwidth"></app-patientmanager-homepage>
+        <!-- <app-patientmanager-detailpage [patient]="patient" *ngIf="employeeDetailArea" class="fullwidth"></app-patientmanager-detailpage>  -->
+        <div *ngIf="newEmp" class="modal-overlay">
+            <app-new-patient (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-patient>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="welcome-wrap">
+    <div>
+        <div class="img-wrap">
+            <app-image-viewer [imageSrc]="selectedFacility?.logoObject?.thumbnail"></app-image-viewer>
+            <!-- <img *ngIf="selectedFacility.logoObject != undefined" [src]="selectedFacility?.logoObject?.thumbnail">
+            <img *ngIf="selectedFacility.logoObject == undefined" src="assets/images/logos/default.png"> -->
+        </div>
+        <div class="facility-name-wrap">
+            <div class="txt1">{{facilityObj?.name}}</div>
+            <div class="txt2">Powered by APMIS</div>
+        </div>
+    </div>
+</div>
+<div class="loading_screen" *ngIf="loadIndicatorVisible">
+    <div id="outer_circle">
+        <div id="animated_circle">
+        </div>
+        <div id="inner_circle"><img src="assets/images/app_logo/logo2.png"/></div>
+      </div>
+</div>
+

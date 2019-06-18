@@ -1,0 +1,94 @@
+<div class="mainErr animated shake" [hidden]="mainErr">{{errMsg}}</div>
+<div *ngIf="sg1_2_show" class="f_sg_1 animated zoomIn">
+
+    <form [formGroup]="facilityForm1_1" novalidate>
+
+        <div class="lhs">
+            <div class="frm-item-wrap">
+                <mat-form-field>
+                    <mat-select placeholder="Facility State" formControlName="facilitystate" (change)="onStateChange($event.value)">
+                        <mat-option *ngFor="let state of selectedCountry?.states" selected="inputFacility.address.state" [value]="state">{{state.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-form-field>
+                    <mat-select placeholder="Facility City" formControlName="facilitycity">
+                        <mat-option *ngFor="let item of cities" selected="inputFacility.address.city" [value]="item._id">{{item.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-form-field>
+                    <mat-select placeholder="Facility LGA" formControlName="facilitylga">
+                        <mat-option *ngFor="let item of lgas" selected="inputFacility.address.lga" [value]="item._id">{{item.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Facility Address" formControlName="facilityaddress">
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container>
+                    <input matInput mat-error placeholder="Major Landmark" formControlName="facilitylandmark">
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input type="email" matInput mat-error placeholder="Contact Email" formControlName="contactEmail">
+                </mat-input-container>
+            </div>
+
+        </div>
+        <div class="rhs">
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Contact Person (First Name)" formControlName="contactFName">
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input matInput mat-error placeholder="Contact Person (Last Name)" formControlName="contactLName">
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <input type="tel" matInput mat-error placeholder="Contact Number" formControlName="facilityphonNo">
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <i *ngIf="show" (click)="toggleShow($event)" class="fa fa-lock toggle-pass" aria-hidden="true"></i>
+                    <input type="password" matInput mat-error formControlName="password" #showhideinput placeholder="Password">
+                    <a [hidden]="show" (click)="toggleShow($event)" class="toggle-pass">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                </mat-input-container>
+            </div>
+            <div class="frm-item-wrap">
+                <mat-input-container class="example-full-width">
+                    <i *ngIf="show" (click)="toggleShow($event)" class="fa fa-lock toggle-pass" aria-hidden="true"></i>
+                    <input type="password" matInput mat-error formControlName="repass" #showhideinput placeholder="Confirm Password">
+                    <a [hidden]="show" (click)="toggleShow($event)" class="toggle-pass">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                </mat-input-container>
+            </div>
+
+        </div>
+
+        <div class="clear"></div>
+
+        <div (click)="back_facilityForm1_1()" class="backBtn">
+            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>Go Back</div>
+
+        <button (click)="facilitySetup1_1(facilityForm1_1.valid, facilityForm1_1.value)" [disabled]="!facilityForm1_1.valid" class="cta-1">
+            CONTINUE
+        </button>
+    </form>
+</div>
+<!-- <app-verify-token *ngIf="next_key_show" (closeModal)="close_onClick($event)" class="f_sg2 animated zoomIn" [backBtnVisible]="true"
+    [inputFacility]="inputFacility"></app-verify-token> -->
+<app-facility-info *ngIf="back_key_show" (closeModal)="close_onClick($event)" [inputFacility]="inputFacility"></app-facility-info>

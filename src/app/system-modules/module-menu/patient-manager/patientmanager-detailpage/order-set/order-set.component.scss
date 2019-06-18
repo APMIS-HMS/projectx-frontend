@@ -1,0 +1,116 @@
+@import'../documentation/documentation.component.scss';
+.frm-x2 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.frm-x2 .frm-item-wrap {
+    width: 47%;
+}
+
+.tr {
+    width: 100%;
+    position: relative;
+}
+
+.doc-contentArea {
+    width: 100%;
+}
+
+.med-sect {
+    position: relative;
+    background: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.itemSect-title {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    color: #ff2500;
+}
+
+.med-sect td {
+    padding: 3px;
+    text-align: left;
+}
+
+.sect-remove {
+    color: #ff2500;
+    cursor: pointer;
+}
+
+.cta-1 {
+    width: 184px;
+    height: 35px;
+}
+
+.cta-1:hover {
+    background: #0270AC;
+}
+
+.billItemWrap {
+    position: absolute;
+    bottom: 90%;
+    left: -39vw;
+    background: #fff;
+    border: 1px solid #bebebe;
+    padding: 10px;
+    width: 230px;
+}
+
+.add-link {
+    position: absolute;
+    z-index: 1;
+    right: 10px;
+    bottom: -13px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #0270AC;
+}
+
+.add-link:hover {
+    text-decoration: underline;
+}
+
+.btn-box {
+    padding: 20px;
+    .mat-lg-btn {
+        padding: 5px 20px !important;
+    }
+}
+
+.doc-mainWrap .pg-subtitle {
+    text-align: center;
+}
+
+.doc-contentArea {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.doc-mainWrap {
+    display: block;
+    margin-top: 0;
+    .pg-subtitle {
+        margin-top: 20px;
+        font-size: 2rem;
+        width: 100%;
+    }
+}
+
+
+.modal-baseWrap {
+    position: relative;
+    width: auto;
+    height: auto;
+    min-height: 60vh;
+    overflow-y: auto;
+    background: #fff;
+    /* overflow: unset; */
+    padding: 20px 50px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+}

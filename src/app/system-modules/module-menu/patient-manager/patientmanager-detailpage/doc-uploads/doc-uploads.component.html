@@ -1,0 +1,62 @@
+<div class="pg-subtitle">PATIENT PAGE - UPLOADS</div>
+
+<div class="doc-mainWrap">
+  <div class="doc-contentArea">
+    <div class="actSect">
+      <div (click)="newUpload_show()" class="act-wrap">
+        <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+        <span>Upload File</span>
+      </div>
+    </div>
+
+    <ul class="upload-ul">
+      <li class="upload-li" *ngFor="let doc of documents">
+        <div class="uploaded-img" (click)="docDetail(doc)">
+          <i class="{{doc.fileType == 'application/pdf' ? 'fa fa-file-pdf-o' : 'fa fa-file-image-o'}}" aria-hidden="true"></i>
+        </div>
+        <div class="uploaded-txt" (click)="docDetail(doc)">
+          <div class="modal_title">{{doc.docName}}</div>
+          <div class="topWrap">
+            <div class="upload_type">{{doc.docType}}</div>
+            <div class="upload-file-name">{{doc.createdAt | date :'medium'}}</div>
+          </div>
+          <div class="upload-file-desc">{{doc.description}}</div>
+        </div>
+        <!-- <app-doc-upload-detail [selectedDocument]="doc" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-doc-upload-detail> -->
+      </li>
+    </ul>
+  </div>
+  <div class="doc-rArea">
+    <app-right-tab [patient]="patient" (addProblem)="addProblem_show($event)" (addAllergy)="addAllergy_show($event)"
+      (addHistory)="addHistory_show($event)" (addVitals)="addVitals_show($event)"></app-right-tab>
+  </div>
+
+  <div *ngIf="docDetail_view" class="modal-overlay">
+    <app-documentation-detail [document]="selectedDocument" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-documentation-detail>
+  </div>
+
+  <div *ngIf="addProblem_view" class="modal-overlay">
+    <app-add-patient-problem [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-patient-problem>
+  </div>
+
+  <div *ngIf="addAllergy_view" class="modal-overlay">
+    <app-add-allergy [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-allergy>
+  </div>
+
+  <div *ngIf="addHistory_view" class="modal-overlay">
+    <app-add-history (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-history>
+  </div>
+
+  <div *ngIf="addVitals_view" class="modal-overlay">
+    <app-add-vitals [patient]="patient" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-add-vitals>
+  </div>
+
+  <div *ngIf="newUpload" class="modal-overlay">
+    <app-doc-upload (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-doc-upload>
+  </div>
+  <div *ngIf="showDoc" class="modal-overlay">
+    <app-doc-upload-detail [selectedDocument]="selectedDocument" (closeModal)="close_onClick($event)" id="form-modal"
+      class="form-modal center-center"></app-doc-upload-detail>
+  </div>
+
+</div>

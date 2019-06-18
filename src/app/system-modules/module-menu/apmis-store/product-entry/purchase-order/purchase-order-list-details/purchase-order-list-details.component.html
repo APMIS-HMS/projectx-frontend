@@ -1,0 +1,54 @@
+<div class="list-wrap" style="border:none !important;">
+  <div class="list-con-wrap">
+    <div class="con-wrap">
+      <span>Date Generated</span>
+      <h3>{{selectedOrder.createdAt | date:'fullDate'}}</h3>
+    </div>
+    <div class="con-wrap">
+      <span>Status</span>
+      <h3 *ngIf="selectedOrder.isSupplied===true">Pending</h3>
+      <h3 *ngIf="!selectedOrder.isSupplied===true">Pending</h3>
+    </div>
+    <div class="con-wrap">
+      <span>Supplier(s)</span>
+      <h3>{{selectedOrder.supplierObject.name}}</h3>
+    </div>
+  </div>
+</div>
+
+<div class="store-table">
+  <div class="store-thead">
+    <div class="store-tr">
+      <div class="store-th store-td-actions">
+      </div>
+      <div class="config-tr-in in-tr">
+        <div class="store-th">Products</div>
+        <div class="store-th">Unit</div>
+        <div class="store-th">Quantity</div>
+        <div class="store-th">Cost/Unit</div>
+        <div class="store-th">Total Cost Price</div>
+      </div>
+      <div class="store-th store-td-actions"></div>
+    </div>
+  </div>
+
+  <div class="store-tbody">
+    <div class="store-pre-tr">
+      <div class="store-tr" *ngFor="let order of selectedOrder.orderedProducts">
+        <div class="store-td store-td-actions">
+        </div>
+        <div class="config-tr-in in-tr">
+          <div class="store-td">{{order.productName}}</div>
+          <div class="store-td">{{order.productPackType}}</div>
+          <div class="store-td">{{order.quantity}} {{order.productPackType}}</div>
+          <div class="store-td">
+            <app-apmis-naira></app-apmis-naira>{{order.costPrice}}/{{order.productPackType}}
+          </div>
+          <div class="store-td">
+            <app-apmis-naira></app-apmis-naira>{{order.quantity * order.costPrice}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

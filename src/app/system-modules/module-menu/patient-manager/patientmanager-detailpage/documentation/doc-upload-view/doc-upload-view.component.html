@@ -1,0 +1,7 @@
+<div class="doc-preview-margin">
+  <pdf-viewer *ngIf="docPdf" [src]="currentPDF"  [fit-to-page]="false" [render-text]="true" 
+  [zoom]="0.5" [autoresize]="true" (page-rendered)="pageRendered($event)"  
+  [original-size]="false" (after-load-complete)="onComplete($event)" 
+   [autoresize]="true" (error)="onError($event)"
+  (on-progress)="onProgress($event)"></pdf-viewer>
+</div>

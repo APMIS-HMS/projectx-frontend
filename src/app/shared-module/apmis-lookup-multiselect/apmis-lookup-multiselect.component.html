@@ -1,0 +1,33 @@
+<form [formGroup]="form" novalidate>
+    <div class="cu-search-box">
+        <mat-input-container>
+            <input matInput formControlName="searchtext" class="cu-search" placeholder="{{placeholder}}" (focus)="focusSearch()" [value]="valueString"
+                (change)="onChange($event)" (keyup)="onChange($event)" autocomplete="off">
+        </mat-input-container>
+        <div class="cu-popup-wrapper" *ngIf="showCuDropdown">
+            <div class="cu-popover-arrow"></div>
+            <div class="cu-header">
+                <p></p>
+            </div>
+            <ul class="cu-dropdown">
+                <li><a class="header">Select item</a></li>
+                <li *ngIf="results.length === 0 && !cuDropdownLoading" class="text-center"><a>Result is empty</a></li>
+                <li *ngIf="results.length === 0 && cuDropdownLoading" class="text-center"><a><i class="fa fa-spinner fa-spin"></i></a></li>
+                <!-- <li *ngFor="let item of results" (click)="onSelectedItem(item)"><a>{{item[displayKey]}}</a></li> -->
+                <!-- <li *ngFor="let item of results" (click)="onSelectedItem(item)"> -->
+                <li *ngFor="let item of results">
+                    <a>
+                        <div class="txt-val">
+                            <mat-checkbox (change)="onSelectedItem(item, $event)"></mat-checkbox>
+                        </div>
+                        <div class="txt-label">{{item[displayKey]}}</div>
+                    </a>
+                </li>
+            </ul>
+            <div class="cu-footer">
+                <button (click)="ok()" class="btn btn-default">Ok</button>
+                <button (click)="cancel()" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>

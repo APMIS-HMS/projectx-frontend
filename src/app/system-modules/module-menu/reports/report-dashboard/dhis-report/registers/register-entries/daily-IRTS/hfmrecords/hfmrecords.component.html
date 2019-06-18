@@ -1,0 +1,158 @@
+<div class="pp-card shadow-grey">
+    <div class="card-title">
+        <div>NATIONAL HEALTH MANAGEMENT HEALTH FACILITY MONTHLY / IMMUNIZATION SUMMARY</div>
+        <!-- <div class="top-btns">
+            <div (click)="back_registers()" class="top-btn"><i class="fa fa-arrow-left"></i> Registers</div>
+        </div> -->
+    </div>
+    <div class="content-wrap">
+
+        <div class="tbl-resp-wrap">
+            <table class="workspace-tbl" cellpadding="0" cellspacing="0" border="0.5">
+                <thead>
+                    <tr>
+                        <th colspan="43">
+                            <div class="th1-wrap">
+                                <div class="filters">
+                                    <div class="filter">
+                                        <input class="search" placeholder="search for patient...">
+                                    </div>
+                                </div>
+                                <div class="tp-rhs">
+                                    <div class="dr-wrap survery">
+                                        <app-date-range [dateRange]="dateRange" (dateRangeChange)="setReturnValue($event)"></app-date-range>
+                                        <span *ngIf="loadIndicatorVisible" class="fa fa-spinner fa-spin"></span>
+                                    </div>
+                                    <div (click)="newEntry()" class="th1-cta"><i class="fa fa-plus"></i> </div>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr class="th-r1 th-xxx">
+                        <th rowspan="3">S/N</th>
+                        <th rowspan="3">Date</th>
+                        <th rowspan="3">Session Type</th>
+                        <th rowspan="2">OPV 0 (Birth)</th>
+                        <th rowspan="2">Hep.B 0 (Birth)</th>
+                        <th rowspan="2">BCG</th>
+                        <th colspan="2" rowspan="2">OPV 1</th>
+                        <th colspan="2" rowspan="2">PENTA 1</th>
+                        <th colspan="2" rowspan="2">PCV 1</th>
+                        <th colspan="2" rowspan="2">OPV 2</th>
+                        <th colspan="2" rowspan="2">PENTA 2</th>
+                        <th colspan="2" rowspan="2">PCV 2</th>
+                        <th colspan="2" rowspan="2">OPV 3</th>
+                        <th colspan="2" rowspan="2">PENTA 3</th>
+                        <th colspan="2" rowspan="2">PCV 3</th>
+                        <th colspan="2" rowspan="2">Vitamin A</th>
+                        <th rowspan="2">Meascles 1</th>
+                        <th colspan="2" rowspan="2">Yellow Fever</th>
+                        <th colspan="2" rowspan="2">Meascles 2</th>
+                        <th rowspan="3" class="vertical-txt">Conjugate A CSM</th>
+                        <th colspan="10">Tetanus Toxiod 9 WOMEN 15-49 Years</th>
+                        <th rowspan="3">LLIN</th>
+                    </tr>
+                    <tr class="th-r2 th-xxx">
+                        <th colspan="2">1st</th>
+                        <th colspan="2">2nd</th>
+                        <th colspan="2">3rd</th>
+                        <th colspan="2">4th</th>
+                        <th colspan="2">5th</th>                        
+                    </tr>
+                    <tr class="th-r3 th-xxx">
+                        <th class="table-col">0 - 2 WEEKS</th>
+                        <th class="table-col">0 - 2 WEEKS</th>
+                        <th class="table-col">0 - 11 MONTHS</th>
+                        <th class="table-col">6 WEEKS - 11 MONTHS</th>
+                        <th class="table-col">12 -23 MONTHS</th>    
+                        <th class="table-col">6 WEEKS - 11 MONTHS</th>
+                        <th class="table-col">12 -23 MONTHS</th>     
+                        <th class="table-col">6 WEEKS - 11 MONTHS</th>
+                        <th class="table-col">12 -23 MONTHS</th>  
+                        <th class="table-col">10 WEEKS - 11 MONTHS</th>
+                        <th class="table-col">12 -23 MONTHS</th>  
+                        <th class="table-col">10 WEEKS - 11 MONTHS</th>
+                        <th class="table-col">12 -23 MONTHS</th>  
+                        <th class="table-col">10 WEEKS - 11 MONTHS</th>
+                        <th class="table-col">12 -23 MONTHS</th>  
+                        <th class="table-col">14 WEEKS - 11 MONTHS</th>
+                        <th class="table-col">12 -23 MONTHS</th> 
+                        <th class="table-col">10 WEEKS - 11 MONTHS</th>
+                        <th class="table-col">12 -23 MONTHS</th>  
+                        <th class="table-col">10 WEEKS - 11 MONTHS</th>
+                        <th class="table-col">12 -23 MONTHS</th> 
+                        <th class="table-col">6 - 11 Months (100,000IU)</th> 
+                        <th class="table-col">12 - 23 Months (200,000IU)</th>  
+                        <th class="table-col">9 - 11 Months</th>
+                        <th class="table-col">12 - 23 Months</th> 
+                        <th class="table-col">9 - 11 Months</th>
+                        <th class="table-col">12 - 23 Months</th>
+                        <th class="table-col">18 - 23 Months</th>
+                        <th>P</th>               
+                        <th>NP</th>
+                        <th>P</th>               
+                        <th>NP</th>
+                        <th>P</th>               
+                        <th>NP</th>
+                        <th>P</th>               
+                        <th>NP</th>
+                        <th>P</th>               
+                        <th>NP</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>11th Oct 2018</td>
+                        <td>Fixed</td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td> 
+                        <td><i class="fa fa-check green"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td> 
+                        <td><i class="fa fa-check green"></i> </td> 
+                        <td><i class="fa fa-check green"></i> </td>  
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>  
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-times red"></i> </td> 
+                        <td><i class="fa fa-check green"></i> </td>  
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>  
+                        <td><i class="fa fa-times red"></i> </td>
+                        <td><i class="fa fa-check green"></i> </td>  
+                        <td><i class="fa fa-times red"></i> </td> 
+                        <td><i class="fa fa-check green"></i> </td>                                         
+                    </tr>                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showNewEntry" class="modal-overlay">
+    <app-new-hfmrecords-entry (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-hfmrecords-entry>
+</div>

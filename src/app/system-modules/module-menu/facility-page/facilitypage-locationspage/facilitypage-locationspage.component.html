@@ -1,0 +1,65 @@
+<div class="pp-card shadow-grey">
+    <div class="card-title">Location(s)</div>
+
+    <ul class="dept-wrap">
+        <li class="dept-li" *ngIf="locationsObj.length > 0">
+            <div *ngFor="let location of locationsObj">
+                <div class="dept-item">
+                    <div class="dept-name">{{location.name}}</div>
+                    <div class="action-icons">
+                        <i [hidden]="showMinorLocation_selectedLocation(location)" (click)="showLoc_click(location); locationDetailContentArea_show(location)" class="fa fa-fw fa-2x fa-expand orange tooltip"  data-tooltip='Expand' aria-hidden="true"></i>
+                        <i *ngIf="showMinorLocation_selectedLocation(location)" (click)="showLoc_hide()" class="fa fa-fw fa-2x fa-compress orange tooltip" data-tooltip="Compress" aria-hidden="true"></i>
+                        <i (click)="newSubLocationModal_show(location)" class="fa fa-fw fa-2x fa-plus orange tooltip " data-tooltip='Add' aria-hidden="true"></i>
+                        <!-- <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i class="fa fa-trash-o" aria-hidden="true"></i> -->
+                    </div>
+                </div>
+
+                <div *ngIf="showMinorLocation_selectedLocation(location)" class="dept-units">
+                    <div class="tbl-resp-wrap">
+                        <table cellpadding="0" cellspacing="0" border="0.5">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span style="padding-left: 3px;">Minor Location</span>
+                                    </th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody *ngIf="filteredMinorLocations.length > 0">
+                                <tr *ngFor="let minor of getActiveMinorLocations(filteredMinorLocations)">
+                                    <td>{{minor.name}}</td>
+                                    <td class="action-icons">
+                                        <i (click)="newLoc_onClick(minor)" class="fa fa-fw fa-2x fa-pencil-square-o orange tooltip" data-tooltip='Edit' aria-hidden="true"></i>
+                                        <!--<i *ngIf="unitEditNameIcoShow" (click)="unitEditNameSubmit()" class="done-ico fa fa-check" aria-hidden="true"></i>-->
+                                        <i (click)="removeMinorLocationFacade(minor)" class="fa fa-fw fa-2x fa-trash orange tooltip" data-tooltip='Delete' aria-hidden="true"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="filteredMinorLocations.length == 0">
+                                <tr>
+                                    <td class="table-content" colspan="6" border="0.5" style="text-align: center "> No data available in table</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li *ngIf="locationsObj.length == 0">
+            <div>
+                <tr>
+                    <td class="table-content" colspan="6" border="0.5" style="text-align: center "> No data available</td>
+                </tr>
+            </div>
+        </li>
+    </ul>
+
+    <!-- <span id="floating-button">
+        <p class="plus">+</p>
+    </span> -->
+</div>
+<div *ngIf="newSubLocModal_on" class="modal-overlay">
+    <app-new-sub-location [locations]="locationsObj" [location]="locationObj" [subLocation]="subLocation" (closeModal)="close_onClick($event)" id="form-modal" class="form-modal center-center"></app-new-sub-location>
+</div>

@@ -1,0 +1,323 @@
+@import "../module-menu/module-menu.component.scss";
+.inner-wrap {
+    font-family: $font-titles;
+}
+
+.bodyWrap {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.coverProviders,
+.activitiesFeeds {
+    margin: 0 0 40px 0;
+    max-width: 300px;
+    box-shadow: 0px 0px 9px #ccc;
+}
+
+.activityFeed {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    box-shadow: 0px 0px 9px #ccc;
+}
+
+.feedTime {
+    display: block;
+    color: #BDBDBD;
+    padding-top: 10px;
+}
+
+.coverProvider {
+    width: 200px
+}
+
+.coverProvider:hover {
+    background-color: #F5F5F5;
+    .facility {
+        text-decoration: underline;
+    }
+}
+
+.facility {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.component-header {
+    padding: 10px 0;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 2rem;
+}
+
+.coverProvider,
+.ContentListing {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    cursor: pointer;
+    padding: 3px 7px;
+}
+
+.coverProvider img,
+.activityFeed img {
+    width: 40px;
+    margin-right: 20px;
+}
+
+.coverProvider .txtWrap .listedFacilityDesc {
+    //margin-left: 13px !important;
+    //padding-left: 5px;
+    text-align: justify;
+    max-width: 130px;
+    //border-left: 2px solid #eee;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.ContentListing img {
+    width: 60px;
+    margin-right: 20px;
+}
+
+.ContentListing:hover {
+    background-color: #F5F5F5;
+    .listedFacility {
+        text-decoration: underline;
+    }
+}
+
+.secTitle {
+    margin: 20px 0;
+    font-weight: bold;
+    padding: 0 0 0 10px;
+}
+
+.coveredEmps {
+    font-size: 1.2rem;
+    color: #D84315;
+}
+
+.theUser {
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: inline;
+}
+
+.theActivity {
+    font-size: 1.2rem;
+    line-height: 1.3;
+    display: inline;
+}
+
+.lineLink {
+    color: #0288d1;
+    border-bottom: 0.5px solid #0288d1;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.lineLink:hover {
+    color: #525252;
+    border-bottom: 0.5px solid #525252;
+}
+
+.mainContentArea {
+    position: relative;
+    width: 700px;
+    min-height: 300px;
+    border: 1px solid #eee;
+    margin: 0 10px;
+}
+
+.searchInputWrap,
+.contentListings,
+.detailSect {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.searchInputWrap i {
+    margin-left: -30px;
+    color: #939393;
+}
+
+.searchInput {
+    border: 1px solid #eee;
+    background: #FAFAFA;
+    border-radius: 7px;
+    padding: 7px;
+    text-align: center;
+}
+
+.searchInputWrap .searchInput {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.listedFacility {
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+
+.listedFacilityDesc {
+    font-size: 1rem;
+    margin-bottom: 0px;
+    text-align: justify;
+}
+
+.listedFacilityLoc {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.listedFacilityLoc strong {
+    padding: 0 5px;
+    display: inline;
+    margin: 0;
+}
+
+.detailHeader {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.detailLogoWrap {
+    margin-right: 20px;
+}
+
+.detailLogoWrap img {
+    width: 100px;
+}
+
+.btnWrap {
+    width: 187px;
+    position: absolute;
+    right: 0;
+}
+
+.inner-menu1-wrap {
+    top: 20px;
+    right: 20px;
+}
+
+.content-sec-ico {
+    font-size: 2rem;
+    color: #757575;
+    padding: 4px;
+    width: 21px;
+    height: 21px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: right;
+}
+
+.content-sec-ico:hover,
+.content-sec-icoActive {
+    background: #F5F5F5;
+    color: #4bb8ef;
+}
+
+.innerMenu-ul {
+    top: 30px;
+    border-radius: 7px;
+    display: block;
+    padding: 10px 0;
+}
+
+.detailAnalytics {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #F5F5F5;
+    color: #fff;
+    padding: 10px;
+    margin: 20px 0;
+}
+
+.detailAnalytic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 80px;
+    height: 80px;
+    background-color: #E0E0E0;
+    padding: 10px;
+    border-radius: 100%;
+    border: 2px solid #fff;
+}
+
+.analyticNo {
+    color: #ff2500;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.analyticText {
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+    margin-top: 3px;
+    color: #555;
+}
+
+.corporateClients {
+    margin-bottom: 30px;
+    padding: 5px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.clientsWrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.clientWrap {
+    width: 50px;
+}
+
+.clientWrap img {
+    width: 100%;
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(1);
+    -webkit-filter: grayscale(100%);
+    filter: gray;
+}
+
+.secTitleInner {
+    font-weight: bold;
+    margin-top: 50px;
+}
+
+.requestPending {
+    color: #ff2500;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: right;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0px;
+    left: 0;
+}
+
+.inner-menu1-wrap ul li {
+    font-size: 1.1rem;
+    line-height: 16px;
+}
