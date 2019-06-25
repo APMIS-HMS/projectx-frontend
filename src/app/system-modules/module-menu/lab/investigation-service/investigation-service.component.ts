@@ -223,7 +223,7 @@ export class InvestigationServiceComponent implements OnInit {
     this.index++;
   }
   getShowing() {
-    const ret = this.index * this.limit
+    const ret = this.index * this.limit;
     if (ret >= this.total && this.index > 0) {
       this.loadMoreText = 'Showing ' + this.total + ' of ' + this.total + ' records';
       return;
@@ -309,8 +309,15 @@ export class InvestigationServiceComponent implements OnInit {
   }
 
   specimenDisplayFn(specimen: any) {
+    if (specimen!==null){
+    try{
     return typeof(specimen) === 'object' ? specimen.name : specimen;
+    }
+    catch (err){
+      console.log(err);
+    }
   }
+ }
   getRefrenceValues(reportType) {
     if (reportType !== undefined && reportType.name === 'Numeric') {
       return reportType.ref.min + ' - ' + reportType.ref.max;
@@ -321,7 +328,8 @@ export class InvestigationServiceComponent implements OnInit {
     }
   }
 
-  createInvestigation(valid, value) {
+ async createInvestigation(valid, value) {
+   let createInv=true;
     if (valid) {
       this.isBtnDisable = true;
       if (this.selectedInvestigation._id === undefined) {
@@ -330,7 +338,7 @@ export class InvestigationServiceComponent implements OnInit {
           name: value.investigationName,
           unit: value.unit,
           specimen: value.specimen,
-        }
+        };
         const reportType: any = {};
         if (value.reportType === 'Text') {
           reportType.name = value.reportType;
@@ -344,6 +352,24 @@ export class InvestigationServiceComponent implements OnInit {
           }
           investigation.reportType = reportType;
         }
+      // check that investigation name is unique
+      if (this.addInvestBtn) {
+      await this.investigationService.find({
+        query: {
+          'facilityId': this.selectedFacility._id,
+         'name':investigation.name // use regex
+        }
+      }).then(invExist => {
+        console.log(invExist);
+        if (invExist.data.length > 0 ) {
+          this._systemModuleService.announceSweetProxy('Investigation name already exist!', 'success', this);
+          createInv=false;
+        }
+       
+      });
+    }
+    if (createInv){
+      
         this.investigationService.create(investigation).then(payload => {
           const service: any = <any>{};
           service.name = value.investigationName;
@@ -351,14 +377,16 @@ export class InvestigationServiceComponent implements OnInit {
             if (item.name === 'Laboratory') {
               item.services.push(service);
             }
-          });
+          }); 
           this.facilityServiceCategoryService.patch(this.selectedFacilityService._id,{categories:this.selectedFacilityService.categories},{}).then((payResult: FacilityService) => {
+          
             this.isBtnDisable = false;
             payResult.categories.forEach((itemi, i) => {
               if (itemi.name === 'Laboratory') {
                 itemi.services.forEach((items, s) => {
                   if (items.name === service.name) {
-                    payload.serviceId = items;
+                    payload.serviceId = items._id;
+                   
                     payload.facilityServiceId = this.selectedFacilityService._id;
 
                     const price: FacilityServicePrice = <FacilityServicePrice>{};
@@ -382,7 +410,7 @@ export class InvestigationServiceComponent implements OnInit {
               }
             });
           });
-        })
+        });
       } else {
         this.selectedInvestigation.name = this.frmNewInvestigationh.controls['investigationName'].value;
         this.selectedInvestigation.specimen = this.frmNewInvestigationh.controls['specimen'].value;
@@ -416,9 +444,8 @@ export class InvestigationServiceComponent implements OnInit {
                 if (itemi.name === 'Laboratory') {
                   itemi.services.forEach((items, s) => {
                     if (items.name === service.name) {
-                      payload.serviceId = items;
+                      payload.serviceId = items._id;
                       payload.facilityServiceId = this.selectedFacilityService._id;
-
                       const price: FacilityServicePrice = <FacilityServicePrice>{};
                       price.categoryId = itemi._id;
                       price.facilityId = this.selectedFacility._id;
@@ -465,11 +492,105 @@ export class InvestigationServiceComponent implements OnInit {
           this.addingInvestBtn = false;
           this.frmNewInvestigationh.reset();
           this.frmNewInvestigationh.controls['isPanel'].setValue(false);
-        })
+      });
       }
     }
+    }
   }
+  async refactorId(){
+      //   get  organization service
+      let category:any = [];
+      let facilityCatServ:any;
+      let InvServices:any=[];
+      let count=0;
+      let count1=0;
+     let  simpa:any;
+      await this.facilityServiceCategoryService.find({ query: { facilityId: this.selectedFacility._id } }).then(res => {
+       console.log(res);
+       facilityCatServ = res.data[0];
+       category = res.data[0].categories;
+      
+      });
+     
+        //    find the lab category
+      
+        let labCat = category[0];
+        //console.log(labCat);
 
+    
+      //    loop through service
+      /*labCat.services.forEach(
+        (x)=> {
+          console.log(x._id, x.name);
+        }
+      );*/
+      //    find all services
+      await this.investigationService.find({
+        query: {
+          'facilityId': this.selectedFacility._id,
+          $limit: 200
+        }
+      }).then(res => {
+        console.log(res);
+        InvServices=res.data;
+      });
+
+      //    if name is same and id is different
+      labCat.services.forEach(
+        (x)=> {
+         // x.checked=false;
+          //const getFruit = fruits.find(fruit => fruit.name === 'apples'); 
+        simpa = InvServices.find(y => (y.name === x.name) && (x._id !== y.serviceId) );
+       // console.log(simpa);
+
+          if (!!simpa){
+             // x.checked=true;ng
+            //console.log(x.name, x._id, simpa.serviceId, simpa.name) ;
+            count++;
+            
+            //    modify serviceid
+            x._id = simpa.serviceId;
+           // console.log(x.name, x._id, simpa.serviceId, simpa.name) ;
+            }
+            
+                 
+                 
+                 
+        }
+      );
+      labCat.services.forEach(
+        (x)=> {
+          
+          //const getFruit = fruits.find(fruit => fruit.name === 'apples'); 
+          let simpa1 = InvServices.find(y => (y.name === x.name) && (x._id !== y.serviceId));
+          // console.log(simpa);
+    
+             if (!!simpa1){
+                 
+              // console.log(x.name, x._id, simpa1.serviceId, simpa1.name) ;
+               count1++;
+                 
+                 
+                 
+        }
+      }
+      );
+
+    
+     
+      console.log(count);
+      console.log(count1);
+      console.log (facilityCatServ);
+      //    modify service
+
+
+      //    update organzation service
+    /* await this.facilityServiceCategoryService.patch(this.selectedFacilityService._id,{categories:facilityCatServ.categories},{})
+     .then((payResult) => {
+        console.log(payResult);
+      });
+*/
+  }
   sweetAlertCallback(result) {
     this.getInvestigations();
   }

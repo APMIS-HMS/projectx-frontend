@@ -81,7 +81,7 @@ export class ApmisLookupComponent implements OnInit, ControlValueAccessor, Valid
 					},
 					this.isSocket
 				)
-			)
+				)
 			.subscribe(
 				(payload: any) => {
 					
@@ -95,6 +95,7 @@ export class ApmisLookupComponent implements OnInit, ControlValueAccessor, Valid
 							this.results = payload.data;
 						}
 					} catch (error) {}
+					
 				},
 				(err) => {}
 			);

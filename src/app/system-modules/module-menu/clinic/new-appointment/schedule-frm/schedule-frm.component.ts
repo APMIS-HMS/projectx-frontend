@@ -222,11 +222,13 @@ export class ScheduleFrmComponent implements OnInit {
 
 		this.patient = new FormControl('', [ Validators.required ]);
 		this.patient.valueChanges.subscribe((value) => {
+			if (value.length > 2){
 			this.apmisLookupQuery = {
 				facilityId: this.selectedFacility._id,
 				searchText: value,
 				patientTable: true
 			};
+		}
 		});
 		// this.filteredPatients = this.patient.valueChanges
 		//   .startWith(null)

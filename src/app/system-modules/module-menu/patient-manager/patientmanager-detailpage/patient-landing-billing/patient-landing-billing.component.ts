@@ -419,6 +419,7 @@ export class PatientLandingBillingComponent implements OnInit, OnDestroy {
 					}
 				})
 				.then((payload) => {
+					console.log(payload);
 					if (payload !== null) {
 						this.billGroups = payload.billGroups;
 						this.listedBillItems = payload.originalCallback;

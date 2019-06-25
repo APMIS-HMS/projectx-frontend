@@ -140,7 +140,7 @@ export class LabRequestsComponent implements OnInit, OnDestroy {
 		this.searchInvestigation = new FormControl('', []);
 
 		this.patientSearch.valueChanges
-			.debounceTime(400)
+			.debounceTime(100)
 			.distinctUntilChanged()
 			.do((val) => {
 				this.pendingRequests = [];
@@ -224,7 +224,7 @@ export class LabRequestsComponent implements OnInit, OnDestroy {
 				(err) => {}
 			);
 
-		this.searchInvestigation.valueChanges.debounceTime(400).distinctUntilChanged().subscribe((value) => {
+		this.searchInvestigation.valueChanges.debounceTime(100).distinctUntilChanged().subscribe((value) => {
 			if (value !== null && value.length === 0) {
 				this.investigationService
 					.find({
@@ -307,10 +307,12 @@ export class LabRequestsComponent implements OnInit, OnDestroy {
 		});
 
 		this.frmNewRequest.controls['patient'].valueChanges.subscribe((value) => {
+			if (value.length >2){
 			this.apmisLookupQuery = {
 				facilityId: this.selectedFacility._id,
 				searchText: value
 			};
+		}
 		});
 		this.frmNewRequest.controls['investigation'].valueChanges.subscribe((value) => {
 			if (value !== null && value.length === 0) {
@@ -552,6 +554,7 @@ export class LabRequestsComponent implements OnInit, OnDestroy {
 			}
 		}
 	}
+
 	investigationChanged(
 		$event,
 		investigation: InvestigationModel,
@@ -882,7 +885,7 @@ export class LabRequestsComponent implements OnInit, OnDestroy {
 
 		const copyBindInvestigation = JSON.parse(JSON.stringify(this.bindInvestigations));
 		const readyCollection: any[] = [];
-
+		
 		copyBindInvestigation.forEach((item: any, i) => {
 			if (item.investigation.isPanel) {
 				delete item.isChecked;
@@ -939,6 +942,7 @@ export class LabRequestsComponent implements OnInit, OnDestroy {
 					this.makingRequestBtn = false;
 					this.makeRequestBtn = true;
 					this.disableBtn = false;
+					
 				} else {
 					this._systemModuleService.announceSweetProxy(
 						'There was a problem trying to send request!',
@@ -948,11 +952,13 @@ export class LabRequestsComponent implements OnInit, OnDestroy {
 					this.makingRequestBtn = false;
 					this.makeRequestBtn = true;
 					this.disableBtn = false;
+					
 				}
 			})
 			.catch((err) => {
 				this._systemModuleService.announceSweetProxy('There was a problem trying to send request!', 'error');
 				this.requestLoading = false;
+				console.log(err);
 			});
 	}
 

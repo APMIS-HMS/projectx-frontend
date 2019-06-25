@@ -17,7 +17,13 @@
                             <i [hidden]="pannel_view" class="fa fa-plus" aria-hidden="true"></i>
                             <span>Create Panel</span>
                         </div>
+                        <!--<div class="">
+                            <button (click)="refactorId()" class="btn">
+                                <span>RefactorId</span>
+                            </button>
+                        </div>-->
                     </div>
+                   
                     <form class="frmNoteWrap" *ngIf="investigation_view" [formGroup]="frmNewInvestigationh" novalidate>
                         <div class="row">
                             <div class="col-sm-6">
@@ -85,6 +91,7 @@
                                 </span>
                             </button>
                         </div>
+                        
                     </form>
 
                     <form class="frmNoteWrap" *ngIf="pannel_view" [formGroup]="frmNewPanel" novalidate>
